@@ -36,7 +36,7 @@
 
     public enum ResearchType
     {
-        Tier1,
+        Tier1, //Note, Tier one includes 'the beginning', tier 0, and tier 1, as no resources are added in tier 1, and there are only a few in the beginning and tier 0
         Tier2,
         Tier3,
         Tier4,
