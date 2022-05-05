@@ -33,11 +33,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: .NET test
-      run: dotnet test src/DSPTree.Tests/DSPTree.Tests.csproj -c Release
+      run: dotnet test src/SatisfactoryTree.Tests/SatisfactoryTree.Tests.csproj -c Release
     - name: .NET publish
-      run: dotnet publish src/DSPTree/DSPTree.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
+      run: dotnet publish src/SatisfactoryTree/SatisfactoryTree.csproj -c Release -p:Version='${{ steps.gitversion.outputs.SemVer }}'
     - name: Upload package back to GitHub
       uses: actions/upload-artifact@v3
       with:
         name: drop
-        path: src/DSPTree/bin/Release
+        path: src/SatisfactoryTree/bin/Release
