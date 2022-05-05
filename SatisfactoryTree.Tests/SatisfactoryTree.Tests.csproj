@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DSPTree\DSPTree.csproj" />
+    <ProjectReference Include="..\SatisfactoryTree\SatisfactoryTree.csproj" />
   </ItemGroup>
 
 </Project>
