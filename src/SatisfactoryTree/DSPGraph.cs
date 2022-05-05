@@ -7,7 +7,7 @@ namespace DSPTree
     {
         public List<Item> Items { get; set; }
         public DSPGraph(string filter = "",
-            ResearchType researchType = ResearchType.Tier1,
+            ResearchType researchType = ResearchType.Tier8,
             bool includeBuildings = false,
             bool showOnlyDirectDependencies = false)
         {
