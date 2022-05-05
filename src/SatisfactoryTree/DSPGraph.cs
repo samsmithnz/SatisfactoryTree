@@ -48,6 +48,11 @@ namespace DSPTree
                 ItemPoolTier3.SteelBeam(),
                 ItemPoolTier3.VersatileFramework(),
 
+                ItemPoolTier4.EncasedIndustrialBeam(),
+                ItemPoolTier4.AutomatedWiring(),
+                ItemPoolTier4.Stator(),
+                ItemPoolTier4.Motor(),
+                ItemPoolTier4.HeavyModularFrame(),
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),
                 //    ItemPoolLevel0.CopperOreVein(),
