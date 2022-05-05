@@ -4,14 +4,14 @@ using MethodType = DSPTree.Models.ManufactoringMethodType;
 
 namespace DSPTree.Helpers
 {
-    public static class ItemPoolTheBeginning
+    public static class ItemPoolTier1
     {
         public static Item IronOre()
         {
             return new Item(0, "Iron Ore",
                 "Iron_Ore.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -31,7 +31,7 @@ namespace DSPTree.Helpers
             return new Item(2, "Iron Ingot",
                 "Iron_Ingot.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -55,7 +55,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Iron Plate",
                 "Iron_Plate.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -78,7 +78,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Iron Rod",
                 "Iron_Rod.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -102,7 +102,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Copper Ore",
                 "Copper_Ore.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -123,7 +123,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Copper Ingot",
                 "Copper_Ingot.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -147,7 +147,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Wire",
                 "Wire.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -171,7 +171,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Cable",
                 "Cable.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -195,7 +195,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Limestone",
                 "Limestone.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -216,7 +216,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Concrete",
                 "Concrete.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -240,7 +240,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Screw",
                 "Screw.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
@@ -264,7 +264,7 @@ namespace DSPTree.Helpers
             return new Item(0, "Reinforced Iron Plate",
                 "Reinforced_Iron_Plate.webp",
                 ItemType.Item,
-                ResearchType.TheBeginning)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {

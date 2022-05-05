@@ -11,7 +11,7 @@ public class ResearchTests
     public void OnBoardingTest()
     {
         //Arrange
-        DSPGraph graph = new("", ResearchType.TheBeginning, true);
+        DSPGraph graph = new("", ResearchType.Tier1, true);
 
         //Act
 

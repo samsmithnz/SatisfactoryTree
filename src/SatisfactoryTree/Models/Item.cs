@@ -10,7 +10,7 @@
             string name,
             string image,
             ItemType itemType = ItemType.Item,
-            ResearchType researchType = ResearchType.TheBeginning)
+            ResearchType researchType = ResearchType.Tier1)
         {
             Level = level;
             Name = name;
@@ -36,8 +36,6 @@
 
     public enum ResearchType
     {
-        TheBeginning,
-        Tier0,
         Tier1,
         Tier2,
         Tier3,
