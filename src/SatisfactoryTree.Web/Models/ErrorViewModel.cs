@@ -1,4 +1,4 @@
-namespace DSPTree.Web.Models
+namespace SatisfactoryTree.Web.Models
 {
     public class ErrorViewModel
     {

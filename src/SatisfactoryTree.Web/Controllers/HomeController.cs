@@ -1,10 +1,11 @@
-﻿using DSPTree.Models;
-using DSPTree.Web.Models;
+﻿using DSPTree;
+using DSPTree.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SatisfactoryTree.Web.Models;
 using System.Diagnostics;
 
-namespace DSPTree.Web.Controllers
+namespace SatisfactoryTree.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -15,7 +16,7 @@ namespace DSPTree.Web.Controllers
             //Build the DSP graph
             string filter = "";// "Gravity Matrix";
             DSPGraph dSPGraph = new(filter, 
-                ResearchType.GreenScience, 
+                ResearchType.OnBoarding, 
                 true,
                 true);
 
