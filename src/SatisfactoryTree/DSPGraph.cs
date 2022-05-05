@@ -1,4 +1,5 @@
-﻿using DSPTree.Models;
+﻿using DSPTree.Helpers;
+using DSPTree.Models;
 
 namespace DSPTree
 {
@@ -21,9 +22,8 @@ namespace DSPTree
             bool includeBuildings,
             bool showOnlyDirectDependencies)
         {
-            List<Item> items = new();
-            //List<Item> items = new()
-            //{
+            List<Item> items = new()
+            {
             //    //Level 0 items (Mostly ore veins)
             //    ItemPoolLevel0.IronOreVein(),
             //    ItemPoolLevel0.CopperOreVein(),
@@ -42,7 +42,7 @@ namespace DSPTree
             //    ItemPoolLevel0.PlantFuel(),
 
             //    //Level 1 items (mostly mined ore)
-            //    ItemPoolLevel1.IronOre(),
+                ItemPoolLevel1.IronOre(),
             //    ItemPoolLevel1.CopperOre(),
             //    ItemPoolLevel1.Water(),
             //    ItemPoolLevel1.CrudeOil(),
@@ -59,7 +59,7 @@ namespace DSPTree
             //    ItemPoolLevel1.CriticalPhoton(),
 
             //    //Level 2 items
-            //    ItemPoolLevel2.IronIngot(),
+                ItemPoolLevel2.IronIngot(),
             //    ItemPoolLevel2.Magnet(),
             //    ItemPoolLevel2.CopperIngot(),
             //    ItemPoolLevel2.RefinedOil(),
@@ -135,7 +135,7 @@ namespace DSPTree
             //    //Level 10 items
             //    ItemPoolLevel10.UniverseMatrix()
 
-            //};
+            };
 
             ////Include buildings
             //if (includeBuildings == true)
@@ -209,115 +209,115 @@ namespace DSPTree
                 {
                     items.RemoveAt(i);
                 }
-            }
+}
 
-            //Filter by name
-            if (string.IsNullOrEmpty(nameFilter) == false)
+//Filter by name
+if (string.IsNullOrEmpty(nameFilter) == false)
+{
+    Item? filteredItem = FindItem(items, nameFilter);
+    if (filteredItem == null)
+    {
+        throw new Exception(nameFilter + " item not found");
+    }
+    else
+    {
+        List<Item> filteredItems = new();
+        //Add the root - this is the final item
+        filteredItems.Add(filteredItem);
+
+        //Get all of the inputs leading up to it
+        filteredItems.AddRange(GetInputs(items, filteredItem.Recipes));
+
+        //Sort the items by level
+        filteredItems = filteredItems.OrderBy(b => b.Level).ToList();
+        items = filteredItems;
+    }
+}
+
+//If enabled, only show the direct inputs to product an item
+if (showOnlyDirectDependencies == true)
+{
+    Dictionary<string, int> inputs = new();
+    List<Item> filteredItems = new();
+    foreach (Item? item in items)
+    {
+        if (item.ItemType != ItemType.Building)
+        {
+            //If the item is not a building, hide it's recipe
+            item.Recipes = new List<Recipe>();
+        }
+        else
+        {
+            //If it is a building, log all of it's inputs
+            foreach (Recipe? recipe in item.Recipes)
             {
-                Item? filteredItem = FindItem(items, nameFilter);
-                if (filteredItem == null)
+                foreach (KeyValuePair<string, int> input in recipe.Inputs)
                 {
-                    throw new Exception(nameFilter + " item not found");
-                }
-                else
-                {
-                    List<Item> filteredItems = new();
-                    //Add the root - this is the final item
-                    filteredItems.Add(filteredItem);
-
-                    //Get all of the inputs leading up to it
-                    filteredItems.AddRange(GetInputs(items, filteredItem.Recipes));
-
-                    //Sort the items by level
-                    filteredItems = filteredItems.OrderBy(b => b.Level).ToList();
-                    items = filteredItems;
+                    if (inputs.ContainsKey(input.Key) == false)
+                    {
+                        inputs.Add(input.Key, 1);
+                    }
                 }
             }
+        }
+    }
 
-            //If enabled, only show the direct inputs to product an item
-            if (showOnlyDirectDependencies == true)
-            {
-                Dictionary<string, int> inputs = new();
-                List<Item> filteredItems = new();
-                foreach (Item? item in items)
-                {
-                    if (item.ItemType != ItemType.Building)
-                    {
-                        //If the item is not a building, hide it's recipe
-                        item.Recipes = new List<Recipe>();
-                    }
-                    else
-                    {
-                        //If it is a building, log all of it's inputs
-                        foreach (Recipe? recipe in item.Recipes)
-                        {
-                            foreach (KeyValuePair<string, int> input in recipe.Inputs)
-                            {
-                                if (inputs.ContainsKey(input.Key) == false)
-                                {
-                                    inputs.Add(input.Key, 1);
-                                }
-                            }
-                        }
-                    }
-                }
+    //Add each item to the filter.
+    foreach (Item? item in items)
+    {
+        if (!filteredItems.Contains(item) &&
+            (item.ItemType == ItemType.Building ||
+            inputs.ContainsKey(item.Name)))
+        {
+            filteredItems.Add(item);
+        }
+    }
 
-                //Add each item to the filter.
-                foreach (Item? item in items)
-                {
-                    if (!filteredItems.Contains(item) &&
-                        (item.ItemType == ItemType.Building ||
-                        inputs.ContainsKey(item.Name)))
-                    {
-                        filteredItems.Add(item);
-                    }
-                }
+    items = filteredItems;
+}
 
-                items = filteredItems;
-            }
+//for (int i = 0; i < items.Count; i++)
+//{
+//    Item? item = items[i];
+//    if (item.Name == "Accumulator")
+//    {
+//        int j = i;
+//    }
+//}
 
-            //for (int i = 0; i < items.Count; i++)
-            //{
-            //    Item? item = items[i];
-            //    if (item.Name == "Accumulator")
-            //    {
-            //        int j = i;
-            //    }
-            //}
-
-            return items;
+return items;
         }
 
         //Get recipe inputs
         private static List<Item> GetInputs(List<Item> items, List<Recipe> recipes)
+{
+    List<Item> inputs = new();
+    foreach (Recipe recipe in recipes)
+    {
+        foreach (KeyValuePair<string, int> item in recipe.Inputs)
         {
-            List<Item> inputs = new();
-            foreach (Recipe recipe in recipes)
+            Item? inputItem = FindItem(items, item.Key);
+            if (inputItem != null && inputs.Contains(inputItem) == false)
             {
-                foreach (KeyValuePair<string, int> item in recipe.Inputs)
+                inputs.Add(inputItem);
+                List<Item> newItems = GetInputs(items, inputItem.Recipes);
+                foreach (Item newItem in newItems)
                 {
-                    Item? inputItem = FindItem(items, item.Key);
-                    if (inputItem != null && inputs.Contains(inputItem) == false)
+                    if (newItem != null && inputs.Contains(newItem) == false)
                     {
-                        inputs.Add(inputItem);
-                        List<Item> newItems = GetInputs(items, inputItem.Recipes);
-                        foreach (Item newItem in newItems)
-                        {
-                            if (newItem != null && inputs.Contains(newItem) == false)
-                            {
-                                inputs.Add(newItem);
-                            }
-                        }
+                        inputs.Add(newItem);
                     }
                 }
             }
-            return inputs;
         }
+    }
+    return inputs;
+}
 
-        private static Item? FindItem(List<Item> items, string name)
-        {
-            return items.Where(i => i.Name == name).FirstOrDefault();
-        }
+private static Item? FindItem(List<Item> items, string name)
+{
+    return items.Where(i => i.Name == name).FirstOrDefault();
+}
 
     }
 }
