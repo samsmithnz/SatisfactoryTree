@@ -40,7 +40,13 @@ namespace DSPTree
                 ItemPoolTier2.CopperSheet(),
                 ItemPoolTier2.ModularFrame(),
                 ItemPoolTier2.Rotor(),
-                ItemPoolTier2.SmartPlating()
+                ItemPoolTier2.SmartPlating(),
+
+                ItemPoolTier3.Coal(),
+                ItemPoolTier3.SteelIngot(),
+                ItemPoolTier3.SteelPipe(),
+                ItemPoolTier3.SteelBeam(),
+                ItemPoolTier3.VersatileFramework(),
 
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),
@@ -310,7 +316,7 @@ namespace DSPTree
             List<Item> inputs = new();
             foreach (Recipe recipe in recipes)
             {
-                foreach (KeyValuePair<string, int> item in recipe.Inputs)
+                foreach (KeyValuePair<string, decimal> item in recipe.Inputs)
                 {
                     Item? inputItem = FindItem(items, item.Key);
                     if (inputItem != null && inputs.Contains(inputItem) == false)
