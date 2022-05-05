@@ -31,7 +31,11 @@ namespace DSPTree
                 ItemPoolTheBeginning.CopperOre(),
                 ItemPoolTheBeginning.CopperIngot(),
                 ItemPoolTheBeginning.Wire(),
-                ItemPoolTheBeginning.Cable()
+                ItemPoolTheBeginning.Cable(),
+                ItemPoolTheBeginning.Limestone(),
+                ItemPoolTheBeginning.Concrete(),
+                ItemPoolTheBeginning.Screw(),
+                ItemPoolTheBeginning.ReinforcedIronPlate()
 
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),

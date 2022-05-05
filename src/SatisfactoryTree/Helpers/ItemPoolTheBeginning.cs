@@ -15,7 +15,7 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1, 
+                    new Recipe(1,
                         60,
                         new(),
                         new()
@@ -184,6 +184,100 @@ namespace DSPTree.Helpers
                         new()
                         {
                             {"Cable", 1 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+
+        public static Item Limestone()
+        {
+            return new Item(0, "Limestone",
+                "Limestone.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(1,
+                        60,
+                        new(),
+                        new()
+                        {
+                            {"Limestone", 1 }
+                        },
+                        BuildingType.MiningMachine)
+                }
+            };
+        }
+
+        public static Item Concrete()
+        {
+            return new Item(0, "Concrete",
+                "Concrete.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(4,
+                        15,
+                        new()
+                        {
+                            { "Limestone", 3 }
+                        },
+                        new()
+                        {
+                            {"Concrete", 1 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+
+        public static Item Screw()
+        {
+            return new Item(0, "Screw",
+                "Screw.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(6,
+                        40,
+                        new()
+                        {
+                            { "Iron Rod", 1 }
+                        },
+                        new()
+                        {
+                            {"Screw", 10 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+
+        public static Item ReinforcedIronPlate()
+        {
+            return new Item(0, "Reinforced Iron Plate",
+                "Reinforced_Iron_Plate.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(12,
+                        5,
+                        new()
+                        {
+                            { "Iron Plate", 6 },
+                            { "Screw", 12 }
+                        },
+                        new()
+                        {
+                            {"Reinforced Iron Plate", 1 }
                         },
                         BuildingType.Constructor)
                 }
