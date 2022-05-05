@@ -7,98 +7,101 @@ namespace DSPTree.Helpers
     public static class ItemPoolTier2
     {
         //Level 2
-        public static Item IronIngot()
+        public static Item CopperSheet()
         {
-            return new Item(2, "Iron Ingot",
-                "Iron_Ingot.webp",
+            return new Item(2, "Copper Sheet",
+                "Copper_Sheet.webp",
                 ItemType.Item,
-                ResearchType.Tier1)
+                ResearchType.Tier2)
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        30,
+                    new Recipe(6,
+                        10,
                         new()
                         {
-                            { "Iron Ore", 1 }
+                            { "Copper Ingot", 2 }
                         },
                         new()
                         {
-                            {"Iron Ingot", 1 }
+                            { "Copper Sheet", 1 }
                         },
-                        BuildingType.Smelter)
+                        BuildingType.Constructor)
                 }
             };
         }
 
-        public static Item IronIngot()
+        public static Item Rotor()
         {
-            return new Item(2, "Iron Ingot",
-                "Iron_Ingot.webp",
+            return new Item(2, "Rotor",
+                "Rotor.webp",
                 ItemType.Item,
-                ResearchType.Tier1)
+                ResearchType.Tier2)
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        30,
+                    new Recipe(15,
+                        4,
                         new()
                         {
-                            { "Iron Ore", 1 }
+                            { "Iron Rod", 5 },
+                            { "Screw", 25 }
                         },
                         new()
                         {
-                            {"Iron Ingot", 1 }
+                            { "Rotor", 1 }
                         },
-                        BuildingType.Smelter)
+                        BuildingType.Assembler)
                 }
             };
         }
 
-        public static Item IronIngot()
+        public static Item ModularFrame()
         {
-            return new Item(2, "Iron Ingot",
-                "Iron_Ingot.webp",
+            return new Item(2, "Modular Frame",
+                "Modular_Frame.webp",
                 ItemType.Item,
-                ResearchType.Tier1)
+                ResearchType.Tier2)
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        30,
+                    new Recipe(60,
+                        2,
                         new()
                         {
-                            { "Iron Ore", 1 }
+                            { "Reinforced Iron Plate", 3 },
+                            { "Iron Rod", 12 }
                         },
                         new()
                         {
-                            {"Iron Ingot", 1 }
+                            { "Modular Frame", 1 }
                         },
-                        BuildingType.Smelter)
+                        BuildingType.Assembler)
                 }
             };
         }
 
-        public static Item IronIngot()
+        public static Item SmartPlating()
         {
-            return new Item(2, "Iron Ingot",
-                "Iron_Ingot.webp",
+            return new Item(2, "Smart Plating",
+                "Smart_Plating.webp",
                 ItemType.Item,
-                ResearchType.Tier1)
+                ResearchType.Tier2)
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        30,
+                    new Recipe(30,
+                        2,
                         new()
                         {
-                            { "Iron Ore", 1 }
+                            { "Reinforced Iron Plate", 1 },
+                            { "Rotor", 1 }
                         },
                         new()
                         {
-                            {"Iron Ingot", 1 }
+                            { "Smart Plating", 1 }
                         },
-                        BuildingType.Smelter)
+                        BuildingType.Assembler)
                 }
             };
         }

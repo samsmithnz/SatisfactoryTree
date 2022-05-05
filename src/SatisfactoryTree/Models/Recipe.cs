@@ -41,6 +41,7 @@
         Foundry = 2,
         Refinery = 3,
         Constructor = 4,
+        Assembler = 5,
         //OilRefinery = 5,
         //ChemicalPlant = 6,
         //MatrixLab = 7,

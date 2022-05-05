@@ -35,7 +35,12 @@ namespace DSPTree
                 ItemPoolTier1.Limestone(),
                 ItemPoolTier1.Concrete(),
                 ItemPoolTier1.Screw(),
-                ItemPoolTier1.ReinforcedIronPlate()
+                ItemPoolTier1.ReinforcedIronPlate(),
+
+                ItemPoolTier2.CopperSheet(),
+                ItemPoolTier2.ModularFrame(),
+                ItemPoolTier2.Rotor(),
+                ItemPoolTier2.SmartPlating()
 
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),

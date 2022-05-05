@@ -280,7 +280,7 @@ namespace DSPTree.Helpers
                         {
                             {"Reinforced Iron Plate", 1 }
                         },
-                        BuildingType.Constructor)
+                        BuildingType.Assembler)
                 }
             };
         }
