@@ -40,7 +40,7 @@
         Smelter = 1,
         Foundry = 2,
         Refinery = 3,
-        //OilExtractor = 4,
+        Constructor = 4,
         //OilRefinery = 5,
         //ChemicalPlant = 6,
         //MatrixLab = 7,

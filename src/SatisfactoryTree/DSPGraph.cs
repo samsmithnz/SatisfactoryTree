@@ -7,7 +7,7 @@ namespace DSPTree
     {
         public List<Item> Items { get; set; }
         public DSPGraph(string filter = "",
-            ResearchType researchType = ResearchType.WhiteScience,
+            ResearchType researchType = ResearchType.TheBeginning,
             bool includeBuildings = false,
             bool showOnlyDirectDependencies = false)
         {
@@ -24,6 +24,15 @@ namespace DSPTree
         {
             List<Item> items = new()
             {
+                ItemPoolTheBeginning.IronOre(),
+                ItemPoolTheBeginning.IronIngot(),
+                ItemPoolTheBeginning.IronPlate(),
+                ItemPoolTheBeginning.IronRod(),
+                ItemPoolTheBeginning.CopperOre(),
+                ItemPoolTheBeginning.CopperIngot(),
+                ItemPoolTheBeginning.Wire(),
+                ItemPoolTheBeginning.Cable()
+
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),
                 //    ItemPoolLevel0.CopperOreVein(),
@@ -42,8 +51,6 @@ namespace DSPTree
                 //    ItemPoolLevel0.PlantFuel(),
 
                 //    //Level 1 items (mostly mined ore)
-                ItemPoolLevel1.IronOre(),
-                //    ItemPoolLevel1.CopperOre(),
                 //    ItemPoolLevel1.Water(),
                 //    ItemPoolLevel1.CrudeOil(),
                 //    ItemPoolLevel1.Stone(),
@@ -59,7 +66,7 @@ namespace DSPTree
                 //    ItemPoolLevel1.CriticalPhoton(),
 
                 //    //Level 2 items
-                ItemPoolLevel2.IronIngot(),
+                //ItemPoolTier0.IronIngot(),
                 //    ItemPoolLevel2.Magnet(),
                 //    ItemPoolLevel2.CopperIngot(),
                 //    ItemPoolLevel2.RefinedOil(),

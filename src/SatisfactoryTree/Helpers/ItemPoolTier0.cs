@@ -4,12 +4,10 @@ using BuildingType = DSPTree.Models.ManufactoringBuildingType;
 
 namespace DSPTree.Helpers
 {
-    public static class ItemPoolLevel3
+    public static class ItemPoolTier0
     {
-        //Level 3
-       
+        //Level 2
 
-        
-
+      
     }
 }

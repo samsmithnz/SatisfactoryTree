@@ -10,7 +10,7 @@
             string name,
             string image,
             ItemType itemType = ItemType.Item,
-            ResearchType researchType = ResearchType.WhiteScience)
+            ResearchType researchType = ResearchType.TheBeginning)
         {
             Level = level;
             Name = name;
@@ -36,13 +36,14 @@
 
     public enum ResearchType
     {
-        OnBoarding = 0,
-        PreBlueScience = 1,
-        BlueScience = 2,
-        RedScience = 3,
-        YellowScience = 4,
-        PurpleScience = 5,
-        GreenScience = 6,
-        WhiteScience = 7
+        TheBeginning,
+        Tier0,
+        Tier1,
+        Tier2,
+        Tier3,
+        Tier4,
+        Tier5,
+        Tier6,
+        Tier7
     }
 }

@@ -1,0 +1,195 @@
+﻿using DSPTree.Models;
+using BuildingType = DSPTree.Models.ManufactoringBuildingType;
+using MethodType = DSPTree.Models.ManufactoringMethodType;
+
+namespace DSPTree.Helpers
+{
+    public static class ItemPoolTheBeginning
+    {
+        public static Item IronOre()
+        {
+            return new Item(0, "Iron Ore",
+                "Iron_Ore.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(1, 
+                        60,
+                        new(),
+                        new()
+                        {
+                            { "Iron Ore", 1 }
+                        },
+                        BuildingType.MiningMachine)
+                }
+            };
+        }
+        public static Item IronIngot()
+        {
+            return new Item(2, "Iron Ingot",
+                "Iron_Ingot.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(2,
+                        30,
+                        new()
+                        {
+                            { "Iron Ore", 1 }
+                        },
+                        new()
+                        {
+                            {"Iron Ingot", 1 }
+                        },
+                        BuildingType.Smelter)
+                }
+            };
+        }
+
+        public static Item IronPlate()
+        {
+            return new Item(0, "Iron Plate",
+                "Iron_Plate.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(6,
+                        20,
+                        new()
+                        {
+                            { "Iron Ingot", 3 }
+                        },
+                        new()
+                        {
+                            { "Iron Plate", 2 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+        public static Item IronRod()
+        {
+            return new Item(0, "Iron Rod",
+                "Iron_Rod.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(4,
+                        15,
+                        new()
+                        {
+                            { "Iron Ingot", 1 }
+                        },
+                        new()
+                        {
+                            { "Iron Rod", 1 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+
+        public static Item CopperOre()
+        {
+            return new Item(0, "Copper Ore",
+                "Copper_Ore.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(1,
+                        60,
+                        new(),
+                        new()
+                        {
+                            { "Copper Ore", 1 }
+                        },
+                        BuildingType.MiningMachine)
+                }
+            };
+        }
+
+        public static Item CopperIngot()
+        {
+            return new Item(0, "Copper Ingot",
+                "Copper_Ingot.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(2,
+                        30,
+                        new()
+                        {
+                            { "Copper Ore", 1 }
+                        },
+                        new()
+                        {
+                            {"Copper Ingot", 1 }
+                        },
+                        BuildingType.Smelter)
+                }
+            };
+        }
+
+        public static Item Wire()
+        {
+            return new Item(0, "Wire",
+                "Wire.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(4,
+                        30,
+                        new()
+                        {
+                            { "Copper Ingot", 1 }
+                        },
+                        new()
+                        {
+                            {"Wire", 2 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+
+        public static Item Cable()
+        {
+            return new Item(0, "Cable",
+                "Cable.webp",
+                ItemType.Item,
+                ResearchType.TheBeginning)
+            {
+                Recipes =
+                {
+                    new Recipe(2,
+                        30,
+                        new()
+                        {
+                            { "Wire", 2 }
+                        },
+                        new()
+                        {
+                            {"Cable", 1 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+
+
+    }
+}
