@@ -2,6 +2,10 @@
 {
     public class Item
     {
+
+        //STacksize
+        //SInkValue
+
         public Item(int level,
             string name,
             string image,
@@ -32,7 +36,7 @@
 
     public enum ResearchType
     {
-        NoScience = 0,
+        OnBoarding = 0,
         PreBlueScience = 1,
         BlueScience = 2,
         RedScience = 3,

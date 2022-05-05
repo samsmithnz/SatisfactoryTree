@@ -1,49 +1,49 @@
-using DSPTree.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using DSPTree.Models;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DSPTree.Tests;
+//namespace DSPTree.Tests;
 
-[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-[TestClass]
-public class ResearchTests
-{
-    [TestMethod]
-    public void NoScienceTest()
-    {
-        //Arrange
-        DSPGraph graph = new("", ResearchType.NoScience, true);
+//[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+//[TestClass]
+//public class ResearchTests
+//{
+//    [TestMethod]
+//    public void NoScienceTest()
+//    {
+//        //Arrange
+//        DSPGraph graph = new("", ResearchType.OnBoarding, true);
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(graph);
-        Assert.AreEqual(35, graph.Items.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(graph);
+//        Assert.AreEqual(35, graph.Items.Count);
+//    }
 
-    [TestMethod]
-    public void PreBlueScienceTest()
-    {
-        //Arrange
-        DSPGraph graph = new("", ResearchType.PreBlueScience, true);
+//    [TestMethod]
+//    public void PreBlueScienceTest()
+//    {
+//        //Arrange
+//        DSPGraph graph = new("", ResearchType.PreBlueScience, true);
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(graph);
-        Assert.AreEqual(45, graph.Items.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(graph);
+//        Assert.AreEqual(45, graph.Items.Count);
+//    }
 
-    [TestMethod]
-    public void BlueScienceTest()
-    {
-        //Arrange
-        DSPGraph graph = new("", ResearchType.BlueScience, true);
+//    [TestMethod]
+//    public void BlueScienceTest()
+//    {
+//        //Arrange
+//        DSPGraph graph = new("", ResearchType.BlueScience, true);
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(graph);
-        Assert.AreEqual(75, graph.Items.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(graph);
+//        Assert.AreEqual(75, graph.Items.Count);
+//    }
 
-}
+//}

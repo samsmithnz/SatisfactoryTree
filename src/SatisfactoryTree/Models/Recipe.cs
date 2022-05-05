@@ -4,6 +4,7 @@
     {
         public Recipe(
             decimal processingTimeInSeconds,
+            decimal throughPutPerMinute,
             Dictionary<string, int> inputs,
             Dictionary<string, int> outputs,
             ManufactoringBuildingType manufactoringBuilding,
@@ -11,6 +12,7 @@
             bool primaryMethodOfManufacture = true)
         {
             ProcessingTimeInSeconds = processingTimeInSeconds;
+            ThroughPutPerMinute = throughPutPerMinute;
             Inputs = inputs;
             Outputs = outputs;
             ManufactoringBuilding = manufactoringBuilding;
@@ -18,6 +20,7 @@
             PrimaryMethodOfManufacture = primaryMethodOfManufacture;
         }
         public decimal ProcessingTimeInSeconds { get; internal set; }
+        public decimal ThroughPutPerMinute { get; internal set; }
         public Dictionary<string, int> Inputs { get; set; }
         public Dictionary<string, int> Outputs { get; set; }
         public ManufactoringBuildingType ManufactoringBuilding { get; set; }
@@ -35,16 +38,16 @@
     {
         MiningMachine = 0,
         Smelter = 1,
-        AssemblingMachine = 2,
-        WaterPump = 3,
-        OilExtractor = 4,
-        OilRefinery = 5,
-        ChemicalPlant = 6,
-        MatrixLab = 7,
-        MiniatureParticleCollider = 8,
-        EnergyExchanger = 9,
-        Fractionator = 10,
-        RayReceiver = 11,
+        Foundry = 2,
+        Refinery = 3,
+        //OilExtractor = 4,
+        //OilRefinery = 5,
+        //ChemicalPlant = 6,
+        //MatrixLab = 7,
+        //MiniatureParticleCollider = 8,
+        //EnergyExchanger = 9,
+        //Fractionator = 10,
+        //RayReceiver = 11,
         None = 12
     }
 }
