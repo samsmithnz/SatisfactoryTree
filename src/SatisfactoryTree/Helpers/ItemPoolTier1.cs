@@ -8,7 +8,7 @@ namespace DSPTree.Helpers
     {
         public static Item IronOre()
         {
-            return new Item(0, "Iron Ore",
+            return new Item(1, "Iron Ore",
                 "Iron_Ore.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -26,9 +26,10 @@ namespace DSPTree.Helpers
                 }
             };
         }
+
         public static Item IronIngot()
         {
-            return new Item(2, "Iron Ingot",
+            return new Item(1, "Iron Ingot",
                 "Iron_Ingot.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -52,7 +53,7 @@ namespace DSPTree.Helpers
 
         public static Item IronPlate()
         {
-            return new Item(0, "Iron Plate",
+            return new Item(1, "Iron Plate",
                 "Iron_Plate.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -75,7 +76,7 @@ namespace DSPTree.Helpers
         }
         public static Item IronRod()
         {
-            return new Item(0, "Iron Rod",
+            return new Item(1, "Iron Rod",
                 "Iron_Rod.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -99,7 +100,7 @@ namespace DSPTree.Helpers
 
         public static Item CopperOre()
         {
-            return new Item(0, "Copper Ore",
+            return new Item(1, "Copper Ore",
                 "Copper_Ore.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -120,7 +121,7 @@ namespace DSPTree.Helpers
 
         public static Item CopperIngot()
         {
-            return new Item(0, "Copper Ingot",
+            return new Item(1, "Copper Ingot",
                 "Copper_Ingot.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -144,7 +145,7 @@ namespace DSPTree.Helpers
 
         public static Item Wire()
         {
-            return new Item(0, "Wire",
+            return new Item(1, "Wire",
                 "Wire.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -168,7 +169,7 @@ namespace DSPTree.Helpers
 
         public static Item Cable()
         {
-            return new Item(0, "Cable",
+            return new Item(1, "Cable",
                 "Cable.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -192,7 +193,7 @@ namespace DSPTree.Helpers
 
         public static Item Limestone()
         {
-            return new Item(0, "Limestone",
+            return new Item(1, "Limestone",
                 "Limestone.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -213,7 +214,7 @@ namespace DSPTree.Helpers
 
         public static Item Concrete()
         {
-            return new Item(0, "Concrete",
+            return new Item(1, "Concrete",
                 "Concrete.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -237,7 +238,7 @@ namespace DSPTree.Helpers
 
         public static Item Screw()
         {
-            return new Item(0, "Screw",
+            return new Item(1, "Screw",
                 "Screw.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
@@ -261,7 +262,7 @@ namespace DSPTree.Helpers
 
         public static Item ReinforcedIronPlate()
         {
-            return new Item(0, "Reinforced Iron Plate",
+            return new Item(1, "Reinforced Iron Plate",
                 "Reinforced_Iron_Plate.webp",
                 ItemType.Item,
                 ResearchType.Tier1)
