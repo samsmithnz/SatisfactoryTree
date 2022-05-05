@@ -42,6 +42,7 @@
         Tier4,
         Tier5,
         Tier6,
-        Tier7
+        Tier7,
+        Tier8
     }
 }

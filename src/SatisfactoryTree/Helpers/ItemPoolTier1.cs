@@ -44,7 +44,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            {"Iron Ingot", 1 }
+                            { "Iron Ingot", 1 }
                         },
                         BuildingType.Smelter)
                 }
@@ -136,7 +136,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            {"Copper Ingot", 1 }
+                            { "Copper Ingot", 1 }
                         },
                         BuildingType.Smelter)
                 }
@@ -160,7 +160,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            {"Wire", 2 }
+                            { "Wire", 2 }
                         },
                         BuildingType.Constructor)
                 }
@@ -184,7 +184,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            {"Cable", 1 }
+                            { "Cable", 1 }
                         },
                         BuildingType.Constructor)
                 }
@@ -205,7 +205,7 @@ namespace DSPTree.Helpers
                         new(),
                         new()
                         {
-                            {"Limestone", 1 }
+                            { "Limestone", 1 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -229,7 +229,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            {"Concrete", 1 }
+                            { "Concrete", 1 }
                         },
                         BuildingType.Constructor)
                 }
@@ -253,7 +253,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            {"Screw", 10 }
+                            { "Screw", 10 }
                         },
                         BuildingType.Constructor)
                 }
@@ -278,7 +278,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            {"Reinforced Iron Plate", 1 }
+                            { "Reinforced Iron Plate", 1 }
                         },
                         BuildingType.Assembler)
                 }

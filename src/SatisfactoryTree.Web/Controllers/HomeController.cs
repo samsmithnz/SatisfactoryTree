@@ -16,7 +16,7 @@ namespace SatisfactoryTree.Web.Controllers
             //Build the DSP graph
             string filter = "";// "Gravity Matrix";
             DSPGraph dSPGraph = new(filter, 
-                ResearchType.Tier1, 
+                ResearchType.Tier8, 
                 true,
                 true);
 
