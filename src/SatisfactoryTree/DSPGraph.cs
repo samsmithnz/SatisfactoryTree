@@ -69,6 +69,22 @@ namespace DSPTree
                 ItemPoolTier6.CateriumOre(),
                 ItemPoolTier6.CateriumIngot(),
 
+                ItemPoolTier7.Bauxite(),
+                ItemPoolTier7.AluminaSolution(),
+                ItemPoolTier7.AluminumScrap(),
+                ItemPoolTier7.AluminumIngot(),
+                ItemPoolTier7.AlcladAluminumSheet(),
+                ItemPoolTier7.AluminumCasing(),
+                ItemPoolTier7.RawQuartz(),
+                ItemPoolTier7.QuartzCrystal(),
+                ItemPoolTier7.Silica(),
+                ItemPoolTier7.CrystalOscillator(),
+                ItemPoolTier7.RadioControlUnit(),
+                ItemPoolTier7.Sulfur(),
+                ItemPoolTier7.SulfuricAcid(),
+                ItemPoolTier7.Battery(),
+                ItemPoolTier7.Supercomputer(),
+                ItemPoolTier7.AssemblyDirectorSystem(),
 
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),

@@ -45,6 +45,7 @@
         Manufacturer = 6,
         OilExtractor = 7,
         WaterExtractor = 8,
+        Blender = 9,
         //OilRefinery = 5,
         //ChemicalPlant = 6,
         //MatrixLab = 7,
