@@ -70,6 +70,7 @@ namespace DSPTree
                 ItemPoolTier6.CateriumOre(),
                 ItemPoolTier6.CateriumIngot(),
                 ItemPoolTier6.Quickwire(),
+                ItemPoolTier6.HighSpeedConnector(),
 
                 ItemPoolTier7.Bauxite(),
                 ItemPoolTier7.AluminaSolution(),

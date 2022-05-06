@@ -76,6 +76,32 @@ namespace DSPTree.Helpers
             };
         }
 
+        public static Item HighSpeedConnector()
+        {
+            return new Item(6, "High-Speed Connector",
+                "High-Speed_Connector.webp",
+                ItemType.Item,
+                ResearchType.Tier6)
+            {
+                Recipes =
+                {
+                    new Recipe(16,
+                        3.75m,
+                        new()
+                        {
+                            { "Quickwire", 56 },
+                            { "Cable", 10 },
+                            { "Circuit Board", 1 },
+                        },
+                        new()
+                        {
+                            { "High-Speed Connector", 1 }
+                        },
+                        BuildingType.Manufacturer)
+                }
+            };
+        }
+
 
     }
 }
