@@ -127,6 +127,27 @@ namespace DSPTree.Helpers
         }
 
 
+        public static Item Water()
+        {
+            return new Item(3, "Water",
+                "Water.webp",
+                ItemType.Item,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(1,
+                        120,
+                        new(),
+                        new()
+                        {
+                            { "Water", 2 }
+                        },
+                        BuildingType.WaterExtractor)
+                }
+            };
+        }
+
 
     }
 }

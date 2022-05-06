@@ -43,6 +43,8 @@
         Constructor = 4,
         Assembler = 5,
         Manufacturer = 6,
+        OilExtractor = 7,
+        WaterExtractor = 8,
         //OilRefinery = 5,
         //ChemicalPlant = 6,
         //MatrixLab = 7,

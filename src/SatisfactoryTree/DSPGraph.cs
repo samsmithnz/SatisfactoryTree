@@ -53,6 +53,17 @@ namespace DSPTree
                 ItemPoolTier4.Stator(),
                 ItemPoolTier4.Motor(),
                 ItemPoolTier4.HeavyModularFrame(),
+
+
+                ItemPoolTier5.CircuitBoard(),
+                ItemPoolTier5.CrudeOil(),
+                ItemPoolTier5.Plastic(),
+                ItemPoolTier5.Rubber(),
+                ItemPoolTier5.HeavyOilResidue(),
+                ItemPoolTier5.PetroleumCoke(),
+                ItemPoolTier5.Fuel(),
+
+
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),
                 //    ItemPoolLevel0.CopperOreVein(),
