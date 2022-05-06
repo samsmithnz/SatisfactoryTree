@@ -41,7 +41,7 @@ namespace DSPTree.Helpers
                         15,
                         new()
                         {
-                            { "Caterium Ingot", 3 }
+                            { "Caterium Ore", 3 }
                         },
                         new()
                         {
