@@ -47,6 +47,7 @@ namespace DSPTree
                 ItemPoolTier3.SteelPipe(),
                 ItemPoolTier3.SteelBeam(),
                 ItemPoolTier3.VersatileFramework(),
+                ItemPoolTier3.Water(),
 
                 ItemPoolTier4.EncasedIndustrialBeam(),
                 ItemPoolTier4.AutomatedWiring(),

@@ -50,53 +50,53 @@ public class DSPGraphTests
     //    Assert.IsTrue(true);
     //}
 
-    //[TestMethod]
-    //public void TreeHasValidParentsAndChildrenTest()
-    //{
-    //    //Arrange
-    //    DSPGraph graph = new("", ResearchType.WhiteScience, true);
+    [TestMethod]
+    public void TreeHasValidParentsAndChildrenTest()
+    {
+        //Arrange
+        DSPGraph graph = new("", ResearchType.Tier8, true);
 
-    //    //Act
+        //Act
 
-    //    //Assert
-    //    Dictionary<string, int> rawMaterials = new();
-    //    foreach (Item item in graph.Items)
-    //    {
-    //        foreach (Recipe recipe in item.Recipes)
-    //        {
-    //            //Check each input (if it's not gathered)
-    //            foreach (KeyValuePair<string, int> input in recipe.Inputs)
-    //            {
-    //                if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
-    //                {
-    //                    if (!rawMaterials.ContainsKey(input.Key) == true)
-    //                    {
-    //                        rawMaterials.Add(input.Key, input.Value);
-    //                    }
-    //                }
-    //            }
-    //            //Check each output (if it's not gathered)
-    //            foreach (KeyValuePair<string, int> output in recipe.Outputs)
-    //            {
-    //                if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
-    //                {
-    //                    if (!rawMaterials.ContainsKey(output.Key) == true)
-    //                    {
-    //                        rawMaterials.Add(output.Key, output.Value);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //    foreach (KeyValuePair<string, int> item in rawMaterials)
-    //    {
-    //        if (!graph.Items.Where(a => a.Name == item.Key).Any())
-    //        {
-    //            Assert.AreEqual("child not found", item.Key);
-    //        }
-    //    }
-    //    Assert.IsTrue(true);
-    //}
+        //Assert
+        Dictionary<string, decimal> rawMaterials = new();
+        foreach (Item item in graph.Items)
+        {
+            foreach (Recipe recipe in item.Recipes)
+            {
+                //Check each input (if it's not gathered)
+                foreach (KeyValuePair<string, decimal> input in recipe.Inputs)
+                {
+                    if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
+                    {
+                        if (!rawMaterials.ContainsKey(input.Key) == true)
+                        {
+                            rawMaterials.Add(input.Key, input.Value);
+                        }
+                    }
+                }
+                //Check each output (if it's not gathered)
+                foreach (KeyValuePair<string, decimal> output in recipe.Outputs)
+                {
+                    if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
+                    {
+                        if (!rawMaterials.ContainsKey(output.Key) == true)
+                        {
+                            rawMaterials.Add(output.Key, output.Value);
+                        }
+                    }
+                }
+            }
+        }
+        foreach (KeyValuePair<string, decimal> item in rawMaterials)
+        {
+            if (!graph.Items.Where(a => a.Name == item.Key).Any())
+            {
+                Assert.AreEqual("child not found", item.Key);
+            }
+        }
+        Assert.IsTrue(true);
+    }
 
     //[TestMethod]
     //public void TreeImageIsUsedOnlyOnceTest()
