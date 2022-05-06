@@ -52,6 +52,30 @@ namespace DSPTree.Helpers
             };
         }
 
+        public static Item Quickwire()
+        {
+            return new Item(6, "Quickwire",
+                "Quickwire.webp",
+                ItemType.Item,
+                ResearchType.Tier6)
+            {
+                Recipes =
+                {
+                    new Recipe(5,
+                        60,
+                        new()
+                        {
+                            { "Caterium Ingot", 1 }
+                        },
+                        new()
+                        {
+                            { "Quickwire", 5 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
+
 
     }
 }
