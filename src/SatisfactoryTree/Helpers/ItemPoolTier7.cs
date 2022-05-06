@@ -349,6 +349,31 @@ namespace DSPTree.Helpers
             };
         }
 
+        public static Item AILimiter()
+        {
+            return new Item(7, "AI Limiter",
+                "AI_Limiter.webp",
+                ItemType.Item,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(12,
+                        5,
+                        new()
+                        {
+                            { "Copper Sheet", 5 },
+                            { "Quickwire", 20 }
+                        },
+                        new()
+                        {
+                            { "AI Limiter", 1 }
+                        },
+                        BuildingType.Assembler)
+                }
+            };
+        }
+
         public static Item Supercomputer()
         {
             return new Item(7, "Supercomputer",

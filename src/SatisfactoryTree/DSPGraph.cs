@@ -84,6 +84,7 @@ namespace DSPTree
                 ItemPoolTier7.Sulfur(),
                 ItemPoolTier7.SulfuricAcid(),
                 ItemPoolTier7.Battery(),
+                ItemPoolTier7.AILimiter(),
                 ItemPoolTier7.Supercomputer(),
                 ItemPoolTier7.AssemblyDirectorSystem(),
 
