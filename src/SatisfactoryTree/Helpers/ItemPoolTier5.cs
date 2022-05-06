@@ -201,6 +201,86 @@ namespace DSPTree.Helpers
             };
         }
 
+        public static Item Computer()
+        {
+            return new Item(5, "Computer",
+                "Computer.webp",
+                ItemType.Item,
+                ResearchType.Tier5)
+            {
+                Recipes =
+                {
+                    new Recipe(24,
+                        2.5m,
+                        new()
+                        {
+                            { "Circuit Board", 10 },
+                            { "Cable", 9 },
+                            { "Plastic", 18 },
+                            { "Screw", 52 }
+                        },
+                        new()
+                        {
+                            { "Computer", 1 }
+                        },
+                        BuildingType.Manufacturer)
+                }
+            };
+        }
+
+        public static Item ModularEngine()
+        {
+            return new Item(5, "Modular Engine",
+                "Modular_Engine.webp",
+                ItemType.Item,
+                ResearchType.Tier5)
+            {
+                Recipes =
+                {
+                    new Recipe(60,
+                        1,
+                        new()
+                        {
+                            { "Motor", 2 },
+                            { "Rubber", 15 },
+                            { "Smart Plating", 2 },
+                        },
+                        new()
+                        {
+                            { "Modular Engine", 1 }
+                        },
+                        BuildingType.Manufacturer)
+                }
+            };
+        }
+
+        public static Item AdaptiveControlUnit()
+        {
+            return new Item(5, "Adaptive Control Unit",
+                "Adaptive_Control_Unit.webp",
+                ItemType.Item,
+                ResearchType.Tier5)
+            {
+                Recipes =
+                {
+                    new Recipe(120,
+                        2,
+                        new()
+                        {
+                            { "Automated Wiring", 15 },
+                            { "Circuit Board", 10 },
+                            { "Heavy Modular Frame", 2 },
+                            { "Computer", 2 }
+                        },
+                        new()
+                        {
+                            { "Adaptive Control Unit", 2 }
+                        },
+                        BuildingType.Manufacturer)
+                }
+            };
+        }
+
 
     }
 }

@@ -62,6 +62,12 @@ namespace DSPTree
                 ItemPoolTier5.HeavyOilResidue(),
                 ItemPoolTier5.PetroleumCoke(),
                 ItemPoolTier5.Fuel(),
+                ItemPoolTier5.Computer(),
+                ItemPoolTier5.ModularEngine(),
+                ItemPoolTier5.AdaptiveControlUnit(),
+
+                ItemPoolTier6.CateriumOre(),
+                ItemPoolTier6.CateriumIngot(),
 
 
                 //    //Level 0 items (Mostly ore veins)
