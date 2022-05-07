@@ -4,28 +4,28 @@ namespace DSPTree
 {
     public static class RawMaterials
     {
-        public static Dictionary<string, int> CalculateRawMaterials(List<Item> items, Item item)
+        public static Dictionary<string, decimal> CalculateRawMaterials(List<Item> items, Item item)
         {
             //For the primary recipe, look at the inputs.
             //If the input is not a gathered input, look at those items inputs,
             //adding together all of the resource totals until we find the gatherer.
             //For the initial raw materials, we always want to use a factor of 1, as it's already part of the outputs calculation
             int count = 1;
-            Dictionary<string, int> rawMaterials = GetRawMaterials(items, item, count);
+            Dictionary<string, decimal> rawMaterials = GetRawMaterials(items, item, count);
 
             return rawMaterials;
         }
 
-        private static Dictionary<string, int> GetRawMaterials(List<Item> items, Item item, int count)
+        private static Dictionary<string, decimal> GetRawMaterials(List<Item> items, Item item, decimal count)
         {
-            Dictionary<string, int> rawMaterials = new();
+            Dictionary<string, decimal> rawMaterials = new();
 
             foreach (Recipe recipe in item.Recipes)
             {
                 //get each items materials recursively, summing up all of the items
                 if (recipe.PrimaryMethodOfManufacture == true)
                 {
-                    foreach (KeyValuePair<string, int> input in recipe.Inputs)
+                    foreach (KeyValuePair<string, decimal> input in recipe.Inputs)
                     {
                         Item? inputItem = FindItem(items, input.Key);
                         if (inputItem != null)
@@ -52,7 +52,7 @@ namespace DSPTree
                                         Item? detailedItem = FindItem(items, input.Key);
                                         if (detailedItem != null)
                                         {
-                                            int detailedCount = 0;
+                                            decimal detailedCount = 0;
                                             foreach (Recipe detailedRecipe in detailedItem.Recipes)
                                             {
                                                 //get each items materials recursively, summing up all of the items
@@ -61,8 +61,8 @@ namespace DSPTree
                                                     detailedCount = recipe.Inputs[detailedItem.Name];
                                                 }
                                             }
-                                            Dictionary<string, int>? rawMaterialsNextLevel = GetRawMaterials(items, detailedItem, detailedCount);
-                                            foreach (KeyValuePair<string, int> rawMaterialNextLevel in rawMaterialsNextLevel)
+                                            Dictionary<string, decimal>? rawMaterialsNextLevel = GetRawMaterials(items, detailedItem, detailedCount);
+                                            foreach (KeyValuePair<string, decimal> rawMaterialNextLevel in rawMaterialsNextLevel)
                                             {
                                                 if (rawMaterials.ContainsKey(rawMaterialNextLevel.Key))
                                                 {
@@ -82,7 +82,7 @@ namespace DSPTree
                 }
             }
             //Now apply the counts
-            foreach (KeyValuePair<string, int> rawMaterial in rawMaterials)
+            foreach (KeyValuePair<string, decimal> rawMaterial in rawMaterials)
             {
                 rawMaterials[rawMaterial.Key] *= count;
             }

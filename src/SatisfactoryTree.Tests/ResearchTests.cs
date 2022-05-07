@@ -8,42 +8,42 @@ namespace DSPTree.Tests;
 public class ResearchTests
 {
     [TestMethod]
-    public void NoScienceTest()
+    public void OnBoardingTest()
     {
         //Arrange
-        DSPGraph graph = new("", ResearchType.NoScience, true);
+        DSPGraph graph = new("", ResearchType.Tier2, true);
 
         //Act
 
         //Assert
         Assert.IsNotNull(graph);
-        Assert.AreEqual(35, graph.Items.Count);
+        Assert.IsTrue(graph.Items.Count > 0);
     }
 
-    [TestMethod]
-    public void PreBlueScienceTest()
-    {
-        //Arrange
-        DSPGraph graph = new("", ResearchType.PreBlueScience, true);
+    //[TestMethod]
+    //public void PreBlueScienceTest()
+    //{
+    //    //Arrange
+    //    DSPGraph graph = new("", ResearchType.PreBlueScience, true);
 
-        //Act
+    //    //Act
 
-        //Assert
-        Assert.IsNotNull(graph);
-        Assert.AreEqual(45, graph.Items.Count);
-    }
+    //    //Assert
+    //    Assert.IsNotNull(graph);
+    //    Assert.AreEqual(45, graph.Items.Count);
+    //}
 
-    [TestMethod]
-    public void BlueScienceTest()
-    {
-        //Arrange
-        DSPGraph graph = new("", ResearchType.BlueScience, true);
+    //[TestMethod]
+    //public void BlueScienceTest()
+    //{
+    //    //Arrange
+    //    DSPGraph graph = new("", ResearchType.BlueScience, true);
 
-        //Act
+    //    //Act
 
-        //Assert
-        Assert.IsNotNull(graph);
-        Assert.AreEqual(75, graph.Items.Count);
-    }
+    //    //Assert
+    //    Assert.IsNotNull(graph);
+    //    Assert.AreEqual(75, graph.Items.Count);
+    //}
 
 }

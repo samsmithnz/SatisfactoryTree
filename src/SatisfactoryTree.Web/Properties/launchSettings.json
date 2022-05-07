@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "DSPTree.Web": {
+    "SatisfactoryTree.Web": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

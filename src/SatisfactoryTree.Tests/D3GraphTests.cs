@@ -1,7 +1,5 @@
 using DSPTree.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DSPTree.Tests;
 
@@ -27,29 +25,52 @@ public class D3GraphTests
         //Assert.AreEqual(0, graph.Items[0].Level);
     }
 
-    //[TestMethod]
-    //public void MatrixTest()
-    //{
-    //    //Arrange
-    //    DSPGraph graph = new();
+    [TestMethod]
+    public void AssemblerWhenThereAre2InputsTest()
+    {
+        //Arrange
+        DSPGraph graph = new();
 
-    //    //Act
+        //Act
 
-    //    //Assert
+        //Assert
+        foreach (Item item in graph.Items)
+        {
+            if (item.Recipes[0].Inputs.Count == 2 &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Assembler &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Foundry &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Refinery &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.ParticleAccelerator)
+            {
+                Assert.AreEqual("", item.Name);
+                Assert.IsTrue(false);
+            }
+        }
+        Assert.IsTrue(true);
+    }
 
-    //    foreach (Item item in graph.Items)
-    //    {
-    //        if ((item.Name.ToLower().Contains("matrix") == true &&
-    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.MatrixLab) ||
-    //            (item.Name.ToLower().Contains("matrix") == false &&
-    //            item.Recipes[0].ManufactoringBuilding == ManufactoringBuildingType.MatrixLab))
-    //        {
-    //            Assert.AreEqual("", item.Name);
-    //            Assert.IsTrue(false);
-    //        }
-    //    }
-    //    Assert.IsTrue(true);
-    //}
+    [TestMethod]
+    public void ManufacturerWhenThereAre4InputsTest()
+    {
+        //Arrange
+        DSPGraph graph = new();
+
+        //Act
+
+        //Assert
+        foreach (Item item in graph.Items)
+        {
+            if ((item.Recipes[0].Inputs.Count == 4 || item.Recipes[0].Inputs.Count == 3) &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Manufacturer &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Blender)
+            {
+                Assert.AreEqual("", item.Name);
+                Assert.IsTrue(false);
+            }
+        }
+        Assert.IsTrue(true);
+    }
 
     //[TestMethod]
     //public void TreeHasValidParentsAndChildrenTest()

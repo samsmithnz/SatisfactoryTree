@@ -7,7 +7,7 @@ namespace DSPTree
     {
         public List<Item> Items { get; set; }
         public DSPGraph(string filter = "",
-            ResearchType researchType = ResearchType.WhiteScience,
+            ResearchType researchType = ResearchType.Tier8,
             bool includeBuildings = false,
             bool showOnlyDirectDependencies = false)
         {
@@ -24,183 +24,161 @@ namespace DSPTree
         {
             List<Item> items = new()
             {
-                //Level 0 items (Mostly ore veins)
-                ItemPoolLevel0.IronOreVein(),
-                ItemPoolLevel0.CopperOreVein(),
-                ItemPoolLevel0.CrudeOilVein(),
-                ItemPoolLevel0.StoneVein(),
-                ItemPoolLevel0.CoalVein(),
-                ItemPoolLevel0.TitaniumOreVein(),
-                ItemPoolLevel0.SiliconOreVein(),
-                ItemPoolLevel0.UnipolarMagnetVein(),
-                ItemPoolLevel0.KimberliteOreVein(),
-                ItemPoolLevel0.FractalSiliconVein(),
-                ItemPoolLevel0.OpticalGratingRock(),
-                ItemPoolLevel0.SpiniformStalagmiteCrystalVein(),
-                ItemPoolLevel0.FireIceVein(),
-                ItemPoolLevel0.Log(),
-                ItemPoolLevel0.PlantFuel(),
+                ItemPoolTier1.IronOre(),
+                ItemPoolTier1.IronIngot(),
+                ItemPoolTier1.IronPlate(),
+                ItemPoolTier1.IronRod(),
+                ItemPoolTier1.CopperOre(),
+                ItemPoolTier1.CopperIngot(),
+                ItemPoolTier1.Wire(),
+                ItemPoolTier1.Cable(),
+                ItemPoolTier1.Limestone(),
+                ItemPoolTier1.Concrete(),
+                ItemPoolTier1.Screw(),
+                ItemPoolTier1.ReinforcedIronPlate(),
 
-                //Level 1 items (mostly mined ore)
-                ItemPoolLevel1.IronOre(),
-                ItemPoolLevel1.CopperOre(),
-                ItemPoolLevel1.Water(),
-                ItemPoolLevel1.CrudeOil(),
-                ItemPoolLevel1.Stone(),
-                ItemPoolLevel1.Coal(),
-                ItemPoolLevel1.TitaniumOre(),
-                ItemPoolLevel1.SiliconOre(),
-                ItemPoolLevel1.UnipolarMagnet(),
-                ItemPoolLevel1.KimberliteOre(),
-                ItemPoolLevel1.FractalSilicon(),
-                ItemPoolLevel1.OpticalGratingCrystal(),
-                ItemPoolLevel1.SpiniformStalagmiteCrystal(),
-                ItemPoolLevel1.FireIce(),
-                ItemPoolLevel1.CriticalPhoton(),
+                ItemPoolTier2.CopperSheet(),
+                ItemPoolTier2.ModularFrame(),
+                ItemPoolTier2.Rotor(),
+                ItemPoolTier2.SmartPlating(),
 
-                //Level 2 items
-                ItemPoolLevel2.IronIngot(),
-                ItemPoolLevel2.Magnet(),
-                ItemPoolLevel2.CopperIngot(),
-                ItemPoolLevel2.RefinedOil(),
-                ItemPoolLevel2.Hydrogen(),
-                ItemPoolLevel2.EnergeticGraphite(),
-                ItemPoolLevel2.StoneBrick(),
-                ItemPoolLevel2.TitaniumIngot(),
-                ItemPoolLevel2.Antimatter(),
-                ItemPoolLevel2.ProliferatorMkI(),
+                ItemPoolTier3.Coal(),
+                ItemPoolTier3.SteelIngot(),
+                ItemPoolTier3.SteelPipe(),
+                ItemPoolTier3.SteelBeam(),
+                ItemPoolTier3.VersatileFramework(),
+                ItemPoolTier3.Water(),
 
-                //Level 3 items
-                ItemPoolLevel3.MagneticCoil(),
-                ItemPoolLevel3.CircuitBoard(),
-                ItemPoolLevel3.Gear(),
-                ItemPoolLevel3.Steel(),
-                ItemPoolLevel3.SulfuricAcid(),
-                ItemPoolLevel3.EnergyMatrix(),
-                ItemPoolLevel3.Glass(),
-                ItemPoolLevel3.HighPuritySilicon(),
-                ItemPoolLevel3.Diamond(),
-                ItemPoolLevel3.HydrogenFuelRod(),
-                ItemPoolLevel3.Plastic(),
-                ItemPoolLevel3.Deuterium(),
+                ItemPoolTier4.EncasedIndustrialBeam(),
+                ItemPoolTier4.AutomatedWiring(),
+                ItemPoolTier4.Stator(),
+                ItemPoolTier4.Motor(),
+                ItemPoolTier4.HeavyModularFrame(),
 
-                //Level 4 items
-                ItemPoolLevel4.ElectromagneticMatrix(),
-                ItemPoolLevel4.ElectricMotor(),
-                ItemPoolLevel4.Prism(),
-                ItemPoolLevel4.CrystalSilicon(),
-                ItemPoolLevel4.MicrocrystallineComponent(),
-                ItemPoolLevel4.Graphene(),
-                ItemPoolLevel4.OrganicCrystal(),
-                ItemPoolLevel4.TitaniumGlass(),
-                ItemPoolLevel4.Thruster(),
-                ItemPoolLevel4.ProliferatorMkII(),
 
-                //Level 5 items
-                ItemPoolLevel5.PlasmaExciter(),
-                ItemPoolLevel5.PhotonCombiner(),
-                ItemPoolLevel5.ElectromagneticTurbine(),
-                ItemPoolLevel5.TitaniumAlloy(),
-                ItemPoolLevel5.Processor(),
-                ItemPoolLevel5.CarbonNanotube(),
-                ItemPoolLevel5.TitaniumCrystal(),
+                ItemPoolTier5.CircuitBoard(),
+                ItemPoolTier5.CrudeOil(),
+                ItemPoolTier5.Plastic(),
+                ItemPoolTier5.Rubber(),
+                ItemPoolTier5.HeavyOilResidue(),
+                ItemPoolTier5.PetroleumCoke(),
+                ItemPoolTier5.Fuel(),
+                ItemPoolTier5.Computer(),
+                ItemPoolTier5.ModularEngine(),
+                ItemPoolTier5.AdaptiveControlUnit(),
 
-                //Level 6 items
-                ItemPoolLevel6.SuperMagneticRing(),
-                ItemPoolLevel6.StructureMatrix(),
-                ItemPoolLevel6.ParticleBroadband(),
-                ItemPoolLevel6.ParticleContainer(),
-                ItemPoolLevel6.CasimirCrystal(),
-                ItemPoolLevel6.ReinforcedThruster(),
-                ItemPoolLevel6.SolarSail(),
-                ItemPoolLevel6.ProliferatorMkIII(),
+                ItemPoolTier6.CateriumOre(),
+                ItemPoolTier6.CateriumIngot(),
+                ItemPoolTier6.Quickwire(),
+                ItemPoolTier6.HighSpeedConnector(),
 
-                //Level 7 items
-                ItemPoolLevel7.StrangeMatter(),
-                ItemPoolLevel7.InformationMatrix(),
-                ItemPoolLevel7.PlaneFilter(),
-                ItemPoolLevel7.FrameMaterial(),
-                ItemPoolLevel7.AnnihilationConstraintSphere(),
-                ItemPoolLevel7.DeuteronFuelRod(),
+                ItemPoolTier7.Bauxite(),
+                ItemPoolTier7.AluminaSolution(),
+                ItemPoolTier7.AluminumScrap(),
+                ItemPoolTier7.AluminumIngot(),
+                ItemPoolTier7.AlcladAluminumSheet(),
+                ItemPoolTier7.AluminumCasing(),
+                ItemPoolTier7.RawQuartz(),
+                ItemPoolTier7.QuartzCrystal(),
+                ItemPoolTier7.Silica(),
+                ItemPoolTier7.CrystalOscillator(),
+                ItemPoolTier7.RadioControlUnit(),
+                ItemPoolTier7.Sulfur(),
+                ItemPoolTier7.SulfuricAcid(),
+                ItemPoolTier7.Battery(),
+                ItemPoolTier7.AILimiter(),
+                ItemPoolTier7.Supercomputer(),
+                ItemPoolTier7.AssemblyDirectorSystem(),
 
-                //Level 8 items
-                ItemPoolLevel8.GravitonLens(),
-                ItemPoolLevel8.QuantumChip(),
-                ItemPoolLevel8.DysonSphereComponent(),
+                ItemPoolTier8.Uranium(),
+                ItemPoolTier8.EncasedUraniumCell(),
+                ItemPoolTier8.ElectromagneticControlRod(),
+                ItemPoolTier8.UraniumFuelRod(),
+                ItemPoolTier8.MagneticFieldGenerator(),
+                ItemPoolTier8.NitrogenGas(),
+                ItemPoolTier8.HeatSink(),
+                ItemPoolTier8.CoolingSystem(),
+                ItemPoolTier8.FusedModularFrame(),
+                ItemPoolTier8.TurboMotor(),
+                ItemPoolTier8.ThermalPropulsionRocket(),
+                ItemPoolTier8.NitricAcid(),
+                ItemPoolTier8.UraniumWaste(),
+                ItemPoolTier8.NonfissileUranium(),
+                ItemPoolTier8.PlutoniumPellet(),
+                ItemPoolTier8.EncasedPlutoniumCell(),
+                ItemPoolTier8.PlutoniumFuelRod(),
+                ItemPoolTier8.PlutoniumWaste(),
+                ItemPoolTier8.CopperPowder(),
+                ItemPoolTier8.PressureConversionCube(),
+                ItemPoolTier8.NuclearPasta(),
 
-                //Level 9 items
-                ItemPoolLevel9.GravityMatrix(),
-                ItemPoolLevel9.SpaceWarper(),
-
-                //Level 10 items
-                ItemPoolLevel10.UniverseMatrix()
 
             };
 
-            //Include buildings
-            if (includeBuildings == true)
-            {
-                List<Item> buildings = new()
-                {
-                    BuildingsNoScience.ConveyorBeltMkI(),
+            ////Include buildings
+            //if (includeBuildings == true)
+            //{
+            //    List<Item> buildings = new()
+            //    {
+            //        BuildingsNoScience.ConveyorBeltMkI(),
 
-                    BuildingsPreBlueScience.TeslaTower(),
-                    BuildingsPreBlueScience.WindTurbine(),
-                    BuildingsPreBlueScience.SorterMkI(),
-                    BuildingsPreBlueScience.AssemblingMachineMkI(),
-                    BuildingsPreBlueScience.MiningMachine(),
-                    BuildingsPreBlueScience.ArcSmelter(),
-                    BuildingsPreBlueScience.StorageMkI(),
-                    BuildingsPreBlueScience.MatrixLab(),
+            //        BuildingsPreBlueScience.TeslaTower(),
+            //        BuildingsPreBlueScience.WindTurbine(),
+            //        BuildingsPreBlueScience.SorterMkI(),
+            //        BuildingsPreBlueScience.AssemblingMachineMkI(),
+            //        BuildingsPreBlueScience.MiningMachine(),
+            //        BuildingsPreBlueScience.ArcSmelter(),
+            //        BuildingsPreBlueScience.StorageMkI(),
+            //        BuildingsPreBlueScience.MatrixLab(),
 
-                    BuildingsBlueScience.WirelessPowerTower(),
-                    BuildingsBlueScience.ThermalPowerPlant(),
-                    BuildingsBlueScience.SolarPanel(),
-                    BuildingsBlueScience.Splitter(),
-                    BuildingsBlueScience.OilExtractor(),
-                    BuildingsBlueScience.OilRefinery(),
-                    BuildingsBlueScience.WaterPump(),
-                    BuildingsBlueScience.StorageTank(),
-                    BuildingsBlueScience.SorterMkII(),
-                    BuildingsBlueScience.TrafficMonitor(),
-                    BuildingsBlueScience.ChemicalPlant(),
-                    BuildingsBlueScience.SprayCoater(),
-                    BuildingsBlueScience.Foundation(),
+            //        BuildingsBlueScience.WirelessPowerTower(),
+            //        BuildingsBlueScience.ThermalPowerPlant(),
+            //        BuildingsBlueScience.SolarPanel(),
+            //        BuildingsBlueScience.Splitter(),
+            //        BuildingsBlueScience.OilExtractor(),
+            //        BuildingsBlueScience.OilRefinery(),
+            //        BuildingsBlueScience.WaterPump(),
+            //        BuildingsBlueScience.StorageTank(),
+            //        BuildingsBlueScience.SorterMkII(),
+            //        BuildingsBlueScience.TrafficMonitor(),
+            //        BuildingsBlueScience.ChemicalPlant(),
+            //        BuildingsBlueScience.SprayCoater(),
+            //        BuildingsBlueScience.Foundation(),
 
-                    BuildingsRedScience.Accumulator(),
-                    BuildingsRedScience.StorageMkII(),
-                    BuildingsRedScience.ConveyorBeltMkII(),
-                    BuildingsRedScience.AssemblingMachineMkII(),
-                    BuildingsRedScience.ConveyorBeltMkIII(),
-                    BuildingsRedScience.SorterMkIII(),
-                    BuildingsRedScience.Fractionator(),
-                    BuildingsRedScience.EMRailEjector(),
-                    BuildingsRedScience.RayReceiver(),
-                    BuildingsRedScience.PlanetaryLogisticsStation(),
-                    BuildingsRedScience.LogisticsDrone(),
+            //        BuildingsRedScience.Accumulator(),
+            //        BuildingsRedScience.StorageMkII(),
+            //        BuildingsRedScience.ConveyorBeltMkII(),
+            //        BuildingsRedScience.AssemblingMachineMkII(),
+            //        BuildingsRedScience.ConveyorBeltMkIII(),
+            //        BuildingsRedScience.SorterMkIII(),
+            //        BuildingsRedScience.Fractionator(),
+            //        BuildingsRedScience.EMRailEjector(),
+            //        BuildingsRedScience.RayReceiver(),
+            //        BuildingsRedScience.PlanetaryLogisticsStation(),
+            //        BuildingsRedScience.LogisticsDrone(),
 
-                    BuildingsYellowScience.SatelliteSubstation(),
-                    BuildingsYellowScience.MiniFusionPowerPlant(),
-                    BuildingsYellowScience.EnergyExchanger(),
-                    BuildingsYellowScience.FullAccumulator(),
-                    BuildingsYellowScience.MiniatureParticleCollider(),
-                    BuildingsYellowScience.InterstellarLogisticsStation(),
-                    BuildingsYellowScience.OrbitalCollector(),
-                    BuildingsYellowScience.AutomaticPiler(),
-                    BuildingsYellowScience.LogisticsVessel(),
+            //        BuildingsYellowScience.SatelliteSubstation(),
+            //        BuildingsYellowScience.MiniFusionPowerPlant(),
+            //        BuildingsYellowScience.EnergyExchanger(),
+            //        BuildingsYellowScience.FullAccumulator(),
+            //        BuildingsYellowScience.MiniatureParticleCollider(),
+            //        BuildingsYellowScience.InterstellarLogisticsStation(),
+            //        BuildingsYellowScience.OrbitalCollector(),
+            //        BuildingsYellowScience.AutomaticPiler(),
+            //        BuildingsYellowScience.LogisticsVessel(),
 
-                    BuildingsPurpleScience.AssemblingMachineMkIII(),
-                    BuildingsPurpleScience.PlaneSmelter(),
-                    BuildingsPurpleScience.VerticalLaunchingSilo(),
-                    BuildingsPurpleScience.SmallCarrierRocket(),
+            //        BuildingsPurpleScience.AssemblingMachineMkIII(),
+            //        BuildingsPurpleScience.PlaneSmelter(),
+            //        BuildingsPurpleScience.VerticalLaunchingSilo(),
+            //        BuildingsPurpleScience.SmallCarrierRocket(),
 
-                    BuildingsGreenScience.ArtificialStar(),
-                    BuildingsGreenScience.AdvancedMiningMachine(),
+            //        BuildingsGreenScience.ArtificialStar(),
+            //        BuildingsGreenScience.AdvancedMiningMachine(),
 
-                    //BuildingsWhiteScience.(),
-                };
-                items.AddRange(buildings);
-            }
+            //        //BuildingsWhiteScience.(),
+            //    };
+            //    items.AddRange(buildings);
+            //}
 
             //Filter by science level
             for (int i = items.Count - 1; i >= 0; i--)
@@ -234,47 +212,47 @@ namespace DSPTree
                 }
             }
 
-            //If enabled, only show the direct inputs to product an item
-            if (showOnlyDirectDependencies == true)
-            {
-                Dictionary<string, int> inputs = new();
-                List<Item> filteredItems = new();
-                foreach (Item? item in items)
-                {
-                    if (item.ItemType != ItemType.Building)
-                    {
-                        //If the item is not a building, hide it's recipe
-                        item.Recipes = new List<Recipe>();
-                    }
-                    else
-                    {
-                        //If it is a building, log all of it's inputs
-                        foreach (Recipe? recipe in item.Recipes)
-                        {
-                            foreach (KeyValuePair<string, int> input in recipe.Inputs)
-                            {
-                                if (inputs.ContainsKey(input.Key) == false)
-                                {
-                                    inputs.Add(input.Key, 1);
-                                }
-                            }
-                        }
-                    }
-                }
+            ////If enabled, only show the direct inputs to product an item
+            //if (showOnlyDirectDependencies == true)
+            //{
+            //    Dictionary<string, int> inputs = new();
+            //    List<Item> filteredItems = new();
+            //    foreach (Item? item in items)
+            //    {
+            //        if (item.ItemType != ItemType.Building)
+            //        {
+            //            //If the item is not a building, hide it's recipe
+            //            item.Recipes = new List<Recipe>();
+            //        }
+            //        else
+            //        {
+            //            //If it is a building, log all of it's inputs
+            //            foreach (Recipe? recipe in item.Recipes)
+            //            {
+            //                foreach (KeyValuePair<string, int> input in recipe.Inputs)
+            //                {
+            //                    if (inputs.ContainsKey(input.Key) == false)
+            //                    {
+            //                        inputs.Add(input.Key, 1);
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
 
-                //Add each item to the filter.
-                foreach (Item? item in items)
-                {
-                    if (!filteredItems.Contains(item) &&
-                        (item.ItemType == ItemType.Building ||
-                        inputs.ContainsKey(item.Name)))
-                    {
-                        filteredItems.Add(item);
-                    }
-                }
+            //    //Add each item to the filter.
+            //    foreach (Item? item in items)
+            //    {
+            //        if (!filteredItems.Contains(item) &&
+            //            (item.ItemType == ItemType.Building ||
+            //            inputs.ContainsKey(item.Name)))
+            //        {
+            //            filteredItems.Add(item);
+            //        }
+            //    }
 
-                items = filteredItems;
-            }
+            //    items = filteredItems;
+            //}
 
             //for (int i = 0; i < items.Count; i++)
             //{
@@ -294,7 +272,7 @@ namespace DSPTree
             List<Item> inputs = new();
             foreach (Recipe recipe in recipes)
             {
-                foreach (KeyValuePair<string, int> item in recipe.Inputs)
+                foreach (KeyValuePair<string, decimal> item in recipe.Inputs)
                 {
                     Item? inputItem = FindItem(items, item.Key);
                     if (inputItem != null && inputs.Contains(inputItem) == false)

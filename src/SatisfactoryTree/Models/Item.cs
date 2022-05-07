@@ -2,11 +2,15 @@
 {
     public class Item
     {
+
+        //STacksize
+        //SInkValue
+
         public Item(int level,
             string name,
             string image,
             ItemType itemType = ItemType.Item,
-            ResearchType researchType = ResearchType.WhiteScience)
+            ResearchType researchType = ResearchType.Tier1)
         {
             Level = level;
             Name = name;
@@ -32,13 +36,13 @@
 
     public enum ResearchType
     {
-        NoScience = 0,
-        PreBlueScience = 1,
-        BlueScience = 2,
-        RedScience = 3,
-        YellowScience = 4,
-        PurpleScience = 5,
-        GreenScience = 6,
-        WhiteScience = 7
+        Tier1, //Note, Tier one includes 'the beginning', tier 0, and tier 1, as no resources are added in tier 1, and there are only a few in the beginning and tier 0
+        Tier2,
+        Tier3,
+        Tier4,
+        Tier5,
+        Tier6,
+        Tier7,
+        Tier8
     }
 }

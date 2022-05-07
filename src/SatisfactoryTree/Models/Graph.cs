@@ -9,7 +9,7 @@
         {
             nodes = new();
             links = new();
-     
+
             //Build the graph
             foreach (Item item in data)
             {
@@ -35,13 +35,13 @@
 
                         if (recipe2.ManufactoringMethod != ManufactoringMethodType.Gathered)
                         {
-                            foreach (KeyValuePair<string, int> itemInput in recipe2.Inputs)
+                            foreach (KeyValuePair<string, decimal> itemInput in recipe2.Inputs)
                             {
                                 Link newLink = new()
                                 {
                                     source = FindIndex(data, item.Name), //item.Name.Replace(" ", "_"),
                                     target = FindIndex(data, itemInput.Key), // itemInput.Key.Replace(" ", "_"),
-                                    value = itemInput.Value //The width of the connection
+                                    value = (int)itemInput.Value //The width of the connection
                                 };
                                 if (newLink.source >= 0 && newLink.target >= 0 && !links.Any(n => n.source == newLink.source && n.target == newLink.target))
                                 {

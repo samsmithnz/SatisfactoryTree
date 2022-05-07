@@ -1,6 +1,5 @@
 using DSPTree.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,51 +20,51 @@ public class DSPGraphTests
         //Assert
         Assert.IsNotNull(graph);
         Assert.IsTrue(graph.Items.Count > 0);
-        Assert.AreEqual("Iron Ore Vein", graph.Items[0].Name);
-        Assert.AreEqual("80px-Icon_Iron_Ore_Vein.png", graph.Items[0].Image);
-        Assert.AreEqual(0, graph.Items[0].Level);
+        Assert.AreEqual("Iron Ore", graph.Items[0].Name);
+        Assert.AreEqual("Iron_Ore.webp", graph.Items[0].Image);
+        Assert.AreEqual(1, graph.Items[0].Level);
     }
 
-    [TestMethod]
-    public void MatrixTest()
-    {
-        //Arrange
-        DSPGraph graph = new();
+    //[TestMethod]
+    //public void MatrixTest()
+    //{
+    //    //Arrange
+    //    DSPGraph graph = new();
 
-        //Act
+    //    //Act
 
-        //Assert
+    //    //Assert
 
-        foreach (Item item in graph.Items)
-        {
-            if ((item.Name.ToLower().Contains("matrix") == true &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.MatrixLab) ||
-                (item.Name.ToLower().Contains("matrix") == false &&
-                item.Recipes[0].ManufactoringBuilding == ManufactoringBuildingType.MatrixLab))
-            {
-                Assert.AreEqual("", item.Name);
-                Assert.IsTrue(false);
-            }
-        }
-        Assert.IsTrue(true);
-    }
+    //    foreach (Item item in graph.Items)
+    //    {
+    //        if ((item.Name.ToLower().Contains("matrix") == true &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.MatrixLab) ||
+    //            (item.Name.ToLower().Contains("matrix") == false &&
+    //            item.Recipes[0].ManufactoringBuilding == ManufactoringBuildingType.MatrixLab))
+    //        {
+    //            Assert.AreEqual("", item.Name);
+    //            Assert.IsTrue(false);
+    //        }
+    //    }
+    //    Assert.IsTrue(true);
+    //}
 
     [TestMethod]
     public void TreeHasValidParentsAndChildrenTest()
     {
         //Arrange
-        DSPGraph graph = new("", ResearchType.WhiteScience, true);
+        DSPGraph graph = new("", ResearchType.Tier8, true);
 
         //Act
 
         //Assert
-        Dictionary<string, int> rawMaterials = new();
+        Dictionary<string, decimal> rawMaterials = new();
         foreach (Item item in graph.Items)
         {
             foreach (Recipe recipe in item.Recipes)
             {
                 //Check each input (if it's not gathered)
-                foreach (KeyValuePair<string, int> input in recipe.Inputs)
+                foreach (KeyValuePair<string, decimal> input in recipe.Inputs)
                 {
                     if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
                     {
@@ -76,7 +75,7 @@ public class DSPGraphTests
                     }
                 }
                 //Check each output (if it's not gathered)
-                foreach (KeyValuePair<string, int> output in recipe.Outputs)
+                foreach (KeyValuePair<string, decimal> output in recipe.Outputs)
                 {
                     if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
                     {
@@ -88,8 +87,12 @@ public class DSPGraphTests
                 }
             }
         }
-        foreach (KeyValuePair<string, int> item in rawMaterials)
+        foreach (KeyValuePair<string, decimal> item in rawMaterials)
         {
+            //if (item.Key == "Nitrogen Gas")
+            //{
+            //    int i = 4;
+            //}
             if (!graph.Items.Where(a => a.Name == item.Key).Any())
             {
                 Assert.AreEqual("child not found", item.Key);
@@ -98,70 +101,70 @@ public class DSPGraphTests
         Assert.IsTrue(true);
     }
 
-    [TestMethod]
-    public void TreeImageIsUsedOnlyOnceTest()
-    {
-        //Arrange
-        DSPGraph graph = new("", ResearchType.WhiteScience, true);
+    //[TestMethod]
+    //public void TreeImageIsUsedOnlyOnceTest()
+    //{
+    //    //Arrange
+    //    DSPGraph graph = new("", ResearchType.WhiteScience, true);
 
-        //Act
+    //    //Act
 
-        //Assert
-        HashSet<string> images = new();
-        foreach (Item item in graph.Items)
-        {
-            if (images.Contains(item.Image) == true)
-            {
-                Assert.AreEqual("", item.Image);
-            }
-            images.Add(item.Image);
-        }
-    }
+    //    //Assert
+    //    HashSet<string> images = new();
+    //    foreach (Item item in graph.Items)
+    //    {
+    //        if (images.Contains(item.Image) == true)
+    //        {
+    //            Assert.AreEqual("", item.Image);
+    //        }
+    //        images.Add(item.Image);
+    //    }
+    //}
 
-    [TestMethod]
-    public void FilterBlueScienceTest()
-    {
-        //Arrange
-        string filter = "Electromagnetic Matrix";
-        DSPGraph graph = new(filter);
+    //[TestMethod]
+    //public void FilterBlueScienceTest()
+    //{
+    //    //Arrange
+    //    string filter = "Electromagnetic Matrix";
+    //    DSPGraph graph = new(filter);
 
-        //Act
+    //    //Act
 
-        //Assert
-        Assert.IsTrue(graph.Items.Count > 1);
-        Assert.AreEqual(filter, graph.Items[graph.Items.Count - 1].Name);
-    }
+    //    //Assert
+    //    Assert.IsTrue(graph.Items.Count > 1);
+    //    Assert.AreEqual(filter, graph.Items[graph.Items.Count - 1].Name);
+    //}
 
-    [TestMethod]
-    public void FilterRedScienceTest()
-    {
-        //Arrange
-        string filter = "Energy Matrix";
-        DSPGraph graph = new(filter);
+    //[TestMethod]
+    //public void FilterRedScienceTest()
+    //{
+    //    //Arrange
+    //    string filter = "Energy Matrix";
+    //    DSPGraph graph = new(filter);
 
-        //Act
+    //    //Act
 
-        //Assert
-        Assert.IsTrue(graph.Items.Count > 1);
-        Assert.AreEqual(filter, graph.Items[graph.Items.Count - 1].Name);
-    }
+    //    //Assert
+    //    Assert.IsTrue(graph.Items.Count > 1);
+    //    Assert.AreEqual(filter, graph.Items[graph.Items.Count - 1].Name);
+    //}
 
-    [TestMethod]
-    public void FilterItemThatDoesNotExistTest()
-    {
-        //Arrange
-        string filter = "Widget";
+    //[TestMethod]
+    //public void FilterItemThatDoesNotExistTest()
+    //{
+    //    //Arrange
+    //    string filter = "Widget";
 
-        //Act
-        try
-        {
-            DSPGraph graph = new(filter);
-        }
-        catch (Exception ex)
-        {
-            //Assert
-            Assert.AreEqual("Widget item not found", ex.Message);
-        }
+    //    //Act
+    //    try
+    //    {
+    //        DSPGraph graph = new(filter);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        //Assert
+    //        Assert.AreEqual("Widget item not found", ex.Message);
+    //    }
 
-    }
+    //}
 }
