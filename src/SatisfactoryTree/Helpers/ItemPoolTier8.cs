@@ -133,130 +133,129 @@ namespace DSPTree.Helpers
             };
         }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item NitrogenGas()
+        {
+            return new Item(8, "Nitrogen Gas",
+                "Nitrogen_Gas.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(1,
+                        60,
+                        new(),
+                        new()
+                        {
+                            { "Nitrogen Gas", 1 }
+                        },
+                        BuildingType.ResourceWellExtractor)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item HeatSink()
+        {
+            return new Item(8, "Heat Sink",
+                "Heat_Sink.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(8,
+                        7.5m,
+                        new()
+                        {
+                            { "Alclad Aluminum Sheet", 5 },
+                            { "Copper Sheet", 3 }
+                        },
+                        new()
+                        {
+                            { "Heat Sink", 1 }
+                        },
+                        BuildingType.Assembler)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item CoolingSystem()
+        {
+            return new Item(8, "Cooling System",
+                "Cooling_System.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(10,
+                        6,
+                        new()
+                        {
+                            { "Heat Sink", 2 },
+                            { "Rubber", 2 },
+                            { "Water", 5 },
+                            { "Nitrogen Gas", 25 }
+                        },
+                        new()
+                        {
+                            { "Cooling System", 4 }
+                        },
+                        BuildingType.Blender)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item FusedModularFrame()
+        {
+            return new Item(8, "Fused Modular Frame",
+                "Fused_Modular_Frame.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(40,
+                        1.5m,
+                        new()
+                        {
+                            { "Heavy Modular Frame", 1 },
+                            { "Aluminum Casing", 50 },
+                            { "Nitrogen Gas", 25 }
+                        },
+                        new()
+                        {
+                            { "Fused Modular Frame", 99 }
+                        },
+                        BuildingType.Blender)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item CircuitBoard()
+        {
+            return new Item(8, "CircuitBoard",
+                "Circuit_Boardwebp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(99,
+                        99,
+                        new()
+                        {
+                            { "CopperSheet", 99 },
+                            { "Plastic", 99 }
+                        },
+                        new()
+                        {
+                            { "CircuitBoard", 99 }
+                        },
+                        BuildingType.Assembler)
+                }
+            };
+        }
 
         //public static Item CircuitBoard()
         //{

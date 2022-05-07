@@ -90,6 +90,10 @@ public class DSPGraphTests
         }
         foreach (KeyValuePair<string, decimal> item in rawMaterials)
         {
+            //if (item.Key == "Nitrogen Gas")
+            //{
+            //    int i = 4;
+            //}
             if (!graph.Items.Where(a => a.Name == item.Key).Any())
             {
                 Assert.AreEqual("child not found", item.Key);

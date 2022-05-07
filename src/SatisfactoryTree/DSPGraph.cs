@@ -95,8 +95,12 @@ namespace DSPTree
                 ItemPoolTier8.ElectromagneticControlRod(),
                 ItemPoolTier8.UraniumFuelRod(),
                 ItemPoolTier8.MagneticFieldGenerator(),
+                ItemPoolTier8.NitrogenGas(),
+                ItemPoolTier8.HeatSink(),
+                ItemPoolTier8.CoolingSystem(),
+                ItemPoolTier8.FusedModularFrame(),
 
-                
+
             };
 
             ////Include buildings

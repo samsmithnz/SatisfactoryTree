@@ -46,13 +46,8 @@
         OilExtractor = 7,
         WaterExtractor = 8,
         Blender = 9,
-        //OilRefinery = 5,
-        //ChemicalPlant = 6,
-        //MatrixLab = 7,
-        //MiniatureParticleCollider = 8,
-        //EnergyExchanger = 9,
-        //Fractionator = 10,
-        //RayReceiver = 11,
+        ResourceWellExtractor = 10,
+
         None = 12
     }
 }
