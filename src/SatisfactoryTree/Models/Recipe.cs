@@ -47,7 +47,7 @@
         WaterExtractor = 8,
         Blender = 9,
         ResourceWellExtractor = 10,
-
+        ParticleAccelerator = 11,
         None = 12
     }
 }

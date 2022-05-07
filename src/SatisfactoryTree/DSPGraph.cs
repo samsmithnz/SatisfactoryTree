@@ -101,6 +101,14 @@ namespace DSPTree
                 ItemPoolTier8.FusedModularFrame(),
                 ItemPoolTier8.TurboMotor(),
                 ItemPoolTier8.ThermalPropulsionRocket(),
+                ItemPoolTier8.NitricAcid(),
+                ItemPoolTier8.NonfissileUranium(),
+                ItemPoolTier8.PlutoniumPellet(),
+                ItemPoolTier8.EncasedPlutoniumCell(),
+                ItemPoolTier8.PlutoniumFuelRod(),
+                ItemPoolTier8.CopperPowder(),
+                ItemPoolTier8.PressureConversionCube(),
+                ItemPoolTier8.NuclearPasta(),
 
 
             };

@@ -286,205 +286,210 @@ namespace DSPTree.Helpers
             };
         }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item NitricAcid()
+        {
+            return new Item(8, "Nitric Acid",
+                "Nitric_Acid.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(6,
+                        30,
+                        new()
+                        {
+                            { "Nitrogen Gas", 12 },
+                            { "Water", 3 },
+                            { "Iron Plate", 1 }
+                        },
+                        new()
+                        {
+                            { "Nitric Acid", 3 }
+                        },
+                        BuildingType.Blender)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item NonfissileUranium()
+        {
+            return new Item(8, "Non-fissile Uranium",
+                "Non-fissile_Uranium.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(24,
+                        50,
+                        new()
+                        {
+                            { "Uranium Waste", 15 },
+                            { "Silica", 10 },
+                            { "Nitric Acid", 6 },
+                            { "Sulfuric Acid", 6 }
+                        },
+                        new()
+                        {
+                            { "Non-fissile Uranium", 20 },
+                            { "Water", 15 }
+                        },
+                        BuildingType.Blender)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item PlutoniumPellet()
+        {
+            return new Item(8, "Plutonium Pellet",
+                "Plutonium_Pellet.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(60,
+                        30,
+                        new()
+                        {
+                            { "Non-fissile Uranium", 100 },
+                            { "Uranium Waste", 25 }
+                        },
+                        new()
+                        {
+                            { "Plutonium Pellet", 30 }
+                        },
+                        BuildingType.Assembler)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item EncasedPlutoniumCell()
+        {
+            return new Item(8, "Encased Plutonium Cell",
+                "Encased_Plutonium_Cell",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(12,
+                        5,
+                        new()
+                        {
+                            { "Plutonium Pellet", 2 },
+                            { "Concrete", 4 }
+                        },
+                        new()
+                        {
+                            { "Encased Plutonium Cell", 1 }
+                        },
+                        BuildingType.Assembler)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item PlutoniumFuelRod()
+        {
+            return new Item(8, "Plutonium Fuel Rod",
+                "Plutonium Fuel Rod",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(240,
+                        0.25m,
+                        new()
+                        {
+                            { "Encased Plutonium Cell", 30 },
+                            { "Steel Beam", 18 },
+                            { "Electromagnetic Control Rod", 6 },
+                            { "Heat Sink", 10 }
+                        },
+                        new()
+                        {
+                            { "Plutonium Fuel Rod", 1 }
+                        },
+                        BuildingType.Manufacturer)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item CopperPowder()
+        {
+            return new Item(8, "Copper Powder",
+                "Copper_Powder.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(6,
+                        50,
+                        new()
+                        {
+                            { "Copper Ingot", 30 }
+                        },
+                        new()
+                        {
+                            { "Copper Powder", 5 }
+                        },
+                        BuildingType.Constructor)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item PressureConversionCube()
+        {
+            return new Item(8, "Pressure Conversion Cube",
+                "Pressure_Conversion_Cube.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(60,
+                        1,
+                        new()
+                        {
+                            { "Fused Modular Frame", 1 },
+                            { "Radio Control Unit", 2 }
+                        },
+                        new()
+                        {
+                            { "Pressure Conversion Cube", 1 }
+                        },
+                        BuildingType.Assembler)
+                }
+            };
+        }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item NuclearPasta()
+        {
+            return new Item(8, "Nuclear Pasta",
+                "Nuclear_Pasta.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(120,
+                        0.5m,
+                        new()
+                        {
+                            { "Copper Powder", 200 },
+                            { "Pressure Conversion Cube", 1 }
+                        },
+                        new()
+                        {
+                            { "Nuclear Pasta", 1 }
+                        },
+                        BuildingType.ParticleAccelerator)
+                }
+            };
+        }
 
 
 
