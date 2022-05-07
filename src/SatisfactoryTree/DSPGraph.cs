@@ -90,6 +90,12 @@ namespace DSPTree
                 ItemPoolTier7.Supercomputer(),
                 ItemPoolTier7.AssemblyDirectorSystem(),
 
+                ItemPoolTier8.Uranium(),
+                ItemPoolTier8.EncasedUraniumCell(),
+                ItemPoolTier8.ElectromagneticControlRod(),
+                ItemPoolTier8.UraniumFuelRod(),
+                ItemPoolTier8.MagneticFieldGenerator(),
+
                 //    //Level 0 items (Mostly ore veins)
                 //    ItemPoolLevel0.IronOreVein(),
                 //    ItemPoolLevel0.CopperOreVein(),
