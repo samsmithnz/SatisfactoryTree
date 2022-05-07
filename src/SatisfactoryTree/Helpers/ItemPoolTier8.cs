@@ -312,6 +312,31 @@ namespace DSPTree.Helpers
             };
         }
 
+        public static Item UraniumWaste()
+        {
+            return new Item(8, "Uranium Waste",
+                "Uranium_Waste.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(300,
+                        10,
+                        new()
+                        {
+                            { "Uranium Fuel Rod", 1 },
+                            { "Sulfuric Acid", 1500 }
+                        },
+                        new()
+                        {
+                            { "Uranium Waste", 50 }
+                        },
+                        BuildingType.NuclearPowerPlant)
+                }
+            };
+        }
+
         public static Item NonfissileUranium()
         {
             return new Item(8, "Non-fissile Uranium",
@@ -393,7 +418,7 @@ namespace DSPTree.Helpers
         public static Item PlutoniumFuelRod()
         {
             return new Item(8, "Plutonium Fuel Rod",
-                "Plutonium Fuel Rod",
+                "Plutonium_Fuel_Rod.webp",
                 ItemType.Item,
                 ResearchType.Tier8)
             {
@@ -413,6 +438,31 @@ namespace DSPTree.Helpers
                             { "Plutonium Fuel Rod", 1 }
                         },
                         BuildingType.Manufacturer)
+                }
+            };
+        }
+
+        public static Item PlutoniumWaste()
+        {
+            return new Item(8, "Plutonium Waste",
+                "Plutonium_Waste.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(600,
+                        1,
+                        new()
+                        {
+                            { "Plutonium Fuel Rod", 1 },
+                            { "Water", 3000 }
+                        },
+                        new()
+                        {
+                            { "Plutonium Waste", 10 }
+                        },
+                        BuildingType.NuclearPowerPlant)
                 }
             };
         }

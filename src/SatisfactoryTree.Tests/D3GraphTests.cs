@@ -41,7 +41,8 @@ public class D3GraphTests
             if (item.Recipes[0].Inputs.Count == 2 &&
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Assembler &&
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Foundry &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Refinery)
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Refinery &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant)
             {
                 Assert.AreEqual("", item.Name);
                 Assert.IsTrue(false);

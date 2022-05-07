@@ -36,18 +36,19 @@
 
     public enum ManufactoringBuildingType
     {
-        MiningMachine = 0,
-        Smelter = 1,
-        Foundry = 2,
-        Refinery = 3,
-        Constructor = 4,
-        Assembler = 5,
-        Manufacturer = 6,
-        OilExtractor = 7,
-        WaterExtractor = 8,
-        Blender = 9,
-        ResourceWellExtractor = 10,
-        ParticleAccelerator = 11,
-        None = 12
+        MiningMachine = 1,
+        Smelter = 2,
+        Foundry = 3,
+        Refinery = 4,
+        Constructor = 5,
+        Assembler = 6,
+        Manufacturer = 7,
+        OilExtractor = 8,
+        WaterExtractor = 9,
+        Blender = 10,
+        ResourceWellExtractor = 11,
+        ParticleAccelerator = 12,
+        NuclearPowerPlant = 13,
+        None = 14
     }
 }
