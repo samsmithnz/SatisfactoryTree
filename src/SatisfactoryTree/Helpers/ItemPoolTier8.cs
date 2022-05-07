@@ -232,55 +232,59 @@ namespace DSPTree.Helpers
             };
         }
 
-        public static Item CircuitBoard()
+        public static Item TurboMotor()
         {
-            return new Item(8, "CircuitBoard",
-                "Circuit_Boardwebp",
+            return new Item(8, "Turbo Motor",
+                "Turbo_Motor.webp",
                 ItemType.Item,
                 ResearchType.Tier8)
             {
                 Recipes =
                 {
-                    new Recipe(99,
-                        99,
+                    new Recipe(32,
+                        1.875m,
                         new()
                         {
-                            { "CopperSheet", 99 },
-                            { "Plastic", 99 }
+                            { "Cooling System", 4 },
+                            { "Radio Control Unit", 2 },
+                            { "Motor", 4 },
+                            { "Rubber", 24 }
                         },
                         new()
                         {
-                            { "CircuitBoard", 99 }
+                            { "Turbo Motor", 1 }
                         },
-                        BuildingType.Assembler)
+                        BuildingType.Manufacturer)
                 }
             };
         }
 
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(8, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier8)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
+        public static Item ThermalPropulsionRocket()
+        {
+            return new Item(8, "Thermal Propulsion Rocket",
+                "Thermal_Propulsion_Rocket.webp",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(120,
+                        1,
+                        new()
+                        {
+                            { "Modular Engine", 5 },
+                            { "Turbo Motor", 2 },
+                            { "Cooling System", 6 },
+                            { "Fused Modular Frame", 2 }
+                        },
+                        new()
+                        {
+                            { "Thermal Propulsion Rocket", 2 }
+                        },
+                        BuildingType.Manufacturer)
+                }
+            };
+        }
 
         //public static Item CircuitBoard()
         //{

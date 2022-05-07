@@ -99,6 +99,8 @@ namespace DSPTree
                 ItemPoolTier8.HeatSink(),
                 ItemPoolTier8.CoolingSystem(),
                 ItemPoolTier8.FusedModularFrame(),
+                ItemPoolTier8.TurboMotor(),
+                ItemPoolTier8.ThermalPropulsionRocket(),
 
 
             };
