@@ -42,7 +42,8 @@ public class D3GraphTests
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Assembler &&
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Foundry &&
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Refinery &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant)
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant&&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.ParticleAccelerator)
             {
                 Assert.AreEqual("", item.Name);
                 Assert.IsTrue(false);
