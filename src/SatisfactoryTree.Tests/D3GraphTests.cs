@@ -62,7 +62,8 @@ public class D3GraphTests
         foreach (Item item in graph.Items)
         {
             if (item.Recipes[0].Inputs.Count == 4 &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Manufacturer)
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Manufacturer &&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Blender)
             {
                 Assert.AreEqual("", item.Name);
                 Assert.IsTrue(false);
