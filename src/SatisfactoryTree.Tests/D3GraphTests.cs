@@ -1,7 +1,5 @@
 using DSPTree.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DSPTree.Tests;
 
@@ -42,7 +40,7 @@ public class D3GraphTests
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Assembler &&
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Foundry &&
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Refinery &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant&&
+                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant &&
                 item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.ParticleAccelerator)
             {
                 Assert.AreEqual("", item.Name);

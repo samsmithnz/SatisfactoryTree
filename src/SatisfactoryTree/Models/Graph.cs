@@ -9,7 +9,7 @@
         {
             nodes = new();
             links = new();
-     
+
             //Build the graph
             foreach (Item item in data)
             {
