@@ -393,7 +393,7 @@ namespace DSPTree.Helpers
         public static Item EncasedPlutoniumCell()
         {
             return new Item(8, "Encased Plutonium Cell",
-                "Encased_Plutonium_Cell",
+                "Encased_Plutonium_Cell.webp",
                 ItemType.Item,
                 ResearchType.Tier8)
             {
