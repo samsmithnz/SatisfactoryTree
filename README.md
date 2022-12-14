@@ -1,10 +1,14 @@
 # SatisfactoryTree
 
 
-[![CI/CD](https://github.com/samsmithnz/SatisfactoryTree/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/DSPTree/actions/workflows/workflow.yml)
+[![CI/CD](https://github.com/samsmithnz/SatisfactoryTree/actions/workflows/workflow.yml/badge.svg)](https://github.com/samsmithnz/SatisfactoryTree/actions/workflows/workflow.yml)
+[![Coverage Status](https://coveralls.io/repos/github/samsmithnz/SatisfactoryTree/badge.svg?branch=main)](https://coveralls.io/github/samsmithnz/SatisfactoryTree?branch=main)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=samsmithnz_SatisfactoryTree&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=samsmithnz_SatisfactoryTree)
+[![Current Release](https://img.shields.io/github/release/samsmithnz/SatisfactoryTree/all.svg)](https://github.com/samsmithnz/SatisfactoryTree/releases)
+
 
 A POC project to graph [Satisfactory](https://store.steampowered.com/app/526870/Satisfactory/) items with [D3](https://d3js.org/) [force directed graphs](https://en.wikipedia.org/wiki/Force-directed_graph_drawing). 
-Sister project to [http://github.com/samsmithnz/dsptree](http://github.com/samsmithnz/dsptree)
+Sister project to [http://github.com/samsmithnz/SatisfactoryTree](http://github.com/samsmithnz/SatisfactoryTree)
 
 <!--This is very rough. At the very beginning of the game - it looks like this:
 
