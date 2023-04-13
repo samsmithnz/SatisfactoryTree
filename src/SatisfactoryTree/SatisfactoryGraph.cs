@@ -11,13 +11,13 @@ namespace SatisfactoryTree
             bool includeBuildings = false,
             bool showOnlyDirectDependencies = false)
         {
-            Items = BuildDSPTree(filter,
+            Items = BuildSatisfactoryTree(filter,
                 researchType,
                 includeBuildings,
                 showOnlyDirectDependencies);
         }
 
-        private static List<Item> BuildDSPTree(string nameFilter,
+        private static List<Item> BuildSatisfactoryTree(string nameFilter,
             ResearchType researchType,
             bool includeBuildings,
             bool showOnlyDirectDependencies)
