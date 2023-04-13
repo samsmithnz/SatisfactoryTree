@@ -1,4 +1,4 @@
-﻿using DSPTree.Models;
+﻿using SatisfactoryTree.Models;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -20,7 +20,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Iron Ore", 1 }
                         },
-                        BuildingType.MiningMachine)
+                        ManufactoringBuildingType.MiningMachine)
                 }
             };
         }

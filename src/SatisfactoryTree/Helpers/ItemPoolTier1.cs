@@ -1,7 +1,7 @@
-﻿using DSPTree.Models;
-using BuildingType = DSPTree.Models.ManufactoringBuildingType;
+﻿using SatisfactoryTree.Models;
+using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
-namespace DSPTree.Helpers
+namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier1
     {

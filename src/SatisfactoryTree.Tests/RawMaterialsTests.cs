@@ -1,8 +1,8 @@
-//using DSPTree.Models;
+//using SatisfactoryTree.Models;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using System.Collections.Generic;
 
-//namespace DSPTree.Tests;
+//namespace SatisfactoryTree.Tests;
 
 //[TestClass]
 //public class RawMaterialsTests

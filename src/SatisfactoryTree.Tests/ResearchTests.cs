@@ -1,7 +1,7 @@
-using DSPTree.Models;
+using SatisfactoryTree.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DSPTree.Tests;
+namespace SatisfactoryTree.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
@@ -11,7 +11,7 @@ public class ResearchTests
     public void OnBoardingTest()
     {
         //Arrange
-        DSPGraph graph = new("", ResearchType.Tier2, true);
+        SatisfactoryGraph graph = new("", ResearchType.Tier2, true);
 
         //Act
 

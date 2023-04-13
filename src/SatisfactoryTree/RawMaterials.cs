@@ -1,4 +1,4 @@
-﻿using DSPTree.Models;
+﻿using SatisfactoryTree.Models;
 
 namespace DSPTree
 {

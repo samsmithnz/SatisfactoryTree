@@ -1,7 +1,7 @@
-using DSPTree.Models;
+using SatisfactoryTree.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DSPTree.Tests;
+namespace SatisfactoryTree.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
@@ -11,7 +11,7 @@ public class D3GraphTests
     public void D3GraphTest()
     {
         //Arrange
-        DSPGraph dspGraph = new();
+        SatisfactoryGraph dspGraph = new();
         Graph graph = new(dspGraph.Items);
 
         //Act
@@ -29,7 +29,7 @@ public class D3GraphTests
     public void AssemblerWhenThereAre2InputsTest()
     {
         //Arrange
-        DSPGraph graph = new();
+        SatisfactoryGraph graph = new();
 
         //Act
 
@@ -54,7 +54,7 @@ public class D3GraphTests
     public void ManufacturerWhenThereAre4InputsTest()
     {
         //Arrange
-        DSPGraph graph = new();
+        SatisfactoryGraph graph = new();
 
         //Act
 

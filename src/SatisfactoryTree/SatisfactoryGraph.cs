@@ -1,12 +1,12 @@
-﻿using DSPTree.Helpers;
-using DSPTree.Models;
+﻿using SatisfactoryTree.Helpers;
+using SatisfactoryTree.Models;
 
-namespace DSPTree
+namespace SatisfactoryTree
 {
-    public class DSPGraph
+    public class SatisfactoryGraph
     {
         public List<Item> Items { get; set; }
-        public DSPGraph(string filter = "",
+        public SatisfactoryGraph(string filter = "",
             ResearchType researchType = ResearchType.Tier8,
             bool includeBuildings = false,
             bool showOnlyDirectDependencies = false)

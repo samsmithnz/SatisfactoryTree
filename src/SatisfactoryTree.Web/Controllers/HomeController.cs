@@ -1,7 +1,6 @@
-﻿using DSPTree;
-using DSPTree.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SatisfactoryTree.Models;
 using SatisfactoryTree.Web.Models;
 using System.Diagnostics;
 
@@ -15,7 +14,7 @@ namespace SatisfactoryTree.Web.Controllers
         {
             //Build the DSP graph
             string filter = "";// "Gravity Matrix";
-            DSPGraph dSPGraph = new(filter,
+            SatisfactoryGraph dSPGraph = new(filter,
                 ResearchType.Tier8,
                 true,
                 true);

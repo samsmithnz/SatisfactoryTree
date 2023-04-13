@@ -1,11 +1,11 @@
-//using DSPTree.Models;
+//using SatisfactoryTree.Models;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using System.Collections.Generic;
 //using System.Diagnostics;
 //using System.Linq;
 //using System.Text;
 
-//namespace DSPTree.Tests;
+//namespace SatisfactoryTree.Tests;
 
 //[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 //[TestClass]
