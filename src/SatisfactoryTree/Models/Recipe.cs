@@ -1,4 +1,4 @@
-﻿namespace DSPTree.Models
+﻿namespace SatisfactoryTree.Models
 {
     public class Recipe
     {
