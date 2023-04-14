@@ -3,8 +3,8 @@
     public class Item
     {
 
-        //STacksize
-        //SInkValue
+        //Stacksize
+        //SinkValue
 
         public Item(int level,
             string name,
