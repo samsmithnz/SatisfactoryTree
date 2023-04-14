@@ -33,7 +33,7 @@ namespace SatisfactoryTree
             //}
             if (itemGoal != null && itemGoal.Item != null && itemGoal.Item.Recipes.Count > 0 && itemGoal.Item.Recipes[0].Inputs.Count > 0)
             {
-                productionPlan.AddRange(GetChildren(itemGoal.Item.Name, 1));
+                productionPlan.AddRange(GetChildren(itemGoal.Item.Name, itemGoal.Item.Recipes[0].ThroughPutPerMinute));
             }
 
             return productionPlan;
@@ -70,7 +70,7 @@ namespace SatisfactoryTree
                     if (newItem != null && newItem.Item != null)
                     {
                         results.Add(newItem);
-                        results.AddRange(GetChildren(newItem.Item.Name, quantity));
+                        results.AddRange(GetChildren(newItem.Item.Name, recipeInput.Value * quantity));
                     }
                 }
             }
