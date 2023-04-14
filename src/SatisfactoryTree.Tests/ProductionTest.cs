@@ -12,8 +12,8 @@ namespace SatisfactoryTree.Tests
         {
             //Arrange
             SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
-            Item? startingItem = graph.FindItem("Copper Ingot");
-            List<Item> results = new();
+            ProductionItem? startingItem = new ProductionItem(graph.FindItem("Copper Ingot"), null, 30);
+            List<ProductionItem> results = new();
 
             //Act
             if (startingItem != null)
@@ -25,6 +25,7 @@ namespace SatisfactoryTree.Tests
             //1 Copper Ore -> Copper Ingot
             Assert.IsNotNull(startingItem);
             Assert.AreEqual(2, results.Count);
+            //Assert.IsNotNull(results[0].Building)
             //Assert.IsTrue(rawMaterials.ContainsKey("Copper Ore"));
             //Assert.AreEqual(1, rawMaterials["Copper Ore"]);
         }

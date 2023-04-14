@@ -19,9 +19,9 @@ namespace SatisfactoryTree
                 showOnlyDirectDependencies);
         }
 
-        public List<Item> BuildSatisfactoryProductionPlan(Item itemGoal)
+        public List<ProductionItem> BuildSatisfactoryProductionPlan(ProductionItem itemGoal)
         {
-            List<Item> productionPlan = new();
+            List<ProductionItem> productionPlan = new();
             Items = GetItems();
             productionPlan.Add(itemGoal);
 
@@ -31,27 +31,46 @@ namespace SatisfactoryTree
             //    items.Add(FindItem(recipeInput.Key, items));
 
             //}
-            if (itemGoal != null && itemGoal.Recipes.Count > 0 && itemGoal.Recipes[0].Inputs.Count > 0)
+            if (itemGoal != null && itemGoal.Item != null && itemGoal.Item.Recipes.Count > 0 && itemGoal.Item.Recipes[0].Inputs.Count > 0)
             {
-                productionPlan.AddRange(GetChildren(itemGoal.Name, 1));
+                productionPlan.AddRange(GetChildren(itemGoal.Item.Name, 1));
             }
 
             return productionPlan;
         }
 
-        private List<Item> GetChildren(string itemName, decimal quantity)
+        //private List<Item> GetChildren(string itemName, decimal quantity)
+        //{
+        //    List<Item> results = new();
+        //    Item? item = FindItem(itemName);
+        //    if (item != null && item.Recipes.Count > 0 && item.Recipes[0].Inputs.Count > 0)
+        //    {
+        //        foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
+        //        {
+        //            Item? newItem = FindItem(recipeInput.Key);
+        //            if (newItem != null)
+        //            {
+        //                results.Add(newItem);
+        //                results.AddRange(GetChildren(newItem.Name, 1));
+        //            }
+        //        }
+        //    }
+        //    return results;
+        //}
+
+        private List<ProductionItem> GetChildren(string itemName, decimal quantity)
         {
-            List<Item> results = new();
+            List<ProductionItem> results = new();
             Item? item = FindItem(itemName);
             if (item != null && item.Recipes.Count > 0 && item.Recipes[0].Inputs.Count > 0)
             {
                 foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
                 {
-                    Item? newItem = FindItem(recipeInput.Key);
-                    if (newItem != null)
+                    ProductionItem? newItem = new ProductionItem(FindItem(recipeInput.Key), null, recipeInput.Value);
+                    if (newItem != null && newItem.Item != null)
                     {
                         results.Add(newItem);
-                        results.AddRange(GetChildren(newItem.Name, 1));
+                        results.AddRange(GetChildren(newItem.Item.Name, 1));
                     }
                 }
             }
