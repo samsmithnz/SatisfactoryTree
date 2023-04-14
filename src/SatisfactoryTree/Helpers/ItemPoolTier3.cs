@@ -17,7 +17,7 @@ namespace SatisfactoryTree.Helpers
                 Recipes =
                 {
                     new Recipe(1,
-                        60,
+                        120, // Assuming normal node
                         new(),
                         new()
                         {
