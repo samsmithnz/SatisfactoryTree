@@ -2,7 +2,8 @@
 {
     public class ProductionItem
     {
-        public ProductionItem(Item? item, Building? building, decimal quantity)
+        public ProductionItem(Item? item, decimal quantity,
+             Building? building = null)
         {
             Item = item;
             Building = building;

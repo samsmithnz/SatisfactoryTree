@@ -61,7 +61,7 @@ namespace SatisfactoryTree
             {
                 foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
                 {
-                    ProductionItem? newItem = new ProductionItem(FindItem(recipeInput.Key), null, recipeInput.Value);
+                    ProductionItem? newItem = new ProductionItem(FindItem(recipeInput.Key), recipeInput.Value);
                     if (newItem != null && newItem.Item != null)
                     {
                         results.Add(newItem);

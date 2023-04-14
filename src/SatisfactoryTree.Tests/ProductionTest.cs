@@ -14,7 +14,7 @@ namespace SatisfactoryTree.Tests
             SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
             string itemName = "Copper Ingot";
             decimal quantity = 30;
-            ProductionItem? startingItem = new(graph.FindItem(itemName), null, quantity);
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
             List<ProductionItem> results = new();
 
             //Act
