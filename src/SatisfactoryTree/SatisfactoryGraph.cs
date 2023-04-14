@@ -23,7 +23,7 @@ namespace SatisfactoryTree
         {
             List<Item> productionPlan = new();
             Items = GetItems();
-            Items.Add(itemGoal);
+            productionPlan.Add(itemGoal);
 
             //Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
             //foreach (KeyValuePair<string, decimal> recipeInput in itemGoal.Recipes[0].Inputs)

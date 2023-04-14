@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Tests
     public class ProductionTest
     {
         [TestMethod]
-        public void CopperIngotRawProductionTest()
+        public void CopperIngotProductionTest()
         {
             //Arrange
             SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
@@ -24,7 +24,7 @@ namespace SatisfactoryTree.Tests
             //Assert
             //1 Copper Ore -> Copper Ingot
             Assert.IsNotNull(startingItem);
-            Assert.AreEqual(1, results.Count);
+            Assert.AreEqual(2, results.Count);
             //Assert.IsTrue(rawMaterials.ContainsKey("Copper Ore"));
             //Assert.AreEqual(1, rawMaterials["Copper Ore"]);
         }
