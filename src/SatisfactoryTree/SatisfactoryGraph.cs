@@ -26,11 +26,6 @@ namespace SatisfactoryTree
             productionPlan.Add(itemGoal);
 
             //Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
-            //foreach (KeyValuePair<string, decimal> recipeInput in itemGoal.Recipes[0].Inputs)
-            //{
-            //    items.Add(FindItem(recipeInput.Key, items));
-
-            //}
             if (itemGoal != null && itemGoal.Item != null && itemGoal.Item.Recipes.Count > 0 && itemGoal.Item.Recipes[0].Inputs.Count > 0)
             {
                 productionPlan.AddRange(GetChildren(itemGoal.Item.Name, itemGoal.Item.Recipes[0].ThroughPutPerMinute));
