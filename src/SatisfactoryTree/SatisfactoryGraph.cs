@@ -70,7 +70,7 @@ namespace SatisfactoryTree
                     if (newItem != null && newItem.Item != null)
                     {
                         results.Add(newItem);
-                        results.AddRange(GetChildren(newItem.Item.Name, 1));
+                        results.AddRange(GetChildren(newItem.Item.Name, quantity));
                     }
                 }
             }
