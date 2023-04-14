@@ -7,6 +7,7 @@ namespace SatisfactoryTree
     public class SatisfactoryGraph
     {
         public List<Item> Items { get; set; }
+
         public SatisfactoryGraph(string filter = "",
             ResearchType researchType = ResearchType.Tier8,
             bool includeBuildings = false,
@@ -18,11 +19,11 @@ namespace SatisfactoryTree
                 showOnlyDirectDependencies);
         }
 
-        private List<Item> BuildSatisfactoryProductionPlan(Item itemGoal)
+        public List<Item> BuildSatisfactoryProductionPlan(Item itemGoal)
         {
             List<Item> productionPlan = new();
-            List<Item> items = GetItems();
-            items.Add(itemGoal);
+            Items = GetItems();
+            Items.Add(itemGoal);
 
             //Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
             //foreach (KeyValuePair<string, decimal> recipeInput in itemGoal.Recipes[0].Inputs)
@@ -32,40 +33,43 @@ namespace SatisfactoryTree
             //}
             if (itemGoal != null && itemGoal.Recipes.Count > 0 && itemGoal.Recipes[0].Inputs.Count > 0)
             {
-                productionPlan.AddRange(GetChildren(itemGoal.Name, 1, items));
+                productionPlan.AddRange(GetChildren(itemGoal.Name, 1));
             }
 
             return productionPlan;
         }
 
-        private static List<Item> GetChildren(string itemName, decimal quantity, List<Item> items)
+        private List<Item> GetChildren(string itemName, decimal quantity)
         {
             List<Item> results = new();
-            Item? item = FindItem(itemName, items);
+            Item? item = FindItem(itemName);
             if (item != null && item.Recipes.Count > 0 && item.Recipes[0].Inputs.Count > 0)
             {
                 foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
                 {
-                    Item? newItem = FindItem(recipeInput.Key, items);
+                    Item? newItem = FindItem(recipeInput.Key);
                     if (newItem != null)
                     {
-                        items.Add(newItem);
-                        items.AddRange(GetChildren(newItem.Name, 1, items));
+                        results.Add(newItem);
+                        results.AddRange(GetChildren(newItem.Name, 1));
                     }
                 }
             }
             return results;
         }
 
-        private static Item? FindItem(string itemName, List<Item> items)
+        public Item? FindItem(string itemName)
         {
             Item? result = null;
-            foreach (Item item in items)
+            if (Items != null && Items.Count > 0)
             {
-                if (item.Name == itemName)
+                foreach (Item item in Items)
                 {
-                    result = item;
-                    break;
+                    if (item.Name == itemName)
+                    {
+                        result = item;
+                        break;
+                    }
                 }
             }
             return result;
