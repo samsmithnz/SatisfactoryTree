@@ -1,5 +1,6 @@
 ﻿using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
+using System.Collections.Generic;
 
 namespace SatisfactoryTree
 {
@@ -17,103 +18,65 @@ namespace SatisfactoryTree
                 showOnlyDirectDependencies);
         }
 
+        private List<Item> BuildSatisfactoryProductionPlan(Item itemGoal)
+        {
+            List<Item> productionPlan = new();
+            List<Item> items = GetItems();
+            items.Add(itemGoal);
+
+            //Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
+            //foreach (KeyValuePair<string, decimal> recipeInput in itemGoal.Recipes[0].Inputs)
+            //{
+            //    items.Add(FindItem(recipeInput.Key, items));
+
+            //}
+            if (itemGoal != null && itemGoal.Recipes.Count > 0 && itemGoal.Recipes[0].Inputs.Count > 0)
+            {
+                productionPlan.AddRange(GetChildren(itemGoal.Name, 1, items));
+            }
+
+            return productionPlan;
+        }
+
+        private static List<Item> GetChildren(string itemName, decimal quantity, List<Item> items)
+        {
+            List<Item> results = new();
+            Item? item = FindItem(itemName, items);
+            if (item != null && item.Recipes.Count > 0 && item.Recipes[0].Inputs.Count > 0)
+            {
+                foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
+                {
+                    Item? newItem = FindItem(recipeInput.Key, items);
+                    if (newItem != null)
+                    {
+                        items.Add(newItem);
+                        items.AddRange(GetChildren(newItem.Name, 1, items));
+                    }
+                }
+            }
+            return results;
+        }
+
+        private static Item? FindItem(string itemName, List<Item> items)
+        {
+            Item? result = null;
+            foreach (Item item in items)
+            {
+                if (item.Name == itemName)
+                {
+                    result = item;
+                    break;
+                }
+            }
+            return result;
+        }
+
         private static List<Item> BuildSatisfactoryTree(string nameFilter,
             ResearchType researchType,
             bool includeBuildings,
             bool showOnlyDirectDependencies)
         {
-            List<Item> items = new()
-            {
-                ItemPoolTier1.IronOre(),
-                ItemPoolTier1.IronIngot(),
-                ItemPoolTier1.IronPlate(),
-                ItemPoolTier1.IronRod(),
-                ItemPoolTier1.CopperOre(),
-                ItemPoolTier1.CopperIngot(),
-                ItemPoolTier1.Wire(),
-                ItemPoolTier1.Cable(),
-                ItemPoolTier1.Limestone(),
-                ItemPoolTier1.Concrete(),
-                ItemPoolTier1.Screw(),
-                ItemPoolTier1.ReinforcedIronPlate(),
-
-                ItemPoolTier2.CopperSheet(),
-                ItemPoolTier2.ModularFrame(),
-                ItemPoolTier2.Rotor(),
-                ItemPoolTier2.SmartPlating(),
-
-                ItemPoolTier3.Coal(),
-                ItemPoolTier3.SteelIngot(),
-                ItemPoolTier3.SteelPipe(),
-                ItemPoolTier3.SteelBeam(),
-                ItemPoolTier3.VersatileFramework(),
-                ItemPoolTier3.Water(),
-
-                ItemPoolTier4.EncasedIndustrialBeam(),
-                ItemPoolTier4.AutomatedWiring(),
-                ItemPoolTier4.Stator(),
-                ItemPoolTier4.Motor(),
-                ItemPoolTier4.HeavyModularFrame(),
-
-
-                ItemPoolTier5.CircuitBoard(),
-                ItemPoolTier5.CrudeOil(),
-                ItemPoolTier5.Plastic(),
-                ItemPoolTier5.Rubber(),
-                ItemPoolTier5.HeavyOilResidue(),
-                ItemPoolTier5.PetroleumCoke(),
-                ItemPoolTier5.Fuel(),
-                ItemPoolTier5.Computer(),
-                ItemPoolTier5.ModularEngine(),
-                ItemPoolTier5.AdaptiveControlUnit(),
-
-                ItemPoolTier6.CateriumOre(),
-                ItemPoolTier6.CateriumIngot(),
-                ItemPoolTier6.Quickwire(),
-                ItemPoolTier6.HighSpeedConnector(),
-
-                ItemPoolTier7.Bauxite(),
-                ItemPoolTier7.AluminaSolution(),
-                ItemPoolTier7.AluminumScrap(),
-                ItemPoolTier7.AluminumIngot(),
-                ItemPoolTier7.AlcladAluminumSheet(),
-                ItemPoolTier7.AluminumCasing(),
-                ItemPoolTier7.RawQuartz(),
-                ItemPoolTier7.QuartzCrystal(),
-                ItemPoolTier7.Silica(),
-                ItemPoolTier7.CrystalOscillator(),
-                ItemPoolTier7.RadioControlUnit(),
-                ItemPoolTier7.Sulfur(),
-                ItemPoolTier7.SulfuricAcid(),
-                ItemPoolTier7.Battery(),
-                ItemPoolTier7.AILimiter(),
-                ItemPoolTier7.Supercomputer(),
-                ItemPoolTier7.AssemblyDirectorSystem(),
-
-                ItemPoolTier8.Uranium(),
-                ItemPoolTier8.EncasedUraniumCell(),
-                ItemPoolTier8.ElectromagneticControlRod(),
-                ItemPoolTier8.UraniumFuelRod(),
-                ItemPoolTier8.MagneticFieldGenerator(),
-                ItemPoolTier8.NitrogenGas(),
-                ItemPoolTier8.HeatSink(),
-                ItemPoolTier8.CoolingSystem(),
-                ItemPoolTier8.FusedModularFrame(),
-                ItemPoolTier8.TurboMotor(),
-                ItemPoolTier8.ThermalPropulsionRocket(),
-                ItemPoolTier8.NitricAcid(),
-                ItemPoolTier8.UraniumWaste(),
-                ItemPoolTier8.NonfissileUranium(),
-                ItemPoolTier8.PlutoniumPellet(),
-                ItemPoolTier8.EncasedPlutoniumCell(),
-                ItemPoolTier8.PlutoniumFuelRod(),
-                ItemPoolTier8.PlutoniumWaste(),
-                ItemPoolTier8.CopperPowder(),
-                ItemPoolTier8.PressureConversionCube(),
-                ItemPoolTier8.NuclearPasta(),
-
-
-            };
+            List<Item> items = GetItems();
 
             ////Include buildings
             //if (includeBuildings == true)
@@ -262,6 +225,102 @@ namespace SatisfactoryTree
             //        int j = i;
             //    }
             //}
+
+            return items;
+        }
+
+        private static List<Item> GetItems()
+        {
+            List<Item> items = new()
+            {
+                ItemPoolTier1.IronOre(),
+                ItemPoolTier1.IronIngot(),
+                ItemPoolTier1.IronPlate(),
+                ItemPoolTier1.IronRod(),
+                ItemPoolTier1.CopperOre(),
+                ItemPoolTier1.CopperIngot(),
+                ItemPoolTier1.Wire(),
+                ItemPoolTier1.Cable(),
+                ItemPoolTier1.Limestone(),
+                ItemPoolTier1.Concrete(),
+                ItemPoolTier1.Screw(),
+                ItemPoolTier1.ReinforcedIronPlate(),
+
+                ItemPoolTier2.CopperSheet(),
+                ItemPoolTier2.ModularFrame(),
+                ItemPoolTier2.Rotor(),
+                ItemPoolTier2.SmartPlating(),
+
+                ItemPoolTier3.Coal(),
+                ItemPoolTier3.SteelIngot(),
+                ItemPoolTier3.SteelPipe(),
+                ItemPoolTier3.SteelBeam(),
+                ItemPoolTier3.VersatileFramework(),
+                ItemPoolTier3.Water(),
+
+                ItemPoolTier4.EncasedIndustrialBeam(),
+                ItemPoolTier4.AutomatedWiring(),
+                ItemPoolTier4.Stator(),
+                ItemPoolTier4.Motor(),
+                ItemPoolTier4.HeavyModularFrame(),
+
+
+                ItemPoolTier5.CircuitBoard(),
+                ItemPoolTier5.CrudeOil(),
+                ItemPoolTier5.Plastic(),
+                ItemPoolTier5.Rubber(),
+                ItemPoolTier5.HeavyOilResidue(),
+                ItemPoolTier5.PetroleumCoke(),
+                ItemPoolTier5.Fuel(),
+                ItemPoolTier5.Computer(),
+                ItemPoolTier5.ModularEngine(),
+                ItemPoolTier5.AdaptiveControlUnit(),
+
+                ItemPoolTier6.CateriumOre(),
+                ItemPoolTier6.CateriumIngot(),
+                ItemPoolTier6.Quickwire(),
+                ItemPoolTier6.HighSpeedConnector(),
+
+                ItemPoolTier7.Bauxite(),
+                ItemPoolTier7.AluminaSolution(),
+                ItemPoolTier7.AluminumScrap(),
+                ItemPoolTier7.AluminumIngot(),
+                ItemPoolTier7.AlcladAluminumSheet(),
+                ItemPoolTier7.AluminumCasing(),
+                ItemPoolTier7.RawQuartz(),
+                ItemPoolTier7.QuartzCrystal(),
+                ItemPoolTier7.Silica(),
+                ItemPoolTier7.CrystalOscillator(),
+                ItemPoolTier7.RadioControlUnit(),
+                ItemPoolTier7.Sulfur(),
+                ItemPoolTier7.SulfuricAcid(),
+                ItemPoolTier7.Battery(),
+                ItemPoolTier7.AILimiter(),
+                ItemPoolTier7.Supercomputer(),
+                ItemPoolTier7.AssemblyDirectorSystem(),
+
+                ItemPoolTier8.Uranium(),
+                ItemPoolTier8.EncasedUraniumCell(),
+                ItemPoolTier8.ElectromagneticControlRod(),
+                ItemPoolTier8.UraniumFuelRod(),
+                ItemPoolTier8.MagneticFieldGenerator(),
+                ItemPoolTier8.NitrogenGas(),
+                ItemPoolTier8.HeatSink(),
+                ItemPoolTier8.CoolingSystem(),
+                ItemPoolTier8.FusedModularFrame(),
+                ItemPoolTier8.TurboMotor(),
+                ItemPoolTier8.ThermalPropulsionRocket(),
+                ItemPoolTier8.NitricAcid(),
+                ItemPoolTier8.UraniumWaste(),
+                ItemPoolTier8.NonfissileUranium(),
+                ItemPoolTier8.PlutoniumPellet(),
+                ItemPoolTier8.EncasedPlutoniumCell(),
+                ItemPoolTier8.PlutoniumFuelRod(),
+                ItemPoolTier8.PlutoniumWaste(),
+                ItemPoolTier8.CopperPowder(),
+                ItemPoolTier8.PressureConversionCube(),
+                ItemPoolTier8.NuclearPasta(),
+            };
 
             return items;
         }
