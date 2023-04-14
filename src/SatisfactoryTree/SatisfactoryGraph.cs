@@ -25,7 +25,7 @@ namespace SatisfactoryTree
             Items = GetItems();
             productionPlan.Add(itemGoal);
             decimal quantity = 1;
-            if (itemGoal != null )
+            if (itemGoal != null)
             {
                 quantity = itemGoal.Quantity;
             }
@@ -76,7 +76,7 @@ namespace SatisfactoryTree
                     if (newItem != null && newItem.Item != null)
                     {
                         results.Add(newItem);
-                        results.AddRange(GetChildren(newItem.Item.Name, recipeInput.Value * quantity));
+                        results.AddRange(GetChildren(newItem.Item.Name, FindItem(recipeInput.Key).Recipes[0].ThroughPutPerMinute * quantity));
                     }
                 }
             }
