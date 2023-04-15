@@ -29,7 +29,13 @@ namespace SatisfactoryTree.Web.Controllers
 
         public IActionResult Production()
         {
-            return View();
+            string graph = @"
+        flowchart LR
+            id0[Miner Mk1] --Iron Ore<br>45 units/min--> id1
+            id1[x1.5 Smeltor<br>Iron Ingot] --Iron Ingot<br>45 units/min--> id3
+            id3[x1.5 Constructor<br>Iron Plate] --Iron Plate<br>30 units/min--> id4
+            id4[30 Iron plate]";
+            return View(model: graph);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
