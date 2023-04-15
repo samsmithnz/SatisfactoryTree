@@ -30,11 +30,16 @@ namespace SatisfactoryTree.Web.Controllers
         public IActionResult Production()
         {
             string graph = @"
-        flowchart LR
-            id0[Miner Mk1] --Iron Ore<br>45 units/min--> id1
-            id1[x1.5 Smeltor<br>Iron Ingot] --Iron Ingot<br>45 units/min--> id3
-            id3[x1.5 Constructor<br>Iron Plate] --Iron Plate<br>30 units/min--> id4
-            id4[30 Iron plate]";
+flowchart LR
+    miner1[(""Miner Mk1<br>(Iron Ore)"")] --""Iron Ore<br>(60 units/min)""--> smeltor1
+    smeltor1[""x2 Smeltor<br>(Iron Ingot)""] --""Iron Ingot<br>(15 units/min)""--> constructor1
+    smeltor1 --""Iron Ingot<br>(45 units/min)""--> constructor2
+    constructor1[""x1 Constructor<br>(Iron Rod)""] --""Iron Rod<br>(15 units/min)""--> constructor3
+    constructor3[""x1.5 Constructor<br>(Screw)""] --""Screw<br>(60 units/min)""--> constructor4
+    constructor2[""x1.5 Constructor<br>(Iron Plate)""] --""Iron Plate<br>(30 units/min)""--> constructor4
+    constructor4[""x1 Assembler<br>(Reinforced Plates)""] --""Reinforced Plates<br>(10 units/min)""--> end1
+    end1{{10 Reinforced plates}}
+";
             return View(model: graph);
         }
 
