@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Production Graph</h2>
+<body>
+    Here is a mermaid diagram:
+    <pre class="mermaid">
+        flowchart LR
+            id0[Miner Mk1] --Iron Ore<br>45 units/min--> id1
+            id1[x1.5 Smeltor<br>Iron Ingot] --Iron Ingot<br>45 units/min--> id3
+            id3[x1.5 Constructor<br>Iron Plate] --Iron Plate<br>30 units/min--> id4
+            id4[30 Iron plate]
+    </pre>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>

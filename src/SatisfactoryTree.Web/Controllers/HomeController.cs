@@ -27,6 +27,11 @@ namespace SatisfactoryTree.Web.Controllers
             return View(model: json);
         }
 
+        public IActionResult Production()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
