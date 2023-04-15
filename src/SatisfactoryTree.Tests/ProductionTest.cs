@@ -34,5 +34,33 @@ namespace SatisfactoryTree.Tests
             //Assert.IsTrue(rawMaterials.ContainsKey("Copper Ore"));
             //Assert.AreEqual(1, rawMaterials["Copper Ore"]);
         }
+
+
+        [TestMethod]
+        public void IronPlateProductionTest()
+        {
+            //Arrange
+            SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
+            string itemName = "Iron Plate";
+            decimal quantity = 30;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(3, results.Count);
+            Assert.IsNotNull(results[0].Item);
+            Assert.AreEqual(30, results[0].Quantity);
+            Assert.AreEqual("Iron Ingot", results[1].Item?.Name);
+            Assert.AreEqual(45, results[1].Quantity);
+            //Assert.IsTrue(rawMaterials.ContainsKey("Copper Ore"));
+            //Assert.AreEqual(1, rawMaterials["Copper Ore"]);
+        }
     }
 }

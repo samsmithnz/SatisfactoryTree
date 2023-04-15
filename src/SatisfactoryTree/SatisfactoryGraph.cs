@@ -70,13 +70,18 @@ namespace SatisfactoryTree
             Item? item = FindItem(itemName);
             if (item != null && item.Recipes.Count > 0 && item.Recipes[0].Inputs.Count > 0)
             {
+                //Look at each input and the quantity needed to make the item 
                 foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
                 {
-                    ProductionItem? newItem = new ProductionItem(FindItem(recipeInput.Key), recipeInput.Value);
-                    if (newItem != null && newItem.Item != null)
+                    //get the input item
+                    ProductionItem? inputItem = new ProductionItem(FindItem(recipeInput.Key), recipeInput.Value);
+                    if (inputItem != null && inputItem.Item != null)
                     {
-                        results.Add(newItem);
-                        results.AddRange(GetChildren(newItem.Item.Name, FindItem(recipeInput.Key).Recipes[0].ThroughPutPerMinute * quantity));
+                        inputItem.Quantity = recipeInput.Value / inputItem.Item.Recipes[0].ThroughPutPerMinute;
+                        //Add the input item to the results
+                        results.Add(inputItem);
+                        //Then get the children of the input item
+                        results.AddRange(GetChildren(inputItem.Item.Name, FindItem(recipeInput.Key).Recipes[0].ThroughPutPerMinute * quantity));
                     }
                 }
             }
