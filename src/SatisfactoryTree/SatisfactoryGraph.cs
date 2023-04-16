@@ -23,24 +23,27 @@ namespace SatisfactoryTree
         {
             List<ProductionItem> productionPlan = new();
             Items = GetItems();
-            productionPlan.Add(itemGoal);
-            decimal quantity = 1;
             if (itemGoal != null)
             {
-                quantity = itemGoal.Quantity;
+                decimal quantity = itemGoal.Quantity;
+                if (itemGoal.Item != null)
+                {
+                    decimal total = itemGoal.Item.Recipes[0].ThroughPutPerMinute;
+                    decimal ratio = quantity / total;
+                    itemGoal.BuildingQuantityRequired = ratio;
+                    foreach (KeyValuePair<string, decimal> inputItem in itemGoal.Item.Recipes[0].Inputs)
+                    {
+                        itemGoal.Dependencies.Add(inputItem.Key, inputItem.Value * ratio);
+                    }
+                }
+                productionPlan.Add(itemGoal);
             }
-            decimal total = 1;
-            if (itemGoal != null && itemGoal.Item != null)
-            {
-                total = itemGoal.Item.Recipes[0].ThroughPutPerMinute;
-            }
-            decimal ratio = quantity / total;
 
-            //Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
-            if (itemGoal != null && itemGoal.Item != null && itemGoal.Item.Recipes.Count > 0 && itemGoal.Item.Recipes[0].Inputs.Count > 0)
-            {
-                productionPlan.AddRange(GetChildren(itemGoal.Item.Name, ratio));
-            }
+            ////Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
+            //if (itemGoal != null && itemGoal.Item != null && itemGoal.Item.Recipes.Count > 0 && itemGoal.Item.Recipes[0].Inputs.Count > 0)
+            //{
+            //    productionPlan.AddRange(GetChildren(itemGoal.Item.Name, ratio));
+            //}
 
             return productionPlan;
         }
