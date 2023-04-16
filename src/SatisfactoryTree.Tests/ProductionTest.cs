@@ -8,6 +8,30 @@ namespace SatisfactoryTree.Tests
     public class ProductionTest
     {
         [TestMethod]
+        public void CopperOreProductionTest()
+        {
+            //Arrange
+            SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
+            string itemName = "Copper Ore";
+            decimal quantity = 90;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(1, results.Count);
+            Assert.IsNotNull(results[0].Item);
+            Assert.AreEqual(90, results[0].Quantity);
+            Assert.AreEqual(0.75M, results[0].BuildingQuantityRequired);
+        }
+
+        [TestMethod]
         public void CopperIngotProductionTest()
         {
             //Arrange

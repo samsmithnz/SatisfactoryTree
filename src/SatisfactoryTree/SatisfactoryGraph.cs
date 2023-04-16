@@ -1,6 +1,5 @@
 ﻿using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
-using System.Collections.Generic;
 
 namespace SatisfactoryTree
 {
@@ -21,7 +20,8 @@ namespace SatisfactoryTree
 
         public List<ProductionItem> BuildSatisfactoryProductionPlan(ProductionItem itemGoal)
         {
-            List<ProductionItem> productionPlan = new();
+            List<ProductionItem> productionItems = new();
+            Queue<KeyValuePair<string, decimal>> inputQueue = new();
             Items = GetItems();
             if (itemGoal != null)
             {
@@ -34,10 +34,29 @@ namespace SatisfactoryTree
                     foreach (KeyValuePair<string, decimal> inputItem in itemGoal.Item.Recipes[0].Inputs)
                     {
                         itemGoal.Dependencies.Add(inputItem.Key, inputItem.Value * ratio);
+                        //Add each item to a queue to add to other dependencies
+                        inputQueue.Enqueue(new(inputItem.Key, inputItem.Value * ratio));
                     }
                 }
-                productionPlan.Add(itemGoal);
+                productionItems.Add(itemGoal);
             }
+
+            while (inputQueue.Count > 0)
+            {
+                KeyValuePair<string, decimal> inputToProcess = inputQueue.Dequeue();
+                //See if it exists in the production item list already
+                ProductionItem? productionItem = productionItems.Where(i => i.Item.Name == inputToProcess.Key).FirstOrDefault();
+                if (productionItem != null)
+                {
+                    productionItem.Quantity += inputToProcess.Value;
+                    //Now process these items in a queue recursively
+                }
+                else
+                {
+                    productionItems.Add(new(FindItem(inputToProcess.Key), inputToProcess.Value));
+                }
+            }
+
 
             ////Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
             //if (itemGoal != null && itemGoal.Item != null && itemGoal.Item.Recipes.Count > 0 && itemGoal.Item.Recipes[0].Inputs.Count > 0)
@@ -45,7 +64,7 @@ namespace SatisfactoryTree
             //    productionPlan.AddRange(GetChildren(itemGoal.Item.Name, ratio));
             //}
 
-            return productionPlan;
+            return productionItems;
         }
 
         //private List<Item> GetChildren(string itemName, decimal quantity)
