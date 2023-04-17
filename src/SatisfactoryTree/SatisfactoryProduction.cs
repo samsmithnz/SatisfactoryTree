@@ -57,10 +57,13 @@ namespace SatisfactoryTree
                 }
                 else
                 {
-                    ProductionItem inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
-                    decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
-                    inputProductionItem.BuildingQuantityRequired = inputRatio;
-                    ProductionItems.Add(inputProductionItem);
+                    ProductionItem? inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
+                    if (inputProductionItem != null && inputProductionItem.Item != null)
+                    {
+                        decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
+                        inputProductionItem.BuildingQuantityRequired = inputRatio;
+                        ProductionItems.Add(inputProductionItem);
+                    }
                 }
             }
 
