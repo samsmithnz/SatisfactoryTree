@@ -11,7 +11,7 @@ namespace SatisfactoryTree.Tests
         public void IronOreProductionTest()
         {
             //Arrange
-            SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
+            SatisfactoryProduction graph = new();
             string itemName = "Iron Ore";
             decimal quantity = 90;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
@@ -35,7 +35,7 @@ namespace SatisfactoryTree.Tests
         public void IronIngotProductionTest()
         {
             //Arrange
-            SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
+            SatisfactoryProduction graph = new(); 
             string itemName = "Iron Ingot";
             decimal quantity = 30;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
@@ -64,7 +64,7 @@ namespace SatisfactoryTree.Tests
         public void IronPlateProductionTest()
         {
             //Arrange
-            SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
+            SatisfactoryProduction graph = new(); 
             string itemName = "Iron Plate";
             decimal quantity = 30;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
