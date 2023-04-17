@@ -52,11 +52,13 @@ namespace SatisfactoryTree
                 ProductionItem? productionItem = ProductionItems.Where(i => i.Item?.Name == inputToProcess.Key).FirstOrDefault();
                 if (productionItem != null)
                 {
+                    //Increase the total quantity required
                     productionItem.Quantity += inputToProcess.Value;
                     //Now process these items in a queue recursively
                 }
                 else
                 {
+                    //Add the new production item required
                     ProductionItem? inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
                     if (inputProductionItem != null && inputProductionItem.Item != null)
                     {
@@ -67,14 +69,28 @@ namespace SatisfactoryTree
                 }
             }
 
-
-            ////Look at the recipe inputs, and get all of the item inputs that are needed to make the itemGoal
-            //if (itemGoal != null && itemGoal.Item != null && itemGoal.Item.Recipes.Count > 0 && itemGoal.Item.Recipes[0].Inputs.Count > 0)
-            //{
-            //    productionPlan.AddRange(GetChildren(itemGoal.Item.Name, ratio));
-            //}
-
             return ProductionItems;
+        }
+
+        private bool AddItemsToInputs(Dictionary<string, decimal> inputs)
+        {
+            foreach (KeyValuePair<string, decimal> inputItem in inputs)
+            {
+                Item? itemInput = FindItem(inputItem.Key);
+                if (itemInput != null)
+                {
+                    decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
+                    decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
+                    if (adjustedInputThroughPutPerMinute > quantity)
+                    {
+                        adjustedInputThroughPutPerMinute = quantity;
+                    }
+                    itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
+                    //Add each item to a queue to add to other dependencies
+                    InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
+                }
+            }
+            return true;
         }
 
         private List<ProductionItem> GetChildren(string itemName, decimal quantity)
