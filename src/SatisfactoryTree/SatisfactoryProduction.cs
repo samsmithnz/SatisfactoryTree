@@ -57,7 +57,10 @@ namespace SatisfactoryTree
                 }
                 else
                 {
-                    ProductionItems.Add(new(FindItem(inputToProcess.Key), inputToProcess.Value));
+                    ProductionItem inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
+                    decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
+                    inputProductionItem.BuildingQuantityRequired = inputRatio;
+                    ProductionItems.Add(inputProductionItem);
                 }
             }
 
