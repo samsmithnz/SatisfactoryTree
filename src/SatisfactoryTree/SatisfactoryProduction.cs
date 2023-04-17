@@ -32,9 +32,14 @@ namespace SatisfactoryTree
                     if (itemInput != null)
                     {
                         decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
-                        itemGoal.Dependencies.Add(inputItem.Key, inputThroughPutPerMinute * ratio);
+                        decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
+                        if (adjustedInputThroughPutPerMinute > quantity)
+                        {
+                            adjustedInputThroughPutPerMinute = quantity;
+                        }
+                        itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
                         //Add each item to a queue to add to other dependencies
-                        InputQueue.Enqueue(new(inputItem.Key, inputThroughPutPerMinute * ratio));
+                        InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
                     }
                 }
                 ProductionItems.Add(itemGoal);
