@@ -44,7 +44,7 @@ namespace SatisfactoryTree
             {
                 KeyValuePair<string, decimal> inputToProcess = InputQueue.Dequeue();
                 //See if it exists in the production item list already
-                ProductionItem? productionItem = ProductionItems.Where(i => i.Item.Name == inputToProcess.Key).FirstOrDefault();
+                ProductionItem? productionItem = ProductionItems.Where(i => i.Item?.Name == inputToProcess.Key).FirstOrDefault();
                 if (productionItem != null)
                 {
                     productionItem.Quantity += inputToProcess.Value;
@@ -83,7 +83,7 @@ namespace SatisfactoryTree
                         //Add the input item to the results
                         results.Add(inputItem);
                         //Then get the children of the input item
-                        results.AddRange(GetChildren(inputItem.Item.Name, FindItem(recipeInput.Key).Recipes[0].ThroughPutPerMinute * quantity));
+                        results.AddRange(GetChildren(inputItem.Item.Name, inputItem.Item.Recipes[0].ThroughPutPerMinute * quantity));
                     }
                 }
             }
