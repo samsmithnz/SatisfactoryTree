@@ -22,72 +22,111 @@ namespace SatisfactoryTree
             InputQueue = new();
             if (itemGoal != null && itemGoal.Item != null)
             {
-                decimal quantity = itemGoal.Quantity;
-                decimal total = itemGoal.Item.Recipes[0].ThroughPutPerMinute;
-                decimal ratio = quantity / total;
-                itemGoal.BuildingQuantityRequired = ratio;
-                foreach (KeyValuePair<string, decimal> inputItem in itemGoal.Item.Recipes[0].Inputs)
-                {
-                    Item? itemInput = FindItem(inputItem.Key);
-                    if (itemInput != null)
-                    {
-                        decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
-                        decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
-                        if (adjustedInputThroughPutPerMinute > quantity)
-                        {
-                            adjustedInputThroughPutPerMinute = quantity;
-                        }
-                        itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
-                        //Add each item to a queue to add to other dependencies
-                        InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
-                    }
-                }
-                ProductionItems.Add(itemGoal);
+                ProcessOutputItem(itemGoal);
+                //decimal quantity = itemGoal.Quantity;
+                //decimal total = itemGoal.Item.Recipes[0].ThroughPutPerMinute;
+                //decimal ratio = quantity / total;
+                //itemGoal.BuildingQuantityRequired = ratio;
+                //foreach (KeyValuePair<string, decimal> inputItem in itemGoal.Item.Recipes[0].Inputs)
+                //{
+                //    Item? itemInput = FindItem(inputItem.Key);
+                //    if (itemInput != null)
+                //    {
+                //        decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
+                //        decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
+                //        if (adjustedInputThroughPutPerMinute > quantity)
+                //        {
+                //            adjustedInputThroughPutPerMinute = quantity;
+                //        }
+                //        itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
+                //        //Add each item to a queue to add to other dependencies
+                //        InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
+                //    }
+                //}
+                //ProductionItems.Add(itemGoal);
             }
 
-            while (InputQueue.Count > 0)
+            //while (InputQueue.Count > 0)
+            //{
+            foreach (ProductionItem productionItem in ProductionItems)
             {
-                KeyValuePair<string, decimal> inputToProcess = InputQueue.Dequeue();
-                //See if it exists in the production item list already
-                ProductionItem? productionItem = ProductionItems.Where(i => i.Item?.Name == inputToProcess.Key).FirstOrDefault();
+                //KeyValuePair<string, decimal> inputToProcess = InputQueue.Dequeue();
+                ////See if it exists in the production item list already
+                //ProductionItem? productionItem = ProductionItems.Where(i => i.Item?.Name == inputToProcess.Key).FirstOrDefault();
                 if (productionItem != null)
                 {
                     //Increase the total quantity required
-                    productionItem.Quantity += inputToProcess.Value;
-                    //Now process these items in a queue recursively
-                }
-                else
-                {
-                    //Add the new production item required
-                    ProductionItem? inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
-                    if (inputProductionItem != null && inputProductionItem.Item != null)
+                    //productionItem.Quantity += inputToProcess.Value;
+
+                    //Update the building quantity required
+                    if (productionItem.Item != null)
                     {
-                        decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
-                        inputProductionItem.BuildingQuantityRequired = inputRatio;
-                        ProductionItems.Add(inputProductionItem);
+                        decimal inputRatio = productionItem.Quantity / productionItem.Item.Recipes[0].ThroughPutPerMinute;
+                        productionItem.BuildingQuantityRequired = inputRatio;
                     }
                 }
+                //else
+                //{
+                //    //Add the new production item required
+                //    ProductionItem? inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
+                //    if (inputProductionItem != null && inputProductionItem.Item != null)
+                //    {
+                //        decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
+                //        inputProductionItem.BuildingQuantityRequired = inputRatio;
+                //        ProductionItems.Add(inputProductionItem);
+                //    }
+                //}
+                //}
             }
 
             return ProductionItems;
         }
 
-        private bool AddItemsToInputs(Dictionary<string, decimal> inputs)
+        //private bool AddItemsToInputs(Dictionary<string, decimal> inputs)
+        //{
+        //    foreach (KeyValuePair<string, decimal> inputItem in inputs)
+        //    {
+        //        Item? itemInput = FindItem(inputItem.Key);
+        //        if (itemInput != null)
+        //        {
+        //            decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
+        //            decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute;// * ratio;
+        //            if (adjustedInputThroughPutPerMinute > inputItem.Value)
+        //            {
+        //                adjustedInputThroughPutPerMinute = inputItem.Value;
+        //            }
+        //            //itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
+        //            //Add each item to a queue to add to other dependencies
+        //            InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
+        //        }
+        //    }
+        //    return true;
+        //}
+
+        //Taking an output item, find the inputs required to produce it
+        private bool ProcessOutputItem(ProductionItem item)
         {
-            foreach (KeyValuePair<string, decimal> inputItem in inputs)
+            if (item != null && item.Item != null)
             {
-                Item? itemInput = FindItem(inputItem.Key);
-                if (itemInput != null)
+                ProductionItems.Add(item);
+                decimal quantity = item.Quantity;
+                decimal total = item.Item.Recipes[0].ThroughPutPerMinute;
+                decimal ratio = quantity / total;
+                decimal inputThroughPutPerMinute = item.Item.Recipes[0].ThroughPutPerMinute;
+                //decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
+                //if (adjustedInputThroughPutPerMinute > item.Quantity)
+                //{
+                //    adjustedInputThroughPutPerMinute = item.Quantity;
+                //}
+                //InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
+                foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
                 {
-                    decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
-                    decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
-                    if (adjustedInputThroughPutPerMinute > quantity)
+                    Item? inputItem = FindItem(input.Key);
+                    if (inputItem != null)
                     {
-                        adjustedInputThroughPutPerMinute = quantity;
+                        ProcessOutputItem(new(inputItem, input.Value));
                     }
-                    itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
-                    //Add each item to a queue to add to other dependencies
-                    InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
+                    //InputQueue.Enqueue(new(input.Key, input.Value));
                 }
             }
             return true;
