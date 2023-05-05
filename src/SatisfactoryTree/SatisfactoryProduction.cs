@@ -124,7 +124,7 @@ namespace SatisfactoryTree
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
-                        ProcessOutputItem(new(inputItem, input.Value));
+                        ProcessOutputItem(new(inputItem, (inputThroughPutPerMinute * ratio) / inputItem.Recipes[0].ThroughPutPerMinute * inputItem.Recipes[0].ThroughPutPerMinute) );
                     }
                     //InputQueue.Enqueue(new(input.Key, input.Value));
                 }
