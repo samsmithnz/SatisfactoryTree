@@ -58,12 +58,12 @@ namespace SatisfactoryTree
                     //Increase the total quantity required
                     //productionItem.Quantity += inputToProcess.Value;
 
-                    //Update the building quantity required
-                    if (productionItem.Item != null)
-                    {
-                        decimal inputRatio = productionItem.Quantity / productionItem.Item.Recipes[0].ThroughPutPerMinute;
-                        productionItem.BuildingQuantityRequired = inputRatio;
-                    }
+                    ////Update the building quantity required
+                    //if (productionItem.Item != null)
+                    //{
+                    //    decimal inputRatio = productionItem.Quantity / productionItem.Item.Recipes[0].ThroughPutPerMinute;
+                    //    productionItem.BuildingQuantityRequired = inputRatio;
+                    //}
                 }
                 //else
                 //{
@@ -124,7 +124,9 @@ namespace SatisfactoryTree
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
-                        ProcessOutputItem(new(inputItem, (inputThroughPutPerMinute * ratio) / inputItem.Recipes[0].ThroughPutPerMinute * inputItem.Recipes[0].ThroughPutPerMinute) );
+                        ProductionItem newProductionItem = new(inputItem, (inputThroughPutPerMinute * ratio) / inputItem.Recipes[0].ThroughPutPerMinute * inputItem.Recipes[0].ThroughPutPerMinute);
+                        newProductionItem.BuildingQuantityRequired = item.Quantity / inputThroughPutPerMinute;
+                        ProcessOutputItem(newProductionItem);
                     }
                     //InputQueue.Enqueue(new(input.Key, input.Value));
                 }
