@@ -93,7 +93,7 @@ namespace SatisfactoryTree.Tests
     IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
     IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
     IronPlate_Item[30 Iron Plate]
-    IronIngot--""Iron Ingot<br>(30 units/min)""-->IronPlate
+    IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
     IronOre--""Iron Ore<br>(30 units/min)""-->IronIngot
     IronPlate--""Iron Plate<br>(30 units/min)""-->IronPlate_Item
 ";
@@ -115,6 +115,9 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual("Iron Ingot", results[1].Item?.Name);
             Assert.AreEqual(45, results[1].Quantity);
             Assert.AreEqual(1.5M, results[1].BuildingQuantityRequired);
+            Assert.AreEqual("Iron Ore", results[2].Item?.Name);
+            Assert.AreEqual(45, results[2].Quantity);
+            Assert.AreEqual(1.5M, results[2].BuildingQuantityRequired);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
         }
