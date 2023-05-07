@@ -49,11 +49,9 @@ namespace SatisfactoryTree.Tests
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
-    IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
-    IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
+    IronIngot[""x1 Smelter<br>(Iron Ingot)""]
     IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
-    IronIngot--""Iron Plate<br>(30 units/min)""-->IronPlate
-    IronOre--""Iron Ingot<br>(45 units/min)""-->IronIngot
+    IronOre--""Iron Ingot<br>(30 units/min)""-->IronIngot
 ";
 
             //Act
