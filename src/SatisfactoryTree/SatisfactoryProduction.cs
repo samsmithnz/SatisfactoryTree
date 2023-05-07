@@ -203,13 +203,17 @@ namespace SatisfactoryTree
             return items.Where(i => i.Name == name).FirstOrDefault();
         }
 
-        public string GetMermaidString()
+        public string GetMermaidString(ProductionItem? productionItem = null)
         {
             string direction = "LR";
             List<MermaidDotNet.Models.Node> nodes = new();
             foreach (ProductionItem item in ProductionItems)
             {
                 nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + item.BuildingQuantityRequired + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+            }
+            if (productionItem != null)
+            {
+                nodes.Add(new(productionItem.Item.Name.Replace(" ", "") + "_Item", productionItem.Item.Name));
             }
             //List<MermaidDotNet.Models.Node> nodes = new()
             //{
@@ -230,6 +234,10 @@ namespace SatisfactoryTree
                             );
                 }
             }
+                links.Add(new MermaidDotNet.Models.Link(
+                                    ProductionItems[0].Item.Name.Replace(" ", ""),
+                                    productionItem.Item.Name.Replace(" ", "") + "_Item",
+                                    '"' + productionItem.Item.Name + "<br>(" + productionItem.Quantity.ToString("0") + " units/min)" + '"'));
             //{
             //    new("node1", "node2", "12s"),
             //    new("node1", "node3", "3mins")

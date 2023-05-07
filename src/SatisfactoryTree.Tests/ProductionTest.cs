@@ -25,7 +25,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString();
+                mermaidResult = graph.GetMermaidString(startingItem);
             }
 
             //Assert
@@ -58,7 +58,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString();
+                mermaidResult = graph.GetMermaidString(startingItem);
             }
 
             //Assert
@@ -96,7 +96,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString();
+                mermaidResult = graph.GetMermaidString(startingItem);
             }
 
             //Assert
