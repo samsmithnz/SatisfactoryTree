@@ -224,7 +224,7 @@ namespace SatisfactoryTree
                         new MermaidDotNet.Models.Link(
                                 itemInput.Key.Replace(" ", ""),
                                 item.Item.Name.Replace(" ", ""),
-                                '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"')
+                                '"' + itemInput.Key + "<br>(" + itemInput.Value.ToString("0") + " units/min)" + '"')
                             );
                 }
             }
