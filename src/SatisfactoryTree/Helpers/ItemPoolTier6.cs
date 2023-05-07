@@ -17,7 +17,7 @@ namespace SatisfactoryTree.Helpers
                 Recipes =
                 {
                     new Recipe(1,
-                        120, // Assuming normal node
+                        60, // Assuming normal node, MK1 miner
                         new(),
                         new()
                         {
