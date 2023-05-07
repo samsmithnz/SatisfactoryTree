@@ -123,7 +123,6 @@ namespace SatisfactoryTree
                         newProductionItem.BuildingQuantityRequired = ratio;
                         ProcessOutputItem(newProductionItem);
                     }
-                    //InputQueue.Enqueue(new(input.Key, input.Value));
                 }
             }
             return true;
