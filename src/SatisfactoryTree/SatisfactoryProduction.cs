@@ -110,7 +110,7 @@ namespace SatisfactoryTree
             {
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
                 ProductionItems.Add(item);
-                decimal quantity = item.Quantity;
+                //decimal quantity = item.Quantity;
                 //decimal total = item.Item.Recipes[0].ThroughPutPerMinute;
                 //decimal ratio = quantity / total;
                 //decimal inputThroughPutPerMinute = item.Item.Recipes[0].ThroughPutPerMinute;
