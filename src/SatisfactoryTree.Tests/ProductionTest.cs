@@ -80,6 +80,7 @@ namespace SatisfactoryTree.Tests
             Assert.IsNotNull(startingItem);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(results[0].Item);
+            Assert.AreEqual("Iron Plate", results[0].Item?.Name);
             Assert.AreEqual(30, results[0].Quantity); 
             Assert.AreEqual(1.5M, results[0].BuildingQuantityRequired);
             Assert.AreEqual("Iron Ingot", results[1].Item?.Name);
