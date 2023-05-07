@@ -213,14 +213,8 @@ namespace SatisfactoryTree
             }
             if (productionItem != null)
             {
-                nodes.Add(new(productionItem.Item.Name.Replace(" ", "") + "_Item", productionItem.Item.Name));
+                nodes.Add(new(productionItem.Item.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString() + " " + productionItem.Item.Name));
             }
-            //List<MermaidDotNet.Models.Node> nodes = new()
-            //{
-            //    new("node1", "This is node 1"),
-            //    new("node2", "This is node 2"),
-            //    new("node3", "This is node 3")
-            //};
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
             {
@@ -234,14 +228,13 @@ namespace SatisfactoryTree
                             );
                 }
             }
+            if (productionItem != null)
+            {
                 links.Add(new MermaidDotNet.Models.Link(
                                     ProductionItems[0].Item.Name.Replace(" ", ""),
                                     productionItem.Item.Name.Replace(" ", "") + "_Item",
                                     '"' + productionItem.Item.Name + "<br>(" + productionItem.Quantity.ToString("0") + " units/min)" + '"'));
-            //{
-            //    new("node1", "node2", "12s"),
-            //    new("node1", "node3", "3mins")
-            //};
+            }
             Flowchart flowchart = new(direction, nodes, links);
             string result = flowchart.CalculateFlowchart();
 
