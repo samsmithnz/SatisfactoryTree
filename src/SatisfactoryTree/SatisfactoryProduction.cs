@@ -1,4 +1,5 @@
-﻿using SatisfactoryTree.Helpers;
+﻿using MermaidDotNet;
+using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
 
 namespace SatisfactoryTree
@@ -200,6 +201,38 @@ namespace SatisfactoryTree
         private static Item? FindItem(List<Item> items, string name)
         {
             return items.Where(i => i.Name == name).FirstOrDefault();
+        }
+
+        public string GetMermaidString()
+        {
+            string direction = "LR";
+            List<MermaidDotNet.Models.Node> nodes = new();
+            foreach (ProductionItem item in ProductionItems)
+            {
+                nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + item.BuildingQuantityRequired + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+            }
+            //List<MermaidDotNet.Models.Node> nodes = new()
+            //{
+            //    new("node1", "This is node 1"),
+            //    new("node2", "This is node 2"),
+            //    new("node3", "This is node 3")
+            //};
+            List<MermaidDotNet.Models.Link> links = new();
+            foreach (ProductionItem item in ProductionItems)
+            {
+                foreach (KeyValuePair<string, decimal> itemInput in item.Item.Recipes[0].Inputs)
+                {
+                    links.Add(new MermaidDotNet.Models.Link(item.Item.Name.Replace(" ", ""), itemInput.Key.Replace(" ", ""), '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"'));
+                }
+            }
+            //{
+            //    new("node1", "node2", "12s"),
+            //    new("node1", "node3", "3mins")
+            //};
+            Flowchart flowchart = new(direction, nodes, links);
+            string result = flowchart.CalculateFlowchart();
+
+            return result;
         }
 
     }
