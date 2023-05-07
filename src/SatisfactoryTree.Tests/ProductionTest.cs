@@ -16,13 +16,20 @@ namespace SatisfactoryTree.Tests
             decimal quantity = 90;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
             List<ProductionItem> results = new();
-            string mermaid = "";
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
+    IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
+    IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
+    IronIngot--""Iron Plate<br>(30 units/min)""-->IronPlate
+    IronOre--""Iron Ingot<br>(45 units/min)""-->IronIngot
+";
 
             //Act
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaid = graph.GetMermaidString();
+                mermaidResult = graph.GetMermaidString();
             }
 
             //Assert
@@ -31,7 +38,8 @@ namespace SatisfactoryTree.Tests
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(90, results[0].Quantity);
             Assert.AreEqual(1.5M, results[0].BuildingQuantityRequired);
-            Assert.IsNotNull(mermaid);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
         }
 
         [TestMethod]
@@ -43,13 +51,20 @@ namespace SatisfactoryTree.Tests
             decimal quantity = 30;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
             List<ProductionItem> results = new();
-            string mermaid = "";
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
+    IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
+    IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
+    IronIngot--""Iron Plate<br>(30 units/min)""-->IronPlate
+    IronOre--""Iron Ingot<br>(45 units/min)""-->IronIngot
+";
 
             //Act
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaid = graph.GetMermaidString();
+                mermaidResult = graph.GetMermaidString();
             }
 
             //Assert
@@ -61,7 +76,8 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual("Iron Ore", results[1].Item?.Name);
             Assert.AreEqual(30, results[1].Quantity); 
             Assert.AreEqual(0.5M, results[1].BuildingQuantityRequired);
-            Assert.IsNotNull(mermaid);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
         }
 
         [TestMethod]
@@ -73,13 +89,20 @@ namespace SatisfactoryTree.Tests
             decimal quantity = 30;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
             List<ProductionItem> results = new();
-            string mermaid = "";
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
+    IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
+    IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
+    IronIngot--""Iron Plate<br>(30 units/min)""-->IronPlate
+    IronOre--""Iron Ingot<br>(45 units/min)""-->IronIngot
+";
 
             //Act
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaid = graph.GetMermaidString();
+                mermaidResult = graph.GetMermaidString();
             }
 
             //Assert
@@ -92,7 +115,8 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual("Iron Ingot", results[1].Item?.Name);
             Assert.AreEqual(45, results[1].Quantity);
             Assert.AreEqual(1.5M, results[1].BuildingQuantityRequired);
-            Assert.IsNotNull(mermaid);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
         }
 
 

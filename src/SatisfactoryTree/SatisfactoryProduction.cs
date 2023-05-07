@@ -222,7 +222,12 @@ namespace SatisfactoryTree
             {
                 foreach (KeyValuePair<string, decimal> itemInput in item.Item.Recipes[0].Inputs)
                 {
-                    links.Add(new MermaidDotNet.Models.Link(item.Item.Name.Replace(" ", ""), itemInput.Key.Replace(" ", ""), '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"'));
+                    links.Add(
+                        new MermaidDotNet.Models.Link(
+                                itemInput.Key.Replace(" ", ""),
+                                item.Item.Name.Replace(" ", ""),
+                                '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"')
+                            );
                 }
             }
             //{
