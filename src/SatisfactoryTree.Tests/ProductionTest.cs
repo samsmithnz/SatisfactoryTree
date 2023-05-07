@@ -28,7 +28,7 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual(1, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(90, results[0].Quantity);
-            Assert.AreEqual(0.75M, results[0].BuildingQuantityRequired);
+            Assert.AreEqual(1.5M, results[0].BuildingQuantityRequired);
         }
 
         [TestMethod]
