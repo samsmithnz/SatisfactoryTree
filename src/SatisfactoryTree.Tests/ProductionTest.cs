@@ -94,7 +94,7 @@ namespace SatisfactoryTree.Tests
     IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
     IronPlate_Item[30 Iron Plate]
     IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
-    IronOre--""Iron Ore<br>(30 units/min)""-->IronIngot
+    IronOre--""Iron Ore<br>(45 units/min)""-->IronIngot
     IronPlate--""Iron Plate<br>(30 units/min)""-->IronPlate_Item
 ";
 
