@@ -119,8 +119,10 @@ namespace SatisfactoryTree
                         decimal inputQuantity = input.Value;
                         decimal ratio = inputQuantity / outputQuantity;
 
-                        ProductionItem newProductionItem = new(inputItem, input.Value * ratio);
-                        newProductionItem.BuildingQuantityRequired = ratio;
+                        ProductionItem newProductionItem = new(inputItem, input.Value * ratio)
+                        {
+                            BuildingQuantityRequired = ratio
+                        };
                         ProcessOutputItem(newProductionItem);
                     }
                 }
@@ -138,7 +140,7 @@ namespace SatisfactoryTree
                 foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
                 {
                     //get the input item
-                    ProductionItem? inputItem = new ProductionItem(FindItem(recipeInput.Key), recipeInput.Value);
+                    ProductionItem? inputItem = new(FindItem(recipeInput.Key), recipeInput.Value);
                     if (inputItem != null && inputItem.Item != null)
                     {
                         inputItem.Quantity = recipeInput.Value / inputItem.Item.Recipes[0].ThroughPutPerMinute;
