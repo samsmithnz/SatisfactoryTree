@@ -218,7 +218,7 @@ namespace SatisfactoryTree
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
             {
-                foreach (KeyValuePair<string, decimal> itemInput in item.Item.Recipes[0].Inputs)
+                foreach (KeyValuePair<string, decimal> itemInput in item.Dependencies)
                 {
                     links.Add(
                         new MermaidDotNet.Models.Link(
