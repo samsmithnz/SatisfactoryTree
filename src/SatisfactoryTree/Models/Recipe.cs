@@ -26,6 +26,7 @@
         public ManufactoringBuildingType ManufactoringBuilding { get; set; }
         public ManufactoringMethodType ManufactoringMethod { get; set; }
         public bool PrimaryMethodOfManufacture { get; set; }
+
     }
 
     public enum ManufactoringMethodType
