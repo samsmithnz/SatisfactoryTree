@@ -53,7 +53,9 @@ namespace SatisfactoryTree.Tests
             string expectedResult = @"flowchart LR
     IronIngot[""x1 Smelter<br>(Iron Ingot)""]
     IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
+    IronIngot_Item[30 Iron Ingot]
     IronOre--""Iron Ingot<br>(30 units/min)""-->IronIngot
+    IronIngot--""Iron Ingot<br>(30 units/min)""-->IronIngot_Item
 ";
 
             //Act
