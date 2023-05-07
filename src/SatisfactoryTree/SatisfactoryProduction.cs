@@ -46,38 +46,38 @@ namespace SatisfactoryTree
                 //ProductionItems.Add(itemGoal);
             }
 
-            //while (InputQueue.Count > 0)
+            ////while (InputQueue.Count > 0)
+            ////{
+            //foreach (ProductionItem productionItem in ProductionItems)
             //{
-            foreach (ProductionItem productionItem in ProductionItems)
-            {
-                //KeyValuePair<string, decimal> inputToProcess = InputQueue.Dequeue();
-                ////See if it exists in the production item list already
-                //ProductionItem? productionItem = ProductionItems.Where(i => i.Item?.Name == inputToProcess.Key).FirstOrDefault();
-                if (productionItem != null)
-                {
-                    //Increase the total quantity required
-                    //productionItem.Quantity += inputToProcess.Value;
+            //    //KeyValuePair<string, decimal> inputToProcess = InputQueue.Dequeue();
+            //    ////See if it exists in the production item list already
+            //    //ProductionItem? productionItem = ProductionItems.Where(i => i.Item?.Name == inputToProcess.Key).FirstOrDefault();
+            //    if (productionItem != null)
+            //    {
+            //        //Increase the total quantity required
+            //        //productionItem.Quantity += inputToProcess.Value;
 
-                    ////Update the building quantity required
-                    //if (productionItem.Item != null)
-                    //{
-                    //    decimal inputRatio = productionItem.Quantity / productionItem.Item.Recipes[0].ThroughPutPerMinute;
-                    //    productionItem.BuildingQuantityRequired = inputRatio;
-                    //}
-                }
-                //else
-                //{
-                //    //Add the new production item required
-                //    ProductionItem? inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
-                //    if (inputProductionItem != null && inputProductionItem.Item != null)
-                //    {
-                //        decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
-                //        inputProductionItem.BuildingQuantityRequired = inputRatio;
-                //        ProductionItems.Add(inputProductionItem);
-                //    }
-                //}
-                //}
-            }
+            //        ////Update the building quantity required
+            //        //if (productionItem.Item != null)
+            //        //{
+            //        //    decimal inputRatio = productionItem.Quantity / productionItem.Item.Recipes[0].ThroughPutPerMinute;
+            //        //    productionItem.BuildingQuantityRequired = inputRatio;
+            //        //}
+            //    }
+            //    //else
+            //    //{
+            //    //    //Add the new production item required
+            //    //    ProductionItem? inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
+            //    //    if (inputProductionItem != null && inputProductionItem.Item != null)
+            //    //    {
+            //    //        decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
+            //    //        inputProductionItem.BuildingQuantityRequired = inputRatio;
+            //    //        ProductionItems.Add(inputProductionItem);
+            //    //    }
+            //    //}
+            //    //}
+            //}
 
             return ProductionItems;
         }
@@ -110,16 +110,6 @@ namespace SatisfactoryTree
             {
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
                 ProductionItems.Add(item);
-                //decimal quantity = item.Quantity;
-                //decimal total = item.Item.Recipes[0].ThroughPutPerMinute;
-                //decimal ratio = quantity / total;
-                //decimal inputThroughPutPerMinute = item.Item.Recipes[0].ThroughPutPerMinute;
-                //decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
-                //if (adjustedInputThroughPutPerMinute > item.Quantity)
-                //{
-                //    adjustedInputThroughPutPerMinute = item.Quantity;
-                //}
-                //InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
                 foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
                 {
                     Item? inputItem = FindItem(input.Key);
@@ -127,7 +117,7 @@ namespace SatisfactoryTree
                     {
                         decimal outputQuantity = item.Item.Recipes[0].Outputs[item.Item.Name];
                         decimal inputQuantity = input.Value;
-                        decimal ratio = inputQuantity/outputQuantity ;
+                        decimal ratio = inputQuantity / outputQuantity;
 
                         ProductionItem newProductionItem = new(inputItem, input.Value * ratio);
                         newProductionItem.BuildingQuantityRequired = ratio;
