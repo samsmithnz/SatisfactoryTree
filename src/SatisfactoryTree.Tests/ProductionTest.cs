@@ -92,8 +92,10 @@ namespace SatisfactoryTree.Tests
     IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
     IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
     IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
-    IronIngot--""Iron Plate<br>(30 units/min)""-->IronPlate
-    IronOre--""Iron Ingot<br>(45 units/min)""-->IronIngot
+    IronPlate_Item[30 Iron Plate]
+    IronIngot--""Iron Ingot<br>(30 units/min)""-->IronPlate
+    IronOre--""Iron Ore<br>(30 units/min)""-->IronIngot
+    IronPlate--""Iron Plate<br>(30 units/min)""-->IronPlate_Item
 ";
 
             //Act
