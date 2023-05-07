@@ -108,12 +108,12 @@ namespace SatisfactoryTree
         {
             if (item != null && item.Item != null)
             {
-                item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].ThroughPutPerMinute;
+                item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
                 ProductionItems.Add(item);
                 decimal quantity = item.Quantity;
-                decimal total = item.Item.Recipes[0].ThroughPutPerMinute;
-                decimal ratio = quantity / total;
-                decimal inputThroughPutPerMinute = item.Item.Recipes[0].ThroughPutPerMinute;
+                //decimal total = item.Item.Recipes[0].ThroughPutPerMinute;
+                //decimal ratio = quantity / total;
+                //decimal inputThroughPutPerMinute = item.Item.Recipes[0].ThroughPutPerMinute;
                 //decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
                 //if (adjustedInputThroughPutPerMinute > item.Quantity)
                 //{
@@ -125,8 +125,8 @@ namespace SatisfactoryTree
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
-                        ProductionItem newProductionItem = new(inputItem, (inputThroughPutPerMinute * ratio) / inputItem.Recipes[0].ThroughPutPerMinute * inputItem.Recipes[0].ThroughPutPerMinute);
-                        newProductionItem.BuildingQuantityRequired = item.Quantity / inputThroughPutPerMinute;
+                        ProductionItem newProductionItem = new(inputItem, input.Value);
+                        newProductionItem.BuildingQuantityRequired = input.Value / inputItem.Recipes[0].Outputs[input.Key];
                         ProcessOutputItem(newProductionItem);
                     }
                     //InputQueue.Enqueue(new(input.Key, input.Value));
