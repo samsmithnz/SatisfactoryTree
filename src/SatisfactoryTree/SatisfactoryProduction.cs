@@ -24,28 +24,7 @@ namespace SatisfactoryTree
             InputQueue = new();
             if (itemGoal != null && itemGoal.Item != null)
             {
-                ProcessOutputItem(itemGoal);
-                //decimal quantity = itemGoal.Quantity;
-                //decimal total = itemGoal.Item.Recipes[0].ThroughPutPerMinute;
-                //decimal ratio = quantity / total;
-                //itemGoal.BuildingQuantityRequired = ratio;
-                //foreach (KeyValuePair<string, decimal> inputItem in itemGoal.Item.Recipes[0].Inputs)
-                //{
-                //    Item? itemInput = FindItem(inputItem.Key);
-                //    if (itemInput != null)
-                //    {
-                //        decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
-                //        decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute * ratio;
-                //        if (adjustedInputThroughPutPerMinute > quantity)
-                //        {
-                //            adjustedInputThroughPutPerMinute = quantity;
-                //        }
-                //        itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
-                //        //Add each item to a queue to add to other dependencies
-                //        InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
-                //    }
-                //}
-                //ProductionItems.Add(itemGoal);
+                ProcessOutputItem(itemGoal);                
             }
 
             ////while (InputQueue.Count > 0)
