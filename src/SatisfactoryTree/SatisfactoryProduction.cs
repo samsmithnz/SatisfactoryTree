@@ -123,10 +123,6 @@ namespace SatisfactoryTree
                 }
                 foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
                 {
-                    if (input.Key == "Iron Ore")
-                    {
-                        int i = 0;
-                    }
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
@@ -138,14 +134,7 @@ namespace SatisfactoryTree
                         decimal inputQuantity = input.Value;
                         decimal ratio = item.Quantity / outputQuantity;
                         decimal newQuantity = inputQuantity * ratio;
-                        if (item.Dependencies.Any(p => p.Key == input.Key))
-                        {
-                            item.Dependencies[input.Key] += newQuantity;
-                        }
-                        else
-                        {
-                            item.Dependencies.Add(input.Key, newQuantity);
-                        }
+                        item.Dependencies.Add(input.Key, newQuantity);
                         ProductionItem newProductionItem = new(inputItem, newQuantity)
                         {
                             BuildingQuantityRequired = ratio
