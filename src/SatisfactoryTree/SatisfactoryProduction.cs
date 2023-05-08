@@ -163,12 +163,7 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    string buildingQuantity = item.BuildingQuantityRequired.ToString("0.0");
-                    if ((int)item.BuildingQuantityRequired == item.BuildingQuantityRequired)
-                    {
-                        buildingQuantity = item.BuildingQuantityRequired.ToString("0");
-                    }
-                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + buildingQuantity + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
                 }
             }
             if (productionItem != null && productionItem.Item != null)
@@ -217,6 +212,18 @@ namespace SatisfactoryTree
             string result = flowchart.CalculateFlowchart();
 
             return result;
+        }
+
+        private static string RoundUpAndFormat(decimal value)
+        {
+            if ((int)value == value)
+            {
+                return (Math.Ceiling(value * 10) / 10).ToString("0");
+            }
+            else
+            {
+                return (Math.Ceiling(value * 10) / 10).ToString("0.0");
+            }
         }
 
     }
