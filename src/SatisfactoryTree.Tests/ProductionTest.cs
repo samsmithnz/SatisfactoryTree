@@ -242,6 +242,34 @@ namespace SatisfactoryTree.Tests
 
 
         [TestMethod]
+        public void SteelIngotsProductionTest()
+        {
+            //Arrange
+            SatisfactoryProduction graph = new();
+            string itemName = "Steel Ingot";
+            decimal quantity = 1550;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+";
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                mermaidResult = graph.GetMermaidString(startingItem);
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(15, results.Count);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
+        }
+
+
+        [TestMethod]
         public void HeavyModularFramesProductionTest()
         {
             //Arrange
