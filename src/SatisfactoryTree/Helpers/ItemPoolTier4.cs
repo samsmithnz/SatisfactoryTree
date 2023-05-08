@@ -116,14 +116,14 @@ namespace SatisfactoryTree.Helpers
                         2,
                         new()
                         {
-                            { "Modular Frame", 5 },
-                            { "Steel Pipe", 15 },
-                            { "Encased Industrial Beam", 5 },
-                            { "Screw", 100 }
+                            { "Modular Frame", 10 },
+                            { "Steel Pipe", 30 },
+                            { "Encased Industrial Beam", 10 },
+                            { "Screw", 200 }
                         },
                         new()
                         {
-                            { "Heavy Modular Frame", 1 }
+                            { "Heavy Modular Frame", 2 }
                         },
                         BuildingType.Manufacturer)
                 }
