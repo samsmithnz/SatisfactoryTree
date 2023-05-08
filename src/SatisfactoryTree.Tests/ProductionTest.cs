@@ -41,10 +41,48 @@ namespace SatisfactoryTree.Tests
         }
 
         [TestMethod]
-        public void IronIngotProductionTest()
+        public void IronIngotHalfProductionTest()
         {
             //Arrange
             SatisfactoryProduction graph = new(); 
+            string itemName = "Iron Ingot";
+            decimal quantity = 15;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    IronIngot[""x0.5 Smelter<br>(Iron Ingot)""]
+    IronOre[""x0.25 MiningMachine<br>(Iron Ore)""]
+    IronIngot_Item[15 Iron Ingot]
+    IronOre--""Iron Ore<br>(15 units/min)""-->IronIngot
+    IronIngot--""Iron Ingot<br>(15 units/min)""-->IronIngot_Item
+";
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                mermaidResult = graph.GetMermaidString(startingItem);
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(2, results.Count);
+            Assert.IsNotNull(results[0].Item);
+            Assert.AreEqual(30, results[0].Quantity);
+            Assert.AreEqual(1M, results[0].BuildingQuantityRequired);
+            Assert.AreEqual("Iron Ore", results[1].Item?.Name);
+            Assert.AreEqual(30, results[1].Quantity); 
+            Assert.AreEqual(0.5M, results[1].BuildingQuantityRequired);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
+        }
+
+        [TestMethod]
+        public void IronIngotNormalProductionTest()
+        {
+            //Arrange
+            SatisfactoryProduction graph = new();
             string itemName = "Iron Ingot";
             decimal quantity = 30;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
@@ -72,7 +110,45 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual(30, results[0].Quantity);
             Assert.AreEqual(1M, results[0].BuildingQuantityRequired);
             Assert.AreEqual("Iron Ore", results[1].Item?.Name);
-            Assert.AreEqual(30, results[1].Quantity); 
+            Assert.AreEqual(30, results[1].Quantity);
+            Assert.AreEqual(0.5M, results[1].BuildingQuantityRequired);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
+        }
+
+        [TestMethod]
+        public void IronIngotDoubleProductionTest()
+        {
+            //Arrange
+            SatisfactoryProduction graph = new();
+            string itemName = "Iron Ingot";
+            decimal quantity = 60;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    IronIngot[""x2 Smelter<br>(Iron Ingot)""]
+    IronOre[""x1.0 MiningMachine<br>(Iron Ore)""]
+    IronIngot_Item[60 Iron Ingot]
+    IronOre--""Iron Ore<br>(60 units/min)""-->IronIngot
+    IronIngot--""Iron Ingot<br>(60 units/min)""-->IronIngot_Item
+";
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                mermaidResult = graph.GetMermaidString(startingItem);
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(2, results.Count);
+            Assert.IsNotNull(results[0].Item);
+            Assert.AreEqual(30, results[0].Quantity);
+            Assert.AreEqual(1M, results[0].BuildingQuantityRequired);
+            Assert.AreEqual("Iron Ore", results[1].Item?.Name);
+            Assert.AreEqual(30, results[1].Quantity);
             Assert.AreEqual(0.5M, results[1].BuildingQuantityRequired);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
