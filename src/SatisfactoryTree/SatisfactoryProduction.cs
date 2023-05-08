@@ -23,10 +23,10 @@ namespace SatisfactoryTree
             InputQueue = new();
             if (itemGoal != null && itemGoal.Item != null)
             {
-                ProcessOutputItem(itemGoal);                
-            }            
+                ProcessOutputItem(itemGoal);
+            }
             return ProductionItems;
-        }       
+        }
 
         //Taking an output item, find the inputs required to produce it
         private bool ProcessOutputItem(ProductionItem item)
@@ -161,11 +161,14 @@ namespace SatisfactoryTree
             List<MermaidDotNet.Models.Node> nodes = new();
             foreach (ProductionItem item in ProductionItems)
             {
-                nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + item.BuildingQuantityRequired + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                if (item != null && item.Item != null)
+                {
+                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + item.BuildingQuantityRequired + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                }
             }
             if (productionItem != null)
             {
-                nodes.Add(new(productionItem.Item.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString() + " " + productionItem.Item.Name));
+                nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString() + " " + productionItem.Item.Name));
             }
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
