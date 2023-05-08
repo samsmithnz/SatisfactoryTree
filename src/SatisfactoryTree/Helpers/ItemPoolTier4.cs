@@ -88,8 +88,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(24,
-                        2.5m,
+                    new Recipe(
                         new()
                         {
                             { "Stator", 2.5m },
@@ -97,7 +96,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Automated Wiring", 1 }
+                            { "Automated Wiring", 2.5M }
                         },
                         BuildingType.Assembler)
                 }
