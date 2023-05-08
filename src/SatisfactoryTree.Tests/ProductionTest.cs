@@ -210,13 +210,20 @@ namespace SatisfactoryTree.Tests
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
-    IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
-    IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
-    IronOre[""x0.75 MiningMachine<br>(Iron Ore)""]
-    IronPlate_Item[30 Iron Plate]
-    IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
-    IronOre--""Iron Ore<br>(45 units/min)""-->IronIngot
-    IronPlate--""Iron Plate<br>(30 units/min)""-->IronPlate_Item
+    ReinforcedIronPlate[""x2.4 Assembler<br>(Reinforced Iron Plate)""]
+    IronPlate[""x3.6 Constructor<br>(Iron Plate)""]
+    IronIngot[""x4.8 Smelter<br>(Iron Ingot)""]
+    IronOre[""x2.4 MiningMachine<br>(Iron Ore)""]
+    Screw[""x3.6 Constructor<br>(Screw)""]
+    IronRod[""x2.4 Constructor<br>(Iron Rod)""]
+    ReinforcedIronPlate_Item[12 Reinforced Iron Plate]
+    IronPlate--""Iron Plate<br>(72 units/min)""-->ReinforcedIronPlate
+    Screw--""Screw<br>(144 units/min)""-->ReinforcedIronPlate
+    IronIngot--""Iron Ingot<br>(108 units/min)""-->IronPlate
+    IronOre--""Iron Ore<br>(108 units/min)""-->IronIngot
+    IronRod--""Iron Rod<br>(36 units/min)""-->Screw
+    IronIngot--""Iron Ingot<br>(36 units/min)""-->IronRod
+    ReinforcedIronPlate--""Reinforced Iron Plate<br>(12 units/min)""-->ReinforcedIronPlate_Item
 ";
 
             //Act
