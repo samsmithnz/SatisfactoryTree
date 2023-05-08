@@ -112,8 +112,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(30,
-                        2,
+                    new Recipe(
                         new()
                         {
                             { "Modular Frame", 10 },
