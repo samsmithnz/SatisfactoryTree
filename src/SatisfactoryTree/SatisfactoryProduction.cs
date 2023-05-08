@@ -108,14 +108,22 @@ namespace SatisfactoryTree
         //Taking an output item, find the inputs required to produce it
         private bool ProcessOutputItem(ProductionItem item)
         {
+            ProductionItem? match = null;
             if (item != null && item.Item != null)
             {
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
                 if (ProductionItems.Any(p => p.Item.Name == item.Item.Name))
                 {
-                    ProductionItem match = ProductionItems.FirstOrDefault(p => p.Item.Name == item.Item.Name);
-                    match.Quantity += item.Quantity;
-                    match.BuildingQuantityRequired += item.BuildingQuantityRequired;
+                    if (item.Item.Name == "Iron Ingot")
+                    {
+                        int i = 0;
+                    }
+                    match = ProductionItems.FirstOrDefault(p => p.Item.Name == item.Item.Name);
+                    if (match != null)
+                    {
+                        match.Quantity += item.Quantity;
+                        match.BuildingQuantityRequired += item.BuildingQuantityRequired;
+                    }
                 }
                 else
                 {
@@ -134,7 +142,17 @@ namespace SatisfactoryTree
                         decimal inputQuantity = input.Value;
                         decimal ratio = item.Quantity / outputQuantity;
                         decimal newQuantity = inputQuantity * ratio;
-                        item.Dependencies.Add(input.Key, newQuantity);
+                        if (match != null)
+                        {
+                            foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
+                            {
+                                match.Dependencies.Add(dependency.Key, dependency.Value);
+                            }
+                        }
+                        else
+                        {
+                            item.Dependencies.Add(input.Key, newQuantity);
+                        }
                         ProductionItem newProductionItem = new(inputItem, newQuantity)
                         {
                             BuildingQuantityRequired = ratio
