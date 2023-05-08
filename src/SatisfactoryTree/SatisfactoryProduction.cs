@@ -168,7 +168,7 @@ namespace SatisfactoryTree
             }
             if (productionItem != null && productionItem.Item != null)
             {
-                nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString() + " " + productionItem.Item.Name));
+                nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString() + " " + productionItem.Item?.Name));
             }
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
