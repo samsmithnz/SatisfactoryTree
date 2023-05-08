@@ -35,9 +35,9 @@ namespace SatisfactoryTree
             if (item != null && item.Item != null)
             {
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
-                if (ProductionItems.Any(p => p.Item.Name == item.Item.Name))
+                if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
                 {
-                    match = ProductionItems.FirstOrDefault(p => p.Item.Name == item.Item.Name);
+                    match = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
                     if (match != null)
                     {
                         match.Quantity += item.Quantity;
