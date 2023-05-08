@@ -175,12 +175,15 @@ namespace SatisfactoryTree
             {
                 foreach (KeyValuePair<string, decimal> itemInput in item.Dependencies)
                 {
-                    links.Add(
+                    if (item != null && item.Item != null)
+                    {
+                        links.Add(
                         new MermaidDotNet.Models.Link(
                                 itemInput.Key.Replace(" ", ""),
                                 item.Item.Name.Replace(" ", ""),
                                 '"' + itemInput.Key + "<br>(" + itemInput.Value.ToString("0") + " units/min)" + '"')
                             );
+                    }
                 }
             }
             if (productionItem != null)
