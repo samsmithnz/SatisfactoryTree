@@ -8,7 +8,7 @@
 
 
 A POC project to graph [Satisfactory](https://store.steampowered.com/app/526870/Satisfactory/) items with [D3](https://d3js.org/) [force directed graphs](https://en.wikipedia.org/wiki/Force-directed_graph_drawing). 
-Sister project to [http://github.com/samsmithnz/SatisfactoryTree](http://github.com/samsmithnz/SatisfactoryTree)
+Sister project to [http://github.com/samsmithnz/SatisfactoryPlan](http://github.com/samsmithnz/SatisfactoryPlan)
 
 <!--This is very rough. At the very beginning of the game - it looks like this:
 
