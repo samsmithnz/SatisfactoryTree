@@ -1,8 +1,8 @@
-﻿using DSPTree.Models;
-using BuildingType = DSPTree.Models.ManufactoringBuildingType;
-//using MethodType = DSPTree.Models.ManufactoringMethodType;
+﻿using SatisfactoryTree.Models;
+using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
+//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
 
-namespace DSPTree.Helpers
+namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier2
     {
@@ -16,15 +16,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        10,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Ingot", 2 }
+                            { "Copper Ingot", 20 }
                         },
                         new()
                         {
-                            { "Copper Sheet", 1 }
+                            { "Copper Sheet", 10 }
                         },
                         BuildingType.Constructor)
                 }
@@ -40,16 +39,15 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(15,
-                        4,
+                    new Recipe(
                         new()
                         {
-                            { "Iron Rod", 5 },
-                            { "Screw", 25 }
+                            { "Iron Rod", 20 },
+                            { "Screw", 100 }
                         },
                         new()
                         {
-                            { "Rotor", 1 }
+                            { "Rotor", 4 }
                         },
                         BuildingType.Assembler)
                 }
@@ -65,8 +63,7 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(60,
-                        2,
+                    new Recipe(
                         new()
                         {
                             { "Reinforced Iron Plate", 3 },
@@ -74,7 +71,7 @@ namespace DSPTree.Helpers
                         },
                         new()
                         {
-                            { "Modular Frame", 1 }
+                            { "Modular Frame", 2 }
                         },
                         BuildingType.Assembler)
                 }
@@ -90,16 +87,15 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(30,
-                        2,
+                    new Recipe(
                         new()
                         {
-                            { "Reinforced Iron Plate", 1 },
-                            { "Rotor", 1 }
+                            { "Reinforced Iron Plate", 2 },
+                            { "Rotor", 2 }
                         },
                         new()
                         {
-                            { "Smart Plating", 1 }
+                            { "Smart Plating", 2 }
                         },
                         BuildingType.Assembler)
                 }

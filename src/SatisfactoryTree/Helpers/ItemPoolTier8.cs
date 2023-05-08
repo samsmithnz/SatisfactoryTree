@@ -1,8 +1,8 @@
-﻿using DSPTree.Models;
-using BuildingType = DSPTree.Models.ManufactoringBuildingType;
-//using MethodType = DSPTree.Models.ManufactoringMethodType;
+﻿using SatisfactoryTree.Models;
+using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
+//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
 
-namespace DSPTree.Helpers
+namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier8
     {
@@ -18,7 +18,7 @@ namespace DSPTree.Helpers
                 Recipes =
                 {
                     new Recipe(1,
-                        60,
+                        60, // Assuming normal node, MK1 miner
                         new(),
                         new()
                         {

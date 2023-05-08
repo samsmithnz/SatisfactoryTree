@@ -1,7 +1,7 @@
-﻿using DSPTree.Models;
-using BuildingType = DSPTree.Models.ManufactoringBuildingType;
+﻿using SatisfactoryTree.Models;
+using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
-namespace DSPTree.Helpers
+namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier1
     {
@@ -14,12 +14,11 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Iron Ore", 1 }
+                            { "Iron Ore", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -35,15 +34,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        30,
+                    new Recipe(
                         new()
                         {
-                            { "Iron Ore", 1 }
+                            { "Iron Ore", 30 }
                         },
                         new()
                         {
-                            { "Iron Ingot", 1 }
+                            { "Iron Ingot", 30 }
                         },
                         BuildingType.Smelter)
                 }
@@ -59,15 +57,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Iron Ingot", 3 }
+                            { "Iron Ingot", 30 }
                         },
                         new()
                         {
-                            { "Iron Plate", 2 }
+                            { "Iron Plate", 20 }
                         },
                         BuildingType.Constructor)
                 }
@@ -82,15 +79,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        15,
+                    new Recipe(
                         new()
                         {
-                            { "Iron Ingot", 1 }
+                            { "Iron Ingot", 15 }
                         },
                         new()
                         {
-                            { "Iron Rod", 1 }
+                            { "Iron Rod", 15 }
                         },
                         BuildingType.Constructor)
                 }
@@ -106,12 +102,11 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Copper Ore", 1 }
+                            { "Copper Ore", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -127,15 +122,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        30,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Ore", 1 }
+                            { "Copper Ore", 30 }
                         },
                         new()
                         {
-                            { "Copper Ingot", 1 }
+                            { "Copper Ingot",30 }
                         },
                         BuildingType.Smelter)
                 }
@@ -151,15 +145,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        30,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Ingot", 1 }
+                            { "Copper Ingot", 15 }
                         },
                         new()
                         {
-                            { "Wire", 2 }
+                            { "Wire", 30 }
                         },
                         BuildingType.Constructor)
                 }
@@ -175,15 +168,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        30,
+                    new Recipe(
                         new()
                         {
-                            { "Wire", 2 }
+                            { "Wire", 60 }
                         },
                         new()
                         {
-                            { "Cable", 1 }
+                            { "Cable", 30 }
                         },
                         BuildingType.Constructor)
                 }
@@ -199,12 +191,11 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Limestone", 1 }
+                            { "Limestone", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -220,15 +211,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        15,
+                    new Recipe(
                         new()
                         {
-                            { "Limestone", 3 }
+                            { "Limestone", 45 }
                         },
                         new()
                         {
-                            { "Concrete", 1 }
+                            { "Concrete", 15 }
                         },
                         BuildingType.Constructor)
                 }
@@ -244,15 +234,14 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        40,
+                    new Recipe(
                         new()
                         {
-                            { "Iron Rod", 1 }
+                            { "Iron Rod", 10 }
                         },
                         new()
                         {
-                            { "Screw", 10 }
+                            { "Screw", 40 }
                         },
                         BuildingType.Constructor)
                 }
@@ -268,16 +257,15 @@ namespace DSPTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
-                            { "Iron Plate", 6 },
-                            { "Screw", 12 }
+                            { "Iron Plate", 30 },
+                            { "Screw", 60 }
                         },
                         new()
                         {
-                            { "Reinforced Iron Plate", 1 }
+                            { "Reinforced Iron Plate", 5 }
                         },
                         BuildingType.Assembler)
                 }

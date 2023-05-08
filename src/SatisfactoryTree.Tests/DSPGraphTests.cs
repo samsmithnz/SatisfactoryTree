@@ -1,9 +1,9 @@
-using DSPTree.Models;
+using SatisfactoryTree.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DSPTree.Tests;
+namespace SatisfactoryTree.Tests;
 
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [TestClass]
@@ -13,7 +13,7 @@ public class DSPGraphTests
     public void DSPGraphTest()
     {
         //Arrange
-        DSPGraph graph = new();
+        SatisfactoryGraph graph = new();
 
         //Act
 
@@ -53,7 +53,7 @@ public class DSPGraphTests
     public void TreeHasValidParentsAndChildrenTest()
     {
         //Arrange
-        DSPGraph graph = new("", ResearchType.Tier8, true);
+        SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
 
         //Act
 

@@ -1,7 +1,21 @@
-﻿namespace DSPTree.Models
+﻿namespace SatisfactoryTree.Models
 {
     public class Recipe
     {
+        public Recipe(
+            Dictionary<string, decimal> inputs,
+            Dictionary<string, decimal> outputs,
+            ManufactoringBuildingType manufactoringBuilding,
+            ManufactoringMethodType manufactoringMethod = ManufactoringMethodType.Manufactured,
+            bool primaryMethodOfManufacture = true)
+        {
+            Inputs = inputs;
+            Outputs = outputs;
+            ManufactoringBuilding = manufactoringBuilding;
+            ManufactoringMethod = manufactoringMethod;
+            PrimaryMethodOfManufacture = primaryMethodOfManufacture;
+        }
+
         public Recipe(
             decimal processingTimeInSeconds,
             decimal throughPutPerMinute,
@@ -19,6 +33,7 @@
             ManufactoringMethod = manufactoringMethod;
             PrimaryMethodOfManufacture = primaryMethodOfManufacture;
         }
+
         public decimal ProcessingTimeInSeconds { get; internal set; }
         public decimal ThroughPutPerMinute { get; internal set; }
         public Dictionary<string, decimal> Inputs { get; set; }
@@ -26,6 +41,7 @@
         public ManufactoringBuildingType ManufactoringBuilding { get; set; }
         public ManufactoringMethodType ManufactoringMethod { get; set; }
         public bool PrimaryMethodOfManufacture { get; set; }
+
     }
 
     public enum ManufactoringMethodType
