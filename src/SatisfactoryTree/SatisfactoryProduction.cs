@@ -187,12 +187,21 @@ namespace SatisfactoryTree
                 }
             }
             if (productionItem != null && productionItem.Item != null &&
-                ProductionItems != null && ProductionItems.Count > 0 && ProductionItems[0] != null && ProductionItems[0].Item != null)
+                ProductionItems != null && ProductionItems.Count > 0 &&
+                ProductionItems[0] != null && ProductionItems[0].Item != null &&
+                ProductionItems[0].Item?.Name != null)
             {
-                links.Add(new MermaidDotNet.Models.Link(
-                                    ProductionItems[0].Item.Name.Replace(" ", ""),
-                                    productionItem.Item.Name.Replace(" ", "") + "_Item",
-                                    '"' + productionItem.Item.Name + "<br>(" + productionItem.Quantity.ToString("0") + " units/min)" + '"'));
+                string? source;
+                string? destination;
+                source = ProductionItems[0].Item?.Name.Replace(" ", "");
+                destination = productionItem.Item.Name.Replace(" ", "") + "_Item";
+                if (source != null && destination != null)
+                {
+                    links.Add(new MermaidDotNet.Models.Link(
+                                        source,
+                                        destination,
+                                        '"' + productionItem.Item.Name + "<br>(" + productionItem.Quantity.ToString("0") + " units/min)" + '"'));
+                }
             }
             Flowchart flowchart = new(direction, nodes, links);
             string result = flowchart.CalculateFlowchart();
