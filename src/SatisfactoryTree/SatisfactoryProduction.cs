@@ -164,7 +164,7 @@ namespace SatisfactoryTree
                 if (item != null && item.Item != null)
                 {
                     string buildingQuantity = item.BuildingQuantityRequired.ToString("0.0");
-                        if ((int)item.BuildingQuantityRequired == item.BuildingQuantityRequired)
+                    if ((int)item.BuildingQuantityRequired == item.BuildingQuantityRequired)
                     {
                         buildingQuantity = item.BuildingQuantityRequired.ToString("0");
                     }
@@ -173,7 +173,12 @@ namespace SatisfactoryTree
             }
             if (productionItem != null && productionItem.Item != null)
             {
-                nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString("0.0") + " " + productionItem.Item?.Name));
+                string finalItemQuantity = productionItem.Quantity.ToString("0.0");
+                if ((int)productionItem.Quantity == productionItem.Quantity)
+                {
+                    finalItemQuantity = productionItem.Quantity.ToString("0");
+                }
+                nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + productionItem.Item?.Name));
             }
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
