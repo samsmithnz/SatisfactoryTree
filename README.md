@@ -11,7 +11,7 @@ A POC project to graph [Satisfactory](https://store.steampowered.com/app/526870/
 Sister project to [http://github.com/samsmithnz/SatisfactoryPlan](http://github.com/samsmithnz/SatisfactoryPlan)
 
 Also has a production calculator that outputs mermaid graphs.
-```
+```mermaid
 flowchart LR
     ReinforcedIronPlate["x2.4 Assembler<br>(Reinforced Iron Plate)"]
     IronPlate["x3.6 Constructor<br>(Iron Plate)"]
