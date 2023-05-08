@@ -40,16 +40,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
-                            { "Steel Pipe", 3 },
-                            { "Wire", 8 }
+                            { "Steel Pipe", 15 },
+                            { "Wire", 40 }
                         },
                         new()
                         {
-                            { "Stator", 1 }
+                            { "Stator", 5 }
                         },
                         BuildingType.Assembler)
                 }
