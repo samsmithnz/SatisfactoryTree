@@ -129,9 +129,5 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
-
-
-
-
     }
 }
