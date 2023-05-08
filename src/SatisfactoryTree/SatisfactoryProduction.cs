@@ -186,7 +186,8 @@ namespace SatisfactoryTree
                     }
                 }
             }
-            if (productionItem != null)
+            if (productionItem != null && productionItem.Item != null &&
+                ProductionItems != null && ProductionItems.Count > 0 && ProductionItems[0] != null && ProductionItems[0].Item != null)
             {
                 links.Add(new MermaidDotNet.Models.Link(
                                     ProductionItems[0].Item.Name.Replace(" ", ""),
