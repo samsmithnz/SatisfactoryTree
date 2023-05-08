@@ -114,10 +114,6 @@ namespace SatisfactoryTree
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
                 if (ProductionItems.Any(p => p.Item.Name == item.Item.Name))
                 {
-                    if (item.Item.Name == "Iron Ingot")
-                    {
-                        int i = 0;
-                    }
                     match = ProductionItems.FirstOrDefault(p => p.Item.Name == item.Item.Name);
                     if (match != null)
                     {
@@ -142,16 +138,20 @@ namespace SatisfactoryTree
                         decimal inputQuantity = input.Value;
                         decimal ratio = item.Quantity / outputQuantity;
                         decimal newQuantity = inputQuantity * ratio;
+                        item.Dependencies.Add(input.Key, newQuantity);
                         if (match != null)
                         {
                             foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
                             {
-                                match.Dependencies.Add(dependency.Key, dependency.Value);
+                                if (match.Dependencies.ContainsKey(dependency.Key))
+                                {
+                                    match.Dependencies[dependency.Key] += dependency.Value;
+                                }
+                                else
+                                {
+                                    match.Dependencies.Add(dependency.Key, dependency.Value);
+                                }
                             }
-                        }
-                        else
-                        {
-                            item.Dependencies.Add(input.Key, newQuantity);
                         }
                         ProductionItem newProductionItem = new(inputItem, newQuantity)
                         {
