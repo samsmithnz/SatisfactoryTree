@@ -16,16 +16,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(10,
-                        6,
+                    new Recipe(
                         new()
                         {
-                            { "Steel Beam", 4 },
-                            { "Concrete", 5 }
+                            { "Steel Beam", 24 },
+                            { "Concrete", 30 }
                         },
                         new()
                         {
-                            { "Encased Industrial Beam", 1 }
+                            { "Encased Industrial Beam", 6 }
                         },
                         BuildingType.Assembler)
                 }
