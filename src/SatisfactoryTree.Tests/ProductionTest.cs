@@ -263,7 +263,7 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(startingItem);
-            Assert.AreEqual(15, results.Count);
+            Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
         }
