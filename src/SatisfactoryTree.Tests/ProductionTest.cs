@@ -247,7 +247,7 @@ namespace SatisfactoryTree.Tests
             //Arrange
             SatisfactoryProduction graph = new();
             string itemName = "Steel Ingot";
-            decimal quantity = 1550;
+            decimal quantity = 1025;
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
             List<ProductionItem> results = new();
             string mermaidResult = "";
