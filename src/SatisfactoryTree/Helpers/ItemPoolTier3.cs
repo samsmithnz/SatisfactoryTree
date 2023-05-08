@@ -107,16 +107,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(24,
-                        5,
+                    new Recipe(
                         new()
                         {
                             { "Modular Frame", 2.5m },
-                            { "Steel Beam", 12 }
+                            { "Steel Beam", 30 }
                         },
                         new()
                         {
-                            { "Versatile Framework", 2 }
+                            { "Versatile Framework", 5 }
                         },
                         BuildingType.Assembler)
                 }
