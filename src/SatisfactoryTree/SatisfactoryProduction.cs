@@ -25,41 +25,7 @@ namespace SatisfactoryTree
             if (itemGoal != null && itemGoal.Item != null)
             {
                 ProcessOutputItem(itemGoal);                
-            }
-
-            ////while (InputQueue.Count > 0)
-            ////{
-            //foreach (ProductionItem productionItem in ProductionItems)
-            //{
-            //    //KeyValuePair<string, decimal> inputToProcess = InputQueue.Dequeue();
-            //    ////See if it exists in the production item list already
-            //    //ProductionItem? productionItem = ProductionItems.Where(i => i.Item?.Name == inputToProcess.Key).FirstOrDefault();
-            //    if (productionItem != null)
-            //    {
-            //        //Increase the total quantity required
-            //        //productionItem.Quantity += inputToProcess.Value;
-
-            //        ////Update the building quantity required
-            //        //if (productionItem.Item != null)
-            //        //{
-            //        //    decimal inputRatio = productionItem.Quantity / productionItem.Item.Recipes[0].ThroughPutPerMinute;
-            //        //    productionItem.BuildingQuantityRequired = inputRatio;
-            //        //}
-            //    }
-            //    //else
-            //    //{
-            //    //    //Add the new production item required
-            //    //    ProductionItem? inputProductionItem = new(FindItem(inputToProcess.Key), inputToProcess.Value);
-            //    //    if (inputProductionItem != null && inputProductionItem.Item != null)
-            //    //    {
-            //    //        decimal inputRatio = inputProductionItem.Quantity / inputProductionItem.Item.Recipes[0].ThroughPutPerMinute;
-            //    //        inputProductionItem.BuildingQuantityRequired = inputRatio;
-            //    //        ProductionItems.Add(inputProductionItem);
-            //    //    }
-            //    //}
-            //    //}
-            //}
-
+            }            
             return ProductionItems;
         }
 
