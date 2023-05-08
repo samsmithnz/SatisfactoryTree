@@ -16,15 +16,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        10,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Ingot", 2 }
+                            { "Copper Ingot", 20 }
                         },
                         new()
                         {
-                            { "Copper Sheet", 1 }
+                            { "Copper Sheet", 10 }
                         },
                         BuildingType.Constructor)
                 }
