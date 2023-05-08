@@ -166,7 +166,7 @@ namespace SatisfactoryTree
                     nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + item.BuildingQuantityRequired + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
                 }
             }
-            if (productionItem != null)
+            if (productionItem != null && productionItem.Item != null)
             {
                 nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString() + " " + productionItem.Item.Name));
             }
