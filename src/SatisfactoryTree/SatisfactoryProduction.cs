@@ -1,7 +1,6 @@
 ﻿using MermaidDotNet;
 using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
-using System.Runtime.CompilerServices;
 
 namespace SatisfactoryTree
 {
