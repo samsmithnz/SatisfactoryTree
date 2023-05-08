@@ -26,28 +26,7 @@ namespace SatisfactoryTree
                 ProcessOutputItem(itemGoal);                
             }            
             return ProductionItems;
-        }
-
-        //private bool AddItemsToInputs(Dictionary<string, decimal> inputs)
-        //{
-        //    foreach (KeyValuePair<string, decimal> inputItem in inputs)
-        //    {
-        //        Item? itemInput = FindItem(inputItem.Key);
-        //        if (itemInput != null)
-        //        {
-        //            decimal inputThroughPutPerMinute = itemInput.Recipes[0].ThroughPutPerMinute;
-        //            decimal adjustedInputThroughPutPerMinute = inputThroughPutPerMinute;// * ratio;
-        //            if (adjustedInputThroughPutPerMinute > inputItem.Value)
-        //            {
-        //                adjustedInputThroughPutPerMinute = inputItem.Value;
-        //            }
-        //            //itemGoal.Dependencies.Add(inputItem.Key, adjustedInputThroughPutPerMinute);
-        //            //Add each item to a queue to add to other dependencies
-        //            InputQueue.Enqueue(new(inputItem.Key, adjustedInputThroughPutPerMinute));
-        //        }
-        //    }
-        //    return true;
-        //}
+        }       
 
         //Taking an output item, find the inputs required to produce it
         private bool ProcessOutputItem(ProductionItem item)
