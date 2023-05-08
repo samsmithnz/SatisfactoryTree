@@ -37,16 +37,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        45,
+                    new Recipe(
                         new()
                         {
-                            { "Iron Ore", 3 },
-                            { "Coal", 3 }
+                            { "Iron Ore", 45 },
+                            { "Coal", 45 }
                         },
                         new()
                         {
-                            { "Steel Ingot", 3 }
+                            { "Steel Ingot", 45 }
                         },
                         BuildingType.Foundry)
                 }
