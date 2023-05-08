@@ -61,15 +61,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        15,
+                    new Recipe(
                         new()
                         {
-                            { "Steel Ingot", 4 }
+                            { "Steel Ingot", 60 }
                         },
                         new()
                         {
-                            { "Steel Beam", 1 }
+                            { "Steel Beam", 15 }
                         },
                         BuildingType.Constructor)
                 }
@@ -85,15 +84,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Steel Ingot", 3 }
+                            { "Steel Ingot", 30 }
                         },
                         new()
                         {
-                            { "Steel Pipe", 2 }
+                            { "Steel Pipe", 20 }
                         },
                         BuildingType.Constructor)
                 }
