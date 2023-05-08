@@ -132,12 +132,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        120,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Water", 2 }
+                            { "Water", 120 }
                         },
                         BuildingType.WaterExtractor)
                 }
