@@ -117,12 +117,12 @@ namespace SatisfactoryTree
                     if (inputItem != null)
                     {
                         decimal outputQuantity = item.Item.Recipes[0].Outputs[item.Item.Name];
-                        if (item.Quantity > outputQuantity)
-                        {
-                            outputQuantity = item.Quantity;
-                        }
+                        //if (item.Quantity > outputQuantity)
+                        //{
+                        //    outputQuantity = item.Quantity;
+                        //}
                         decimal inputQuantity = input.Value;
-                        decimal ratio = item.Quantity / inputQuantity;
+                        decimal ratio = item.Quantity / outputQuantity;
                         decimal newQuantity = inputQuantity * ratio;
                         item.Dependencies.Add(input.Key, newQuantity);
                         ProductionItem newProductionItem = new(inputItem, newQuantity)

@@ -193,7 +193,7 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual(1.5M, results[1].BuildingQuantityRequired);
             Assert.AreEqual("Iron Ore", results[2].Item?.Name);
             Assert.AreEqual(45, results[2].Quantity);
-            Assert.AreEqual(1.5M, results[2].BuildingQuantityRequired);
+            Assert.AreEqual(0.75M, results[2].BuildingQuantityRequired);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
         }
