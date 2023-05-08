@@ -63,8 +63,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(60,
-                        2,
+                    new Recipe(
                         new()
                         {
                             { "Reinforced Iron Plate", 3 },
@@ -72,7 +71,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Modular Frame", 1 }
+                            { "Modular Frame", 2 }
                         },
                         BuildingType.Assembler)
                 }
@@ -88,16 +87,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(30,
-                        2,
+                    new Recipe(
                         new()
                         {
-                            { "Reinforced Iron Plate", 1 },
-                            { "Rotor", 1 }
+                            { "Reinforced Iron Plate", 2 },
+                            { "Rotor", 2 }
                         },
                         new()
                         {
-                            { "Smart Plating", 1 }
+                            { "Smart Plating", 2 }
                         },
                         BuildingType.Assembler)
                 }
