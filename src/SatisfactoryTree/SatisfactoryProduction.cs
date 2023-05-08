@@ -1,6 +1,7 @@
 ﻿using MermaidDotNet;
 using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
+using System.Runtime.CompilerServices;
 
 namespace SatisfactoryTree
 {
@@ -110,9 +111,22 @@ namespace SatisfactoryTree
             if (item != null && item.Item != null)
             {
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
-                ProductionItems.Add(item);
+                if (ProductionItems.Any(p => p.Item.Name == item.Item.Name))
+                {
+                    ProductionItem match = ProductionItems.FirstOrDefault(p => p.Item.Name == item.Item.Name);
+                    match.Quantity += item.Quantity;
+                    match.BuildingQuantityRequired += item.BuildingQuantityRequired;
+                }
+                else
+                {
+                    ProductionItems.Add(item);
+                }
                 foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
                 {
+                    if (input.Key == "Iron Ore")
+                    {
+                        int i = 0;
+                    }
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
@@ -124,7 +138,14 @@ namespace SatisfactoryTree
                         decimal inputQuantity = input.Value;
                         decimal ratio = item.Quantity / outputQuantity;
                         decimal newQuantity = inputQuantity * ratio;
-                        item.Dependencies.Add(input.Key, newQuantity);
+                        if (item.Dependencies.Any(p => p.Key == input.Key))
+                        {
+                            item.Dependencies[input.Key] += newQuantity;
+                        }
+                        else
+                        {
+                            item.Dependencies.Add(input.Key, newQuantity);
+                        }
                         ProductionItem newProductionItem = new(inputItem, newQuantity)
                         {
                             BuildingQuantityRequired = ratio
