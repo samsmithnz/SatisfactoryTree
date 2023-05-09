@@ -317,35 +317,35 @@ namespace SatisfactoryTree.Tests
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
-Motor[""x1 Assembler<br>(Motor)""]
-Rotor[""x2.5 Assembler<br>(Rotor)""]
-IronRod[""x7.5 Constructor<br>(Iron Rod)""]
-IronIngot[""x3.8 Smelter<br>(Iron Ingot)""]
-IronOre[""x2.7 MiningMachine<br>(Iron Ore)""]
-Screw[""x6.3 Constructor<br>(Screw)""]
-Stator[""x2 Assembler<br>(Stator)""]
-SteelPipe[""x1.5 Constructor<br>(Steel Pipe)""]
-SteelIngot[""x1 Foundry<br>(Steel Ingot)""]
-Coal[""x0.8 MiningMachine<br>(Coal)""]
-Wire[""x2.7 Constructor<br>(Wire)""]
-CopperIngot[""x1.4 Smelter<br>(Copper Ingot)""]
-CopperOre[""x0.7 MiningMachine<br>(Copper Ore)""]
-Motor_Item[5 Motor]
-Rotor--""Rotor<br>(10 units/min)""-->Motor
-Stator--""Stator<br>(10 units/min)""-->Motor
-IronRod--""Iron Rod<br>(50 units/min)""-->Rotor
-Screw--""Screw<br>(250 units/min)""-->Rotor
-IronIngot--""Iron Ingot<br>(112.5 units/min)""-->IronRod
-IronOre--""Iron Ore<br>(112.5 units/min)""-->IronIngot
-IronRod--""Iron Rod<br>(62.5 units/min)""-->Screw
-SteelPipe--""Steel Pipe<br>(30 units/min)""-->Stator
-Wire--""Wire<br>(80 units/min)""-->Stator
-SteelIngot--""Steel Ingot<br>(45 units/min)""-->SteelPipe
-IronOre--""Iron Ore<br>(45 units/min)""-->SteelIngot
-Coal--""Coal<br>(45 units/min)""-->SteelIngot
-CopperIngot--""Copper Ingot<br>(40 units/min)""-->Wire
-CopperOre--""Copper Ore<br>(40.0 units/min)""-->CopperIngot
-Motor--""Motor<br>(5 units/min)""-->Motor_Item
+    Motor[""x1 Assembler<br>(Motor)""]
+    Rotor[""x2.5 Assembler<br>(Rotor)""]
+    IronRod[""x7.5 Constructor<br>(Iron Rod)""]
+    IronIngot[""x3.8 Smelter<br>(Iron Ingot)""]
+    IronOre[""x2.7 MiningMachine<br>(Iron Ore)""]
+    Screw[""x6.3 Constructor<br>(Screw)""]
+    Stator[""x2 Assembler<br>(Stator)""]
+    SteelPipe[""x1.5 Constructor<br>(Steel Pipe)""]
+    SteelIngot[""x1 Foundry<br>(Steel Ingot)""]
+    Coal[""x0.8 MiningMachine<br>(Coal)""]
+    Wire[""x2.7 Constructor<br>(Wire)""]
+    CopperIngot[""x1.4 Smelter<br>(Copper Ingot)""]
+    CopperOre[""x0.7 MiningMachine<br>(Copper Ore)""]
+    Motor_Item[5 Motor]
+    Rotor--""Rotor<br>(10 units/min)""-->Motor
+    Stator--""Stator<br>(10 units/min)""-->Motor
+    IronRod--""Iron Rod<br>(50 units/min)""-->Rotor
+    Screw--""Screw<br>(250 units/min)""-->Rotor
+    IronIngot--""Iron Ingot<br>(112.5 units/min)""-->IronRod
+    IronOre--""Iron Ore<br>(112.5 units/min)""-->IronIngot
+    IronRod--""Iron Rod<br>(62.5 units/min)""-->Screw
+    SteelPipe--""Steel Pipe<br>(30 units/min)""-->Stator
+    Wire--""Wire<br>(80 units/min)""-->Stator
+    SteelIngot--""Steel Ingot<br>(45 units/min)""-->SteelPipe
+    IronOre--""Iron Ore<br>(45 units/min)""-->SteelIngot
+    Coal--""Coal<br>(45 units/min)""-->SteelIngot
+    CopperIngot--""Copper Ingot<br>(40 units/min)""-->Wire
+    CopperOre--""Copper Ore<br>(40.0 units/min)""-->CopperIngot
+    Motor--""Motor<br>(5 units/min)""-->Motor_Item
 ";
 
             //Act
