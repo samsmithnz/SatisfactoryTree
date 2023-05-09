@@ -1,6 +1,7 @@
 ﻿using MermaidDotNet;
 using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
+using System.Diagnostics;
 
 namespace SatisfactoryTree
 {
@@ -61,8 +62,9 @@ namespace SatisfactoryTree
                         decimal outputQuantity = item.Item.Recipes[0].Outputs[item.Item.Name];
                         decimal inputQuantity = input.Value;
                         decimal ratio = item.Quantity / outputQuantity;
-                        decimal newQuantity = inputQuantity * ratio;
-                        item.Dependencies.Add(input.Key, newQuantity);
+                        decimal inputQuantityWithRatio = inputQuantity * ratio;
+                        Debug.WriteLine("Item " + item.Item.Name + " requires " + inputQuantityWithRatio + " of " + input.Key + " to produce " + item.Quantity + " " + item.Item.Name);
+                        item.Dependencies.Add(input.Key, inputQuantityWithRatio);
                         //If this item already exists in the production list, update the quantity for it
                         if (match != null)
                         {
@@ -78,7 +80,7 @@ namespace SatisfactoryTree
                                 }
                             }
                         }
-                        ProductionItem newProductionItem = new(inputItem, newQuantity)
+                        ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
                         {
                             BuildingQuantityRequired = ratio
                         };
