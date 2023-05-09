@@ -35,6 +35,7 @@ namespace SatisfactoryTree
             if (item != null && item.Item != null)
             {
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
+                //Check if this item is already in the production list
                 if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
                 {
                     match = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
@@ -48,6 +49,10 @@ namespace SatisfactoryTree
                 {
                     ProductionItems.Add(item);
                 }
+                if (item.Item.Name == "Steel Ingot")
+                {
+                    int i = 0;
+                }
                 foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
                 {
                     Item? inputItem = FindItem(input.Key);
@@ -58,6 +63,7 @@ namespace SatisfactoryTree
                         decimal ratio = item.Quantity / outputQuantity;
                         decimal newQuantity = inputQuantity * ratio;
                         item.Dependencies.Add(input.Key, newQuantity);
+                        //If this item already exists in the production list, update the quantity for it
                         if (match != null)
                         {
                             foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
