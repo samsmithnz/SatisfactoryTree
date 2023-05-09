@@ -1,6 +1,6 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
-//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
+
 
 namespace SatisfactoryTree.Helpers
 {
