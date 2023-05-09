@@ -277,7 +277,7 @@ namespace SatisfactoryTree.Tests
 
 
         [TestMethod]
-        public void HeavyModularFramesProductionTest()
+        public void HeavyModularFrameProductionTest()
         {
             //Arrange
             SatisfactoryProduction graph = new();
@@ -301,6 +301,36 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual(15, results.Count);
             Assert.AreEqual(1025, results[9].Dependencies["Iron Ore"]);
             Assert.AreEqual(1025, results[9].Dependencies["Coal"]);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
+        }
+
+
+        [TestMethod]
+        public void MotorProductionTest()
+        {
+            //Arrange
+            SatisfactoryProduction graph = new();
+            string itemName = "Motor";
+            decimal quantity = 5;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+";
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                mermaidResult = graph.GetMermaidString(startingItem);
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(13, results.Count);
+            //Assert.AreEqual(1025, results[9].Dependencies["Iron Ore"]);
+            //Assert.AreEqual(1025, results[9].Dependencies["Coal"]);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
         }

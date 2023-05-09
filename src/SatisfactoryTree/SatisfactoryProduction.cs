@@ -188,11 +188,16 @@ namespace SatisfactoryTree
                 {
                     if (item != null && item.Item != null)
                     {
+                        string itemQuantity = itemInput.Value.ToString("0.0");
+                        if ((int)itemInput.Value == itemInput.Value)
+                        {
+                            itemQuantity = itemInput.Value.ToString("0");
+                        }
                         links.Add(
                         new MermaidDotNet.Models.Link(
                                 itemInput.Key.Replace(" ", ""),
                                 item.Item.Name.Replace(" ", ""),
-                                '"' + itemInput.Key + "<br>(" + itemInput.Value.ToString("0") + " units/min)" + '"')
+                                '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"')
                             );
                     }
                 }
