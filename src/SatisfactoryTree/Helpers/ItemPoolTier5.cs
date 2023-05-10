@@ -253,14 +253,13 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        2,
+                    new Recipe(
                         new()
                         {
-                            { "Automated Wiring", 15 },
-                            { "Circuit Board", 10 },
-                            { "Heavy Modular Frame", 2 },
-                            { "Computer", 2 }
+                            { "Automated Wiring", 7.5M },
+                            { "Circuit Board", 5 },
+                            { "Heavy Modular Frame", 1 },
+                            { "Computer", 1 }
                         },
                         new()
                         {
