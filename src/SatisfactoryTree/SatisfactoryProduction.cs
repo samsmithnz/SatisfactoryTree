@@ -18,7 +18,6 @@ namespace SatisfactoryTree
         public List<ProductionItem> BuildSatisfactoryProductionPlan(ProductionItem itemGoal)
         {
             ProductionItems = new();
-            //InputQueue = new();
             if (itemGoal != null && itemGoal.Item != null)
             {
                 ProcessOutputItem(itemGoal);
