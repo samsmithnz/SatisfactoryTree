@@ -396,8 +396,40 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual(13, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
-        }  
-        
+        }
+
+        [TestMethod]
+        public void PlasticProductionTest()
+        {
+            //Arrange
+            SatisfactoryProduction graph = new();
+            string itemName = "Plastic";
+            decimal quantity = 20;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    Plastic[""x1 Refinery<br>(Plastic)""]
+    Plastic_Item[20 Plastic]
+    CrudeOil[""x0.3 OilExtractor<br>(Crude Oil)""]
+    CrudeOil--""Crude Oil<br>(30 units/min)""-->Plastic
+    Plastic--""Plastic<br>(20 units/min)""-->Plastic_Item
+";
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                mermaidResult = graph.GetMermaidString(startingItem);
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(2, results.Count);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
+        }
+
         [TestMethod]
         public void CircuitBoardProductionTest()
         {
