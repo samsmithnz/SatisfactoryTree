@@ -52,8 +52,8 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     IronIngot[""x0.5 Smelter<br>(Iron Ingot)""]
-    IronOre[""x0.3 MiningMachine<br>(Iron Ore)""]
     IronIngot_Item[15 Iron Ingot]
+    IronOre[""x0.3 MiningMachine<br>(Iron Ore)""]
     IronOre--""Iron Ore<br>(15 units/min)""-->IronIngot
     IronIngot--""Iron Ingot<br>(15 units/min)""-->IronIngot_Item
 ";
@@ -90,8 +90,8 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     IronIngot[""x1 Smelter<br>(Iron Ingot)""]
-    IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
     IronIngot_Item[30 Iron Ingot]
+    IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
     IronOre--""Iron Ore<br>(30 units/min)""-->IronIngot
     IronIngot--""Iron Ingot<br>(30 units/min)""-->IronIngot_Item
 ";
@@ -128,8 +128,8 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     IronIngot[""x2 Smelter<br>(Iron Ingot)""]
-    IronOre[""x1 MiningMachine<br>(Iron Ore)""]
     IronIngot_Item[60 Iron Ingot]
+    IronOre[""x1 MiningMachine<br>(Iron Ore)""]
     IronOre--""Iron Ore<br>(60 units/min)""-->IronIngot
     IronIngot--""Iron Ingot<br>(60 units/min)""-->IronIngot_Item
 ";
@@ -166,9 +166,9 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
+    IronPlate_Item[30 Iron Plate]
     IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
     IronOre[""x0.8 MiningMachine<br>(Iron Ore)""]
-    IronPlate_Item[30 Iron Plate]
     IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
     IronOre--""Iron Ore<br>(45 units/min)""-->IronIngot
     IronPlate--""Iron Plate<br>(30 units/min)""-->IronPlate_Item
@@ -211,12 +211,12 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     ReinforcedIronPlate[""x2.4 Assembler<br>(Reinforced Iron Plate)""]
+    ReinforcedIronPlate_Item[12 Reinforced Iron Plate]
     IronPlate[""x3.6 Constructor<br>(Iron Plate)""]
     IronIngot[""x4.8 Smelter<br>(Iron Ingot)""]
     IronOre[""x2.4 MiningMachine<br>(Iron Ore)""]
     Screw[""x3.6 Constructor<br>(Screw)""]
     IronRod[""x2.4 Constructor<br>(Iron Rod)""]
-    ReinforcedIronPlate_Item[12 Reinforced Iron Plate]
     IronPlate--""Iron Plate<br>(72 units/min)""-->ReinforcedIronPlate
     Screw--""Screw<br>(144 units/min)""-->ReinforcedIronPlate
     IronIngot--""Iron Ingot<br>(108 units/min)""-->IronPlate
@@ -253,9 +253,9 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     SteelIngot[""x22.8 Foundry<br>(Steel Ingot)""]
+    SteelIngot_Item[1025 Steel Ingot]
     IronOre[""x17.1 MiningMachine<br>(Iron Ore)""]
     Coal[""x17.1 MiningMachine<br>(Coal)""]
-    SteelIngot_Item[1025 Steel Ingot]
     IronOre--""Iron Ore<br>(1025 units/min)""-->SteelIngot
     Coal--""Coal<br>(1025 units/min)""-->SteelIngot
     SteelIngot--""Steel Ingot<br>(1025 units/min)""-->SteelIngot_Item
@@ -288,6 +288,7 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     HeavyModularFrame[""x5 Manufacturer<br>(Heavy Modular Frame)""]
+    HeavyModularFrame_Item[10 Heavy Modular Frame]
     ModularFrame[""x25 Assembler<br>(Modular Frame)""]
     ReinforcedIronPlate[""x15 Assembler<br>(Reinforced Iron Plate)""]
     IronPlate[""x22.5 Constructor<br>(Iron Plate)""]
@@ -302,7 +303,6 @@ namespace SatisfactoryTree.Tests
     SteelBeam[""x13.4 Constructor<br>(Steel Beam)""]
     Concrete[""x16.7 Constructor<br>(Concrete)""]
     Limestone[""x12.5 MiningMachine<br>(Limestone)""]
-    HeavyModularFrame_Item[10 Heavy Modular Frame]
     ModularFrame--""Modular Frame<br>(50 units/min)""-->HeavyModularFrame
     SteelPipe--""Steel Pipe<br>(150 units/min)""-->HeavyModularFrame
     EncasedIndustrialBeam--""Encased Industrial Beam<br>(50 units/min)""-->HeavyModularFrame
@@ -354,6 +354,7 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     Motor[""x1 Assembler<br>(Motor)""]
+    Motor_Item[5 Motor]
     Rotor[""x2.5 Assembler<br>(Rotor)""]
     IronRod[""x7.5 Constructor<br>(Iron Rod)""]
     IronIngot[""x3.8 Smelter<br>(Iron Ingot)""]
@@ -366,7 +367,6 @@ namespace SatisfactoryTree.Tests
     Wire[""x2.7 Constructor<br>(Wire)""]
     CopperIngot[""x1.4 Smelter<br>(Copper Ingot)""]
     CopperOre[""x0.7 MiningMachine<br>(Copper Ore)""]
-    Motor_Item[5 Motor]
     Rotor--""Rotor<br>(10 units/min)""-->Motor
     Stator--""Stator<br>(10 units/min)""-->Motor
     IronRod--""Iron Rod<br>(50 units/min)""-->Rotor
@@ -410,12 +410,12 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     CircuitBoard[""x0.7 Assembler<br>(Circuit Board)""]
+    CircuitBoard_Item[5 Circuit Board]
     CopperSheet[""x1 Constructor<br>(Copper Sheet)""]
     CopperIngot[""x0.7 Smelter<br>(Copper Ingot)""]
     CopperOre[""x0.4 MiningMachine<br>(Copper Ore)""]
     Plastic[""x1 Refinery<br>(Plastic)""]
     CrudeOil[""x0.3 OilExtractor<br>(Crude Oil)""]
-    CircuitBoard_Item[5 Circuit Board]
     CopperSheet--""Copper Sheet<br>(10 units/min)""-->CircuitBoard
     Plastic--""Plastic<br>(20.0 units/min)""-->CircuitBoard
     CopperIngot--""Copper Ingot<br>(20 units/min)""-->CopperSheet

@@ -138,18 +138,15 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
+                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
                     if (item.OutputItem == true)
                     {
-                        string finalItemQuantity = productionItem.Quantity.ToString("0.0");
-                        if ((int)productionItem.Quantity == productionItem.Quantity)
+                        string finalItemQuantity = item.Quantity.ToString("0.0");
+                        if ((int)item.Quantity == item.Quantity)
                         {
-                            finalItemQuantity = productionItem.Quantity.ToString("0");
+                            finalItemQuantity = item.Quantity.ToString("0");
                         }
-                        nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + productionItem.Item?.Name));
-                    }
-                    else
-                    {
-                        nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                        nodes.Add(new(item.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + item.Item?.Name));
                     }
                 }
             }
