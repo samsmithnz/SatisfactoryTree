@@ -163,6 +163,7 @@ namespace SatisfactoryTree
             return result;
         }
 
+        //Round up to the nearest decimal point - if one exists
         private static string RoundUpAndFormat(decimal value)
         {
             if ((int)value == value)
