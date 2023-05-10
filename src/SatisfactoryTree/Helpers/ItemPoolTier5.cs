@@ -20,12 +20,12 @@ namespace SatisfactoryTree.Helpers
                     new Recipe(
                         new()
                         {
-                            { "Copper Sheet", 2 },
-                            { "Plastic", 4 }
+                            { "Copper Sheet", 15 },
+                            { "Plastic", 30 }
                         },
                         new()
                         {
-                            { "Circuit Board", 1 }
+                            { "Circuit Board", 7.5M }
                         },
                         BuildingType.Assembler)
                 }
