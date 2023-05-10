@@ -86,30 +86,6 @@ namespace SatisfactoryTree
             return true;
         }
 
-        //private List<ProductionItem> GetChildren(string itemName, decimal quantity)
-        //{
-        //    List<ProductionItem> results = new();
-        //    Item? item = FindItem(itemName);
-        //    if (item != null && item.Recipes.Count > 0 && item.Recipes[0].Inputs.Count > 0)
-        //    {
-        //        //Look at each input and the quantity needed to make the item 
-        //        foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
-        //        {
-        //            //get the input item
-        //            ProductionItem? inputItem = new(FindItem(recipeInput.Key), recipeInput.Value);
-        //            if (inputItem != null && inputItem.Item != null)
-        //            {
-        //                inputItem.Quantity = recipeInput.Value / inputItem.Item.Recipes[0].ThroughPutPerMinute;
-        //                //Add the input item to the results
-        //                results.Add(inputItem);
-        //                //Then get the children of the input item
-        //                results.AddRange(GetChildren(inputItem.Item.Name, inputItem.Item.Recipes[0].ThroughPutPerMinute * quantity));
-        //            }
-        //        }
-        //    }
-        //    return results;
-        //}
-
         public Item? FindItem(string itemName)
         {
             Item? result = null;
