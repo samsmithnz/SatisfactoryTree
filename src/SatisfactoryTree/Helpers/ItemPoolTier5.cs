@@ -179,15 +179,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        120,
+                    new Recipe(
                         new()
                         {
-                            { "Heavy Oil Residue", 4 }
+                            { "Heavy Oil Residue", 40 }
                         },
                         new()
                         {
-                            { "Petroleum Coke", 12 }
+                            { "Petroleum Coke", 120 }
                         },
                         BuildingType.Refinery)
                 }
