@@ -156,15 +156,14 @@ namespace SatisfactoryTree.Helpers
                     //        { "Polymer Resin", 3 }
                     //    },
                     //    BuildingType.Refinery),
-                    new Recipe(6,
-                        40,
+                    new Recipe(
                         new()
                         {
-                            { "Heavy Oil Residue", 6 }
+                            { "Heavy Oil Residue", 60 }
                         },
                         new()
                         {
-                            { "Fuel", 4 }
+                            { "Fuel", 40 }
                         },
                         BuildingType.Refinery)
                 }
