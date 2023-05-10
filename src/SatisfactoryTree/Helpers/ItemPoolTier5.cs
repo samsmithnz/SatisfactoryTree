@@ -61,16 +61,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Crude Oil", 3 }
+                            { "Crude Oil", 30 }
                         },
                         new()
                         {
-                            { "Plastic", 2 },
-                            { "Heavy Oil Residue", 1 }
+                            { "Plastic", 20 },
+                            { "Heavy Oil Residue", 10 }
                         },
                         BuildingType.Refinery)
                 }
