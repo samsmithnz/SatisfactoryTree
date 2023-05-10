@@ -97,7 +97,7 @@ namespace SatisfactoryTree
                         //}
                         //else
                         //{
-                        //    ProductionItems.Add(item);
+                            ProductionItems.Add(item);
                         //}
                     }
                 }
