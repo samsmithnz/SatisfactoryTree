@@ -57,7 +57,7 @@ namespace SatisfactoryTree
         //Taking an output item, find the inputs required to produce it
         private bool ProcessOutputItem(ProductionItem item)
         {
-            ProductionItem? match = null;
+            ProductionItem? currentItemMatch = null;
             if (item != null && item.Item != null)
             {
                 //Process this item
@@ -65,16 +65,41 @@ namespace SatisfactoryTree
                 //Check if this item is already in the production list, undate it instead of adding a new one
                 if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
                 {
-                    match = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
-                    if (match != null)
+                    currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
+                    if (currentItemMatch != null)
                     {
-                        match.Quantity += item.Quantity;
-                        match.BuildingQuantityRequired += item.BuildingQuantityRequired;
+                        currentItemMatch.Quantity += item.Quantity;
+                        currentItemMatch.BuildingQuantityRequired += item.BuildingQuantityRequired;
                     }
                 }
                 else
                 {
                     ProductionItems.Add(item);
+                }
+                decimal itemOutputRatio = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
+                //Process each output
+                foreach (KeyValuePair<string, decimal> output in item.Item.Recipes[0].Outputs)
+                {
+                    //Check for additional outputs
+                    if (output.Key != item.Item.Name)
+                    {
+                        ////Process this item
+                        //item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
+                        ////Check if this item is already in the production list, undate it instead of adding a new one
+                        //if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
+                        //{
+                        //    currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
+                        //    if (currentItemMatch != null)
+                        //    {
+                        //        currentItemMatch.Quantity += item.Quantity;
+                        //        currentItemMatch.BuildingQuantityRequired += item.BuildingQuantityRequired;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    ProductionItems.Add(item);
+                        //}
+                    }
                 }
                 //Process each input
                 foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
@@ -82,30 +107,28 @@ namespace SatisfactoryTree
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
-                        decimal outputQuantity = item.Item.Recipes[0].Outputs[item.Item.Name];
                         decimal inputQuantity = input.Value;
-                        decimal ratio = item.Quantity / outputQuantity;
-                        decimal inputQuantityWithRatio = inputQuantity * ratio;
+                        decimal inputQuantityWithRatio = inputQuantity * itemOutputRatio;
                         item.Dependencies.Add(input.Key, inputQuantityWithRatio);
                         ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
                         {
-                            BuildingQuantityRequired = ratio
+                            BuildingQuantityRequired = itemOutputRatio
                         };
                         ProcessOutputItem(newProductionItem);
                     }
                 }
                 //If this item already exists in the production list, update the quantity for it
-                if (match != null)
+                if (currentItemMatch != null)
                 {
                     foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
                     {
-                        if (match.Dependencies.ContainsKey(dependency.Key))
+                        if (currentItemMatch.Dependencies.ContainsKey(dependency.Key))
                         {
-                            match.Dependencies[dependency.Key] += dependency.Value;
+                            currentItemMatch.Dependencies[dependency.Key] += dependency.Value;
                         }
                         else
                         {
-                            match.Dependencies.Add(dependency.Key, dependency.Value);
+                            currentItemMatch.Dependencies.Add(dependency.Key, dependency.Value);
                         }
                     }
                 }
