@@ -408,7 +408,20 @@ namespace SatisfactoryTree.Tests
             ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
             List<ProductionItem> results = new();
             string mermaidResult = "";
-            string expectedResult = @"flowchart LR    
+            string expectedResult = @"flowchart LR
+    CircuitBoard[""x0.7 Assembler<br>(Circuit Board)""]
+    CopperSheet[""x1 Constructor<br>(Copper Sheet)""]
+    CopperIngot[""x0.7 Smelter<br>(Copper Ingot)""]
+    CopperOre[""x0.4 MiningMachine<br>(Copper Ore)""]
+    Plastic[""x1 Refinery<br>(Plastic)""]
+    CrudeOil[""x0.3 OilExtractor<br>(Crude Oil)""]
+    CircuitBoard_Item[5 Circuit Board]
+    CopperSheet--""Copper Sheet<br>(10 units/min)""-->CircuitBoard
+    Plastic--""Plastic<br>(20.0 units/min)""-->CircuitBoard
+    CopperIngot--""Copper Ingot<br>(20 units/min)""-->CopperSheet
+    CopperOre--""Copper Ore<br>(20.0 units/min)""-->CopperIngot
+    CrudeOil--""Crude Oil<br>(30 units/min)""-->Plastic
+    CircuitBoard--""Circuit Board<br>(5 units/min)""-->CircuitBoard_Item
 ";
 
             //Act
