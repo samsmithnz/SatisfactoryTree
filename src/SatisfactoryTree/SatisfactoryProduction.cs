@@ -21,6 +21,35 @@ namespace SatisfactoryTree
             if (itemGoal != null && itemGoal.Item != null)
             {
                 ProcessOutputItem(itemGoal);
+                //Identify which items aren't dependencies for other items
+                List<string> dependencies = new();
+                foreach (ProductionItem item in ProductionItems)
+                {
+                    foreach (KeyValuePair<string, decimal> dependent in item.Dependencies)
+                    {
+                        if (!dependencies.Any(p => p == dependent.Key))
+                        {
+                            dependencies.Add(dependent.Key);
+                        }
+                    }
+                    ////see if item exists in dependencies list
+                    //if (item != null && item.Item != null &&
+                    //    !dependencies.Any(p => item.Dependencies.Any(y => y.Key == p)))
+                    //{
+                    //    dependencies.Add(item.Item.Name);
+                    //}
+                }
+                //Mark items that are not dependencies
+                foreach (ProductionItem item in ProductionItems)
+                {
+                    if (item != null && item.Item != null)
+                    {
+                        if (!dependencies.Any(p => p == item.Item?.Name))
+                        {
+                            item.OutputItem = true;
+                        }
+                    }
+                }
             }
             return ProductionItems;
         }
@@ -31,6 +60,7 @@ namespace SatisfactoryTree
             ProductionItem? match = null;
             if (item != null && item.Item != null)
             {
+                //Process this item
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
                 //Check if this item is already in the production list, undate it instead of adding a new one
                 if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
@@ -46,6 +76,7 @@ namespace SatisfactoryTree
                 {
                     ProductionItems.Add(item);
                 }
+                //Process each input
                 foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
                 {
                     Item? inputItem = FindItem(input.Key);
@@ -55,7 +86,7 @@ namespace SatisfactoryTree
                         decimal inputQuantity = input.Value;
                         decimal ratio = item.Quantity / outputQuantity;
                         decimal inputQuantityWithRatio = inputQuantity * ratio;
-                        item.Dependencies.Add(input.Key, inputQuantityWithRatio);                        
+                        item.Dependencies.Add(input.Key, inputQuantityWithRatio);
                         ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
                         {
                             BuildingQuantityRequired = ratio
@@ -107,17 +138,20 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                    if (item.OutputItem == true)
+                    {
+                        string finalItemQuantity = productionItem.Quantity.ToString("0.0");
+                        if ((int)productionItem.Quantity == productionItem.Quantity)
+                        {
+                            finalItemQuantity = productionItem.Quantity.ToString("0");
+                        }
+                        nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + productionItem.Item?.Name));
+                    }
+                    else
+                    {
+                        nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                    }
                 }
-            }
-            if (productionItem != null && productionItem.Item != null)
-            {
-                string finalItemQuantity = productionItem.Quantity.ToString("0.0");
-                if ((int)productionItem.Quantity == productionItem.Quantity)
-                {
-                    finalItemQuantity = productionItem.Quantity.ToString("0");
-                }
-                nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + productionItem.Item?.Name));
             }
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
