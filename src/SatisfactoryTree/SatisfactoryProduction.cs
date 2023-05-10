@@ -103,37 +103,6 @@ namespace SatisfactoryTree
             return result;
         }
 
-        ////Get recipe inputs
-        //private static List<Item> GetInputs(List<Item> items, List<Recipe> recipes)
-        //{
-        //    List<Item> inputs = new();
-        //    foreach (Recipe recipe in recipes)
-        //    {
-        //        foreach (KeyValuePair<string, decimal> item in recipe.Inputs)
-        //        {
-        //            Item? inputItem = FindItem(items, item.Key);
-        //            if (inputItem != null && inputs.Contains(inputItem) == false)
-        //            {
-        //                inputs.Add(inputItem);
-        //                List<Item> newItems = GetInputs(items, inputItem.Recipes);
-        //                foreach (Item newItem in newItems)
-        //                {
-        //                    if (newItem != null && inputs.Contains(newItem) == false)
-        //                    {
-        //                        inputs.Add(newItem);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return inputs;
-        //}
-
-        //private static Item? FindItem(List<Item> items, string name)
-        //{
-        //    return items.Where(i => i.Name == name).FirstOrDefault();
-        //}
-
         public string GetMermaidString(ProductionItem? productionItem = null)
         {
             string direction = "LR";
