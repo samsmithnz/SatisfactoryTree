@@ -36,7 +36,7 @@ namespace SatisfactoryTree
             if (item != null && item.Item != null)
             {
                 item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
-                //Check if this item is already in the production list
+                //Check if this item is already in the production list, undate it instead of adding a new one
                 if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
                 {
                     match = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
@@ -63,28 +63,36 @@ namespace SatisfactoryTree
                         decimal inputQuantity = input.Value;
                         decimal ratio = item.Quantity / outputQuantity;
                         decimal inputQuantityWithRatio = inputQuantity * ratio;
-                        Debug.WriteLine("Item " + item.Item.Name + " requires " + inputQuantityWithRatio + " of " + input.Key + " to produce " + item.Quantity + " " + item.Item.Name);
-                        item.Dependencies.Add(input.Key, inputQuantityWithRatio);
-                        //If this item already exists in the production list, update the quantity for it
-                        if (match != null)
-                        {
-                            foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
-                            {
-                                if (match.Dependencies.ContainsKey(dependency.Key))
-                                {
-                                    match.Dependencies[dependency.Key] += dependency.Value;
-                                }
-                                else
-                                {
-                                    match.Dependencies.Add(dependency.Key, dependency.Value);
-                                }
-                            }
-                        }
+                        Debug.WriteLine("Item " + item.Item.Name + " requires " + Math.Round(inputQuantityWithRatio, 1) + " of " + input.Key + " to produce " + Math.Round(item.Quantity) + " " + item.Item.Name);
+                        item.Dependencies.Add(input.Key, inputQuantityWithRatio);                        
                         ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
                         {
                             BuildingQuantityRequired = ratio
                         };
                         ProcessOutputItem(newProductionItem);
+                    }
+                }
+                //If this item already exists in the production list, update the quantity for it
+                if (match != null)
+                {
+                    foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
+                    {
+                        if (match.Dependencies.ContainsKey(dependency.Key))
+                        {
+                            if (item.Item.Name == "Steel Ingot" && dependency.Key == "Iron Ore")
+                            {
+                                Debug.WriteLine("Match appended " + item.Item.Name + " requires " + Math.Round(dependency.Value, 1) + " of " + dependency.Key + " to produce " + Math.Round(item.Quantity) + " " + item.Item.Name);
+                            }
+                            match.Dependencies[dependency.Key] += dependency.Value;
+                        }
+                        else
+                        {
+                            if (item.Item.Name == "Steel Ingot" && dependency.Key == "Iron Ore")
+                            {
+                                Debug.WriteLine("Match added " + item.Item.Name + " requires " + Math.Round(dependency.Value, 1) + " of " + dependency.Key + " to produce " + Math.Round(item.Quantity) + " " + item.Item.Name);
+                            }
+                            match.Dependencies.Add(dependency.Key, dependency.Value);
+                        }
                     }
                 }
             }
