@@ -12,5 +12,6 @@
         public decimal Quantity { get; set; }
         public decimal BuildingQuantityRequired { get; set; }
         public Dictionary<string, decimal> Dependencies { get; set; }
+        public bool OutputItem { get; set; }
     }
 }
