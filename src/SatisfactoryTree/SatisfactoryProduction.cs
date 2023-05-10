@@ -9,13 +9,11 @@ namespace SatisfactoryTree
     {
         public List<Item> Items { get; set; }
         public List<ProductionItem> ProductionItems { get; set; }
-        //public Queue<KeyValuePair<string, decimal>> InputQueue { get; set; }
 
         public SatisfactoryProduction()
         {
             Items = AllItems.GetAllItems();
             ProductionItems = new();
-            //InputQueue = new();
         }
 
         public List<ProductionItem> BuildSatisfactoryProductionPlan(ProductionItem itemGoal)
