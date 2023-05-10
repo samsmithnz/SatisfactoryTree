@@ -202,18 +202,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(24,
-                        2.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Circuit Board", 10 },
-                            { "Cable", 9 },
-                            { "Plastic", 18 },
-                            { "Screw", 52 }
+                            { "Circuit Board", 25 },
+                            { "Cable", 22.5M },
+                            { "Plastic", 45 },
+                            { "Screw", 130 }
                         },
                         new()
                         {
-                            { "Computer", 1 }
+                            { "Computer", 2.5M }
                         },
                         BuildingType.Manufacturer)
                 }
