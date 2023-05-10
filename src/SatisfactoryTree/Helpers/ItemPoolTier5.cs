@@ -228,8 +228,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(60,
-                        1,
+                    new Recipe(
                         new()
                         {
                             { "Motor", 2 },
