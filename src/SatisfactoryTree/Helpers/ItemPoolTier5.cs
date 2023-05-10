@@ -41,12 +41,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        120,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Crude Oil", 2 }
+                            { "Crude Oil", 120 }
                         },
                         BuildingType.OilExtractor)
                 }
