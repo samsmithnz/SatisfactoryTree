@@ -74,18 +74,10 @@ namespace SatisfactoryTree
                     {
                         if (match.Dependencies.ContainsKey(dependency.Key))
                         {
-                            if (item.Item.Name == "Steel Ingot" && dependency.Key == "Iron Ore")
-                            {
-                                Debug.WriteLine("Match appended " + item.Item.Name + " requires " + Math.Round(dependency.Value, 1) + " of " + dependency.Key + " to produce " + Math.Round(item.Quantity) + " " + item.Item.Name);
-                            }
                             match.Dependencies[dependency.Key] += dependency.Value;
                         }
                         else
                         {
-                            if (item.Item.Name == "Steel Ingot" && dependency.Key == "Iron Ore")
-                            {
-                                Debug.WriteLine("Match added " + item.Item.Name + " requires " + Math.Round(dependency.Value, 1) + " of " + dependency.Key + " to produce " + Math.Round(item.Quantity) + " " + item.Item.Name);
-                            }
                             match.Dependencies.Add(dependency.Key, dependency.Value);
                         }
                     }
