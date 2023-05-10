@@ -57,6 +57,7 @@ namespace SatisfactoryTree
         //Taking an output item, find the inputs required to produce it
         private bool ProcessOutputItem(ProductionItem item)
         {
+            List<KeyValuePair<string, decimal>> inputs = new();
             ProductionItem? currentItemMatch = null;
             if (item != null && item.Item != null)
             {
@@ -83,32 +84,25 @@ namespace SatisfactoryTree
                     //Check for additional outputs
                     if (output.Key != item.Item.Name)
                     {
-                        ////Process this item
-                        //item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
-                        ////Check if this item is already in the production list, undate it instead of adding a new one
-                        //if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
-                        //{
-                        //    currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
-                        //    if (currentItemMatch != null)
-                        //    {
-                        //        currentItemMatch.Quantity += item.Quantity;
-                        //        currentItemMatch.BuildingQuantityRequired += item.BuildingQuantityRequired;
-                        //    }
-                        //}
-                        //else
-                        //{
-                            ProductionItems.Add(item);
-                        //}
+                        //Process this item
+                        Item? outputItem = FindItem(output.Key);
+                        decimal outputQuantityWithRatio = output.Value * itemOutputRatio;
+                        ProductionItem newProductionItem = new(outputItem, outputQuantityWithRatio)
+                        {
+                            BuildingQuantityRequired = itemOutputRatio
+                        };
+                        ProductionItems.Add(newProductionItem);
+                        inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
                     }
                 }
+                inputs.AddRange(item.Item.Recipes[0].Inputs);
                 //Process each input
-                foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
+                foreach (KeyValuePair<string, decimal> input in inputs)
                 {
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
-                        decimal inputQuantity = input.Value;
-                        decimal inputQuantityWithRatio = inputQuantity * itemOutputRatio;
+                        decimal inputQuantityWithRatio = input.Value * itemOutputRatio;
                         item.Dependencies.Add(input.Key, inputQuantityWithRatio);
                         ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
                         {
