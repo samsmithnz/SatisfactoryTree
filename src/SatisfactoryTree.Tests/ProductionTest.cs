@@ -27,7 +27,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -62,7 +62,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -100,7 +100,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -138,7 +138,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -170,15 +170,15 @@ namespace SatisfactoryTree.Tests
     IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
     IronOre[""x0.8 MiningMachine<br>(Iron Ore)""]
     IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
-    IronOre--""Iron Ore<br>(45 units/min)""-->IronIngot
     IronPlate--""Iron Plate<br>(30 units/min)""-->IronPlate_Item
+    IronOre--""Iron Ore<br>(45 units/min)""-->IronIngot
 ";
 
             //Act
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -230,7 +230,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -265,7 +265,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -329,7 +329,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -388,7 +388,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -420,7 +420,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
@@ -460,7 +460,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.ToMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString();
             }
 
             //Assert

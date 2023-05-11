@@ -147,7 +147,7 @@ namespace SatisfactoryTree
             return result;
         }
 
-        public string ToMermaidString(ProductionItem? productionItem = null)
+        public string ToMermaidString()
         {
             string direction = "LR";
             List<MermaidDotNet.Models.Node> nodes = new();
@@ -170,9 +170,9 @@ namespace SatisfactoryTree
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
             {
-                foreach (KeyValuePair<string, decimal> itemInput in item.Dependencies)
+                if (item != null && item.Item != null)
                 {
-                    if (item != null && item.Item != null)
+                    foreach (KeyValuePair<string, decimal> itemInput in item.Dependencies)
                     {
                         string itemQuantity = itemInput.Value.ToString("0.0");
                         if ((int)itemInput.Value == itemInput.Value)
@@ -186,23 +186,25 @@ namespace SatisfactoryTree
                                 '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"')
                             );
                     }
-                }
-            }
-            if (productionItem != null && productionItem.Item != null &&
-                ProductionItems != null && ProductionItems.Count > 0 &&
-                ProductionItems[0] != null && ProductionItems[0].Item != null &&
-                ProductionItems[0].Item?.Name != null)
-            {
-                string? source;
-                string? destination;
-                source = ProductionItems[0].Item?.Name.Replace(" ", "");
-                destination = productionItem.Item.Name.Replace(" ", "") + "_Item";
-                if (source != null && destination != null)
-                {
-                    links.Add(new MermaidDotNet.Models.Link(
-                                        source,
-                                        destination,
-                                        '"' + productionItem.Item.Name + "<br>(" + productionItem.Quantity.ToString("0") + " units/min)" + '"'));
+                    if (item.OutputItem == true)
+                    {
+                        //if (ProductionItems != null && ProductionItems.Count > 0 &&
+                        //        ProductionItems[0] != null && ProductionItems[0].Item != null &&
+                        //        ProductionItems[0].Item?.Name != null)
+                        //{
+                        string? source;
+                        string? destination;
+                        source = item.Item.Name.Replace(" ", "");
+                        destination = item.Item.Name.Replace(" ", "") + "_Item";
+                        if (source != null && destination != null)
+                        {
+                            links.Add(new MermaidDotNet.Models.Link(
+                                                source,
+                                                destination,
+                                                '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"'));
+                        }
+                        //}
+                    }
                 }
             }
             Flowchart flowchart = new(direction, nodes, links);
