@@ -253,7 +253,7 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     SteelIngot[""x22.8 Foundry<br>(Steel Ingot)""]
-    SteelIngot_Item[1025 Steel Ingot]
+    SteelIngot_Item([1025 Steel Ingot])
     IronOre[""x17.1 MiningMachine<br>(Iron Ore)""]
     Coal[""x17.1 MiningMachine<br>(Coal)""]
     IronOre--""Iron Ore<br>(1025 units/min)""-->SteelIngot
