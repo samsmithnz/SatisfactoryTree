@@ -55,34 +55,35 @@ namespace SatisfactoryTree
         }
 
         //Taking an output item, find the inputs required to produce it
-        private bool ProcessOutputItem(ProductionItem item)
+        private bool ProcessOutputItem(ProductionItem targetItem)
         {
             List<KeyValuePair<string, decimal>> inputs = new();
             ProductionItem? currentItemMatch = null;
-            if (item != null && item.Item != null)
+            if (targetItem != null && targetItem.Item != null)
             {
                 //Process this item
-                item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
+                targetItem.BuildingQuantityRequired = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
                 //Check if this item is already in the production list, undate it instead of adding a new one
-                if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
+                if (ProductionItems.Any(p => p.Item?.Name == targetItem.Item.Name))
                 {
-                    currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
+                    currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == targetItem.Item.Name);
                     if (currentItemMatch != null)
                     {
-                        currentItemMatch.Quantity += item.Quantity;
-                        currentItemMatch.BuildingQuantityRequired += item.BuildingQuantityRequired;
+                        currentItemMatch.Quantity += targetItem.Quantity;
+                        currentItemMatch.BuildingQuantityRequired += targetItem.BuildingQuantityRequired;
                     }
                 }
                 else
                 {
-                    ProductionItems.Add(item);
+                    ProductionItems.Add(targetItem);
                 }
-                decimal itemOutputRatio = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
-                //Process each output
-                foreach (KeyValuePair<string, decimal> output in item.Item.Recipes[0].Outputs)
+                decimal itemOutputRatio = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
+                
+                //Process each output (that isn't the target item)
+                foreach (KeyValuePair<string, decimal> output in targetItem.Item.Recipes[0].Outputs)
                 {
                     //Check for additional outputs
-                    if (output.Key != item.Item.Name)
+                    if (output.Key != targetItem.Item.Name)
                     {
                         //Process this item
                         Item? outputItem = FindItem(output.Key);
@@ -95,7 +96,8 @@ namespace SatisfactoryTree
                         inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
                     }
                 }
-                inputs.AddRange(item.Item.Recipes[0].Inputs);
+                inputs.AddRange(targetItem.Item.Recipes[0].Inputs);
+                
                 //Process each input
                 foreach (KeyValuePair<string, decimal> input in inputs)
                 {
@@ -103,7 +105,7 @@ namespace SatisfactoryTree
                     if (inputItem != null)
                     {
                         decimal inputQuantityWithRatio = input.Value * itemOutputRatio;
-                        item.Dependencies.Add(input.Key, inputQuantityWithRatio);
+                        targetItem.Dependencies.Add(input.Key, inputQuantityWithRatio);
                         ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
                         {
                             BuildingQuantityRequired = itemOutputRatio
@@ -114,7 +116,7 @@ namespace SatisfactoryTree
                 //If this item already exists in the production list, update the quantity for it
                 if (currentItemMatch != null)
                 {
-                    foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
+                    foreach (KeyValuePair<string, decimal> dependency in targetItem.Dependencies)
                     {
                         if (currentItemMatch.Dependencies.ContainsKey(dependency.Key))
                         {
