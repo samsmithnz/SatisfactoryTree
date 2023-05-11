@@ -219,11 +219,11 @@ namespace SatisfactoryTree.Tests
     IronRod[""x2.4 Constructor<br>(Iron Rod)""]
     IronPlate--""Iron Plate<br>(72 units/min)""-->ReinforcedIronPlate
     Screw--""Screw<br>(144 units/min)""-->ReinforcedIronPlate
+    ReinforcedIronPlate--""Reinforced Iron Plate<br>(12 units/min)""-->ReinforcedIronPlate_Item
     IronIngot--""Iron Ingot<br>(108 units/min)""-->IronPlate
     IronOre--""Iron Ore<br>(144 units/min)""-->IronIngot
     IronRod--""Iron Rod<br>(36 units/min)""-->Screw
     IronIngot--""Iron Ingot<br>(36 units/min)""-->IronRod
-    ReinforcedIronPlate--""Reinforced Iron Plate<br>(12 units/min)""-->ReinforcedIronPlate_Item
 ";
 
             //Act
