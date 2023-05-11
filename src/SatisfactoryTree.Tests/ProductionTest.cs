@@ -211,7 +211,7 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     ReinforcedIronPlate[""x2.4 Assembler<br>(Reinforced Iron Plate)""]
-    ReinforcedIronPlate_Item[12 Reinforced Iron Plate]
+    ReinforcedIronPlate_Item([12 Reinforced Iron Plate])
     IronPlate[""x3.6 Constructor<br>(Iron Plate)""]
     IronIngot[""x4.8 Smelter<br>(Iron Ingot)""]
     IronOre[""x2.4 MiningMachine<br>(Iron Ore)""]
