@@ -354,7 +354,7 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     Motor[""x1 Assembler<br>(Motor)""]
-    Motor_Item[5 Motor]
+    Motor_Item([5 Motor])
     Rotor[""x2.5 Assembler<br>(Rotor)""]
     IronRod[""x7.5 Constructor<br>(Iron Rod)""]
     IronIngot[""x3.8 Smelter<br>(Iron Ingot)""]
