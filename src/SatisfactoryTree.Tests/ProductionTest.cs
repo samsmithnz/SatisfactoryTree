@@ -307,6 +307,7 @@ namespace SatisfactoryTree.Tests
     SteelPipe--""Steel Pipe<br>(150 units/min)""-->HeavyModularFrame
     EncasedIndustrialBeam--""Encased Industrial Beam<br>(50 units/min)""-->HeavyModularFrame
     Screw--""Screw<br>(1000 units/min)""-->HeavyModularFrame
+    HeavyModularFrame--""Heavy Modular Frame<br>(10 units/min)""-->HeavyModularFrame_Item
     ReinforcedIronPlate--""Reinforced Iron Plate<br>(75 units/min)""-->ModularFrame
     IronRod--""Iron Rod<br>(300 units/min)""-->ModularFrame
     IronPlate--""Iron Plate<br>(450 units/min)""-->ReinforcedIronPlate
@@ -322,7 +323,6 @@ namespace SatisfactoryTree.Tests
     Concrete--""Concrete<br>(250.0 units/min)""-->EncasedIndustrialBeam
     SteelIngot--""Steel Ingot<br>(800 units/min)""-->SteelBeam
     Limestone--""Limestone<br>(750.0 units/min)""-->Concrete
-    HeavyModularFrame--""Heavy Modular Frame<br>(10 units/min)""-->HeavyModularFrame_Item
 ";
 
             //Act
