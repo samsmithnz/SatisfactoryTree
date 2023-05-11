@@ -27,7 +27,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -62,7 +62,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -100,7 +100,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -138,7 +138,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -178,7 +178,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -230,7 +230,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -265,7 +265,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -329,7 +329,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -388,7 +388,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -420,7 +420,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert
@@ -460,7 +460,7 @@ namespace SatisfactoryTree.Tests
             if (startingItem != null)
             {
                 results = graph.BuildSatisfactoryProductionPlan(startingItem);
-                mermaidResult = graph.GetMermaidString(startingItem);
+                mermaidResult = graph.ToMermaidString(startingItem);
             }
 
             //Assert

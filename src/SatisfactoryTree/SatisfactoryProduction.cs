@@ -147,7 +147,7 @@ namespace SatisfactoryTree
             return result;
         }
 
-        public string GetMermaidString(ProductionItem? productionItem = null)
+        public string ToMermaidString(ProductionItem? productionItem = null)
         {
             string direction = "LR";
             List<MermaidDotNet.Models.Node> nodes = new();
