@@ -19,7 +19,7 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     IronOre[""x1.5 MiningMachine<br>(Iron Ore)""]
-    IronOre_Item[90 Iron Ore]
+    IronOre_Item([90 Iron Ore])
     IronOre--""Iron Ore<br>(90 units/min)""-->IronOre_Item
 ";
 
@@ -288,7 +288,7 @@ namespace SatisfactoryTree.Tests
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
     HeavyModularFrame[""x5 Manufacturer<br>(Heavy Modular Frame)""]
-    HeavyModularFrame_Item[10 Heavy Modular Frame]
+    HeavyModularFrame_Item(10 Heavy Modular Frame)
     ModularFrame[""x25 Assembler<br>(Modular Frame)""]
     ReinforcedIronPlate[""x15 Assembler<br>(Reinforced Iron Plate)""]
     IronPlate[""x22.5 Constructor<br>(Iron Plate)""]

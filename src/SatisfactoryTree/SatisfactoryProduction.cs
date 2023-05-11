@@ -163,7 +163,7 @@ namespace SatisfactoryTree
                         {
                             finalItemQuantity = item.Quantity.ToString("0");
                         }
-                        nodes.Add(new(item.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + item.Item?.Name, MermaidDotNet.Models.Node.eShape.Rounded));
+                        nodes.Add(new(item.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + item.Item?.Name, MermaidDotNet.Models.Node.eShape.Stadium));
                     }
                 }
             }
