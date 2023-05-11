@@ -32,12 +32,6 @@ namespace SatisfactoryTree
                             dependencies.Add(dependent.Key);
                         }
                     }
-                    ////see if item exists in dependencies list
-                    //if (item != null && item.Item != null &&
-                    //    !dependencies.Any(p => item.Dependencies.Any(y => y.Key == p)))
-                    //{
-                    //    dependencies.Add(item.Item.Name);
-                    //}
                 }
                 //Mark items that are not dependencies
                 foreach (ProductionItem item in ProductionItems)
