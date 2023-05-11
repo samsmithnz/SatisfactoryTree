@@ -72,7 +72,7 @@ namespace SatisfactoryTree
                     ProductionItems.Add(targetItem);
                 }
                 decimal itemOutputRatio = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
-                
+
                 //Process each output (that isn't the target item)
                 foreach (KeyValuePair<string, decimal> output in targetItem.Item.Recipes[0].Outputs)
                 {
@@ -86,12 +86,15 @@ namespace SatisfactoryTree
                         {
                             BuildingQuantityRequired = itemOutputRatio
                         };
-                        ProductionItems.Add(newProductionItem);
-                        inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
+                        if (newProductionItem != null && newProductionItem.Item != null)
+                        {
+                            ProductionItems.Add(newProductionItem);
+                            inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
+                        }
                     }
                 }
                 inputs.AddRange(targetItem.Item.Recipes[0].Inputs);
-                
+
                 //Process each input
                 foreach (KeyValuePair<string, decimal> input in inputs)
                 {
