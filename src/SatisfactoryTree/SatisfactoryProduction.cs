@@ -102,7 +102,19 @@ namespace SatisfactoryTree
                     if (inputItem != null)
                     {
                         decimal inputQuantityWithRatio = input.Value * itemOutputRatio;
-                        targetItem.Dependencies.Add(input.Key, inputQuantityWithRatio);
+                        if (targetItem.Dependencies.Any(p => p.Key == input.Key))
+                        {
+                            KeyValuePair<string, decimal>? currentInputMatch = targetItem.Dependencies.FirstOrDefault(p => p.Key == input.Key);
+                            if (currentInputMatch != null)
+                            {
+                                decimal value = ((KeyValuePair<string, decimal>)currentInputMatch).Value;
+                                currentInputMatch = new KeyValuePair<string, decimal>(input.Key, value + targetItem.Quantity);
+                            }
+                        }
+                        else
+                        {
+                            targetItem.Dependencies.Add(input.Key, inputQuantityWithRatio);
+                        }
                         ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
                         {
                             BuildingQuantityRequired = itemOutputRatio
