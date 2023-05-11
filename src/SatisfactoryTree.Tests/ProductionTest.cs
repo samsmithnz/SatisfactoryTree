@@ -369,6 +369,7 @@ namespace SatisfactoryTree.Tests
     CopperOre[""x0.7 MiningMachine<br>(Copper Ore)""]
     Rotor--""Rotor<br>(10 units/min)""-->Motor
     Stator--""Stator<br>(10 units/min)""-->Motor
+    Motor--""Motor<br>(5 units/min)""-->Motor_Item
     IronRod--""Iron Rod<br>(50 units/min)""-->Rotor
     Screw--""Screw<br>(250 units/min)""-->Rotor
     IronIngot--""Iron Ingot<br>(112.5 units/min)""-->IronRod
@@ -381,7 +382,6 @@ namespace SatisfactoryTree.Tests
     Coal--""Coal<br>(45 units/min)""-->SteelIngot
     CopperIngot--""Copper Ingot<br>(40 units/min)""-->Wire
     CopperOre--""Copper Ore<br>(40.0 units/min)""-->CopperIngot
-    Motor--""Motor<br>(5 units/min)""-->Motor_Item
 ";
 
             //Act
