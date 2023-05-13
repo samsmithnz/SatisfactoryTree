@@ -88,8 +88,13 @@ namespace SatisfactoryTree
                         };
                         if (newProductionItem != null && newProductionItem.Item != null)
                         {
+                            foreach (KeyValuePair<string, decimal> input in newProductionItem.Item.Recipes[0].Inputs)
+                            {
+                                newProductionItem.Dependencies.Add(input.Key, input.Value);
+                            }
                             ProductionItems.Add(newProductionItem);
-                            inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
+                            //Commented out this - because we are already adding this input below V
+                            //inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
                         }
                     }
                 }
