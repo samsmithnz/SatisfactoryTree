@@ -3,12 +3,14 @@
     public class Recipe
     {
         public Recipe(
+            string name,
             Dictionary<string, decimal> inputs,
             Dictionary<string, decimal> outputs,
             ManufactoringBuildingType manufactoringBuilding,
             ManufactoringMethodType manufactoringMethod = ManufactoringMethodType.Manufactured,
             bool primaryMethodOfManufacture = true)
         {
+            Name = name;
             Inputs = inputs;
             Outputs = outputs;
             ManufactoringBuilding = manufactoringBuilding;
@@ -34,6 +36,7 @@
             PrimaryMethodOfManufacture = primaryMethodOfManufacture;
         }
 
+        public string Name { get; set; }
         public decimal ProcessingTimeInSeconds { get; internal set; }
         public decimal ThroughPutPerMinute { get; internal set; }
         public Dictionary<string, decimal> Inputs { get; set; }
