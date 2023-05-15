@@ -293,16 +293,16 @@ namespace SatisfactoryTree.Tests
     ReinforcedIronPlate[""x15 Assembler<br>(Reinforced Iron Plate)""]
     IronPlate[""x22.5 Constructor<br>(Iron Plate)""]
     IronIngot[""x48.4 Smelter<br>(Iron Ingot)""]
-    IronOre[""x41.3 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x41.3 Mining Machine<br>(Iron Ore)""]
     Screw[""x47.5 Constructor<br>(Screw)""]
     IronRod[""x51.7 Constructor<br>(Iron Rod)""]
     SteelPipe[""x7.5 Constructor<br>(Steel Pipe)""]
     SteelIngot[""x22.8 Foundry<br>(Steel Ingot)""]
-    Coal[""x17.1 MiningMachine<br>(Coal)""]
+    Coal[""x17.1 Mining Machine<br>(Coal)""]
     EncasedIndustrialBeam[""x8.4 Assembler<br>(Encased Industrial Beam)""]
     SteelBeam[""x13.4 Constructor<br>(Steel Beam)""]
     Concrete[""x16.7 Constructor<br>(Concrete)""]
-    Limestone[""x12.5 MiningMachine<br>(Limestone)""]
+    Limestone[""x12.5 Mining Machine<br>(Limestone)""]
     ModularFrame--""Modular Frame<br>(50 units/min)""-->HeavyModularFrame
     SteelPipe--""Steel Pipe<br>(150 units/min)""-->HeavyModularFrame
     EncasedIndustrialBeam--""Encased Industrial Beam<br>(50 units/min)""-->HeavyModularFrame
