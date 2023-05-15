@@ -176,7 +176,7 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + GetManufacturingName(item.Item.Recipes[0].ManufactoringBuilding) + "<br>(" + GetOutputsAsString(item.Item.Recipes[0].Outputs) + ")" + '"'));
+                    nodes.Add(new(GetOutputsAsString(item.Item.Recipes[0].Outputs).Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + GetManufacturingName(item.Item.Recipes[0].ManufactoringBuilding) + "<br>(" + GetOutputsAsString(item.Item.Recipes[0].Outputs) + ")" + '"'));
                     if (item.OutputItem == true)
                     {
                         string finalItemQuantity = item.Quantity.ToString("0.0");
@@ -203,7 +203,7 @@ namespace SatisfactoryTree
                         links.Add(
                         new MermaidDotNet.Models.Link(
                                 itemInput.Key.Replace(" ", ""),
-                                item.Item.Name.Replace(" ", ""),
+                                GetOutputsAsString(item.Item.Recipes[0].Outputs).Replace(" ", ""),
                                 '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"')
                             );
                     }
@@ -211,7 +211,7 @@ namespace SatisfactoryTree
                     {
                         string? source;
                         string? destination;
-                        source = item.Item.Name.Replace(" ", "");
+                        source = GetOutputsAsString(item.Item.Recipes[0].Outputs).Replace(" ", "");
                         destination = item.Item.Name.Replace(" ", "") + "_Item";
                         if (source != null && destination != null)
                         {
