@@ -176,7 +176,7 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + GetOutputsAsString(item.Item.Recipes[0].Outputs) + ")" + '"'));
+                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + GetManufacturingName(item.Item.Recipes[0].ManufactoringBuilding) + "<br>(" + GetOutputsAsString(item.Item.Recipes[0].Outputs) + ")" + '"'));
                     if (item.OutputItem == true)
                     {
                         string finalItemQuantity = item.Quantity.ToString("0.0");
@@ -257,6 +257,27 @@ namespace SatisfactoryTree
                 i++;
             }
             return sb.ToString();
+        }
+
+        private static string GetManufacturingName(ManufactoringBuildingType manufactoringBuilding)
+        {
+             switch (manufactoringBuilding)
+            {
+                case ManufactoringBuildingType.MiningMachine:
+                    return "Mining Machine";
+                case ManufactoringBuildingType.OilExtractor:
+                    return  "Oil Extractor";
+                case ManufactoringBuildingType.NuclearPowerPlant:
+                    return "Nuclear Power Plant";
+                case ManufactoringBuildingType.ParticleAccelerator:
+                    return "Particle Accelerator";
+                case ManufactoringBuildingType.ResourceWellExtractor:
+                    return "Resource Well Extractor";
+                case ManufactoringBuildingType.WaterExtractor:
+                    return "Water Extractor";
+                default:
+                    return manufactoringBuilding.ToString();
+            }
         }
 
     }
