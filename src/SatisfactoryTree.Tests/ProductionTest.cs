@@ -18,7 +18,7 @@ namespace SatisfactoryTree.Tests
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
-    IronOre[""x1.5 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x1.5 Mining Machine<br>(Iron Ore)""]
     IronOre_Item([90 Iron Ore])
     IronOre--""Iron Ore<br>(90 units/min)""-->IronOre_Item
 ";
@@ -53,7 +53,7 @@ namespace SatisfactoryTree.Tests
             string expectedResult = @"flowchart LR
     IronIngot[""x0.5 Smelter<br>(Iron Ingot)""]
     IronIngot_Item([15 Iron Ingot])
-    IronOre[""x0.3 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x0.3 Mining Machine<br>(Iron Ore)""]
     IronOre--""Iron Ore<br>(15 units/min)""-->IronIngot
     IronIngot--""Iron Ingot<br>(15 units/min)""-->IronIngot_Item
 ";
@@ -91,7 +91,7 @@ namespace SatisfactoryTree.Tests
             string expectedResult = @"flowchart LR
     IronIngot[""x1 Smelter<br>(Iron Ingot)""]
     IronIngot_Item([30 Iron Ingot])
-    IronOre[""x0.5 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x0.5 Mining Machine<br>(Iron Ore)""]
     IronOre--""Iron Ore<br>(30 units/min)""-->IronIngot
     IronIngot--""Iron Ingot<br>(30 units/min)""-->IronIngot_Item
 ";
@@ -129,7 +129,7 @@ namespace SatisfactoryTree.Tests
             string expectedResult = @"flowchart LR
     IronIngot[""x2 Smelter<br>(Iron Ingot)""]
     IronIngot_Item([60 Iron Ingot])
-    IronOre[""x1 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x1 Mining Machine<br>(Iron Ore)""]
     IronOre--""Iron Ore<br>(60 units/min)""-->IronIngot
     IronIngot--""Iron Ingot<br>(60 units/min)""-->IronIngot_Item
 ";
@@ -168,7 +168,7 @@ namespace SatisfactoryTree.Tests
     IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
     IronPlate_Item([30 Iron Plate])
     IronIngot[""x1.5 Smelter<br>(Iron Ingot)""]
-    IronOre[""x0.8 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x0.8 Mining Machine<br>(Iron Ore)""]
     IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
     IronPlate--""Iron Plate<br>(30 units/min)""-->IronPlate_Item
     IronOre--""Iron Ore<br>(45 units/min)""-->IronIngot
@@ -214,7 +214,7 @@ namespace SatisfactoryTree.Tests
     ReinforcedIronPlate_Item([12 Reinforced Iron Plate])
     IronPlate[""x3.6 Constructor<br>(Iron Plate)""]
     IronIngot[""x4.8 Smelter<br>(Iron Ingot)""]
-    IronOre[""x2.4 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x2.4 Mining Machine<br>(Iron Ore)""]
     Screw[""x3.6 Constructor<br>(Screw)""]
     IronRod[""x2.4 Constructor<br>(Iron Rod)""]
     IronPlate--""Iron Plate<br>(72 units/min)""-->ReinforcedIronPlate
@@ -254,8 +254,8 @@ namespace SatisfactoryTree.Tests
             string expectedResult = @"flowchart LR
     SteelIngot[""x22.8 Foundry<br>(Steel Ingot)""]
     SteelIngot_Item([1025 Steel Ingot])
-    IronOre[""x17.1 MiningMachine<br>(Iron Ore)""]
-    Coal[""x17.1 MiningMachine<br>(Coal)""]
+    IronOre[""x17.1 Mining Machine<br>(Iron Ore)""]
+    Coal[""x17.1 Mining Machine<br>(Coal)""]
     IronOre--""Iron Ore<br>(1025 units/min)""-->SteelIngot
     Coal--""Coal<br>(1025 units/min)""-->SteelIngot
     SteelIngot--""Steel Ingot<br>(1025 units/min)""-->SteelIngot_Item
@@ -358,15 +358,15 @@ namespace SatisfactoryTree.Tests
     Rotor[""x2.5 Assembler<br>(Rotor)""]
     IronRod[""x7.5 Constructor<br>(Iron Rod)""]
     IronIngot[""x3.8 Smelter<br>(Iron Ingot)""]
-    IronOre[""x2.7 MiningMachine<br>(Iron Ore)""]
+    IronOre[""x2.7 Mining Machine<br>(Iron Ore)""]
     Screw[""x6.3 Constructor<br>(Screw)""]
     Stator[""x2 Assembler<br>(Stator)""]
     SteelPipe[""x1.5 Constructor<br>(Steel Pipe)""]
     SteelIngot[""x1 Foundry<br>(Steel Ingot)""]
-    Coal[""x0.8 MiningMachine<br>(Coal)""]
+    Coal[""x0.8 Mining Machine<br>(Coal)""]
     Wire[""x2.7 Constructor<br>(Wire)""]
     CopperIngot[""x1.4 Smelter<br>(Copper Ingot)""]
-    CopperOre[""x0.7 MiningMachine<br>(Copper Ore)""]
+    CopperOre[""x0.7 Mining Machine<br>(Copper Ore)""]
     Rotor--""Rotor<br>(10 units/min)""-->Motor
     Stator--""Stator<br>(10 units/min)""-->Motor
     Motor--""Motor<br>(5 units/min)""-->Motor_Item
@@ -449,7 +449,7 @@ namespace SatisfactoryTree.Tests
     CircuitBoard_Item[5 Circuit Board]
     CopperSheet[""x1 Constructor<br>(Copper Sheet)""]
     CopperIngot[""x0.7 Smelter<br>(Copper Ingot)""]
-    CopperOre[""x0.4 MiningMachine<br>(Copper Ore)""]
+    CopperOre[""x0.4 Mining Machine<br>(Copper Ore)""]
     Plastic[""x1 Refinery<br>(Plastic)""]
     CrudeOil[""x0.3 OilExtractor<br>(Crude Oil)""]
     CopperSheet--""Copper Sheet<br>(10 units/min)""-->CircuitBoard
