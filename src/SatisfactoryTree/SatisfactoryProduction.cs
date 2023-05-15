@@ -240,6 +240,7 @@ namespace SatisfactoryTree
             }
         }
 
+        //Combine multiple outputs into a single string
         private static string GetOutputsAsString(Dictionary<string, decimal> outputs)
         {
             StringBuilder sb = new();

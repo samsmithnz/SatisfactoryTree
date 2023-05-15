@@ -409,11 +409,15 @@ namespace SatisfactoryTree.Tests
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
-    Plastic[""x1 Refinery<br>(Plastic)""]
-    Plastic_Item[20 Plastic]
+    Plastic[""x1 Refinery<br>(Plastic & Heavy Oil Residue)""]
+    Plastic_Item([20 Plastic])
+    HeavyOilResidue[""x1 Refinery<br>(Plastic & Heavy Oil Residue)""]
+    HeavyOilResidue_Item([10 Heavy Oil Residue])
     CrudeOil[""x0.3 OilExtractor<br>(Crude Oil)""]
     CrudeOil--""Crude Oil<br>(30 units/min)""-->Plastic
     Plastic--""Plastic<br>(20 units/min)""-->Plastic_Item
+    CrudeOil--""Crude Oil<br>(30 units/min)""-->HeavyOilResidue
+    HeavyOilResidue--""Heavy Oil Residue<br>(10 units/min)""-->HeavyOilResidue_Item
 ";
 
             //Act
