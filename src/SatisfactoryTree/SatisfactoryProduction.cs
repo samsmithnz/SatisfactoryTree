@@ -21,7 +21,8 @@ namespace SatisfactoryTree
             if (itemGoal != null && itemGoal.Item != null)
             {
                 ProcessOutputItem(itemGoal);
-                //Identify which items aren't dependencies for other items
+
+                //Search for items that are not dependencies to identify outputs
                 List<string> dependencies = new();
                 foreach (ProductionItem item in ProductionItems)
                 {
