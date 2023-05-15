@@ -1,6 +1,8 @@
 ﻿using MermaidDotNet;
 using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
+using System.Net.NetworkInformation;
+using System.Text;
 
 namespace SatisfactoryTree
 {
@@ -172,7 +174,7 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + GetOutputsAsString(item.Item.Recipes[0].Outputs) + ")" + '"'));
                     if (item.OutputItem == true)
                     {
                         string finalItemQuantity = item.Quantity.ToString("0.0");
@@ -236,6 +238,13 @@ namespace SatisfactoryTree
             {
                 return (Math.Ceiling(value * 10) / 10).ToString("0.0");
             }
+        }
+
+        private static string GetOutputsAsString(Dictionary<string, decimal> outputs)
+        {
+            StringBuilder sb = new();
+
+            return sb.ToString();
         }
 
     }
