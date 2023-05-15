@@ -15,7 +15,7 @@ namespace SatisfactoryTree
             ProductionItems = new();
         }
 
-        public List<ProductionItem> BuildSatisfactoryProductionPlan(ProductionItem itemGoal)
+        public List<ProductionItem> BuildProductionPlan(ProductionItem itemGoal)
         {
             ProductionItems = new();
             if (itemGoal != null && itemGoal.Item != null)

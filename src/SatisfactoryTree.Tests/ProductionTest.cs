@@ -26,7 +26,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -61,7 +61,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -99,7 +99,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -137,7 +137,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -177,7 +177,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -229,7 +229,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -264,7 +264,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -328,7 +328,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -387,7 +387,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -419,7 +419,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
@@ -459,7 +459,7 @@ namespace SatisfactoryTree.Tests
             //Act
             if (startingItem != null)
             {
-                results = graph.BuildSatisfactoryProductionPlan(startingItem);
+                results = graph.BuildProductionPlan(startingItem);
                 mermaidResult = graph.ToMermaidString();
             }
 
