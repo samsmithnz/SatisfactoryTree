@@ -243,7 +243,10 @@ namespace SatisfactoryTree
         private static string GetOutputsAsString(Dictionary<string, decimal> outputs)
         {
             StringBuilder sb = new();
-
+            foreach (KeyValuePair<string, decimal> item in outputs)
+            {
+                sb.Append(item.Key);
+            }
             return sb.ToString();
         }
 
