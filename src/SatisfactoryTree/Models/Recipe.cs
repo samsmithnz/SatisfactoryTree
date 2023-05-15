@@ -3,14 +3,25 @@
     public class Recipe
     {
         public Recipe(
-            string name,
             Dictionary<string, decimal> inputs,
             Dictionary<string, decimal> outputs,
             ManufactoringBuildingType manufactoringBuilding,
             ManufactoringMethodType manufactoringMethod = ManufactoringMethodType.Manufactured,
-            bool primaryMethodOfManufacture = true)
+            bool primaryMethodOfManufacture = true,
+            string? name = null)
         {
-            Name = name;
+            if (name == null && Outputs != null)
+            {
+                Name = Outputs.FirstOrDefault().Key;
+            }
+            else if (name != null)
+            {
+                Name = name;
+            }
+            else
+            {
+                Name = "Unknown";
+            }
             Inputs = inputs;
             Outputs = outputs;
             ManufactoringBuilding = manufactoringBuilding;
