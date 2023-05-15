@@ -17,6 +17,7 @@ namespace SatisfactoryTree
             ProductionItems = new();
         }
 
+        //Build a production plan for a given target item
         public List<ProductionItem> BuildProductionPlan(ProductionItem itemGoal)
         {
             ProductionItems = new();
@@ -149,6 +150,7 @@ namespace SatisfactoryTree
             return true;
         }
 
+        //Find an item by name
         public Item? FindItem(string itemName)
         {
             Item? result = null;
@@ -166,6 +168,7 @@ namespace SatisfactoryTree
             return result;
         }
 
+        //Create the mermaid string for the production plan
         public string ToMermaidString()
         {
             string direction = "LR";
