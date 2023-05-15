@@ -205,10 +205,6 @@ namespace SatisfactoryTree
                     }
                     if (item.OutputItem == true)
                     {
-                        //if (ProductionItems != null && ProductionItems.Count > 0 &&
-                        //        ProductionItems[0] != null && ProductionItems[0].Item != null &&
-                        //        ProductionItems[0].Item?.Name != null)
-                        //{
                         string? source;
                         string? destination;
                         source = item.Item.Name.Replace(" ", "");
@@ -220,7 +216,6 @@ namespace SatisfactoryTree
                                                 destination,
                                                 '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"'));
                         }
-                        //}
                     }
                 }
             }
