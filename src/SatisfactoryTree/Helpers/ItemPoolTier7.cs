@@ -182,15 +182,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(8,
-                        22.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Raw Quartz", 5 }
+                            { "Raw Quartz", 37.5M }
                         },
                         new()
                         {
-                            { "Quartz Crystal", 3 }
+                            { "Quartz Crystal", 22.5M }
                         },
                         BuildingType.Assembler)
                 }
@@ -206,15 +205,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(8,
-                        37.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Raw Quartz", 3 }
+                            { "Raw Quartz", 22.5M }
                         },
                         new()
                         {
-                            { "Silica", 5 }
+                            { "Silica", 37.5 }
                         },
                         BuildingType.Constructor)
                 }
