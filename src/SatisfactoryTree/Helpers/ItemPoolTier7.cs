@@ -212,7 +212,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Silica", 37.5 }
+                            { "Silica", 37.5M }
                         },
                         BuildingType.Constructor)
                 }
