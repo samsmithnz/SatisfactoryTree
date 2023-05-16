@@ -355,12 +355,12 @@ namespace SatisfactoryTree.Helpers
                         5,
                         new()
                         {
-                            { "Copper Sheet", 5 },
-                            { "Quickwire", 20 }
+                            { "Copper Sheet", 25 },
+                            { "Quickwire", 100 }
                         },
                         new()
                         {
-                            { "AI Limiter", 1 }
+                            { "AI Limiter", 5 }
                         },
                         BuildingType.Assembler)
                 }
