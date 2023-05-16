@@ -91,16 +91,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        60,
+                    new Recipe(
                         new()
                         {
-                            { "Aluminum Scrap", 6 },
-                            { "Silica", 5 }
+                            { "Aluminum Scrap", 90 },
+                            { "Silica", 75 }
                         },
                         new()
                         {
-                            { "Aluminum Ingot", 4 }
+                            { "Aluminum Ingot", 60 }
                         },
                         BuildingType.Foundry)
                 }
