@@ -412,8 +412,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(240,
-                        0.25m,
+                    new Recipe(
                         new()
                         {
                             { "Encased Plutonium Cell", 30 },
