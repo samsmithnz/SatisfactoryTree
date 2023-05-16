@@ -335,7 +335,6 @@ namespace SatisfactoryTree.Helpers
                             { "Water", 40 }
                         },
                         BuildingType.Blender,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Battery")
                 }
