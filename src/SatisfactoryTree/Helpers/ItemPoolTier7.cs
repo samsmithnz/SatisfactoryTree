@@ -253,8 +253,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(48,
-                        2.5m,
+                    new Recipe(
                         new()
                         {
                             { "Aluminum Casing", 40 },
