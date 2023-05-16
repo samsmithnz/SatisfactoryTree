@@ -233,18 +233,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(32,
-                        1.875m,
+                    new Recipe(
                         new()
                         {
-                            { "Cooling System", 4 },
-                            { "Radio Control Unit", 2 },
-                            { "Motor", 4 },
-                            { "Rubber", 24 }
+                            { "Cooling System", 7.5M },
+                            { "Radio Control Unit", 3.75M },
+                            { "Motor", 7.5M },
+                            { "Rubber", 45 }
                         },
                         new()
                         {
-                            { "Turbo Motor", 1 }
+                            { "Turbo Motor", 1.88M }
                         },
                         BuildingType.Manufacturer)
                 }
