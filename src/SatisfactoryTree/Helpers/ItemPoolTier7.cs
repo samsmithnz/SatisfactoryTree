@@ -1,13 +1,11 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
-
 namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier7
     {
         //Level 7
-
         public static Item Bauxite()
         {
             return new Item(7, "Bauxite",
@@ -17,12 +15,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Bauxite", 1 }
+                            { "Bauxite", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
