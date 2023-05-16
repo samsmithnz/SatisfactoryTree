@@ -1,7 +1,6 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
-
 namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier6
@@ -16,12 +15,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Caterium Ore", 1 }
+                            { "Caterium Ore", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
