@@ -364,8 +364,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(60,
-                        30,
+                    new Recipe(
                         new()
                         {
                             { "Non-fissile Uranium", 100 },
