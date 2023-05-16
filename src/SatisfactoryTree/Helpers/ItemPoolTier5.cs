@@ -71,7 +71,10 @@ namespace SatisfactoryTree.Helpers
                             { "Plastic", 20 },
                             { "Heavy Oil Residue", 10 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Plastic")
                 }
             };
         }
@@ -95,7 +98,10 @@ namespace SatisfactoryTree.Helpers
                             { "Rubber", 20 },
                             { "Heavy Oil Residue", 20 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Rubber")
                 }
             };
         }
@@ -119,7 +125,10 @@ namespace SatisfactoryTree.Helpers
                             { "Plastic", 20 },
                             { "Heavy Oil Residue", 10 }
                         },
-                        BuildingType.Refinery),
+                        BuildingType.Refinery,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Plastic"),
                     new Recipe(
                         new()
                         {
@@ -130,7 +139,10 @@ namespace SatisfactoryTree.Helpers
                             { "Rubber", 20 },
                             { "Heavy Oil Residue", 20 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Rubber")
                 }
             };
         }
