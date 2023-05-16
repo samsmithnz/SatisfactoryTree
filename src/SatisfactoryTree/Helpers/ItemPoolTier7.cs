@@ -375,18 +375,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(32,
-                        1.875m,
+                    new Recipe(
                         new()
                         {
-                            { "Computer", 2 },
-                            { "AI Limiter", 2 },
-                            { "High-Speed Connector", 3 },
-                            { "Plastic", 28 }
+                            { "Computer", 3.75M },
+                            { "AI Limiter", 3.75M },
+                            { "High-Speed Connector", 5.63M },
+                            { "Plastic", 52.5M }
                         },
                         new()
                         {
-                            { "Supercomputer", 1 }
+                            { "Supercomputer", 1.88M }
                         },
                         BuildingType.Manufacturer)
                 }
