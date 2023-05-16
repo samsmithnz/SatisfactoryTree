@@ -10,9 +10,9 @@
             bool primaryMethodOfManufacture = true,
             string? name = null)
         {
-            if (name == null && Outputs != null)
+            if (name == null && outputs != null)
             {
-                Name = Outputs.FirstOrDefault().Key;
+                Name = outputs.FirstOrDefault().Key;
             }
             else if (name != null)
             {
