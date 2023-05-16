@@ -113,17 +113,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Versatile Framework", 5 },
-                            { "Electromagnetic Control Rod", 2 },
-                            { "Battery", 10 }
+                            { "Versatile Framework", 2.5M },
+                            { "Electromagnetic Control Rod", 1 },
+                            { "Battery", 5 }
                         },
                         new()
                         {
-                            { "Magnetic Field Generator", 2 }
+                            { "Magnetic Field Generator", 1 }
                         },
                         BuildingType.Manufacturer)
                 }
