@@ -75,7 +75,6 @@ namespace SatisfactoryTree.Helpers
                             { "Water", 120 }
                         },
                         BuildingType.Assembler,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Aluminum Scrap")
                 }
