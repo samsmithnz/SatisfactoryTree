@@ -63,19 +63,21 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        360,
+                    new Recipe(
                         new()
                         {
-                            { "Alumina Solution", 4 },
-                            { "Coal", 2 }
+                            { "Alumina Solution", 240 },
+                            { "Coal", 120 }
                         },
                         new()
                         {
-                            { "Aluminum Scrap", 6 },
-                            { "Water", 2 }
+                            { "Aluminum Scrap", 360 },
+                            { "Water", 120 }
                         },
-                        BuildingType.Assembler)
+                        BuildingType.Assembler,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Aluminum Scrap")
                 }
             };
         }
