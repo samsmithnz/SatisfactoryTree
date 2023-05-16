@@ -334,21 +334,23 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(24,
-                        50,
+                    new Recipe(
                         new()
                         {
-                            { "Uranium Waste", 15 },
-                            { "Silica", 10 },
-                            { "Nitric Acid", 6 },
-                            { "Sulfuric Acid", 6 }
+                            { "Uranium Waste", 37.5M },
+                            { "Silica", 25 },
+                            { "Nitric Acid", 15 },
+                            { "Sulfuric Acid", 15 }
                         },
                         new()
                         {
-                            { "Non-fissile Uranium", 20 },
+                            { "Non-fissile Uranium", 50 },
                             { "Water", 15 }
                         },
-                        BuildingType.Blender)
+                        BuildingType.Blender,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Non-fissile Uranium")
                 }
             };
         }
