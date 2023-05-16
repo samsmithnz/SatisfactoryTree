@@ -257,13 +257,13 @@ namespace SatisfactoryTree.Helpers
                         2.5m,
                         new()
                         {
-                            { "Aluminum Casing", 32 },
-                            { "Crystal Oscillator", 1.25m },
-                            { "Computer", 1 }
+                            { "Aluminum Casing", 40 },
+                            { "Crystal Oscillator", 1.25M },
+                            { "Computer", 1.25M }
                         },
                         new()
                         {
-                            { "Radio Control Unit", 2 }
+                            { "Radio Control Unit", 2.5M }
                         },
                         BuildingType.Manufacturer)
                 }
