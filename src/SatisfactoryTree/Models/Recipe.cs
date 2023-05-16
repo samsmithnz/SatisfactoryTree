@@ -6,7 +6,6 @@
             Dictionary<string, decimal> inputs,
             Dictionary<string, decimal> outputs,
             ManufactoringBuildingType manufactoringBuilding,
-            ManufactoringMethodType manufactoringMethod = ManufactoringMethodType.Manufactured,
             bool primaryMethodOfManufacture = true,
             string? name = null)
         {
@@ -56,15 +55,8 @@
         public Dictionary<string, decimal> Inputs { get; set; }
         public Dictionary<string, decimal> Outputs { get; set; }
         public ManufactoringBuildingType ManufactoringBuilding { get; set; }
-        public ManufactoringMethodType ManufactoringMethod { get; set; }
         public bool PrimaryMethodOfManufacture { get; set; }
 
-    }
-
-    public enum ManufactoringMethodType
-    {
-        Gathered = 0,
-        Manufactured = 1
     }
 
     public enum ManufactoringBuildingType
