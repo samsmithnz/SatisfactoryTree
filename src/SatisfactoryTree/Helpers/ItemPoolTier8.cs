@@ -64,16 +64,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(30,
-                        4,
+                    new Recipe(
                         new()
                         {
-                            { "Stator", 3 },
-                            { "AI Limiter", 2 }
+                            { "Stator", 6 },
+                            { "AI Limiter", 4 }
                         },
                         new()
                         {
-                            { "Electromagnetic Control Rod", 2 }
+                            { "Electromagnetic Control Rod", 4 }
                         },
                         BuildingType.Assembler)
                 }
