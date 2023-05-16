@@ -246,22 +246,22 @@ namespace SatisfactoryTree
             }
         }
 
-        //Combine multiple outputs into a single string
-        private static string GetOutputsAsString(Dictionary<string, decimal> outputs)
-        {
-            StringBuilder sb = new();
-            int i = 0;
-            foreach (KeyValuePair<string, decimal> item in outputs)
-            {
-                if (i > 0)
-                {
-                    sb = sb.Append(" & ");
-                }
-                sb.Append(item.Key);
-                i++;
-            }
-            return sb.ToString();
-        }
+        ////Combine multiple outputs into a single string
+        //private static string GetOutputsAsString(Dictionary<string, decimal> outputs)
+        //{
+        //    StringBuilder sb = new();
+        //    int i = 0;
+        //    foreach (KeyValuePair<string, decimal> item in outputs)
+        //    {
+        //        if (i > 0)
+        //        {
+        //            sb = sb.Append(" & ");
+        //        }
+        //        sb.Append(item.Key);
+        //        i++;
+        //    }
+        //    return sb.ToString();
+        //}
 
         private static string GetManufacturingName(ManufactoringBuildingType manufactoringBuilding)
         {
