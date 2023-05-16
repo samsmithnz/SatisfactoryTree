@@ -47,7 +47,6 @@ namespace SatisfactoryTree.Helpers
                             { "Silica", 50 }
                         },
                         BuildingType.Refinery,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Alumina Solution")
                 }
