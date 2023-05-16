@@ -98,7 +98,6 @@ namespace SatisfactoryTree.Helpers
                             { "Heavy Oil Residue", 20 }
                         },
                         BuildingType.Refinery,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Rubber")
                 }
