@@ -35,20 +35,22 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        25,
+                    new Recipe(
                         new()
                         {
-                            { "Uranium", 10 },
-                            { "Concrete", 3 },
-                            { "Sulfuric Acid", 8 }
+                            { "Uranium", 50 },
+                            { "Concrete", 15 },
+                            { "Sulfuric Acid", 40 }
                         },
                         new()
                         {
-                            { "Encased Uranium Cell", 5 },
-                            { "Sulfuric Acid", 2 }
+                            { "Encased Uranium Cell", 25 },
+                            { "Sulfuric Acid", 10 }
                         },
-                        BuildingType.Blender)
+                        BuildingType.Blender,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Encased Uranium Cell")
                 }
             };
         }
