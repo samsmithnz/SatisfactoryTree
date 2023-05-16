@@ -23,9 +23,12 @@
                 Name = "Unknown";
             }
             Inputs = inputs;
+            if (outputs == null)
+            {
+                outputs = new();
+            }
             Outputs = outputs;
             ManufactoringBuilding = manufactoringBuilding;
-            ManufactoringMethod = manufactoringMethod;
             PrimaryMethodOfManufacture = primaryMethodOfManufacture;
         }
 
