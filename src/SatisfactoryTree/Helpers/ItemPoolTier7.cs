@@ -401,16 +401,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(80,
-                        0.75m,
+                    new Recipe(
                         new()
                         {
-                            { "Adaptive Control Unit", 1.5m },
-                            { "Supercomputer", 0.75m }
+                            { "Adaptive Control Unit", 1.5M },
+                            { "Supercomputer", 0.75M }
                         },
                         new()
                         {
-                            { "Assembly Director System", 1 }
+                            { "Assembly Director System", 0.75M }
                         },
                         BuildingType.Assembler)
                 }
