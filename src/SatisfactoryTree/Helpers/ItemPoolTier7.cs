@@ -162,12 +162,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Raw Quartz", 1 }
+                            { "Raw Quartz", 60 }
                         },
                         BuildingType.Assembler)
                 }
