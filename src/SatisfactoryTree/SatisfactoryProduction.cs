@@ -204,7 +204,9 @@ namespace SatisfactoryTree
                         string destination = item.Item.Recipes[0].Name.Replace(" ", "");
                         string text = '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"';
                         MermaidDotNet.Models.Link link = new(source, destination, text);
-                        if (!links.Any(g => g.SourceNode == link.SourceNode))
+                        if (!links.Any(g => g.SourceNode == link.SourceNode && 
+                                            g.DestinationNode == link.DestinationNode && 
+                                            g.Text == link.Text))
                         {
                             links.Add(new MermaidDotNet.Models.Link(source, destination, text));
                         }
