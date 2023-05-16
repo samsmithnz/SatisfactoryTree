@@ -15,12 +15,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Uranium", 1 }
+                            { "Uranium", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
