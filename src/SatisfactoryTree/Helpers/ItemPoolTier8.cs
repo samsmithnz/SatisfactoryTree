@@ -285,17 +285,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        30,
+                    new Recipe(
                         new()
                         {
-                            { "Nitrogen Gas", 12 },
-                            { "Water", 3 },
-                            { "Iron Plate", 1 }
+                            { "Nitrogen Gas", 120 },
+                            { "Water", 30 },
+                            { "Iron Plate", 10 }
                         },
                         new()
                         {
-                            { "Nitric Acid", 3 }
+                            { "Nitric Acid", 30 }
                         },
                         BuildingType.Blender)
                 }
