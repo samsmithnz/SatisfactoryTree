@@ -138,12 +138,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Nitrogen Gas", 1 }
+                            { "Nitrogen Gas", 120 }
                         },
                         BuildingType.ResourceWellExtractor)
                 }
