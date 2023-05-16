@@ -48,7 +48,6 @@ namespace SatisfactoryTree.Helpers
                             { "Sulfuric Acid", 10 }
                         },
                         BuildingType.Blender,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Encased Uranium Cell")
                 }
@@ -348,7 +347,6 @@ namespace SatisfactoryTree.Helpers
                             { "Water", 15 }
                         },
                         BuildingType.Blender,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Non-fissile Uranium")
                 }
