@@ -322,20 +322,22 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(3,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Sulfuric Acid", 2.5m },
-                            { "Alumina Solution", 2 },
-                            { "Aluminum Casing", 1 }
+                            { "Sulfuric Acid", 60 },
+                            { "Alumina Solution", 40 },
+                            { "Aluminum Casing", 20 }
                         },
                         new()
                         {
-                            { "Battery", 1 },
-                            { "Water", 1.5m }
+                            { "Battery", 20 },
+                            { "Water", 40 }
                         },
-                        BuildingType.Blender)
+                        BuildingType.Blender,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Battery")
                 }
             };
         }
