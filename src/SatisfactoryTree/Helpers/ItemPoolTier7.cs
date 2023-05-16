@@ -298,16 +298,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        50,
+                    new Recipe(
                         new()
                         {
-                            { "Sulfur", 5 },
-                            { "Water", 5 }
+                            { "Sulfur", 50 },
+                            { "Water", 50 }
                         },
                         new()
                         {
-                            { "Sulfuric Acid", 5 }
+                            { "Sulfuric Acid", 50 }
                         },
                         BuildingType.Refinery)
                 }
