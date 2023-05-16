@@ -475,5 +475,48 @@ namespace SatisfactoryTree.Tests
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
         }
+
+        [TestMethod]
+        public void AluminumIngotProductionTest()
+        {
+            //Arrange
+            SatisfactoryProduction graph = new();
+            string itemName = "Aluminum Ingot";
+            decimal quantity = 10;
+            ProductionItem? startingItem = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    CircuitBoard[""x0.7 Assembler<br>(Circuit Board)""]
+    CircuitBoard_Item([5 Circuit Board])
+    CopperSheet[""x1 Constructor<br>(Copper Sheet)""]
+    CopperIngot[""x0.7 Smelter<br>(Copper Ingot)""]
+    CopperOre[""x0.4 Mining Machine<br>(Copper Ore)""]
+    Plastic[""x1 Refinery<br>(Plastic)""]
+    Plastic[""x1 Refinery<br>(Plastic)""]
+    HeavyOilResidue_Item([10 Heavy Oil Residue])
+    CrudeOil[""x0.3 Oil Extractor<br>(Crude Oil)""]
+    CopperSheet--""Copper Sheet<br>(10 units/min)""-->CircuitBoard
+    Plastic--""Plastic<br>(20.0 units/min)""-->CircuitBoard
+    CircuitBoard--""Circuit Board<br>(5 units/min)""-->CircuitBoard_Item
+    CopperIngot--""Copper Ingot<br>(20 units/min)""-->CopperSheet
+    CopperOre--""Copper Ore<br>(20.0 units/min)""-->CopperIngot
+    CrudeOil--""Crude Oil<br>(30 units/min)""-->Plastic
+    Plastic--""Heavy Oil Residue<br>(10 units/min)""-->HeavyOilResidue_Item
+";
+
+            //Act
+            if (startingItem != null)
+            {
+                results = graph.BuildProductionPlan(startingItem);
+                mermaidResult = graph.ToMermaidString();
+            }
+
+            //Assert
+            Assert.IsNotNull(startingItem);
+            Assert.AreEqual(8, results.Count);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
+        }
     }
 }
