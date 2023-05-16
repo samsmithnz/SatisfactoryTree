@@ -35,15 +35,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        15,
+                    new Recipe(
                         new()
                         {
-                            { "Caterium Ore", 3 }
+                            { "Caterium Ore", 45 }
                         },
                         new()
                         {
-                            { "Caterium Ingot", 1 }
+                            { "Caterium Ingot", 15 }
                         },
                         BuildingType.Smelter)
                 }
