@@ -35,19 +35,21 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        120,
+                    new Recipe(
                         new()
                         {
-                            { "Bauxite", 12 },
-                            { "Water", 18 }
+                            { "Bauxite", 120 },
+                            { "Water", 180 }
                         },
                         new()
                         {
-                            { "Alumina Solution", 12 },
-                            { "Silica", 5 }
+                            { "Alumina Solution", 120 },
+                            { "Silica", 50 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        ManufactoringMethodType.Manufactured,
+                        true,
+                        "Alumina Solution")
                 }
             };
         }
