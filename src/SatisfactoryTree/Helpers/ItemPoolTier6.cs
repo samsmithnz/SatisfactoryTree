@@ -58,15 +58,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(5,
-                        60,
+                    new Recipe(
                         new()
                         {
-                            { "Caterium Ingot", 1 }
+                            { "Caterium Ingot", 12 }
                         },
                         new()
                         {
-                            { "Quickwire", 5 }
+                            { "Quickwire", 60 }
                         },
                         BuildingType.Constructor)
                 }
