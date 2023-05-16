@@ -29,23 +29,23 @@
             PrimaryMethodOfManufacture = primaryMethodOfManufacture;
         }
 
-        public Recipe(
-            decimal processingTimeInSeconds,
-            decimal throughPutPerMinute,
-            Dictionary<string, decimal> inputs,
-            Dictionary<string, decimal> outputs,
-            ManufactoringBuildingType manufactoringBuilding,
-            ManufactoringMethodType manufactoringMethod = ManufactoringMethodType.Manufactured,
-            bool primaryMethodOfManufacture = true)
-        {
-            ProcessingTimeInSeconds = processingTimeInSeconds;
-            ThroughPutPerMinute = throughPutPerMinute;
-            Inputs = inputs;
-            Outputs = outputs;
-            ManufactoringBuilding = manufactoringBuilding;
-            ManufactoringMethod = manufactoringMethod;
-            PrimaryMethodOfManufacture = primaryMethodOfManufacture;
-        }
+        //public Recipe(
+        //    decimal processingTimeInSeconds,
+        //    decimal throughPutPerMinute,
+        //    Dictionary<string, decimal> inputs,
+        //    Dictionary<string, decimal> outputs,
+        //    ManufactoringBuildingType manufactoringBuilding,
+        //    ManufactoringMethodType manufactoringMethod = ManufactoringMethodType.Manufactured,
+        //    bool primaryMethodOfManufacture = true)
+        //{
+        //    ProcessingTimeInSeconds = processingTimeInSeconds;
+        //    ThroughPutPerMinute = throughPutPerMinute;
+        //    Inputs = inputs;
+        //    Outputs = outputs;
+        //    ManufactoringBuilding = manufactoringBuilding;
+        //    ManufactoringMethod = manufactoringMethod;
+        //    PrimaryMethodOfManufacture = primaryMethodOfManufacture;
+        //}
 
         public string Name { get; set; }
         public decimal ProcessingTimeInSeconds { get; internal set; }

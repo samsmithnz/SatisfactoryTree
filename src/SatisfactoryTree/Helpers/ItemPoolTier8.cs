@@ -310,16 +310,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(300,
-                        10,
+                    new Recipe(
                         new()
                         {
-                            { "Uranium Fuel Rod", 1 },
-                            { "Sulfuric Acid", 1500 }
+                            { "Uranium Fuel Rod", 0.2M },
+                            { "Water", 240 }
                         },
                         new()
                         {
-                            { "Uranium Waste", 50 }
+                            { "Uranium Waste", 10 }
                         },
                         BuildingType.NuclearPowerPlant)
                 }
