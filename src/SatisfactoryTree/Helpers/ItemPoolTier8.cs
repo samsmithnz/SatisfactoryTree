@@ -88,17 +88,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(150,
-                        0.4m,
+                    new Recipe(
                         new()
                         {
-                            { "Encased Uranium Cell", 50 },
-                            { "Encased Industrial Beam", 3 },
-                            { "Electromagnetic Control Rod", 5 }
+                            { "Encased Uranium Cell", 20 },
+                            { "Encased Industrial Beam", 1.2M },
+                            { "Electromagnetic Control Rod", 2 }
                         },
                         new()
                         {
-                            { "Uranium Fuel Rod", 1 }
+                            { "Uranium Fuel Rod", 0.4M }
                         },
                         BuildingType.Manufacturer)
                 }
