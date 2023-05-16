@@ -509,16 +509,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        0.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Powder", 200 },
-                            { "Pressure Conversion Cube", 1 }
+                            { "Copper Powder", 100 },
+                            { "Pressure Conversion Cube", 0.5M }
                         },
                         new()
                         {
-                            { "Nuclear Pasta", 1 }
+                            { "Nuclear Pasta", 0.5M }
                         },
                         BuildingType.ParticleAccelerator)
                 }
