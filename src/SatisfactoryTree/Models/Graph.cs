@@ -54,7 +54,7 @@
             }
         }
 
-        private int FindIndex(List<Item> data, string name)
+        private static int FindIndex(List<Item> data, string name)
         {
             for (int i = 0; i < data.Count; i++)
             {
