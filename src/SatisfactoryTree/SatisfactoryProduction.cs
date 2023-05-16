@@ -200,12 +200,14 @@ namespace SatisfactoryTree
                         {
                             itemQuantity = itemInput.Value.ToString("0");
                         }
-                        links.Add(
-                        new MermaidDotNet.Models.Link(
-                                itemInput.Key.Replace(" ", ""),
-                                item.Item.Recipes[0].Name.Replace(" ", ""),
-                                '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"')
-                            );
+                        string source = itemInput.Key.Replace(" ", "");
+                        string destination = item.Item.Recipes[0].Name.Replace(" ", "");
+                        string text = '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"';
+                        MermaidDotNet.Models.Link link = new(source, destination, text);
+                        if (!links.Any(g => g.SourceNode == link.SourceNode))
+                        {
+                            links.Add(new MermaidDotNet.Models.Link(source, destination, text));
+                        }
                     }
                     if (item.OutputItem == true)
                     {
@@ -261,12 +263,12 @@ namespace SatisfactoryTree
 
         private static string GetManufacturingName(ManufactoringBuildingType manufactoringBuilding)
         {
-             switch (manufactoringBuilding)
+            switch (manufactoringBuilding)
             {
                 case ManufactoringBuildingType.MiningMachine:
                     return "Mining Machine";
                 case ManufactoringBuildingType.OilExtractor:
-                    return  "Oil Extractor";
+                    return "Oil Extractor";
                 case ManufactoringBuildingType.NuclearPowerPlant:
                     return "Nuclear Power Plant";
                 case ManufactoringBuildingType.ParticleAccelerator:
