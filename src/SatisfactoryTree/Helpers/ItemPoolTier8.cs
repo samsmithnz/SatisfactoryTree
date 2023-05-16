@@ -1,13 +1,11 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
-
 namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier8
     {
         //Level 8
-
         public static Item Uranium()
         {
             return new Item(8, "Uranium",
