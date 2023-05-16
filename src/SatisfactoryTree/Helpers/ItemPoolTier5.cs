@@ -124,7 +124,6 @@ namespace SatisfactoryTree.Helpers
                             { "Heavy Oil Residue", 10 }
                         },
                         BuildingType.Refinery,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Plastic"),
                     new Recipe(
@@ -138,7 +137,6 @@ namespace SatisfactoryTree.Helpers
                             { "Heavy Oil Residue", 20 }
                         },
                         BuildingType.Refinery,
-                        ManufactoringMethodType.Manufactured,
                         true,
                         "Rubber")
                 }
