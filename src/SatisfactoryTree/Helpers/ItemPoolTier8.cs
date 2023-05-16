@@ -259,18 +259,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Modular Engine", 5 },
-                            { "Turbo Motor", 2 },
-                            { "Cooling System", 6 },
-                            { "Fused Modular Frame", 2 }
+                            { "Modular Engine", 2.5M },
+                            { "Turbo Motor", 1 },
+                            { "Cooling System", 3 },
+                            { "Fused Modular Frame", 1 }
                         },
                         new()
                         {
-                            { "Thermal Propulsion Rocket", 2 }
+                            { "Thermal Propulsion Rocket", 1 }
                         },
                         BuildingType.Manufacturer)
                 }
