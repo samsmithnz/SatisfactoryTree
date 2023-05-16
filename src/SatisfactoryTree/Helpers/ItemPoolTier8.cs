@@ -208,17 +208,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(40,
-                        1.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Heavy Modular Frame", 1 },
-                            { "Aluminum Casing", 50 },
-                            { "Nitrogen Gas", 25 }
+                            { "Heavy Modular Frame", 1.5M },
+                            { "Aluminum Casing", 75 },
+                            { "Nitrogen Gas", 37.5M }
                         },
                         new()
                         {
-                            { "Fused Modular Frame", 99 }
+                            { "Fused Modular Frame", 1.5M }
                         },
                         BuildingType.Blender)
                 }
