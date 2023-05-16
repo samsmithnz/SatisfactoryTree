@@ -139,15 +139,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        60,
+                    new Recipe(
                         new()
                         {
-                            { "Aluminum Ingot", 3 }
+                            { "Aluminum Ingot", 90 }
                         },
                         new()
                         {
-                            { "Aluminum Casing", 2 }
+                            { "Aluminum Casing", 60 }
                         },
                         BuildingType.Constructor)
                 }
