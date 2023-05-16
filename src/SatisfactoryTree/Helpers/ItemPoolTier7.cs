@@ -228,17 +228,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Quartz Crystal", 36 },
-                            { "Cable", 28 },
-                            { "Reinforced Iron Plate", 5 }
+                            { "Quartz Crystal", 18 },
+                            { "Cable", 14 },
+                            { "Reinforced Iron Plate", 2.5M }
                         },
                         new()
                         {
-                            { "Crystal Oscillator", 2 }
+                            { "Crystal Oscillator", 1 }
                         },
                         BuildingType.Manufacturer)
                 }
