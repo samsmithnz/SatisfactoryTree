@@ -415,14 +415,14 @@ namespace SatisfactoryTree.Helpers
                     new Recipe(
                         new()
                         {
-                            { "Encased Plutonium Cell", 30 },
-                            { "Steel Beam", 18 },
-                            { "Electromagnetic Control Rod", 6 },
-                            { "Heat Sink", 10 }
+                            { "Encased Plutonium Cell", 7.5M },
+                            { "Steel Beam", 4.5M },
+                            { "Electromagnetic Control Rod", 1.5M },
+                            { "Heat Sink", 2.5M }
                         },
                         new()
                         {
-                            { "Plutonium Fuel Rod", 1 }
+                            { "Plutonium Fuel Rod", 0.25M }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -438,16 +438,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(600,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Plutonium Fuel Rod", 1 },
-                            { "Water", 3000 }
+                            { "Plutonium Fuel Rod", 0.1M },
+                            { "Water", 240 }
                         },
                         new()
                         {
-                            { "Plutonium Waste", 10 }
+                            { "Plutonium Waste", 1 }
                         },
                         BuildingType.NuclearPowerPlant)
                 }
