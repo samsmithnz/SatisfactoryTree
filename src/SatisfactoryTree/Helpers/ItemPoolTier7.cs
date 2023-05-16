@@ -351,8 +351,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
                             { "Copper Sheet", 25 },
