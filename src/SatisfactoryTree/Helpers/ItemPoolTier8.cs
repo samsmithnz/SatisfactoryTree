@@ -388,12 +388,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
-                            { "Plutonium Pellet", 2 },
-                            { "Concrete", 4 }
+                            { "Plutonium Pellet", 10 },
+                            { "Concrete", 20 }
                         },
                         new()
                         {
