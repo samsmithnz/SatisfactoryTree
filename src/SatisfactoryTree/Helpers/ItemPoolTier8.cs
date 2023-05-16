@@ -158,16 +158,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(8,
-                        7.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Alclad Aluminum Sheet", 5 },
+                            { "Alclad Aluminum Sheet", 37.5M },
                             { "Copper Sheet", 3 }
                         },
                         new()
                         {
-                            { "Heat Sink", 1 }
+                            { "Heat Sink", 7.5M }
                         },
                         BuildingType.Assembler)
                 }
@@ -183,18 +182,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(10,
-                        6,
+                    new Recipe(
                         new()
                         {
-                            { "Heat Sink", 2 },
-                            { "Rubber", 2 },
-                            { "Water", 5 },
-                            { "Nitrogen Gas", 25 }
+                            { "Heat Sink", 12 },
+                            { "Rubber", 12 },
+                            { "Water", 30 },
+                            { "Nitrogen Gas", 150 }
                         },
                         new()
                         {
-                            { "Cooling System", 4 }
+                            { "Cooling System", 6 }
                         },
                         BuildingType.Blender)
                 }
