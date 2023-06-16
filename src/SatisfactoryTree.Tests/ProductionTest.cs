@@ -487,22 +487,23 @@ namespace SatisfactoryTree.Tests
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
-    CircuitBoard[""x0.7 Assembler<br>(Circuit Board)""]
-    CircuitBoard_Item([5 Circuit Board])
-    CopperSheet[""x1 Constructor<br>(Copper Sheet)""]
-    CopperIngot[""x0.7 Smelter<br>(Copper Ingot)""]
-    CopperOre[""x0.4 Mining Machine<br>(Copper Ore)""]
-    Plastic[""x1 Refinery<br>(Plastic)""]
-    Plastic[""x1 Refinery<br>(Plastic)""]
-    HeavyOilResidue_Item([10 Heavy Oil Residue])
-    CrudeOil[""x0.3 Oil Extractor<br>(Crude Oil)""]
-    CopperSheet--""Copper Sheet<br>(10 units/min)""-->CircuitBoard
-    Plastic--""Plastic<br>(20.0 units/min)""-->CircuitBoard
-    CircuitBoard--""Circuit Board<br>(5 units/min)""-->CircuitBoard_Item
-    CopperIngot--""Copper Ingot<br>(20 units/min)""-->CopperSheet
-    CopperOre--""Copper Ore<br>(20.0 units/min)""-->CopperIngot
-    CrudeOil--""Crude Oil<br>(30 units/min)""-->Plastic
-    Plastic--""Heavy Oil Residue<br>(10 units/min)""-->HeavyOilResidue_Item
+    AluminumIngot[""x0.2 Foundry<br>(Aluminum Ingot)""]
+    AluminumIngot_Item([10 Aluminum Ingot])
+    AluminumScrap[""x0.1 Assembler<br>(Aluminum Scrap)""]
+    Water[""x0.2 Water Extractor<br>(Water)""]
+    AluminaSolution[""x0.1 Refinery<br>(Alumina Solution)""]
+    Silica[""x0.5 Constructor<br>(Silica)""]
+    Bauxite[""x0.2 Mining Machine<br>(Bauxite)""]
+    Coal[""x0.1 Mining Machine<br>(Coal)""]
+    RawQuartz[""x0.2 Assembler<br>(Raw Quartz)""]
+    AluminumScrap--""Aluminum Scrap<br>(15.0 units/min)""-->AluminumIngot
+    Silica--""Silica<br>(12.5 units/min)""-->AluminumIngot
+    AluminumIngot--""Aluminum Ingot<br>(10 units/min)""-->AluminumIngot_Item
+    AluminaSolution--""Alumina Solution<br>(10.0 units/min)""-->AluminumScrap
+    Coal--""Coal<br>(5.0 units/min)""-->AluminumScrap
+    Bauxite--""Bauxite<br>(10.0 units/min)""-->AluminaSolution
+    Water--""Water<br>(15.0 units/min)""-->AluminaSolution
+    RawQuartz--""Raw Quartz<br>(30.0 units/min)""-->Silica
 ";
 
             //Act
