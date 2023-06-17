@@ -1,6 +1,6 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
-//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
+
 
 namespace SatisfactoryTree.Helpers
 {
@@ -17,16 +17,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(8,
-                        7.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Sheet", 2 },
-                            { "Plastic", 4 }
+                            { "Copper Sheet", 15 },
+                            { "Plastic", 30 }
                         },
                         new()
                         {
-                            { "Circuit Board", 1 }
+                            { "Circuit Board", 7.5M }
                         },
                         BuildingType.Assembler)
                 }
@@ -42,12 +41,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        120,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Crude Oil", 2 }
+                            { "Crude Oil", 120 }
                         },
                         BuildingType.OilExtractor)
                 }
@@ -63,18 +61,19 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Crude Oil", 3 }
+                            { "Crude Oil", 30 }
                         },
                         new()
                         {
-                            { "Plastic", 2 },
-                            { "Heavy Oil Residue", 1 }
+                            { "Plastic", 20 },
+                            { "Heavy Oil Residue", 10 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        true,
+                        "Plastic")
                 }
             };
         }
@@ -88,18 +87,19 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Crude Oil", 3 }
+                            { "Crude Oil", 30 }
                         },
                         new()
                         {
-                            { "Rubber", 2 },
-                            { "Heavy Oil Residue", 2 }
+                            { "Rubber", 20 },
+                            { "Heavy Oil Residue", 20 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        true,
+                        "Rubber")
                 }
             };
         }
@@ -113,30 +113,32 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Crude Oil", 3 }
+                            { "Crude Oil", 30 }
                         },
                         new()
                         {
-                            { "Plastic", 2 },
-                            { "Heavy Oil Residue", 1 }
+                            { "Plastic", 20 },
+                            { "Heavy Oil Residue", 10 }
                         },
-                        BuildingType.Refinery),
-                    new Recipe(6,
-                        20,
+                        BuildingType.Refinery,
+                        true,
+                        "Plastic"),
+                    new Recipe(
                         new()
                         {
-                            { "Crude Oil", 3 }
+                            { "Crude Oil", 30 }
                         },
                         new()
                         {
-                            { "Rubber", 2 },
-                            { "Heavy Oil Residue", 2 }
+                            { "Rubber", 20 },
+                            { "Heavy Oil Residue", 20 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        true,
+                        "Rubber")
                 }
             };
         }
@@ -162,15 +164,14 @@ namespace SatisfactoryTree.Helpers
                     //        { "Polymer Resin", 3 }
                     //    },
                     //    BuildingType.Refinery),
-                    new Recipe(6,
-                        40,
+                    new Recipe(
                         new()
                         {
-                            { "Heavy Oil Residue", 6 }
+                            { "Heavy Oil Residue", 60 }
                         },
                         new()
                         {
-                            { "Fuel", 4 }
+                            { "Fuel", 40 }
                         },
                         BuildingType.Refinery)
                 }
@@ -186,15 +187,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        120,
+                    new Recipe(
                         new()
                         {
-                            { "Heavy Oil Residue", 4 }
+                            { "Heavy Oil Residue", 40 }
                         },
                         new()
                         {
-                            { "Petroleum Coke", 12 }
+                            { "Petroleum Coke", 120 }
                         },
                         BuildingType.Refinery)
                 }
@@ -210,18 +210,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(24,
-                        2.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Circuit Board", 10 },
-                            { "Cable", 9 },
-                            { "Plastic", 18 },
-                            { "Screw", 52 }
+                            { "Circuit Board", 25 },
+                            { "Cable", 22.5M },
+                            { "Plastic", 45 },
+                            { "Screw", 130 }
                         },
                         new()
                         {
-                            { "Computer", 1 }
+                            { "Computer", 2.5M }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -237,8 +236,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(60,
-                        1,
+                    new Recipe(
                         new()
                         {
                             { "Motor", 2 },
@@ -263,14 +261,13 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        2,
+                    new Recipe(
                         new()
                         {
-                            { "Automated Wiring", 15 },
-                            { "Circuit Board", 10 },
-                            { "Heavy Modular Frame", 2 },
-                            { "Computer", 2 }
+                            { "Automated Wiring", 7.5M },
+                            { "Circuit Board", 5 },
+                            { "Heavy Modular Frame", 1 },
+                            { "Computer", 1 }
                         },
                         new()
                         {

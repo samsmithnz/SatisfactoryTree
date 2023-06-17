@@ -1,13 +1,11 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
-//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
 
 namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier7
     {
         //Level 7
-
         public static Item Bauxite()
         {
             return new Item(7, "Bauxite",
@@ -17,12 +15,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Bauxite", 1 }
+                            { "Bauxite", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -38,19 +35,20 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        120,
+                    new Recipe(
                         new()
                         {
-                            { "Bauxite", 12 },
-                            { "Water", 18 }
+                            { "Bauxite", 120 },
+                            { "Water", 180 }
                         },
                         new()
                         {
-                            { "Alumina Solution", 12 },
-                            { "Silica", 5 }
+                            { "Alumina Solution", 120 },
+                            { "Silica", 50 }
                         },
-                        BuildingType.Refinery)
+                        BuildingType.Refinery,
+                        true,
+                        "Alumina Solution")
                 }
             };
         }
@@ -64,19 +62,20 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        360,
+                    new Recipe(
                         new()
                         {
-                            { "Alumina Solution", 4 },
-                            { "Coal", 2 }
+                            { "Alumina Solution", 240 },
+                            { "Coal", 120 }
                         },
                         new()
                         {
-                            { "Aluminum Scrap", 6 },
-                            { "Water", 2 }
+                            { "Aluminum Scrap", 360 },
+                            { "Water", 120 }
                         },
-                        BuildingType.Assembler)
+                        BuildingType.Assembler,
+                        true,
+                        "Aluminum Scrap")
                 }
             };
         }
@@ -90,16 +89,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        60,
+                    new Recipe(
                         new()
                         {
-                            { "Aluminum Scrap", 6 },
-                            { "Silica", 5 }
+                            { "Aluminum Scrap", 90 },
+                            { "Silica", 75 }
                         },
                         new()
                         {
-                            { "Aluminum Ingot", 4 }
+                            { "Aluminum Ingot", 60 }
                         },
                         BuildingType.Foundry)
                 }
@@ -115,16 +113,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        30,
+                    new Recipe(
                         new()
                         {
-                            { "Aluminum Ingot", 3 },
-                            { "Copper Ingot", 1 }
+                            { "Aluminum Ingot", 30 },
+                            { "Copper Ingot", 10 }
                         },
                         new()
                         {
-                            { "Alclad Aluminum Sheet", 3 }
+                            { "Alclad Aluminum Sheet", 30 }
                         },
                         BuildingType.Assembler)
                 }
@@ -140,15 +137,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(2,
-                        60,
+                    new Recipe(
                         new()
                         {
-                            { "Aluminum Ingot", 3 }
+                            { "Aluminum Ingot", 90 }
                         },
                         new()
                         {
-                            { "Aluminum Casing", 2 }
+                            { "Aluminum Casing", 60 }
                         },
                         BuildingType.Constructor)
                 }
@@ -164,12 +160,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Raw Quartz", 1 }
+                            { "Raw Quartz", 60 }
                         },
                         BuildingType.Assembler)
                 }
@@ -185,15 +180,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(8,
-                        22.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Raw Quartz", 5 }
+                            { "Raw Quartz", 37.5M }
                         },
                         new()
                         {
-                            { "Quartz Crystal", 3 }
+                            { "Quartz Crystal", 22.5M }
                         },
                         BuildingType.Assembler)
                 }
@@ -209,15 +203,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(8,
-                        37.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Raw Quartz", 3 }
+                            { "Raw Quartz", 22.5M }
                         },
                         new()
                         {
-                            { "Silica", 5 }
+                            { "Silica", 37.5M }
                         },
                         BuildingType.Constructor)
                 }
@@ -233,17 +226,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Quartz Crystal", 36 },
-                            { "Cable", 28 },
-                            { "Reinforced Iron Plate", 5 }
+                            { "Quartz Crystal", 18 },
+                            { "Cable", 14 },
+                            { "Reinforced Iron Plate", 2.5M }
                         },
                         new()
                         {
-                            { "Crystal Oscillator", 2 }
+                            { "Crystal Oscillator", 1 }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -259,17 +251,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(48,
-                        2.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Aluminum Casing", 32 },
-                            { "Crystal Oscillator", 1.25m },
-                            { "Computer", 1 }
+                            { "Aluminum Casing", 40 },
+                            { "Crystal Oscillator", 1.25M },
+                            { "Computer", 1.25M }
                         },
                         new()
                         {
-                            { "Radio Control Unit", 2 }
+                            { "Radio Control Unit", 2.5M }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -285,12 +276,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Sulfur", 1 }
+                            { "Sulfur", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -306,16 +296,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        50,
+                    new Recipe(
                         new()
                         {
-                            { "Sulfur", 5 },
-                            { "Water", 5 }
+                            { "Sulfur", 50 },
+                            { "Water", 50 }
                         },
                         new()
                         {
-                            { "Sulfuric Acid", 5 }
+                            { "Sulfuric Acid", 50 }
                         },
                         BuildingType.Refinery)
                 }
@@ -331,20 +320,21 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(3,
-                        20,
+                    new Recipe(
                         new()
                         {
-                            { "Sulfuric Acid", 2.5m },
-                            { "Alumina Solution", 2 },
-                            { "Aluminum Casing", 1 }
+                            { "Sulfuric Acid", 60 },
+                            { "Alumina Solution", 40 },
+                            { "Aluminum Casing", 20 }
                         },
                         new()
                         {
-                            { "Battery", 1 },
-                            { "Water", 1.5m }
+                            { "Battery", 20 },
+                            { "Water", 40 }
                         },
-                        BuildingType.Blender)
+                        BuildingType.Blender,
+                        true,
+                        "Battery")
                 }
             };
         }
@@ -358,16 +348,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Sheet", 5 },
-                            { "Quickwire", 20 }
+                            { "Copper Sheet", 25 },
+                            { "Quickwire", 100 }
                         },
                         new()
                         {
-                            { "AI Limiter", 1 }
+                            { "AI Limiter", 5 }
                         },
                         BuildingType.Assembler)
                 }
@@ -383,18 +372,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(32,
-                        1.875m,
+                    new Recipe(
                         new()
                         {
-                            { "Computer", 2 },
-                            { "AI Limiter", 2 },
-                            { "High-Speed Connector", 3 },
-                            { "Plastic", 28 }
+                            { "Computer", 3.75M },
+                            { "AI Limiter", 3.75M },
+                            { "High-Speed Connector", 5.63M },
+                            { "Plastic", 52.5M }
                         },
                         new()
                         {
-                            { "Supercomputer", 1 }
+                            { "Supercomputer", 1.88M }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -410,46 +398,20 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(80,
-                        0.75m,
+                    new Recipe(
                         new()
                         {
-                            { "Adaptive Control Unit", 1.5m },
-                            { "Supercomputer", 0.75m }
+                            { "Adaptive Control Unit", 1.5M },
+                            { "Supercomputer", 0.75M }
                         },
                         new()
                         {
-                            { "Assembly Director System", 1 }
+                            { "Assembly Director System", 0.75M }
                         },
                         BuildingType.Assembler)
                 }
             };
         }
-
-        //public static Item CircuitBoard()
-        //{
-        //    return new Item(7, "CircuitBoard",
-        //        "Circuit_Boardwebp",
-        //        ItemType.Item,
-        //        ResearchType.Tier7)
-        //    {
-        //        Recipes =
-        //        {
-        //            new Recipe(99,
-        //                99,
-        //                new()
-        //                {
-        //                    { "CopperSheet", 99 },
-        //                    { "Plastic", 99 }
-        //                },
-        //                new()
-        //                {
-        //                    { "CircuitBoard", 99 }
-        //                },
-        //                BuildingType.Assembler)
-        //        }
-        //    };
-        //}
 
 
 

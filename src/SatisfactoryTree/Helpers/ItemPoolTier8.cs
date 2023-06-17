@@ -1,13 +1,11 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
-//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
 
 namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier8
     {
         //Level 8
-
         public static Item Uranium()
         {
             return new Item(8, "Uranium",
@@ -17,12 +15,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Uranium", 1 }
+                            { "Uranium", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -38,20 +35,21 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        25,
+                    new Recipe(
                         new()
                         {
-                            { "Uranium", 10 },
-                            { "Concrete", 3 },
-                            { "Sulfuric Acid", 8 }
+                            { "Uranium", 50 },
+                            { "Concrete", 15 },
+                            { "Sulfuric Acid", 40 }
                         },
                         new()
                         {
-                            { "Encased Uranium Cell", 5 },
-                            { "Sulfuric Acid", 2 }
+                            { "Encased Uranium Cell", 25 },
+                            { "Sulfuric Acid", 10 }
                         },
-                        BuildingType.Blender)
+                        BuildingType.Blender,
+                        true,
+                        "Encased Uranium Cell")
                 }
             };
         }
@@ -65,16 +63,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(30,
-                        4,
+                    new Recipe(
                         new()
                         {
-                            { "Stator", 3 },
-                            { "AI Limiter", 2 }
+                            { "Stator", 6 },
+                            { "AI Limiter", 4 }
                         },
                         new()
                         {
-                            { "Electromagnetic Control Rod", 2 }
+                            { "Electromagnetic Control Rod", 4 }
                         },
                         BuildingType.Assembler)
                 }
@@ -90,17 +87,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(150,
-                        0.4m,
+                    new Recipe(
                         new()
                         {
-                            { "Encased Uranium Cell", 50 },
-                            { "Encased Industrial Beam", 3 },
-                            { "Electromagnetic Control Rod", 5 }
+                            { "Encased Uranium Cell", 20 },
+                            { "Encased Industrial Beam", 1.2M },
+                            { "Electromagnetic Control Rod", 2 }
                         },
                         new()
                         {
-                            { "Uranium Fuel Rod", 1 }
+                            { "Uranium Fuel Rod", 0.4M }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -116,17 +112,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Versatile Framework", 5 },
-                            { "Electromagnetic Control Rod", 2 },
-                            { "Battery", 10 }
+                            { "Versatile Framework", 2.5M },
+                            { "Electromagnetic Control Rod", 1 },
+                            { "Battery", 5 }
                         },
                         new()
                         {
-                            { "Magnetic Field Generator", 2 }
+                            { "Magnetic Field Generator", 1 }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -142,12 +137,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Nitrogen Gas", 1 }
+                            { "Nitrogen Gas", 120 }
                         },
                         BuildingType.ResourceWellExtractor)
                 }
@@ -163,16 +157,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(8,
-                        7.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Alclad Aluminum Sheet", 5 },
+                            { "Alclad Aluminum Sheet", 37.5M },
                             { "Copper Sheet", 3 }
                         },
                         new()
                         {
-                            { "Heat Sink", 1 }
+                            { "Heat Sink", 7.5M }
                         },
                         BuildingType.Assembler)
                 }
@@ -188,18 +181,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(10,
-                        6,
+                    new Recipe(
                         new()
                         {
-                            { "Heat Sink", 2 },
-                            { "Rubber", 2 },
-                            { "Water", 5 },
-                            { "Nitrogen Gas", 25 }
+                            { "Heat Sink", 12 },
+                            { "Rubber", 12 },
+                            { "Water", 30 },
+                            { "Nitrogen Gas", 150 }
                         },
                         new()
                         {
-                            { "Cooling System", 4 }
+                            { "Cooling System", 6 }
                         },
                         BuildingType.Blender)
                 }
@@ -215,17 +207,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(40,
-                        1.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Heavy Modular Frame", 1 },
-                            { "Aluminum Casing", 50 },
-                            { "Nitrogen Gas", 25 }
+                            { "Heavy Modular Frame", 1.5M },
+                            { "Aluminum Casing", 75 },
+                            { "Nitrogen Gas", 37.5M }
                         },
                         new()
                         {
-                            { "Fused Modular Frame", 99 }
+                            { "Fused Modular Frame", 1.5M }
                         },
                         BuildingType.Blender)
                 }
@@ -241,18 +232,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(32,
-                        1.875m,
+                    new Recipe(
                         new()
                         {
-                            { "Cooling System", 4 },
-                            { "Radio Control Unit", 2 },
-                            { "Motor", 4 },
-                            { "Rubber", 24 }
+                            { "Cooling System", 7.5M },
+                            { "Radio Control Unit", 3.75M },
+                            { "Motor", 7.5M },
+                            { "Rubber", 45 }
                         },
                         new()
                         {
-                            { "Turbo Motor", 1 }
+                            { "Turbo Motor", 1.88M }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -268,18 +258,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Modular Engine", 5 },
-                            { "Turbo Motor", 2 },
-                            { "Cooling System", 6 },
-                            { "Fused Modular Frame", 2 }
+                            { "Modular Engine", 2.5M },
+                            { "Turbo Motor", 1 },
+                            { "Cooling System", 3 },
+                            { "Fused Modular Frame", 1 }
                         },
                         new()
                         {
-                            { "Thermal Propulsion Rocket", 2 }
+                            { "Thermal Propulsion Rocket", 1 }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -295,17 +284,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        30,
+                    new Recipe(
                         new()
                         {
-                            { "Nitrogen Gas", 12 },
-                            { "Water", 3 },
-                            { "Iron Plate", 1 }
+                            { "Nitrogen Gas", 120 },
+                            { "Water", 30 },
+                            { "Iron Plate", 10 }
                         },
                         new()
                         {
-                            { "Nitric Acid", 3 }
+                            { "Nitric Acid", 30 }
                         },
                         BuildingType.Blender)
                 }
@@ -321,16 +309,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(300,
-                        10,
+                    new Recipe(
                         new()
                         {
-                            { "Uranium Fuel Rod", 1 },
-                            { "Sulfuric Acid", 1500 }
+                            { "Uranium Fuel Rod", 0.2M },
+                            { "Water", 240 }
                         },
                         new()
                         {
-                            { "Uranium Waste", 50 }
+                            { "Uranium Waste", 10 }
                         },
                         BuildingType.NuclearPowerPlant)
                 }
@@ -346,21 +333,22 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(24,
-                        50,
+                    new Recipe(
                         new()
                         {
-                            { "Uranium Waste", 15 },
-                            { "Silica", 10 },
-                            { "Nitric Acid", 6 },
-                            { "Sulfuric Acid", 6 }
+                            { "Uranium Waste", 37.5M },
+                            { "Silica", 25 },
+                            { "Nitric Acid", 15 },
+                            { "Sulfuric Acid", 15 }
                         },
                         new()
                         {
-                            { "Non-fissile Uranium", 20 },
+                            { "Non-fissile Uranium", 50 },
                             { "Water", 15 }
                         },
-                        BuildingType.Blender)
+                        BuildingType.Blender,
+                        true,
+                        "Non-fissile Uranium")
                 }
             };
         }
@@ -374,8 +362,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(60,
-                        30,
+                    new Recipe(
                         new()
                         {
                             { "Non-fissile Uranium", 100 },
@@ -399,12 +386,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
-                            { "Plutonium Pellet", 2 },
-                            { "Concrete", 4 }
+                            { "Plutonium Pellet", 10 },
+                            { "Concrete", 20 }
                         },
                         new()
                         {
@@ -424,18 +410,17 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(240,
-                        0.25m,
+                    new Recipe(
                         new()
                         {
-                            { "Encased Plutonium Cell", 30 },
-                            { "Steel Beam", 18 },
-                            { "Electromagnetic Control Rod", 6 },
-                            { "Heat Sink", 10 }
+                            { "Encased Plutonium Cell", 7.5M },
+                            { "Steel Beam", 4.5M },
+                            { "Electromagnetic Control Rod", 1.5M },
+                            { "Heat Sink", 2.5M }
                         },
                         new()
                         {
-                            { "Plutonium Fuel Rod", 1 }
+                            { "Plutonium Fuel Rod", 0.25M }
                         },
                         BuildingType.Manufacturer)
                 }
@@ -451,16 +436,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(600,
-                        1,
+                    new Recipe(
                         new()
                         {
-                            { "Plutonium Fuel Rod", 1 },
-                            { "Water", 3000 }
+                            { "Plutonium Fuel Rod", 0.1M },
+                            { "Water", 240 }
                         },
                         new()
                         {
-                            { "Plutonium Waste", 10 }
+                            { "Plutonium Waste", 1 }
                         },
                         BuildingType.NuclearPowerPlant)
                 }
@@ -476,15 +460,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(6,
-                        50,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Ingot", 30 }
+                            { "Copper Ingot", 300 }
                         },
                         new()
                         {
-                            { "Copper Powder", 5 }
+                            { "Copper Powder", 50 }
                         },
                         BuildingType.Constructor)
                 }
@@ -500,8 +483,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(60,
-                        1,
+                    new Recipe(
                         new()
                         {
                             { "Fused Modular Frame", 1 },
@@ -525,16 +507,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(120,
-                        0.5m,
+                    new Recipe(
                         new()
                         {
-                            { "Copper Powder", 200 },
-                            { "Pressure Conversion Cube", 1 }
+                            { "Copper Powder", 100 },
+                            { "Pressure Conversion Cube", 0.5M }
                         },
                         new()
                         {
-                            { "Nuclear Pasta", 1 }
+                            { "Nuclear Pasta", 0.5M }
                         },
                         BuildingType.ParticleAccelerator)
                 }

@@ -1,6 +1,5 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
-//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -16,12 +15,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Caterium Ore", 1 }
+                            { "Caterium Ore", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -37,15 +35,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(4,
-                        15,
+                    new Recipe(
                         new()
                         {
-                            { "Caterium Ore", 3 }
+                            { "Caterium Ore", 45 }
                         },
                         new()
                         {
-                            { "Caterium Ingot", 1 }
+                            { "Caterium Ingot", 15 }
                         },
                         BuildingType.Smelter)
                 }
@@ -61,15 +58,14 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(5,
-                        60,
+                    new Recipe(
                         new()
                         {
-                            { "Caterium Ingot", 1 }
+                            { "Caterium Ingot", 12 }
                         },
                         new()
                         {
-                            { "Quickwire", 5 }
+                            { "Quickwire", 60 }
                         },
                         BuildingType.Constructor)
                 }
@@ -85,17 +81,16 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(16,
-                        3.75m,
+                    new Recipe(
                         new()
                         {
-                            { "Quickwire", 56 },
-                            { "Cable", 10 },
-                            { "Circuit Board", 1 },
+                            { "Quickwire", 210 },
+                            { "Cable", 37.5M },
+                            { "Circuit Board", 3.75M },
                         },
                         new()
                         {
-                            { "High-Speed Connector", 1 }
+                            { "High-Speed Connector", 3.75M }
                         },
                         BuildingType.Manufacturer)
                 }

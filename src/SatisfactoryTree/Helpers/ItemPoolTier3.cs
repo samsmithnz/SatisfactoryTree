@@ -1,6 +1,5 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
-//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -16,12 +15,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        60, // Assuming normal node, MK1 miner
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Coal", 1 }
+                            { "Coal", 60 }
                         },
                         BuildingType.MiningMachine)
                 }
@@ -132,12 +130,11 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(1,
-                        120,
+                    new Recipe(
                         new(),
                         new()
                         {
-                            { "Water", 2 }
+                            { "Water", 120 }
                         },
                         BuildingType.WaterExtractor)
                 }

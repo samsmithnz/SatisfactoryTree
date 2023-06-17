@@ -1,6 +1,7 @@
 ﻿using MermaidDotNet;
 using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
+using System.Text;
 
 namespace SatisfactoryTree
 {
@@ -8,105 +9,147 @@ namespace SatisfactoryTree
     {
         public List<Item> Items { get; set; }
         public List<ProductionItem> ProductionItems { get; set; }
-        public Queue<KeyValuePair<string, decimal>> InputQueue { get; set; }
 
         public SatisfactoryProduction()
         {
             Items = AllItems.GetAllItems();
             ProductionItems = new();
-            InputQueue = new();
         }
 
-        public List<ProductionItem> BuildSatisfactoryProductionPlan(ProductionItem itemGoal)
+        //Build a production plan for a given target item
+        public List<ProductionItem> BuildProductionPlan(ProductionItem itemGoal)
         {
             ProductionItems = new();
-            InputQueue = new();
             if (itemGoal != null && itemGoal.Item != null)
             {
                 ProcessOutputItem(itemGoal);
+
+                //Search for items that are not dependencies to identify outputs
+                List<string> dependencies = new();
+                foreach (ProductionItem item in ProductionItems)
+                {
+                    foreach (KeyValuePair<string, decimal> dependent in item.Dependencies)
+                    {
+                        if (!dependencies.Any(p => p == dependent.Key))
+                        {
+                            dependencies.Add(dependent.Key);
+                        }
+                    }
+                }
+                //Mark items that are not dependencies
+                foreach (ProductionItem item in ProductionItems)
+                {
+                    if (item != null && item.Item != null)
+                    {
+                        if (!dependencies.Any(p => p == item.Item?.Name))
+                        {
+                            item.OutputItem = true;
+                        }
+                    }
+                }
             }
             return ProductionItems;
         }
 
         //Taking an output item, find the inputs required to produce it
-        private bool ProcessOutputItem(ProductionItem item)
+        private bool ProcessOutputItem(ProductionItem targetItem)
         {
-            ProductionItem? match = null;
-            if (item != null && item.Item != null)
+            List<KeyValuePair<string, decimal>> inputs = new();
+            ProductionItem? currentItemMatch = null;
+            if (targetItem != null && targetItem.Item != null)
             {
-                item.BuildingQuantityRequired = item.Quantity / item.Item.Recipes[0].Outputs[item.Item.Name];
-                if (ProductionItems.Any(p => p.Item?.Name == item.Item.Name))
+                //Process this item
+                targetItem.BuildingQuantityRequired = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
+                //Check if this item is already in the production list, undate it instead of adding a new one
+                if (ProductionItems.Any(p => p.Item?.Name == targetItem.Item.Name))
                 {
-                    match = ProductionItems.FirstOrDefault(p => p.Item?.Name == item.Item.Name);
-                    if (match != null)
+                    currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == targetItem.Item.Name);
+                    if (currentItemMatch != null)
                     {
-                        match.Quantity += item.Quantity;
-                        match.BuildingQuantityRequired += item.BuildingQuantityRequired;
+                        currentItemMatch.Quantity += targetItem.Quantity;
+                        currentItemMatch.BuildingQuantityRequired += targetItem.BuildingQuantityRequired;
                     }
                 }
                 else
                 {
-                    ProductionItems.Add(item);
+                    ProductionItems.Add(targetItem);
                 }
-                foreach (KeyValuePair<string, decimal> input in item.Item.Recipes[0].Inputs)
+                decimal itemOutputRatio = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
+
+                //Process each output (that isn't the target item)
+                foreach (KeyValuePair<string, decimal> output in targetItem.Item.Recipes[0].Outputs)
+                {
+                    //Check for additional outputs
+                    if (output.Key != targetItem.Item.Name)
+                    {
+                        //Process this item
+                        Item? outputItem = FindItem(output.Key);
+                        decimal outputQuantityWithRatio = output.Value * itemOutputRatio;
+                        ProductionItem newProductionItem = new(outputItem, outputQuantityWithRatio)
+                        {
+                            BuildingQuantityRequired = itemOutputRatio
+                        };
+                        if (newProductionItem != null && newProductionItem.Item != null)
+                        {
+                            foreach (KeyValuePair<string, decimal> input in newProductionItem.Item.Recipes[0].Inputs)
+                            {
+                                newProductionItem.Dependencies.Add(input.Key, input.Value);
+                            }
+                            ProductionItems.Add(newProductionItem);
+                            //Commented out this - because we are already adding this input below V
+                            //inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
+                        }
+                    }
+                }
+                inputs.AddRange(targetItem.Item.Recipes[0].Inputs);
+
+                //Process each input
+                foreach (KeyValuePair<string, decimal> input in inputs)
                 {
                     Item? inputItem = FindItem(input.Key);
                     if (inputItem != null)
                     {
-                        decimal outputQuantity = item.Item.Recipes[0].Outputs[item.Item.Name];
-                        decimal inputQuantity = input.Value;
-                        decimal ratio = item.Quantity / outputQuantity;
-                        decimal newQuantity = inputQuantity * ratio;
-                        item.Dependencies.Add(input.Key, newQuantity);
-                        if (match != null)
+                        decimal inputQuantityWithRatio = input.Value * itemOutputRatio;
+                        if (targetItem.Dependencies.Any(p => p.Key == input.Key))
                         {
-                            foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
+                            KeyValuePair<string, decimal>? currentInputMatch = targetItem.Dependencies.FirstOrDefault(p => p.Key == input.Key);
+                            if (currentInputMatch != null)
                             {
-                                if (match.Dependencies.ContainsKey(dependency.Key))
-                                {
-                                    match.Dependencies[dependency.Key] += dependency.Value;
-                                }
-                                else
-                                {
-                                    match.Dependencies.Add(dependency.Key, dependency.Value);
-                                }
+                                decimal value = ((KeyValuePair<string, decimal>)currentInputMatch).Value;
+                                currentInputMatch = new KeyValuePair<string, decimal>(input.Key, value + targetItem.Quantity);
                             }
                         }
-                        ProductionItem newProductionItem = new(inputItem, newQuantity)
+                        else
                         {
-                            BuildingQuantityRequired = ratio
+                            targetItem.Dependencies.Add(input.Key, inputQuantityWithRatio);
+                        }
+                        ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
+                        {
+                            BuildingQuantityRequired = itemOutputRatio
                         };
                         ProcessOutputItem(newProductionItem);
+                    }
+                }
+                //If this item already exists in the production list, update the quantity for it
+                if (currentItemMatch != null)
+                {
+                    foreach (KeyValuePair<string, decimal> dependency in targetItem.Dependencies)
+                    {
+                        if (currentItemMatch.Dependencies.ContainsKey(dependency.Key))
+                        {
+                            currentItemMatch.Dependencies[dependency.Key] += dependency.Value;
+                        }
+                        else
+                        {
+                            currentItemMatch.Dependencies.Add(dependency.Key, dependency.Value);
+                        }
                     }
                 }
             }
             return true;
         }
 
-        private List<ProductionItem> GetChildren(string itemName, decimal quantity)
-        {
-            List<ProductionItem> results = new();
-            Item? item = FindItem(itemName);
-            if (item != null && item.Recipes.Count > 0 && item.Recipes[0].Inputs.Count > 0)
-            {
-                //Look at each input and the quantity needed to make the item 
-                foreach (KeyValuePair<string, decimal> recipeInput in item.Recipes[0].Inputs)
-                {
-                    //get the input item
-                    ProductionItem? inputItem = new(FindItem(recipeInput.Key), recipeInput.Value);
-                    if (inputItem != null && inputItem.Item != null)
-                    {
-                        inputItem.Quantity = recipeInput.Value / inputItem.Item.Recipes[0].ThroughPutPerMinute;
-                        //Add the input item to the results
-                        results.Add(inputItem);
-                        //Then get the children of the input item
-                        results.AddRange(GetChildren(inputItem.Item.Name, inputItem.Item.Recipes[0].ThroughPutPerMinute * quantity));
-                    }
-                }
-            }
-            return results;
-        }
-
+        //Find an item by name
         public Item? FindItem(string itemName)
         {
             Item? result = null;
@@ -124,38 +167,8 @@ namespace SatisfactoryTree
             return result;
         }
 
-        //Get recipe inputs
-        private static List<Item> GetInputs(List<Item> items, List<Recipe> recipes)
-        {
-            List<Item> inputs = new();
-            foreach (Recipe recipe in recipes)
-            {
-                foreach (KeyValuePair<string, decimal> item in recipe.Inputs)
-                {
-                    Item? inputItem = FindItem(items, item.Key);
-                    if (inputItem != null && inputs.Contains(inputItem) == false)
-                    {
-                        inputs.Add(inputItem);
-                        List<Item> newItems = GetInputs(items, inputItem.Recipes);
-                        foreach (Item newItem in newItems)
-                        {
-                            if (newItem != null && inputs.Contains(newItem) == false)
-                            {
-                                inputs.Add(newItem);
-                            }
-                        }
-                    }
-                }
-            }
-            return inputs;
-        }
-
-        private static Item? FindItem(List<Item> items, string name)
-        {
-            return items.Where(i => i.Name == name).FirstOrDefault();
-        }
-
-        public string GetMermaidString(ProductionItem? productionItem = null)
+        //Create the mermaid string for the production plan
+        public string ToMermaidString()
         {
             string direction = "LR";
             List<MermaidDotNet.Models.Node> nodes = new();
@@ -163,50 +176,112 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    nodes.Add(new(item.Item.Name.Replace(" ", ""), '"' + "x" + item.BuildingQuantityRequired + " " + item.Item.Recipes[0].ManufactoringBuilding + "<br>(" + item.Item.Name + ")" + '"'));
+                    nodes.Add(new(item.Item.Recipes[0].Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + GetManufacturingName(item.Item.Recipes[0].ManufactoringBuilding) + "<br>(" + item.Item.Recipes[0].Name + ")" + '"'));
+                    if (item.OutputItem == true)
+                    {
+                        string finalItemQuantity = item.Quantity.ToString("0.0");
+                        if ((int)item.Quantity == item.Quantity)
+                        {
+                            finalItemQuantity = item.Quantity.ToString("0");
+                        }
+                        nodes.Add(new(item.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + item.Item?.Name, MermaidDotNet.Models.Node.ShapeType.Stadium));
+                    }
                 }
-            }
-            if (productionItem != null && productionItem.Item != null)
-            {
-                nodes.Add(new(productionItem.Item?.Name.Replace(" ", "") + "_Item", productionItem.Quantity.ToString() + " " + productionItem.Item?.Name));
             }
             List<MermaidDotNet.Models.Link> links = new();
             foreach (ProductionItem item in ProductionItems)
             {
-                foreach (KeyValuePair<string, decimal> itemInput in item.Dependencies)
+                if (item != null && item.Item != null)
                 {
-                    if (item != null && item.Item != null)
+                    foreach (KeyValuePair<string, decimal> itemInput in item.Dependencies)
                     {
-                        links.Add(
-                        new MermaidDotNet.Models.Link(
-                                itemInput.Key.Replace(" ", ""),
-                                item.Item.Name.Replace(" ", ""),
-                                '"' + itemInput.Key + "<br>(" + itemInput.Value.ToString("0") + " units/min)" + '"')
-                            );
+                        string itemQuantity = itemInput.Value.ToString("0.0");
+                        if ((int)itemInput.Value == itemInput.Value)
+                        {
+                            itemQuantity = itemInput.Value.ToString("0");
+                        }
+                        string source = itemInput.Key.Replace(" ", "");
+                        string destination = item.Item.Recipes[0].Name.Replace(" ", "");
+                        string text = '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"';
+                        MermaidDotNet.Models.Link link = new(source, destination, text);
+                        if (!links.Any(g => g.SourceNode == link.SourceNode && 
+                                            g.DestinationNode == link.DestinationNode && 
+                                            g.Text == link.Text))
+                        {
+                            links.Add(new MermaidDotNet.Models.Link(source, destination, text));
+                        }
                     }
-                }
-            }
-            if (productionItem != null && productionItem.Item != null &&
-                ProductionItems != null && ProductionItems.Count > 0 &&
-                ProductionItems[0] != null && ProductionItems[0].Item != null &&
-                ProductionItems[0].Item?.Name != null)
-            {
-                string? source;
-                string? destination;
-                source = ProductionItems[0].Item?.Name.Replace(" ", "");
-                destination = productionItem.Item.Name.Replace(" ", "") + "_Item";
-                if (source != null && destination != null)
-                {
-                    links.Add(new MermaidDotNet.Models.Link(
-                                        source,
-                                        destination,
-                                        '"' + productionItem.Item.Name + "<br>(" + productionItem.Quantity.ToString("0") + " units/min)" + '"'));
+                    if (item.OutputItem == true)
+                    {
+                        string? source;
+                        string? destination;
+                        source = item.Item.Recipes[0].Name.Replace(" ", "");
+                        destination = item.Item.Name.Replace(" ", "") + "_Item";
+                        if (source != null && destination != null)
+                        {
+                            links.Add(new MermaidDotNet.Models.Link(
+                                                source,
+                                                destination,
+                                                '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"'));
+                        }
+                    }
                 }
             }
             Flowchart flowchart = new(direction, nodes, links);
             string result = flowchart.CalculateFlowchart();
 
             return result;
+        }
+
+        //Round up to the nearest decimal point - if one exists
+        private static string RoundUpAndFormat(decimal value)
+        {
+            if ((int)value == value)
+            {
+                return (Math.Ceiling(value * 10) / 10).ToString("0");
+            }
+            else
+            {
+                return (Math.Ceiling(value * 10) / 10).ToString("0.0");
+            }
+        }
+
+        ////Combine multiple outputs into a single string
+        //private static string GetOutputsAsString(Dictionary<string, decimal> outputs)
+        //{
+        //    StringBuilder sb = new();
+        //    int i = 0;
+        //    foreach (KeyValuePair<string, decimal> item in outputs)
+        //    {
+        //        if (i > 0)
+        //        {
+        //            sb = sb.Append(" & ");
+        //        }
+        //        sb.Append(item.Key);
+        //        i++;
+        //    }
+        //    return sb.ToString();
+        //}
+
+        private static string GetManufacturingName(ManufactoringBuildingType manufactoringBuilding)
+        {
+            switch (manufactoringBuilding)
+            {
+                case ManufactoringBuildingType.MiningMachine:
+                    return "Mining Machine";
+                case ManufactoringBuildingType.OilExtractor:
+                    return "Oil Extractor";
+                case ManufactoringBuildingType.NuclearPowerPlant:
+                    return "Nuclear Power Plant";
+                case ManufactoringBuildingType.ParticleAccelerator:
+                    return "Particle Accelerator";
+                case ManufactoringBuildingType.ResourceWellExtractor:
+                    return "Resource Well Extractor";
+                case ManufactoringBuildingType.WaterExtractor:
+                    return "Water Extractor";
+                default:
+                    return manufactoringBuilding.ToString();
+            }
         }
 
     }

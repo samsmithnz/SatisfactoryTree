@@ -66,23 +66,17 @@ public class DSPGraphTests
                 //Check each input (if it's not gathered)
                 foreach (KeyValuePair<string, decimal> input in recipe.Inputs)
                 {
-                    if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
+                    if (!rawMaterials.ContainsKey(input.Key) == true)
                     {
-                        if (!rawMaterials.ContainsKey(input.Key) == true)
-                        {
-                            rawMaterials.Add(input.Key, input.Value);
-                        }
+                        rawMaterials.Add(input.Key, input.Value);
                     }
                 }
                 //Check each output (if it's not gathered)
                 foreach (KeyValuePair<string, decimal> output in recipe.Outputs)
                 {
-                    if (recipe.ManufactoringMethod != ManufactoringMethodType.Gathered)
+                    if (!rawMaterials.ContainsKey(output.Key) == true)
                     {
-                        if (!rawMaterials.ContainsKey(output.Key) == true)
-                        {
-                            rawMaterials.Add(output.Key, output.Value);
-                        }
+                        rawMaterials.Add(output.Key, output.Value);
                     }
                 }
             }

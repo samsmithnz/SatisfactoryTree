@@ -32,21 +32,17 @@
                     foreach (Recipe recipe2 in item.Recipes)
                     {
                         //recipe2.PrimaryMethodOfManufacture == true &&
-
-                        if (recipe2.ManufactoringMethod != ManufactoringMethodType.Gathered)
+                        foreach (KeyValuePair<string, decimal> itemInput in recipe2.Inputs)
                         {
-                            foreach (KeyValuePair<string, decimal> itemInput in recipe2.Inputs)
+                            Link newLink = new()
                             {
-                                Link newLink = new()
-                                {
-                                    source = FindIndex(data, item.Name), //item.Name.Replace(" ", "_"),
-                                    target = FindIndex(data, itemInput.Key), // itemInput.Key.Replace(" ", "_"),
-                                    value = (int)itemInput.Value //The width of the connection
-                                };
-                                if (newLink.source >= 0 && newLink.target >= 0 && !links.Any(n => n.source == newLink.source && n.target == newLink.target))
-                                {
-                                    links.Add(newLink);
-                                }
+                                source = FindIndex(data, item.Name), //item.Name.Replace(" ", "_"),
+                                target = FindIndex(data, itemInput.Key), // itemInput.Key.Replace(" ", "_"),
+                                value = (int)itemInput.Value //The width of the connection
+                            };
+                            if (newLink.source >= 0 && newLink.target >= 0 && !links.Any(n => n.source == newLink.source && n.target == newLink.target))
+                            {
+                                links.Add(newLink);
                             }
                         }
                     }
@@ -54,7 +50,7 @@
             }
         }
 
-        private int FindIndex(List<Item> data, string name)
+        private static int FindIndex(List<Item> data, string name)
         {
             for (int i = 0; i < data.Count; i++)
             {

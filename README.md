@@ -10,6 +10,25 @@
 A POC project to graph [Satisfactory](https://store.steampowered.com/app/526870/Satisfactory/) items with [D3](https://d3js.org/) [force directed graphs](https://en.wikipedia.org/wiki/Force-directed_graph_drawing). 
 Sister project to [http://github.com/samsmithnz/SatisfactoryPlan](http://github.com/samsmithnz/SatisfactoryPlan)
 
+Also has a production calculator that outputs mermaid graphs.
+```mermaid
+flowchart LR
+    ReinforcedIronPlate["x2.4 Assembler<br>(Reinforced Iron Plate)"]
+    IronPlate["x3.6 Constructor<br>(Iron Plate)"]
+    IronIngot["x4.8 Smelter<br>(Iron Ingot)"]
+    IronOre["x2.4 MiningMachine<br>(Iron Ore)"]
+    Screw["x3.6 Constructor<br>(Screw)"]
+    IronRod["x2.4 Constructor<br>(Iron Rod)"]
+    ReinforcedIronPlate_Item[12 Reinforced Iron Plate]
+    IronPlate--"Iron Plate<br>(72 units/min)"-->ReinforcedIronPlate
+    Screw--"Screw<br>(144 units/min)"-->ReinforcedIronPlate
+    IronIngot--"Iron Ingot<br>(108 units/min)"-->IronPlate
+    IronOre--"Iron Ore<br>(144 units/min)"-->IronIngot
+    IronRod--"Iron Rod<br>(36 units/min)"-->Screw
+    IronIngot--"Iron Ingot<br>(36 units/min)"-->IronRod
+    ReinforcedIronPlate--"Reinforced Iron Plate<br>(12 units/min)"-->ReinforcedIronPlate_Item
+```
+
 <!--This is very rough. At the very beginning of the game - it looks like this:
 
 ![image](https://user-images.githubusercontent.com/8389039/153523309-5709dcaa-d231-42e9-a54c-e55a465884af.png)

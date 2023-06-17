@@ -1,6 +1,6 @@
 ﻿using SatisfactoryTree.Models;
 using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
-//using MethodType = SatisfactoryTree.Models.ManufactoringMethodType;
+
 
 namespace SatisfactoryTree.Helpers
 {
@@ -16,16 +16,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(10,
-                        6,
+                    new Recipe(
                         new()
                         {
-                            { "Steel Beam", 4 },
-                            { "Concrete", 5 }
+                            { "Steel Beam", 24 },
+                            { "Concrete", 30 }
                         },
                         new()
                         {
-                            { "Encased Industrial Beam", 1 }
+                            { "Encased Industrial Beam", 6 }
                         },
                         BuildingType.Assembler)
                 }
@@ -41,16 +40,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
-                            { "Steel Pipe", 3 },
-                            { "Wire", 8 }
+                            { "Steel Pipe", 15 },
+                            { "Wire", 40 }
                         },
                         new()
                         {
-                            { "Stator", 1 }
+                            { "Stator", 5 }
                         },
                         BuildingType.Assembler)
                 }
@@ -66,16 +64,15 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(12,
-                        5,
+                    new Recipe(
                         new()
                         {
-                            { "Rotor", 2 },
-                            { "Stator", 2 }
+                            { "Rotor", 10 },
+                            { "Stator", 10 }
                         },
                         new()
                         {
-                            { "Motor", 1 }
+                            { "Motor", 5 }
                         },
                         BuildingType.Assembler)
                 }
@@ -91,8 +88,7 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(24,
-                        2.5m,
+                    new Recipe(
                         new()
                         {
                             { "Stator", 2.5m },
@@ -100,7 +96,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Automated Wiring", 1 }
+                            { "Automated Wiring", 2.5M }
                         },
                         BuildingType.Assembler)
                 }
@@ -116,27 +112,22 @@ namespace SatisfactoryTree.Helpers
             {
                 Recipes =
                 {
-                    new Recipe(30,
-                        2,
+                    new Recipe(
                         new()
                         {
-                            { "Modular Frame", 5 },
-                            { "Steel Pipe", 15 },
-                            { "Encased Industrial Beam", 5 },
-                            { "Screw", 100 }
+                            { "Modular Frame", 10 },
+                            { "Steel Pipe", 30 },
+                            { "Encased Industrial Beam", 10 },
+                            { "Screw", 200 }
                         },
                         new()
                         {
-                            { "Heavy Modular Frame", 1 }
+                            { "Heavy Modular Frame", 2 }
                         },
                         BuildingType.Manufacturer)
                 }
             };
         }
-
-
-
-
 
     }
 }
