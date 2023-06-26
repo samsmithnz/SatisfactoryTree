@@ -8,9 +8,9 @@ namespace SatisfactoryTree
         public List<Item> Items { get; set; }
 
         public SatisfactoryGraph(string filter = "",
-            ResearchType researchType = ResearchType.Tier8,
-            bool includeBuildings = false,
-            bool showOnlyDirectDependencies = false)
+            ResearchType researchType = ResearchType.Tier8)
+            //bool includeBuildings = false,
+            //bool showOnlyDirectDependencies = false)
         {
             Items = BuildSatisfactoryTree(filter,
                 researchType);
