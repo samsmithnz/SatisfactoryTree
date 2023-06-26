@@ -448,7 +448,7 @@ namespace SatisfactoryTree.Tests
     CircuitBoard_Item([5 Circuit Board])
     CopperSheet[""x1 Constructor<br>(Copper Sheet)""]
     CopperIngot[""x0.7 Smelter<br>(Copper Ingot)""]
-    CopperOre[""x0.4 Mining Machine<br>(Copper Ore)""]
+    CopperOre[""x0.4 Mining Machine Mk1<br>(Copper Ore)""]
     Plastic[""x1 Refinery<br>(Plastic)""]
     Plastic[""x1 Refinery<br>(Plastic)""]
     HeavyOilResidue_Item([10 Heavy Oil Residue])

@@ -61,10 +61,10 @@ namespace SatisfactoryTree.Helpers
         }
 
         //Production
-        public static Building Smeltor()
+        public static Building Smelter()
         {
-            return new Building("Smeltor",
-                "SmeltorMk1_256.png",
+            return new Building("Smelter",
+                "SmelterMk1_256.png",
                 ManufactoringBuildingType.Production,
                 4M);
         }

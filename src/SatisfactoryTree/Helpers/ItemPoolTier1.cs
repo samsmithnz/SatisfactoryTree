@@ -42,7 +42,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Iron Ingot", 30 }
                         },
-                        "Smeltor")
+                        "Smelter")
                 }
             };
         }
@@ -130,7 +130,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Copper Ingot",30 }
                         },
-                        "Smeltor")
+                        "Smelter")
                 }
             };
         }

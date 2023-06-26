@@ -43,7 +43,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Caterium Ingot", 15 }
                         },
-                        "Smeltor")
+                        "Smelter")
                 }
             };
         }
