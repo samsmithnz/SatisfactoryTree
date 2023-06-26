@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 
 namespace SatisfactoryTree.Helpers
@@ -124,7 +123,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Heavy Modular Frame", 2 }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }

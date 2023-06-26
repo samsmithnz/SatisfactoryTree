@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -92,7 +91,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "High-Speed Connector", 3.75M }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }

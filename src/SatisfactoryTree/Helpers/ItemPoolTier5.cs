@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 
 namespace SatisfactoryTree.Helpers
@@ -47,7 +46,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Crude Oil", 120 }
                         },
-                        BuildingType.OilExtractor)
+                        "Oil Extractor")
                 }
             };
         }
@@ -71,7 +70,7 @@ namespace SatisfactoryTree.Helpers
                             { "Plastic", 20 },
                             { "Heavy Oil Residue", 10 }
                         },
-                        BuildingType.Refinery,
+                        "Refinery",
                         true,
                         "Plastic")
                 }
@@ -97,7 +96,7 @@ namespace SatisfactoryTree.Helpers
                             { "Rubber", 20 },
                             { "Heavy Oil Residue", 20 }
                         },
-                        BuildingType.Refinery,
+                        "Refinery",
                         true,
                         "Rubber")
                 }
@@ -123,7 +122,7 @@ namespace SatisfactoryTree.Helpers
                             { "Plastic", 20 },
                             { "Heavy Oil Residue", 10 }
                         },
-                        BuildingType.Refinery,
+                        "Refinery",
                         true,
                         "Plastic"),
                     new Recipe(
@@ -136,7 +135,7 @@ namespace SatisfactoryTree.Helpers
                             { "Rubber", 20 },
                             { "Heavy Oil Residue", 20 }
                         },
-                        BuildingType.Refinery,
+                        "Refinery",
                         true,
                         "Rubber")
                 }
@@ -163,7 +162,7 @@ namespace SatisfactoryTree.Helpers
                     //        { "Fuel", 4 },
                     //        { "Polymer Resin", 3 }
                     //    },
-                    //    BuildingType.Refinery),
+                    //    "Refinery"),
                     new Recipe(
                         new()
                         {
@@ -173,7 +172,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Fuel", 40 }
                         },
-                        BuildingType.Refinery)
+                        "Refinery")
                 }
             };
         }
@@ -196,7 +195,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Petroleum Coke", 120 }
                         },
-                        BuildingType.Refinery)
+                        "Refinery")
                 }
             };
         }
@@ -222,7 +221,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Computer", 2.5M }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }
@@ -247,7 +246,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Modular Engine", 1 }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }
@@ -273,7 +272,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Adaptive Control Unit", 2 }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }

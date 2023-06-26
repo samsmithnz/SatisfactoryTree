@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -45,7 +44,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Steel Ingot", 45 }
                         },
-                        BuildingType.Foundry)
+                        "Foundry")
                 }
             };
         }
@@ -136,7 +135,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Water", 120 }
                         },
-                        BuildingType.WaterExtractor)
+                        "Water Extractor")
                 }
             };
         }

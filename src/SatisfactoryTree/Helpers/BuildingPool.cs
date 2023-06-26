@@ -144,8 +144,8 @@ namespace SatisfactoryTree.Helpers
 
         public static Building CoalGenerator()
         {
-            return new Building("Biomass Burner",
-                "BiomassBurner_256.png",
+            return new Building("Coal Generator",
+                "CoalGenerator_256.png",
                 ManufactoringBuildingType.PowerGeneration,
                 0M,
                 75M);
@@ -153,7 +153,7 @@ namespace SatisfactoryTree.Helpers
 
         public static Building FuelGenerator()
         {
-            return new Building("Biomass Burner",
+            return new Building("Fuel Generator",
                 "FuelGenerator_256.png",
                 ManufactoringBuildingType.PowerGeneration,
                 0M,
@@ -169,9 +169,9 @@ namespace SatisfactoryTree.Helpers
                 200M); // Actual varies constantly: https://satisfactory-calculator.com/en/buildings/detail/id/Build_GeneratorGeoThermal_C/name/Geothermal+Generator
         }
 
-        public static Building NuclearPower()
+        public static Building NuclearPowerPlant()
         {
-            return new Building("Biomass Burner",
+            return new Building("Nuclear Power Plant",
                 "NuclearPowerplant_256.png",
                 ManufactoringBuildingType.PowerGeneration,
                 0M,

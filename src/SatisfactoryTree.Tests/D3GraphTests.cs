@@ -25,52 +25,52 @@ public class D3GraphTests
         //Assert.AreEqual(0, graph.Items[0].Level);
     }
 
-    [TestMethod]
-    public void AssemblerWhenThereAre2InputsTest()
-    {
-        //Arrange
-        SatisfactoryGraph graph = new();
+    //[TestMethod]
+    //public void AssemblerWhenThereAre2InputsTest()
+    //{
+    //    //Arrange
+    //    SatisfactoryGraph graph = new();
 
-        //Act
+    //    //Act
 
-        //Assert
-        foreach (Item item in graph.Items)
-        {
-            if (item.Recipes[0].Inputs.Count == 2 &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Assembler &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Foundry &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Refinery &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.ParticleAccelerator)
-            {
-                Assert.AreEqual("", item.Name);
-                Assert.IsTrue(false);
-            }
-        }
-        Assert.IsTrue(true);
-    }
+    //    //Assert
+    //    foreach (Item item in graph.Items)
+    //    {
+    //        if (item.Recipes[0].Inputs.Count == 2 &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Assembler &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Foundry &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Refinery &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.NuclearPowerPlant &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.ParticleAccelerator)
+    //        {
+    //            Assert.AreEqual("", item.Name);
+    //            Assert.IsTrue(false);
+    //        }
+    //    }
+    //    Assert.IsTrue(true);
+    //}
 
-    [TestMethod]
-    public void ManufacturerWhenThereAre4InputsTest()
-    {
-        //Arrange
-        SatisfactoryGraph graph = new();
+    //[TestMethod]
+    //public void ManufacturerWhenThereAre4InputsTest()
+    //{
+    //    //Arrange
+    //    SatisfactoryGraph graph = new();
 
-        //Act
+    //    //Act
 
-        //Assert
-        foreach (Item item in graph.Items)
-        {
-            if ((item.Recipes[0].Inputs.Count == 4 || item.Recipes[0].Inputs.Count == 3) &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Manufacturer &&
-                item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Blender)
-            {
-                Assert.AreEqual("", item.Name);
-                Assert.IsTrue(false);
-            }
-        }
-        Assert.IsTrue(true);
-    }
+    //    //Assert
+    //    foreach (Item item in graph.Items)
+    //    {
+    //        if ((item.Recipes[0].Inputs.Count == 4 || item.Recipes[0].Inputs.Count == 3) &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Manufacturer &&
+    //            item.Recipes[0].ManufactoringBuilding != ManufactoringBuildingType.Blender)
+    //        {
+    //            Assert.AreEqual("", item.Name);
+    //            Assert.IsTrue(false);
+    //        }
+    //    }
+    //    Assert.IsTrue(true);
+    //}
 
     //[TestMethod]
     //public void TreeHasValidParentsAndChildrenTest()

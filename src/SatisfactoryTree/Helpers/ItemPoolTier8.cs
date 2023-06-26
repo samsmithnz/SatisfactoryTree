@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -47,7 +46,7 @@ namespace SatisfactoryTree.Helpers
                             { "Encased Uranium Cell", 25 },
                             { "Sulfuric Acid", 10 }
                         },
-                        BuildingType.Blender,
+                        "Blender",
                         true,
                         "Encased Uranium Cell")
                 }
@@ -98,7 +97,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Uranium Fuel Rod", 0.4M }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }
@@ -123,7 +122,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Magnetic Field Generator", 1 }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }
@@ -143,7 +142,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Nitrogen Gas", 120 }
                         },
-                        BuildingType.ResourceWellExtractor)
+                        "Resource Well Extractor")
                 }
             };
         }
@@ -193,7 +192,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Cooling System", 6 }
                         },
-                        BuildingType.Blender)
+                        "Blender")
                 }
             };
         }
@@ -218,7 +217,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Fused Modular Frame", 1.5M }
                         },
-                        BuildingType.Blender)
+                        "Blender")
                 }
             };
         }
@@ -244,7 +243,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Turbo Motor", 1.88M }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }
@@ -270,7 +269,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Thermal Propulsion Rocket", 1 }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }
@@ -295,7 +294,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Nitric Acid", 30 }
                         },
-                        BuildingType.Blender)
+                        "Blender")
                 }
             };
         }
@@ -319,7 +318,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Uranium Waste", 10 }
                         },
-                        BuildingType.NuclearPowerPlant)
+                        "Nuclear Power Plant")
                 }
             };
         }
@@ -346,7 +345,7 @@ namespace SatisfactoryTree.Helpers
                             { "Non-fissile Uranium", 50 },
                             { "Water", 15 }
                         },
-                        BuildingType.Blender,
+                        "Blender",
                         true,
                         "Non-fissile Uranium")
                 }
@@ -422,7 +421,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Plutonium Fuel Rod", 0.25M }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }
@@ -446,7 +445,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Plutonium Waste", 1 }
                         },
-                        BuildingType.NuclearPowerPlant)
+                        "Nuclear Power Plant")
                 }
             };
         }
@@ -517,7 +516,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Nuclear Pasta", 0.5M }
                         },
-                        BuildingType.ParticleAccelerator)
+                        "Particle Accelerator")
                 }
             };
         }
