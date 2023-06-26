@@ -13,15 +13,15 @@ namespace SatisfactoryTree
             bool showOnlyDirectDependencies = false)
         {
             Items = BuildSatisfactoryTree(filter,
-                researchType,
-                includeBuildings,
-                showOnlyDirectDependencies);
+                researchType);
+                //includeBuildings,
+                //showOnlyDirectDependencies);
         }
 
         private static List<Item> BuildSatisfactoryTree(string nameFilter,
-            ResearchType researchType,
-            bool includeBuildings= false,
-            bool showOnlyDirectDependencies = false)
+            ResearchType researchType)
+            //bool includeBuildings= false,
+            //bool showOnlyDirectDependencies = false)
         {
             List<Item> items = AllItems.GetAllItems();
 
