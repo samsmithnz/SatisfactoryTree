@@ -1,4 +1,5 @@
 ﻿using SatisfactoryTree.Models;
+using static SatisfactoryTree.Models.Building;
 
 namespace SatisfactoryTree.Helpers
 {

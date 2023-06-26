@@ -21,7 +21,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Caterium Ore", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -44,7 +44,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Caterium Ingot", 15 }
                         },
-                        BuildingType.Smelter)
+                        "Smeltor")
                 }
             };
         }
@@ -67,7 +67,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Quickwire", 60 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }

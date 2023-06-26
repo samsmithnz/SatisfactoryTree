@@ -21,7 +21,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Coal", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -68,7 +68,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Steel Beam", 15 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -91,7 +91,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Steel Pipe", 20 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -115,7 +115,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Versatile Framework", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }

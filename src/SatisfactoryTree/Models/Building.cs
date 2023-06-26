@@ -20,5 +20,14 @@
         public ManufactoringBuildingType BuildingType { get; set; }
         public decimal PowerConsumption { get; set; }
         public decimal PowerGeneration { get; set; }
+
+        public enum ManufactoringBuildingType
+        {
+            None = 0,
+            Extraction = 1,
+            Production = 2,
+            PowerGeneration = 3,
+            Special = 4
+        }
     }
 }

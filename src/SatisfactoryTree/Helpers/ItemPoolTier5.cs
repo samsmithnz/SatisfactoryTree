@@ -27,7 +27,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Circuit Board", 7.5M }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }

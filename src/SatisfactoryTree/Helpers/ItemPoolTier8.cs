@@ -21,7 +21,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Uranium", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -73,7 +73,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Electromagnetic Control Rod", 4 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -167,7 +167,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Heat Sink", 7.5M }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -372,7 +372,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Plutonium Pellet", 30 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -396,7 +396,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Encased Plutonium Cell", 1 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -469,7 +469,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Copper Powder", 50 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -493,7 +493,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Pressure Conversion Cube", 1 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }

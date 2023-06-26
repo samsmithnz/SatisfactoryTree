@@ -21,7 +21,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Bauxite", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -73,7 +73,7 @@ namespace SatisfactoryTree.Helpers
                             { "Aluminum Scrap", 360 },
                             { "Water", 120 }
                         },
-                        BuildingType.Assembler,
+                        "Assembler",
                         true,
                         "Aluminum Scrap")
                 }
@@ -123,7 +123,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Alclad Aluminum Sheet", 30 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -146,7 +146,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Aluminum Casing", 60 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -166,7 +166,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Raw Quartz", 60 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -189,7 +189,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Quartz Crystal", 22.5M }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -212,7 +212,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Silica", 37.5M }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -282,7 +282,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Sulfur", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -358,7 +358,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "AI Limiter", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -408,7 +408,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Assembly Director System", 0.75M }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }

@@ -26,7 +26,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Encased Industrial Beam", 6 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -50,7 +50,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Stator", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -74,7 +74,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Motor", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -98,7 +98,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Automated Wiring", 2.5M }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
