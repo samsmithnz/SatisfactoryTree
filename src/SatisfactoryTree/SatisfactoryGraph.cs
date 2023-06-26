@@ -8,20 +8,20 @@ namespace SatisfactoryTree
         public List<Item> Items { get; set; }
 
         public SatisfactoryGraph(string filter = "",
-            ResearchType researchType = ResearchType.Tier8,
-            bool includeBuildings = false,
-            bool showOnlyDirectDependencies = false)
+            ResearchType researchType = ResearchType.Tier8)
+            //bool includeBuildings = false,
+            //bool showOnlyDirectDependencies = false)
         {
             Items = BuildSatisfactoryTree(filter,
-                researchType,
-                includeBuildings,
-                showOnlyDirectDependencies);
+                researchType);
+                //includeBuildings,
+                //showOnlyDirectDependencies);
         }
 
         private static List<Item> BuildSatisfactoryTree(string nameFilter,
-            ResearchType researchType,
-            bool includeBuildings,
-            bool showOnlyDirectDependencies)
+            ResearchType researchType)
+            //bool includeBuildings= false,
+            //bool showOnlyDirectDependencies = false)
         {
             List<Item> items = AllItems.GetAllItems();
 
@@ -109,9 +109,11 @@ namespace SatisfactoryTree
                 }
                 else
                 {
-                    List<Item> filteredItems = new();
-                    //Add the root - this is the final item
-                    filteredItems.Add(filteredItem);
+                    List<Item> filteredItems = new()
+                    {
+                        //Add the root - this is the final item
+                        filteredItem
+                    };
 
                     //Get all of the inputs leading up to it
                     filteredItems.AddRange(GetInputs(items, filteredItem.Recipes));

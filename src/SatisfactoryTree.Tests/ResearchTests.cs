@@ -11,7 +11,7 @@ public class ResearchTests
     public void OnBoardingTest()
     {
         //Arrange
-        SatisfactoryGraph graph = new("", ResearchType.Tier2, true);
+        SatisfactoryGraph graph = new("", ResearchType.Tier2);//, true);
 
         //Act
 

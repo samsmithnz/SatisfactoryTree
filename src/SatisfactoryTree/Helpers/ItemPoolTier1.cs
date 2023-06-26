@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -20,7 +19,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Iron Ore", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -43,7 +42,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Iron Ingot", 30 }
                         },
-                        BuildingType.Smelter)
+                        "Smelter")
                 }
             };
         }
@@ -66,7 +65,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Iron Plate", 20 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -88,7 +87,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Iron Rod", 15 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -108,7 +107,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Copper Ore", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -131,7 +130,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Copper Ingot",30 }
                         },
-                        BuildingType.Smelter)
+                        "Smelter")
                 }
             };
         }
@@ -154,7 +153,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Wire", 30 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -177,7 +176,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Cable", 30 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -197,7 +196,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Limestone", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -220,7 +219,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Concrete", 15 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -243,7 +242,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Screw", 40 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -267,7 +266,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Reinforced Iron Plate", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }

@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 
 namespace SatisfactoryTree.Helpers
@@ -26,7 +25,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Encased Industrial Beam", 6 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -50,7 +49,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Stator", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -74,7 +73,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Motor", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -98,7 +97,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Automated Wiring", 2.5M }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -124,7 +123,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Heavy Modular Frame", 2 }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }

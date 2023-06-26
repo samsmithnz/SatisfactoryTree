@@ -176,7 +176,7 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    nodes.Add(new(item.Item.Recipes[0].Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + GetManufacturingName(item.Item.Recipes[0].ManufactoringBuilding) + "<br>(" + item.Item.Recipes[0].Name + ")" + '"'));
+                    nodes.Add(new(item.Item.Recipes[0].Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].Building + "<br>(" + item.Item.Recipes[0].Name + ")" + '"'));
                     if (item.OutputItem == true)
                     {
                         string finalItemQuantity = item.Quantity.ToString("0.0");
@@ -243,44 +243,6 @@ namespace SatisfactoryTree
             else
             {
                 return (Math.Ceiling(value * 10) / 10).ToString("0.0");
-            }
-        }
-
-        ////Combine multiple outputs into a single string
-        //private static string GetOutputsAsString(Dictionary<string, decimal> outputs)
-        //{
-        //    StringBuilder sb = new();
-        //    int i = 0;
-        //    foreach (KeyValuePair<string, decimal> item in outputs)
-        //    {
-        //        if (i > 0)
-        //        {
-        //            sb = sb.Append(" & ");
-        //        }
-        //        sb.Append(item.Key);
-        //        i++;
-        //    }
-        //    return sb.ToString();
-        //}
-
-        private static string GetManufacturingName(ManufactoringBuildingType manufactoringBuilding)
-        {
-            switch (manufactoringBuilding)
-            {
-                case ManufactoringBuildingType.MiningMachine:
-                    return "Mining Machine";
-                case ManufactoringBuildingType.OilExtractor:
-                    return "Oil Extractor";
-                case ManufactoringBuildingType.NuclearPowerPlant:
-                    return "Nuclear Power Plant";
-                case ManufactoringBuildingType.ParticleAccelerator:
-                    return "Particle Accelerator";
-                case ManufactoringBuildingType.ResourceWellExtractor:
-                    return "Resource Well Extractor";
-                case ManufactoringBuildingType.WaterExtractor:
-                    return "Water Extractor";
-                default:
-                    return manufactoringBuilding.ToString();
             }
         }
 

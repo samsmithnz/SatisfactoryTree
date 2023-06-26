@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -21,7 +20,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Coal", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -45,7 +44,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Steel Ingot", 45 }
                         },
-                        BuildingType.Foundry)
+                        "Foundry")
                 }
             };
         }
@@ -68,7 +67,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Steel Beam", 15 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -91,7 +90,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Steel Pipe", 20 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -115,7 +114,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Versatile Framework", 5 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -136,7 +135,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Water", 120 }
                         },
-                        BuildingType.WaterExtractor)
+                        "Water Extractor")
                 }
             };
         }

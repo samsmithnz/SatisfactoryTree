@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -24,7 +23,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Copper Sheet", 10 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -48,7 +47,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Rotor", 4 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -72,7 +71,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Modular Frame", 2 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }
@@ -96,7 +95,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Smart Plating", 2 }
                         },
-                        BuildingType.Assembler)
+                        "Assembler")
                 }
             };
         }

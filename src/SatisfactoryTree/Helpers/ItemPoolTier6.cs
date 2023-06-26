@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Models;
-using BuildingType = SatisfactoryTree.Models.ManufactoringBuildingType;
 
 namespace SatisfactoryTree.Helpers
 {
@@ -21,7 +20,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Caterium Ore", 60 }
                         },
-                        BuildingType.MiningMachine)
+                        "Mining Machine Mk1")
                 }
             };
         }
@@ -44,7 +43,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Caterium Ingot", 15 }
                         },
-                        BuildingType.Smelter)
+                        "Smelter")
                 }
             };
         }
@@ -67,7 +66,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Quickwire", 60 }
                         },
-                        BuildingType.Constructor)
+                        "Constructor")
                 }
             };
         }
@@ -92,7 +91,7 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "High-Speed Connector", 3.75M }
                         },
-                        BuildingType.Manufacturer)
+                        "Manufacturer")
                 }
             };
         }

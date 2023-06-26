@@ -53,7 +53,7 @@ public class DSPGraphTests
     public void TreeHasValidParentsAndChildrenTest()
     {
         //Arrange
-        SatisfactoryGraph graph = new("", ResearchType.Tier8, true);
+        SatisfactoryGraph graph = new("", ResearchType.Tier8);//, true);
 
         //Act
 
