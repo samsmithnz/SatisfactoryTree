@@ -5,5 +5,3 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "Doesn't make it easier to read.", Scope = "member", Target = "~M:SatisfactoryTree.SatisfactoryProduction.GetManufacturingName(SatisfactoryTree.Models.ManufactoringBuildingType)~System.String")]
-[assembly: SuppressMessage("Style", "IDE0074:Use compound assignment", Justification = "Doesn't make it easier to read.", Scope = "member", Target = "~M:SatisfactoryTree.Models.Recipe.#ctor(System.Collections.Generic.Dictionary{System.String,System.Decimal},System.Collections.Generic.Dictionary{System.String,System.Decimal},SatisfactoryTree.Models.ManufactoringBuildingType,System.Boolean,System.String)")]
