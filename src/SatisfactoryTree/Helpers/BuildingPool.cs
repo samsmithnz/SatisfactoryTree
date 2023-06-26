@@ -153,7 +153,7 @@ namespace SatisfactoryTree.Helpers
         public static Building FuelGenerator()
         {
             return new Building("Biomass Burner",
-                "BiomassBurner_256.png",
+                "FuelGenerator_256.png",
                 ManufactoringBuildingType.PowerGeneration,
                 0M,
                 150M);
@@ -171,7 +171,7 @@ namespace SatisfactoryTree.Helpers
         public static Building NuclearPower()
         {
             return new Building("Biomass Burner",
-                "BiomassBurner_256.png",
+                "NuclearPowerplant_256.png",
                 ManufactoringBuildingType.PowerGeneration,
                 0M,
                 2500M);
