@@ -69,10 +69,10 @@ namespace SatisfactoryTree.Helpers
         }
         public static Building Foundry()
         {
-            return new Building("Assembler",
-                "AssemblerMk1_256.png",
-                ManufactoringBuildingType.Assembler,
-                15M);
+            return new Building("Foundry",
+                "Foundry_256.png",
+                ManufactoringBuildingType.Foundry,
+                16M);
         }
 
         public static Building Constructor()
@@ -94,17 +94,17 @@ namespace SatisfactoryTree.Helpers
         public static Building Manufacturer()
         {
             return new Building("Manufacturer",
-                "ManufacturerMk1_256.png",
+                "Manufacturer_256.png",
                 ManufactoringBuildingType.Manufacturer,
-                15M);
+                55M);
         }
 
-        public static Building Manufacturer()
+        public static Building Refinery()
         {
-            return new Building("Manufacturer",
-                "ManufacturerMk1_256.png",
-                ManufactoringBuildingType.Manufacturer,
-                15M);
+            return new Building("Refinery",
+                "Refinery_256.png",
+                ManufactoringBuildingType.Refinery,
+                30M);
         }
 
         public static Building Packager()

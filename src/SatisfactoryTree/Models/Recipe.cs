@@ -77,5 +77,10 @@
         ParticleAccelerator = 13,
         NuclearPowerPlant = 14,
         Packager = 15
+
+            //Extractor
+            //Production
+            //Power Generation
+            //Special
     }
 }
