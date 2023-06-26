@@ -75,6 +75,7 @@
         ResourceWellPressurizer = 11,
         ResourceWellExtractor = 12,
         ParticleAccelerator = 13,
-        NuclearPowerPlant = 14        
+        NuclearPowerPlant = 14,
+        Packager = 15
     }
 }

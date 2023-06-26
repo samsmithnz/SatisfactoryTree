@@ -59,7 +59,15 @@ namespace SatisfactoryTree.Helpers
                 0M);
         }
 
-        public static Building AssemblerMk1()
+        //Production
+        public static Building Smeltor()
+        {
+            return new Building("Smeltor",
+                "SmeltorMk1_256.png",
+                ManufactoringBuildingType.Smelter,
+                4M);
+        }
+        public static Building Foundry()
         {
             return new Building("Assembler",
                 "AssemblerMk1_256.png",
@@ -67,7 +75,7 @@ namespace SatisfactoryTree.Helpers
                 15M);
         }
 
-        public static Building ConstructorMk1()
+        public static Building Constructor()
         {
             return new Building("Constructor",
                 "ConstructorMk1_256.png",
@@ -75,12 +83,52 @@ namespace SatisfactoryTree.Helpers
                 4M);
         }
 
-        public static Building SmeltorMk1()
+        public static Building Assembler()
         {
-            return new Building("Smeltor",
-                "SmeltorMk1_256.png",
-                ManufactoringBuildingType.Smelter,
-                4M);
+            return new Building("Assembler",
+                "AssemblerMk1_256.png",
+                ManufactoringBuildingType.Assembler,
+                15M);
+        }
+
+        public static Building Manufacturer()
+        {
+            return new Building("Manufacturer",
+                "ManufacturerMk1_256.png",
+                ManufactoringBuildingType.Manufacturer,
+                15M);
+        }
+
+        public static Building Manufacturer()
+        {
+            return new Building("Manufacturer",
+                "ManufacturerMk1_256.png",
+                ManufactoringBuildingType.Manufacturer,
+                15M);
+        }
+
+        public static Building Packager()
+        {
+            return new Building("Packager",
+                "Packager_256.png",
+                ManufactoringBuildingType.Packager,
+                10M);
+        }
+
+        public static Building Blender()
+        {
+            return new Building("Blender",
+                "Blender_256.png",
+                ManufactoringBuildingType.Blender,
+                75M);
+        }
+
+        public static Building ParticleAccelerator()
+        {
+            return new Building("Particle Accelerator",
+                "ParticleAccelerator_256.png",
+                ManufactoringBuildingType.ParticleAccelerator,
+                250M);
         }
     }
 }
