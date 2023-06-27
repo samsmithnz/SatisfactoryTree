@@ -17,7 +17,7 @@ namespace SatisfactoryTree
         }
 
         //Build a production plan for a given target item
-        public List<ProductionItem> BuildProductionPlan(ProductionItem itemGoal)
+        public ProductionCalculation BuildProductionPlan(ProductionItem itemGoal)
         {
             ProductionItems = new();
             if (itemGoal != null && itemGoal.Item != null)
@@ -48,7 +48,12 @@ namespace SatisfactoryTree
                     }
                 }
             }
-            return ProductionItems;
+            ProductionCalculation productionCalculation = new()
+            {
+                ProductionItems = ProductionItems,
+                PowerConsumption = 0
+            };
+            return productionCalculation;
         }
 
         //Taking an output item, find the inputs required to produce it

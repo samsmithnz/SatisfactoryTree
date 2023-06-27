@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Copper Sheet",
                 "Copper_Sheet.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -32,7 +32,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Rotor",
                 "Rotor.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -56,7 +56,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Modular Frame",
                 "Modular_Frame.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -80,7 +80,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Smart Plating",
                 "Smart_Plating.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -96,6 +96,52 @@ namespace SatisfactoryTree.Helpers
                             { "Smart Plating", 2 }
                         },
                         "Assembler")
+                }
+            };
+        }
+
+        public static Item SolidBiofuel()
+        {
+            return new Item(1, "Solid Biofuel",
+                "SolidBiofuel_256.png",
+                ItemType.Production,
+                ResearchType.Tier2)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Biomass", 120 }
+                        },
+                        new()
+                        {
+                            { "Solid Biofuel", 60 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
+        public static Item SolidBiofuelPowerGeneration()
+        {
+            return new Item(2, "Solid Biofuel Power",
+                "LightningBolt.png",
+                ItemType.PowerGeneration,
+                ResearchType.Tier2)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Solid Biofuel", 4 }
+                        },
+                        new()
+                        {
+                            { "Solid Biofuel Power", 30M }
+                        },
+                        "Biomass Burner")
                 }
             };
         }

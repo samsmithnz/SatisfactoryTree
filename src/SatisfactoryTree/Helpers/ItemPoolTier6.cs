@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "Caterium Ore",
                 "Caterium_Ore.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -29,7 +29,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "Caterium Ingot",
                 "Caterium_Ingot.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -52,7 +52,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "Quickwire",
                 "Quickwire.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -75,7 +75,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "High-Speed Connector",
                 "High-Speed_Connector.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -92,6 +92,29 @@ namespace SatisfactoryTree.Helpers
                             { "High-Speed Connector", 3.75M }
                         },
                         "Manufacturer")
+                }
+            };
+        }
+
+        public static Item FuelPowerGeneration()
+        {
+            return new Item(6, "Fuel Power",
+                "LightningBolt.png",
+                ItemType.PowerGeneration,
+                ResearchType.Tier6)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Fuel", 12 }
+                        },
+                        new()
+                        {
+                            { "Fuel Power", 150M }
+                        },
+                        "Fuel Generator")
                 }
             };
         }

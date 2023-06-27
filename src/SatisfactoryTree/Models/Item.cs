@@ -9,7 +9,7 @@
         public Item(int level,
             string name,
             string image,
-            ItemType itemType = ItemType.Item,
+            ItemType itemType = ItemType.Production,
             ResearchType researchType = ResearchType.Tier1)
         {
             Level = level;
@@ -30,8 +30,8 @@
     public enum ItemType
     {
         All = 0,
-        Item = 1,
-        Building = 2
+        Production = 1,
+        PowerGeneration = 2
     }
 
     public enum ResearchType

@@ -11,7 +11,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Circuit Board",
                 "Circuit_Board.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -35,7 +35,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Crude Oil",
                 "Crude_Oil.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -55,7 +55,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Plastic",
                 "Plastic.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -81,7 +81,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Rubber",
                 "Rubber.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -107,7 +107,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Heavy Oil Residue",
                 "Heavy_Oil_Residue.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -146,7 +146,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Fuel",
                 "Fuel.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -181,7 +181,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Petroleum Coke",
                 "Petroleum_Coke.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -204,7 +204,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Computer",
                 "Computer.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -230,7 +230,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Modular Engine",
                 "Modular_Engine.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =
@@ -255,7 +255,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(5, "Adaptive Control Unit",
                 "Adaptive_Control_Unit.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier5)
             {
                 Recipes =

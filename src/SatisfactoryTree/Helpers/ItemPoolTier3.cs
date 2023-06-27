@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(3, "Coal",
                 "Coal.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier3)
             {
                 Recipes =
@@ -29,7 +29,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(3, "Steel Ingot",
                 "Steel_Ingot.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier3)
             {
                 Recipes =
@@ -53,7 +53,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(3, "Steel Beam",
                 "Steel_Beam.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier3)
             {
                 Recipes =
@@ -76,7 +76,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(3, "Steel Pipe",
                 "Steel_Pipe.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier3)
             {
                 Recipes =
@@ -99,7 +99,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(3, "Versatile Framework",
                 "Versatile_Framework.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier3)
             {
                 Recipes =
@@ -124,7 +124,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(3, "Water",
                 "Water.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier3)
             {
                 Recipes =
@@ -136,6 +136,30 @@ namespace SatisfactoryTree.Helpers
                             { "Water", 120 }
                         },
                         "Water Extractor")
+                }
+            };
+        }
+
+        public static Item CoalPowerGeneration()
+        {
+            return new Item(3, "Coal Power",
+                "LightningBolt.png",
+                ItemType.PowerGeneration,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Coal", 15 },
+                            { "Water", 45 }
+                        },
+                        new()
+                        {
+                            { "Coal Power" , 75 }
+                        },
+                        "Coal Generator")
                 }
             };
         }

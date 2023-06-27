@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Uranium",
                 "Uranium.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -29,7 +29,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Encased Uranium Cell",
                 "Encased_Uranium_Cell.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -57,7 +57,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Electromagnetic Control Rod",
                 "Electromagnetic_Control_Rod.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -81,7 +81,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Uranium Fuel Rod",
                 "Uranium_Fuel_Rod.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -106,7 +106,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Magnetic Field Generator",
                 "Magnetic_Field_Generator.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -131,7 +131,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Nitrogen Gas",
                 "Nitrogen_Gas.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -151,7 +151,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Heat Sink",
                 "Heat_Sink.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -175,7 +175,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Cooling System",
                 "Cooling_System.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -201,7 +201,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Fused Modular Frame",
                 "Fused_Modular_Frame.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -226,7 +226,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Turbo Motor",
                 "Turbo_Motor.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -252,7 +252,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Thermal Propulsion Rocket",
                 "Thermal_Propulsion_Rocket.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -278,7 +278,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Nitric Acid",
                 "Nitric_Acid.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -303,7 +303,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Uranium Waste",
                 "Uranium_Waste.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -327,7 +327,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Non-fissile Uranium",
                 "Non-fissile_Uranium.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -356,7 +356,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Plutonium Pellet",
                 "Plutonium_Pellet.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -380,7 +380,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Encased Plutonium Cell",
                 "Encased_Plutonium_Cell.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -404,7 +404,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Plutonium Fuel Rod",
                 "Plutonium_Fuel_Rod.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -430,7 +430,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Plutonium Waste",
                 "Plutonium_Waste.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -454,7 +454,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Copper Powder",
                 "Copper_Powder.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -477,7 +477,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Pressure Conversion Cube",
                 "Pressure_Conversion_Cube.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -501,7 +501,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(8, "Nuclear Pasta",
                 "Nuclear_Pasta.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier8)
             {
                 Recipes =
@@ -517,6 +517,30 @@ namespace SatisfactoryTree.Helpers
                             { "Nuclear Pasta", 0.5M }
                         },
                         "Particle Accelerator")
+                }
+            };
+        }
+
+        public static Item NuclearPowerGeneration()
+        {
+            return new Item(8, "Nuclear Power",
+                "LightningBolt.png",
+                ItemType.PowerGeneration,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Uranium Fuel Rod", 0.2M },
+                            { "Water", 240 }
+                        },
+                        new()
+                        {
+                            { "Nuclear Power", 2500M }
+                        },
+                        "Nuclear Power Plant")
                 }
             };
         }
