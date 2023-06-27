@@ -8,6 +8,45 @@ namespace SatisfactoryTree.Tests
     public class PowerTests
     {
         [TestMethod]
+        public void SolidBioFuelPowerGenerationTest()
+        {
+            //Arrange
+            SatisfactoryProduction graph = new();
+            string itemName = "Solid Biofuel Power";
+            decimal quantity = 60;
+            ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
+            List<ProductionItem> results = new();
+            string mermaidResult = "";
+            string expectedResult = @"flowchart LR
+    SolidBiofuelPower[""x2 Biomass Burner<br>(Solid Biofuel Power)""]
+    SolidBiofuelPower_Item([60 Solid Biofuel Power])
+    SolidBiofuel[""x0.2 Constructor<br>(Solid Biofuel)""]
+    Biomass[""x0.3 Constructor<br>(Biomass)""]
+    Leaves[""x0.6 <br>(Leaves)""]
+    SolidBiofuel--""Solid Biofuel<br>(8 units/min)""-->SolidBiofuelPower
+    SolidBiofuelPower--""Solid Biofuel Power<br>(60 units/min)""-->SolidBiofuelPower_Item
+    Biomass--""Biomass<br>(16.0 units/min)""-->SolidBiofuel
+    Leaves--""Leaves<br>(32.0 units/min)""-->Biomass
+";
+
+            //Act
+            if (itemGoal != null)
+            {
+                results = graph.BuildProductionPlan(itemGoal);
+                mermaidResult = graph.ToMermaidString();
+            }
+
+            //Assert
+            Assert.IsNotNull(itemGoal);
+            Assert.AreEqual(4, results.Count);
+            Assert.IsNotNull(results[0].Item);
+            Assert.AreEqual(60, results[0].Quantity);
+            Assert.AreEqual(2, results[0].BuildingQuantityRequired);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
+        }
+
+        [TestMethod]
         public void CoalPowerGenerationTest()
         {
             //Arrange
