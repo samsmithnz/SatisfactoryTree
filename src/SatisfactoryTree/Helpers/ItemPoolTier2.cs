@@ -100,5 +100,51 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item SolidBiofuel()
+        {
+            return new Item(1, "Solid Biofuel",
+                "SolidBiofuel_256.png",
+                ItemType.Item,
+                ResearchType.Tier2)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Biomass", 120 }
+                        },
+                        new()
+                        {
+                            { "Solid Biofuel", 60 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
+        public static Item SolidBiofuelPowerGeneration()
+        {
+            return new Item(2, "Solid Biofuel Generation",
+                "LightningBolt.png",
+                ItemType.Item,
+                ResearchType.Tier2)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Solid Biofuel", 4 }
+                        },
+                        new(),
+                        "Biomass Burner",
+                        false,
+                        null,
+                        30M)
+                }
+            };
+        }
+
     }
 }

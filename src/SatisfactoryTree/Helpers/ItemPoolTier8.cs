@@ -521,6 +521,29 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item NuclearGeneration()
+        {
+            return new Item(8, "Nuclear Generation",
+                "LightningBolt.png",
+                ItemType.Item,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Uranium Fuel Rod", 0.2M }
+                        },
+                        new(),
+                        "Nuclear Power Plant",
+                        false,
+                        null,
+                        2500M)
+                }
+            };
+        }
+
 
 
     }

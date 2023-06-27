@@ -140,6 +140,29 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item CoalGeneration()
+        {
+            return new Item(3, "Coal Generation",
+                "LightningBolt.png",
+                ItemType.Item,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Coal", 15 }
+                        },
+                        new(),
+                        "Coal Generator",
+                        false,
+                        null,
+                        75M)
+                }
+            };
+        }
+
 
     }
 }

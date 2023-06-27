@@ -271,6 +271,139 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item Wood()
+        {
+            return new Item(1, "Wood",
+                "Wood_256.png",
+                ItemType.Item,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Wood", 60 }
+                        },
+                        "")
+                }
+            };
+        }
+
+        public static Item Leaves()
+        {
+            return new Item(1, "Leaves",
+                "Leaves_256.png",
+                ItemType.Item,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Leaves", 60 }
+                        },
+                        "")
+                }
+            };
+        }
+
+        public static Item AlienProtein()
+        {
+            return new Item(1, "Alien Protein",
+                "AlienProtein_256.png",
+                ItemType.Item,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Alien Protein", 60 }
+                        },
+                        "")
+                }
+            };
+        }
+
+        public static Item Mycelia()
+        {
+            return new Item(1, "Mycelia",
+                "Mycelia_256.png",
+                ItemType.Item,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Mycelia", 60 }
+                        },
+                        "")
+                }
+            };
+        }
+
+        public static Item Biomass()
+        {
+            return new Item(1, "Biomass",
+                "Biomass256.png",
+                ItemType.Item,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Leaves", 120 }
+                        },
+                        new()
+                        {
+                            { "Biomass", 60 }
+                        },
+                        "Constructor"),
+                    new Recipe(
+                        new()
+                        {
+                            { "Wood", 60 }
+                        },
+                        new()
+                        {
+                            { "Biomass", 300 }
+                        },
+                        "Constructor"),
+                    new Recipe(
+                        new()
+                        {
+                            { "Alien Protein", 15 }
+                        },
+                        new()
+                        {
+                            { "Biomass", 1500 }
+                        },
+                        "Constructor"),
+                    new Recipe(
+                        new()
+                        {
+                            { "Mycelia", 15 }
+                        },
+                        new()
+                        {
+                            { "Biomass", 150 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
 
     }
 }

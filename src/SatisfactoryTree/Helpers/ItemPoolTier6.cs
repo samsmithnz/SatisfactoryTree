@@ -96,6 +96,29 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item FuelGeneration()
+        {
+            return new Item(6, "Fuel Generation",
+                "LightningBolt.png",
+                ItemType.Item,
+                ResearchType.Tier6)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Fuel", 12 }
+                        },
+                        new(),
+                        "Fuel Generator",
+                        false,
+                        null,
+                        150M)
+                }
+            };
+        }
+
 
     }
 }
