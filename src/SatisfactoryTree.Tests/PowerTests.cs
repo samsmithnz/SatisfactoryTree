@@ -12,7 +12,7 @@ namespace SatisfactoryTree.Tests
         {
             //Arrange
             SatisfactoryProduction graph = new();
-            string itemName = "Coal Generation";
+            string itemName = "Coal Power";
             decimal quantity = 150;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
             List<ProductionItem> results = new();

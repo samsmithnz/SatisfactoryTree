@@ -125,7 +125,7 @@ namespace SatisfactoryTree.Helpers
 
         public static Item SolidBiofuelPowerGeneration()
         {
-            return new Item(2, "Solid Biofuel Generation",
+            return new Item(2, "Solid Biofuel Power",
                 "LightningBolt.png",
                 ItemType.PowerGeneration,
                 ResearchType.Tier2)
@@ -139,7 +139,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Power", 30M }
+                            { "Solid Biofuel Power", 30M }
                         },
                         "Biomass Burner")
                 }

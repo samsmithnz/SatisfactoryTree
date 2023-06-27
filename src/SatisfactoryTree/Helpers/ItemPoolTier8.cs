@@ -521,9 +521,9 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
-        public static Item NuclearGeneration()
+        public static Item NuclearPowerGeneration()
         {
-            return new Item(8, "Nuclear Generation",
+            return new Item(8, "Nuclear Power",
                 "LightningBolt.png",
                 ItemType.PowerGeneration,
                 ResearchType.Tier8)
@@ -537,7 +537,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Power", 2500M }
+                            { "Nuclear Power", 2500M }
                         },
                         "Nuclear Power Plant")
                 }

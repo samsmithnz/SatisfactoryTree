@@ -96,9 +96,9 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
-        public static Item FuelGeneration()
+        public static Item FuelPowerGeneration()
         {
-            return new Item(6, "Fuel Generation",
+            return new Item(6, "Fuel Power",
                 "LightningBolt.png",
                 ItemType.PowerGeneration,
                 ResearchType.Tier6)
@@ -112,7 +112,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Power", 150M }
+                            { "Fuel Power", 150M }
                         },
                         "Fuel Generator")
                 }

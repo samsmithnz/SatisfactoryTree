@@ -140,9 +140,9 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
-        public static Item CoalGeneration()
+        public static Item CoalPowerGeneration()
         {
-            return new Item(3, "Coal Generation",
+            return new Item(3, "Coal Power",
                 "LightningBolt.png",
                 ItemType.PowerGeneration,
                 ResearchType.Tier3)
@@ -156,7 +156,7 @@ namespace SatisfactoryTree.Helpers
                         },
                         new()
                         {
-                            { "Power" , 75 }
+                            { "Coal Power" , 75 }
                         },
                         "Coal Generator")
                 }

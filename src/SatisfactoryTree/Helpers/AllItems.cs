@@ -39,7 +39,7 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier3.SteelBeam(),
                 ItemPoolTier3.VersatileFramework(),
                 ItemPoolTier3.Water(),
-                ItemPoolTier3.CoalGeneration(),
+                ItemPoolTier3.CoalPowerGeneration(),
 
                 ItemPoolTier4.EncasedIndustrialBeam(),
                 ItemPoolTier4.AutomatedWiring(),
@@ -63,7 +63,7 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier6.CateriumIngot(),
                 ItemPoolTier6.Quickwire(),
                 ItemPoolTier6.HighSpeedConnector(),
-                ItemPoolTier6.FuelGeneration(),
+                ItemPoolTier6.FuelPowerGeneration(),
 
                 ItemPoolTier7.Bauxite(),
                 ItemPoolTier7.AluminaSolution(),
@@ -104,7 +104,7 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier8.CopperPowder(),
                 ItemPoolTier8.PressureConversionCube(),
                 ItemPoolTier8.NuclearPasta(),
-                ItemPoolTier8.NuclearGeneration(),
+                ItemPoolTier8.NuclearPowerGeneration(),
             };
 
             return items;
