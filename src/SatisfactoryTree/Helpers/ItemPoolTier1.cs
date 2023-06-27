@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Iron Ore",
                 "Iron_Ore.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -28,7 +28,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Iron Ingot",
                 "Iron_Ingot.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -51,7 +51,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Iron Plate",
                 "Iron_Plate.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -73,7 +73,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Iron Rod",
                 "Iron_Rod.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -96,7 +96,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Copper Ore",
                 "Copper_Ore.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -116,7 +116,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Copper Ingot",
                 "Copper_Ingot.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -139,7 +139,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Wire",
                 "Wire.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -162,7 +162,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Cable",
                 "Cable.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -185,7 +185,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Limestone",
                 "Limestone.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -205,7 +205,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Concrete",
                 "Concrete.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -228,7 +228,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Screw",
                 "Screw.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -251,7 +251,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Reinforced Iron Plate",
                 "Reinforced_Iron_Plate.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -275,7 +275,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Wood",
                 "Wood_256.png",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -295,7 +295,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Leaves",
                 "Leaves_256.png",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -315,7 +315,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Alien Protein",
                 "AlienProtein_256.png",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -335,7 +335,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Mycelia",
                 "Mycelia_256.png",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =
@@ -355,7 +355,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Biomass",
                 "Biomass256.png",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier1)
             {
                 Recipes =

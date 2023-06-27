@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "Caterium Ore",
                 "Caterium_Ore.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -29,7 +29,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "Caterium Ingot",
                 "Caterium_Ingot.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -52,7 +52,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "Quickwire",
                 "Quickwire.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -75,7 +75,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "High-Speed Connector",
                 "High-Speed_Connector.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -100,7 +100,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(6, "Fuel Generation",
                 "LightningBolt.png",
-                ItemType.Item,
+                ItemType.PowerGeneration,
                 ResearchType.Tier6)
             {
                 Recipes =
@@ -110,11 +110,11 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Fuel", 12 }
                         },
-                        new(),
-                        "Fuel Generator",
-                        false,
-                        null,
-                        150M)
+                        new()
+                        {
+                            { "Power", 150M }
+                        },
+                        "Fuel Generator")
                 }
             };
         }

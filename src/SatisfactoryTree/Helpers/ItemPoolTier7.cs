@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Bauxite",
                 "Bauxite.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -29,7 +29,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Alumina Solution",
                 "Alumina_Solution.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -56,7 +56,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Aluminum Scrap",
                 "Aluminum_Scrap.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -83,7 +83,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Aluminum Ingot",
                 "Aluminum_Ingot.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -107,7 +107,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Alclad Aluminum Sheet",
                 "Alclad_Aluminum_Sheet.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -131,7 +131,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Aluminum Casing",
                 "Aluminum_Casing.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -154,7 +154,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Raw Quartz",
                 "Raw_Quartz.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -174,7 +174,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Quartz Crystal",
                 "Quartz_Crystal.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -197,7 +197,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Silica",
                 "Silica.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -220,7 +220,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Crystal Oscillator",
                 "Crystal_Oscillator.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -245,7 +245,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Radio Control Unit",
                 "Radio_Control_Unit.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -270,7 +270,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Sulfur",
                 "Sulfur.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -290,7 +290,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Sulfuric Acid",
                 "Sulfuric_Acid.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -314,7 +314,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Battery",
                 "Battery.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -342,7 +342,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "AI Limiter",
                 "AI_Limiter.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -366,7 +366,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Supercomputer",
                 "Supercomputer.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =
@@ -392,7 +392,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(7, "Assembly Director System",
                 "Assembly_Director_System.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier7)
             {
                 Recipes =

@@ -10,7 +10,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(4, "Encased Industrial Beam",
                 "Encased_Industrial_Beam.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier4)
             {
                 Recipes =
@@ -34,7 +34,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(4, "Stator",
                 "Stator.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier4)
             {
                 Recipes =
@@ -58,7 +58,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(4, "Motor",
                 "Motor.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier4)
             {
                 Recipes =
@@ -82,7 +82,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(4, "Automated Wiring",
                 "Automated_Wiring.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier4)
             {
                 Recipes =
@@ -106,7 +106,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(4, "Heavy Modular Frame",
                 "Heavy_Modular_Frame.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier4)
             {
                 Recipes =

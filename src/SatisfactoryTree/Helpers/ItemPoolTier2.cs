@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Copper Sheet",
                 "Copper_Sheet.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -32,7 +32,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Rotor",
                 "Rotor.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -56,7 +56,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Modular Frame",
                 "Modular_Frame.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -80,7 +80,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Smart Plating",
                 "Smart_Plating.webp",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -104,7 +104,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(1, "Solid Biofuel",
                 "SolidBiofuel_256.png",
-                ItemType.Item,
+                ItemType.Production,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -127,7 +127,7 @@ namespace SatisfactoryTree.Helpers
         {
             return new Item(2, "Solid Biofuel Generation",
                 "LightningBolt.png",
-                ItemType.Item,
+                ItemType.PowerGeneration,
                 ResearchType.Tier2)
             {
                 Recipes =
@@ -137,11 +137,11 @@ namespace SatisfactoryTree.Helpers
                         {
                             { "Solid Biofuel", 4 }
                         },
-                        new(),
-                        "Biomass Burner",
-                        false,
-                        null,
-                        30M)
+                        new()
+                        {
+                            { "Power", 30M }
+                        },
+                        "Biomass Burner")
                 }
             };
         }
