@@ -18,9 +18,11 @@ namespace SatisfactoryTree.Tests
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
-    IronOre[""x1.5 Mining Machine Mk1<br>(Iron Ore)""]
-    IronOre_Item([90 Iron Ore])
-    IronOre--""Iron Ore<br>(90 units/min)""-->IronOre_Item
+    CoalPower[""x2 Coal Generator<br>(Coal Power)""]
+    CoalPower_Item([150 Coal Power])
+    Coal[""x0.5 Mining Machine Mk1<br>(Coal)""]
+    Coal--""Coal<br>(30 units/min)""-->CoalPower
+    CoalPower--""Coal Power<br>(150 units/min)""-->CoalPower_Item
 ";
 
             //Act
@@ -32,10 +34,10 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
-            Assert.AreEqual(1, results.Count);
+            Assert.AreEqual(2, results.Count);
             Assert.IsNotNull(results[0].Item);
-            Assert.AreEqual(90, results[0].Quantity);
-            Assert.AreEqual(1.5M, results[0].BuildingQuantityRequired);
+            Assert.AreEqual(150, results[0].Quantity);
+            Assert.AreEqual(2, results[0].BuildingQuantityRequired);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
         }

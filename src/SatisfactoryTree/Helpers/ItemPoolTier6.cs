@@ -108,7 +108,8 @@ namespace SatisfactoryTree.Helpers
                     new Recipe(
                         new()
                         {
-                            { "Fuel", 12 }
+                            { "Fuel", 12 },
+                            { "Water", 45 }
                         },
                         new()
                         {
