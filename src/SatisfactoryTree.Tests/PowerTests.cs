@@ -21,7 +21,9 @@ namespace SatisfactoryTree.Tests
     CoalPower[""x2 Coal Generator<br>(Coal Power)""]
     CoalPower_Item([150 Coal Power])
     Coal[""x0.5 Mining Machine Mk1<br>(Coal)""]
+    Water[""x0.8 Water Extractor<br>(Water)""]
     Coal--""Coal<br>(30 units/min)""-->CoalPower
+    Water--""Water<br>(90 units/min)""-->CoalPower
     CoalPower--""Coal Power<br>(150 units/min)""-->CoalPower_Item
 ";
 
@@ -34,7 +36,7 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
-            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(150, results[0].Quantity);
             Assert.AreEqual(2, results[0].BuildingQuantityRequired);
