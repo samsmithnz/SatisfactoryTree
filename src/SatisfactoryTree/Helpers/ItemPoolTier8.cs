@@ -533,7 +533,8 @@ namespace SatisfactoryTree.Helpers
                     new Recipe(
                         new()
                         {
-                            { "Uranium Fuel Rod", 0.2M }
+                            { "Uranium Fuel Rod", 0.2M },
+                            { "Water", 240 }
                         },
                         new()
                         {
