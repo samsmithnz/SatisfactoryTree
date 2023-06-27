@@ -20,11 +20,18 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier1.Concrete(),
                 ItemPoolTier1.Screw(),
                 ItemPoolTier1.ReinforcedIronPlate(),
+                ItemPoolTier1.AlienProtein(),
+                ItemPoolTier1.Leaves(),
+                ItemPoolTier1.Mycelia(),
+                ItemPoolTier1.Wood(),
+                ItemPoolTier1.Biomass(),
 
                 ItemPoolTier2.CopperSheet(),
                 ItemPoolTier2.ModularFrame(),
                 ItemPoolTier2.Rotor(),
                 ItemPoolTier2.SmartPlating(),
+                ItemPoolTier2.SolidBiofuel(),
+                ItemPoolTier2.SolidBiofuelPowerGeneration(),
 
                 ItemPoolTier3.Coal(),
                 ItemPoolTier3.SteelIngot(),
@@ -32,6 +39,7 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier3.SteelBeam(),
                 ItemPoolTier3.VersatileFramework(),
                 ItemPoolTier3.Water(),
+                ItemPoolTier3.CoalGeneration(),
 
                 ItemPoolTier4.EncasedIndustrialBeam(),
                 ItemPoolTier4.AutomatedWiring(),
@@ -55,6 +63,7 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier6.CateriumIngot(),
                 ItemPoolTier6.Quickwire(),
                 ItemPoolTier6.HighSpeedConnector(),
+                ItemPoolTier6.FuelGeneration(),
 
                 ItemPoolTier7.Bauxite(),
                 ItemPoolTier7.AluminaSolution(),
@@ -95,6 +104,7 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier8.CopperPowder(),
                 ItemPoolTier8.PressureConversionCube(),
                 ItemPoolTier8.NuclearPasta(),
+                ItemPoolTier8.NuclearGeneration(),
             };
 
             return items;
