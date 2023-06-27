@@ -7,7 +7,8 @@
             Dictionary<string, decimal> outputs,
             string building,
             bool primaryMethodOfManufacture = true,
-            string? name = null)
+            string? name = null,
+            decimal powerGenerated = 0)
         {
             if (name == null && outputs != null)
             {
@@ -29,6 +30,7 @@
             Outputs = outputs;
             Building = building;
             PrimaryMethodOfManufacture = primaryMethodOfManufacture;
+            PowerGenerated = powerGenerated;
         }
 
         public string Name { get; set; }
@@ -36,6 +38,7 @@
         public decimal ThroughPutPerMinute { get; internal set; }
         public Dictionary<string, decimal> Inputs { get; set; }
         public Dictionary<string, decimal> Outputs { get; set; }
+        public decimal PowerGenerated { get; set; }
         public string Building { get; set; }
         public bool PrimaryMethodOfManufacture { get; set; }
 
