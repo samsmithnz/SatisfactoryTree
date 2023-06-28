@@ -15,7 +15,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Iron Ore";
             decimal quantity = 90;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -34,6 +34,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(7.5M, result.PowerConsumption);
             Assert.AreEqual(1, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(90, results[0].Quantity);
@@ -50,7 +52,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Iron Ingot";
             decimal quantity = 15;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -71,6 +73,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3.25M, result.PowerConsumption);
             Assert.AreEqual(2, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(15, results[0].Quantity);
@@ -90,7 +94,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Iron Ingot";
             decimal quantity = 30;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -111,6 +115,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(6.5M, result.PowerConsumption);
             Assert.AreEqual(2, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(30, results[0].Quantity);
@@ -130,7 +136,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Iron Ingot";
             decimal quantity = 60;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -151,6 +157,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(13M, result.PowerConsumption);
             Assert.AreEqual(2, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(60, results[0].Quantity);
@@ -170,7 +178,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Iron Plate";
             decimal quantity = 30;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -193,6 +201,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(15.75M, result.PowerConsumption);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual("Iron Plate", results[0].Item?.Name);
@@ -217,7 +227,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Reinforced Iron Plate";
             decimal quantity = 12;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -247,6 +257,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(105.6M, result.PowerConsumption);
             Assert.AreEqual(6, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -261,7 +273,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Steel Ingot";
             decimal quantity = 1025;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -284,6 +296,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(535.28M, result.PowerConsumption);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -298,7 +312,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Heavy Modular Frame";
             decimal quantity = 10;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -350,6 +364,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2548.61M, result.PowerConsumption);
             Assert.AreEqual(15, results.Count);
             Assert.AreEqual(1025, results[9].Dependencies["Iron Ore"]);
             Assert.AreEqual(1025, results[9].Dependencies["Coal"]);
@@ -366,7 +382,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Motor";
             decimal quantity = 5;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -411,6 +427,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(210.71M, result.PowerConsumption);
             Assert.AreEqual(13, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -424,7 +442,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Plastic";
             decimal quantity = 20;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -448,6 +466,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(40M, result.PowerConsumption);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -461,7 +481,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Circuit Board";
             decimal quantity = 5;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -493,6 +513,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(58.33M, result.PowerConsumption);
             Assert.AreEqual(7, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -506,7 +528,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Aluminum Ingot";
             decimal quantity = 10;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -539,6 +561,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(12.75M, result.PowerConsumption);
             Assert.AreEqual(8, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);

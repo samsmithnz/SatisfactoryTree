@@ -15,7 +15,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Solid Biofuel Power";
             decimal quantity = 60;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -40,6 +40,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1.60M, result.PowerConsumption);
             Assert.AreEqual(4, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(60, results[0].Quantity);
@@ -56,7 +58,7 @@ namespace SatisfactoryTree.Tests
             string itemName = "Coal Power";
             decimal quantity = 150;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
-            ProductionCalculation result;
+            ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -79,6 +81,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(17.5M, result.PowerConsumption);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(150, results[0].Quantity);

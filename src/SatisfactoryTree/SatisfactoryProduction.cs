@@ -8,11 +8,14 @@ namespace SatisfactoryTree
     public class SatisfactoryProduction
     {
         public List<Item> Items { get; set; }
+        public List<Building> Buildings { get; set; }
         public List<ProductionItem> ProductionItems { get; set; }
+        public decimal PowerConsumption { get; set; }
 
         public SatisfactoryProduction()
         {
             Items = AllItems.GetAllItems();
+            Buildings = AllBuildings.GetAllBuildings();
             ProductionItems = new();
         }
 
@@ -51,7 +54,7 @@ namespace SatisfactoryTree
             ProductionCalculation productionCalculation = new()
             {
                 ProductionItems = ProductionItems,
-                PowerConsumption = 0
+                PowerConsumption = PowerConsumption
             };
             return productionCalculation;
         }
@@ -65,6 +68,14 @@ namespace SatisfactoryTree
             {
                 //Process this item
                 targetItem.BuildingQuantityRequired = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
+                if (targetItem != null && targetItem.Item != null && targetItem.Item.Recipes.Count > 0 && targetItem.Item.Recipes[0].Building != null)
+                {
+                    Building? building = FindBuilding(targetItem.Item.Recipes[0].Building);
+                    if (building != null)
+                    {
+                        PowerConsumption += building.PowerConsumption * targetItem.BuildingQuantityRequired;
+                    }
+                }
                 //Check if this item is already in the production list, undate it instead of adding a new one
                 if (ProductionItems.Any(p => p.Item?.Name == targetItem.Item.Name))
                 {
@@ -172,6 +183,24 @@ namespace SatisfactoryTree
             return result;
         }
 
+        //Find a building by name
+        public Building? FindBuilding(string buildingName)
+        {
+            Building? result = null;
+            if (Buildings != null && Buildings.Count > 0)
+            {
+                foreach (Building item in Buildings)
+                {
+                    if (item.Name == buildingName)
+                    {
+                        result = item;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
         //Create the mermaid string for the production plan
         public string ToMermaidString()
         {
@@ -209,8 +238,8 @@ namespace SatisfactoryTree
                         string destination = item.Item.Recipes[0].Name.Replace(" ", "");
                         string text = '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"';
                         MermaidDotNet.Models.Link link = new(source, destination, text);
-                        if (!links.Any(g => g.SourceNode == link.SourceNode && 
-                                            g.DestinationNode == link.DestinationNode && 
+                        if (!links.Any(g => g.SourceNode == link.SourceNode &&
+                                            g.DestinationNode == link.DestinationNode &&
                                             g.Text == link.Text))
                         {
                             links.Add(new MermaidDotNet.Models.Link(source, destination, text));
