@@ -9,6 +9,7 @@ namespace SatisfactoryTree
     {
         public List<Item> Items { get; set; }
         public List<ProductionItem> ProductionItems { get; set; }
+        public decimal PowerConsumption { get; set; }
 
         public SatisfactoryProduction()
         {
@@ -51,7 +52,7 @@ namespace SatisfactoryTree
             ProductionCalculation productionCalculation = new()
             {
                 ProductionItems = ProductionItems,
-                PowerConsumption = 0
+                PowerConsumption = PowerConsumption
             };
             return productionCalculation;
         }
