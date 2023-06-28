@@ -34,6 +34,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(7.5M, result.PowerConsumption);
             Assert.AreEqual(1, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(90, results[0].Quantity);
@@ -71,6 +73,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3.25M, result.PowerConsumption);
             Assert.AreEqual(2, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(15, results[0].Quantity);
@@ -111,6 +115,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(6.5M, result.PowerConsumption);
             Assert.AreEqual(2, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(30, results[0].Quantity);
@@ -151,6 +157,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(13M, result.PowerConsumption);
             Assert.AreEqual(2, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual(60, results[0].Quantity);
@@ -193,6 +201,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(15.75M, result.PowerConsumption);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(results[0].Item);
             Assert.AreEqual("Iron Plate", results[0].Item?.Name);
@@ -247,6 +257,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(105.6M, result.PowerConsumption);
             Assert.AreEqual(6, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -284,6 +296,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(535.28M, result.PowerConsumption);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -350,6 +364,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2548.61M, result.PowerConsumption);
             Assert.AreEqual(15, results.Count);
             Assert.AreEqual(1025, results[9].Dependencies["Iron Ore"]);
             Assert.AreEqual(1025, results[9].Dependencies["Coal"]);
@@ -411,6 +427,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(210.71M, result.PowerConsumption);
             Assert.AreEqual(13, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -448,6 +466,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(40M, result.PowerConsumption);
             Assert.AreEqual(3, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -493,6 +513,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(58.33M, result.PowerConsumption);
             Assert.AreEqual(7, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
@@ -539,6 +561,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(itemGoal);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(12.75M, result.PowerConsumption);
             Assert.AreEqual(8, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
