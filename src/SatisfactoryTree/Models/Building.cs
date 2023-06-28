@@ -8,7 +8,7 @@
             decimal powerConsumption,
             decimal powerGeneration = 0)
         {
-            Name = name; ;
+            Name = name;
             Image = image;
             BuildingType = buildingType;
             PowerConsumption = powerConsumption;
