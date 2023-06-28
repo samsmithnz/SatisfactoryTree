@@ -8,6 +8,18 @@
         }
 
         public List<ProductionItem> ProductionItems { get; set; }
-        public decimal PowerConsumption { get; set; }
+
+        private decimal _powerConsumption;
+        public decimal PowerConsumption
+        {
+            get
+            {
+                return Math.Round(_powerConsumption, 2);
+            }
+            set
+            {
+                _powerConsumption = value;
+            }
+        }
     }
 }
