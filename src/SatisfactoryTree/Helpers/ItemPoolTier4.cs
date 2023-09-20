@@ -175,5 +175,76 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item AlcladAluminumSheet()
+        {
+            return new Item(4, "Alclad Aluminum Sheet",
+                "Alclad_Aluminum_Sheet.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Aluminum Ingot", 30 },
+                            { "Copper Ingot", 10 }
+                        },
+                        new()
+                        {
+                            { "Alclad Aluminum Sheet", 30 }
+                        },
+                        "Assembler")
+                }
+            };
+        }
+
+        public static Item AluminumCasing()
+        {
+            return new Item(4, "Aluminum Casing",
+                "Aluminum_Casing.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Aluminum Ingot", 90 }
+                        },
+                        new()
+                        {
+                            { "Aluminum Casing", 60 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+        public static Item CrystalOscillator()
+        {
+            return new Item(4, "Crystal Oscillator",
+                "Crystal_Oscillator.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Quartz Crystal", 18 },
+                            { "Cable", 14 },
+                            { "Reinforced Iron Plate", 2.5M }
+                        },
+                        new()
+                        {
+                            { "Crystal Oscillator", 1 }
+                        },
+                        "Manufacturer")
+                }
+            };
+        }
+
     }
 }

@@ -223,5 +223,65 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item Bauxite()
+        {
+            return new Item(0, "Bauxite",
+                "Bauxite.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Bauxite", 60 }
+                        },
+                        "Mining Machine Mk1")
+                }
+            };
+        }
+
+        public static Item RawQuartz()
+        {
+            return new Item(0, "Raw Quartz",
+                "Raw_Quartz.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Raw Quartz", 60 }
+                        },
+                        "Assembler")
+                }
+            };
+        }
+
+        public static Item Sulfur()
+        {
+            return new Item(0, "Sulfur",
+                "Sulfur.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Sulfur", 60 }
+                        },
+                        "Mining Machine Mk1")
+                }
+            };
+        }
+
     }
 }

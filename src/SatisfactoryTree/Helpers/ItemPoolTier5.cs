@@ -82,5 +82,83 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item Battery()
+        {
+            return new Item(5, "Battery",
+                "Battery.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Sulfuric Acid", 60 },
+                            { "Alumina Solution", 40 },
+                            { "Aluminum Casing", 20 }
+                        },
+                        new()
+                        {
+                            { "Battery", 20 },
+                            { "Water", 40 }
+                        },
+                        "Blender",
+                        true,
+                        "Battery")
+                }
+            };
+        }
+        public static Item RadioControlUnit()
+        {
+            return new Item(5, "Radio Control Unit",
+                "Radio_Control_Unit.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Aluminum Casing", 40 },
+                            { "Crystal Oscillator", 1.25M },
+                            { "Computer", 1.25M }
+                        },
+                        new()
+                        {
+                            { "Radio Control Unit", 2.5M }
+                        },
+                        "Manufacturer")
+                }
+            };
+        }
+
+        public static Item Supercomputer()
+        {
+            return new Item(5, "Supercomputer",
+                "Supercomputer.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Computer", 3.75M },
+                            { "AI Limiter", 3.75M },
+                            { "High-Speed Connector", 5.63M },
+                            { "Plastic", 52.5M }
+                        },
+                        new()
+                        {
+                            { "Supercomputer", 1.88M }
+                        },
+                        "Manufacturer")
+                }
+            };
+        }
+
     }
 }

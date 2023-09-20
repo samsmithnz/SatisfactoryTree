@@ -273,5 +273,32 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item AluminumScrap()
+        {
+            return new Item(2, "Aluminum Scrap",
+                "Aluminum_Scrap.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Alumina Solution", 240 },
+                            { "Coal", 120 }
+                        },
+                        new()
+                        {
+                            { "Aluminum Scrap", 360 },
+                            { "Water", 120 }
+                        },
+                        "Assembler",
+                        true,
+                        "Aluminum Scrap")
+                }
+            };
+        }
+
     }
 }

@@ -29,10 +29,5 @@ namespace SatisfactoryTree.Helpers
                 }
             };
         }
-
-
-
-
-
     }
 }

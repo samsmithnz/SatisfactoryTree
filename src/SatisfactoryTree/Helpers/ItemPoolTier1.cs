@@ -226,6 +226,103 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item AluminaSolution()
+        {
+            return new Item(1, "Alumina Solution",
+                "Alumina_Solution.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Bauxite", 120 },
+                            { "Water", 180 }
+                        },
+                        new()
+                        {
+                            { "Alumina Solution", 120 },
+                            { "Silica", 50 }
+                        },
+                        "Refinery",
+                        true,
+                        "Alumina Solution")
+                }
+            };
+        }
+
+        public static Item QuartzCrystal()
+        {
+            return new Item(1, "Quartz Crystal",
+                "Quartz_Crystal.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Raw Quartz", 37.5M }
+                        },
+                        new()
+                        {
+                            { "Quartz Crystal", 22.5M }
+                        },
+                        "Assembler")
+                }
+            };
+        }
+
+        public static Item Silica()
+        {
+            return new Item(1, "Silica",
+                "Silica.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Raw Quartz", 22.5M }
+                        },
+                        new()
+                        {
+                            { "Silica", 37.5M }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
+        public static Item SulfuricAcid()
+        {
+            return new Item(1, "Sulfuric Acid",
+                "Sulfuric_Acid.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Sulfur", 50 },
+                            { "Water", 50 }
+                        },
+                        new()
+                        {
+                            { "Sulfuric Acid", 50 }
+                        },
+                        "Refinery")
+                }
+            };
+        }
+
 
     }
 }

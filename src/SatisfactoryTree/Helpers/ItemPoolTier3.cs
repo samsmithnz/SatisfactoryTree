@@ -228,6 +228,52 @@ namespace SatisfactoryTree.Helpers
                 }
             };
         }
+        public static Item AluminumIngot()
+        {
+            return new Item(3, "Aluminum Ingot",
+                "Aluminum_Ingot.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Aluminum Scrap", 90 },
+                            { "Silica", 75 }
+                        },
+                        new()
+                        {
+                            { "Aluminum Ingot", 60 }
+                        },
+                        "Foundry")
+                }
+            };
+        }
+        public static Item AILimiter()
+        {
+            return new Item(3, "AI Limiter",
+                "AI_Limiter.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Copper Sheet", 25 },
+                            { "Quickwire", 100 }
+                        },
+                        new()
+                        {
+                            { "AI Limiter", 5 }
+                        },
+                        "Assembler")
+                }
+            };
+        }
 
 
     }
