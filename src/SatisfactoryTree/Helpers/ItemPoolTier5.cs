@@ -5,223 +5,54 @@ namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier5
     {
-        //Level 5
 
-        public static Item CircuitBoard()
+
+        public static Item HeavyModularFrame()
         {
-            return new Item(5, "Circuit Board",
-                "Circuit_Board.webp",
+            return new Item(5, "Heavy Modular Frame",
+                "Heavy_Modular_Frame.webp",
                 ItemType.Production,
-                ResearchType.Tier5)
+                ResearchType.Tier4)
             {
                 Recipes =
                 {
                     new Recipe(
                         new()
                         {
-                            { "Copper Sheet", 15 },
-                            { "Plastic", 30 }
+                            { "Modular Frame", 10 },
+                            { "Steel Pipe", 30 },
+                            { "Encased Industrial Beam", 10 },
+                            { "Screw", 200 }
                         },
                         new()
                         {
-                            { "Circuit Board", 7.5M }
-                        },
-                        "Assembler")
-                }
-            };
-        }
-
-        public static Item CrudeOil()
-        {
-            return new Item(5, "Crude Oil",
-                "Crude_Oil.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Crude Oil", 120 }
-                        },
-                        "Oil Extractor")
-                }
-            };
-        }
-
-        public static Item Plastic()
-        {
-            return new Item(5, "Plastic",
-                "Plastic.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Crude Oil", 30 }
-                        },
-                        new()
-                        {
-                            { "Plastic", 20 },
-                            { "Heavy Oil Residue", 10 }
-                        },
-                        "Refinery",
-                        true,
-                        "Plastic")
-                }
-            };
-        }
-
-        public static Item Rubber()
-        {
-            return new Item(5, "Rubber",
-                "Rubber.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Crude Oil", 30 }
-                        },
-                        new()
-                        {
-                            { "Rubber", 20 },
-                            { "Heavy Oil Residue", 20 }
-                        },
-                        "Refinery",
-                        true,
-                        "Rubber")
-                }
-            };
-        }
-
-        public static Item HeavyOilResidue()
-        {
-            return new Item(5, "Heavy Oil Residue",
-                "Heavy_Oil_Residue.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Crude Oil", 30 }
-                        },
-                        new()
-                        {
-                            { "Plastic", 20 },
-                            { "Heavy Oil Residue", 10 }
-                        },
-                        "Refinery",
-                        true,
-                        "Plastic"),
-                    new Recipe(
-                        new()
-                        {
-                            { "Crude Oil", 30 }
-                        },
-                        new()
-                        {
-                            { "Rubber", 20 },
-                            { "Heavy Oil Residue", 20 }
-                        },
-                        "Refinery",
-                        true,
-                        "Rubber")
-                }
-            };
-        }
-
-        public static Item Fuel()
-        {
-            return new Item(5, "Fuel",
-                "Fuel.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    //new Recipe(6,
-                    //    40,
-                    //    new()
-                    //    {
-                    //        { "Crude Oil", 6 }
-                    //    },
-                    //    new()
-                    //    {
-                    //        { "Fuel", 4 },
-                    //        { "Polymer Resin", 3 }
-                    //    },
-                    //    "Refinery"),
-                    new Recipe(
-                        new()
-                        {
-                            { "Heavy Oil Residue", 60 }
-                        },
-                        new()
-                        {
-                            { "Fuel", 40 }
-                        },
-                        "Refinery")
-                }
-            };
-        }
-
-        public static Item PetroleumCoke()
-        {
-            return new Item(5, "Petroleum Coke",
-                "Petroleum_Coke.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Heavy Oil Residue", 40 }
-                        },
-                        new()
-                        {
-                            { "Petroleum Coke", 120 }
-                        },
-                        "Refinery")
-                }
-            };
-        }
-
-        public static Item Computer()
-        {
-            return new Item(5, "Computer",
-                "Computer.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Circuit Board", 25 },
-                            { "Cable", 22.5M },
-                            { "Plastic", 45 },
-                            { "Screw", 130 }
-                        },
-                        new()
-                        {
-                            { "Computer", 2.5M }
+                            { "Heavy Modular Frame", 2 }
                         },
                         "Manufacturer")
+                }
+            };
+        }
+
+        public static Item VersatileFramework()
+        {
+            return new Item(5, "Versatile Framework",
+                "Versatile_Framework.webp",
+                ItemType.Production,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Modular Frame", 2.5m },
+                            { "Steel Beam", 30 }
+                        },
+                        new()
+                        {
+                            { "Versatile Framework", 5 }
+                        },
+                        "Assembler")
                 }
             };
         }
@@ -250,33 +81,6 @@ namespace SatisfactoryTree.Helpers
                 }
             };
         }
-
-        public static Item AdaptiveControlUnit()
-        {
-            return new Item(5, "Adaptive Control Unit",
-                "Adaptive_Control_Unit.webp",
-                ItemType.Production,
-                ResearchType.Tier5)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Automated Wiring", 7.5M },
-                            { "Circuit Board", 5 },
-                            { "Heavy Modular Frame", 1 },
-                            { "Computer", 1 }
-                        },
-                        new()
-                        {
-                            { "Adaptive Control Unit", 2 }
-                        },
-                        "Manufacturer")
-                }
-            };
-        }
-
 
     }
 }

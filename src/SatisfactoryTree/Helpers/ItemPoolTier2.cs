@@ -4,7 +4,76 @@ namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier2
     {
-        //Level 2
+
+        public static Item IronPlate()
+        {
+            return new Item(2, "Iron Plate",
+                "Iron_Plate.webp",
+                ItemType.Production,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Iron Ingot", 30 }
+                        },
+                        new()
+                        {
+                            { "Iron Plate", 20 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+        public static Item IronRod()
+        {
+            return new Item(2, "Iron Rod",
+                "Iron_Rod.webp",
+                ItemType.Production,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Iron Ingot", 15 }
+                        },
+                        new()
+                        {
+                            { "Iron Rod", 15 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
+        //Special level 2 item since screws are always made with iron rods
+        public static Item Screw()
+        {
+            return new Item(2, "Screw",
+                "Screw.webp",
+                ItemType.Production,
+                ResearchType.Tier1)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Iron Rod", 10 }
+                        },
+                        new()
+                        {
+                            { "Screw", 40 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
         public static Item CopperSheet()
         {
             return new Item(2, "Copper Sheet",
@@ -28,74 +97,49 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
-        public static Item Rotor()
+        public static Item Wire()
         {
-            return new Item(2, "Rotor",
-                "Rotor.webp",
+            return new Item(2, "Wire",
+                "Wire.webp",
                 ItemType.Production,
-                ResearchType.Tier2)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
                     new Recipe(
                         new()
                         {
-                            { "Iron Rod", 20 },
-                            { "Screw", 100 }
+                            { "Copper Ingot", 15 }
                         },
                         new()
                         {
-                            { "Rotor", 4 }
+                            { "Wire", 30 }
                         },
-                        "Assembler")
+                        "Constructor")
                 }
             };
         }
 
-        public static Item ModularFrame()
+        //Special level 2 item since cable is always made with wire.
+        public static Item Cable()
         {
-            return new Item(2, "Modular Frame",
-                "Modular_Frame.webp",
+            return new Item(2, "Cable",
+                "Cable.webp",
                 ItemType.Production,
-                ResearchType.Tier2)
+                ResearchType.Tier1)
             {
                 Recipes =
                 {
                     new Recipe(
                         new()
                         {
-                            { "Reinforced Iron Plate", 3 },
-                            { "Iron Rod", 12 }
+                            { "Wire", 60 }
                         },
                         new()
                         {
-                            { "Modular Frame", 2 }
+                            { "Cable", 30 }
                         },
-                        "Assembler")
-                }
-            };
-        }
-
-        public static Item SmartPlating()
-        {
-            return new Item(2, "Smart Plating",
-                "Smart_Plating.webp",
-                ItemType.Production,
-                ResearchType.Tier2)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Reinforced Iron Plate", 2 },
-                            { "Rotor", 2 }
-                        },
-                        new()
-                        {
-                            { "Smart Plating", 2 }
-                        },
-                        "Assembler")
+                        "Constructor")
                 }
             };
         }
@@ -123,25 +167,108 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
-        public static Item SolidBiofuelPowerGeneration()
+        public static Item SteelBeam()
         {
-            return new Item(2, "Solid Biofuel Power",
-                "LightningBolt.png",
-                ItemType.PowerGeneration,
-                ResearchType.Tier2)
+            return new Item(2, "Steel Beam",
+                "Steel_Beam.webp",
+                ItemType.Production,
+                ResearchType.Tier3)
             {
                 Recipes =
                 {
                     new Recipe(
                         new()
                         {
-                            { "Solid Biofuel", 4 }
+                            { "Steel Ingot", 60 }
                         },
                         new()
                         {
-                            { "Solid Biofuel Power", 30M }
+                            { "Steel Beam", 15 }
                         },
-                        "Biomass Burner")
+                        "Constructor")
+                }
+            };
+        }
+
+        public static Item SteelPipe()
+        {
+            return new Item(2, "Steel Pipe",
+                "Steel_Pipe.webp",
+                ItemType.Production,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Steel Ingot", 30 }
+                        },
+                        new()
+                        {
+                            { "Steel Pipe", 20 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+        public static Item HeavyOilResidue()
+        {
+            return new Item(2, "Heavy Oil Residue",
+                "Heavy_Oil_Residue.webp",
+                ItemType.Production,
+                ResearchType.Tier5)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Crude Oil", 30 }
+                        },
+                        new()
+                        {
+                            { "Plastic", 20 },
+                            { "Heavy Oil Residue", 10 }
+                        },
+                        "Refinery",
+                        true,
+                        "Plastic"),
+                    new Recipe(
+                        new()
+                        {
+                            { "Crude Oil", 30 }
+                        },
+                        new()
+                        {
+                            { "Rubber", 20 },
+                            { "Heavy Oil Residue", 20 }
+                        },
+                        "Refinery",
+                        true,
+                        "Rubber")
+                }
+            };
+        }
+        public static Item Quickwire()
+        {
+            return new Item(2, "Quickwire",
+                "Quickwire.webp",
+                ItemType.Production,
+                ResearchType.Tier6)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Caterium Ingot", 12 }
+                        },
+                        new()
+                        {
+                            { "Quickwire", 60 }
+                        },
+                        "Constructor")
                 }
             };
         }
