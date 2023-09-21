@@ -282,6 +282,44 @@ namespace SatisfactoryTree.Helpers
                 }
             };
         }
+        public static Item Uranium()
+        {
+            return new Item(0, "Uranium",
+                "Uranium.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Uranium", 60 }
+                        },
+                        "Mining Machine Mk1")
+                }
+            };
+        }
+        public static Item NitrogenGas()
+        {
+            return new Item(0, "Nitrogen Gas",
+                "Nitrogen_Gas.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new(),
+                        new()
+                        {
+                            { "Nitrogen Gas", 120 }
+                        },
+                        "Resource Well Extractor")
+                }
+            };
+        }
 
     }
 }

@@ -275,6 +275,31 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item NitricAcid()
+        {
+            return new Item(3, "Nitric Acid",
+                "Nitric_Acid.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Nitrogen Gas", 120 },
+                            { "Water", 30 },
+                            { "Iron Plate", 10 }
+                        },
+                        new()
+                        {
+                            { "Nitric Acid", 30 }
+                        },
+                        "Blender")
+                }
+            };
+        }
+
 
     }
 }

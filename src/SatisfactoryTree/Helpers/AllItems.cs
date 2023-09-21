@@ -22,6 +22,8 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier0.Bauxite(),
                 ItemPoolTier0.RawQuartz(),
                 ItemPoolTier0.Sulfur(),
+                ItemPoolTier0.Uranium(),
+                ItemPoolTier0.NitrogenGas(),
 
                 ItemPoolTier1.IronIngot(),
                 ItemPoolTier1.CopperIngot(),
@@ -48,6 +50,8 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier2.HeavyOilResidue(),
                 ItemPoolTier2.Quickwire(),
                 ItemPoolTier2.AluminumScrap(),
+                ItemPoolTier2.EncasedUraniumCell(),
+                ItemPoolTier2.CopperPowder(),
 
                 ItemPoolTier3.ReinforcedIronPlate(),
                 ItemPoolTier3.Rotor(),
@@ -59,7 +63,8 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier3.PetroleumCoke(),
                 ItemPoolTier3.CircuitBoard(),
                 ItemPoolTier3.AluminumIngot(),
-                ItemPoolTier3.AILimiter(),
+                ItemPoolTier3.AILimiter(),        
+                ItemPoolTier3.NitricAcid(),
 
                 ItemPoolTier4.SmartPlating(),
                 ItemPoolTier4.ModularFrame(),
@@ -71,6 +76,7 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier4.AlcladAluminumSheet(),
                 ItemPoolTier4.AluminumCasing(),
                 ItemPoolTier4.CrystalOscillator(),
+                ItemPoolTier4.ElectromagneticControlRod(),
 
                 ItemPoolTier5.HeavyModularFrame(),
                 ItemPoolTier5.VersatileFramework(),
@@ -78,33 +84,30 @@ namespace SatisfactoryTree.Helpers
                 ItemPoolTier5.Battery(),
                 ItemPoolTier5.RadioControlUnit(),
                 ItemPoolTier5.Supercomputer(),
+                ItemPoolTier5.UraniumFuelRod(),
+                ItemPoolTier5.HeatSink(),
 
                 ItemPoolTier6.AdaptiveControlUnit(),
+                ItemPoolTier6.MagneticFieldGenerator(),
+                ItemPoolTier6.CoolingSystem(),
+                ItemPoolTier6.FusedModularFrame(),
+                ItemPoolTier6.UraniumWaste(),
+                ItemPoolTier6.NuclearPowerGeneration(),
 
                 ItemPoolTier7.AssemblyDirectorSystem(),
+                ItemPoolTier7.TurboMotor(),
+                ItemPoolTier7.NonfissileUranium(),
+                ItemPoolTier7.PressureConversionCube(),
 
-                ItemPoolTier8.Uranium(),
-                ItemPoolTier8.EncasedUraniumCell(),
-                ItemPoolTier8.ElectromagneticControlRod(),
-                ItemPoolTier8.UraniumFuelRod(),
-                ItemPoolTier8.MagneticFieldGenerator(),
-                ItemPoolTier8.NitrogenGas(),
-                ItemPoolTier8.HeatSink(),
-                ItemPoolTier8.CoolingSystem(),
-                ItemPoolTier8.FusedModularFrame(),
-                ItemPoolTier8.TurboMotor(),
                 ItemPoolTier8.ThermalPropulsionRocket(),
-                ItemPoolTier8.NitricAcid(),
-                ItemPoolTier8.UraniumWaste(),
-                ItemPoolTier8.NonfissileUranium(),
                 ItemPoolTier8.PlutoniumPellet(),
-                ItemPoolTier8.EncasedPlutoniumCell(),
-                ItemPoolTier8.PlutoniumFuelRod(),
-                ItemPoolTier8.PlutoniumWaste(),
-                ItemPoolTier8.CopperPowder(),
-                ItemPoolTier8.PressureConversionCube(),
                 ItemPoolTier8.NuclearPasta(),
-                ItemPoolTier8.NuclearPowerGeneration(),
+
+                ItemPoolTier9.EncasedPlutoniumCell(),
+
+                ItemPoolTierA.PlutoniumFuelRod(),
+                
+                ItemPoolTierB.PlutoniumWaste(),
             };
 
             return items;

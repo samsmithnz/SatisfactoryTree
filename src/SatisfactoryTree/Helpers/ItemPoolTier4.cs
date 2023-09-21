@@ -245,6 +245,29 @@ namespace SatisfactoryTree.Helpers
                 }
             };
         }
+        public static Item ElectromagneticControlRod()
+        {
+            return new Item(4, "Electromagnetic Control Rod",
+                "Electromagnetic_Control_Rod.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Stator", 6 },
+                            { "AI Limiter", 4 }
+                        },
+                        new()
+                        {
+                            { "Electromagnetic Control Rod", 4 }
+                        },
+                        "Assembler")
+                }
+            };
+        }
 
     }
 }

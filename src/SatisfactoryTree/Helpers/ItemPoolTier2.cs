@@ -300,5 +300,55 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item EncasedUraniumCell()
+        {
+            return new Item(2, "Encased Uranium Cell",
+                "Encased_Uranium_Cell.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Uranium", 50 },
+                            { "Concrete", 15 },
+                            { "Sulfuric Acid", 40 }
+                        },
+                        new()
+                        {
+                            { "Encased Uranium Cell", 25 },
+                            { "Sulfuric Acid", 10 }
+                        },
+                        "Blender",
+                        true,
+                        "Encased Uranium Cell")
+                }
+            };
+        }
+        public static Item CopperPowder()
+        {
+            return new Item(2, "Copper Powder",
+                "Copper_Powder.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Copper Ingot", 300 }
+                        },
+                        new()
+                        {
+                            { "Copper Powder", 50 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
     }
 }

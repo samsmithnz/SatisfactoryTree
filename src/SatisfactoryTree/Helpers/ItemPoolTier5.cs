@@ -160,5 +160,54 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item UraniumFuelRod()
+        {
+            return new Item(5, "Uranium Fuel Rod",
+                "Uranium_Fuel_Rod.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Encased Uranium Cell", 20 },
+                            { "Encased Industrial Beam", 1.2M },
+                            { "Electromagnetic Control Rod", 2 }
+                        },
+                        new()
+                        {
+                            { "Uranium Fuel Rod", 0.4M }
+                        },
+                        "Manufacturer")
+                }
+            };
+        }
+
+        public static Item HeatSink()
+        {
+            return new Item(5, "Heat Sink",
+                "Heat_Sink.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Alclad Aluminum Sheet", 37.5M },
+                            { "Copper Sheet", 3 }
+                        },
+                        new()
+                        {
+                            { "Heat Sink", 7.5M }
+                        },
+                        "Assembler")
+                }
+            };
+        }
+
     }
 }
