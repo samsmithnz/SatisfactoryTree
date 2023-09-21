@@ -5,7 +5,29 @@ namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier5
     {
-
+                public static Item VersatileFramework()
+        {
+            return new Item(5, "Versatile Framework",
+                "Versatile_Framework.webp",
+                ItemType.Production,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Modular Frame", 2.5m },
+                            { "Steel Beam", 30 }
+                        },
+                        new()
+                        {
+                            { "Versatile Framework", 5 }
+                        },
+                        "Assembler")
+                }
+            };
+        }
 
         public static Item HeavyModularFrame()
         {
@@ -29,30 +51,6 @@ namespace SatisfactoryTree.Helpers
                             { "Heavy Modular Frame", 2 }
                         },
                         "Manufacturer")
-                }
-            };
-        }
-
-        public static Item VersatileFramework()
-        {
-            return new Item(5, "Versatile Framework",
-                "Versatile_Framework.webp",
-                ItemType.Production,
-                ResearchType.Tier3)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Modular Frame", 2.5m },
-                            { "Steel Beam", 30 }
-                        },
-                        new()
-                        {
-                            { "Versatile Framework", 5 }
-                        },
-                        "Assembler")
                 }
             };
         }
