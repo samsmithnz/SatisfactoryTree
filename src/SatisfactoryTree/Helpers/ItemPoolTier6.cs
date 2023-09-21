@@ -4,121 +4,153 @@ namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier6
     {
-        //Level 6
-        public static Item CateriumOre()
+        public static Item AdaptiveControlUnit()
         {
-            return new Item(6, "Caterium Ore",
-                "Caterium_Ore.webp",
+            return new Item(6, "Adaptive Control Unit",
+                "Adaptive_Control_Unit.webp",
                 ItemType.Production,
-                ResearchType.Tier6)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Caterium Ore", 60 }
-                        },
-                        "Mining Machine Mk1")
-                }
-            };
-        }
-
-        public static Item CateriumIngot()
-        {
-            return new Item(6, "Caterium Ingot",
-                "Caterium_Ingot.webp",
-                ItemType.Production,
-                ResearchType.Tier6)
+                ResearchType.Tier5)
             {
                 Recipes =
                 {
                     new Recipe(
                         new()
                         {
-                            { "Caterium Ore", 45 }
+                            { "Automated Wiring", 7.5M },
+                            { "Circuit Board", 5 },
+                            { "Heavy Modular Frame", 1 },
+                            { "Computer", 1 }
                         },
                         new()
                         {
-                            { "Caterium Ingot", 15 }
-                        },
-                        "Smelter")
-                }
-            };
-        }
-
-        public static Item Quickwire()
-        {
-            return new Item(6, "Quickwire",
-                "Quickwire.webp",
-                ItemType.Production,
-                ResearchType.Tier6)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Caterium Ingot", 12 }
-                        },
-                        new()
-                        {
-                            { "Quickwire", 60 }
-                        },
-                        "Constructor")
-                }
-            };
-        }
-
-        public static Item HighSpeedConnector()
-        {
-            return new Item(6, "High-Speed Connector",
-                "High-Speed_Connector.webp",
-                ItemType.Production,
-                ResearchType.Tier6)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Quickwire", 210 },
-                            { "Cable", 37.5M },
-                            { "Circuit Board", 3.75M },
-                        },
-                        new()
-                        {
-                            { "High-Speed Connector", 3.75M }
+                            { "Adaptive Control Unit", 2 }
                         },
                         "Manufacturer")
                 }
             };
         }
 
-        public static Item FuelPowerGeneration()
+        public static Item MagneticFieldGenerator()
         {
-            return new Item(6, "Fuel Power",
-                "LightningBolt.png",
-                ItemType.PowerGeneration,
-                ResearchType.Tier6)
+            return new Item(6, "Magnetic Field Generator",
+                "Magnetic_Field_Generator.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
             {
                 Recipes =
                 {
                     new Recipe(
                         new()
                         {
-                            { "Fuel", 12 }
+                            { "Versatile Framework", 2.5M },
+                            { "Electromagnetic Control Rod", 1 },
+                            { "Battery", 5 }
                         },
                         new()
                         {
-                            { "Fuel Power", 150M }
+                            { "Magnetic Field Generator", 1 }
                         },
-                        "Fuel Generator")
+                        "Manufacturer")
+                }
+            };
+        }
+        public static Item CoolingSystem()
+        {
+            return new Item(6, "Cooling System",
+                "Cooling_System.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Heat Sink", 12 },
+                            { "Rubber", 12 },
+                            { "Water", 30 },
+                            { "Nitrogen Gas", 150 }
+                        },
+                        new()
+                        {
+                            { "Cooling System", 6 }
+                        },
+                        "Blender")
                 }
             };
         }
 
+        public static Item FusedModularFrame()
+        {
+            return new Item(6, "Fused Modular Frame",
+                "Fused_Modular_Frame.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Heavy Modular Frame", 1.5M },
+                            { "Aluminum Casing", 75 },
+                            { "Nitrogen Gas", 37.5M }
+                        },
+                        new()
+                        {
+                            { "Fused Modular Frame", 1.5M }
+                        },
+                        "Blender")
+                }
+            };
+        }
 
+        public static Item UraniumWaste()
+        {
+            return new Item(6, "Uranium Waste",
+                "Uranium_Waste.webp",
+                ItemType.Production,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Uranium Fuel Rod", 0.2M },
+                            { "Water", 240 }
+                        },
+                        new()
+                        {
+                            { "Uranium Waste", 10 }
+                        },
+                        "Nuclear Power Plant")
+                }
+            };
+        }
+
+        public static Item NuclearPowerGeneration()
+        {
+            return new Item(6, "Nuclear Power",
+                "LightningBolt.png",
+                ItemType.PowerGeneration,
+                ResearchType.Tier8)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Uranium Fuel Rod", 0.2M },
+                            { "Water", 240 }
+                        },
+                        new()
+                        {
+                            { "Nuclear Power", 2500M }
+                        },
+                        "Nuclear Power Plant")
+                }
+            };
+        }
     }
 }

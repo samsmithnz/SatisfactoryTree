@@ -4,26 +4,6 @@ namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier1
     {
-        public static Item IronOre()
-        {
-            return new Item(1, "Iron Ore",
-                "Iron_Ore.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Iron Ore", 60 }
-                        },
-                        "Mining Machine Mk1")
-                }
-            };
-        }
-
         public static Item IronIngot()
         {
             return new Item(1, "Iron Ingot",
@@ -43,71 +23,6 @@ namespace SatisfactoryTree.Helpers
                             { "Iron Ingot", 30 }
                         },
                         "Smelter")
-                }
-            };
-        }
-
-        public static Item IronPlate()
-        {
-            return new Item(1, "Iron Plate",
-                "Iron_Plate.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Iron Ingot", 30 }
-                        },
-                        new()
-                        {
-                            { "Iron Plate", 20 }
-                        },
-                        "Constructor")
-                }
-            };
-        }
-        public static Item IronRod()
-        {
-            return new Item(1, "Iron Rod",
-                "Iron_Rod.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Iron Ingot", 15 }
-                        },
-                        new()
-                        {
-                            { "Iron Rod", 15 }
-                        },
-                        "Constructor")
-                }
-            };
-        }
-
-        public static Item CopperOre()
-        {
-            return new Item(1, "Copper Ore",
-                "Copper_Ore.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Copper Ore", 60 }
-                        },
-                        "Mining Machine Mk1")
                 }
             };
         }
@@ -134,72 +49,7 @@ namespace SatisfactoryTree.Helpers
                 }
             };
         }
-
-        public static Item Wire()
-        {
-            return new Item(1, "Wire",
-                "Wire.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Copper Ingot", 15 }
-                        },
-                        new()
-                        {
-                            { "Wire", 30 }
-                        },
-                        "Constructor")
-                }
-            };
-        }
-
-        public static Item Cable()
-        {
-            return new Item(1, "Cable",
-                "Cable.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Wire", 60 }
-                        },
-                        new()
-                        {
-                            { "Cable", 30 }
-                        },
-                        "Constructor")
-                }
-            };
-        }
-
-        public static Item Limestone()
-        {
-            return new Item(1, "Limestone",
-                "Limestone.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Limestone", 60 }
-                        },
-                        "Mining Machine Mk1")
-                }
-            };
-        }
+        
 
         public static Item Concrete()
         {
@@ -220,133 +70,6 @@ namespace SatisfactoryTree.Helpers
                             { "Concrete", 15 }
                         },
                         "Constructor")
-                }
-            };
-        }
-
-        public static Item Screw()
-        {
-            return new Item(1, "Screw",
-                "Screw.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Iron Rod", 10 }
-                        },
-                        new()
-                        {
-                            { "Screw", 40 }
-                        },
-                        "Constructor")
-                }
-            };
-        }
-
-        public static Item ReinforcedIronPlate()
-        {
-            return new Item(1, "Reinforced Iron Plate",
-                "Reinforced_Iron_Plate.webp",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Iron Plate", 30 },
-                            { "Screw", 60 }
-                        },
-                        new()
-                        {
-                            { "Reinforced Iron Plate", 5 }
-                        },
-                        "Assembler")
-                }
-            };
-        }
-
-        public static Item Wood()
-        {
-            return new Item(1, "Wood",
-                "Wood_256.png",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Wood", 60 }
-                        },
-                        "")
-                }
-            };
-        }
-
-        public static Item Leaves()
-        {
-            return new Item(1, "Leaves",
-                "Leaves_256.png",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Leaves", 60 }
-                        },
-                        "")
-                }
-            };
-        }
-
-        public static Item AlienProtein()
-        {
-            return new Item(1, "Alien Protein",
-                "AlienProtein_256.png",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Alien Protein", 60 }
-                        },
-                        "")
-                }
-            };
-        }
-
-        public static Item Mycelia()
-        {
-            return new Item(1, "Mycelia",
-                "Mycelia_256.png",
-                ItemType.Production,
-                ResearchType.Tier1)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new(),
-                        new()
-                        {
-                            { "Mycelia", 60 }
-                        },
-                        "")
                 }
             };
         }
@@ -400,6 +123,202 @@ namespace SatisfactoryTree.Helpers
                             { "Biomass", 150 }
                         },
                         "Constructor")
+                }
+            };
+        }
+
+        public static Item SteelIngot()
+        {
+            return new Item(2, "Steel Ingot",
+                "Steel_Ingot.webp",
+                ItemType.Production,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Iron Ore", 45 },
+                            { "Coal", 45 }
+                        },
+                        new()
+                        {
+                            { "Steel Ingot", 45 }
+                        },
+                        "Foundry")
+                }
+            };
+        }
+
+
+        public static Item Plastic()
+        {
+            return new Item(1, "Plastic",
+                "Plastic.webp",
+                ItemType.Production,
+                ResearchType.Tier5)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Crude Oil", 30 }
+                        },
+                        new()
+                        {
+                            { "Plastic", 20 },
+                            { "Heavy Oil Residue", 10 }
+                        },
+                        "Refinery",
+                        true,
+                        "Plastic")
+                }
+            };
+        }
+
+        public static Item Rubber()
+        {
+            return new Item(1, "Rubber",
+                "Rubber.webp",
+                ItemType.Production,
+                ResearchType.Tier5)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Crude Oil", 30 }
+                        },
+                        new()
+                        {
+                            { "Rubber", 20 },
+                            { "Heavy Oil Residue", 20 }
+                        },
+                        "Refinery",
+                        true,
+                        "Rubber")
+                }
+            };
+        }
+        public static Item CateriumIngot()
+        {
+            return new Item(1, "Caterium Ingot",
+                "Caterium_Ingot.webp",
+                ItemType.Production,
+                ResearchType.Tier6)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Caterium Ore", 45 }
+                        },
+                        new()
+                        {
+                            { "Caterium Ingot", 15 }
+                        },
+                        "Smelter")
+                }
+            };
+        }
+
+        public static Item AluminaSolution()
+        {
+            return new Item(1, "Alumina Solution",
+                "Alumina_Solution.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Bauxite", 120 },
+                            { "Water", 180 }
+                        },
+                        new()
+                        {
+                            { "Alumina Solution", 120 },
+                            { "Silica", 50 }
+                        },
+                        "Refinery",
+                        true,
+                        "Alumina Solution")
+                }
+            };
+        }
+
+        public static Item QuartzCrystal()
+        {
+            return new Item(1, "Quartz Crystal",
+                "Quartz_Crystal.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Raw Quartz", 37.5M }
+                        },
+                        new()
+                        {
+                            { "Quartz Crystal", 22.5M }
+                        },
+                        "Assembler")
+                }
+            };
+        }
+
+        public static Item Silica()
+        {
+            return new Item(1, "Silica",
+                "Silica.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Raw Quartz", 22.5M }
+                        },
+                        new()
+                        {
+                            { "Silica", 37.5M }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
+        public static Item SulfuricAcid()
+        {
+            return new Item(1, "Sulfuric Acid",
+                "Sulfuric_Acid.webp",
+                ItemType.Production,
+                ResearchType.Tier7)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Sulfur", 50 },
+                            { "Water", 50 }
+                        },
+                        new()
+                        {
+                            { "Sulfuric Acid", 50 }
+                        },
+                        "Refinery")
                 }
             };
         }
