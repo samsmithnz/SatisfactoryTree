@@ -30,6 +30,29 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item ModularFrame()
+        {
+            return new Item(4, "Modular Frame",
+                "Modular_Frame.webp",
+                ItemType.Production,
+                ResearchType.Tier2)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Reinforced Iron Plate", 3 },
+                            { "Iron Rod", 12 }
+                        },
+                        new()
+                        {
+                            { "Modular Frame", 2 }
+                        },
+                        "Assembler")
+                }
+            };
+        }
 
         public static Item Motor()
         {
@@ -49,29 +72,6 @@ namespace SatisfactoryTree.Helpers
                         new()
                         {
                             { "Motor", 5 }
-                        },
-                        "Assembler")
-                }
-            };
-        }
-        public static Item ModularFrame()
-        {
-            return new Item(4, "Modular Frame",
-                "Modular_Frame.webp",
-                ItemType.Production,
-                ResearchType.Tier2)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Reinforced Iron Plate", 3 },
-                            { "Iron Rod", 12 }
-                        },
-                        new()
-                        {
-                            { "Modular Frame", 2 }
                         },
                         "Assembler")
                 }
