@@ -5,7 +5,7 @@ namespace SatisfactoryTree.Helpers
 {
     public static class ItemPoolTier5
     {
-                public static Item VersatileFramework()
+        public static Item VersatileFramework()
         {
             return new Item(5, "Versatile Framework",
                 "Versatile_Framework.webp",
