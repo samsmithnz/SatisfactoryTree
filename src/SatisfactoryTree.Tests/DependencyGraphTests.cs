@@ -10,7 +10,7 @@ namespace SatisfactoryTree.Tests
         {
             //Arrange
             SatisfactoryDependencies satisfactoryDependencies = new();
-            string mermaidResult = "";
+
             string expectedResult = @"flowchart LR
     IronOre[""x1.5 Mining Machine Mk1<br>(Iron Ore)""]
     IronOre_Item([90 Iron Ore])
@@ -24,6 +24,7 @@ namespace SatisfactoryTree.Tests
             Assert.IsNotNull(flowchart);
             Assert.IsNotNull(flowchart.SubGraphs);
             Assert.AreEqual(11, flowchart.SubGraphs.Count);
+            string mermaidResult = flowchart.CalculateFlowchart();
             //Assert.IsNotNull(result);
             //Assert.AreEqual(7.5M, result.PowerConsumption);
             //Assert.AreEqual(1, results.Count);

@@ -48,6 +48,22 @@ namespace SatisfactoryTree
             }
 
             Flowchart flowchart = new("LR", new(), new(), subGraphs);
+            //Now calculate all of the links
+            foreach (MermaidDotNet.Models.Node node in flowchart.NavigationNodes)
+            {
+                //Find item
+                Item? item = Items.FirstOrDefault(p => p.Name == node.Name);
+                if (item != null)
+                {
+                    //process the item dependencies
+                    foreach (KeyValuePair<string, decimal> input in item.Recipes[0].Inputs)
+                    {
+                        flowchart.Links.Add(new MermaidDotNet.Models.Link(input.Key, node.Name));
+                    }
+                }
+
+            }
+
             return flowchart;
 
 
