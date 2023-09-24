@@ -2,10 +2,9 @@
 
 namespace SatisfactoryTree.Helpers
 {
-    public class AllItemGroups
+    public static class AllItemGroups
     {
-        List<ItemGroup> ItemGroups { get; set; }
-        public AllItemGroups()
+        public static List<ItemGroup> GetAllItemGroups()
         {
             List<ItemGroup> itemGroups = new()
             {
@@ -98,8 +97,7 @@ namespace SatisfactoryTree.Helpers
                 new(11,"Plutonium Waste", 8),
             };
 
-            ItemGroups = itemGroups;
-
+            return itemGroups;
         }
     }
 }
