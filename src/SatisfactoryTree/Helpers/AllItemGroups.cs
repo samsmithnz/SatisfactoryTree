@@ -8,7 +8,6 @@ namespace SatisfactoryTree.Helpers
         {
             List<ItemGroup> itemGroups = new()
             {
-                new(0,"Tier 0", 0 ),
                 new(0,"Iron Ore", 1),
                 new(0,"Copper Ore", 1),
                 new(0,"Limestone", 1),

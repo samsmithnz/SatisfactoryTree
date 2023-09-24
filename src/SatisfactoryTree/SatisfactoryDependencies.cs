@@ -52,7 +52,7 @@ namespace SatisfactoryTree
             foreach (MermaidDotNet.Models.Node node in flowchart.NavigationNodes)
             {
                 //Find item
-                Item? item = Items.FirstOrDefault(p => p.Name == node.Name);
+                Item? item = Items.FirstOrDefault(p => p.Name == node.Text);
                 if (item != null)
                 {
                     //process the item dependencies
