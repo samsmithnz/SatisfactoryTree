@@ -2,8 +2,6 @@
 using MermaidDotNet.Models;
 using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
 
 namespace SatisfactoryTree
 {
@@ -58,7 +56,7 @@ namespace SatisfactoryTree
                     //process the item dependencies
                     foreach (KeyValuePair<string, decimal> input in item.Recipes[0].Inputs)
                     {
-                        flowchart.Links.Add(new MermaidDotNet.Models.Link(input.Key, node.Name));
+                        flowchart.Links.Add(new MermaidDotNet.Models.Link(input.Key.Replace(" ",""), node.Text.Replace(" ", "")));
                     }
                 }
 
