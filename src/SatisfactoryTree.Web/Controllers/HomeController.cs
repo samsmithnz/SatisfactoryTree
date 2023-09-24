@@ -12,6 +12,8 @@ namespace SatisfactoryTree.Web.Controllers
 
         public IActionResult Index()
         {
+            Response.Redirect("/home/dependency");
+
             //Build the DSP graph
             string filter = "";// "Gravity Matrix";
             SatisfactoryGraph dSPGraph = new(filter,
