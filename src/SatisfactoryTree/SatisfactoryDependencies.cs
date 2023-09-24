@@ -27,18 +27,18 @@ namespace SatisfactoryTree
             SubGraph? currentSubGraph = null;
             for (int i = 0; i < ItemGroups.Count - 1; i++)
             {
-                if (currentDependencyLevel != ItemGroups[0].Dependencies)
+                if (currentDependencyLevel != ItemGroups[i].Dependencies)
                 {
                     if (currentSubGraph != null)
                     {
                         subGraphs.Add(currentSubGraph);
                     }
-                    currentDependencyLevel = ItemGroups[0].Dependencies;
-                    currentSubGraph = new(ItemGroups[0].Dependencies.ToString());
+                    currentDependencyLevel = ItemGroups[i].Dependencies;
+                    currentSubGraph = new(ItemGroups[i].Dependencies.ToString());
                 }
                 if (currentSubGraph != null)
                 {
-                    string name = ItemGroups[0].Name;
+                    string name = ItemGroups[i].Name;
                     currentSubGraph.Nodes.Add(new MermaidDotNet.Models.Node(name.Replace(" ", ""), name));
                 }
             }

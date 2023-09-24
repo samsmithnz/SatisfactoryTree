@@ -22,6 +22,8 @@ namespace SatisfactoryTree.Tests
 
             //Assert
             Assert.IsNotNull(flowchart);
+            Assert.IsNotNull(flowchart.SubGraphs);
+            Assert.AreEqual(11, flowchart.SubGraphs.Count);
             //Assert.IsNotNull(result);
             //Assert.AreEqual(7.5M, result.PowerConsumption);
             //Assert.AreEqual(1, results.Count);
@@ -32,6 +34,6 @@ namespace SatisfactoryTree.Tests
             //Assert.AreEqual(expectedResult, mermaidResult);
         }
 
-      
+
     }
 }
