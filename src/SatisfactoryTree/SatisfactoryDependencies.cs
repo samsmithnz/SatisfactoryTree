@@ -56,53 +56,13 @@ namespace SatisfactoryTree
                     //process the item dependencies
                     foreach (KeyValuePair<string, decimal> input in item.Recipes[0].Inputs)
                     {
-                        flowchart.Links.Add(new MermaidDotNet.Models.Link(input.Key.Replace(" ",""), node.Text.Replace(" ", "")));
+                        flowchart.Links.Add(new MermaidDotNet.Models.Link(input.Key.Replace(" ", ""), node.Text.Replace(" ", "")));
                     }
                 }
 
             }
 
             return flowchart;
-
-
-            //ProductionItems = new ();
-            //    if (itemGoal != null && itemGoal.Item != null)
-            //    {
-            //        ProcessOutputItem(itemGoal);
-
-            //        //Search for items that are not dependencies to identify outputs
-            //        List<string> dependencies = new();
-            //        foreach (ProductionItem item in ProductionItems)
-            //        {
-            //            foreach (KeyValuePair<string, decimal> dependent in item.Dependencies)
-            //            {
-            //                if (!dependencies.Any(p => p == dependent.Key))
-            //                {
-            //                    dependencies.Add(dependent.Key);
-            //                }
-            //            }
-            //        }
-            //        //Mark items that are not dependencies
-            //        foreach (ProductionItem item in ProductionItems)
-            //        {
-            //            if (item != null && item.Item != null)
-            //            {
-            //                if (!dependencies.Any(p => p == item.Item?.Name))
-            //                {
-            //                    item.OutputItem = true;
-            //                }
-            //            }
-            //        }
-            //    }
-            //    ProductionCalculation productionCalculation = new()
-            //    {
-            //        ProductionItems = ProductionItems,
-            //        PowerConsumption = PowerConsumption
-            //    };
-            //    return productionCalculation;
-            //}
-
-
 
         }
     }
