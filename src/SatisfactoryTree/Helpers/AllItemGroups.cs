@@ -91,9 +91,10 @@ namespace SatisfactoryTree.Helpers
                 new(8,"Thermal Propulsion Rocket", 8),
                 new(8,"Plutonium Pellet", 8),
                 new(8,"Nuclear Pasta", 8),
-                new(9,"Encased Plutonium Cell", 8),
-                new(10,"Plutonium Fuel Rod", 8),
-                new(11,"Plutonium Waste", 8),
+                
+                new(8,"Encased Plutonium Cell", 8),
+                new(8,"Plutonium Fuel Rod", 8),
+                new(8,"Plutonium Waste", 8),
             };
 
             return itemGroups;

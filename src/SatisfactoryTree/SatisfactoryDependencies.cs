@@ -52,9 +52,11 @@ namespace SatisfactoryTree
                 Item? item = Items.FirstOrDefault(p => p.Name == node.Text);
                 if (item != null)
                 {
+                    Random rnd = new();
                     //process the item dependencies
                     foreach (KeyValuePair<string, decimal> input in item.Recipes[0].Inputs)
                     {
+                        item.Level = rnd.Next(1, 9);
                         flowchart.Links.Add(
                             new MermaidDotNet.Models.Link(input.Key.Replace(" ", ""), 
                             node.Text.Replace(" ", ""),
