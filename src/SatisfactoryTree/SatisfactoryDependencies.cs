@@ -88,8 +88,9 @@ namespace SatisfactoryTree
                     return "stroke:red";
                 case 6:
                     return "stroke:purple";
+                //case 7:
+                //    return "stroke:yellow";
                 case 7:
-                    return "stroke:yellow";
                 case 8:
                 case 9:
                 case 10:
