@@ -52,6 +52,53 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
+        public static Item SolidBiofuelPowerGeneration()
+        {
+            return new Item(3, "Solid Biofuel Power",
+                "LightningBolt.png",
+                ItemType.PowerGeneration,
+                ResearchType.Tier2)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Solid Biofuel", 4 }
+                        },
+                        new()
+                        {
+                            { "Solid Biofuel Power", 30M }
+                        },
+                        "Biomass Burner")
+                }
+            };
+        }
+
+        public static Item CoalPowerGeneration()
+        {
+            return new Item(3, "Coal Power",
+                "LightningBolt.png",
+                ItemType.PowerGeneration,
+                ResearchType.Tier3)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Coal", 15 },
+                            { "Water", 45 }
+                        },
+                        new()
+                        {
+                            { "Coal Power" , 75 }
+                        },
+                        "Coal Generator")
+                }
+            };
+        }
+
         public static Item EncasedIndustrialBeam()
         {
             return new Item(3, "Encased Industrial Beam",
@@ -98,54 +145,7 @@ namespace SatisfactoryTree.Helpers
                         "Assembler")
                 }
             };
-        }
-
-        public static Item CoalPowerGeneration()
-        {
-            return new Item(3, "Coal Power",
-                "LightningBolt.png",
-                ItemType.PowerGeneration,
-                ResearchType.Tier3)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Coal", 15 },
-                            { "Water", 45 }
-                        },
-                        new()
-                        {
-                            { "Coal Power" , 75 }
-                        },
-                        "Coal Generator")
-                }
-            };
-        }
-
-        public static Item SolidBiofuelPowerGeneration()
-        {
-            return new Item(3, "Solid Biofuel Power",
-                "LightningBolt.png",
-                ItemType.PowerGeneration,
-                ResearchType.Tier2)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Solid Biofuel", 4 }
-                        },
-                        new()
-                        {
-                            { "Solid Biofuel Power", 30M }
-                        },
-                        "Biomass Burner")
-                }
-            };
-        }
+        }        
 
         public static Item Fuel()
         {

@@ -74,29 +74,6 @@ namespace SatisfactoryTree.Helpers
             };
         }
 
-        public static Item CopperSheet()
-        {
-            return new Item(2, "Copper Sheet",
-                "Copper_Sheet.webp",
-                ItemType.Production,
-                ResearchType.Tier2)
-            {
-                Recipes =
-                {
-                    new Recipe(
-                        new()
-                        {
-                            { "Copper Ingot", 20 }
-                        },
-                        new()
-                        {
-                            { "Copper Sheet", 10 }
-                        },
-                        "Constructor")
-                }
-            };
-        }
-
         public static Item Wire()
         {
             return new Item(2, "Wire",
@@ -138,6 +115,29 @@ namespace SatisfactoryTree.Helpers
                         new()
                         {
                             { "Cable", 30 }
+                        },
+                        "Constructor")
+                }
+            };
+        }
+
+        public static Item CopperSheet()
+        {
+            return new Item(2, "Copper Sheet",
+                "Copper_Sheet.webp",
+                ItemType.Production,
+                ResearchType.Tier2)
+            {
+                Recipes =
+                {
+                    new Recipe(
+                        new()
+                        {
+                            { "Copper Ingot", 20 }
+                        },
+                        new()
+                        {
+                            { "Copper Sheet", 10 }
                         },
                         "Constructor")
                 }

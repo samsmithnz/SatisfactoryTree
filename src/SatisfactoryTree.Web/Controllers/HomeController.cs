@@ -12,6 +12,8 @@ namespace SatisfactoryTree.Web.Controllers
 
         public IActionResult Index()
         {
+            Response.Redirect("/home/dependency");
+
             //Build the DSP graph
             string filter = "";// "Gravity Matrix";
             SatisfactoryGraph dSPGraph = new(filter,
@@ -40,19 +42,27 @@ namespace SatisfactoryTree.Web.Controllers
     end1[""<div align=center><img src=https://static.satisfactory-calculator.com/img/gameUpdate6/IconDesc_ReinforcedIronPlates_256.png?v=1668514886 style=max-width:100px><br>5 Reinforced plates</div>""]
   ";
 
-//            string graph = @"
-//flowchart LR
-//    miner1[""Miner Mk1<br>(Iron Ore)""] --""Iron Ore<br>(60 units/min)""--> Smelter1
-//    Smelter1[""x2 Smelter<br>(Iron Ingot)""] --""Iron Ingot<br>(15 units/min)""--> constructor1
-//    Smelter1 --""Iron Ingot<br>(45 units/min)""--> constructor2
-//    constructor1[""x1 Constructor<br>(Iron Rod)""] --""Iron Rod<br>(15 units/min)""--> constructor3
-//    constructor3[""x1.5 Constructor<br>(Screw)""] --""Screw<br>(60 units/min)""--> constructor4
-//    constructor2[""x1.5 Constructor<br>(Iron Plate)""] --""Iron Plate<br>(30 units/min)""--> constructor4
-//    constructor4[""x1 Assembler<br>(Reinforced Plates)""] --""Reinforced Plates<br>(5 units/min)""--> end1
-//    end1[""5 Reinforced plates""]
-  
-//";
+            //            string graph = @"
+            //flowchart LR
+            //    miner1[""Miner Mk1<br>(Iron Ore)""] --""Iron Ore<br>(60 units/min)""--> Smelter1
+            //    Smelter1[""x2 Smelter<br>(Iron Ingot)""] --""Iron Ingot<br>(15 units/min)""--> constructor1
+            //    Smelter1 --""Iron Ingot<br>(45 units/min)""--> constructor2
+            //    constructor1[""x1 Constructor<br>(Iron Rod)""] --""Iron Rod<br>(15 units/min)""--> constructor3
+            //    constructor3[""x1.5 Constructor<br>(Screw)""] --""Screw<br>(60 units/min)""--> constructor4
+            //    constructor2[""x1.5 Constructor<br>(Iron Plate)""] --""Iron Plate<br>(30 units/min)""--> constructor4
+            //    constructor4[""x1 Assembler<br>(Reinforced Plates)""] --""Reinforced Plates<br>(5 units/min)""--> end1
+            //    end1[""5 Reinforced plates""]
+
+            //";
             return View(model: graph2);
+        }
+
+        public IActionResult Dependency()
+        {
+            SatisfactoryDependencies satisfactoryDependencies = new();
+            MermaidDotNet.Flowchart flowchart = satisfactoryDependencies.BuildDependencyPlan();
+
+            return View(model: flowchart.CalculateFlowchart());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
