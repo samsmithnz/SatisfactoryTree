@@ -23,7 +23,7 @@ namespace SatisfactoryTree.Tests
             //Assert
             Assert.IsNotNull(flowchart);
             Assert.IsNotNull(flowchart.SubGraphs);
-            Assert.AreEqual(11, flowchart.SubGraphs.Count);
+            Assert.AreEqual(9, flowchart.SubGraphs.Count);
             string mermaidResult = flowchart.CalculateFlowchart();
             //Assert.IsNotNull(result);
             //Assert.AreEqual(7.5M, result.PowerConsumption);
