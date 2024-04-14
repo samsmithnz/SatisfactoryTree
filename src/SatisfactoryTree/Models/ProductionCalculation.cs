@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace SatisfactoryTree.Models
+﻿namespace SatisfactoryTree.Models
 {
     public class ProductionCalculation
     {
@@ -33,7 +31,7 @@ namespace SatisfactoryTree.Models
                 foreach (ProductionItem item in ProductionItems)
                 {
                     string buildingName = "none";
-                    if (item.Building!= null && item.Building.Name != null)
+                    if (item.Building != null && item.Building.Name != null)
                     {
                         buildingName = item.Building.Name;
                     }
@@ -47,29 +45,11 @@ namespace SatisfactoryTree.Models
                     nodes.Add(node);
                     foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
                     {
-                        //string sourceNode = "";
-                        //if (item.Building != null && item.Building.Name!=null)
-                        //{
-                        //    sourceNode = item.Building.Name;
-                        //}
-                        //sourceNode = item.Name;
-                        //Item? targetItem = AllItems.FindItem(dependency.Key);
-                        //Building? targetBuilding = AllBuildings.FindBuilding(targetItem.Recipes[0].Building);
-                        //string targetNode = targetBuilding.Name;
-                        //string targetNode = dependency.Key;
-                        MermaidDotNet.Models.Link link = new( dependency.Key, item.Name, dependency.Value.ToString());
+                        MermaidDotNet.Models.Link link = new(dependency.Key, item.Name, item.Name + "<br>(" + dependency.Value.ToString() + " units/min)");
                         links.Add(link);
                     }
                 }
                 MermaidDotNet.Flowchart flowchart = new("LR", nodes, links);
-                //foreach (MermaidDotNet.Models.Node item in flowchart.Nodes)
-                //{
-                //    Debug.WriteLine(item.Name);
-                //}
-                //foreach (MermaidDotNet.Models.Link item in flowchart.Links)
-                //{
-                //    Debug.WriteLine(item.SourceNode + ":" + item.DestinationNode);
-                //}
                 return flowchart;
             }
         }
