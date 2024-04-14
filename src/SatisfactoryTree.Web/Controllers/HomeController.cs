@@ -32,9 +32,9 @@ namespace SatisfactoryTree.Web.Controllers
         public IActionResult Production()
         {
             string graph2 = @"flowchart LR
-    miner1[""<div align=center><span style='min-width: 40px; display: block;'><img src=https://localhost:7015/Images/Buildings/MinerMk3_256.png style=width:40px alt=""Miner Mk1""></span><br>Miner Mk1<br>(Iron Ore)""</div>] --""<div align=center><img src=https://localhost:7015/Images/Items/IronOre_256.png style=max-width:40px><br>Iron Ore<br>(60 units/min)</div>""--> Smelter1
+    miner1[""<div align=center><span style='min-width: 100px; display: block;'><img src=https://localhost:7015/Images/Buildings/MinerMk1_256.png style=max-width:100px alt=""Miner Mk1""></span><br>x1 Miner Mk1<br>(Iron Ore)""</div>] --""Iron Ore<br>(60 units/min)""--> Smelter1
     Smelter1[""<div align=center><img src=https://localhost:7015/Images/Buildings/SmelterMk1_256.png style=max-width:100px><br>x2 Smelter<br>(Iron Ingot)""</div>] --""Iron Ingot<br>(15 units/min)""--> constructor1
-    Smelter1 --""<div align=center><img src=https://localhost:7015/Images/Items/IronIngot_256.png style=max-width:40px><br>Iron Ingot<br>(45 units/min)</div>""--> constructor2
+    Smelter1 --""<div align=center>Iron Ingot<br>(45 units/min)</div>""--> constructor2
     constructor1[""<div align=center><img src=https://localhost:7015/Images/Buildings/ConstructorMk1_256.png style=max-width:100px><br>x1 Constructor<br>(Iron Rod)""</div>] --""Iron Rod<br>(15 units/min)""--> constructor3
     constructor3[""<div align=center><img src=https://localhost:7015/Images/Buildings/ConstructorMk1_256.png style=max-width:100px><br>x1.5 Constructor<br>(Screw)""</div>] --""Screw<br>(60 units/min)""--> constructor4
     constructor2[""<div align=center><img src=https://localhost:7015/Images/Buildings/ConstructorMk1_256.png style=max-width:100px><br>x1.5 Constructor<br>(Iron Plate)""</div>] --""Iron Plate<br>(30 units/min)""--> constructor4
