@@ -20,7 +20,7 @@ namespace SatisfactoryTree
         }
 
         //Build a production plan for a given target item
-        public ProductionCalculation BuildProductionPlan(ProductionItem itemGoal)
+        public  ProductionCalculation BuildProductionPlan(ProductionItem itemGoal)
         {
             ProductionItems = [];
             if (itemGoal != null && itemGoal.Item != null)
