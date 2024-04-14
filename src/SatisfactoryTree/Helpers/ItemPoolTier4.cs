@@ -9,7 +9,7 @@ namespace SatisfactoryTree.Helpers
         public static Item SmartPlating()
         {
             return new Item(4, "Smart Plating",
-                "Smart_Plating.webp",
+                "Smart_Plating_256.png",
                 ItemType.Production,
                 ResearchType.Tier2)
             {
@@ -33,7 +33,7 @@ namespace SatisfactoryTree.Helpers
         public static Item ModularFrame()
         {
             return new Item(4, "Modular Frame",
-                "Modular_Frame.webp",
+                "Modular_Frame_256.png",
                 ItemType.Production,
                 ResearchType.Tier2)
             {
@@ -57,7 +57,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Motor()
         {
             return new Item(4, "Motor",
-                "Motor.webp",
+                "Motor_256.png",
                 ItemType.Production,
                 ResearchType.Tier4)
             {
@@ -81,7 +81,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AutomatedWiring()
         {
             return new Item(4, "Automated Wiring",
-                "Automated_Wiring.webp",
+                "Automated_Wiring_256.png",
                 ItemType.Production,
                 ResearchType.Tier4)
             {
@@ -105,7 +105,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Computer()
         {
             return new Item(4, "Computer",
-                "Computer.webp",
+                "Computer_256.png",
                 ItemType.Production,
                 ResearchType.Tier5)
             {
@@ -130,7 +130,7 @@ namespace SatisfactoryTree.Helpers
         public static Item HighSpeedConnector()
         {
             return new Item(4, "High-Speed Connector",
-                "High-Speed_Connector.webp",
+                "High-Speed_Connector_256.png",
                 ItemType.Production,
                 ResearchType.Tier6)
             {
@@ -178,7 +178,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AlcladAluminumSheet()
         {
             return new Item(4, "Alclad Aluminum Sheet",
-                "Alclad_Aluminum_Sheet.webp",
+                "Alclad_Aluminum_Sheet_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -202,7 +202,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AluminumCasing()
         {
             return new Item(4, "Aluminum Casing",
-                "Aluminum_Casing.webp",
+                "Aluminum_Casing_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -224,7 +224,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CrystalOscillator()
         {
             return new Item(4, "Crystal Oscillator",
-                "Crystal_Oscillator.webp",
+                "Crystal_Oscillator_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -248,7 +248,7 @@ namespace SatisfactoryTree.Helpers
         public static Item ElectromagneticControlRod()
         {
             return new Item(4, "Electromagnetic Control Rod",
-                "Electromagnetic_Control_Rod.webp",
+                "Electromagnetic_Control_Rod_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
