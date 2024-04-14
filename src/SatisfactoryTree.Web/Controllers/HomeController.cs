@@ -40,7 +40,7 @@ namespace SatisfactoryTree.Web.Controllers
                 Debug.WriteLine(item.ToString());
             }
 
-            if (productionCalculation != null && productionCalculation.Flowchart != null)
+            if (productionCalculation != null)
             {
                 string graph3 = productionCalculation.Flowchart.CalculateFlowchart();
                 Debug.WriteLine(graph3);
@@ -48,7 +48,7 @@ namespace SatisfactoryTree.Web.Controllers
             }
 
             string graph2 = @"flowchart LR
-    miner1[""<div align=center><span style='min-width: 100px; display: block;'><img src=https://localhost:7015/Images/Buildings/MinerMk1_256.png style=max-width:100px alt=""Miner Mk1""></span><br>x1 Miner Mk1<br>(Iron Ore)""</div>] --""Iron Ore<br>(60 units/min)""--> Smelter1
+    miner1[""<div align=center><span style='min-width: 100px; display: block;'><img src=https://localhost:7015/Images/Buildings/MinerMk1_256.png style=max-width:100px alt=""Miner Mk1""></span><br>x1 Miner Mk1<br>(Iron Ore)</div>""] --""Iron Ore<br>(60 units/min)""--> Smelter1
     Smelter1[""<div align=center><img src=https://localhost:7015/Images/Buildings/SmelterMk1_256.png style=max-width:100px><br>x2 Smelter<br>(Iron Ingot)""</div>] --""Iron Ingot<br>(15 units/min)""--> constructor1
     Smelter1 --""<div align=center>Iron Ingot<br>(45 units/min)</div>""--> constructor2
     constructor1[""<div align=center><img src=https://localhost:7015/Images/Buildings/ConstructorMk1_256.png style=max-width:100px><br>x1 Constructor<br>(Iron Rod)""</div>] --""Iron Rod<br>(15 units/min)""--> constructor3

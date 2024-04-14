@@ -1,4 +1,4 @@
-﻿using MermaidDotNet.Models;
+﻿using System.Diagnostics;
 
 namespace SatisfactoryTree.Models
 {
@@ -28,16 +28,48 @@ namespace SatisfactoryTree.Models
         {
             get
             {
-                MermaidDotNet.Flowchart flowchart = new("LR", new(), new()); ;
+                List<MermaidDotNet.Models.Node> nodes = [];
+                List<MermaidDotNet.Models.Link> links = [];
                 foreach (ProductionItem item in ProductionItems)
                 {
-                    flowchart.Nodes.Add(new(item.Name, item.Name));
-                    //foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
-                    //{
-                    //    flowchart.AddNode(dependency.Key);
-                    //    flowchart.AddLink(item.Name, dependency.Key, dependency.Value.ToString());
-                    //}
+                    string buildingName = "none";
+                    if (item.Building!= null && item.Building.Name != null)
+                    {
+                        buildingName = item.Building.Name;
+                    }
+                    string buildingImage = "";
+                    if (item.Building != null && item.Building.Image != null)
+                    {
+                        buildingImage = item.Building.Image;
+                    }
+                    string itemText = "\"<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/" + buildingImage + "' style='max-width:100px' alt='" + buildingName + "'></span><br> x" + item.BuildingQuantityRequired + " " + buildingName + "<br>(" + item.Name + ")</div>\"";
+                    MermaidDotNet.Models.Node node = new(item.Name, itemText);
+                    nodes.Add(node);
+                    foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
+                    {
+                        //string sourceNode = "";
+                        //if (item.Building != null && item.Building.Name!=null)
+                        //{
+                        //    sourceNode = item.Building.Name;
+                        //}
+                        //sourceNode = item.Name;
+                        //Item? targetItem = AllItems.FindItem(dependency.Key);
+                        //Building? targetBuilding = AllBuildings.FindBuilding(targetItem.Recipes[0].Building);
+                        //string targetNode = targetBuilding.Name;
+                        //string targetNode = dependency.Key;
+                        MermaidDotNet.Models.Link link = new( dependency.Key, item.Name, dependency.Value.ToString());
+                        links.Add(link);
+                    }
                 }
+                MermaidDotNet.Flowchart flowchart = new("LR", nodes, links);
+                //foreach (MermaidDotNet.Models.Node item in flowchart.Nodes)
+                //{
+                //    Debug.WriteLine(item.Name);
+                //}
+                //foreach (MermaidDotNet.Models.Link item in flowchart.Links)
+                //{
+                //    Debug.WriteLine(item.SourceNode + ":" + item.DestinationNode);
+                //}
                 return flowchart;
             }
         }
