@@ -16,19 +16,19 @@ namespace SatisfactoryTree
         {
             Items = AllItems.GetAllItems();
             Buildings = AllBuildings.GetAllBuildings();
-            ProductionItems = new();
+            ProductionItems = [];
         }
 
         //Build a production plan for a given target item
         public ProductionCalculation BuildProductionPlan(ProductionItem itemGoal)
         {
-            ProductionItems = new();
+            ProductionItems = [];
             if (itemGoal != null && itemGoal.Item != null)
             {
                 ProcessOutputItem(itemGoal);
 
                 //Search for items that are not dependencies to identify outputs
-                List<string> dependencies = new();
+                List<string> dependencies = [];
                 foreach (ProductionItem item in ProductionItems)
                 {
                     foreach (KeyValuePair<string, decimal> dependent in item.Dependencies)
@@ -62,7 +62,7 @@ namespace SatisfactoryTree
         //Taking an output item, find the inputs required to produce it
         private bool ProcessOutputItem(ProductionItem targetItem)
         {
-            List<KeyValuePair<string, decimal>> inputs = new();
+            List<KeyValuePair<string, decimal>> inputs = [];
             ProductionItem? currentItemMatch = null;
             if (targetItem != null && targetItem.Item != null)
             {
@@ -205,7 +205,7 @@ namespace SatisfactoryTree
         public string ToMermaidString()
         {
             string direction = "LR";
-            List<MermaidDotNet.Models.Node> nodes = new();
+            List<MermaidDotNet.Models.Node> nodes = [];
             foreach (ProductionItem item in ProductionItems)
             {
                 if (item != null && item.Item != null)
@@ -222,7 +222,7 @@ namespace SatisfactoryTree
                     }
                 }
             }
-            List<MermaidDotNet.Models.Link> links = new();
+            List<MermaidDotNet.Models.Link> links = [];
             foreach (ProductionItem item in ProductionItems)
             {
                 if (item != null && item.Item != null)
