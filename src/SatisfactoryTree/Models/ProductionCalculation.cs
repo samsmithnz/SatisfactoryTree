@@ -4,7 +4,7 @@
     {
         public ProductionCalculation()
         {
-            ProductionItems = new();
+            ProductionItems = [];
         }
 
         public List<ProductionItem> ProductionItems { get; set; }

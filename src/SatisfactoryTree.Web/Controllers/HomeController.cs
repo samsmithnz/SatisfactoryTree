@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Models;
 using SatisfactoryTree.Web.Models;
 using System.Diagnostics;
@@ -31,6 +32,14 @@ namespace SatisfactoryTree.Web.Controllers
 
         public IActionResult Production()
         {
+            SatisfactoryProduction satisfactoryProduction = new();
+            Item productionItem = ItemPoolTier3.ReinforcedIronPlate();
+            ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, 5));
+            foreach (ProductionItem item in productionCalculation.ProductionItems)
+            {
+                Debug.WriteLine(item.ToString());
+            }
+
             string graph2 = @"flowchart LR
     miner1[""<div align=center><span style='min-width: 100px; display: block;'><img src=https://localhost:7015/Images/Buildings/MinerMk1_256.png style=max-width:100px alt=""Miner Mk1""></span><br>x1 Miner Mk1<br>(Iron Ore)""</div>] --""Iron Ore<br>(60 units/min)""--> Smelter1
     Smelter1[""<div align=center><img src=https://localhost:7015/Images/Buildings/SmelterMk1_256.png style=max-width:100px><br>x2 Smelter<br>(Iron Ingot)""</div>] --""Iron Ingot<br>(15 units/min)""--> constructor1
@@ -38,8 +47,8 @@ namespace SatisfactoryTree.Web.Controllers
     constructor1[""<div align=center><img src=https://localhost:7015/Images/Buildings/ConstructorMk1_256.png style=max-width:100px><br>x1 Constructor<br>(Iron Rod)""</div>] --""Iron Rod<br>(15 units/min)""--> constructor3
     constructor3[""<div align=center><img src=https://localhost:7015/Images/Buildings/ConstructorMk1_256.png style=max-width:100px><br>x1.5 Constructor<br>(Screw)""</div>] --""Screw<br>(60 units/min)""--> constructor4
     constructor2[""<div align=center><img src=https://localhost:7015/Images/Buildings/ConstructorMk1_256.png style=max-width:100px><br>x1.5 Constructor<br>(Iron Plate)""</div>] --""Iron Plate<br>(30 units/min)""--> constructor4
-    constructor4[""<div align=center><img src=https://localhost:7015/Images/Buildings/AssemblerMk1_256.png style=max-width:100px><br>x1 Assembler<br>(Reinforced Plates)""</div>] --""Reinforced Plates<br>(5 units/min)""--> end1
-    end1[""<div align=center><img src=https://localhost:7015/Images/Items/ReinforcedIronPlate_256.png style=max-width:100px><br>5 Reinforced plates</div>""]
+    constructor4[""<div align=center><img src=https://localhost:7015/Images/Buildings/AssemblerMk1_256.png style=max-width:100px><br>x1 Assembler<br>(Reinforced Plate)""</div>] --""Reinforced Plates<br>(5 units/min)""--> end1
+    end1[""<div align=center><img src=https://localhost:7015/Images/Items/ReinforcedIronPlate_256.png style=max-width:100px><br>5 Reinforced Plate</div>""]
   ";
 
             //            string graph = @"

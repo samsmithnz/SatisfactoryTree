@@ -14,5 +14,9 @@
         public Dictionary<string, decimal> Dependencies { get; set; }
         public bool OutputItem { get; set; }
         public string Name => Item?.Name ?? "Unknown";
+        public override string ToString()
+        {
+            return $"{Name} x{Quantity}";
+        }
     }
 }
