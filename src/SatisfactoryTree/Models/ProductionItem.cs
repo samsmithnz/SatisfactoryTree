@@ -24,7 +24,7 @@ namespace SatisfactoryTree.Models
         public override string ToString()
         {
             if (Building != null)
-            {Building to
+            {
                 return $"{Name} x{Quantity} ({Building.Name} x{BuildingQuantityRequired})";
             }
             else
