@@ -20,17 +20,23 @@ namespace SatisfactoryTree.Models
         public Building? Building { get; set; }
         public Dictionary<string, decimal> Dependencies { get; set; }
         public bool OutputItem { get; set; }
-        public string Name => Item?.Name ?? "Unknown";
-        public override string ToString()
+        public string Name
         {
-            if (Building != null)
+            get
             {
-                return $"{Name} x{Quantity} ({Building.Name} x{BuildingQuantityRequired})";
-            }
-            else
-            {
-                return $"{Name} x{Quantity}";
+                return Item?.Name ?? "Unknown";
             }
         }
+        //public override string ToString()
+        //{
+        //    if (Building != null)
+        //    {
+        //        return $"{Name} x{Quantity} ({Building.Name} x{BuildingQuantityRequired})";
+        //    }
+        //    else
+        //    {
+        //        return $"{Name} x{Quantity}";
+        //    }
+        //}
     }
 }
