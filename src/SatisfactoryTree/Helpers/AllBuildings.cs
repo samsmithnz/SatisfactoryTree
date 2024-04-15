@@ -34,5 +34,18 @@ namespace SatisfactoryTree.Helpers
 
             return buildings;
         }
+
+        public static Building FindBuilding(string name)
+        {
+            List<Building> buildings = GetAllBuildings();
+            foreach (Building item in buildings)
+            {
+                if (item.Name == name)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }

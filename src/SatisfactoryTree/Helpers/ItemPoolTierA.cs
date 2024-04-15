@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Helpers
         public static Item PlutoniumFuelRod()
         {
             return new Item(10, "Plutonium Fuel Rod",
-                "Plutonium_Fuel_Rod.webp",
+                "PlutoniumFuelRod_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

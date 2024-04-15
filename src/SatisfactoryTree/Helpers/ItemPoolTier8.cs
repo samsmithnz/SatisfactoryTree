@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Helpers
         public static Item ThermalPropulsionRocket()
         {
             return new Item(8, "Thermal Propulsion Rocket",
-                "Thermal_Propulsion_Rocket.webp",
+                "ThermalPropulsionRocket_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -33,7 +33,7 @@ namespace SatisfactoryTree.Helpers
         public static Item PlutoniumPellet()
         {
             return new Item(8, "Plutonium Pellet",
-                "Plutonium_Pellet.webp",
+                "PlutoniumPellet_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -57,7 +57,7 @@ namespace SatisfactoryTree.Helpers
         public static Item NuclearPasta()
         {
             return new Item(8, "Nuclear Pasta",
-                "Nuclear_Pasta.webp",
+                "NuclearPasta_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

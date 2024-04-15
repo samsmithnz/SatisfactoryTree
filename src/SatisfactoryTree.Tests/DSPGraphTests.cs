@@ -21,7 +21,7 @@ public class DSPGraphTests
         Assert.IsNotNull(graph);
         Assert.IsTrue(graph.Items.Count > 0);
         Assert.AreEqual("Iron Ore", graph.Items[0].Name);
-        Assert.AreEqual("Iron_Ore.webp", graph.Items[0].Image);
+        Assert.AreEqual("IronOre_256.png", graph.Items[0].Image);
         Assert.AreEqual(0, graph.Items[0].Level);
     }
 

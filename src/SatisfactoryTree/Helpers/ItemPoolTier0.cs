@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Helpers
         public static Item IronOre()
         {
             return new Item(0, "Iron Ore",
-                "Iron_Ore.webp",
+                "IronOre_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -26,7 +26,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CopperOre()
         {
             return new Item(0, "Copper Ore",
-                "Copper_Ore.webp",
+                "CopperOre_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -46,7 +46,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Limestone()
         {
             return new Item(0, "Limestone",
-                "Limestone.webp",
+                "Limestone_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -146,7 +146,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Coal()
         {
             return new Item(0, "Coal",
-                "Coal.webp",
+                "Coal_256.png",
                 ItemType.Production,
                 ResearchType.Tier3)
             {
@@ -166,7 +166,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Water()
         {
             return new Item(0, "Water",
-                "Water.webp",
+                "Water_256.png",
                 ItemType.Production,
                 ResearchType.Tier3)
             {
@@ -186,7 +186,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CrudeOil()
         {
             return new Item(0, "Crude Oil",
-                "Crude_Oil.webp",
+                "CrudeOil_256.png",
                 ItemType.Production,
                 ResearchType.Tier5)
             {
@@ -206,7 +206,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CateriumOre()
         {
             return new Item(0, "Caterium Ore",
-                "Caterium_Ore.webp",
+                "CateriumOre_256.png",
                 ItemType.Production,
                 ResearchType.Tier6)
             {
@@ -226,7 +226,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Bauxite()
         {
             return new Item(0, "Bauxite",
-                "Bauxite.webp",
+                "Bauxite_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -246,7 +246,7 @@ namespace SatisfactoryTree.Helpers
         public static Item RawQuartz()
         {
             return new Item(0, "Raw Quartz",
-                "Raw_Quartz.webp",
+                "RawQuartz_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -266,7 +266,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Sulfur()
         {
             return new Item(0, "Sulfur",
-                "Sulfur.webp",
+                "Sulfur_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -285,7 +285,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Uranium()
         {
             return new Item(0, "Uranium",
-                "Uranium.webp",
+                "Uranium_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -304,7 +304,7 @@ namespace SatisfactoryTree.Helpers
         public static Item NitrogenGas()
         {
             return new Item(0, "Nitrogen Gas",
-                "Nitrogen_Gas.webp",
+                "NitrogenGas_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

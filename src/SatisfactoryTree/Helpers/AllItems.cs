@@ -112,5 +112,18 @@ namespace SatisfactoryTree.Helpers
 
             return items;
         }
+
+        public static Item? FindItem(string name)
+        {
+            List<Item> items = GetAllItems();
+            foreach (Item item in items)
+            {
+                if (item.Name == name)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }

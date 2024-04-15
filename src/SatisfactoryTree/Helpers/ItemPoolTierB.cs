@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Helpers
         public static Item PlutoniumWaste()
         {
             return new Item(11, "Plutonium Waste",
-                "Plutonium_Waste.webp",
+                "PlutoniumWaste_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

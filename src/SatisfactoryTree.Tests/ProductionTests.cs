@@ -5,6 +5,7 @@ using System.Collections.Generic;
 namespace SatisfactoryTree.Tests
 {
     [TestClass]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class ProductionTests
     {
         [TestMethod]
@@ -225,26 +226,43 @@ namespace SatisfactoryTree.Tests
             //Arrange
             SatisfactoryProduction graph = new();
             string itemName = "Reinforced Iron Plate";
-            decimal quantity = 12;
+            decimal quantity = 5;
             ProductionItem? itemGoal = new(graph.FindItem(itemName), quantity);
             ProductionCalculation? result = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
+            string mermaidWithImagesResult = "";
             string expectedResult = @"flowchart LR
-    ReinforcedIronPlate[""x2.4 Assembler<br>(Reinforced Iron Plate)""]
-    ReinforcedIronPlate_Item([12 Reinforced Iron Plate])
-    IronPlate[""x3.6 Constructor<br>(Iron Plate)""]
-    IronIngot[""x4.8 Smelter<br>(Iron Ingot)""]
-    IronOre[""x2.4 Mining Machine Mk1<br>(Iron Ore)""]
-    Screw[""x3.6 Constructor<br>(Screw)""]
-    IronRod[""x2.4 Constructor<br>(Iron Rod)""]
-    IronPlate--""Iron Plate<br>(72 units/min)""-->ReinforcedIronPlate
-    Screw--""Screw<br>(144 units/min)""-->ReinforcedIronPlate
-    ReinforcedIronPlate--""Reinforced Iron Plate<br>(12 units/min)""-->ReinforcedIronPlate_Item
-    IronIngot--""Iron Ingot<br>(108 units/min)""-->IronPlate
-    IronOre--""Iron Ore<br>(144 units/min)""-->IronIngot
-    IronRod--""Iron Rod<br>(36 units/min)""-->Screw
-    IronIngot--""Iron Ingot<br>(36 units/min)""-->IronRod
+    ReinforcedIronPlate[""x1 Assembler<br>(Reinforced Iron Plate)""]
+    ReinforcedIronPlate_Item([5 Reinforced Iron Plate])
+    IronPlate[""x1.5 Constructor<br>(Iron Plate)""]
+    IronIngot[""x2 Smelter<br>(Iron Ingot)""]
+    IronOre[""x1 Mining Machine Mk1<br>(Iron Ore)""]
+    Screw[""x1.5 Constructor<br>(Screw)""]
+    IronRod[""x1 Constructor<br>(Iron Rod)""]
+    IronPlate--""Iron Plate<br>(30 units/min)""-->ReinforcedIronPlate
+    Screw--""Screw<br>(60 units/min)""-->ReinforcedIronPlate
+    ReinforcedIronPlate--""Reinforced Iron Plate<br>(5 units/min)""-->ReinforcedIronPlate_Item
+    IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
+    IronOre--""Iron Ore<br>(60 units/min)""-->IronIngot
+    IronRod--""Iron Rod<br>(15 units/min)""-->Screw
+    IronIngot--""Iron Ingot<br>(15 units/min)""-->IronRod
+";
+            string expectedWithImagesResult = @"flowchart LR
+    ReinforcedIronPlate(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/AssemblerMk1_256.png' style='max-width:100px' alt='Assembler'></span><br> x1 Assembler<br>(Reinforced Iron Plate)</div>"")
+    ReinforcedIronPlateOutput{{""<div align=center><img src='https://localhost:7015/Images/Items/ReinforcedIronPlate_256.png' style='max-width:100px' alt='Reinforced Iron Plate'><br>5 Reinforced Iron Plate</div>""}}
+    IronPlate(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Iron Plate)</div>"")
+    IronIngot(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/SmelterMk1_256.png' style='max-width:100px' alt='Smelter'></span><br> x2 Smelter<br>(Iron Ingot)</div>"")
+    IronOre(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/MinerMk1_256.png' style='max-width:100px' alt='Mining Machine Mk1'></span><br> x1 Mining Machine Mk1<br>(Iron Ore)</div>"")
+    Screw(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Screw)</div>"")
+    IronRod(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1 Constructor<br>(Iron Rod)</div>"")
+    IronPlate--Iron Plate<br>(30 units/min)-->ReinforcedIronPlate
+    Screw--Screw<br>(60 units/min)-->ReinforcedIronPlate
+    ReinforcedIronPlate--Reinforced Iron Plate<br>(5 units/min)-->ReinforcedIronPlateOutput
+    IronIngot--Iron Ingot<br>(45 units/min)-->IronPlate
+    IronOre--Iron Ore<br>(60 units/min)-->IronIngot
+    IronRod--Iron Rod<br>(15 units/min)-->Screw
+    IronIngot--Iron Ingot<br>(15 units/min)-->IronRod
 ";
 
             //Act
@@ -253,15 +271,18 @@ namespace SatisfactoryTree.Tests
                 result = graph.BuildProductionPlan(itemGoal);
                 results = result.ProductionItems;
                 mermaidResult = graph.ToMermaidString();
+                mermaidWithImagesResult = graph.ToMermaidStringWithImages();
             }
 
             //Assert
             Assert.IsNotNull(itemGoal);
             Assert.IsNotNull(result);
-            Assert.AreEqual(105.6M, result.PowerConsumption);
+            Assert.AreEqual(44.0M, result.PowerConsumption);
             Assert.AreEqual(6, results.Count);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
+            Assert.IsNotNull(mermaidWithImagesResult);
+            Assert.AreEqual(expectedWithImagesResult, mermaidWithImagesResult);
         }
 
 

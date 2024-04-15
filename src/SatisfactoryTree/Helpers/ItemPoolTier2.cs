@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Helpers
         public static Item IronPlate()
         {
             return new Item(2, "Iron Plate",
-                "Iron_Plate.webp",
+                "IronPlate_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -30,7 +30,7 @@ namespace SatisfactoryTree.Helpers
         public static Item IronRod()
         {
             return new Item(2, "Iron Rod",
-                "Iron_Rod.webp",
+                "IronRod_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -54,7 +54,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Screw()
         {
             return new Item(2, "Screw",
-                "Screw.webp",
+                "Screw_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -77,7 +77,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Wire()
         {
             return new Item(2, "Wire",
-                "Wire.webp",
+                "Wire_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -101,7 +101,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Cable()
         {
             return new Item(2, "Cable",
-                "Cable.webp",
+                "Cable_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -124,7 +124,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CopperSheet()
         {
             return new Item(2, "Copper Sheet",
-                "Copper_Sheet.webp",
+                "CopperSheet_256.png",
                 ItemType.Production,
                 ResearchType.Tier2)
             {
@@ -170,7 +170,7 @@ namespace SatisfactoryTree.Helpers
         public static Item SteelBeam()
         {
             return new Item(2, "Steel Beam",
-                "Steel_Beam.webp",
+                "SteelBeam_256.png",
                 ItemType.Production,
                 ResearchType.Tier3)
             {
@@ -193,7 +193,7 @@ namespace SatisfactoryTree.Helpers
         public static Item SteelPipe()
         {
             return new Item(2, "Steel Pipe",
-                "Steel_Pipe.webp",
+                "SteelPipe_256.png",
                 ItemType.Production,
                 ResearchType.Tier3)
             {
@@ -215,7 +215,7 @@ namespace SatisfactoryTree.Helpers
         public static Item HeavyOilResidue()
         {
             return new Item(2, "Heavy Oil Residue",
-                "Heavy_Oil_Residue.webp",
+                "HeavyOilResidue_256.png",
                 ItemType.Production,
                 ResearchType.Tier5)
             {
@@ -253,7 +253,7 @@ namespace SatisfactoryTree.Helpers
         public static Item Quickwire()
         {
             return new Item(2, "Quickwire",
-                "Quickwire.webp",
+                "Quickwire_256.png",
                 ItemType.Production,
                 ResearchType.Tier6)
             {
@@ -276,7 +276,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AluminumScrap()
         {
             return new Item(2, "Aluminum Scrap",
-                "Aluminum_Scrap.webp",
+                "AluminumScrap_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -303,7 +303,7 @@ namespace SatisfactoryTree.Helpers
         public static Item EncasedUraniumCell()
         {
             return new Item(2, "Encased Uranium Cell",
-                "Encased_Uranium_Cell.webp",
+                "EncasedUraniumCell_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -330,7 +330,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CopperPowder()
         {
             return new Item(2, "Copper Powder",
-                "Copper_Powder.webp",
+                "CopperPowder_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
