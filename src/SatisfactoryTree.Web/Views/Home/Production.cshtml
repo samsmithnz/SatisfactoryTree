@@ -6,11 +6,32 @@
 <h2>Production Graph</h2>
 <body>
     Here is a mermaid diagram:
-    <pre class="mermaid">
+@*     <pre class="mermaid">
         @Html.Raw(Model)
-    </pre>
+        </pre> *@
+    <div id="graphDiv" style="border:solid 1px darkgray">
+
+    </div>
+    <script src="https://bumbu.me/svg-pan-zoom/dist/svg-pan-zoom.js"></script>
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
+        mermaid.initialize({ startOnLoad: false });
+        // Example of using the render function
+        const drawDiagram = async function () {
+            const element = document.querySelector('#graphDiv');
+            const graphDefinition = `@Html.Raw(Model)`;
+            const { svg } = await mermaid.render('mySvgId', graphDefinition);
+            element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\.]*px;/i, '');
+            var panZoomTiger = svgPanZoom('#mySvgId', {
+                zoomEnabled: true,
+                controlIconsEnabled: true,
+                fit: true,
+                center: true,
+                minZoom: 0.1
+            })
+            document.getElementById('mySvgId').setAttribute("height", "1000px");
+            document.getElementById('mySvgId').setAttribute("width", "2000px");
+        };
+        await drawDiagram();
     </script>
 </body>

@@ -33,8 +33,9 @@ namespace SatisfactoryTree.Web.Controllers
         public IActionResult Production()
         {
             SatisfactoryProduction satisfactoryProduction = new();
-            Item productionItem = ItemPoolTier1.Plastic();
-            decimal productionQuantity = 20M;
+            //Item productionItem = ItemPoolTier1.Plastic();
+            Item productionItem = ItemPoolTier5.HeavyModularFrame();
+            decimal productionQuantity = 5M;
             ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, productionQuantity));
             if (productionCalculation != null)
             {
