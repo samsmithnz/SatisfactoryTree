@@ -33,8 +33,9 @@ namespace SatisfactoryTree.Web.Controllers
         public IActionResult Production()
         {
             SatisfactoryProduction satisfactoryProduction = new();
-            Item productionItem = ItemPoolTier5.HeavyModularFrame();
-            ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, 5));
+            Item productionItem = ItemPoolTier1.Plastic();
+            decimal productionQuantity = 20M;
+            ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, productionQuantity));
             if (productionCalculation != null)
             {
                 string graph3 = satisfactoryProduction.ToMermaidStringWithImages();
