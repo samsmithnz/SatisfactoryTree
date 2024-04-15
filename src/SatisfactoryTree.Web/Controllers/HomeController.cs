@@ -35,14 +35,9 @@ namespace SatisfactoryTree.Web.Controllers
             SatisfactoryProduction satisfactoryProduction = new();
             Item productionItem = ItemPoolTier3.ReinforcedIronPlate();
             ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, 5));
-            foreach (ProductionItem item in productionCalculation.ProductionItems)
-            {
-                Debug.WriteLine(item.ToString());
-            }
-
             if (productionCalculation != null)
             {
-                string graph3 = productionCalculation.Flowchart.CalculateFlowchart();
+                string graph3 = satisfactoryProduction.ToMermaidStringWithImages();
                 Debug.WriteLine(graph3);
                 return View(model: graph3);
             }
