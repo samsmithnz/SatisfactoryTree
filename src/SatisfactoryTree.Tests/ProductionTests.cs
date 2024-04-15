@@ -252,17 +252,17 @@ namespace SatisfactoryTree.Tests
     ReinforcedIronPlate(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/AssemblerMk1_256.png' style='max-width:100px' alt='Assembler'></span><br> x1 Assembler<br>(Reinforced Iron Plate)</div>"")
     ReinforcedIronPlateOutput{{""<div align=center><img src='https://localhost:7015/Images/Items/ReinforcedIronPlate_256.png' style='max-width:100px' alt='Reinforced Iron Plate'><br>5 Reinforced Iron Plate</div>""}}
     IronPlate(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Iron Plate)</div>"")
-    IronIngot(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/SmelterMk1_256.png' style='max-width:100px' alt='Smelter'></span><br> x2.0 Smelter<br>(Iron Ingot)</div>"")
-    IronOre(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/MinerMk1_256.png' style='max-width:100px' alt='Mining Machine Mk1'></span><br> x1.00 Mining Machine Mk1<br>(Iron Ore)</div>"")
+    IronIngot(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/SmelterMk1_256.png' style='max-width:100px' alt='Smelter'></span><br> x2 Smelter<br>(Iron Ingot)</div>"")
+    IronOre(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/MinerMk1_256.png' style='max-width:100px' alt='Mining Machine Mk1'></span><br> x1 Mining Machine Mk1<br>(Iron Ore)</div>"")
     Screw(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Screw)</div>"")
-    IronRod(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.0 Constructor<br>(Iron Rod)</div>"")
-    IronPlate--Reinforced Iron Plate<br>(30 units/min)-->ReinforcedIronPlate
-    Screw--Reinforced Iron Plate<br>(60 units/min)-->ReinforcedIronPlate
+    IronRod(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1 Constructor<br>(Iron Rod)</div>"")
+    IronPlate--Iron Plate<br>(30 units/min)-->ReinforcedIronPlate
+    Screw--Screw<br>(60 units/min)-->ReinforcedIronPlate
     ReinforcedIronPlate--Reinforced Iron Plate<br>(5 units/min)-->ReinforcedIronPlateOutput
-    IronIngot--Iron Plate<br>(45.0 units/min)-->IronPlate
-    IronOre--Iron Ingot<br>(60.0 units/min)-->IronIngot
-    IronRod--Screw<br>(15.0 units/min)-->Screw
-    IronIngot--Iron Rod<br>(15.0 units/min)-->IronRod
+    IronIngot--Iron Ingot<br>(45 units/min)-->IronPlate
+    IronOre--Iron Ore<br>(60 units/min)-->IronIngot
+    IronRod--Iron Rod<br>(15 units/min)-->Screw
+    IronIngot--Iron Ingot<br>(15 units/min)-->IronRod
 ";
 
             //Act
