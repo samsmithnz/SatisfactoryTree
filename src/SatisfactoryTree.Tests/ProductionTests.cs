@@ -5,6 +5,7 @@ using System.Collections.Generic;
 namespace SatisfactoryTree.Tests
 {
     [TestClass]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class ProductionTests
     {
         [TestMethod]
