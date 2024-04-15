@@ -286,7 +286,7 @@ namespace SatisfactoryTree
                 nodes.Add(node);
                 foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
                 {
-                    MermaidDotNet.Models.Link link = new(dependency.Key, item.Name, item.Name + "<br>(" + RoundUpAndFormat(dependency.Value) + " units/min)");
+                    MermaidDotNet.Models.Link link = new(dependency.Key, item.Name, dependency.Key + "<br>(" + RoundUpAndFormat(dependency.Value) + " units/min)");
                     links.Add(link);
                 }
                 if (item.OutputItem == true)
