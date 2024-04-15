@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Helpers
         public static Item VersatileFramework()
         {
             return new Item(5, "Versatile Framework",
-                "Versatile_Framework_256.png",
+                "VersatileFramework_256.png",
                 ItemType.Production,
                 ResearchType.Tier3)
             {
@@ -32,7 +32,7 @@ namespace SatisfactoryTree.Helpers
         public static Item HeavyModularFrame()
         {
             return new Item(5, "Heavy Modular Frame",
-                "Heavy_Modular_Frame_256.png",
+                "HeavyModularFrame_256.png",
                 ItemType.Production,
                 ResearchType.Tier4)
             {
@@ -58,7 +58,7 @@ namespace SatisfactoryTree.Helpers
         public static Item ModularEngine()
         {
             return new Item(5, "Modular Engine",
-                "Modular_Engine_256.png",
+                "ModularEngine_256.png",
                 ItemType.Production,
                 ResearchType.Tier5)
             {
@@ -110,7 +110,7 @@ namespace SatisfactoryTree.Helpers
         public static Item RadioControlUnit()
         {
             return new Item(5, "Radio Control Unit",
-                "Radio_Control_Unit_256.png",
+                "RadioControlUnit_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -161,7 +161,7 @@ namespace SatisfactoryTree.Helpers
         public static Item UraniumFuelRod()
         {
             return new Item(5, "Uranium Fuel Rod",
-                "Uranium_Fuel_Rod_256.png",
+                "UraniumFuelRod_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -186,7 +186,7 @@ namespace SatisfactoryTree.Helpers
         public static Item HeatSink()
         {
             return new Item(5, "Heat Sink",
-                "Heat_Sink_256.png",
+                "HeatSink_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AssemblyDirectorSystem()
         {
             return new Item(7, "Assembly Director System",
-                "Assembly_Director_System_256.png",
+                "AssemblyDirectorSystem_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -32,7 +32,7 @@ namespace SatisfactoryTree.Helpers
         public static Item TurboMotor()
         {
             return new Item(7, "Turbo Motor",
-                "Turbo_Motor_256.png",
+                "TurboMotor_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -58,7 +58,7 @@ namespace SatisfactoryTree.Helpers
         public static Item NonfissileUranium()
         {
             return new Item(7, "Non-fissile Uranium",
-                "Non-fissile_Uranium_256.png",
+                "NonFissileUranium_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -87,7 +87,7 @@ namespace SatisfactoryTree.Helpers
         public static Item PressureConversionCube()
         {
             return new Item(7, "Pressure Conversion Cube",
-                "Pressure_Conversion_Cube_256.png",
+                "PressureConversionCube_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

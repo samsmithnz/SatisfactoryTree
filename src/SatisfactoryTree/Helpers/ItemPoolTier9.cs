@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Helpers
         public static Item EncasedPlutoniumCell()
         {
             return new Item(9, "Encased Plutonium Cell",
-                "Encased_Plutonium_Cell_256.png",
+                "EncasedPlutoniumCell_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

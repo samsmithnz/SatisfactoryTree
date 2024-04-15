@@ -256,7 +256,7 @@ namespace SatisfactoryTree
                             links.Add(new MermaidDotNet.Models.Link(
                                                 source,
                                                 destination,
-                                                '"' + item.Item.Name + "<br>(" + item.Quantity.ToString("0") + " units/min)" + '"'));
+                                                '"' + item.Item.Name + "<br>(" + RoundUpAndFormat(item.Quantity) + " units/min)" + '"'));
                         }
                     }
                 }
@@ -281,18 +281,18 @@ namespace SatisfactoryTree
                 {
                     buildingImage = item.Building.Image;
                 }
-                string itemText = "\"<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/" + buildingImage + "' style='max-width:100px' alt='" + buildingName + "'></span><br> x" + item.BuildingQuantityRequired + " " + buildingName + "<br>(" + item.Name + ")</div>\"";
+                string itemText = "\"<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/" + buildingImage + "' style='max-width:100px' alt='" + buildingName + "'></span><br> x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + buildingName + "<br>(" + item.Name + ")</div>\"";
                 MermaidDotNet.Models.Node node = new(item.Name, itemText, MermaidDotNet.Models.Node.ShapeType.Rounded);
                 nodes.Add(node);
                 foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
                 {
-                    MermaidDotNet.Models.Link link = new(dependency.Key, item.Name, item.Name + "<br>(" + dependency.Value.ToString() + " units/min)");
+                    MermaidDotNet.Models.Link link = new(dependency.Key, item.Name, item.Name + "<br>(" + RoundUpAndFormat(dependency.Value) + " units/min)");
                     links.Add(link);
                 }
                 if (item.OutputItem == true)
                 {
-                    nodes.Add(new(item.Name + "Output", "\"<div align=center><img src='https://localhost:7015/Images/Items/" + item.Item.Image + "' style='max-width:100px' alt='" + item.Name + "'><br>" + item.Quantity.ToString() + " " + item.Name + "</div>\"", MermaidDotNet.Models.Node.ShapeType.Hexagon));
-                    MermaidDotNet.Models.Link link = new(item.Name, item.Name + "Output", item.Name + "<br>(" + item.Quantity.ToString() + " units/min)");
+                    nodes.Add(new(item.Name + "Output", "\"<div align=center><img src='https://localhost:7015/Images/Items/" + item.Item.Image + "' style='max-width:100px' alt='" + item.Name + "'><br>" + RoundUpAndFormat(item.Quantity) + " " + item.Name + "</div>\"", MermaidDotNet.Models.Node.ShapeType.Hexagon));
+                    MermaidDotNet.Models.Link link = new(item.Name, item.Name + "Output", item.Name + "<br>(" + RoundUpAndFormat(item.Quantity) + " units/min)");
                     links.Add(link);
                 }
             }

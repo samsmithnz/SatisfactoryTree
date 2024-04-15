@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AdaptiveControlUnit()
         {
             return new Item(6, "Adaptive Control Unit",
-                "Adaptive_Control_Unit_256.png",
+                "AdaptiveControlUnit_256.png",
                 ItemType.Production,
                 ResearchType.Tier5)
             {
@@ -33,7 +33,7 @@ namespace SatisfactoryTree.Helpers
         public static Item MagneticFieldGenerator()
         {
             return new Item(6, "Magnetic Field Generator",
-                "Magnetic_Field_Generator_256.png",
+                "MagneticFieldGenerator_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -57,7 +57,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CoolingSystem()
         {
             return new Item(6, "Cooling System",
-                "Cooling_System_256.png",
+                "CoolingSystem_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -83,7 +83,7 @@ namespace SatisfactoryTree.Helpers
         public static Item FusedModularFrame()
         {
             return new Item(6, "Fused Modular Frame",
-                "Fused_Modular_Frame_256.png",
+                "FusedModularFrame_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {
@@ -108,7 +108,7 @@ namespace SatisfactoryTree.Helpers
         public static Item UraniumWaste()
         {
             return new Item(6, "Uranium Waste",
-                "Uranium_Waste_256.png",
+                "UraniumWaste_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

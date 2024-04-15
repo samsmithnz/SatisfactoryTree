@@ -102,7 +102,7 @@ namespace SatisfactoryTree.Helpers
         public static Item EncasedIndustrialBeam()
         {
             return new Item(3, "Encased Industrial Beam",
-                "Encased_Industrial_Beam_256.png",
+                "EncasedIndustrialBeam_256.png",
                 ItemType.Production,
                 ResearchType.Tier4)
             {
@@ -185,7 +185,7 @@ namespace SatisfactoryTree.Helpers
         public static Item PetroleumCoke()
         {
             return new Item(3, "Petroleum Coke",
-                "Petroleum_Coke_256.png",
+                "PetroleumCoke_256.png",
                 ItemType.Production,
                 ResearchType.Tier5)
             {
@@ -208,7 +208,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CircuitBoard()
         {
             return new Item(3, "Circuit Board",
-                "Circuit_Board_256.png",
+                "CircuitBoard_256.png",
                 ItemType.Production,
                 ResearchType.Tier5)
             {
@@ -231,7 +231,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AluminumIngot()
         {
             return new Item(3, "Aluminum Ingot",
-                "Aluminum_Ingot_256.png",
+                "AluminumIngot_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -254,7 +254,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AILimiter()
         {
             return new Item(3, "AI Limiter",
-                "AI_Limiter_256.png",
+                "AILimiter_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -278,7 +278,7 @@ namespace SatisfactoryTree.Helpers
         public static Item NitricAcid()
         {
             return new Item(3, "Nitric Acid",
-                "Nitric_Acid_256.png",
+                "NitricAcid_256.png",
                 ItemType.Production,
                 ResearchType.Tier8)
             {

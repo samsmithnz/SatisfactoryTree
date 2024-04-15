@@ -33,12 +33,12 @@ namespace SatisfactoryTree.Web.Controllers
         public IActionResult Production()
         {
             SatisfactoryProduction satisfactoryProduction = new();
-            Item productionItem = ItemPoolTier3.ReinforcedIronPlate();
+            Item productionItem = ItemPoolTier5.HeavyModularFrame();
             ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, 5));
             if (productionCalculation != null)
             {
                 string graph3 = satisfactoryProduction.ToMermaidStringWithImages();
-                Debug.WriteLine(graph3);
+                //Debug.WriteLine(graph3);
                 return View(model: graph3);
             }
 

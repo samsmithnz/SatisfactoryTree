@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Helpers
         public static Item IronIngot()
         {
             return new Item(1, "Iron Ingot",
-                "Iron_Ingot_256.png",
+                "IronIngot_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -30,7 +30,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CopperIngot()
         {
             return new Item(1, "Copper Ingot",
-                "Copper_Ingot_256.png",
+                "CopperIngot_256.png",
                 ItemType.Production,
                 ResearchType.Tier1)
             {
@@ -130,7 +130,7 @@ namespace SatisfactoryTree.Helpers
         public static Item SteelIngot()
         {
             return new Item(2, "Steel Ingot",
-                "Steel_Ingot_256.png",
+                "SteelIngot_256.png",
                 ItemType.Production,
                 ResearchType.Tier3)
             {
@@ -206,7 +206,7 @@ namespace SatisfactoryTree.Helpers
         public static Item CateriumIngot()
         {
             return new Item(1, "Caterium Ingot",
-                "Caterium_Ingot_256.png",
+                "CateriumIngot_256.png",
                 ItemType.Production,
                 ResearchType.Tier6)
             {
@@ -229,7 +229,7 @@ namespace SatisfactoryTree.Helpers
         public static Item AluminaSolution()
         {
             return new Item(1, "Alumina Solution",
-                "Alumina_Solution_256.png",
+                "AluminaSolution_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -256,7 +256,7 @@ namespace SatisfactoryTree.Helpers
         public static Item QuartzCrystal()
         {
             return new Item(1, "Quartz Crystal",
-                "Quartz_Crystal_256.png",
+                "QuartzCrystal_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
@@ -302,7 +302,7 @@ namespace SatisfactoryTree.Helpers
         public static Item SulfuricAcid()
         {
             return new Item(1, "Sulfuric Acid",
-                "Sulfuric_Acid_256.png",
+                "SulfuricAcid_256.png",
                 ItemType.Production,
                 ResearchType.Tier7)
             {
