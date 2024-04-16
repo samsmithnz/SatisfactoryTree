@@ -42,3 +42,8 @@ At the end of the game, it's a bit busy and I need another visualization:
 I have various filtering, to search for specific items, various "ages" of science, and to exclude buildings. For example: This shows all items to build the Gravity Matrix (the green science cube), including alternative/rare material recipes.
 ![image](https://user-images.githubusercontent.com/8389039/153523841-6f092c4b-80a1-4c39-b30e-fcbe872f816e.png)
 -->
+
+Now with images and zoom:
+![image](https://github.com/samsmithnz/SatisfactoryTree/assets/8389039/c6e8d852-c046-4386-8e9c-f609e0377287)
+
+
