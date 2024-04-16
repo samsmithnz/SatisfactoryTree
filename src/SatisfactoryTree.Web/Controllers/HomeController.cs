@@ -35,10 +35,13 @@ namespace SatisfactoryTree.Web.Controllers
             SatisfactoryProduction satisfactoryProduction = new();
             Item productionItem = ItemPoolTier1.Plastic();
             decimal productionQuantity = 20M;
+            //Item productionItem = ItemPoolTier3.ReinforcedIronPlate();
+            //decimal productionQuantity = 5M;
+
             ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, productionQuantity));
             if (productionCalculation != null)
             {
-                string graph3 = satisfactoryProduction.ToMermaidStringWithImages();
+                string graph3 = satisfactoryProduction.ToMermaidString(true);
                 //Debug.WriteLine(graph3);
                 return View(model: graph3);
             }

@@ -249,20 +249,20 @@ namespace SatisfactoryTree.Tests
     IronIngot--""Iron Ingot<br>(15 units/min)""-->IronRod
 ";
             string expectedWithImagesResult = @"flowchart LR
-    ReinforcedIronPlate(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/AssemblerMk1_256.png' style='max-width:100px' alt='Assembler'></span><br> x1 Assembler<br>(Reinforced Iron Plate)</div>"")
-    ReinforcedIronPlateOutput{{""<div align=center><img src='https://localhost:7015/Images/Items/ReinforcedIronPlate_256.png' style='max-width:100px' alt='Reinforced Iron Plate'><br>5 Reinforced Iron Plate</div>""}}
-    IronPlate(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Iron Plate)</div>"")
-    IronIngot(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/SmelterMk1_256.png' style='max-width:100px' alt='Smelter'></span><br> x2 Smelter<br>(Iron Ingot)</div>"")
-    IronOre(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/MinerMk1_256.png' style='max-width:100px' alt='Mining Machine Mk1'></span><br> x1 Mining Machine Mk1<br>(Iron Ore)</div>"")
-    Screw(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Screw)</div>"")
-    IronRod(""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1 Constructor<br>(Iron Rod)</div>"")
-    IronPlate--Iron Plate<br>(30 units/min)-->ReinforcedIronPlate
-    Screw--Screw<br>(60 units/min)-->ReinforcedIronPlate
-    ReinforcedIronPlate--Reinforced Iron Plate<br>(5 units/min)-->ReinforcedIronPlateOutput
-    IronIngot--Iron Ingot<br>(45 units/min)-->IronPlate
-    IronOre--Iron Ore<br>(60 units/min)-->IronIngot
-    IronRod--Iron Rod<br>(15 units/min)-->Screw
-    IronIngot--Iron Ingot<br>(15 units/min)-->IronRod
+    ReinforcedIronPlate[""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/AssemblerMk1_256.png' style='max-width:100px' alt='Assembler'></span><br> x1 Assembler<br>(Reinforced Iron Plate)</div>""]
+    ReinforcedIronPlate_Item([""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Items/ReinforcedIronPlate_256.png' style='max-width:100px' alt='Reinforced Iron Plate'></span><br> x5 Reinforced Iron Plate</div>""])
+    IronPlate[""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Iron Plate)</div>""]
+    IronIngot[""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/SmelterMk1_256.png' style='max-width:100px' alt='Smelter'></span><br> x2 Smelter<br>(Iron Ingot)</div>""]
+    IronOre[""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/MinerMk1_256.png' style='max-width:100px' alt='Mining Machine Mk1'></span><br> x1 Mining Machine Mk1<br>(Iron Ore)</div>""]
+    Screw[""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1.5 Constructor<br>(Screw)</div>""]
+    IronRod[""<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/ConstructorMk1_256.png' style='max-width:100px' alt='Constructor'></span><br> x1 Constructor<br>(Iron Rod)</div>""]
+    IronPlate--""Iron Plate<br>(30 units/min)""-->ReinforcedIronPlate
+    Screw--""Screw<br>(60 units/min)""-->ReinforcedIronPlate
+    ReinforcedIronPlate--""Reinforced Iron Plate<br>(5 units/min)""-->ReinforcedIronPlate_Item
+    IronIngot--""Iron Ingot<br>(45 units/min)""-->IronPlate
+    IronOre--""Iron Ore<br>(60 units/min)""-->IronIngot
+    IronRod--""Iron Rod<br>(15 units/min)""-->Screw
+    IronIngot--""Iron Ingot<br>(15 units/min)""-->IronRod
 ";
 
             //Act
@@ -271,7 +271,7 @@ namespace SatisfactoryTree.Tests
                 result = graph.BuildProductionPlan(itemGoal);
                 results = result.ProductionItems;
                 mermaidResult = graph.ToMermaidString();
-                mermaidWithImagesResult = graph.ToMermaidStringWithImages();
+                mermaidWithImagesResult = graph.ToMermaidString(true);
             }
 
             //Assert
@@ -469,7 +469,6 @@ namespace SatisfactoryTree.Tests
             string expectedResult = @"flowchart LR
     Plastic[""x1 Refinery<br>(Plastic)""]
     Plastic_Item([20 Plastic])
-    Plastic[""x1 Refinery<br>(Plastic)""]
     HeavyOilResidue_Item([10 Heavy Oil Residue])
     CrudeOil[""x0.3 Oil Extractor<br>(Crude Oil)""]
     CrudeOil--""Crude Oil<br>(30 units/min)""-->Plastic
@@ -512,14 +511,13 @@ namespace SatisfactoryTree.Tests
     CopperIngot[""x0.7 Smelter<br>(Copper Ingot)""]
     CopperOre[""x0.4 Mining Machine Mk1<br>(Copper Ore)""]
     Plastic[""x1 Refinery<br>(Plastic)""]
-    Plastic[""x1 Refinery<br>(Plastic)""]
     HeavyOilResidue_Item([10 Heavy Oil Residue])
     CrudeOil[""x0.3 Oil Extractor<br>(Crude Oil)""]
     CopperSheet--""Copper Sheet<br>(10 units/min)""-->CircuitBoard
-    Plastic--""Plastic<br>(20.0 units/min)""-->CircuitBoard
+    Plastic--""Plastic<br>(20.1 units/min)""-->CircuitBoard
     CircuitBoard--""Circuit Board<br>(5 units/min)""-->CircuitBoard_Item
     CopperIngot--""Copper Ingot<br>(20 units/min)""-->CopperSheet
-    CopperOre--""Copper Ore<br>(20.0 units/min)""-->CopperIngot
+    CopperOre--""Copper Ore<br>(20.1 units/min)""-->CopperIngot
     CrudeOil--""Crude Oil<br>(30 units/min)""-->Plastic
     Plastic--""Heavy Oil Residue<br>(10 units/min)""-->HeavyOilResidue_Item
 ";
@@ -562,14 +560,14 @@ namespace SatisfactoryTree.Tests
     Bauxite[""x0.2 Mining Machine Mk1<br>(Bauxite)""]
     Coal[""x0.1 Mining Machine Mk1<br>(Coal)""]
     RawQuartz[""x0.2 Assembler<br>(Raw Quartz)""]
-    AluminumScrap--""Aluminum Scrap<br>(15.0 units/min)""-->AluminumIngot
-    Silica--""Silica<br>(12.5 units/min)""-->AluminumIngot
+    AluminumScrap--""Aluminum Scrap<br>(15.1 units/min)""-->AluminumIngot
+    Silica--""Silica<br>(12.6 units/min)""-->AluminumIngot
     AluminumIngot--""Aluminum Ingot<br>(10 units/min)""-->AluminumIngot_Item
-    AluminaSolution--""Alumina Solution<br>(10.0 units/min)""-->AluminumScrap
-    Coal--""Coal<br>(5.0 units/min)""-->AluminumScrap
-    Bauxite--""Bauxite<br>(10.0 units/min)""-->AluminaSolution
-    Water--""Water<br>(15.0 units/min)""-->AluminaSolution
-    RawQuartz--""Raw Quartz<br>(30.0 units/min)""-->Silica
+    AluminaSolution--""Alumina Solution<br>(10.1 units/min)""-->AluminumScrap
+    Coal--""Coal<br>(5.1 units/min)""-->AluminumScrap
+    Bauxite--""Bauxite<br>(10.1 units/min)""-->AluminaSolution
+    Water--""Water<br>(15.1 units/min)""-->AluminaSolution
+    RawQuartz--""Raw Quartz<br>(30.1 units/min)""-->Silica
 ";
 
             //Act

@@ -202,7 +202,7 @@ namespace SatisfactoryTree
         }
 
         //Create the mermaid string for the production plan
-        public string ToMermaidString()
+        public string ToMermaidString(bool includeImages = false)
         {
             string direction = "LR";
             List<MermaidDotNet.Models.Node> nodes = [];
@@ -210,15 +210,33 @@ namespace SatisfactoryTree
             {
                 if (item != null && item.Item != null)
                 {
-                    nodes.Add(new(item.Item.Recipes[0].Name.Replace(" ", ""), '"' + "x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + item.Item.Recipes[0].Building + "<br>(" + item.Item.Recipes[0].Name + ")" + '"'));
+                    string recipeName = item.Item.Recipes[0].Name;
+                    string recipeBuildingName = item.Item.Recipes[0].Building;
+                    string recipeBuildingQuantity = RoundUpAndFormat(item.BuildingQuantityRequired);
+                    string recipeBuildingImage = "";
+                    if (AllBuildings.FindBuilding(item.Item.Recipes[0].Building) != null)
+                    {
+                        recipeBuildingImage = AllBuildings.FindBuilding(item.Item.Recipes[0].Building).Image;
+                    }
+                    string recipeText = '"' + "x" + recipeBuildingQuantity + " " + recipeBuildingName + "<br>(" + recipeName + ")" + '"';
+                    if (includeImages)
+                    {
+                        recipeText = "\"<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/" + recipeBuildingImage + "' style='max-width:100px' alt='" + recipeBuildingName + "'></span><br> x" + recipeBuildingQuantity + " " + recipeBuildingName + "<br>(" + recipeName + ")</div>\"";
+                    }
+                    if (nodes.Find(p => p.Name == recipeName) == null)
+                    {
+                        nodes.Add(new(recipeName, recipeText));
+                    }
+                    // If it's the final output, add an extra node to show the output item
                     if (item.OutputItem == true)
                     {
-                        string finalItemQuantity = item.Quantity.ToString("0.0");
-                        if ((int)item.Quantity == item.Quantity)
+                        string finalNode = item.Item?.Name + "_Item";
+                        string finalNodeText = RoundUpAndFormat(item.Quantity) + " " + item.Item?.Name;
+                        if (includeImages)
                         {
-                            finalItemQuantity = item.Quantity.ToString("0");
+                            finalNodeText = "\"<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Items/" + item.Item?.Image + "' style='max-width:100px' alt='" + item.Item?.Name + "'></span><br> x" + RoundUpAndFormat(item.Quantity) + " " + item.Item?.Name + "</div>\"";
                         }
-                        nodes.Add(new(item.Item?.Name.Replace(" ", "") + "_Item", finalItemQuantity + " " + item.Item?.Name, MermaidDotNet.Models.Node.ShapeType.Stadium));
+                        nodes.Add(new(finalNode, finalNodeText, MermaidDotNet.Models.Node.ShapeType.Stadium));
                     }
                 }
             }
@@ -229,14 +247,9 @@ namespace SatisfactoryTree
                 {
                     foreach (KeyValuePair<string, decimal> itemInput in item.Dependencies)
                     {
-                        string itemQuantity = itemInput.Value.ToString("0.0");
-                        if ((int)itemInput.Value == itemInput.Value)
-                        {
-                            itemQuantity = itemInput.Value.ToString("0");
-                        }
-                        string source = itemInput.Key.Replace(" ", "");
-                        string destination = item.Item.Recipes[0].Name.Replace(" ", "");
-                        string text = '"' + itemInput.Key + "<br>(" + itemQuantity + " units/min)" + '"';
+                        string source = itemInput.Key;
+                        string destination = item.Item.Recipes[0].Name;
+                        string text = '"' + itemInput.Key + "<br>(" + RoundUpAndFormat(itemInput.Value) + " units/min)" + '"';
                         MermaidDotNet.Models.Link link = new(source, destination, text);
                         if (!links.Any(g => g.SourceNode == link.SourceNode &&
                                             g.DestinationNode == link.DestinationNode &&
@@ -247,17 +260,13 @@ namespace SatisfactoryTree
                     }
                     if (item.OutputItem == true)
                     {
-                        string? source;
-                        string? destination;
-                        source = item.Item.Recipes[0].Name.Replace(" ", "");
-                        destination = item.Item.Name.Replace(" ", "") + "_Item";
-                        if (source != null && destination != null)
-                        {
-                            links.Add(new MermaidDotNet.Models.Link(
-                                                source,
-                                                destination,
-                                                '"' + item.Item.Name + "<br>(" + RoundUpAndFormat(item.Quantity) + " units/min)" + '"'));
-                        }
+                        string linkSource = item.Item.Recipes[0].Name;
+                        string linkDestination = item.Item.Name + "_Item";
+                        string linkText = '"' + item.Item.Name + "<br>(" + RoundUpAndFormat(item.Quantity) + " units/min)" + '"';
+                        links.Add(new MermaidDotNet.Models.Link(
+                                            linkSource,
+                                            linkDestination,
+                                            linkText));
                     }
                 }
             }
@@ -265,42 +274,7 @@ namespace SatisfactoryTree
             return flowchart.CalculateFlowchart();
         }
 
-        public string ToMermaidStringWithImages()
-        {
-            List<MermaidDotNet.Models.Node> nodes = [];
-            List<MermaidDotNet.Models.Link> links = [];
-            foreach (ProductionItem item in ProductionItems)
-            {
-                string buildingName = "none";
-                if (item.Building != null && item.Building.Name != null)
-                {
-                    buildingName = item.Building.Name;
-                }
-                string buildingImage = "";
-                if (item.Building != null && item.Building.Image != null)
-                {
-                    buildingImage = item.Building.Image;
-                }
-                string itemText = "\"<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/" + buildingImage + "' style='max-width:100px' alt='" + buildingName + "'></span><br> x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + buildingName + "<br>(" + item.Name + ")</div>\"";
-                MermaidDotNet.Models.Node node = new(item.Name, itemText, MermaidDotNet.Models.Node.ShapeType.Rounded);
-                nodes.Add(node);
-                foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
-                {
-                    MermaidDotNet.Models.Link link = new(dependency.Key, item.Name, dependency.Key + "<br>(" + RoundUpAndFormat(dependency.Value) + " units/min)");
-                    links.Add(link);
-                }
-                if (item.OutputItem == true)
-                {
-                    nodes.Add(new(item.Name + "Output", "\"<div align=center><img src='https://localhost:7015/Images/Items/" + item.Item.Image + "' style='max-width:100px' alt='" + item.Name + "'><br>" + RoundUpAndFormat(item.Quantity) + " " + item.Name + "</div>\"", MermaidDotNet.Models.Node.ShapeType.Hexagon));
-                    MermaidDotNet.Models.Link link = new(item.Name, item.Name + "Output", item.Name + "<br>(" + RoundUpAndFormat(item.Quantity) + " units/min)");
-                    links.Add(link);
-                }
-            }
-            MermaidDotNet.Flowchart flowchart = new("LR", nodes, links);
-            return flowchart.CalculateFlowchart();
-        }
-
-        //Round up to the nearest decimal point - if one exists
+        //Round up to the nearest decimal point - if one exists, otherwise just show a whole number
         private static string RoundUpAndFormat(decimal value)
         {
             if ((int)value == value)
