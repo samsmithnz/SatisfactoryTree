@@ -213,7 +213,7 @@ namespace SatisfactoryTree
                     string recipeName = item.Item.Recipes[0].Name;
                     string recipeBuildingName = item.Item.Recipes[0].Building;
                     string recipeBuildingQuantity = RoundUpAndFormat(item.BuildingQuantityRequired);
-                    string recipeBuildingImage = AllBuildings.FindBuilding(item.Item.Recipes[0].Building).Image;
+                    string recipeBuildingImage = AllBuildings.FindBuilding(item.Item.Recipes[0].Building)?.Image;
                     string recipeText = '"' + "x" + recipeBuildingQuantity + " " + recipeBuildingName + "<br>(" + recipeName + ")" + '"';
                     if (includeImages)
                     {
