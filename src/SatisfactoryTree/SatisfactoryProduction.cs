@@ -213,7 +213,11 @@ namespace SatisfactoryTree
                     string recipeName = item.Item.Recipes[0].Name;
                     string recipeBuildingName = item.Item.Recipes[0].Building;
                     string recipeBuildingQuantity = RoundUpAndFormat(item.BuildingQuantityRequired);
-                    string recipeBuildingImage = AllBuildings.FindBuilding(item.Item.Recipes[0].Building)?.Image;
+                    string recipeBuildingImage = "";
+                    if (AllBuildings.FindBuilding(item.Item.Recipes[0].Building) != null)
+                    {
+                        recipeBuildingImage = AllBuildings.FindBuilding(item.Item.Recipes[0].Building).Image;
+                    }
                     string recipeText = '"' + "x" + recipeBuildingQuantity + " " + recipeBuildingName + "<br>(" + recipeName + ")" + '"';
                     if (includeImages)
                     {
@@ -259,10 +263,10 @@ namespace SatisfactoryTree
                         string linkSource = item.Item.Recipes[0].Name;
                         string linkDestination = item.Item.Name + "_Item";
                         string linkText = '"' + item.Item.Name + "<br>(" + RoundUpAndFormat(item.Quantity) + " units/min)" + '"';
-                            links.Add(new MermaidDotNet.Models.Link(
-                                                linkSource,
-                                                linkDestination,
-                                                linkText));
+                        links.Add(new MermaidDotNet.Models.Link(
+                                            linkSource,
+                                            linkDestination,
+                                            linkText));
                     }
                 }
             }
@@ -270,51 +274,7 @@ namespace SatisfactoryTree
             return flowchart.CalculateFlowchart();
         }
 
-        //public string ToMermaidStringWithImages()
-        //{
-        //    string direction = "LR";
-        //    List<MermaidDotNet.Models.Node> nodes = [];
-        //    foreach (ProductionItem item in ProductionItems)
-        //    {
-        //        string buildingName = "none";
-        //        if (item.Building != null && item.Building.Name != null)
-        //        {
-        //            buildingName = item.Building.Name;
-        //        }
-        //        string buildingImage = "";
-        //        if (item.Building != null && item.Building.Image != null)
-        //        {
-        //            buildingImage = item.Building.Image;
-        //        }
-        //        string itemText = "\"<div align=center><span style='min-width:100px;display:block;'><img src='https://localhost:7015/Images/Buildings/" + buildingImage + "' style='max-width:100px' alt='" + buildingName + "'></span><br> x" + RoundUpAndFormat(item.BuildingQuantityRequired) + " " + buildingName + "<br>(" + item.Name + ")</div>\"";
-        //        MermaidDotNet.Models.Node node = new(item.Item.Recipes[0].Name, itemText, MermaidDotNet.Models.Node.ShapeType.Rounded);
-        //        if (nodes.Find(nodes => nodes.Name == item.Item.Recipes[0].Name) == null)
-        //        {
-        //            nodes.Add(node);
-        //        }
-        //        //nodes.Add(node);
-        //    }
-
-        //    List<MermaidDotNet.Models.Link> links = [];
-        //    foreach (ProductionItem item in ProductionItems)
-        //    {
-        //        foreach (KeyValuePair<string, decimal> dependency in item.Dependencies)
-        //        {
-        //            MermaidDotNet.Models.Link link = new(dependency.Key, item.Item.Recipes[0].Name, dependency.Key + "<br>(" + RoundUpAndFormat(dependency.Value) + " units/min)");
-        //            links.Add(link);
-        //        }
-        //        if (item.OutputItem == true)
-        //        {
-        //            nodes.Add(new(item.Name + "Output", "\"<div align=center><img src='https://localhost:7015/Images/Items/" + item.Item.Image + "' style='max-width:100px' alt='" + item.Name + "'><br>" + RoundUpAndFormat(item.Quantity) + " " + item.Name + "</div>\"", MermaidDotNet.Models.Node.ShapeType.Hexagon));
-        //            MermaidDotNet.Models.Link link = new(item.Item.Recipes[0].Name, item.Name + "Output", item.Name + "<br>(" + RoundUpAndFormat(item.Quantity) + " units/min)");
-        //            links.Add(link);
-        //        }
-        //    }
-        //    MermaidDotNet.Flowchart flowchart = new(direction, nodes, links);
-        //    return flowchart.CalculateFlowchart();
-        //}
-
-        //Round up to the nearest decimal point - if one exists
+        //Round up to the nearest decimal point - if one exists, otherwise just show a whole number
         private static string RoundUpAndFormat(decimal value)
         {
             if ((int)value == value)
