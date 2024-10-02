@@ -31,8 +31,8 @@ namespace SatisfactoryTree.Tests
             //Assert.IsNotNull(results[0].Item);
             //Assert.AreEqual(90, results[0].Quantity);
             //Assert.AreEqual(1.5M, results[0].BuildingQuantityRequired);
-            //Assert.IsNotNull(mermaidResult);
-            //Assert.AreEqual(expectedResult, mermaidResult);
+            Assert.IsNotNull(mermaidResult);
+            Assert.AreEqual(expectedResult, mermaidResult);
         }
 
 
