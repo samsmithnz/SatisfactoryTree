@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SatisfactoryTree.ContentExtractor\SatisfactoryTree.ContentExtractor.csproj" />
     <ProjectReference Include="..\SatisfactoryTree\SatisfactoryTree.csproj" />
   </ItemGroup>
 
