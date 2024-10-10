@@ -8,7 +8,7 @@
 
 
 A POC project to graph [Satisfactory](https://store.steampowered.com/app/526870/Satisfactory/) items with [D3](https://d3js.org/) [force directed graphs](https://en.wikipedia.org/wiki/Force-directed_graph_drawing). 
-Sister project to [http://github.com/samsmithnz/SatisfactoryPlan](http://github.com/samsmithnz/SatisfactoryPlan)
+Sister project to [https://github.com/samsmithnz/Satisfactoryplanning](https://github.com/samsmithnz/Satisfactoryplanning)
 
 Also has a production calculator that outputs mermaid graphs.
 ```mermaid

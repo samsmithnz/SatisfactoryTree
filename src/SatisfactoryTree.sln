@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.Tests", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.Web", "SatisfactoryTree.Web\SatisfactoryTree.Web.csproj", "{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.ContentExtractor", "SatisfactoryTree.ContentExtractor\SatisfactoryTree.ContentExtractor.csproj", "{F57832D1-14D2-460C-99A8-3F3E80F32527}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
