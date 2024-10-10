@@ -17,8 +17,18 @@ namespace SatisfactoryTree.ContentExtractor
         public static ProcessedResult ExtractJsonFile()
         {
             // Load the content file
-            string filePath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
-            string jsonString = File.ReadAllText(filePath);
+            string contentPath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            string projectContentPath = Path.Combine(currentDir.Parent.Parent.FullName, "content");
+
+            // If the file exists, copy it to the content folder, that is located in the content folder in the root of the project
+            if (System.IO.File.Exists(contentPath) && 
+                System.IO.Directory.Exists(projectContentPath))
+            {
+                //Get the current directory
+                System.IO.File.Copy(contentPath, projectContentPath, true);
+            }
+            string jsonString = File.ReadAllText(projectContentPath);
             List<RawNativeClass>? rawJSONDoc = JsonSerializer.Deserialize<List<RawNativeClass>>(jsonString);
             if (rawJSONDoc == null)
             {
