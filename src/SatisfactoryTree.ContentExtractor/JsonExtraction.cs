@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Text.Json;
 
 namespace SatisfactoryTree.ContentExtractor
@@ -19,16 +20,18 @@ namespace SatisfactoryTree.ContentExtractor
             // Load the content file
             string contentPath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
             DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
-            string projectContentPath = Path.Combine(currentDir.Parent.Parent.FullName, "content");
+            string projectContentPath = Path.Combine(currentDir.Parent.Parent.Parent.Parent.Parent.FullName, "content");
+            string projectContentFile = Path.Combine(projectContentPath, "en-US.json");
 
             // If the file exists, copy it to the content folder, that is located in the content folder in the root of the project
             if (System.IO.File.Exists(contentPath) && 
                 System.IO.Directory.Exists(projectContentPath))
             {
                 //Get the current directory
-                System.IO.File.Copy(contentPath, projectContentPath, true);
+                Debug.WriteLine("Copying file to " + projectContentPath);
+                System.IO.File.Copy(contentPath, projectContentFile, true);
             }
-            string jsonString = File.ReadAllText(projectContentPath);
+            string jsonString = File.ReadAllText(projectContentFile);
             List<RawNativeClass>? rawJSONDoc = JsonSerializer.Deserialize<List<RawNativeClass>>(jsonString);
             if (rawJSONDoc == null)
             {
