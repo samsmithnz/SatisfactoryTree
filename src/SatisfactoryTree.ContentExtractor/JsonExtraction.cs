@@ -8,9 +8,9 @@ namespace SatisfactoryTree.ContentExtractor
     public class ProcessedResult
     {
         public List<NewItem> Items = new();
-        public List<string> ItemList = new();
+        //public List<string> ItemList = new();
         public List<NewRecipe> Recipes = new();
-        public List<string> RecipeList = new();
+        //public List<string> RecipeList = new();
     }
 
     public class JsonExtraction
