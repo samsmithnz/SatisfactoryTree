@@ -14,8 +14,9 @@ namespace SatisfactoryTree
 
         public SatisfactoryProduction()
         {
-            Items = AllItems.GetAllItems();
-            Buildings = AllBuildings.GetAllBuildings();
+            //TODO
+            Items = null;// AllItems.GetAllItems();
+            Buildings = null;//AllBuildings.GetAllBuildings();
             ProductionItems = [];
         }
 
@@ -214,10 +215,11 @@ namespace SatisfactoryTree
                     string recipeBuildingName = item.Item.Recipes[0].Building;
                     string recipeBuildingQuantity = RoundUpAndFormat(item.BuildingQuantityRequired);
                     string recipeBuildingImage = "";
-                    if (AllBuildings.FindBuilding(item.Item.Recipes[0].Building) != null)
-                    {
-                        recipeBuildingImage = AllBuildings.FindBuilding(item.Item.Recipes[0].Building).Image;
-                    }
+                    //TODO
+                    //if (AllBuildings.FindBuilding(item.Item.Recipes[0].Building) != null)
+                    //{
+                    //    recipeBuildingImage = AllBuildings.FindBuilding(item.Item.Recipes[0].Building).Image;
+                    //}
                     string recipeText = '"' + "x" + recipeBuildingQuantity + " " + recipeBuildingName + "<br>(" + recipeName + ")" + '"';
                     if (includeImages)
                     {

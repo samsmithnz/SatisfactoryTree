@@ -1,5 +1,4 @@
-﻿using SatisfactoryTree.Helpers;
-using SatisfactoryTree.Models;
+﻿using SatisfactoryTree.Models;
 
 namespace SatisfactoryTree
 {
@@ -20,75 +19,9 @@ namespace SatisfactoryTree
 
         private static List<Item> BuildSatisfactoryTree(string nameFilter,
             ResearchType researchType)
-            //bool includeBuildings= false,
-            //bool showOnlyDirectDependencies = false)
         {
-            List<Item> items = AllItems.GetAllItems();
-
-            ////Include buildings
-            //if (includeBuildings == true)
-            //{
-            //    List<Item> buildings = new()
-            //    {
-            //        BuildingsNoScience.ConveyorBeltMkI(),
-
-            //        BuildingsPreBlueScience.TeslaTower(),
-            //        BuildingsPreBlueScience.WindTurbine(),
-            //        BuildingsPreBlueScience.SorterMkI(),
-            //        BuildingsPreBlueScience.AssemblingMachineMkI(),
-            //        BuildingsPreBlueScience.MiningMachine(),
-            //        BuildingsPreBlueScience.ArcSmelter(),
-            //        BuildingsPreBlueScience.StorageMkI(),
-            //        BuildingsPreBlueScience.MatrixLab(),
-
-            //        BuildingsBlueScience.WirelessPowerTower(),
-            //        BuildingsBlueScience.ThermalPowerPlant(),
-            //        BuildingsBlueScience.SolarPanel(),
-            //        BuildingsBlueScience.Splitter(),
-            //        BuildingsBlueScience.OilExtractor(),
-            //        BuildingsBlueScience.OilRefinery(),
-            //        BuildingsBlueScience.WaterPump(),
-            //        BuildingsBlueScience.StorageTank(),
-            //        BuildingsBlueScience.SorterMkII(),
-            //        BuildingsBlueScience.TrafficMonitor(),
-            //        BuildingsBlueScience.ChemicalPlant(),
-            //        BuildingsBlueScience.SprayCoater(),
-            //        BuildingsBlueScience.Foundation(),
-
-            //        BuildingsRedScience.Accumulator(),
-            //        BuildingsRedScience.StorageMkII(),
-            //        BuildingsRedScience.ConveyorBeltMkII(),
-            //        BuildingsRedScience.AssemblingMachineMkII(),
-            //        BuildingsRedScience.ConveyorBeltMkIII(),
-            //        BuildingsRedScience.SorterMkIII(),
-            //        BuildingsRedScience.Fractionator(),
-            //        BuildingsRedScience.EMRailEjector(),
-            //        BuildingsRedScience.RayReceiver(),
-            //        BuildingsRedScience.PlanetaryLogisticsStation(),
-            //        BuildingsRedScience.LogisticsDrone(),
-
-            //        BuildingsYellowScience.SatelliteSubstation(),
-            //        BuildingsYellowScience.MiniFusionPowerPlant(),
-            //        BuildingsYellowScience.EnergyExchanger(),
-            //        BuildingsYellowScience.FullAccumulator(),
-            //        BuildingsYellowScience.MiniatureParticleCollider(),
-            //        BuildingsYellowScience.InterstellarLogisticsStation(),
-            //        BuildingsYellowScience.OrbitalCollector(),
-            //        BuildingsYellowScience.AutomaticPiler(),
-            //        BuildingsYellowScience.LogisticsVessel(),
-
-            //        BuildingsPurpleScience.AssemblingMachineMkIII(),
-            //        BuildingsPurpleScience.PlaneSmelter(),
-            //        BuildingsPurpleScience.VerticalLaunchingSilo(),
-            //        BuildingsPurpleScience.SmallCarrierRocket(),
-
-            //        BuildingsGreenScience.ArtificialStar(),
-            //        BuildingsGreenScience.AdvancedMiningMachine(),
-
-            //        //BuildingsWhiteScience.(),
-            //    };
-            //    items.AddRange(buildings);
-            //}
+            //TODO
+            List<Item> items = null;// AllItems.GetAllItems();
 
             //Filter by science level
             for (int i = items.Count - 1; i >= 0; i--)

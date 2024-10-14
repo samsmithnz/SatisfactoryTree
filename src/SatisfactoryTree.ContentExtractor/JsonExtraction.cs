@@ -1,6 +1,9 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using System.Diagnostics;
+using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Xml;
 
 namespace SatisfactoryTree.ContentExtractor
 {
@@ -19,12 +22,19 @@ namespace SatisfactoryTree.ContentExtractor
         {
             // Load the content file
             string contentPath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
-            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
-            string projectContentPath = Path.Combine(currentDir.Parent.Parent.Parent.Parent.Parent.FullName, "content");
+            //DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            //string projectContentPath = Path.Combine(currentDir.Parent.Parent.Parent.Parent.Parent.FullName, "content");
+            DirectoryInfo? currentDir = new(Directory.GetCurrentDirectory());
+            DirectoryInfo? parentDir = currentDir.Parent?.Parent?.Parent?.Parent?.Parent;
+            if (parentDir == null)
+            {
+                throw new Exception("Parent directory structure is not as expected.");
+            }
+            string projectContentPath = Path.Combine(parentDir.FullName, "content");
             string projectContentFile = Path.Combine(projectContentPath, "en-US.json");
 
             // If the file exists, copy it to the content folder, that is located in the content folder in the root of the project
-            if (System.IO.File.Exists(contentPath) && 
+            if (System.IO.File.Exists(contentPath) &&
                 System.IO.Directory.Exists(projectContentPath))
             {
                 //Get the current directory
@@ -32,7 +42,7 @@ namespace SatisfactoryTree.ContentExtractor
                 System.IO.File.Copy(contentPath, projectContentFile, true);
             }
             string jsonString = File.ReadAllText(projectContentFile);
-            List<RawNativeClass>? rawJSONDoc = JsonSerializer.Deserialize<List<RawNativeClass>>(jsonString);
+            List<RawNativeClass>? rawJSONDoc = System.Text.Json.JsonSerializer.Deserialize<List<RawNativeClass>>(jsonString);
             if (rawJSONDoc == null)
             {
                 throw new Exception("Failed to deserialize JSON file");
@@ -87,7 +97,7 @@ namespace SatisfactoryTree.ContentExtractor
                             !recipe.ProducedIn.Contains("BP_BuildGun_C") &&
                             !recipe.ProducedIn.Contains("BP_WorkshopComponent_C"))
                         {
-                            items.Add(new Item(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, rawItem.StackSize, rawItem.FluidColor, rawItem.ResourceSinkPoints));
+                            items.Add(new Item(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.FluidColor, rawItem.ResourceSinkPoints));
                             itemList.Add(result2);
                         }
                     }
@@ -108,10 +118,47 @@ namespace SatisfactoryTree.ContentExtractor
                 }
             }
 
+            string jsonStringToSave = JsonConvert.SerializeObject(processedResult, Newtonsoft.Json.Formatting.Indented);
+            SaveJSON(projectContentPath, jsonStringToSave);
+
             return processedResult;
-
-
         }
-    }
+
+        private static bool SaveJSON(string path, string jsonString)
+        {
+            // Save the JSON string to a file.
+            string pathToJSON = Path.Combine(path, "output.json");
+            File.WriteAllText(pathToJSON, jsonString);
+            return true;
+        }
+
+        private static int GetStackSizeQuantity(string stackSize)
+        {
+            if (stackSize == "SS_HUGE")
+            {
+                return 500;
+            }
+            else if (stackSize == "SS_BIG")
+            {
+                return 200;
+            }
+            else if (stackSize == "SS_MEDIUM")
+            {
+                return 100;
+            }
+            else if (stackSize == "SS_SMALL")
+            {
+                return 50;
+            }
+            else if (stackSize == "SS_FLUID")
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+}
 
 }

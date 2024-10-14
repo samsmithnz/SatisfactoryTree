@@ -7,10 +7,11 @@ namespace SatisfactoryTree.Models
         public ProductionItem(Item? item, decimal quantity)
         {
             Item = item;
-            if (item != null)
-            {
-                Building = AllBuildings.FindBuilding(item.Recipes[0].Building);
-            }
+            //TODO
+            //if (item != null)
+            //{
+            //    Building = AllBuildings.FindBuilding(item.Recipes[0].Building);
+            //}
             Quantity = quantity;
             Dependencies = [];
         }

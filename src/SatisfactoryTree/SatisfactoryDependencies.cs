@@ -12,8 +12,9 @@ namespace SatisfactoryTree
 
         public SatisfactoryDependencies()
         {
-            Items = AllItems.GetAllItems();
-            ItemGroups = AllItemGroups.GetAllItemGroups();
+            //TODO
+            //Items = AllItems.GetAllItems();
+            //ItemGroups = AllItemGroups.GetAllItemGroups();
         }
 
         //Build a production plan for a given target item
