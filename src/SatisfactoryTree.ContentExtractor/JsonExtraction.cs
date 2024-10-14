@@ -1,24 +1,21 @@
 ﻿using Newtonsoft.Json;
+using SatisfactoryTree.Models;
 using System.Diagnostics;
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Xml;
 
 namespace SatisfactoryTree.ContentExtractor
 {
 
     public class ProcessedResult
     {
-        public List<Item> Items = new();
+        public List<NewItem> Items = new();
         public List<string> ItemList = new();
-        public List<Recipe> Recipes = new();
+        public List<NewRecipe> Recipes = new();
         public List<string> RecipeList = new();
     }
 
     public class JsonExtraction
     {
-        public static ProcessedResult ExtractJsonFile()
+        public static NewContent ExtractJsonFile()
         {
             // Load the content file
             string contentPath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
@@ -49,7 +46,7 @@ namespace SatisfactoryTree.ContentExtractor
             }
 
             // Process the content into an object list
-            ProcessedResult processedResult = new();
+            NewContent processedResult = new();
             List<RawItem> rawItems = new();
             foreach (RawNativeClass nativeClass in rawJSONDoc)
             {
@@ -61,7 +58,7 @@ namespace SatisfactoryTree.ContentExtractor
 
             //Get all recipes that are not Christmas or BuildGun or WorkshopComponent
             List<string> itemList = new();
-            List<Item> items = new();
+            List<NewItem> items = new();
             List<RawItem> rawRecipes = new();
             foreach (RawItem rawItem in rawItems)
             {
@@ -97,7 +94,7 @@ namespace SatisfactoryTree.ContentExtractor
                             !recipe.ProducedIn.Contains("BP_BuildGun_C") &&
                             !recipe.ProducedIn.Contains("BP_WorkshopComponent_C"))
                         {
-                            items.Add(new Item(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.FluidColor, rawItem.ResourceSinkPoints));
+                            items.Add(new NewItem(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.FluidColor, rawItem.ResourceSinkPoints));
                             itemList.Add(result2);
                         }
                     }
@@ -107,14 +104,14 @@ namespace SatisfactoryTree.ContentExtractor
             //Order the list alphabetically
             itemList.Sort();
 
-            processedResult.ItemList = itemList;
+            //processedResult.ItemList = itemList;
             processedResult.Items = items;
             foreach (RawItem recipe in rawRecipes)
             {
                 if (recipe != null)
                 {
-                    processedResult.RecipeList.Add($"ClassName: {recipe.ClassName}, DisplayName: {recipe.DisplayName}, IsAlt: {recipe.IsAlternateRecipe}, Ingredients: {recipe.Ingredients}");
-                    processedResult.Recipes.Add(new Recipe(recipe.ClassName, recipe.DisplayName, recipe.Description, recipe.Ingredients, recipe.Products, recipe.ProducedIn, recipe.ManufactoringDuration, recipe.IsAlternateRecipe));
+                    //processedResult.RecipeList.Add($"ClassName: {recipe.ClassName}, DisplayName: {recipe.DisplayName}, IsAlt: {recipe.IsAlternateRecipe}, Ingredients: {recipe.Ingredients}");
+                    processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, recipe.Ingredients, recipe.Products, recipe.ProducedIn, recipe.ManufactoringDuration, recipe.IsAlternateRecipe));
                 }
             }
 

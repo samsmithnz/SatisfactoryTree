@@ -1,11 +1,10 @@
-﻿namespace SatisfactoryTree.ContentExtractor
+﻿namespace SatisfactoryTree.Models
 {
-    public class Recipe(string? className, string? displayName, string? description, string? ingredients, string? products, string? producedIn, string? manufactoringDuration, bool isAlternateRecipe)
+    public class NewRecipe(string? className, string? displayName, string? ingredients, string? products, string? producedIn, string? manufactoringDuration, bool isAlternateRecipe)
     {
         //Common properties
         public string? ClassName { get; set; } = className;
         public string? DisplayName { get; set; } = displayName;
-        public string? Description { get; set; } = description;
 
         //Recipe properties
         public string? Ingredients { get; set; } = ingredients;

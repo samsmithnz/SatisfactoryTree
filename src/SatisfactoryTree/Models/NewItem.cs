@@ -1,6 +1,6 @@
-﻿namespace SatisfactoryTree.ContentExtractor
+﻿namespace SatisfactoryTree.Models
 {
-    public class Item(string? className, string? displayName, string? description, int stackSize, string? fluidColor, string? resourceSinkPoints)
+    public class NewItem(string? className, string? displayName, string? description, int stackSize, string? fluidColor, string? resourceSinkPoints)
     {
         //Common properties
         public string? ClassName { get; set; } = className;
