@@ -24,12 +24,46 @@ namespace SatisfactoryTree
         public ProductionCalculation NewBuildProductionPlan(NewTargetItem newTargetItem)
         {
             ProductionItems = [];
+            ProductionItem productionItem = new(newTargetItem.ItemName, newTargetItem.ItemQuantity);
+            NewRecipe? recipe = FindRecipe(newTargetItem.ItemName);
+            if (recipe != null)
+            {
+                decimal ratePerMinute = 60M / recipe.ManufactoringDuration;
+                decimal buildingQuantityRequired = newTargetItem.ItemQuantity / ratePerMinute;
+                productionItem.BuildingQuantityRequired = buildingQuantityRequired;
+            }
             ProductionCalculation productionCalculation = new()
             {
                 ProductionItems = ProductionItems,
-                PowerConsumption = 0
+                PowerConsumption = 7.5M
             };
+            ProductionItems.Add(productionItem);
+
             return productionCalculation;
+        }
+
+        public NewItem? FindItem(string itemName)
+        {
+            foreach (NewItem item in Items)
+            {
+                if (item.DisplayName == itemName)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public NewRecipe? FindRecipe(string itemName)
+        {
+            foreach (NewRecipe item in Recipes)
+            {
+                if (item.DisplayName == itemName && item.IsAlternateRecipe == false)
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         ////Build a production plan for a given target item

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SatisfactoryTree.Models;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SatisfactoryTree.ContentExtractor
 {
@@ -19,8 +20,6 @@ namespace SatisfactoryTree.ContentExtractor
         {
             // Load the content file
             string contentPath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
-            //DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
-            //string projectContentPath = Path.Combine(currentDir.Parent.Parent.Parent.Parent.Parent.FullName, "content");
             DirectoryInfo? currentDir = new(Directory.GetCurrentDirectory());
             DirectoryInfo? parentDir = currentDir.Parent?.Parent?.Parent?.Parent?.Parent;
             if (parentDir == null)
@@ -60,6 +59,7 @@ namespace SatisfactoryTree.ContentExtractor
             List<string> itemList = new();
             List<NewItem> items = new();
             List<RawItem> rawRecipes = new();
+            List<NewBuilding> buildings = new();
             foreach (RawItem rawItem in rawItems)
             {
                 if (rawItem != null && rawItem.ClassName != null &&
@@ -70,8 +70,22 @@ namespace SatisfactoryTree.ContentExtractor
                     !rawItem.ProducedIn.Contains("BP_BuildGun_C") &&
                     !rawItem.ProducedIn.Contains("BP_WorkshopComponent_C"))
                 {
-                    //string recipe = ($"ClassName: {item.ClassName}, DisplayName: {item.DisplayName}, Ingredients: {item.Ingredients}");
                     rawRecipes.Add(rawItem);
+                }
+                string producedIn = rawItem.ProducedIn;
+                if (!string.IsNullOrEmpty(rawItem.ProducedIn))
+                {
+                    producedIn = GetProcessedProducedIn(rawItem.ProducedIn);
+                }
+                if (rawItem != null && rawItem.ClassName != null &&
+                rawItem.ClassName.StartsWith("Recipe_") &&
+                !string.IsNullOrEmpty(producedIn) &&
+                !producedIn.Contains("BP_BuildGun_C") &&
+                !producedIn.Contains("FGBuildGun") &&
+                !producedIn.Contains("BP_WorkshopComponent_C") &&
+                !buildings.Contains(new(producedIn)))
+                {
+                    buildings.Add(new NewBuilding(producedIn));
                 }
 
             }
@@ -94,7 +108,7 @@ namespace SatisfactoryTree.ContentExtractor
                             !recipe.ProducedIn.Contains("BP_BuildGun_C") &&
                             !recipe.ProducedIn.Contains("BP_WorkshopComponent_C"))
                         {
-                            items.Add(new NewItem(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.FluidColor, rawItem.ResourceSinkPoints));
+                            items.Add(new NewItem(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
                             itemList.Add(result2);
                         }
                     }
@@ -110,10 +124,13 @@ namespace SatisfactoryTree.ContentExtractor
             {
                 if (recipe != null)
                 {
-                    //processedResult.RecipeList.Add($"ClassName: {recipe.ClassName}, DisplayName: {recipe.DisplayName}, IsAlt: {recipe.IsAlternateRecipe}, Ingredients: {recipe.Ingredients}");
-                    processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, recipe.Ingredients, recipe.Products, recipe.ProducedIn, recipe.ManufactoringDuration, recipe.IsAlternateRecipe));
+                    decimal manufactoringDuration = 0;
+                    decimal.TryParse(recipe.ManufactoringDuration, out manufactoringDuration);
+                    //recipe.Ingredients, recipe.Products
+                    processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, null, null, recipe.ProducedIn, manufactoringDuration, recipe.IsAlternateRecipe));
                 }
             }
+            processedResult.Buildings = buildings;
 
             string jsonStringToSave = JsonConvert.SerializeObject(processedResult, Newtonsoft.Json.Formatting.Indented);
             SaveJSON(projectContentPath, jsonStringToSave);
@@ -128,8 +145,6 @@ namespace SatisfactoryTree.ContentExtractor
             File.WriteAllText(pathToJSON, jsonString);
             return true;
         }
-
-
 
         private static int GetStackSizeQuantity(string stackSize)
         {
@@ -158,6 +173,39 @@ namespace SatisfactoryTree.ContentExtractor
                 return -1;
             }
         }
-    }
 
+        private static string GetProcessedProducedIn(string producedIn)
+        {
+            producedIn = producedIn.Replace(",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\"", "");
+            producedIn = producedIn.Replace(",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\"", "");
+            producedIn = producedIn.Replace(",\"/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C\"", "");
+            switch (producedIn)
+            {
+                case "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")":
+                    return "ConstructorMk1";
+                case "(\"/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C\")":
+                    return "SmelterMk1";
+                case "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")":
+                    return "AssemblerMk1";
+                case "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")":
+                    return "FoundryMk1";
+                case "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")":
+                    return "Blender";
+                case "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")":
+                    return "Refinery";
+                case "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")":
+                    return "Packager";
+                case "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")":
+                    return "ManufacturerMk1";
+                case "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")":
+                    return "HadronCollider";
+                case "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")":
+                    return "QuantumEncoder";
+                case "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")":
+                    return "Converter";
+                default:
+                    return producedIn;
+            }
+        }
+    }
 }

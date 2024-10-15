@@ -15,7 +15,13 @@ namespace SatisfactoryTree.Models
             Quantity = quantity;
             Dependencies = [];
         }
+        public ProductionItem(string itemName, decimal quantity)
+        {
+            ItemName = itemName;
+            Quantity = quantity;
+        }
         public Item? Item { get; set; }
+        public string ItemName { get; set; }
         public decimal Quantity { get; set; }
         public decimal BuildingQuantityRequired { get; set; }
         public Building? Building { get; set; }
