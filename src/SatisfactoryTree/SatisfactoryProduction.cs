@@ -1,206 +1,218 @@
 ﻿using MermaidDotNet;
-using SatisfactoryTree.Helpers;
+using SatisfactoryTree.DataAccess;
 using SatisfactoryTree.Models;
-using System.Text;
 
 namespace SatisfactoryTree
 {
     public class SatisfactoryProduction
     {
-        public List<Item> Items { get; set; }
-        public List<Building> Buildings { get; set; }
+        public List<NewItem> Items { get; set; }
+        public List<NewRecipe> Recipes { get; set; }
+        public List<NewBuilding> Buildings { get; set; }
         public List<ProductionItem> ProductionItems { get; set; }
         public decimal PowerConsumption { get; set; }
 
         public SatisfactoryProduction()
         {
-            //TODO
-            Items = null;// AllItems.GetAllItems();
-            Buildings = null;//AllBuildings.GetAllBuildings();
+            NewContent content = FileContent.LoadJsonContent();
+            Items = content.Items;
+            Recipes = content.Recipes;
+            Buildings = content.Buildings;
             ProductionItems = [];
         }
 
-        //Build a production plan for a given target item
-        public ProductionCalculation BuildProductionPlan(ProductionItem itemGoal)
+        public ProductionCalculation NewBuildProductionPlan(NewTargetItem newTargetItem)
         {
             ProductionItems = [];
-            if (itemGoal != null && itemGoal.Item != null)
-            {
-                ProcessOutputItem(itemGoal);
-
-                //Search for items that are not dependencies to identify outputs
-                List<string> dependencies = [];
-                foreach (ProductionItem item in ProductionItems)
-                {
-                    foreach (KeyValuePair<string, decimal> dependent in item.Dependencies)
-                    {
-                        if (!dependencies.Any(p => p == dependent.Key))
-                        {
-                            dependencies.Add(dependent.Key);
-                        }
-                    }
-                }
-                //Mark items that are not dependencies
-                foreach (ProductionItem item in ProductionItems)
-                {
-                    if (item != null && item.Item != null)
-                    {
-                        if (!dependencies.Any(p => p == item.Item?.Name))
-                        {
-                            item.OutputItem = true;
-                        }
-                    }
-                }
-            }
             ProductionCalculation productionCalculation = new()
             {
                 ProductionItems = ProductionItems,
-                PowerConsumption = PowerConsumption
+                PowerConsumption = 0
             };
             return productionCalculation;
         }
 
-        //Taking an output item, find the inputs required to produce it
-        private bool ProcessOutputItem(ProductionItem targetItem)
-        {
-            List<KeyValuePair<string, decimal>> inputs = [];
-            ProductionItem? currentItemMatch = null;
-            if (targetItem != null && targetItem.Item != null)
-            {
-                //Process this item
-                targetItem.BuildingQuantityRequired = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
-                if (targetItem != null && targetItem.Item != null && targetItem.Item.Recipes.Count > 0 && targetItem.Item.Recipes[0].Building != null)
-                {
-                    Building? building = FindBuilding(targetItem.Item.Recipes[0].Building);
-                    if (building != null)
-                    {
-                        PowerConsumption += building.PowerConsumption * targetItem.BuildingQuantityRequired;
-                    }
-                }
-                //Check if this item is already in the production list, undate it instead of adding a new one
-                if (ProductionItems.Any(p => p.Item?.Name == targetItem.Item.Name))
-                {
-                    currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == targetItem.Item.Name);
-                    if (currentItemMatch != null)
-                    {
-                        currentItemMatch.Quantity += targetItem.Quantity;
-                        currentItemMatch.BuildingQuantityRequired += targetItem.BuildingQuantityRequired;
-                    }
-                }
-                else
-                {
-                    ProductionItems.Add(targetItem);
-                }
-                decimal itemOutputRatio = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
+        ////Build a production plan for a given target item
+        //public ProductionCalculation BuildProductionPlan(ProductionItem itemGoal)
+        //{
+        //    ProductionItems = [];
+        //    if (itemGoal != null && itemGoal.Item != null)
+        //    {
+        //        ProcessOutputItem(itemGoal);
 
-                //Process each output (that isn't the target item)
-                foreach (KeyValuePair<string, decimal> output in targetItem.Item.Recipes[0].Outputs)
-                {
-                    //Check for additional outputs
-                    if (output.Key != targetItem.Item.Name)
-                    {
-                        //Process this item
-                        Item? outputItem = FindItem(output.Key);
-                        decimal outputQuantityWithRatio = output.Value * itemOutputRatio;
-                        ProductionItem newProductionItem = new(outputItem, outputQuantityWithRatio)
-                        {
-                            BuildingQuantityRequired = itemOutputRatio
-                        };
-                        if (newProductionItem != null && newProductionItem.Item != null)
-                        {
-                            foreach (KeyValuePair<string, decimal> input in newProductionItem.Item.Recipes[0].Inputs)
-                            {
-                                newProductionItem.Dependencies.Add(input.Key, input.Value);
-                            }
-                            ProductionItems.Add(newProductionItem);
-                            //Commented out this - because we are already adding this input below V
-                            //inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
-                        }
-                    }
-                }
-                inputs.AddRange(targetItem.Item.Recipes[0].Inputs);
+        //        //Search for items that are not dependencies to identify outputs
+        //        List<string> dependencies = [];
+        //        foreach (ProductionItem item in ProductionItems)
+        //        {
+        //            foreach (KeyValuePair<string, decimal> dependent in item.Dependencies)
+        //            {
+        //                if (!dependencies.Any(p => p == dependent.Key))
+        //                {
+        //                    dependencies.Add(dependent.Key);
+        //                }
+        //            }
+        //        }
+        //        //Mark items that are not dependencies
+        //        foreach (ProductionItem item in ProductionItems)
+        //        {
+        //            if (item != null && item.Item != null)
+        //            {
+        //                if (!dependencies.Any(p => p == item.Item?.Name))
+        //                {
+        //                    item.OutputItem = true;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    ProductionCalculation productionCalculation = new()
+        //    {
+        //        ProductionItems = ProductionItems,
+        //        PowerConsumption = PowerConsumption
+        //    };
+        //    return productionCalculation;
+        //}
 
-                //Process each input
-                foreach (KeyValuePair<string, decimal> input in inputs)
-                {
-                    Item? inputItem = FindItem(input.Key);
-                    if (inputItem != null)
-                    {
-                        decimal inputQuantityWithRatio = input.Value * itemOutputRatio;
-                        if (targetItem.Dependencies.Any(p => p.Key == input.Key))
-                        {
-                            KeyValuePair<string, decimal>? currentInputMatch = targetItem.Dependencies.FirstOrDefault(p => p.Key == input.Key);
-                            if (currentInputMatch != null)
-                            {
-                                decimal value = ((KeyValuePair<string, decimal>)currentInputMatch).Value;
-                                currentInputMatch = new KeyValuePair<string, decimal>(input.Key, value + targetItem.Quantity);
-                            }
-                        }
-                        else
-                        {
-                            targetItem.Dependencies.Add(input.Key, inputQuantityWithRatio);
-                        }
-                        ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
-                        {
-                            BuildingQuantityRequired = itemOutputRatio
-                        };
-                        ProcessOutputItem(newProductionItem);
-                    }
-                }
-                //If this item already exists in the production list, update the quantity for it
-                if (currentItemMatch != null)
-                {
-                    foreach (KeyValuePair<string, decimal> dependency in targetItem.Dependencies)
-                    {
-                        if (currentItemMatch.Dependencies.ContainsKey(dependency.Key))
-                        {
-                            currentItemMatch.Dependencies[dependency.Key] += dependency.Value;
-                        }
-                        else
-                        {
-                            currentItemMatch.Dependencies.Add(dependency.Key, dependency.Value);
-                        }
-                    }
-                }
-            }
-            return true;
-        }
+        ////Taking an output item, find the inputs required to produce it
+        //private bool ProcessOutputItem(ProductionItem targetItem)
+        //{
+        //    List<KeyValuePair<string, decimal>> inputs = [];
+        //    ProductionItem? currentItemMatch = null;
+        //    if (targetItem != null && targetItem.Item != null)
+        //    {
+        //        //Process this item
+        //        targetItem.BuildingQuantityRequired = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
+        //        if (targetItem != null && targetItem.Item != null && targetItem.Item.Recipes.Count > 0 && targetItem.Item.Recipes[0].Building != null)
+        //        {
+        //            Building? building = FindBuilding(targetItem.Item.Recipes[0].Building);
+        //            if (building != null)
+        //            {
+        //                PowerConsumption += building.PowerConsumption * targetItem.BuildingQuantityRequired;
+        //            }
+        //        }
+        //        //Check if this item is already in the production list, undate it instead of adding a new one
+        //        if (ProductionItems.Any(p => p.Item?.Name == targetItem.Item.Name))
+        //        {
+        //            currentItemMatch = ProductionItems.FirstOrDefault(p => p.Item?.Name == targetItem.Item.Name);
+        //            if (currentItemMatch != null)
+        //            {
+        //                currentItemMatch.Quantity += targetItem.Quantity;
+        //                currentItemMatch.BuildingQuantityRequired += targetItem.BuildingQuantityRequired;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ProductionItems.Add(targetItem);
+        //        }
+        //        decimal itemOutputRatio = targetItem.Quantity / targetItem.Item.Recipes[0].Outputs[targetItem.Item.Name];
 
-        //Find an item by name
-        public Item? FindItem(string itemName)
-        {
-            Item? result = null;
-            if (Items != null && Items.Count > 0)
-            {
-                foreach (Item item in Items)
-                {
-                    if (item.Name == itemName)
-                    {
-                        result = item;
-                        break;
-                    }
-                }
-            }
-            return result;
-        }
+        //        //Process each output (that isn't the target item)
+        //        foreach (KeyValuePair<string, decimal> output in targetItem.Item.Recipes[0].Outputs)
+        //        {
+        //            //Check for additional outputs
+        //            if (output.Key != targetItem.Item.Name)
+        //            {
+        //                //Process this item
+        //                Item? outputItem = FindItem(output.Key);
+        //                decimal outputQuantityWithRatio = output.Value * itemOutputRatio;
+        //                ProductionItem newProductionItem = new(outputItem, outputQuantityWithRatio)
+        //                {
+        //                    BuildingQuantityRequired = itemOutputRatio
+        //                };
+        //                if (newProductionItem != null && newProductionItem.Item != null)
+        //                {
+        //                    foreach (KeyValuePair<string, decimal> input in newProductionItem.Item.Recipes[0].Inputs)
+        //                    {
+        //                        newProductionItem.Dependencies.Add(input.Key, input.Value);
+        //                    }
+        //                    ProductionItems.Add(newProductionItem);
+        //                    //Commented out this - because we are already adding this input below V
+        //                    //inputs.AddRange(newProductionItem.Item.Recipes[0].Inputs);
+        //                }
+        //            }
+        //        }
+        //        inputs.AddRange(targetItem.Item.Recipes[0].Inputs);
 
-        //Find a building by name
-        public Building? FindBuilding(string buildingName)
-        {
-            Building? result = null;
-            if (Buildings != null && Buildings.Count > 0)
-            {
-                foreach (Building item in Buildings)
-                {
-                    if (item.Name == buildingName)
-                    {
-                        result = item;
-                        break;
-                    }
-                }
-            }
-            return result;
-        }
+        //        //Process each input
+        //        foreach (KeyValuePair<string, decimal> input in inputs)
+        //        {
+        //            Item? inputItem = FindItem(input.Key);
+        //            if (inputItem != null)
+        //            {
+        //                decimal inputQuantityWithRatio = input.Value * itemOutputRatio;
+        //                if (targetItem.Dependencies.Any(p => p.Key == input.Key))
+        //                {
+        //                    KeyValuePair<string, decimal>? currentInputMatch = targetItem.Dependencies.FirstOrDefault(p => p.Key == input.Key);
+        //                    if (currentInputMatch != null)
+        //                    {
+        //                        decimal value = ((KeyValuePair<string, decimal>)currentInputMatch).Value;
+        //                        currentInputMatch = new KeyValuePair<string, decimal>(input.Key, value + targetItem.Quantity);
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    targetItem.Dependencies.Add(input.Key, inputQuantityWithRatio);
+        //                }
+        //                ProductionItem newProductionItem = new(inputItem, inputQuantityWithRatio)
+        //                {
+        //                    BuildingQuantityRequired = itemOutputRatio
+        //                };
+        //                ProcessOutputItem(newProductionItem);
+        //            }
+        //        }
+        //        //If this item already exists in the production list, update the quantity for it
+        //        if (currentItemMatch != null)
+        //        {
+        //            foreach (KeyValuePair<string, decimal> dependency in targetItem.Dependencies)
+        //            {
+        //                if (currentItemMatch.Dependencies.ContainsKey(dependency.Key))
+        //                {
+        //                    currentItemMatch.Dependencies[dependency.Key] += dependency.Value;
+        //                }
+        //                else
+        //                {
+        //                    currentItemMatch.Dependencies.Add(dependency.Key, dependency.Value);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return true;
+        //}
+
+        ////Find an item by name
+        //public Item? FindItem(string itemName)
+        //{
+        //    Item? result = null;
+        //    if (Items != null && Items.Count > 0)
+        //    {
+        //        foreach (Item item in Items)
+        //        {
+        //            if (item.Name == itemName)
+        //            {
+        //                result = item;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return result;
+        //}
+
+        ////Find a building by name
+        //public Building? FindBuilding(string buildingName)
+        //{
+        //    Building? result = null;
+        //    if (Buildings != null && Buildings.Count > 0)
+        //    {
+        //        foreach (Building item in Buildings)
+        //        {
+        //            if (item.Name == buildingName)
+        //            {
+        //                result = item;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return result;
+        //}
 
         //Create the mermaid string for the production plan
         public string ToMermaidString(bool includeImages = false)

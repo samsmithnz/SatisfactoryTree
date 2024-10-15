@@ -38,13 +38,13 @@ namespace SatisfactoryTree.Web.Controllers
             //Item productionItem = ItemPoolTier3.ReinforcedIronPlate();
             //decimal productionQuantity = 5M;
 
-            ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, productionQuantity));
-            if (productionCalculation != null)
-            {
-                string graph3 = satisfactoryProduction.ToMermaidString(true);
-                //Debug.WriteLine(graph3);
-                return View(model: graph3);
-            }
+            //ProductionCalculation productionCalculation = satisfactoryProduction.BuildProductionPlan(new ProductionItem(productionItem, productionQuantity));
+            //if (productionCalculation != null)
+            //{
+            //    string graph3 = satisfactoryProduction.ToMermaidString(true);
+            //    //Debug.WriteLine(graph3);
+            //    return View(model: graph3);
+            //}
 
             string graph2 = @"flowchart LR
     miner1[""<div align=center><span style='min-width: 100px; display: block;'><img src=https://localhost:7015/Images/Buildings/MinerMk1_256.png style=max-width:100px alt=""Miner Mk1""></span><br>x1 Miner Mk1<br>(Iron Ore)</div>""] --""Iron Ore<br>(60 units/min)""--> Smelter1

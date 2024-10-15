@@ -129,6 +129,8 @@ namespace SatisfactoryTree.ContentExtractor
             return true;
         }
 
+
+
         private static int GetStackSizeQuantity(string stackSize)
         {
             if (stackSize == "SS_HUGE")
@@ -156,6 +158,6 @@ namespace SatisfactoryTree.ContentExtractor
                 return -1;
             }
         }
-}
+    }
 
 }
