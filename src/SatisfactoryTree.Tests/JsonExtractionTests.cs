@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
-using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SatisfactoryTree.ContentExtractor;
 using SatisfactoryTree.Models;
+using System.Diagnostics;
 
 namespace SatisfactoryTree.Tests
 {

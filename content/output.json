@@ -1,6 +1,123 @@
 {
   "Items": [
     {
+      "ClassName": "Desc_OreIron_C",
+      "DisplayName": "Iron Ore",
+      "Description": "Used for crafting.\r\nThe most essential basic resource.",
+      "StackSize": 100,
+      "PingColor": "(R=0.460000,G=0.291200,B=0.242434,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "1"
+    },
+    {
+      "ClassName": "Desc_Coal_C",
+      "DisplayName": "Coal",
+      "Description": "Mainly used as fuel for vehicles & Coal-Powered Generators, or in Steel production.",
+      "StackSize": 100,
+      "PingColor": "(R=0.048172,G=0.048172,B=0.048172,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "3"
+    },
+    {
+      "ClassName": "Desc_Water_C",
+      "DisplayName": "Water",
+      "Description": "It's water.",
+      "StackSize": 0,
+      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=0.000000)",
+      "FluidColor": "(B=212,G=176,R=122,A=0)",
+      "ResourceSinkPoints": "5"
+    },
+    {
+      "ClassName": "Desc_NitrogenGas_C",
+      "DisplayName": "Nitrogen Gas",
+      "Description": "Has a variety of uses, including metallurgy, cooling, and Nitric Acid production. On MASSAGE-2 (AB)b, it can be extracted from underground gas wells.",
+      "StackSize": 0,
+      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)",
+      "FluidColor": "(B=89,G=89,R=89,A=0)",
+      "ResourceSinkPoints": "10"
+    },
+    {
+      "ClassName": "Desc_Sulfur_C",
+      "DisplayName": "Sulfur",
+      "Description": "Primarily used to produce Black Powder.",
+      "StackSize": 100,
+      "PingColor": "(R=1.000000,G=0.956156,B=0.260000,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "11"
+    },
+    {
+      "ClassName": "Desc_SAM_C",
+      "DisplayName": "SAM",
+      "Description": "Strange Alien Matter, commonly referred to as SAM, doesn't seem to follow the known laws of physics. It whispers of new possibilities.",
+      "StackSize": 100,
+      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=0.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "20"
+    },
+    {
+      "ClassName": "Desc_OreBauxite_C",
+      "DisplayName": "Bauxite",
+      "Description": "Used to produce Alumina, which can be further refined into the Aluminum Scrap required to produce Aluminum Ingots.",
+      "StackSize": 100,
+      "PingColor": "(R=1.000000,G=0.000000,B=0.000000,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "8"
+    },
+    {
+      "ClassName": "Desc_OreGold_C",
+      "DisplayName": "Caterium Ore",
+      "Description": "Smelted into Caterium Ingots, which are primarily used for advanced electronics.",
+      "StackSize": 100,
+      "PingColor": "(R=1.000000,G=0.622325,B=0.000000,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "7"
+    },
+    {
+      "ClassName": "Desc_OreCopper_C",
+      "DisplayName": "Copper Ore",
+      "Description": "Used for crafting.\r\nA basic resource primarily used for electricity.",
+      "StackSize": 100,
+      "PingColor": "(R=0.050000,G=0.500000,B=0.150000,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "3"
+    },
+    {
+      "ClassName": "Desc_RawQuartz_C",
+      "DisplayName": "Raw Quartz",
+      "Description": "Can be processed into Quartz Crystals and Silica, which both offer a variety of applications.",
+      "StackSize": 100,
+      "PingColor": "(R=0.983632,G=1.000000,B=0.765000,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "15"
+    },
+    {
+      "ClassName": "Desc_Stone_C",
+      "DisplayName": "Limestone",
+      "Description": "Used for crafting.\r\nA basic resource primarily used for stable Foundations.",
+      "StackSize": 100,
+      "PingColor": "(R=0.241195,G=0.318507,B=0.415000,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "2"
+    },
+    {
+      "ClassName": "Desc_OreUranium_C",
+      "DisplayName": "Uranium",
+      "Description": "A radioactive element. \r\nUsed to produce Encased Uranium Cells for Uranium Fuel Rods.\r\n\r\nCaution: Moderately Radioactive.",
+      "StackSize": 100,
+      "PingColor": "(R=0.000000,G=1.000000,B=0.040609,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "35"
+    },
+    {
+      "ClassName": "Desc_LiquidOil_C",
+      "DisplayName": "Crude Oil",
+      "Description": "Refined into all kinds of Oil-based resources, like Fuel and Plastic.",
+      "StackSize": 0,
+      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)",
+      "FluidColor": "(B=25,G=0,R=25,A=0)",
+      "ResourceSinkPoints": "30"
+    },
+    {
       "ClassName": "Desc_Cement_C",
       "DisplayName": "Concrete",
       "Description": "Used for building.\r\nGood for stable Foundations.",
@@ -910,114 +1027,6 @@
       "ResourceSinkPoints": "120"
     },
     {
-      "ClassName": "Desc_OreIron_C",
-      "DisplayName": "Iron Ore",
-      "Description": "Used for crafting.\r\nThe most essential basic resource.",
-      "StackSize": 100,
-      "PingColor": "(R=0.460000,G=0.291200,B=0.242434,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "1"
-    },
-    {
-      "ClassName": "Desc_Coal_C",
-      "DisplayName": "Coal",
-      "Description": "Mainly used as fuel for vehicles & Coal-Powered Generators, or in Steel production.",
-      "StackSize": 100,
-      "PingColor": "(R=0.048172,G=0.048172,B=0.048172,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "3"
-    },
-    {
-      "ClassName": "Desc_Water_C",
-      "DisplayName": "Water",
-      "Description": "It's water.",
-      "StackSize": 0,
-      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=0.000000)",
-      "FluidColor": "(B=212,G=176,R=122,A=0)",
-      "ResourceSinkPoints": "5"
-    },
-    {
-      "ClassName": "Desc_NitrogenGas_C",
-      "DisplayName": "Nitrogen Gas",
-      "Description": "Has a variety of uses, including metallurgy, cooling, and Nitric Acid production. On MASSAGE-2 (AB)b, it can be extracted from underground gas wells.",
-      "StackSize": 0,
-      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)",
-      "FluidColor": "(B=89,G=89,R=89,A=0)",
-      "ResourceSinkPoints": "10"
-    },
-    {
-      "ClassName": "Desc_Sulfur_C",
-      "DisplayName": "Sulfur",
-      "Description": "Primarily used to produce Black Powder.",
-      "StackSize": 100,
-      "PingColor": "(R=1.000000,G=0.956156,B=0.260000,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "11"
-    },
-    {
-      "ClassName": "Desc_OreBauxite_C",
-      "DisplayName": "Bauxite",
-      "Description": "Used to produce Alumina, which can be further refined into the Aluminum Scrap required to produce Aluminum Ingots.",
-      "StackSize": 100,
-      "PingColor": "(R=1.000000,G=0.000000,B=0.000000,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "8"
-    },
-    {
-      "ClassName": "Desc_OreGold_C",
-      "DisplayName": "Caterium Ore",
-      "Description": "Smelted into Caterium Ingots, which are primarily used for advanced electronics.",
-      "StackSize": 100,
-      "PingColor": "(R=1.000000,G=0.622325,B=0.000000,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "7"
-    },
-    {
-      "ClassName": "Desc_OreCopper_C",
-      "DisplayName": "Copper Ore",
-      "Description": "Used for crafting.\r\nA basic resource primarily used for electricity.",
-      "StackSize": 100,
-      "PingColor": "(R=0.050000,G=0.500000,B=0.150000,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "3"
-    },
-    {
-      "ClassName": "Desc_RawQuartz_C",
-      "DisplayName": "Raw Quartz",
-      "Description": "Can be processed into Quartz Crystals and Silica, which both offer a variety of applications.",
-      "StackSize": 100,
-      "PingColor": "(R=0.983632,G=1.000000,B=0.765000,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "15"
-    },
-    {
-      "ClassName": "Desc_Stone_C",
-      "DisplayName": "Limestone",
-      "Description": "Used for crafting.\r\nA basic resource primarily used for stable Foundations.",
-      "StackSize": 100,
-      "PingColor": "(R=0.241195,G=0.318507,B=0.415000,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "2"
-    },
-    {
-      "ClassName": "Desc_OreUranium_C",
-      "DisplayName": "Uranium",
-      "Description": "A radioactive element. \r\nUsed to produce Encased Uranium Cells for Uranium Fuel Rods.\r\n\r\nCaution: Moderately Radioactive.",
-      "StackSize": 100,
-      "PingColor": "(R=0.000000,G=1.000000,B=0.040609,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "35"
-    },
-    {
-      "ClassName": "Desc_LiquidOil_C",
-      "DisplayName": "Crude Oil",
-      "Description": "Refined into all kinds of Oil-based resources, like Fuel and Plastic.",
-      "StackSize": 0,
-      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)",
-      "FluidColor": "(B=25,G=0,R=25,A=0)",
-      "ResourceSinkPoints": "30"
-    },
-    {
       "ClassName": "Desc_Biofuel_C",
       "DisplayName": "Solid Biofuel",
       "Description": "The most energy-efficient form of solid Biomass. Can be used as fuel for the Chainsaw.",
@@ -1123,7 +1132,7 @@
       "DisplayName": "Iron Plate",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1132,7 +1141,7 @@
       "DisplayName": "Iron Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1141,7 +1150,7 @@
       "DisplayName": "Iron Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1195,7 +1204,7 @@
       "DisplayName": "Alternate: Nitro Rocket Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 2.400000,
       "IsAlternateRecipe": true
     },
@@ -1204,7 +1213,7 @@
       "DisplayName": "Rocket Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1213,7 +1222,7 @@
       "DisplayName": "Packaged Rocket Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -1222,7 +1231,7 @@
       "DisplayName": "Unpackage Rocket Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -1231,7 +1240,7 @@
       "DisplayName": "Alternate: Dark-Ion Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -1240,7 +1249,7 @@
       "DisplayName": "Dark Matter Residue",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1249,7 +1258,7 @@
       "DisplayName": "Dark Matter Crystal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1258,7 +1267,7 @@
       "DisplayName": "Superposition Oscillator",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")",
+      "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -1267,7 +1276,7 @@
       "DisplayName": "Neural-Quantum Processor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")",
+      "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": false
     },
@@ -1276,7 +1285,7 @@
       "DisplayName": "AI Expansion Server",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")",
+      "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": false
     },
@@ -1285,7 +1294,7 @@
       "DisplayName": "Ionized Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -1294,7 +1303,7 @@
       "DisplayName": "Packaged Ionized Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -1303,7 +1312,7 @@
       "DisplayName": "Unpackage Ionized Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -1312,7 +1321,7 @@
       "DisplayName": "Alternate: Turbo Diamonds",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -1321,7 +1330,7 @@
       "DisplayName": "SAM Fluctuator",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1330,7 +1339,7 @@
       "DisplayName": "Ficsite Trigon",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1339,7 +1348,7 @@
       "DisplayName": "Ficsite Ingot (Iron)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1348,7 +1357,7 @@
       "DisplayName": "Time Crystal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": false
     },
@@ -1357,7 +1366,7 @@
       "DisplayName": "Diamonds",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1366,7 +1375,7 @@
       "DisplayName": "Reanimated SAM",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1375,7 +1384,7 @@
       "DisplayName": "Biochemical Sculptor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
     },
@@ -1384,7 +1393,7 @@
       "DisplayName": "Ficsite Ingot (Aluminum)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1393,7 +1402,7 @@
       "DisplayName": "Ficsite Ingot (Caterium)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1402,7 +1411,7 @@
       "DisplayName": "Bauxite (Caterium)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1411,7 +1420,7 @@
       "DisplayName": "Bauxite (Copper)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1420,7 +1429,7 @@
       "DisplayName": "Caterium Ore (Copper)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1429,7 +1438,7 @@
       "DisplayName": "Caterium Ore (Quartz)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1438,7 +1447,7 @@
       "DisplayName": "Coal (Iron)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1447,7 +1456,7 @@
       "DisplayName": "Coal (Limestone)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1456,7 +1465,7 @@
       "DisplayName": "Copper Ore (Quartz)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1465,7 +1474,7 @@
       "DisplayName": "Copper Ore (Sulfur)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1474,7 +1483,7 @@
       "DisplayName": "Iron Ore (Limestone)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1483,7 +1492,7 @@
       "DisplayName": "Limestone (Sulfur)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1492,7 +1501,7 @@
       "DisplayName": "Nitrogen Gas (Bauxite)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1501,7 +1510,7 @@
       "DisplayName": "Nitrogen Gas (Caterium)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1510,7 +1519,7 @@
       "DisplayName": "Raw Quartz (Bauxite)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1519,7 +1528,7 @@
       "DisplayName": "Raw Quartz (Coal)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1528,7 +1537,7 @@
       "DisplayName": "Sulfur (Coal)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1537,7 +1546,7 @@
       "DisplayName": "Sulfur (Iron)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1546,7 +1555,7 @@
       "DisplayName": "Uranium Ore (Bauxite)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1555,7 +1564,7 @@
       "DisplayName": "Turbofuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -1564,7 +1573,7 @@
       "DisplayName": "Packaged Turbofuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1573,7 +1582,7 @@
       "DisplayName": "Unpackage Turbofuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1582,7 +1591,7 @@
       "DisplayName": "Alternate: Charcoal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
     },
@@ -1591,7 +1600,7 @@
       "DisplayName": "Alternate: Biocoal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -1600,7 +1609,7 @@
       "DisplayName": "Alternate: Compacted Coal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -1609,7 +1618,7 @@
       "DisplayName": "Circuit Board",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
     },
@@ -1618,7 +1627,7 @@
       "DisplayName": "Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1627,7 +1636,7 @@
       "DisplayName": "Petroleum Coke",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1636,7 +1645,7 @@
       "DisplayName": "Plastic",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1645,7 +1654,7 @@
       "DisplayName": "Rubber",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1654,7 +1663,7 @@
       "DisplayName": "Residual Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1663,7 +1672,7 @@
       "DisplayName": "Residual Plastic",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1672,7 +1681,7 @@
       "DisplayName": "Residual Rubber",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1681,7 +1690,7 @@
       "DisplayName": "Alternate: Pink Diamonds",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")",
+      "ProducedIn": "Converter",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
     },
@@ -1690,7 +1699,7 @@
       "DisplayName": "Alternate: Petroleum Diamonds",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
     },
@@ -1699,7 +1708,7 @@
       "DisplayName": "Alternate: Oil-Based Diamonds",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -1708,7 +1717,7 @@
       "DisplayName": "Alternate: Cloudy Diamonds",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -1717,7 +1726,7 @@
       "DisplayName": "Alternate: Dark Matter Trap",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
     },
@@ -1726,7 +1735,7 @@
       "DisplayName": "Alternate: Dark Matter Crystallization",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -1735,7 +1744,7 @@
       "DisplayName": "Alternate: Wet Concrete",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -1744,7 +1753,7 @@
       "DisplayName": "Alternate: Turbo Heavy Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -1753,7 +1762,7 @@
       "DisplayName": "Alternate: Steel Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": true
     },
@@ -1762,7 +1771,7 @@
       "DisplayName": "Steel Beam",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1771,7 +1780,7 @@
       "DisplayName": "Steel Pipe",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1780,7 +1789,7 @@
       "DisplayName": "Steel Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1789,7 +1798,7 @@
       "DisplayName": "Versatile Framework",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -1798,7 +1807,7 @@
       "DisplayName": "Alternate: Steel Canister",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -1807,7 +1816,7 @@
       "DisplayName": "Empty Canister",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1816,7 +1825,7 @@
       "DisplayName": "Packaged Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -1825,7 +1834,7 @@
       "DisplayName": "Liquid Biofuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1834,7 +1843,7 @@
       "DisplayName": "Packaged Liquid Biofuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -1843,7 +1852,7 @@
       "DisplayName": "Packaged Oil",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1852,7 +1861,7 @@
       "DisplayName": "Packaged Heavy Oil Residue",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -1861,7 +1870,7 @@
       "DisplayName": "Packaged Water",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1870,7 +1879,7 @@
       "DisplayName": "Unpackage Liquid Biofuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1879,7 +1888,7 @@
       "DisplayName": "Unpackage Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1888,7 +1897,7 @@
       "DisplayName": "Unpackage Oil",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1897,7 +1906,7 @@
       "DisplayName": "Unpackage Heavy Oil Residue",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -1906,7 +1915,7 @@
       "DisplayName": "Unpackage Water",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -1915,7 +1924,7 @@
       "DisplayName": "Alternate: Steamed Copper Sheet",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -1924,7 +1933,7 @@
       "DisplayName": "Alternate: Rubber Concrete",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -1933,7 +1942,7 @@
       "DisplayName": "Alternate: Recycled Rubber",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -1942,7 +1951,7 @@
       "DisplayName": "Alternate: Pure Quartz Crystal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -1951,7 +1960,7 @@
       "DisplayName": "Quartz Crystal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
     },
@@ -1960,7 +1969,7 @@
       "DisplayName": "Alternate: Pure Iron Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -1969,7 +1978,7 @@
       "DisplayName": "Alternate: Pure Copper Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -1978,7 +1987,7 @@
       "DisplayName": "Alternate: Pure Caterium Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": true
     },
@@ -1987,7 +1996,7 @@
       "DisplayName": "Alternate: Pure Aluminum Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C\")",
+      "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -1996,7 +2005,7 @@
       "DisplayName": "Aluminum Casing",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -2005,7 +2014,7 @@
       "DisplayName": "Alclad Aluminum Sheet",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -2014,7 +2023,7 @@
       "DisplayName": "Alumina Solution",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -2023,7 +2032,7 @@
       "DisplayName": "Aluminum Scrap",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -2032,7 +2041,7 @@
       "DisplayName": "Packaged Alumina Solution",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -2041,7 +2050,7 @@
       "DisplayName": "Aluminum Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -2050,7 +2059,7 @@
       "DisplayName": "Silica",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
     },
@@ -2059,7 +2068,7 @@
       "DisplayName": "Crystal Oscillator",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
     },
@@ -2068,7 +2077,7 @@
       "DisplayName": "Unpackage Alumina Solution",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -2077,7 +2086,7 @@
       "DisplayName": "Alternate: Polymer Resin",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2086,7 +2095,7 @@
       "DisplayName": "Alternate: Plastic Smart Plating",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -2095,7 +2104,7 @@
       "DisplayName": "Alternate: Automated Speed Wiring",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
     },
@@ -2104,7 +2113,7 @@
       "DisplayName": "Encased Industrial Beam",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": false
     },
@@ -2113,7 +2122,7 @@
       "DisplayName": "Motor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -2122,7 +2131,7 @@
       "DisplayName": "Stator",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -2131,7 +2140,7 @@
       "DisplayName": "Automated Wiring",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -2140,7 +2149,7 @@
       "DisplayName": "AI Limiter",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -2149,7 +2158,7 @@
       "DisplayName": "Alternate: Heavy Oil Residue",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2158,7 +2167,7 @@
       "DisplayName": "Alternate: Heavy Flexible Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -2167,7 +2176,7 @@
       "DisplayName": "Computer",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -2176,7 +2185,7 @@
       "DisplayName": "Heavy Modular Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 30.000000,
       "IsAlternateRecipe": false
     },
@@ -2185,7 +2194,7 @@
       "DisplayName": "Modular Engine",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
     },
@@ -2194,7 +2203,7 @@
       "DisplayName": "Adaptive Control Unit",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
     },
@@ -2203,7 +2212,7 @@
       "DisplayName": "Alternate: Fused Wire",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
     },
@@ -2212,7 +2221,7 @@
       "DisplayName": "Alternate: Flexible Framework",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -2221,7 +2230,7 @@
       "DisplayName": "Alternate: Electrode Circuit Board",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2230,7 +2239,7 @@
       "DisplayName": "Alternate: Electrode Aluminum Scrap",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
     },
@@ -2239,7 +2248,7 @@
       "DisplayName": "Alternate: Diluted Packaged Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
     },
@@ -2248,7 +2257,7 @@
       "DisplayName": "Alternate: Copper Rotor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -2257,7 +2266,7 @@
       "DisplayName": "Modular Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
     },
@@ -2266,7 +2275,7 @@
       "DisplayName": "Rotor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": false
     },
@@ -2275,7 +2284,7 @@
       "DisplayName": "Copper Sheet",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -2284,7 +2293,7 @@
       "DisplayName": "Smart Plating",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 30.000000,
       "IsAlternateRecipe": false
     },
@@ -2293,7 +2302,7 @@
       "DisplayName": "Alternate: Copper Alloy Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2302,7 +2311,7 @@
       "DisplayName": "Alternate: Coke Steel Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2311,7 +2320,7 @@
       "DisplayName": "Alternate: Coated Iron Plate",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2320,7 +2329,7 @@
       "DisplayName": "Alternate: Coated Iron Canister",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
     },
@@ -2329,7 +2338,7 @@
       "DisplayName": "Alternate: Coated Cable",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2338,7 +2347,7 @@
       "DisplayName": "Alternate: Bolted Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -2347,7 +2356,7 @@
       "DisplayName": "Alternate: Adhered Iron Plate",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -2356,7 +2365,7 @@
       "DisplayName": "Alternate: Turbo Pressure Motor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
     },
@@ -2365,7 +2374,7 @@
       "DisplayName": "Encased Plutonium Cell",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -2374,7 +2383,7 @@
       "DisplayName": "Pressure Conversion Cube",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
     },
@@ -2383,7 +2392,7 @@
       "DisplayName": "Nitric Acid",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -2392,7 +2401,7 @@
       "DisplayName": "Non-Fissile Uranium",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -2401,7 +2410,7 @@
       "DisplayName": "Copper Powder",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -2410,7 +2419,7 @@
       "DisplayName": "Plutonium Pellet",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
     },
@@ -2419,7 +2428,7 @@
       "DisplayName": "Plutonium Fuel Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 240.000000,
       "IsAlternateRecipe": false
     },
@@ -2428,7 +2437,7 @@
       "DisplayName": "Packaged Nitric Acid",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -2437,7 +2446,7 @@
       "DisplayName": "Nuclear Pasta",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
     },
@@ -2446,7 +2455,7 @@
       "DisplayName": "Unpackage Nitric Acid",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -2455,7 +2464,7 @@
       "DisplayName": "Alternate: Turbo Blend Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2464,7 +2473,7 @@
       "DisplayName": "Encased Uranium Cell",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -2473,7 +2482,7 @@
       "DisplayName": "Cooling System",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": false
     },
@@ -2482,7 +2491,7 @@
       "DisplayName": "Battery",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -2491,7 +2500,7 @@
       "DisplayName": "Supercomputer",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": false
     },
@@ -2500,7 +2509,7 @@
       "DisplayName": "Radio Control Unit",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 48.000000,
       "IsAlternateRecipe": false
     },
@@ -2509,7 +2518,7 @@
       "DisplayName": "Sulfuric Acid",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -2518,7 +2527,7 @@
       "DisplayName": "Packaged Sulfuric Acid",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -2527,7 +2536,7 @@
       "DisplayName": "Assembly Director System",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 80.000000,
       "IsAlternateRecipe": false
     },
@@ -2536,7 +2545,7 @@
       "DisplayName": "High-Speed Connector",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": false
     },
@@ -2545,7 +2554,7 @@
       "DisplayName": "Unpackage Sulfuric Acid",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -2554,7 +2563,7 @@
       "DisplayName": "Alternate: Super-State Computer",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 25.000000,
       "IsAlternateRecipe": true
     },
@@ -2563,7 +2572,7 @@
       "DisplayName": "Electromagnetic Control Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 30.000000,
       "IsAlternateRecipe": false
     },
@@ -2572,7 +2581,7 @@
       "DisplayName": "Uranium Fuel Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 150.000000,
       "IsAlternateRecipe": false
     },
@@ -2581,7 +2590,7 @@
       "DisplayName": "Magnetic Field Generator",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
     },
@@ -2590,7 +2599,7 @@
       "DisplayName": "Alternate: Sloppy Alumina",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -2599,7 +2608,7 @@
       "DisplayName": "Alternate: Radio Control System",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 40.000000,
       "IsAlternateRecipe": true
     },
@@ -2608,7 +2617,7 @@
       "DisplayName": "Alternate: Plutonium Fuel Unit",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": true
     },
@@ -2617,7 +2626,7 @@
       "DisplayName": "Alternate: OC Supercomputer",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
     },
@@ -2626,7 +2635,7 @@
       "DisplayName": "Heat Sink",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
     },
@@ -2635,7 +2644,7 @@
       "DisplayName": "Fused Modular Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 40.000000,
       "IsAlternateRecipe": false
     },
@@ -2644,7 +2653,7 @@
       "DisplayName": "Empty Fluid Tank",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -2653,7 +2662,7 @@
       "DisplayName": "Packaged Nitrogen Gas",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -2662,7 +2671,7 @@
       "DisplayName": "Unpackage Nitrogen Gas",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+      "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
     },
@@ -2671,7 +2680,7 @@
       "DisplayName": "Alternate: Instant Scrap",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2680,7 +2689,7 @@
       "DisplayName": "Alternate: Instant Plutonium Cell",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": true
     },
@@ -2689,7 +2698,7 @@
       "DisplayName": "Alternate: Heat-Fused Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
     },
@@ -2698,7 +2707,7 @@
       "DisplayName": "Alternate: Fertile Uranium",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2707,7 +2716,7 @@
       "DisplayName": "Alternate: Electric Motor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -2716,7 +2725,7 @@
       "DisplayName": "Alternate: Diluted Fuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2725,7 +2734,7 @@
       "DisplayName": "Alternate: Cooling Device",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -2734,7 +2743,7 @@
       "DisplayName": "Alternate: Classic Battery",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2743,7 +2752,7 @@
       "DisplayName": "Alternate: Automated Miner",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": true
     },
@@ -2752,7 +2761,7 @@
       "DisplayName": "Alternate: Alclad Casing",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2761,7 +2770,7 @@
       "DisplayName": "Alternate: Molded Steel Pipe",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2770,7 +2779,7 @@
       "DisplayName": "Alternate: Iron Pipe",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2779,7 +2788,7 @@
       "DisplayName": "Alternate: Steel Cast Plate",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
     },
@@ -2788,7 +2797,7 @@
       "DisplayName": "Alternate: Molded Beam",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2797,7 +2806,7 @@
       "DisplayName": "Alternate: Aluminum Beam",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2806,7 +2815,7 @@
       "DisplayName": "Alternate: Aluminum Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2815,7 +2824,7 @@
       "DisplayName": "Alternate: Plastic AI Limiter",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
     },
@@ -2824,7 +2833,7 @@
       "DisplayName": "Alternate: Distilled Silica",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2833,7 +2842,7 @@
       "DisplayName": "Alternate: Quartz Purification",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2842,7 +2851,7 @@
       "DisplayName": "Alternate: Fused Quartz Crystal",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
     },
@@ -2851,7 +2860,7 @@
       "DisplayName": "Alternate: Leached Iron ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -2860,7 +2869,7 @@
       "DisplayName": "Alternate: Basic Iron Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2869,7 +2878,7 @@
       "DisplayName": "Alternate: Tempered Copper Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2878,7 +2887,7 @@
       "DisplayName": "Alternate: Leached Copper Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2887,7 +2896,7 @@
       "DisplayName": "Alternate: Tempered Caterium Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2896,7 +2905,7 @@
       "DisplayName": "Alternate: Leached Caterium Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": true
     },
@@ -2905,7 +2914,7 @@
       "DisplayName": "Alternate: Caterium Wire",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
     },
@@ -2914,7 +2923,7 @@
       "DisplayName": "Alternate: Iron Wire",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -2923,7 +2932,7 @@
       "DisplayName": "Alternate: Infused Uranium Cell",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2932,7 +2941,7 @@
       "DisplayName": "Caterium Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\")",
+      "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -2941,7 +2950,7 @@
       "DisplayName": "Alternate: Turbo Electric Motor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 64.000000,
       "IsAlternateRecipe": true
     },
@@ -2950,7 +2959,7 @@
       "DisplayName": "Turbo Motor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": false
     },
@@ -2959,7 +2968,7 @@
       "DisplayName": "Thermal Propulsion Rocket",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
     },
@@ -2968,7 +2977,7 @@
       "DisplayName": "Alternate: Quickwire Stator",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
     },
@@ -2977,7 +2986,7 @@
       "DisplayName": "Alternate: Cheap Silica",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -2986,7 +2995,7 @@
       "DisplayName": "Alternate: Steel Screw",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -2995,7 +3004,7 @@
       "DisplayName": "Alternate: Cast Screw",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -3004,7 +3013,7 @@
       "DisplayName": "Alternate: Steel Rotor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -3013,7 +3022,7 @@
       "DisplayName": "Alternate: Encased Industrial Pipe",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
     },
@@ -3022,7 +3031,7 @@
       "DisplayName": "Alternate: Stitched Iron Plate",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
     },
@@ -3031,7 +3040,7 @@
       "DisplayName": "Alternate: Bolted Iron Plate",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -3040,7 +3049,7 @@
       "DisplayName": "Alternate: Radio Connection Unit",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -3049,7 +3058,7 @@
       "DisplayName": "Alternate: Fused Quickwire",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -3058,7 +3067,7 @@
       "DisplayName": "Alternate: Recycled Plastic",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -3067,7 +3076,7 @@
       "DisplayName": "Alternate: Uranium Fuel Unit",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 300.000000,
       "IsAlternateRecipe": true
     },
@@ -3076,7 +3085,7 @@
       "DisplayName": "Alternate: Rigor Motor",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 48.000000,
       "IsAlternateRecipe": true
     },
@@ -3085,7 +3094,7 @@
       "DisplayName": "Alternate: Steeled Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": true
     },
@@ -3094,7 +3103,7 @@
       "DisplayName": "Alternate: Compacted Steel Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -3103,7 +3112,7 @@
       "DisplayName": "Alternate: Solid Steel Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
     },
@@ -3112,7 +3121,7 @@
       "DisplayName": "Alternate: Iron Alloy Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")",
+      "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -3121,7 +3130,7 @@
       "DisplayName": "Alternate: Silicon High-Speed Connector",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 40.000000,
       "IsAlternateRecipe": true
     },
@@ -3130,7 +3139,7 @@
       "DisplayName": "Alternate: Heavy Encased Frame",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 64.000000,
       "IsAlternateRecipe": true
     },
@@ -3139,7 +3148,7 @@
       "DisplayName": "Alternate: Heat Exchanger",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
     },
@@ -3148,7 +3157,7 @@
       "DisplayName": "Alternate: Fine Black Powder",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
     },
@@ -3157,7 +3166,7 @@
       "DisplayName": "Alternate: Electromagnetic Connection Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
     },
@@ -3166,7 +3175,7 @@
       "DisplayName": "Alternate: Insulated Crystal Oscillator",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
     },
@@ -3175,7 +3184,7 @@
       "DisplayName": "Alternate: Fine Concrete",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -3184,7 +3193,7 @@
       "DisplayName": "Alternate: Crystal Computer",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 36.000000,
       "IsAlternateRecipe": true
     },
@@ -3193,7 +3202,7 @@
       "DisplayName": "Alternate: Caterium Computer",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
     },
@@ -3202,7 +3211,7 @@
       "DisplayName": "Alternate: Caterium Circuit Board",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 48.000000,
       "IsAlternateRecipe": true
     },
@@ -3211,7 +3220,7 @@
       "DisplayName": "Alternate: Silicon Circuit Board",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -3220,7 +3229,7 @@
       "DisplayName": "Alternate: Quickwire Cable",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
     },
@@ -3229,7 +3238,7 @@
       "DisplayName": "Alternate: Insulated Cable",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
     },
@@ -3238,7 +3247,7 @@
       "DisplayName": "Ficsonium",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")",
+      "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -3247,7 +3256,7 @@
       "DisplayName": "Ficsonium Fuel Rod",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")",
+      "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -3256,7 +3265,7 @@
       "DisplayName": "Singularity Cell",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
     },
@@ -3265,7 +3274,7 @@
       "DisplayName": "Ballistic Warp Drive",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")",
+      "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
     },
@@ -3274,7 +3283,7 @@
       "DisplayName": "Quickwire",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": false
     },
@@ -3283,7 +3292,7 @@
       "DisplayName": "Solid Biofuel",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -3292,7 +3301,7 @@
       "DisplayName": "Hog Protein",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -3301,7 +3310,7 @@
       "DisplayName": "Spitter Protein",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -3310,7 +3319,7 @@
       "DisplayName": "Biomass (Mycelia)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -3319,7 +3328,7 @@
       "DisplayName": "Power Shard (1)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
     },
@@ -3328,7 +3337,7 @@
       "DisplayName": "Alien Power Matrix",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")",
+      "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -3337,7 +3346,7 @@
       "DisplayName": "Stinger Protein",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -3346,7 +3355,7 @@
       "DisplayName": "Hatcher Protein",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
     },
@@ -3355,7 +3364,7 @@
       "DisplayName": "Alien DNA Capsule",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -3364,7 +3373,7 @@
       "DisplayName": "Biomass (Alien Protein)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -3373,7 +3382,7 @@
       "DisplayName": "Alternate: Polyester Fabric",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
     },
@@ -3382,7 +3391,7 @@
       "DisplayName": "Fabric",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -3391,7 +3400,7 @@
       "DisplayName": "Synthetic Power Shard",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")",
+      "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -3400,7 +3409,7 @@
       "DisplayName": "Power Shard (5)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
@@ -3409,7 +3418,7 @@
       "DisplayName": "Power Shard (2)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -3418,7 +3427,7 @@
       "DisplayName": "Turbo Rifle Ammo",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")",
+      "ProducedIn": "Blender",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -3427,7 +3436,7 @@
       "DisplayName": "Smokeless Powder",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")",
+      "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -3445,7 +3454,7 @@
       "DisplayName": "Biomass (Leaves)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": false
     },
@@ -3454,7 +3463,7 @@
       "DisplayName": "Biomass (Wood)",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -3463,7 +3472,7 @@
       "DisplayName": "Reinforced Iron Plate",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
     },
@@ -3472,7 +3481,7 @@
       "DisplayName": "Concrete",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -3481,7 +3490,7 @@
       "DisplayName": "Screw",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
     },
@@ -3490,7 +3499,7 @@
       "DisplayName": "Cable",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     },
@@ -3499,7 +3508,7 @@
       "DisplayName": "Wire",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
     },
@@ -3508,7 +3517,7 @@
       "DisplayName": "Copper Ingot",
       "Ingredients": null,
       "Products": null,
-      "ProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C\",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\")",
+      "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
     }

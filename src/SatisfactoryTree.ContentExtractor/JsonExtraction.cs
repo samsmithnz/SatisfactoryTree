@@ -47,17 +47,27 @@ namespace SatisfactoryTree.ContentExtractor
             // Process the content into an object list
             NewContent processedResult = new();
             List<RawItem> rawItems = new();
+            List<string> itemList = new();
+            List<NewItem> items = new();
             foreach (RawNativeClass nativeClass in rawJSONDoc)
             {
-                if (nativeClass != null && nativeClass.Classes != null)
+                if (nativeClass != null && nativeClass.Classes != null &&
+                    nativeClass.NativeClassName == "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'")
+                {
+                    foreach (RawItem rawItem in nativeClass.Classes)
+                    {
+                        string result2 = ($"DisplayName: {rawItem.DisplayName}, ClassName: {rawItem.ClassName}, StackSize: {rawItem.StackSize}");
+                        items.Add(new NewItem(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
+                        itemList.Add(result2);
+                    }
+                }
+                else if (nativeClass != null && nativeClass.Classes != null)
                 {
                     rawItems.AddRange(nativeClass.Classes);
                 }
             }
 
             //Get all recipes that are not Christmas or BuildGun or WorkshopComponent
-            List<string> itemList = new();
-            List<NewItem> items = new();
             List<RawItem> rawRecipes = new();
             List<NewBuilding> buildings = new();
             foreach (RawItem rawItem in rawItems)
@@ -78,12 +88,12 @@ namespace SatisfactoryTree.ContentExtractor
                     producedIn = GetProcessedProducedIn(rawItem.ProducedIn);
                 }
                 if (rawItem != null && rawItem.ClassName != null &&
-                rawItem.ClassName.StartsWith("Recipe_") &&
-                !string.IsNullOrEmpty(producedIn) &&
-                !producedIn.Contains("BP_BuildGun_C") &&
-                !producedIn.Contains("FGBuildGun") &&
-                !producedIn.Contains("BP_WorkshopComponent_C") &&
-                !buildings.Contains(new(producedIn)))
+                    rawItem.ClassName.StartsWith("Recipe_") &&
+                    !string.IsNullOrEmpty(producedIn) &&
+                    !producedIn.Contains("BP_BuildGun_C") &&
+                    !producedIn.Contains("FGBuildGun") &&
+                    !producedIn.Contains("BP_WorkshopComponent_C") &&
+                    !buildings.Contains(new(producedIn)))
                 {
                     buildings.Add(new NewBuilding(producedIn));
                 }
@@ -111,6 +121,16 @@ namespace SatisfactoryTree.ContentExtractor
                             items.Add(new NewItem(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
                             itemList.Add(result2);
                         }
+                        else if (rawItem.DisplayName == "Iron Ore" ||
+                            rawItem.DisplayName == "Copper Ore" ||
+                            rawItem.DisplayName == "Coal" ||
+                            rawItem.DisplayName == "SAM" ||
+                            rawItem.DisplayName == "Cat Ore" || 
+                            rawItem.DisplayName == "AL Ore")
+                        {
+                            items.Add(new NewItem(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
+                            itemList.Add(result2);
+                        }
                     }
                 }
             }
@@ -127,7 +147,7 @@ namespace SatisfactoryTree.ContentExtractor
                     decimal manufactoringDuration = 0;
                     decimal.TryParse(recipe.ManufactoringDuration, out manufactoringDuration);
                     //recipe.Ingredients, recipe.Products
-                    processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, null, null, recipe.ProducedIn, manufactoringDuration, recipe.IsAlternateRecipe));
+                    processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, null, null, GetProcessedProducedIn(recipe.ProducedIn), manufactoringDuration, recipe.IsAlternateRecipe));
                 }
             }
             processedResult.Buildings = buildings;

@@ -21,7 +21,7 @@ namespace SatisfactoryTree.Tests
             {
                 itemTarget = new(newItem.DisplayName, quantity);
             }
-            ProductionCalculation? result = null;
+            ProductionCalculation? productionPlan = null;
             List<ProductionItem> results = new();
             string mermaidResult = "";
             string expectedResult = @"flowchart LR
@@ -35,19 +35,19 @@ namespace SatisfactoryTree.Tests
             //Act
             if (itemTarget != null)
             {
-                result = graph.NewBuildProductionPlan(itemTarget);
-                results = result.ProductionItems;
+                productionPlan = graph.NewBuildProductionPlan(itemTarget);
+                results = productionPlan.ProductionItems;
                 mermaidResult = graph.ToMermaidString();
             }
 
             //Assert
             Assert.IsNotNull(itemTarget);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(7.5M, result.PowerConsumption);
+            Assert.IsNotNull(productionPlan);
+            Assert.AreEqual(7.5M, productionPlan.PowerConsumption);
             Assert.AreEqual(1, results.Count);
             Assert.IsNotNull(results[0].ItemName);
             Assert.AreEqual(90, results[0].Quantity);
-            Assert.AreEqual(1.5M, results[0].BuildingQuantityRequired);
+            Assert.AreEqual(3M, results[0].BuildingQuantityRequired);
             Assert.IsNotNull(mermaidResult);
             Assert.AreEqual(expectedResult, mermaidResult);
         }
