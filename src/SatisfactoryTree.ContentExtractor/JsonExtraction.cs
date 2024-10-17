@@ -125,7 +125,7 @@ namespace SatisfactoryTree.ContentExtractor
                             rawItem.DisplayName == "Copper Ore" ||
                             rawItem.DisplayName == "Coal" ||
                             rawItem.DisplayName == "SAM" ||
-                            rawItem.DisplayName == "Cat Ore" || 
+                            rawItem.DisplayName == "Cat Ore" ||
                             rawItem.DisplayName == "AL Ore")
                         {
                             items.Add(new NewItem(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
@@ -146,8 +146,29 @@ namespace SatisfactoryTree.ContentExtractor
                 {
                     decimal manufactoringDuration = 0;
                     decimal.TryParse(recipe.ManufactoringDuration, out manufactoringDuration);
-                    //recipe.Ingredients, recipe.Products
-                    processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, null, null, GetProcessedProducedIn(recipe.ProducedIn), manufactoringDuration, recipe.IsAlternateRecipe));
+                    List<KeyValuePair<string?, decimal>>? ingredients = new();
+                    if (recipe.Ingredients != null)
+                    {
+                        // Remove outer parentheses
+                        string ingredientsString = recipe.Ingredients.Trim('(', ')');
+
+                        // Split by "),(" to get individual ingredient strings
+                        string[] ingredientPairs = ingredientsString.Split(new string[] { "),(" }, StringSplitOptions.None);
+
+                        foreach (string pair in ingredientPairs)
+                        {
+                            // Split by "," to get ItemClass and Amount
+                            string[] keyValue = pair.Split(',');
+
+                            string itemClass = GetTextAfterLastDot(keyValue[0].Split('=')[1].Trim('"'));
+                            string amount = keyValue[1].Split('=')[1];
+
+                            Console.WriteLine($"ItemClass: {itemClass}, Amount: {amount}");
+                            ingredients.Add(new(itemClass, decimal.Parse(amount)));
+                        }
+                    }
+                    List<KeyValuePair<string?, decimal>>? products = new();
+                    processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, ingredients, products, GetProcessedProducedIn(recipe.ProducedIn), manufactoringDuration, recipe.IsAlternateRecipe));
                 }
             }
             processedResult.Buildings = buildings;
@@ -156,6 +177,16 @@ namespace SatisfactoryTree.ContentExtractor
             SaveJSON(projectContentPath, jsonStringToSave);
 
             return processedResult;
+        }
+
+     private   static string GetTextAfterLastDot(string input)
+        {
+            int lastDotIndex = input.LastIndexOf('.');
+            if (lastDotIndex == -1)
+            {
+                return string.Empty; // or handle the case where there's no dot in the string
+            }
+            return input.Substring(lastDotIndex + 1).Trim('\'');
         }
 
         private static bool SaveJSON(string path, string jsonString)

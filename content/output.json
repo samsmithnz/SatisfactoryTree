@@ -1130,8 +1130,13 @@
     {
       "ClassName": "Recipe_IronPlate_C",
       "DisplayName": "Iron Plate",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1139,8 +1144,13 @@
     {
       "ClassName": "Recipe_IronRod_C",
       "DisplayName": "Iron Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1148,8 +1158,13 @@
     {
       "ClassName": "Recipe_IngotIron_C",
       "DisplayName": "Iron Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1157,8 +1172,13 @@
     {
       "ClassName": "Recipe_PillarTop_C",
       "DisplayName": "Pillar Top",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 6.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1166,8 +1186,21 @@
     {
       "ClassName": "Recipe_JumpPad_C",
       "DisplayName": "Old Jump Pad",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 15.0
+        },
+        {
+          "Key": "Desc_Cable_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1175,8 +1208,21 @@
     {
       "ClassName": "Recipe_JumpPadTilted_C",
       "DisplayName": "Old Tilted Jump Pad",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 15.0
+        },
+        {
+          "Key": "Desc_Cable_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1184,8 +1230,17 @@
     {
       "ClassName": "Recipe_SteelWall_8x4_C",
       "DisplayName": "Tilted Wall (4 m)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1193,8 +1248,17 @@
     {
       "ClassName": "Recipe_Wall_Window_8x4_03_Steel_C",
       "DisplayName": "Panel Window",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1202,8 +1266,25 @@
     {
       "ClassName": "Recipe_Alternate_RocketFuel_Nitro_C",
       "DisplayName": "Alternate: Nitro Rocket Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidFuel_C",
+          "Value": 4000.0
+        },
+        {
+          "Key": "Desc_NitrogenGas_C",
+          "Value": 3000.0
+        },
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 2.400000,
       "IsAlternateRecipe": true
@@ -1211,8 +1292,17 @@
     {
       "ClassName": "Recipe_RocketFuel_C",
       "DisplayName": "Rocket Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidTurboFuel_C",
+          "Value": 6000.0
+        },
+        {
+          "Key": "Desc_NitricAcid_C",
+          "Value": 1000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1220,8 +1310,17 @@
     {
       "ClassName": "Recipe_PackagedRocketFuel_C",
       "DisplayName": "Packaged Rocket Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RocketFuel_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_GasTank_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1229,8 +1328,13 @@
     {
       "ClassName": "Recipe_UnpackageRocketFuel_C",
       "DisplayName": "Unpackage Rocket Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedRocketFuel_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1238,8 +1342,17 @@
     {
       "ClassName": "Recipe_Alternate_IonizedFuel_Dark_C",
       "DisplayName": "Alternate: Dark-Ion Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedRocketFuel_C",
+          "Value": 12.0
+        },
+        {
+          "Key": "Desc_DarkMatter_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -1247,8 +1360,13 @@
     {
       "ClassName": "Recipe_DarkEnergy_C",
       "DisplayName": "Dark Matter Residue",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1256,8 +1374,17 @@
     {
       "ClassName": "Recipe_DarkMatter_C",
       "DisplayName": "Dark Matter Crystal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Diamond_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_DarkEnergy_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1265,8 +1392,25 @@
     {
       "ClassName": "Recipe_SuperpositionOscillator_C",
       "DisplayName": "Superposition Oscillator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_DarkMatter_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_CrystalOscillator_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_AluminumPlate_C",
+          "Value": 9.0
+        },
+        {
+          "Key": "Desc_QuantumEnergy_C",
+          "Value": 25000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -1274,8 +1418,25 @@
     {
       "ClassName": "Recipe_TemporalProcessor_C",
       "DisplayName": "Neural-Quantum Processor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_TimeCrystal_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_ComputerSuper_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_FicsiteMesh_C",
+          "Value": 15.0
+        },
+        {
+          "Key": "Desc_QuantumEnergy_C",
+          "Value": 25000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": false
@@ -1283,8 +1444,25 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_12_C",
       "DisplayName": "AI Expansion Server",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_6_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_TemporalProcessor_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_QuantumOscillator_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_QuantumEnergy_C",
+          "Value": 25000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": false
@@ -1292,8 +1470,17 @@
     {
       "ClassName": "Recipe_IonizedFuel_C",
       "DisplayName": "Ionized Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RocketFuel_C",
+          "Value": 16000.0
+        },
+        {
+          "Key": "Desc_CrystalShard_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -1301,8 +1488,17 @@
     {
       "ClassName": "Recipe_PackagedIonizedFuel_C",
       "DisplayName": "Packaged Ionized Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IonizedFuel_C",
+          "Value": 4000.0
+        },
+        {
+          "Key": "Desc_GasTank_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -1310,8 +1506,13 @@
     {
       "ClassName": "Recipe_UnpackageIonizedFuel_C",
       "DisplayName": "Unpackage Ionized Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedIonizedFuel_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -1319,8 +1520,17 @@
     {
       "ClassName": "Recipe_Alternate_Diamond_Turbo_C",
       "DisplayName": "Alternate: Turbo Diamonds",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 30.0
+        },
+        {
+          "Key": "Desc_TurboFuel_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -1328,8 +1538,21 @@
     {
       "ClassName": "Recipe_SAMFluctuator_C",
       "DisplayName": "SAM Fluctuator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1337,8 +1560,13 @@
     {
       "ClassName": "Recipe_FicsiteMesh_C",
       "DisplayName": "Ficsite Trigon",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_FicsiteIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1346,8 +1574,17 @@
     {
       "ClassName": "Recipe_FicsiteIngot_Iron_C",
       "DisplayName": "Ficsite Ingot (Iron)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 24.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1355,8 +1592,13 @@
     {
       "ClassName": "Recipe_TimeCrystal_C",
       "DisplayName": "Time Crystal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Diamond_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": false
@@ -1364,8 +1606,13 @@
     {
       "ClassName": "Recipe_Diamond_C",
       "DisplayName": "Diamonds",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 20.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1373,8 +1620,13 @@
     {
       "ClassName": "Recipe_IngotSAM_C",
       "DisplayName": "Reanimated SAM",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAM_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1382,8 +1634,21 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_10_C",
       "DisplayName": "Biochemical Sculptor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_7_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_FicsiteMesh_C",
+          "Value": 80.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 20000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
@@ -1391,8 +1656,17 @@
     {
       "ClassName": "Recipe_FicsiteIngot_AL_C",
       "DisplayName": "Ficsite Ingot (Aluminum)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1400,8 +1674,17 @@
     {
       "ClassName": "Recipe_FicsiteIngot_CAT_C",
       "DisplayName": "Ficsite Ingot (Caterium)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_GoldIngot_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1409,8 +1692,17 @@
     {
       "ClassName": "Recipe_Bauxite_Caterium_C",
       "DisplayName": "Bauxite (Caterium)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreGold_C",
+          "Value": 15.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1418,8 +1710,17 @@
     {
       "ClassName": "Recipe_Bauxite_Copper_C",
       "DisplayName": "Bauxite (Copper)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 18.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1427,8 +1728,17 @@
     {
       "ClassName": "Recipe_Caterium_Copper_C",
       "DisplayName": "Caterium Ore (Copper)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 15.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1436,8 +1746,17 @@
     {
       "ClassName": "Recipe_Caterium_Quartz_C",
       "DisplayName": "Caterium Ore (Quartz)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1445,8 +1764,17 @@
     {
       "ClassName": "Recipe_Coal_Iron_C",
       "DisplayName": "Coal (Iron)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 18.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1454,8 +1782,17 @@
     {
       "ClassName": "Recipe_Coal_Limestone_C",
       "DisplayName": "Coal (Limestone)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 36.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1463,8 +1800,17 @@
     {
       "ClassName": "Recipe_Copper_Quartz_C",
       "DisplayName": "Copper Ore (Quartz)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1472,8 +1818,17 @@
     {
       "ClassName": "Recipe_Copper_Sulfur_C",
       "DisplayName": "Copper Ore (Sulfur)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1481,8 +1836,17 @@
     {
       "ClassName": "Recipe_Iron_Limestone_C",
       "DisplayName": "Iron Ore (Limestone)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 24.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1490,8 +1854,17 @@
     {
       "ClassName": "Recipe_Limestone_Sulfur_C",
       "DisplayName": "Limestone (Sulfur)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1499,8 +1872,17 @@
     {
       "ClassName": "Recipe_Nitrogen_Bauxite_C",
       "DisplayName": "Nitrogen Gas (Bauxite)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreBauxite_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1508,8 +1890,17 @@
     {
       "ClassName": "Recipe_Nitrogen_Caterium_C",
       "DisplayName": "Nitrogen Gas (Caterium)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreGold_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1517,8 +1908,17 @@
     {
       "ClassName": "Recipe_Quartz_Bauxite_C",
       "DisplayName": "Raw Quartz (Bauxite)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreBauxite_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1526,8 +1926,17 @@
     {
       "ClassName": "Recipe_Quartz_Coal_C",
       "DisplayName": "Raw Quartz (Coal)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 24.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1535,8 +1944,17 @@
     {
       "ClassName": "Recipe_Sulfur_Coal_C",
       "DisplayName": "Sulfur (Coal)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 20.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1544,8 +1962,17 @@
     {
       "ClassName": "Recipe_Sulfur_Iron_C",
       "DisplayName": "Sulfur (Iron)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 30.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1553,8 +1980,17 @@
     {
       "ClassName": "Recipe_Uranium_Bauxite_C",
       "DisplayName": "Uranium Ore (Bauxite)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_OreBauxite_C",
+          "Value": 48.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1562,8 +1998,17 @@
     {
       "ClassName": "Recipe_Alternate_Turbofuel_C",
       "DisplayName": "Turbofuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidFuel_C",
+          "Value": 6000.0
+        },
+        {
+          "Key": "Desc_CompactedCoal_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -1571,8 +2016,17 @@
     {
       "ClassName": "Recipe_PackagedTurboFuel_C",
       "DisplayName": "Packaged Turbofuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidTurboFuel_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1580,8 +2034,13 @@
     {
       "ClassName": "Recipe_UnpackageTurboFuel_C",
       "DisplayName": "Unpackage Turbofuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_TurboFuel_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1589,8 +2048,13 @@
     {
       "ClassName": "Recipe_Alternate_Coal_1_C",
       "DisplayName": "Alternate: Charcoal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Wood_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
@@ -1598,8 +2062,13 @@
     {
       "ClassName": "Recipe_Alternate_Coal_2_C",
       "DisplayName": "Alternate: Biocoal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_GenericBiomass_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -1607,8 +2076,17 @@
     {
       "ClassName": "Recipe_Alternate_EnrichedCoal_C",
       "DisplayName": "Alternate: Compacted Coal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -1616,8 +2094,17 @@
     {
       "ClassName": "Recipe_CircuitBoard_C",
       "DisplayName": "Circuit Board",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperSheet_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
@@ -1625,8 +2112,13 @@
     {
       "ClassName": "Recipe_LiquidFuel_C",
       "DisplayName": "Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidOil_C",
+          "Value": 6000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1634,8 +2126,13 @@
     {
       "ClassName": "Recipe_PetroleumCoke_C",
       "DisplayName": "Petroleum Coke",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 4000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1643,8 +2140,13 @@
     {
       "ClassName": "Recipe_Plastic_C",
       "DisplayName": "Plastic",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidOil_C",
+          "Value": 3000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1652,8 +2154,13 @@
     {
       "ClassName": "Recipe_Rubber_C",
       "DisplayName": "Rubber",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidOil_C",
+          "Value": 3000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1661,8 +2168,13 @@
     {
       "ClassName": "Recipe_ResidualFuel_C",
       "DisplayName": "Residual Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 6000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1670,8 +2182,17 @@
     {
       "ClassName": "Recipe_ResidualPlastic_C",
       "DisplayName": "Residual Plastic",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PolymerResin_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 2000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1679,8 +2200,17 @@
     {
       "ClassName": "Recipe_ResidualRubber_C",
       "DisplayName": "Residual Rubber",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PolymerResin_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 4000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1688,8 +2218,17 @@
     {
       "ClassName": "Recipe_Alternate_Diamond_Pink_C",
       "DisplayName": "Alternate: Pink Diamonds",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 8.0
+        },
+        {
+          "Key": "Desc_QuartzCrystal_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Converter",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
@@ -1697,8 +2236,13 @@
     {
       "ClassName": "Recipe_Alternate_Diamond_Petroleum_C",
       "DisplayName": "Alternate: Petroleum Diamonds",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PetroleumCoke_C",
+          "Value": 24.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
@@ -1706,8 +2250,13 @@
     {
       "ClassName": "Recipe_Alternate_Diamond_OilBased_C",
       "DisplayName": "Alternate: Oil-Based Diamonds",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidOil_C",
+          "Value": 10000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -1715,8 +2264,17 @@
     {
       "ClassName": "Recipe_Alternate_Diamond_Cloudy_C",
       "DisplayName": "Alternate: Cloudy Diamonds",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 12.0
+        },
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 24.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -1724,8 +2282,17 @@
     {
       "ClassName": "Recipe_Alternate_DarkMatter_Trap_C",
       "DisplayName": "Alternate: Dark Matter Trap",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_TimeCrystal_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_DarkEnergy_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
@@ -1733,8 +2300,13 @@
     {
       "ClassName": "Recipe_Alternate_DarkMatter_Crystallization_C",
       "DisplayName": "Alternate: Dark Matter Crystallization",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_DarkEnergy_C",
+          "Value": 10000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -1742,8 +2314,17 @@
     {
       "ClassName": "Recipe_Alternate_WetConcrete_C",
       "DisplayName": "Alternate: Wet Concrete",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -1751,8 +2332,17 @@
     {
       "ClassName": "Recipe_Alternate_TurboHeavyFuel_C",
       "DisplayName": "Alternate: Turbo Heavy Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 5000.0
+        },
+        {
+          "Key": "Desc_CompactedCoal_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -1760,8 +2350,13 @@
     {
       "ClassName": "Recipe_Alternate_SteelRod_C",
       "DisplayName": "Alternate: Steel Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": true
@@ -1769,8 +2364,13 @@
     {
       "ClassName": "Recipe_SteelBeam_C",
       "DisplayName": "Steel Beam",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelIngot_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1778,8 +2378,13 @@
     {
       "ClassName": "Recipe_SteelPipe_C",
       "DisplayName": "Steel Pipe",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelIngot_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1787,8 +2392,17 @@
     {
       "ClassName": "Recipe_IngotSteel_C",
       "DisplayName": "Steel Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1796,8 +2410,17 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_2_C",
       "DisplayName": "Versatile Framework",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrame_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_SteelPlate_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -1805,8 +2428,13 @@
     {
       "ClassName": "Recipe_Alternate_SteelCanister_C",
       "DisplayName": "Alternate: Steel Canister",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelIngot_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -1814,8 +2442,13 @@
     {
       "ClassName": "Recipe_FluidCanister_C",
       "DisplayName": "Empty Canister",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1823,8 +2456,17 @@
     {
       "ClassName": "Recipe_Fuel_C",
       "DisplayName": "Packaged Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidFuel_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -1832,8 +2474,17 @@
     {
       "ClassName": "Recipe_LiquidBiofuel_C",
       "DisplayName": "Liquid Biofuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Biofuel_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 3000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1841,8 +2492,17 @@
     {
       "ClassName": "Recipe_PackagedBiofuel_C",
       "DisplayName": "Packaged Liquid Biofuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidBiofuel_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -1850,8 +2510,17 @@
     {
       "ClassName": "Recipe_PackagedCrudeOil_C",
       "DisplayName": "Packaged Oil",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidOil_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1859,8 +2528,17 @@
     {
       "ClassName": "Recipe_PackagedOilResidue_C",
       "DisplayName": "Packaged Heavy Oil Residue",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -1868,8 +2546,17 @@
     {
       "ClassName": "Recipe_PackagedWater_C",
       "DisplayName": "Packaged Water",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Water_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1877,8 +2564,13 @@
     {
       "ClassName": "Recipe_UnpackageBioFuel_C",
       "DisplayName": "Unpackage Liquid Biofuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedBiofuel_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1886,8 +2578,13 @@
     {
       "ClassName": "Recipe_UnpackageFuel_C",
       "DisplayName": "Unpackage Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Fuel_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1895,8 +2592,13 @@
     {
       "ClassName": "Recipe_UnpackageOil_C",
       "DisplayName": "Unpackage Oil",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedOil_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -1904,8 +2606,13 @@
     {
       "ClassName": "Recipe_UnpackageOilResidue_C",
       "DisplayName": "Unpackage Heavy Oil Residue",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedOilResidue_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -1913,8 +2620,13 @@
     {
       "ClassName": "Recipe_UnpackageWater_C",
       "DisplayName": "Unpackage Water",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedWater_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -1922,8 +2634,17 @@
     {
       "ClassName": "Recipe_Alternate_SteamedCopperSheet_C",
       "DisplayName": "Alternate: Steamed Copper Sheet",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 3000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -1931,8 +2652,17 @@
     {
       "ClassName": "Recipe_Alternate_RubberConcrete_C",
       "DisplayName": "Alternate: Rubber Concrete",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -1940,8 +2670,17 @@
     {
       "ClassName": "Recipe_Alternate_RecycledRubber_C",
       "DisplayName": "Alternate: Recycled Rubber",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_LiquidFuel_C",
+          "Value": 6000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -1949,8 +2688,17 @@
     {
       "ClassName": "Recipe_Alternate_PureQuartzCrystal_C",
       "DisplayName": "Alternate: Pure Quartz Crystal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 9.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -1958,8 +2706,13 @@
     {
       "ClassName": "Recipe_QuartzCrystal_C",
       "DisplayName": "Quartz Crystal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
@@ -1967,8 +2720,17 @@
     {
       "ClassName": "Recipe_Alternate_PureIronIngot_C",
       "DisplayName": "Alternate: Pure Iron Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 7.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 4000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -1976,8 +2738,17 @@
     {
       "ClassName": "Recipe_Alternate_PureCopperIngot_C",
       "DisplayName": "Alternate: Pure Copper Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 4000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -1985,8 +2756,17 @@
     {
       "ClassName": "Recipe_Alternate_PureCateriumIngot_C",
       "DisplayName": "Alternate: Pure Caterium Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreGold_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 2000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": true
@@ -1994,8 +2774,13 @@
     {
       "ClassName": "Recipe_PureAluminumIngot_C",
       "DisplayName": "Alternate: Pure Aluminum Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumScrap_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -2003,8 +2788,13 @@
     {
       "ClassName": "Recipe_AluminumCasing_C",
       "DisplayName": "Aluminum Casing",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -2012,8 +2802,17 @@
     {
       "ClassName": "Recipe_AluminumSheet_C",
       "DisplayName": "Alclad Aluminum Sheet",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -2021,8 +2820,17 @@
     {
       "ClassName": "Recipe_AluminaSolution_C",
       "DisplayName": "Alumina Solution",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreBauxite_C",
+          "Value": 12.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 18000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -2030,8 +2838,17 @@
     {
       "ClassName": "Recipe_AluminumScrap_C",
       "DisplayName": "Aluminum Scrap",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminaSolution_C",
+          "Value": 4000.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -2039,8 +2856,17 @@
     {
       "ClassName": "Recipe_PackagedAlumina_C",
       "DisplayName": "Packaged Alumina Solution",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminaSolution_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -2048,8 +2874,17 @@
     {
       "ClassName": "Recipe_IngotAluminum_C",
       "DisplayName": "Aluminum Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumScrap_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Silica_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -2057,8 +2892,13 @@
     {
       "ClassName": "Recipe_Silica_C",
       "DisplayName": "Silica",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
@@ -2066,8 +2906,21 @@
     {
       "ClassName": "Recipe_CrystalOscillator_C",
       "DisplayName": "Crystal Oscillator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_QuartzCrystal_C",
+          "Value": 36.0
+        },
+        {
+          "Key": "Desc_Cable_C",
+          "Value": 28.0
+        },
+        {
+          "Key": "Desc_IronPlateReinforced_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
@@ -2075,8 +2928,13 @@
     {
       "ClassName": "Recipe_UnpackageAlumina_C",
       "DisplayName": "Unpackage Alumina Solution",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedAlumina_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -2084,8 +2942,13 @@
     {
       "ClassName": "Recipe_Alternate_PolymerResin_C",
       "DisplayName": "Alternate: Polymer Resin",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidOil_C",
+          "Value": 6000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2093,8 +2956,21 @@
     {
       "ClassName": "Recipe_Alternate_PlasticSmartPlating_C",
       "DisplayName": "Alternate: Plastic Smart Plating",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlateReinforced_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -2102,8 +2978,21 @@
     {
       "ClassName": "Recipe_Alternate_HighSpeedWiring_C",
       "DisplayName": "Alternate: Automated Speed Wiring",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Stator_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 40.0
+        },
+        {
+          "Key": "Desc_HighSpeedConnector_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
@@ -2111,8 +3000,17 @@
     {
       "ClassName": "Recipe_EncasedIndustrialBeam_C",
       "DisplayName": "Encased Industrial Beam",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelPlate_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 6.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": false
@@ -2120,8 +3018,17 @@
     {
       "ClassName": "Recipe_Motor_C",
       "DisplayName": "Motor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Stator_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -2129,8 +3036,17 @@
     {
       "ClassName": "Recipe_Stator_C",
       "DisplayName": "Stator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 8.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -2138,8 +3054,17 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_3_C",
       "DisplayName": "Automated Wiring",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Stator_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Cable_C",
+          "Value": 20.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -2147,8 +3072,17 @@
     {
       "ClassName": "Recipe_AILimiter_C",
       "DisplayName": "AI Limiter",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperSheet_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 20.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -2156,8 +3090,13 @@
     {
       "ClassName": "Recipe_Alternate_HeavyOilResidue_C",
       "DisplayName": "Alternate: Heavy Oil Residue",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidOil_C",
+          "Value": 3000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2165,8 +3104,25 @@
     {
       "ClassName": "Recipe_Alternate_HeavyFlexibleFrame_C",
       "DisplayName": "Alternate: Heavy Flexible Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrame_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_SteelPlateReinforced_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 20.0
+        },
+        {
+          "Key": "Desc_IronScrew_C",
+          "Value": 104.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -2174,8 +3130,21 @@
     {
       "ClassName": "Recipe_Computer_C",
       "DisplayName": "Computer",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CircuitBoard_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_Cable_C",
+          "Value": 8.0
+        },
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 16.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -2183,8 +3152,25 @@
     {
       "ClassName": "Recipe_ModularFrameHeavy_C",
       "DisplayName": "Heavy Modular Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrame_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 20.0
+        },
+        {
+          "Key": "Desc_SteelPlateReinforced_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_IronScrew_C",
+          "Value": 120.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 30.000000,
       "IsAlternateRecipe": false
@@ -2192,8 +3178,21 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_4_C",
       "DisplayName": "Modular Engine",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Motor_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 15.0
+        },
+        {
+          "Key": "Desc_SpaceElevatorPart_1_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
@@ -2201,8 +3200,25 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_5_C",
       "DisplayName": "Adaptive Control Unit",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_3_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_CircuitBoard_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_ModularFrameHeavy_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Computer_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
@@ -2210,8 +3226,17 @@
     {
       "ClassName": "Recipe_Alternate_FusedWire_C",
       "DisplayName": "Alternate: Fused Wire",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_GoldIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
@@ -2219,8 +3244,21 @@
     {
       "ClassName": "Recipe_Alternate_FlexibleFramework_C",
       "DisplayName": "Alternate: Flexible Framework",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrame_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_SteelPlate_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 8.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -2228,8 +3266,17 @@
     {
       "ClassName": "Recipe_Alternate_ElectrodeCircuitBoard_C",
       "DisplayName": "Alternate: Electrode Circuit Board",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_PetroleumCoke_C",
+          "Value": 8.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2237,8 +3284,17 @@
     {
       "ClassName": "Recipe_Alternate_ElectroAluminumScrap_C",
       "DisplayName": "Alternate: Electrode Aluminum Scrap",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminaSolution_C",
+          "Value": 12000.0
+        },
+        {
+          "Key": "Desc_PetroleumCoke_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
@@ -2246,8 +3302,17 @@
     {
       "ClassName": "Recipe_Alternate_DilutedPackagedFuel_C",
       "DisplayName": "Alternate: Diluted Packaged Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 1000.0
+        },
+        {
+          "Key": "Desc_PackagedWater_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
@@ -2255,8 +3320,17 @@
     {
       "ClassName": "Recipe_Alternate_CopperRotor_C",
       "DisplayName": "Alternate: Copper Rotor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperSheet_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_IronScrew_C",
+          "Value": 52.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -2264,8 +3338,17 @@
     {
       "ClassName": "Recipe_ModularFrame_C",
       "DisplayName": "Modular Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlateReinforced_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_IronRod_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
@@ -2273,8 +3356,17 @@
     {
       "ClassName": "Recipe_Rotor_C",
       "DisplayName": "Rotor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronRod_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_IronScrew_C",
+          "Value": 25.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": false
@@ -2282,8 +3374,13 @@
     {
       "ClassName": "Recipe_CopperSheet_C",
       "DisplayName": "Copper Sheet",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -2291,8 +3388,17 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_1_C",
       "DisplayName": "Smart Plating",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlateReinforced_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 30.000000,
       "IsAlternateRecipe": false
@@ -2300,8 +3406,17 @@
     {
       "ClassName": "Recipe_Alternate_CopperAlloyIngot_C",
       "DisplayName": "Alternate: Copper Alloy Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2309,8 +3424,17 @@
     {
       "ClassName": "Recipe_Alternate_CokeSteelIngot_C",
       "DisplayName": "Alternate: Coke Steel Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 15.0
+        },
+        {
+          "Key": "Desc_PetroleumCoke_C",
+          "Value": 15.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2318,8 +3442,17 @@
     {
       "ClassName": "Recipe_Alternate_CoatedIronPlate_C",
       "DisplayName": "Alternate: Coated Iron Plate",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2327,8 +3460,17 @@
     {
       "ClassName": "Recipe_Alternate_CoatedIronCanister_C",
       "DisplayName": "Alternate: Coated Iron Canister",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_CopperSheet_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
@@ -2336,8 +3478,17 @@
     {
       "ClassName": "Recipe_Alternate_CoatedCable_C",
       "DisplayName": "Alternate: Coated Cable",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 2000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2345,8 +3496,17 @@
     {
       "ClassName": "Recipe_Alternate_BoltedFrame_C",
       "DisplayName": "Alternate: Bolted Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlateReinforced_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_IronScrew_C",
+          "Value": 56.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -2354,8 +3514,17 @@
     {
       "ClassName": "Recipe_Alternate_AdheredIronPlate_C",
       "DisplayName": "Alternate: Adhered Iron Plate",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -2363,8 +3532,25 @@
     {
       "ClassName": "Recipe_Alternate_TurboPressureMotor_C",
       "DisplayName": "Alternate: Turbo Pressure Motor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Motor_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_PressureConversionCube_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_PackagedNitrogenGas_C",
+          "Value": 24.0
+        },
+        {
+          "Key": "Desc_Stator_C",
+          "Value": 8.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
@@ -2372,8 +3558,17 @@
     {
       "ClassName": "Recipe_PlutoniumCell_C",
       "DisplayName": "Encased Plutonium Cell",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PlutoniumPellet_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -2381,8 +3576,17 @@
     {
       "ClassName": "Recipe_PressureConversionCube_C",
       "DisplayName": "Pressure Conversion Cube",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrameFused_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_ModularFrameLightweight_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
@@ -2390,8 +3594,21 @@
     {
       "ClassName": "Recipe_NitricAcid_C",
       "DisplayName": "Nitric Acid",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_NitrogenGas_C",
+          "Value": 12000.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 3000.0
+        },
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -2399,8 +3616,25 @@
     {
       "ClassName": "Recipe_NonFissileUranium_C",
       "DisplayName": "Non-Fissile Uranium",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_NuclearWaste_C",
+          "Value": 15.0
+        },
+        {
+          "Key": "Desc_Silica_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_NitricAcid_C",
+          "Value": 6000.0
+        },
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 6000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -2408,8 +3642,13 @@
     {
       "ClassName": "Recipe_CopperDust_C",
       "DisplayName": "Copper Powder",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 30.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -2417,8 +3656,17 @@
     {
       "ClassName": "Recipe_Plutonium_C",
       "DisplayName": "Plutonium Pellet",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_NonFissibleUranium_C",
+          "Value": 100.0
+        },
+        {
+          "Key": "Desc_NuclearWaste_C",
+          "Value": 25.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
@@ -2426,8 +3674,25 @@
     {
       "ClassName": "Recipe_PlutoniumFuelRod_C",
       "DisplayName": "Plutonium Fuel Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PlutoniumCell_C",
+          "Value": 30.0
+        },
+        {
+          "Key": "Desc_SteelPlate_C",
+          "Value": 18.0
+        },
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_AluminumPlateReinforced_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 240.000000,
       "IsAlternateRecipe": false
@@ -2435,8 +3700,17 @@
     {
       "ClassName": "Recipe_PackagedNitricAcid_C",
       "DisplayName": "Packaged Nitric Acid",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_NitricAcid_C",
+          "Value": 1000.0
+        },
+        {
+          "Key": "Desc_GasTank_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -2444,8 +3718,17 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_9_C",
       "DisplayName": "Nuclear Pasta",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperDust_C",
+          "Value": 200.0
+        },
+        {
+          "Key": "Desc_PressureConversionCube_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
@@ -2453,8 +3736,13 @@
     {
       "ClassName": "Recipe_UnpackageNitricAcid_C",
       "DisplayName": "Unpackage Nitric Acid",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedNitricAcid_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -2462,8 +3750,25 @@
     {
       "ClassName": "Recipe_Alternate_TurboBlendFuel_C",
       "DisplayName": "Alternate: Turbo Blend Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_LiquidFuel_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 4000.0
+        },
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_PetroleumCoke_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2471,8 +3776,21 @@
     {
       "ClassName": "Recipe_UraniumCell_C",
       "DisplayName": "Encased Uranium Cell",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreUranium_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 8000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -2480,8 +3798,25 @@
     {
       "ClassName": "Recipe_CoolingSystem_C",
       "DisplayName": "Cooling System",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumPlateReinforced_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 5000.0
+        },
+        {
+          "Key": "Desc_NitrogenGas_C",
+          "Value": 25000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": false
@@ -2489,8 +3824,21 @@
     {
       "ClassName": "Recipe_Battery_C",
       "DisplayName": "Battery",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 2500.0
+        },
+        {
+          "Key": "Desc_AluminaSolution_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_AluminumCasing_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -2498,8 +3846,25 @@
     {
       "ClassName": "Recipe_ComputerSuper_C",
       "DisplayName": "Supercomputer",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Computer_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_CircuitBoardHighSpeed_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_HighSpeedConnector_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 28.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": false
@@ -2507,8 +3872,21 @@
     {
       "ClassName": "Recipe_RadioControlUnit_C",
       "DisplayName": "Radio Control Unit",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumCasing_C",
+          "Value": 32.0
+        },
+        {
+          "Key": "Desc_CrystalOscillator_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Computer_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 48.000000,
       "IsAlternateRecipe": false
@@ -2516,8 +3894,17 @@
     {
       "ClassName": "Recipe_SulfuricAcid_C",
       "DisplayName": "Sulfuric Acid",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -2525,8 +3912,17 @@
     {
       "ClassName": "Recipe_PackagedSulfuricAcid_C",
       "DisplayName": "Packaged Sulfuric Acid",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 2000.0
+        },
+        {
+          "Key": "Desc_FluidCanister_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -2534,8 +3930,17 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_7_C",
       "DisplayName": "Assembly Director System",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_5_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_ComputerSuper_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 80.000000,
       "IsAlternateRecipe": false
@@ -2543,8 +3948,21 @@
     {
       "ClassName": "Recipe_HighSpeedConnector_C",
       "DisplayName": "High-Speed Connector",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 56.0
+        },
+        {
+          "Key": "Desc_Cable_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_CircuitBoard_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": false
@@ -2552,8 +3970,13 @@
     {
       "ClassName": "Recipe_UnpackageSulfuricAcid_C",
       "DisplayName": "Unpackage Sulfuric Acid",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedSulfuricAcid_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -2561,8 +3984,25 @@
     {
       "ClassName": "Recipe_Alternate_SuperStateComputer_C",
       "DisplayName": "Alternate: Super-State Computer",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Computer_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Battery_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 25.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 25.000000,
       "IsAlternateRecipe": true
@@ -2570,8 +4010,17 @@
     {
       "ClassName": "Recipe_ElectromagneticControlRod_C",
       "DisplayName": "Electromagnetic Control Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Stator_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_CircuitBoardHighSpeed_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 30.000000,
       "IsAlternateRecipe": false
@@ -2579,8 +4028,21 @@
     {
       "ClassName": "Recipe_NuclearFuelRod_C",
       "DisplayName": "Uranium Fuel Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_UraniumCell_C",
+          "Value": 50.0
+        },
+        {
+          "Key": "Desc_SteelPlateReinforced_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 150.000000,
       "IsAlternateRecipe": false
@@ -2588,8 +4050,17 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_6_C",
       "DisplayName": "Magnetic Field Generator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_2_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
@@ -2597,8 +4068,17 @@
     {
       "ClassName": "Recipe_Alternate_SloppyAlumina_C",
       "DisplayName": "Alternate: Sloppy Alumina",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreBauxite_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 10000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -2606,8 +4086,25 @@
     {
       "ClassName": "Recipe_Alternate_RadioControlSystem_C",
       "DisplayName": "Alternate: Radio Control System",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CrystalOscillator_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_CircuitBoard_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_AluminumCasing_C",
+          "Value": 60.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 30.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 40.000000,
       "IsAlternateRecipe": true
@@ -2615,8 +4112,17 @@
     {
       "ClassName": "Recipe_Alternate_PlutoniumFuelUnit_C",
       "DisplayName": "Alternate: Plutonium Fuel Unit",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PlutoniumCell_C",
+          "Value": 20.0
+        },
+        {
+          "Key": "Desc_PressureConversionCube_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": true
@@ -2624,8 +4130,17 @@
     {
       "ClassName": "Recipe_Alternate_OCSupercomputer_C",
       "DisplayName": "Alternate: OC Supercomputer",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrameLightweight_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_CoolingSystem_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
@@ -2633,8 +4148,17 @@
     {
       "ClassName": "Recipe_HeatSink_C",
       "DisplayName": "Heat Sink",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumPlate_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_CopperSheet_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
@@ -2642,8 +4166,21 @@
     {
       "ClassName": "Recipe_FusedModularFrame_C",
       "DisplayName": "Fused Modular Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrameHeavy_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_AluminumCasing_C",
+          "Value": 50.0
+        },
+        {
+          "Key": "Desc_NitrogenGas_C",
+          "Value": 25000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 40.000000,
       "IsAlternateRecipe": false
@@ -2651,8 +4188,13 @@
     {
       "ClassName": "Recipe_GasTank_C",
       "DisplayName": "Empty Fluid Tank",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -2660,8 +4202,17 @@
     {
       "ClassName": "Recipe_PackagedNitrogen_C",
       "DisplayName": "Packaged Nitrogen Gas",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_NitrogenGas_C",
+          "Value": 4000.0
+        },
+        {
+          "Key": "Desc_GasTank_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -2669,8 +4220,13 @@
     {
       "ClassName": "Recipe_UnpackageNitrogen_C",
       "DisplayName": "Unpackage Nitrogen Gas",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PackagedNitrogenGas_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Packager",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -2678,8 +4234,25 @@
     {
       "ClassName": "Recipe_Alternate_InstantScrap_C",
       "DisplayName": "Alternate: Instant Scrap",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreBauxite_C",
+          "Value": 15.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 5000.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 6000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2687,8 +4260,17 @@
     {
       "ClassName": "Recipe_Alternate_InstantPlutoniumCell_C",
       "DisplayName": "Alternate: Instant Plutonium Cell",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_NonFissibleUranium_C",
+          "Value": 150.0
+        },
+        {
+          "Key": "Desc_AluminumCasing_C",
+          "Value": 20.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": true
@@ -2696,8 +4278,25 @@
     {
       "ClassName": "Recipe_Alternate_HeatFusedFrame_C",
       "DisplayName": "Alternate: Heat-Fused Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrameHeavy_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 50.0
+        },
+        {
+          "Key": "Desc_NitricAcid_C",
+          "Value": 8000.0
+        },
+        {
+          "Key": "Desc_LiquidFuel_C",
+          "Value": 10000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
@@ -2705,8 +4304,25 @@
     {
       "ClassName": "Recipe_Alternate_FertileUranium_C",
       "DisplayName": "Alternate: Fertile Uranium",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreUranium_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_NuclearWaste_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_NitricAcid_C",
+          "Value": 3000.0
+        },
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2714,8 +4330,17 @@
     {
       "ClassName": "Recipe_Alternate_ElectricMotor_C",
       "DisplayName": "Alternate: Electric Motor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -2723,8 +4348,17 @@
     {
       "ClassName": "Recipe_Alternate_DilutedFuel_C",
       "DisplayName": "Alternate: Diluted Fuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 5000.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 10000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2732,8 +4366,21 @@
     {
       "ClassName": "Recipe_Alternate_CoolingDevice_C",
       "DisplayName": "Alternate: Cooling Device",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumPlateReinforced_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_Motor_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_NitrogenGas_C",
+          "Value": 24000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -2741,8 +4388,25 @@
     {
       "ClassName": "Recipe_Alternate_ClassicBattery_C",
       "DisplayName": "Alternate: Classic Battery",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_AluminumPlate_C",
+          "Value": 7.0
+        },
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 8.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2750,8 +4414,17 @@
     {
       "ClassName": "Recipe_Alternate_AutomatedMiner_C",
       "DisplayName": "Alternate: Automated Miner",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": true
@@ -2759,8 +4432,17 @@
     {
       "ClassName": "Recipe_Alternate_AlcladCasing_C",
       "DisplayName": "Alternate: Alclad Casing",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 20.0
+        },
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2768,8 +4450,17 @@
     {
       "ClassName": "Recipe_Alternate_SteelPipe_Molded_C",
       "DisplayName": "Alternate: Molded Steel Pipe",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelIngot_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2777,8 +4468,13 @@
     {
       "ClassName": "Recipe_Alternate_SteelPipe_Iron_C",
       "DisplayName": "Alternate: Iron Pipe",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 20.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2786,8 +4482,17 @@
     {
       "ClassName": "Recipe_Alternate_SteelCastedPlate_C",
       "DisplayName": "Alternate: Steel Cast Plate",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_SteelIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
@@ -2795,8 +4500,17 @@
     {
       "ClassName": "Recipe_Alternate_SteelBeam_Molded_C",
       "DisplayName": "Alternate: Molded Beam",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelIngot_C",
+          "Value": 24.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 16.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2804,8 +4518,13 @@
     {
       "ClassName": "Recipe_Alternate_SteelBeam_Aluminum_C",
       "DisplayName": "Alternate: Aluminum Beam",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2813,8 +4532,13 @@
     {
       "ClassName": "Recipe_Alternate_AluminumRod_C",
       "DisplayName": "Alternate: Aluminum Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2822,8 +4546,17 @@
     {
       "ClassName": "Recipe_Alternate_AILimiter_Plastic_C",
       "DisplayName": "Alternate: Plastic AI Limiter",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 30.0
+        },
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 7.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
@@ -2831,8 +4564,21 @@
     {
       "ClassName": "Recipe_Alternate_Silica_Distilled_C",
       "DisplayName": "Alternate: Distilled Silica",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_DissolvedSilica_C",
+          "Value": 12000.0
+        },
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 10000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2840,8 +4586,17 @@
     {
       "ClassName": "Recipe_Alternate_Quartz_Purified_C",
       "DisplayName": "Alternate: Quartz Purification",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 24.0
+        },
+        {
+          "Key": "Desc_NitricAcid_C",
+          "Value": 2000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2849,8 +4604,17 @@
     {
       "ClassName": "Recipe_Alternate_Quartz_Fused_C",
       "DisplayName": "Alternate: Fused Quartz Crystal",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 25.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 20.000000,
       "IsAlternateRecipe": true
@@ -2858,8 +4622,17 @@
     {
       "ClassName": "Recipe_Alternate_IronIngot_Leached_C",
       "DisplayName": "Alternate: Leached Iron ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 1000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -2867,8 +4640,17 @@
     {
       "ClassName": "Recipe_Alternate_IronIngot_Basic_C",
       "DisplayName": "Alternate: Basic Iron Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 8.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2876,8 +4658,17 @@
     {
       "ClassName": "Recipe_Alternate_CopperIngot_Tempered_C",
       "DisplayName": "Alternate: Tempered Copper Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_PetroleumCoke_C",
+          "Value": 8.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2885,8 +4676,17 @@
     {
       "ClassName": "Recipe_Alternate_CopperIngot_Leached_C",
       "DisplayName": "Alternate: Leached Copper Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 9.0
+        },
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2894,8 +4694,17 @@
     {
       "ClassName": "Recipe_Alternate_CateriumIngot_Tempered_C",
       "DisplayName": "Alternate: Tempered Caterium Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreGold_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_PetroleumCoke_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2903,8 +4712,17 @@
     {
       "ClassName": "Recipe_Alternate_CateriumIngot_Leached_C",
       "DisplayName": "Alternate: Leached Caterium Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreGold_C",
+          "Value": 9.0
+        },
+        {
+          "Key": "Desc_SulfuricAcid_C",
+          "Value": 5000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 10.000000,
       "IsAlternateRecipe": true
@@ -2912,8 +4730,13 @@
     {
       "ClassName": "Recipe_Alternate_Wire_2_C",
       "DisplayName": "Alternate: Caterium Wire",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_GoldIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": true
@@ -2921,8 +4744,13 @@
     {
       "ClassName": "Recipe_Alternate_Wire_1_C",
       "DisplayName": "Alternate: Iron Wire",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -2930,8 +4758,25 @@
     {
       "ClassName": "Recipe_Alternate_UraniumCell_1_C",
       "DisplayName": "Alternate: Infused Uranium Cell",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreUranium_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Silica_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 15.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -2939,8 +4784,13 @@
     {
       "ClassName": "Recipe_IngotCaterium_C",
       "DisplayName": "Caterium Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreGold_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -2948,8 +4798,25 @@
     {
       "ClassName": "Recipe_Alternate_TurboMotor_1_C",
       "DisplayName": "Alternate: Turbo Electric Motor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Motor_C",
+          "Value": 7.0
+        },
+        {
+          "Key": "Desc_ModularFrameLightweight_C",
+          "Value": 9.0
+        },
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 7.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 64.000000,
       "IsAlternateRecipe": true
@@ -2957,8 +4824,25 @@
     {
       "ClassName": "Recipe_MotorTurbo_C",
       "DisplayName": "Turbo Motor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CoolingSystem_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_ModularFrameLightweight_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Motor_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 24.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": false
@@ -2966,8 +4850,25 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_8_C",
       "DisplayName": "Thermal Propulsion Rocket",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_4_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_MotorLightweight_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_CoolingSystem_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_ModularFrameFused_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 120.000000,
       "IsAlternateRecipe": false
@@ -2975,8 +4876,17 @@
     {
       "ClassName": "Recipe_Alternate_Stator_C",
       "DisplayName": "Alternate: Quickwire Stator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 15.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
@@ -2984,8 +4894,17 @@
     {
       "ClassName": "Recipe_Alternate_Silica_C",
       "DisplayName": "Alternate: Cheap Silica",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_RawQuartz_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -2993,8 +4912,13 @@
     {
       "ClassName": "Recipe_Alternate_Screw_2_C",
       "DisplayName": "Alternate: Steel Screw",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelPlate_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -3002,8 +4926,13 @@
     {
       "ClassName": "Recipe_Alternate_Screw_C",
       "DisplayName": "Alternate: Cast Screw",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -3011,8 +4940,17 @@
     {
       "ClassName": "Recipe_Alternate_Rotor_C",
       "DisplayName": "Alternate: Steel Rotor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 6.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -3020,8 +4958,17 @@
     {
       "ClassName": "Recipe_Alternate_EncasedIndustrialBeam_C",
       "DisplayName": "Alternate: Encased Industrial Pipe",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
@@ -3029,8 +4976,17 @@
     {
       "ClassName": "Recipe_Alternate_ReinforcedIronPlate_2_C",
       "DisplayName": "Alternate: Stitched Iron Plate",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 20.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
@@ -3038,8 +4994,17 @@
     {
       "ClassName": "Recipe_Alternate_ReinforcedIronPlate_1_C",
       "DisplayName": "Alternate: Bolted Iron Plate",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 18.0
+        },
+        {
+          "Key": "Desc_IronScrew_C",
+          "Value": 50.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -3047,8 +5012,21 @@
     {
       "ClassName": "Recipe_Alternate_RadioControlUnit_1_C",
       "DisplayName": "Alternate: Radio Connection Unit",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumPlateReinforced_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_HighSpeedConnector_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_QuartzCrystal_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -3056,8 +5034,17 @@
     {
       "ClassName": "Recipe_Alternate_Quickwire_C",
       "DisplayName": "Alternate: Fused Quickwire",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_GoldIngot_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -3065,8 +5052,17 @@
     {
       "ClassName": "Recipe_Alternate_Plastic_1_C",
       "DisplayName": "Alternate: Recycled Plastic",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_LiquidFuel_C",
+          "Value": 6000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -3074,8 +5070,25 @@
     {
       "ClassName": "Recipe_Alternate_NuclearFuelRod_1_C",
       "DisplayName": "Alternate: Uranium Fuel Unit",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_UraniumCell_C",
+          "Value": 100.0
+        },
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_CrystalOscillator_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 300.000000,
       "IsAlternateRecipe": true
@@ -3083,8 +5096,21 @@
     {
       "ClassName": "Recipe_Alternate_Motor_1_C",
       "DisplayName": "Alternate: Rigor Motor",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Rotor_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Stator_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_CrystalOscillator_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 48.000000,
       "IsAlternateRecipe": true
@@ -3092,8 +5118,17 @@
     {
       "ClassName": "Recipe_Alternate_ModularFrame_C",
       "DisplayName": "Alternate: Steeled Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlateReinforced_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": true
@@ -3101,8 +5136,17 @@
     {
       "ClassName": "Recipe_Alternate_IngotSteel_2_C",
       "DisplayName": "Alternate: Compacted Steel Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_CompactedCoal_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -3110,8 +5154,17 @@
     {
       "ClassName": "Recipe_Alternate_IngotSteel_1_C",
       "DisplayName": "Alternate: Solid Steel Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronIngot_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_Coal_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": true
@@ -3119,8 +5172,17 @@
     {
       "ClassName": "Recipe_Alternate_IngotIron_C",
       "DisplayName": "Alternate: Iron Alloy Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreIron_C",
+          "Value": 8.0
+        },
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "FoundryMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -3128,8 +5190,21 @@
     {
       "ClassName": "Recipe_Alternate_HighSpeedConnector_C",
       "DisplayName": "Alternate: Silicon High-Speed Connector",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 60.0
+        },
+        {
+          "Key": "Desc_Silica_C",
+          "Value": 25.0
+        },
+        {
+          "Key": "Desc_CircuitBoard_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 40.000000,
       "IsAlternateRecipe": true
@@ -3137,8 +5212,25 @@
     {
       "ClassName": "Recipe_Alternate_ModularFrameHeavy_C",
       "DisplayName": "Alternate: Heavy Encased Frame",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_ModularFrame_C",
+          "Value": 8.0
+        },
+        {
+          "Key": "Desc_SteelPlateReinforced_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_SteelPipe_C",
+          "Value": 36.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 22.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 64.000000,
       "IsAlternateRecipe": true
@@ -3146,8 +5238,17 @@
     {
       "ClassName": "Recipe_Alternate_HeatSink_1_C",
       "DisplayName": "Alternate: Heat Exchanger",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AluminumCasing_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": true
@@ -3155,8 +5256,17 @@
     {
       "ClassName": "Recipe_Alternate_Gunpowder_1_C",
       "DisplayName": "Alternate: Fine Black Powder",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Sulfur_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_CompactedCoal_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": true
@@ -3164,8 +5274,17 @@
     {
       "ClassName": "Recipe_Alternate_ElectromagneticControlRod_1_C",
       "DisplayName": "Alternate: Electromagnetic Connection Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Stator_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_HighSpeedConnector_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 15.000000,
       "IsAlternateRecipe": true
@@ -3173,8 +5292,21 @@
     {
       "ClassName": "Recipe_Alternate_CrystalOscillator_C",
       "DisplayName": "Alternate: Insulated Crystal Oscillator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_QuartzCrystal_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 7.0
+        },
+        {
+          "Key": "Desc_CircuitBoardHighSpeed_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 32.000000,
       "IsAlternateRecipe": true
@@ -3182,8 +5314,17 @@
     {
       "ClassName": "Recipe_Alternate_Concrete_C",
       "DisplayName": "Alternate: Fine Concrete",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Silica_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -3191,8 +5332,17 @@
     {
       "ClassName": "Recipe_Alternate_Computer_2_C",
       "DisplayName": "Alternate: Crystal Computer",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CircuitBoard_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_CrystalOscillator_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 36.000000,
       "IsAlternateRecipe": true
@@ -3200,8 +5350,21 @@
     {
       "ClassName": "Recipe_Alternate_Computer_1_C",
       "DisplayName": "Alternate: Caterium Computer",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CircuitBoard_C",
+          "Value": 4.0
+        },
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 14.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 6.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 16.000000,
       "IsAlternateRecipe": true
@@ -3209,8 +5372,17 @@
     {
       "ClassName": "Recipe_Alternate_CircuitBoard_2_C",
       "DisplayName": "Alternate: Caterium Circuit Board",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Plastic_C",
+          "Value": 10.0
+        },
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 30.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 48.000000,
       "IsAlternateRecipe": true
@@ -3218,8 +5390,17 @@
     {
       "ClassName": "Recipe_Alternate_CircuitBoard_1_C",
       "DisplayName": "Alternate: Silicon Circuit Board",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperSheet_C",
+          "Value": 11.0
+        },
+        {
+          "Key": "Desc_Silica_C",
+          "Value": 11.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -3227,8 +5408,17 @@
     {
       "ClassName": "Recipe_Alternate_Cable_2_C",
       "DisplayName": "Alternate: Quickwire Cable",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HighSpeedWire_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": true
@@ -3236,8 +5426,17 @@
     {
       "ClassName": "Recipe_Alternate_Cable_1_C",
       "DisplayName": "Alternate: Insulated Cable",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 9.0
+        },
+        {
+          "Key": "Desc_Rubber_C",
+          "Value": 6.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": true
@@ -3245,8 +5444,21 @@
     {
       "ClassName": "Recipe_Ficsonium_C",
       "DisplayName": "Ficsonium",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PlutoniumWaste_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_SingularityCell_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_DarkEnergy_C",
+          "Value": 20000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "HadronCollider",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -3254,8 +5466,25 @@
     {
       "ClassName": "Recipe_FicsoniumFuelRod_C",
       "DisplayName": "Ficsonium Fuel Rod",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Ficsonium_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_ElectromagneticControlRod_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_FicsiteMesh_C",
+          "Value": 40.0
+        },
+        {
+          "Key": "Desc_QuantumEnergy_C",
+          "Value": 20000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -3263,8 +5492,25 @@
     {
       "ClassName": "Recipe_SingularityCell_C",
       "DisplayName": "Singularity Cell",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_9_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_DarkMatter_C",
+          "Value": 20.0
+        },
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 100.0
+        },
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 200.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
@@ -3272,8 +5518,25 @@
     {
       "ClassName": "Recipe_SpaceElevatorPart_11_C",
       "DisplayName": "Ballistic Warp Drive",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpaceElevatorPart_8_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_SingularityCell_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_QuantumOscillator_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_DarkMatter_C",
+          "Value": 40.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ManufacturerMk1",
       "ManufactoringDuration": 60.000000,
       "IsAlternateRecipe": false
@@ -3281,8 +5544,13 @@
     {
       "ClassName": "Recipe_Quickwire_C",
       "DisplayName": "Quickwire",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_GoldIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": false
@@ -3290,8 +5558,13 @@
     {
       "ClassName": "Recipe_Biofuel_C",
       "DisplayName": "Solid Biofuel",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_GenericBiomass_C",
+          "Value": 8.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -3299,8 +5572,13 @@
     {
       "ClassName": "Recipe_Protein_Hog_C",
       "DisplayName": "Hog Protein",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HogParts_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -3308,8 +5586,13 @@
     {
       "ClassName": "Recipe_Protein_Spitter_C",
       "DisplayName": "Spitter Protein",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SpitterParts_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -3317,8 +5600,13 @@
     {
       "ClassName": "Recipe_Biomass_Mycelia_C",
       "DisplayName": "Biomass (Mycelia)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Mycelia_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -3326,8 +5614,13 @@
     {
       "ClassName": "Recipe_PowerCrystalShard_1_C",
       "DisplayName": "Power Shard (1)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Crystal_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 8.000000,
       "IsAlternateRecipe": false
@@ -3335,8 +5628,25 @@
     {
       "ClassName": "Recipe_AlienPowerFuel_C",
       "DisplayName": "Alien Power Matrix",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMFluctuator_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_CrystalShard_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_QuantumOscillator_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_QuantumEnergy_C",
+          "Value": 24000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -3344,8 +5654,13 @@
     {
       "ClassName": "Recipe_Protein_Stinger_C",
       "DisplayName": "Stinger Protein",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_StingerParts_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -3353,8 +5668,13 @@
     {
       "ClassName": "Recipe_Protein_Crab_C",
       "DisplayName": "Hatcher Protein",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_HatcherParts_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 3.000000,
       "IsAlternateRecipe": false
@@ -3362,8 +5682,13 @@
     {
       "ClassName": "Recipe_AlienDNACapsule_C",
       "DisplayName": "Alien DNA Capsule",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AlienProtein_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -3371,8 +5696,13 @@
     {
       "ClassName": "Recipe_Biomass_AlienProtein_C",
       "DisplayName": "Biomass (Alien Protein)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_AlienProtein_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -3380,8 +5710,17 @@
     {
       "ClassName": "Recipe_Alternate_PolyesterFabric_C",
       "DisplayName": "Alternate: Polyester Fabric",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_PolymerResin_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_Water_C",
+          "Value": 1000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": true
@@ -3389,8 +5728,17 @@
     {
       "ClassName": "Recipe_Fabric_C",
       "DisplayName": "Fabric",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Mycelia_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_GenericBiomass_C",
+          "Value": 5.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -3398,8 +5746,25 @@
     {
       "ClassName": "Recipe_SyntheticPowerShard_C",
       "DisplayName": "Synthetic Power Shard",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_TimeCrystal_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_DarkMatter_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_QuartzCrystal_C",
+          "Value": 12.0
+        },
+        {
+          "Key": "Desc_QuantumEnergy_C",
+          "Value": 12000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "QuantumEncoder",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -3407,8 +5772,13 @@
     {
       "ClassName": "Recipe_PowerCrystalShard_3_C",
       "DisplayName": "Power Shard (5)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Crystal_mk3_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
@@ -3416,8 +5786,13 @@
     {
       "ClassName": "Recipe_PowerCrystalShard_2_C",
       "DisplayName": "Power Shard (2)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Crystal_mk2_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -3425,8 +5800,21 @@
     {
       "ClassName": "Recipe_CartridgeChaos_C",
       "DisplayName": "Turbo Rifle Ammo",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CartridgeStandard_C",
+          "Value": 25.0
+        },
+        {
+          "Key": "Desc_AluminumCasing_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_LiquidTurboFuel_C",
+          "Value": 3000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Blender",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -3434,8 +5822,17 @@
     {
       "ClassName": "Recipe_GunpowderMK2_C",
       "DisplayName": "Smokeless Powder",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Gunpowder_C",
+          "Value": 2.0
+        },
+        {
+          "Key": "Desc_HeavyOilResidue_C",
+          "Value": 1000.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "Refinery",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -3443,8 +5840,25 @@
     {
       "ClassName": "Recipe_SpaceElevator_C",
       "DisplayName": "Space Elevator",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Cement_C",
+          "Value": 500.0
+        },
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 250.0
+        },
+        {
+          "Key": "Desc_IronRod_C",
+          "Value": 400.0
+        },
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 1500.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "(\"/Script/FactoryGame.FGBuildGun\")",
       "ManufactoringDuration": 1.000000,
       "IsAlternateRecipe": false
@@ -3452,8 +5866,13 @@
     {
       "ClassName": "Recipe_Biomass_Leaves_C",
       "DisplayName": "Biomass (Leaves)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Leaves_C",
+          "Value": 10.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 5.000000,
       "IsAlternateRecipe": false
@@ -3461,8 +5880,13 @@
     {
       "ClassName": "Recipe_Biomass_Wood_C",
       "DisplayName": "Biomass (Wood)",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Wood_C",
+          "Value": 4.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -3470,8 +5894,17 @@
     {
       "ClassName": "Recipe_IronPlateReinforced_C",
       "DisplayName": "Reinforced Iron Plate",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronPlate_C",
+          "Value": 6.0
+        },
+        {
+          "Key": "Desc_IronScrew_C",
+          "Value": 12.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "AssemblerMk1",
       "ManufactoringDuration": 12.000000,
       "IsAlternateRecipe": false
@@ -3479,8 +5912,13 @@
     {
       "ClassName": "Recipe_Concrete_C",
       "DisplayName": "Concrete",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Stone_C",
+          "Value": 3.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -3488,8 +5926,13 @@
     {
       "ClassName": "Recipe_Screw_C",
       "DisplayName": "Screw",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_IronRod_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 6.000000,
       "IsAlternateRecipe": false
@@ -3497,8 +5940,13 @@
     {
       "ClassName": "Recipe_Cable_C",
       "DisplayName": "Cable",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_Wire_C",
+          "Value": 2.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
@@ -3506,8 +5954,13 @@
     {
       "ClassName": "Recipe_Wire_C",
       "DisplayName": "Wire",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_CopperIngot_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
       "IsAlternateRecipe": false
@@ -3515,8 +5968,13 @@
     {
       "ClassName": "Recipe_IngotCopper_C",
       "DisplayName": "Copper Ingot",
-      "Ingredients": null,
-      "Products": null,
+      "Ingredients": [
+        {
+          "Key": "Desc_OreCopper_C",
+          "Value": 1.0
+        }
+      ],
+      "Products": [],
       "ProducedIn": "SmelterMk1",
       "ManufactoringDuration": 2.000000,
       "IsAlternateRecipe": false
