@@ -146,28 +146,8 @@ namespace SatisfactoryTree.ContentExtractor
                 {
                     decimal manufactoringDuration = 0;
                     decimal.TryParse(recipe.ManufactoringDuration, out manufactoringDuration);
-                    List<KeyValuePair<string?, decimal>>? ingredients = new();
-                    if (recipe.Ingredients != null)
-                    {
-                        // Remove outer parentheses
-                        string ingredientsString = recipe.Ingredients.Trim('(', ')');
-
-                        // Split by "),(" to get individual ingredient strings
-                        string[] ingredientPairs = ingredientsString.Split(new string[] { "),(" }, StringSplitOptions.None);
-
-                        foreach (string pair in ingredientPairs)
-                        {
-                            // Split by "," to get ItemClass and Amount
-                            string[] keyValue = pair.Split(',');
-
-                            string itemClass = GetTextAfterLastDot(keyValue[0].Split('=')[1].Trim('"'));
-                            string amount = keyValue[1].Split('=')[1];
-
-                            Console.WriteLine($"ItemClass: {itemClass}, Amount: {amount}");
-                            ingredients.Add(new(itemClass, decimal.Parse(amount)));
-                        }
-                    }
-                    List<KeyValuePair<string?, decimal>>? products = new();
+                    List<KeyValuePair<string?, decimal>>? ingredients = ProcessJSONList(recipe.Ingredients);
+                    List<KeyValuePair<string?, decimal>>? products = ProcessJSONList(recipe.Products);
                     processedResult.Recipes.Add(new NewRecipe(recipe.ClassName, recipe.DisplayName, ingredients, products, GetProcessedProducedIn(recipe.ProducedIn), manufactoringDuration, recipe.IsAlternateRecipe));
                 }
             }
@@ -179,7 +159,32 @@ namespace SatisfactoryTree.ContentExtractor
             return processedResult;
         }
 
-     private   static string GetTextAfterLastDot(string input)
+        private static List<KeyValuePair<string?, decimal>>? ProcessJSONList(string? list)
+        {
+            List<KeyValuePair<string?, decimal>>? result = new();
+            if (list != null)
+            {
+                // Remove outer parentheses
+                string listString = list.Trim('(', ')');
+
+                // Split by "),(" to get individual strings
+                string[] listPairs = listString.Split(new string[] { "),(" }, StringSplitOptions.None);
+
+                // Loop through the pairs
+                foreach (string pair in listPairs)
+                {
+                    // Split by "," to get ItemClass and Amount
+                    string[] keyValue = pair.Split(',');
+                    string itemClass = GetTextAfterLastDot(keyValue[0].Split('=')[1].Trim('"'));
+                    string amount = keyValue[1].Split('=')[1];
+                    //Console.WriteLine($"ItemClass: {itemClass}, Amount: {amount}");
+                    result.Add(new(itemClass, decimal.Parse(amount)));
+                }
+            }
+            return result;
+        }
+
+        private static string GetTextAfterLastDot(string input)
         {
             int lastDotIndex = input.LastIndexOf('.');
             if (lastDotIndex == -1)
