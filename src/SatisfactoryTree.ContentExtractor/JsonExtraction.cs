@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SatisfactoryTree.Models;
 using System.Diagnostics;
-using System.Linq;
 
 namespace SatisfactoryTree.ContentExtractor
 {
@@ -9,11 +8,10 @@ namespace SatisfactoryTree.ContentExtractor
     public class ProcessedResult
     {
         public List<NewItem> Items = new();
-        //public List<string> ItemList = new();
         public List<NewRecipe> Recipes = new();
-        //public List<string> RecipeList = new();
     }
 
+    // Read in the Satisfaction JSON file and extract the relevant (items, recipes, buildings) data into a cleaner format
     public class JsonExtraction
     {
         public static NewContent ExtractJsonFile()
@@ -30,12 +28,12 @@ namespace SatisfactoryTree.ContentExtractor
             string projectContentFile = Path.Combine(projectContentPath, "en-US.json");
 
             // If the file exists, copy it to the content folder, that is located in the content folder in the root of the project
-            if (System.IO.File.Exists(contentPath) &&
-                System.IO.Directory.Exists(projectContentPath))
+            if (File.Exists(contentPath) &&
+                Directory.Exists(projectContentPath))
             {
                 //Get the current directory
                 Debug.WriteLine("Copying file to " + projectContentPath);
-                System.IO.File.Copy(contentPath, projectContentFile, true);
+                File.Copy(contentPath, projectContentFile, true);
             }
             string jsonString = File.ReadAllText(projectContentFile);
             List<RawNativeClass>? rawJSONDoc = System.Text.Json.JsonSerializer.Deserialize<List<RawNativeClass>>(jsonString);
