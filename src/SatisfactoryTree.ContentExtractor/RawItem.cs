@@ -15,6 +15,8 @@ namespace SatisfactoryTree.ContentExtractor
         //Item properties
         [JsonPropertyName("mStackSize")]
         public string? StackSize { get; set; }
+        [JsonPropertyName("mPingColor")]
+        public string? PingColor { get; set; }
         [JsonPropertyName("mFluidColor")]
         public string? FluidColor { get; set; }
         [JsonPropertyName("mResourceSinkPoints")]

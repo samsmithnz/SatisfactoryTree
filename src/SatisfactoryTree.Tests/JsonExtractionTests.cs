@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SatisfactoryTree.ContentExtractor;
+using SatisfactoryTree.Models;
+using System.Diagnostics;
 
 namespace SatisfactoryTree.Tests
 {
@@ -19,21 +16,27 @@ namespace SatisfactoryTree.Tests
 
 
             // Act
-            ProcessedResult result = JsonExtraction.ExtractJsonFile();
+            NewContent result = JsonExtraction.ExtractJsonFile();
 
 
             // Assert
             Assert.IsNotNull(result);
-            foreach (string item in result.ItemList)
-            {
-                Debug.WriteLine(item);
-            }
-            foreach (string item in result.RecipeList)
-            {
-                Debug.WriteLine(item);
-            }
+            //foreach (NewItem item in result.Items)
+            //{
+            //    Debug.WriteLine($"DisplayName: {item.DisplayName}, ClassName: {item.ClassName}, StackSize: {item.StackSize}");
+            //}
+            //foreach (NewRecipe item in result.Recipes)
+            //{
+            //    Debug.WriteLine(($"ClassName: {item.ClassName}, DisplayName: {item.DisplayName}, Ingredients: {item.Ingredients}"));
+            //}
             Debug.WriteLine(result.Items.Count + " items");
             Debug.WriteLine(result.Recipes.Count + " recipes");
+            Debug.WriteLine(result.Buildings.Count + " buildings");
+            foreach (NewBuilding item in result.Buildings)
+            {
+                Debug.WriteLine(item.Name);
+            }
+
         }
     }
 }
