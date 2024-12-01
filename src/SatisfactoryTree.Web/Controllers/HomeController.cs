@@ -32,9 +32,9 @@ namespace SatisfactoryTree.Web.Controllers
 
         public IActionResult Production()
         {
-            SatisfactoryProduction satisfactoryProduction = new();
-            Item productionItem = ItemPoolTier1.Plastic();
-            decimal productionQuantity = 20M;
+            //SatisfactoryProduction satisfactoryProduction = new();
+            //Item productionItem = ItemPoolTier1.Plastic();
+            //decimal productionQuantity = 20M;
             //Item productionItem = ItemPoolTier3.ReinforcedIronPlate();
             //decimal productionQuantity = 5M;
 
