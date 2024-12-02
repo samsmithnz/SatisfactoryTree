@@ -1,23 +1,41 @@
 ﻿using SatisfactoryTree.Console.Interfaces;
+using System.Text.Json;
 
 namespace SatisfactoryTree.Console
 {
     public class Parts
     {
-        public static PartDataInterface GetItems(List<dynamic> data)
+        public static PartDataInterface GetItems(List<dynamic> rawData)
         {
-            var parts = new Dictionary<string, Part>();
-            var collectables = new Dictionary<string, string>();
-            var rawResources = GetRawResources(data);
+            Dictionary<string, Part> parts = new();
+            Dictionary<string, string> collectables = new();
+            List<JsonElement> data = new();
+            foreach (JsonElement entry in rawData)
+            {
+                if (entry.TryGetProperty("Classes", out JsonElement classesElement) && classesElement.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (JsonElement entryClass in classesElement.EnumerateArray())
+                    {
+                        data.Add(entryClass);
+                    }
+                }
+            }
+            Dictionary<string, RawResource> rawResources = GetRawResources(data);
 
             // Scan all recipes (not parts), looking for parts that are used in recipes.
-            var filteredData = data.Where((dynamic entry) => entry.Classes != null)
-                       .SelectMany((dynamic entry) => (IEnumerable<dynamic>)entry.Classes);
+            //var filteredData = rawData.Where((dynamic entry) => entry.Classes != null)
+            //           .SelectMany((dynamic entry) => (IEnumerable<dynamic>)entry.Classes);
 
-            foreach (var entry in filteredData)
+            foreach (JsonElement entry in data)
             {
+                string className = entry.GetProperty("ClassName").ToString();
+                string? displayName = entry.TryGetProperty("mDisplayName", out JsonElement mDisplayName) ? mDisplayName.GetString() : string.Empty;
+                string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
+                string? products = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
+                string? ingredients = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
+
                 // There are two exception products we need to check for and add to the parts list
-                if (entry.ClassName == "Desc_NuclearWaste_C")
+                if (className == "Desc_NuclearWaste_C")
                 {
                     // Note that this part id is NuclearWaste, not Uranium Waste
                     parts["NuclearWaste"] = new Part
@@ -25,23 +43,23 @@ namespace SatisfactoryTree.Console
                         Name = "Uranium Waste",
                         StackSize = 500, // SS_HUGE
                         IsFluid = Common.IsFluid("NuclearWaste"),
-                        IsFicsmas = Common.IsFicsmas(entry.mDisplayName),
+                        IsFicsmas = Common.IsFicsmas(displayName),
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_PlutoniumWaste_C")
+                else if (className == "Desc_PlutoniumWaste_C")
                 {
                     parts["PlutoniumWaste"] = new Part
                     {
                         Name = "Plutonium Waste",
                         StackSize = 500, // SS_HUGE
                         IsFluid = Common.IsFluid("PlutoniumWaste"),
-                        IsFicsmas = Common.IsFicsmas(entry.mDisplayName),
+                        IsFicsmas = Common.IsFicsmas(displayName),
                         EnergyGeneratedInMJ = 0
                     };
                 }
                 // These are exception products that aren't produced by mines or extractors, they are raw materials
-                else if (entry.ClassName == "Desc_Leaves_C")
+                else if (className == "Desc_Leaves_C")
                 {
                     parts["Leaves"] = new Part
                     {
@@ -52,7 +70,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 15
                     };
                 }
-                else if (entry.ClassName == "Desc_Wood_C")
+                else if (className == "Desc_Wood_C")
                 {
                     parts["Wood"] = new Part
                     {
@@ -63,7 +81,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 100
                     };
                 }
-                else if (entry.ClassName == "Desc_Mycelia_C")
+                else if (className == "Desc_Mycelia_C")
                 {
                     parts["Mycelia"] = new Part
                     {
@@ -74,7 +92,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 20
                     };
                 }
-                else if (entry.ClassName == "Desc_HogParts_C")
+                else if (className == "Desc_HogParts_C")
                 {
                     parts["HogParts"] = new Part
                     {
@@ -85,7 +103,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 250
                     };
                 }
-                else if (entry.ClassName == "Desc_SpitterParts_C")
+                else if (className == "Desc_SpitterParts_C")
                 {
                     parts["SpitterParts"] = new Part
                     {
@@ -96,7 +114,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 250
                     };
                 }
-                else if (entry.ClassName == "Desc_StingerParts_C")
+                else if (className == "Desc_StingerParts_C")
                 {
                     parts["StingerParts"] = new Part
                     {
@@ -107,7 +125,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 250
                     };
                 }
-                else if (entry.ClassName == "Desc_HatcherParts_C")
+                else if (className == "Desc_HatcherParts_C")
                 {
                     parts["HatcherParts"] = new Part
                     {
@@ -118,7 +136,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 250
                     };
                 }
-                else if (entry.ClassName == "Desc_DissolvedSilica_C")
+                else if (className == "Desc_DissolvedSilica_C")
                 {
                     // This is a special intermediate alt product
                     parts["DissolvedSilica"] = new Part
@@ -130,7 +148,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_LiquidOil_C")
+                else if (className == "Desc_LiquidOil_C")
                 {
                     // This is a special liquid raw material
                     parts["LiquidOil"] = new Part
@@ -142,7 +160,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_Gift_C")
+                else if (className == "Desc_Gift_C")
                 {
                     // this is a ficsmas collectable
                     parts["Gift"] = new Part
@@ -154,7 +172,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_Snow_C")
+                else if (className == "Desc_Snow_C")
                 {
                     // this is a ficsmas collectable
                     parts["Snow"] = new Part
@@ -166,7 +184,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_Crystal_C")
+                else if (className == "Desc_Crystal_C")
                 {
                     parts["Crystal"] = new Part
                     {
@@ -177,7 +195,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_Crystal_mk2_C")
+                else if (className == "Desc_Crystal_mk2_C")
                 {
                     parts["Crystal_mk2"] = new Part
                     {
@@ -188,7 +206,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_Crystal_mk3_C")
+                else if (className == "Desc_Crystal_mk3_C")
                 {
                     parts["Crystal_mk3"] = new Part
                     {
@@ -199,7 +217,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_SAM_C")
+                else if (className == "Desc_SAM_C")
                 {
                     parts["SAM"] = new Part
                     {
@@ -210,7 +228,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "Desc_CrystalShard_C")
+                else if (className == "Desc_CrystalShard_C")
                 {
                     parts["CrystalShard"] = new Part
                     {
@@ -221,7 +239,7 @@ namespace SatisfactoryTree.Console
                         EnergyGeneratedInMJ = 0
                     };
                 }
-                else if (entry.ClassName == "BP_ItemDescriptorPortableMiner_C")
+                else if (className == "BP_ItemDescriptorPortableMiner_C")
                 {
                     parts["PortableMiner"] = new Part
                     {
@@ -233,54 +251,72 @@ namespace SatisfactoryTree.Console
                     };
                 }
 
-                if (string.IsNullOrEmpty(entry.ClassName)) continue;
+                if (string.IsNullOrEmpty(className)) continue;
 
                 // Ensures it's a recipe, we only care about items that are produced within a recipe.
-                if (entry.mProducedIn == null) continue;
+                if (producedIn == null) continue;
 
-                if (Common.Blacklist.Any(building => entry.mProducedIn.Contains(building))) continue;
+                if (Common.Blacklist.Any(building => producedIn.Contains(building))) continue;
 
                 // Check if it's an alternate recipe and skip it for parts
-                if (entry.ClassName.StartsWith("Recipe_Alternate")) continue;
+                if (className.StartsWith("Recipe_Alternate")) continue;
 
                 // Check if it's an unpackage recipe and skip it for parts
-                if (entry.mDisplayName.Contains("Unpackage")) continue;
+                if (displayName != null && displayName.Contains("Unpackage")) continue;
 
                 // Extract the part name
-                var productMatches = System.Text.RegularExpressions.Regex.Matches(entry.mProduct, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)");
-
-                foreach (System.Text.RegularExpressions.Match match in productMatches)
+                if (products != null)
                 {
-                    var partName = Common.GetPartName(match.Groups[1].Value);  // Use the mProduct part name
-                    var friendlyName = Common.GetFriendlyName(entry.mDisplayName);  // Use the friendly name
+                    System.Text.RegularExpressions.MatchCollection productMatches = System.Text.RegularExpressions.Regex.Matches(products, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)");
 
-                    // Extract the product's Desc_ class name so we can find it in the class descriptors to get the stack size
-                    var productClass = System.Text.RegularExpressions.Regex.Match(match.Groups[0].Value, @"Desc_(.*?)\.Desc_")?.Groups[1].Value;
-
-                    var classDescriptor = data
-                        .SelectMany<dynamic, dynamic>((dynamic entry) => (IEnumerable<dynamic>)entry.Classes)
-                        .FirstOrDefault(e => e.ClassName == $"Desc_{productClass}_C");
-
-                    // Extract stack size
-                    var stackSize = StackSizeConvert(classDescriptor?.mStackSize ?? "SS_UNKNOWN");
-                    // Extract the energy value
-                    var energyValue = classDescriptor?.mEnergyValue ?? 0;
-
-                    // Check if the part is a collectable (e.g., Power Slug)
-                    if (IsCollectable(entry.mIngredients))
+                    foreach (System.Text.RegularExpressions.Match match in productMatches)
                     {
-                        collectables[partName] = friendlyName;
-                    }
-                    else
-                    {
-                        parts[partName] = new Part
+                        var partName = Common.GetPartName(match.Groups[1].Value);  // Use the mProduct part name
+                        var friendlyName = Common.GetFriendlyName(displayName);  // Use the friendly name
+
+                        // Extract the product's Desc_ class name so we can find it in the class descriptors to get the stack size
+                        var productClass = System.Text.RegularExpressions.Regex.Match(match.Groups[0].Value, @"Desc_(.*?)\.Desc_")?.Groups[1].Value;
+
+                        //var classDescriptor = rawData
+                        //    .SelectMany<dynamic, dynamic>((dynamic entry) => (IEnumerable<dynamic>)entry.Classes)
+                        //    .FirstOrDefault(e => e.ClassName == $"Desc_{productClass}_C");
+
+                        JsonElement? productItem = FindData(data, $"Desc_{productClass}_C");
+                        if (productItem != null)
                         {
-                            Name = friendlyName,
-                            StackSize = stackSize,
-                            IsFluid = Common.IsFluid(partName),
-                            IsFicsmas = Common.IsFicsmas(entry.mDisplayName),
-                            EnergyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
-                        };
+                            //Get the stack size
+                            string? stackSizeString = productItem.Value.TryGetProperty("mStackSize", out JsonElement mStackSizeElement) ? mStackSizeElement.GetString() : "SS_UNKNOWN";
+                            int stackSize = StackSizeConvert(stackSizeString);
+
+                            string? energyValueString = productItem.Value.TryGetProperty("mEnergyValue", out JsonElement energyValueElement) ? energyValueElement.GetString() : "0";
+                            double energyValue = 0;
+                            if (energyValueString != null)
+                            {
+                                energyValue = double.Parse(energyValueString);
+                            }
+
+                            // Extract stack size
+                            //var stackSize = 0;// StackSizeConvert(productItem?.mStackSize ?? "SS_UNKNOWN");
+                            // Extract the energy value
+                            //var energyValue = 0;// productItem?.mEnergyValue ?? 0;
+
+                            // Check if the part is a collectable (e.g., Power Slug)
+                            if (IsCollectable(ingredients))
+                            {
+                                collectables[partName] = friendlyName;
+                            }
+                            else
+                            {
+                                parts[partName] = new Part
+                                {
+                                    Name = friendlyName,
+                                    StackSize = stackSize,
+                                    IsFluid = Common.IsFluid(partName),
+                                    IsFicsmas = Common.IsFicsmas(displayName),
+                                    EnergyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
+                                };
+                            }
+                        }
                     }
                 }
             }
@@ -294,10 +330,29 @@ namespace SatisfactoryTree.Console
             };
         }
 
-        // Helper function to determine if an ingredient is a collectable (e.g., Power Slug)
-        public static bool IsCollectable(string ingredients)
+        private static JsonElement? FindData(List<JsonElement> data, string key)
         {
-            var collectableDescriptors = new List<string>
+            JsonElement? result = null;
+            foreach (JsonElement item in data)
+            {
+                string className = item.GetProperty("ClassName").ToString();
+                if (className == key)
+                {
+                    result = item;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        // Helper function to determine if an ingredient is a collectable (e.g., Power Slug)
+        public static bool IsCollectable(string? ingredients)
+        {
+            if (ingredients == null)
+            {
+                return false;
+            }
+            List<string> collectableDescriptors = new()
             {
                 "Desc_Crystal.Desc_Crystal_C",        // Blue Power Slug
                 "Desc_Crystal_mk2.Desc_Crystal_mk2_C", // Yellow Power Slug
@@ -307,7 +362,7 @@ namespace SatisfactoryTree.Console
             return collectableDescriptors.Any(descriptor => ingredients.Contains(descriptor));
         }
 
-        public static int StackSizeConvert(string stackSize)
+        public static int StackSizeConvert(string? stackSize)
         {
             // Convert e.g. SS_HUGE to 500
             switch (stackSize)
@@ -325,7 +380,7 @@ namespace SatisfactoryTree.Console
             }
         }
 
-        public static Dictionary<string, RawResource> GetRawResources(List<dynamic> data)
+        public static Dictionary<string, RawResource> GetRawResources(List<JsonElement> data)
         {
             var rawResources = new Dictionary<string, RawResource>();
             var limits = new Dictionary<string, long>
@@ -345,22 +400,21 @@ namespace SatisfactoryTree.Console
             { "Water", 9007199254740991 }
         };
 
-            var filteredData = data.Where((dynamic entry) => entry.Classes != null)
-                                   .SelectMany<dynamic, dynamic>((dynamic entry) => (IEnumerable<dynamic>)entry.Classes);
+            //var filteredData = data.Where((dynamic entry) => entry.Classes != null)
+            //                       .SelectMany<dynamic, dynamic>((dynamic entry) => (IEnumerable<dynamic>)entry.Classes);
 
-            foreach (var resource in filteredData)
+            foreach (JsonElement resource in data)
             {
-                var className = Common.GetPartName(resource.ClassName);
-                var displayName = resource.mDisplayName;
-
-                var resourceData = new RawResource
-                {
-                    Name = displayName,
-                    Limit = limits.ContainsKey(className) ? limits[className] : 0
-                };
+                string className = Common.GetPartName(resource.GetProperty("ClassName").ToString());
+                string? displayName = resource.TryGetProperty("mDisplayName", out JsonElement displayNameElement) ? displayNameElement.GetString() : string.Empty;
 
                 if (!string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(displayName))
                 {
+                    RawResource resourceData = new()
+                    {
+                        Name = displayName,
+                        Limit = limits.ContainsKey(className) ? limits[className] : 0
+                    };
                     rawResources[className] = resourceData;
                 }
             }

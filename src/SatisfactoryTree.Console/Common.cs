@@ -58,8 +58,12 @@ namespace SatisfactoryTree.Console
             return liquidProducts.Contains(productName) || gasProducts.Contains(productName);
         }
 
-        public static bool IsFicsmas(string displayName)
+        public static bool IsFicsmas(string? displayName)
         {
+            if (displayName == null)
+            {
+                return false;
+            }
             return displayName.Contains("FICSMAS", StringComparison.OrdinalIgnoreCase) ||
                    displayName.Contains("Gift", StringComparison.OrdinalIgnoreCase) ||
                    displayName.Contains("Snow", StringComparison.OrdinalIgnoreCase);
@@ -76,8 +80,12 @@ namespace SatisfactoryTree.Console
             return name;
         }
 
-        public static string GetFriendlyName(string name)
+        public static string GetFriendlyName(string? name)
         {
+            if (name == null)
+            {
+                return "";
+            }
             // Remove any text within brackets, including the brackets themselves
             return Regex.Replace(name, @"\s*\(.*?\)", "");
         }

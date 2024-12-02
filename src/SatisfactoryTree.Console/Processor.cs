@@ -35,10 +35,13 @@ namespace SatisfactoryTree.Console
             {
                 content = await File.ReadAllTextAsync(inputFile, Encoding.UTF8);
             }
+            // Remove BOM if it exists
+            if (content.Length > 0 && content[0] == '\uFEFF')
+            {
+                content = content.Substring(1);
+            }
             return NormalizeLineEndings(content);
         }
-
-
 
         // Helper function to normalize line endings
         public static string NormalizeLineEndings(string content)
@@ -83,59 +86,61 @@ namespace SatisfactoryTree.Console
 
         public static async Task<FinalData> ProcessFileAsync(string inputFile, string outputFile)
         {
-            try
+            //try
+            //{
+            //Read file contexts from text file
+            string fileContent = File.ReadAllText(inputFile);
+            //string fileContent = await ReadFileAsUtf8(inputFile);
+            //string cleanedContent = CleanInput(fileContent);
+            List<dynamic>? data = JsonSerializer.Deserialize<List<dynamic>>(fileContent);
+
+            // Get parts
+            PartDataInterface items = Parts.GetItems(data);
+            Parts.FixItemNames(items);
+
+            //// Get an array of all buildings that produce something
+            //var producingBuildings = Buildings.GetProducingBuildings(data);
+
+            //// Get power consumption for the producing buildings
+            //var buildings = Buildings.GetPowerConsumptionForBuildings(data, producingBuildings);
+
+            //// Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
+            //var recipes = Recipes.GetProductionRecipes(data, buildings);
+            //RemoveRubbishItems(items, recipes);
+            //Parts.FixTurbofuel(items, recipes);
+
+            //// IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
+            //var powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
+
+            // Since we've done some manipulation of the items data, re-sort it
+            var sortedItems = new Dictionary<string, Part>();
+            foreach (var key in items.Parts.Keys.OrderBy(k => k))
             {
-                string fileContent = await ReadFileAsUtf8(inputFile);
-                string cleanedContent = CleanInput(fileContent);
-                List<dynamic>? data = JsonSerializer.Deserialize<List<dynamic>>(cleanedContent);
-
-                // Get parts
-                PartDataInterface items = Parts.GetItems(data);
-                Parts.FixItemNames(items);
-
-                // Get an array of all buildings that produce something
-                var producingBuildings = Buildings.GetProducingBuildings(data);
-
-                // Get power consumption for the producing buildings
-                var buildings = Buildings.GetPowerConsumptionForBuildings(data, producingBuildings);
-
-                // Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
-                var recipes = Recipes.GetProductionRecipes(data, buildings);
-                RemoveRubbishItems(items, recipes);
-                Parts.FixTurbofuel(items, recipes);
-
-                // IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
-                var powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
-
-                // Since we've done some manipulation of the items data, re-sort it
-                var sortedItems = new Dictionary<string, Part>();
-                foreach (var key in items.Parts.Keys.OrderBy(k => k))
-                {
-                    sortedItems[key] = items.Parts[key];
-                }
-                items.Parts = sortedItems;
-
-                // Construct the final JSON object
-                FinalData finalData = new FinalData(
-                    buildings, 
-                    items, 
-                    recipes, 
-                    powerGenerationRecipes);
-
-
-                // Write the output to the file
-                var options = new JsonSerializerOptions { WriteIndented = true };
-                var outputJson = JsonSerializer.Serialize(finalData, options);
-                await File.WriteAllTextAsync(outputFile, outputJson);
-                System.Console.WriteLine($"Processed parts, buildings, and recipes have been written to {outputFile}.");
-
-                return finalData;
+                sortedItems[key] = items.Parts[key];
             }
-            catch (Exception ex)
-            {
-                System.Console.Error.WriteLine($"Error processing file: {ex.Message}");
-                return null;
-            }
+            items.Parts = sortedItems;
+
+            // Construct the final JSON object
+            FinalData finalData = new FinalData(
+                null,// buildings, 
+                items,
+                null,//                    recipes, 
+                null);//             powerGenerationRecipes);
+
+
+            // Write the output to the file
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var outputJson = JsonSerializer.Serialize(finalData, options);
+            await File.WriteAllTextAsync(outputFile, outputJson);
+            System.Console.WriteLine($"Processed parts, buildings, and recipes have been written to {outputFile}.");
+
+            return finalData;
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Console.Error.WriteLine($"Error processing file: {ex.Message}");
+            //    return null;
+            //}
         }
 
         public string InputFile { get; set; }

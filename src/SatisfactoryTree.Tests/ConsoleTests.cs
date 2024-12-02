@@ -1,9 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SatisfactoryTree.Helpers;
 using SatisfactoryTree.Console;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using SatisfactoryTree.Console.Interfaces;
+using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Tests;
 
@@ -11,7 +9,7 @@ namespace SatisfactoryTree.Tests;
 public class RecipesTests
 {
 
-    private FinalData results;
+    private FinalData? results = null;
 
     [TestInitialize]
     public async Task Initialize()
@@ -35,7 +33,8 @@ public class RecipesTests
         //Act
 
         //Assert
-        Assert.AreEqual(1, results.Items.Parts.Count);
+        Assert.IsNotNull(results);
+        Assert.AreEqual(179, results.Items.Parts.Count);
     }
 
 }
