@@ -10,15 +10,6 @@
       "ResourceSinkPoints": "1"
     },
     {
-      "ClassName": "Desc_Coal_C",
-      "DisplayName": "Coal",
-      "Description": "Mainly used as fuel for vehicles & Coal-Powered Generators, or in Steel production.",
-      "StackSize": 100,
-      "PingColor": "(R=0.048172,G=0.048172,B=0.048172,A=1.000000)",
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "3"
-    },
-    {
       "ClassName": "Desc_Water_C",
       "DisplayName": "Water",
       "Description": "It's water.",
@@ -26,6 +17,15 @@
       "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=0.000000)",
       "FluidColor": "(B=212,G=176,R=122,A=0)",
       "ResourceSinkPoints": "5"
+    },
+    {
+      "ClassName": "Desc_Coal_C",
+      "DisplayName": "Coal",
+      "Description": "Mainly used as fuel for vehicles & Coal-Powered Generators, or in Steel production.",
+      "StackSize": 100,
+      "PingColor": "(R=0.048172,G=0.048172,B=0.048172,A=1.000000)",
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "3"
     },
     {
       "ClassName": "Desc_NitrogenGas_C",
@@ -208,42 +208,6 @@
       "ResourceSinkPoints": "570"
     },
     {
-      "ClassName": "Desc_CompactedCoal_C",
-      "DisplayName": "Compacted Coal",
-      "Description": "A much more efficient alternative to Coal. Used as fuel for vehicles and Coal-Powered Generators.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "28"
-    },
-    {
-      "ClassName": "Desc_PackagedOilResidue_C",
-      "DisplayName": "Packaged Heavy Oil Residue",
-      "Description": "Heavy Oil Residue, packaged for alternative transport. Can be used as fuel for vehicles.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=120,G=45,R=109,A=255)",
-      "ResourceSinkPoints": "180"
-    },
-    {
-      "ClassName": "Desc_PetroleumCoke_C",
-      "DisplayName": "Petroleum Coke",
-      "Description": "Used for crafting.\r\nA carbon-rich material distilled from Heavy Oil Residue. \r\nUsed as a less efficient Coal replacement.",
-      "StackSize": 200,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "20"
-    },
-    {
-      "ClassName": "Desc_PackagedOil_C",
-      "DisplayName": "Packaged Oil",
-      "Description": "Crude Oil, packaged for alternative transport. Can be used as fuel for vehicles.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "180"
-    },
-    {
       "ClassName": "Desc_IronRod_C",
       "DisplayName": "Iron Rod",
       "Description": "Used for crafting.\r\nOne of the most basic parts.",
@@ -296,6 +260,15 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "140"
+    },
+    {
+      "ClassName": "Desc_CompactedCoal_C",
+      "DisplayName": "Compacted Coal",
+      "Description": "A much more efficient alternative to Coal. Used as fuel for vehicles and Coal-Powered Generators.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "28"
     },
     {
       "ClassName": "Desc_LiquidFuel_C",
@@ -507,7 +480,7 @@
     {
       "ClassName": "Desc_SpaceElevatorPart_12_C",
       "DisplayName": "AI Expansion Server",
-      "Description": "Project Part #12. Ship via the Space Elevator to complete phases of Project Assembly.\r\nPower Usage: 1500-2500 MW (2000 MW average).\r\n\r\nGrowth is the metric by which we measure success.",
+      "Description": "Project Part #12. Ship via the Space Elevator to complete phases of Project Assembly.\r\nPower Usage: 0-2000 MW (1000 MW average).\r\n\r\nGrowth is the metric by which we measure success.",
       "StackSize": 50,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
@@ -658,6 +631,15 @@
       "ResourceSinkPoints": "30"
     },
     {
+      "ClassName": "Desc_PetroleumCoke_C",
+      "DisplayName": "Petroleum Coke",
+      "Description": "Used for crafting.\r\nA carbon-rich material distilled from Heavy Oil Residue. \r\nUsed as a less efficient Coal replacement.",
+      "StackSize": 200,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "20"
+    },
+    {
       "ClassName": "Desc_QuartzCrystal_C",
       "DisplayName": "Quartz Crystal",
       "Description": "Derived from Raw Quartz. Used in the production of advanced radar technology and high-quality display screens.",
@@ -683,6 +665,24 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "1176"
+    },
+    {
+      "ClassName": "Desc_PackagedOil_C",
+      "DisplayName": "Packaged Oil",
+      "Description": "Crude Oil, packaged for alternative transport. Can be used as fuel for vehicles.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "180"
+    },
+    {
+      "ClassName": "Desc_PackagedOilResidue_C",
+      "DisplayName": "Packaged Heavy Oil Residue",
+      "Description": "Heavy Oil Residue, packaged for alternative transport. Can be used as fuel for vehicles.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=120,G=45,R=109,A=255)",
+      "ResourceSinkPoints": "180"
     },
     {
       "ClassName": "Desc_PackagedWater_C",
@@ -957,7 +957,7 @@
     {
       "ClassName": "Desc_SpaceElevatorPart_11_C",
       "DisplayName": "Ballistic Warp Drive",
-      "Description": "Project Part #11. Ship via the Space Elevator to complete phases of Project Assembly.\r\nPower Usage: 1000-2000 MW (1500 MW average).\r\n\r\nA large amount of force is required for the Warp Drives to activate, so sticking them to rockets was the logical next step. Additionally, results improved immensely when the observers were further removed from the Warp Drives upon activation.",
+      "Description": "Project Part #11. Ship via the Space Elevator to complete phases of Project Assembly.\r\n\r\nA large amount of force is required for the Warp Drives to activate, so sticking them to rockets was the logical next step. Additionally, results improved immensely when the observers were further removed from the Warp Drives upon activation.",
       "StackSize": 50,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
@@ -1027,22 +1027,13 @@
       "ResourceSinkPoints": "120"
     },
     {
-      "ClassName": "Desc_Biofuel_C",
-      "DisplayName": "Solid Biofuel",
-      "Description": "The most energy-efficient form of solid Biomass. Can be used as fuel for the Chainsaw.",
-      "StackSize": 200,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "48"
-    },
-    {
-      "ClassName": "Desc_PackagedBiofuel_C",
-      "DisplayName": "Packaged Liquid Biofuel",
-      "Description": "Liquid Biofuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
+      "ClassName": "Desc_CrystalShard_C",
+      "DisplayName": "Power Shard",
+      "Description": "Power Slug mucus compressed into a solid crystal-like shard. \r\nIt radiates a strange power.",
       "StackSize": 100,
       "PingColor": null,
-      "FluidColor": "(B=42,G=83,R=58,A=255)",
-      "ResourceSinkPoints": "370"
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "0"
     },
     {
       "ClassName": "Desc_GenericBiomass_C",
@@ -1054,6 +1045,15 @@
       "ResourceSinkPoints": "12"
     },
     {
+      "ClassName": "Desc_Biofuel_C",
+      "DisplayName": "Solid Biofuel",
+      "Description": "The most energy-efficient form of solid Biomass. Can be used as fuel for the Chainsaw.",
+      "StackSize": 200,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "48"
+    },
+    {
       "ClassName": "Desc_LiquidBiofuel_C",
       "DisplayName": "Liquid Biofuel",
       "Description": "Liquid Biofuel can be used as-is to generate power, or packaged to be used as fuel for vehicles.",
@@ -1061,6 +1061,15 @@
       "PingColor": null,
       "FluidColor": "(B=44,G=83,R=59,A=0)",
       "ResourceSinkPoints": "261"
+    },
+    {
+      "ClassName": "Desc_PackagedBiofuel_C",
+      "DisplayName": "Packaged Liquid Biofuel",
+      "Description": "Liquid Biofuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=42,G=83,R=58,A=255)",
+      "ResourceSinkPoints": "370"
     },
     {
       "ClassName": "Desc_PackagedAlumina_C",
@@ -1106,15 +1115,6 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "140"
-    },
-    {
-      "ClassName": "Desc_CrystalShard_C",
-      "DisplayName": "Power Shard",
-      "Description": "Power Slug mucus compressed into a solid crystal-like shard. \r\nIt radiates a strange power.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "0"
     },
     {
       "ClassName": "Desc_AlienPowerFuel_C",

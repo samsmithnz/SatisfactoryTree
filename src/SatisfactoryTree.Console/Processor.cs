@@ -86,55 +86,82 @@ namespace SatisfactoryTree.Console
 
         public static async Task<FinalData> ProcessFileAsync(string inputFile, string outputFile)
         {
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
             //try
             //{
             //Read file contexts from text file
             string fileContent = File.ReadAllText(inputFile);
             //string fileContent = await ReadFileAsUtf8(inputFile);
             //string cleanedContent = CleanInput(fileContent);
-            List<dynamic>? data = JsonSerializer.Deserialize<List<dynamic>>(fileContent);
+            List<dynamic>? rawData = JsonSerializer.Deserialize<List<dynamic>>(fileContent);
+            List<JsonElement> data = new();
+            if (rawData != null)
+            {
+                foreach (JsonElement entry in rawData)
+                {
+                    if (entry.TryGetProperty("Classes", out JsonElement classesElement) && classesElement.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (JsonElement entryClass in classesElement.EnumerateArray())
+                        {
+                            data.Add(entryClass);
+                        }
+                    }
+                }
+            }
 
-            // Get parts
-            PartDataInterface items = Parts.GetItems(data);
-            Parts.FixItemNames(items);
+            //// Get parts
+            //PartDataInterface items = Parts.GetItems(data);
+            //Parts.FixItemNames(items);
 
-            //// Get an array of all buildings that produce something
-            //var producingBuildings = Buildings.GetProducingBuildings(data);
+            //// get parts 2
+            //PartDataInterface items2 = Parts.GetItems2(data);
+            //Parts.FixItemNames(items2);
 
-            //// Get power consumption for the producing buildings
-            //var buildings = Buildings.GetPowerConsumptionForBuildings(data, producingBuildings);
+            // Get an array of all buildings that produce something
+            List<string> producingBuildings = Buildings.GetProducingBuildings(data);
 
-            //// Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
-            //var recipes = Recipes.GetProductionRecipes(data, buildings);
+            // Get power consumption for the producing buildings
+            Dictionary<string, double> buildings = Buildings.GetPowerConsumptionForBuildings(data, producingBuildings);
+
+            // Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
+            List<Recipe> recipes = Recipes.GetProductionRecipes(data, buildings);
             //RemoveRubbishItems(items, recipes);
-            //Parts.FixTurbofuel(items, recipes);
+            ////Parts.FixTurbofuel(items, recipes);
 
-            //// IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
+            ////// IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
             //var powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
 
-            // Since we've done some manipulation of the items data, re-sort it
-            var sortedItems = new Dictionary<string, Part>();
-            foreach (var key in items.Parts.Keys.OrderBy(k => k))
-            {
-                sortedItems[key] = items.Parts[key];
-            }
-            items.Parts = sortedItems;
+            //// Since we've done some manipulation of the items data, re-sort it
+            //Dictionary<string, Part> sortedItems = new();
+            //foreach (string? key in items.Parts.Keys.OrderBy(k => k))
+            //{
+            //    sortedItems[key] = items.Parts[key];
+            //}
+            //items.Parts = sortedItems;
 
-            // Construct the final JSON object
-            FinalData finalData = new FinalData(
-                null,// buildings, 
-                items,
-                null,//                    recipes, 
-                null);//             powerGenerationRecipes);
+            //// Construct the final JSON object
+            //FinalData finalData = new FinalData(
+            //    null,
+            //    items,
+            //    items2,
+            //    null,
+            //    null);
+            //buildings, 
+            //items,
+            //recipes, 
+            //powerGenerationRecipes);
 
 
-            // Write the output to the file
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var outputJson = JsonSerializer.Serialize(finalData, options);
-            await File.WriteAllTextAsync(outputFile, outputJson);
+            //// Write the output to the file
+            //JsonSerializerOptions options = new() { WriteIndented = true };
+            //string outputJson = JsonSerializer.Serialize(finalData, options);
+            //await File.WriteAllTextAsync(outputFile, outputJson);
+            stopwatch.Stop();
+
             System.Console.WriteLine($"Processed parts, buildings, and recipes have been written to {outputFile}.");
-
-            return finalData;
+            System.Console.WriteLine($"Total processing time: {stopwatch.Elapsed.TotalMilliseconds} ms");
+            return new();// finalData;
             //}
             //catch (Exception ex)
             //{
@@ -143,8 +170,8 @@ namespace SatisfactoryTree.Console
             //}
         }
 
-        public string InputFile { get; set; }
-        public string OutputFile { get; set; }
+        public string? InputFile { get; set; }
+        public string? OutputFile { get; set; }
         public void UpdateContent()
         {
             // Load the content file

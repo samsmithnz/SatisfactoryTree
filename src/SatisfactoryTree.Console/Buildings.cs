@@ -1,37 +1,41 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace SatisfactoryTree.Console
 {
     public class Buildings
     {
-        public static List<string> GetProducingBuildings(List<dynamic> data)
+        public static List<string> GetProducingBuildings(List<JsonElement> data)
         {
-            var producingBuildingsSet = new HashSet<string>();
-
-            var filteredData = data.Where(entry => entry.Classes != null)
-                                   .SelectMany<dynamic, dynamic>(entry => entry.Classes);
-
-            foreach (var entry in filteredData)
+            HashSet<string> producingBuildingsSet = new();
+            foreach (JsonElement entry in data)
             {
-                if (entry.mProducedIn != null)
+                string className = entry.GetProperty("ClassName").ToString();
+                string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
+
+                if (producedIn != null)
                 {
-                    var producedInBuildings = Regex.Matches(entry.mProducedIn, @"\/(\w+)\/(\w+)\.(\w+)_C")
+                    IEnumerable<string> producedInBuildings = Regex.Matches(producedIn, @"\/(\w+)\/(\w+)\.(\w+)_C")
                                                    .Cast<Match>()
-                                                   .Select((Func<Match, string>)(match =>
+                                                   .Select((match =>
                                                    {
-                                                       var building = match.Groups[2].Value;
+                                                       string building = match.Groups[2].Value;
                                                        return building.StartsWith("Build_", StringComparison.OrdinalIgnoreCase)
                                                               ? building.Replace("Build_", "", StringComparison.OrdinalIgnoreCase).ToLower()
                                                               : building.ToLower();
                                                    }))
                                                    .Where(new Func<string, bool>(buildingName => !string.IsNullOrEmpty(buildingName)));
 
-                    foreach (var buildingName in producedInBuildings)
+                    foreach (string? buildingName in producedInBuildings)
                     {
-                        producingBuildingsSet.Add(buildingName);
+                        if (buildingName != "bp_buildgun")
+                        {
+                            producingBuildingsSet.Add(buildingName);
+                        }
                     }
                 }
-                else if (entry.ClassName == "Desc_NuclearWaste_C")
+                else if (className == "Desc_NuclearWaste_C")
                 {
                     producingBuildingsSet.Add("nuclear power plant");
                 }
@@ -41,25 +45,30 @@ namespace SatisfactoryTree.Console
         }
 
 
-        public static Dictionary<string, double> GetPowerConsumptionForBuildings(List<dynamic> data, List<string> producingBuildings)
+        public static Dictionary<string, double> GetPowerConsumptionForBuildings(List<JsonElement> data, List<string> producingBuildings)
         {
             var buildingsPowerMap = new Dictionary<string, double>();
 
-            var filteredData = data.Where(entry => entry.Classes != null)
-                                   .SelectMany<dynamic, dynamic>(entry => entry.Classes);
+            //var filteredData = data.Where(entry => entry.Classes != null)
+            //                       .SelectMany<dynamic, dynamic>(entry => entry.Classes);
 
-            foreach (var building in filteredData)
+            foreach (JsonElement entry in data)
             {
-                if (building.ClassName != null && building.mPowerConsumption != null)
+                string className = entry.GetProperty("ClassName").ToString();
+                string powerConsumptionString = entry.TryGetProperty("mPowerConsumption", out JsonElement mPowerConsumption) ? mPowerConsumption.ToString() : string.Empty;
+                if (className != null && powerConsumptionString != "")
                 {
-                    // Normalize the building name by removing "_C" and lowercasing it
-                    string buildingName = building.ClassName.Replace("_C", "").ToLower();
-                    buildingName = buildingName.StartsWith("build_") ? buildingName.Replace("build_", "") : buildingName;
-
-                    // Only include power data if the building is in the producingBuildings list
-                    if (producingBuildings.Contains(buildingName))
+                    double powerConsumption = double.TryParse(powerConsumptionString, out double power) ? power : 0;
+                    if (powerConsumption > 0)
                     {
-                        buildingsPowerMap[buildingName] = double.TryParse(building.mPowerConsumption.ToString(), out double powerConsumption) ? powerConsumption : 0;
+                        // Normalize the building name by removing "_Build" prefix, "_C" suffix, and lowercasing it
+                        string buildingName = Common.GetBuildingName(className).ToLower();
+
+                        // Only include power data if the building is in the producingBuildings list
+                        if (producingBuildings.Contains(buildingName))
+                        {
+                            buildingsPowerMap[buildingName] = powerConsumption;
+                        }
                     }
                 }
             }

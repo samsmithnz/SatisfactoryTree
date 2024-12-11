@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using SatisfactoryTree.Console.Interfaces;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SatisfactoryTree.Console
 {
@@ -7,7 +10,7 @@ namespace SatisfactoryTree.Console
         // Blacklist for excluding items produced by the Build Gun
         public static readonly List<string> Blacklist = new List<string>
         {
-            "/Game/FactoryGame/Equipment/BuildGun/BP_BuildGun.BP_BuildGun_C"
+            "(\"/Game/FactoryGame/Equipment/BuildGun/BP_BuildGun.BP_BuildGun_C\")"
         };
 
         public static readonly List<string> Whitelist = new List<string>
@@ -71,7 +74,13 @@ namespace SatisfactoryTree.Console
 
         public static string GetRecipeName(string name)
         {
-            return name.Replace("Build_", "").Replace("_C", "");
+            return name.Replace(oldValue: "Recipe", "").Replace("_C", "");
+        }
+
+        public static string GetBuildingName(string name)
+        {
+            string building = name.Replace("Build_", "").Replace("_C", "");
+            return building;
         }
 
         public static string GetPartName(string name)
@@ -89,5 +98,6 @@ namespace SatisfactoryTree.Console
             // Remove any text within brackets, including the brackets themselves
             return Regex.Replace(name, @"\s*\(.*?\)", "");
         }
+       
     }
 }

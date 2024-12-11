@@ -25,7 +25,7 @@ public class RecipesTests
     }
 
     [TestMethod]
-    public void RecipeCountTest()
+    public void PartsCountTest()
     {
         //Arrange
         
@@ -34,7 +34,28 @@ public class RecipesTests
 
         //Assert
         Assert.IsNotNull(results);
+        //foreach (var item in results.Items.Parts)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(item.Key);
+        //}
         Assert.AreEqual(179, results.Items.Parts.Count);
+    }
+
+    [TestMethod]
+    public void Parts2CountTest()
+    {
+        //Arrange
+
+
+        //Act
+
+        //Assert
+        Assert.IsNotNull(results);
+        //foreach (var item in results.Items2.Parts)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(item.Key);
+        //}
+        Assert.AreEqual(0, results.Items2.Parts.Count);
     }
 
 }

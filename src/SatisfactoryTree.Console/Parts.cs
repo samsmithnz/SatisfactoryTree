@@ -5,21 +5,23 @@ namespace SatisfactoryTree.Console
 {
     public class Parts
     {
-        public static PartDataInterface GetItems(List<dynamic> rawData)
+        public static PartDataInterface GetItems2(List<JsonElement> data)
         {
             Dictionary<string, Part> parts = new();
             Dictionary<string, string> collectables = new();
-            List<JsonElement> data = new();
-            foreach (JsonElement entry in rawData)
+            Dictionary<string, RawResource> rawResources = GetRawResources(data);
+
+            foreach (JsonElement item in data)
             {
-                if (entry.TryGetProperty("Classes", out JsonElement classesElement) && classesElement.ValueKind == JsonValueKind.Array)
-                {
-                    foreach (JsonElement entryClass in classesElement.EnumerateArray())
-                    {
-                        data.Add(entryClass);
-                    }
-                }
+
             }
+            return new();
+        }
+
+        public static PartDataInterface GetItems(List<JsonElement> data)
+        {
+            Dictionary<string, Part> parts = new();
+            Dictionary<string, string> collectables = new();
             Dictionary<string, RawResource> rawResources = GetRawResources(data);
 
             // Scan all recipes (not parts), looking for parts that are used in recipes.
@@ -31,8 +33,8 @@ namespace SatisfactoryTree.Console
                 string className = entry.GetProperty("ClassName").ToString();
                 string? displayName = entry.TryGetProperty("mDisplayName", out JsonElement mDisplayName) ? mDisplayName.GetString() : string.Empty;
                 string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
-                string? products = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
                 string? ingredients = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
+                string? products = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
 
                 // There are two exception products we need to check for and add to the parts list
                 if (className == "Desc_NuclearWaste_C")
@@ -252,6 +254,10 @@ namespace SatisfactoryTree.Console
                 }
 
                 if (string.IsNullOrEmpty(className)) continue;
+                if (className == "Chainsaw")
+                {
+                    int i = 0;
+                }
 
                 // Ensures it's a recipe, we only care about items that are produced within a recipe.
                 if (producedIn == null) continue;
