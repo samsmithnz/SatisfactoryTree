@@ -18,7 +18,7 @@ namespace SatisfactoryTree.Console
             return new();
         }
 
-        public static PartDataInterface GetItems(List<JsonElement> data)
+        public static PartDataInterface GetItems(List<JsonElement> data, List<Recipe> recipes)
         {
             Dictionary<string, Part> parts = new();
             Dictionary<string, string> collectables = new();
@@ -28,306 +28,349 @@ namespace SatisfactoryTree.Console
             //var filteredData = rawData.Where((dynamic entry) => entry.Classes != null)
             //           .SelectMany((dynamic entry) => (IEnumerable<dynamic>)entry.Classes);
 
+            List<string> rawParts = new();
+            foreach (Recipe recipe in recipes)
+            {
+                foreach (Ingredient ingredient in recipe.Ingredients)
+                {
+                    if (!rawParts.Contains(ingredient.Part))
+                    {
+                        rawParts.Add(ingredient.Part);
+                    }
+                }
+                foreach (Product product in recipe.Products)
+                {
+                    if (!rawParts.Contains(product.Part))
+                    {
+                        rawParts.Add(product.Part);
+                    }
+                }
+            }
+
             foreach (JsonElement entry in data)
             {
                 string className = entry.GetProperty("ClassName").ToString();
+                string partName = Common.GetPartName(className);
+                if (!rawParts.Contains(partName))
+                {
+                    continue;
+                }
                 string? displayName = entry.TryGetProperty("mDisplayName", out JsonElement mDisplayName) ? mDisplayName.GetString() : string.Empty;
                 string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
-                string? ingredients = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
-                string? products = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
+                //string? ingredients = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
+                //string? products = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
 
-                // There are two exception products we need to check for and add to the parts list
-                if (className == "Desc_NuclearWaste_C")
+                //Get the stack size
+                string? stackSizeString = entry.TryGetProperty("mStackSize", out JsonElement mStackSizeElement) ? mStackSizeElement.GetString() : "SS_UNKNOWN";
+                int stackSize = StackSizeConvert(stackSizeString);
+
+                string? energyValueString = entry.TryGetProperty("mEnergyValue", out JsonElement energyValueElement) ? energyValueElement.GetString() : "0";
+                double energyValue = 0;
+                if (energyValueString != null)
                 {
-                    // Note that this part id is NuclearWaste, not Uranium Waste
-                    parts["NuclearWaste"] = new Part
-                    {
-                        Name = "Uranium Waste",
-                        StackSize = 500, // SS_HUGE
-                        IsFluid = Common.IsFluid("NuclearWaste"),
-                        IsFicsmas = Common.IsFicsmas(displayName),
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_PlutoniumWaste_C")
-                {
-                    parts["PlutoniumWaste"] = new Part
-                    {
-                        Name = "Plutonium Waste",
-                        StackSize = 500, // SS_HUGE
-                        IsFluid = Common.IsFluid("PlutoniumWaste"),
-                        IsFicsmas = Common.IsFicsmas(displayName),
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                // These are exception products that aren't produced by mines or extractors, they are raw materials
-                else if (className == "Desc_Leaves_C")
-                {
-                    parts["Leaves"] = new Part
-                    {
-                        Name = "Leaves",
-                        StackSize = 500, // SS_HUGE
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 15
-                    };
-                }
-                else if (className == "Desc_Wood_C")
-                {
-                    parts["Wood"] = new Part
-                    {
-                        Name = "Wood",
-                        StackSize = 200, // SS_BIG
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 100
-                    };
-                }
-                else if (className == "Desc_Mycelia_C")
-                {
-                    parts["Mycelia"] = new Part
-                    {
-                        Name = "Mycelia",
-                        StackSize = 200, // SS_BIG
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 20
-                    };
-                }
-                else if (className == "Desc_HogParts_C")
-                {
-                    parts["HogParts"] = new Part
-                    {
-                        Name = "Hog Remains",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 250
-                    };
-                }
-                else if (className == "Desc_SpitterParts_C")
-                {
-                    parts["SpitterParts"] = new Part
-                    {
-                        Name = "Spitter Remains",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 250
-                    };
-                }
-                else if (className == "Desc_StingerParts_C")
-                {
-                    parts["StingerParts"] = new Part
-                    {
-                        Name = "Stinger Remains",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 250
-                    };
-                }
-                else if (className == "Desc_HatcherParts_C")
-                {
-                    parts["HatcherParts"] = new Part
-                    {
-                        Name = "Hatcher Remains",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 250
-                    };
-                }
-                else if (className == "Desc_DissolvedSilica_C")
-                {
-                    // This is a special intermediate alt product
-                    parts["DissolvedSilica"] = new Part
-                    {
-                        Name = "Dissolved Silica",
-                        StackSize = 0, // SS_FLUID
-                        IsFluid = true,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_LiquidOil_C")
-                {
-                    // This is a special liquid raw material
-                    parts["LiquidOil"] = new Part
-                    {
-                        Name = "Liquid Oil",
-                        StackSize = 0, // SS_FLUID
-                        IsFluid = true,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_Gift_C")
-                {
-                    // this is a ficsmas collectable
-                    parts["Gift"] = new Part
-                    {
-                        Name = "Gift",
-                        StackSize = 500, // SS_HUGE
-                        IsFluid = false,
-                        IsFicsmas = true,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_Snow_C")
-                {
-                    // this is a ficsmas collectable
-                    parts["Snow"] = new Part
-                    {
-                        Name = "Snow",
-                        StackSize = 500, // SS_HUGE
-                        IsFluid = false,
-                        IsFicsmas = true,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_Crystal_C")
-                {
-                    parts["Crystal"] = new Part
-                    {
-                        Name = "Blue Power Slug",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_Crystal_mk2_C")
-                {
-                    parts["Crystal_mk2"] = new Part
-                    {
-                        Name = "Yellow Power Slug",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_Crystal_mk3_C")
-                {
-                    parts["Crystal_mk3"] = new Part
-                    {
-                        Name = "Purple Power Slug",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_SAM_C")
-                {
-                    parts["SAM"] = new Part
-                    {
-                        Name = "SAM",
-                        StackSize = 100, // SS_MEDIUM
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "Desc_CrystalShard_C")
-                {
-                    parts["CrystalShard"] = new Part
-                    {
-                        Name = "Power Shard",
-                        StackSize = 100, // SS_MEDIUM
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
-                }
-                else if (className == "BP_ItemDescriptorPortableMiner_C")
-                {
-                    parts["PortableMiner"] = new Part
-                    {
-                        Name = "Portable Miner",
-                        StackSize = 50, // SS_SMALL
-                        IsFluid = false,
-                        IsFicsmas = false,
-                        EnergyGeneratedInMJ = 0
-                    };
+                    energyValue = double.Parse(energyValueString);
                 }
 
-                if (string.IsNullOrEmpty(className)) continue;
+                parts[partName] = new Part
+                {
+                    Name = displayName,
+                    StackSize = stackSize,
+                    IsFluid = Common.IsFluid(partName),
+                    IsFicsmas = Common.IsFicsmas(displayName),
+                    EnergyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
+                };
 
-                // Ensures it's a recipe, we only care about items that are produced within a recipe.
-                if (producedIn == null) continue;
+                //// There are two exception products we need to check for and add to the parts list
+                //if (className == "Desc_NuclearWaste_C")
+                //{
+                //    // Note that this part id is NuclearWaste, not Uranium Waste
+                //    parts["NuclearWaste"] = new Part
+                //    {
+                //        Name = "Uranium Waste",
+                //        StackSize = 500, // SS_HUGE
+                //        IsFluid = Common.IsFluid("NuclearWaste"),
+                //        IsFicsmas = Common.IsFicsmas(displayName),
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_PlutoniumWaste_C")
+                //{
+                //    parts["PlutoniumWaste"] = new Part
+                //    {
+                //        Name = "Plutonium Waste",
+                //        StackSize = 500, // SS_HUGE
+                //        IsFluid = Common.IsFluid("PlutoniumWaste"),
+                //        IsFicsmas = Common.IsFicsmas(displayName),
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //// These are exception products that aren't produced by mines or extractors, they are raw materials
+                //else if (className == "Desc_Leaves_C")
+                //{
+                //    parts["Leaves"] = new Part
+                //    {
+                //        Name = "Leaves",
+                //        StackSize = 500, // SS_HUGE
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 15
+                //    };
+                //}
+                //else if (className == "Desc_Wood_C")
+                //{
+                //    parts["Wood"] = new Part
+                //    {
+                //        Name = "Wood",
+                //        StackSize = 200, // SS_BIG
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 100
+                //    };
+                //}
+                //else if (className == "Desc_Mycelia_C")
+                //{
+                //    parts["Mycelia"] = new Part
+                //    {
+                //        Name = "Mycelia",
+                //        StackSize = 200, // SS_BIG
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 20
+                //    };
+                //}
+                //else if (className == "Desc_HogParts_C")
+                //{
+                //    parts["HogParts"] = new Part
+                //    {
+                //        Name = "Hog Remains",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 250
+                //    };
+                //}
+                //else if (className == "Desc_SpitterParts_C")
+                //{
+                //    parts["SpitterParts"] = new Part
+                //    {
+                //        Name = "Spitter Remains",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 250
+                //    };
+                //}
+                //else if (className == "Desc_StingerParts_C")
+                //{
+                //    parts["StingerParts"] = new Part
+                //    {
+                //        Name = "Stinger Remains",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 250
+                //    };
+                //}
+                //else if (className == "Desc_HatcherParts_C")
+                //{
+                //    parts["HatcherParts"] = new Part
+                //    {
+                //        Name = "Hatcher Remains",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 250
+                //    };
+                //}
+                //else if (className == "Desc_DissolvedSilica_C")
+                //{
+                //    // This is a special intermediate alt product
+                //    parts["DissolvedSilica"] = new Part
+                //    {
+                //        Name = "Dissolved Silica",
+                //        StackSize = 0, // SS_FLUID
+                //        IsFluid = true,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_LiquidOil_C")
+                //{
+                //    // This is a special liquid raw material
+                //    parts["LiquidOil"] = new Part
+                //    {
+                //        Name = "Liquid Oil",
+                //        StackSize = 0, // SS_FLUID
+                //        IsFluid = true,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_Gift_C")
+                //{
+                //    // this is a ficsmas collectable
+                //    parts["Gift"] = new Part
+                //    {
+                //        Name = "Gift",
+                //        StackSize = 500, // SS_HUGE
+                //        IsFluid = false,
+                //        IsFicsmas = true,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_Snow_C")
+                //{
+                //    // this is a ficsmas collectable
+                //    parts["Snow"] = new Part
+                //    {
+                //        Name = "Snow",
+                //        StackSize = 500, // SS_HUGE
+                //        IsFluid = false,
+                //        IsFicsmas = true,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_Crystal_C")
+                //{
+                //    parts["Crystal"] = new Part
+                //    {
+                //        Name = "Blue Power Slug",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_Crystal_mk2_C")
+                //{
+                //    parts["Crystal_mk2"] = new Part
+                //    {
+                //        Name = "Yellow Power Slug",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_Crystal_mk3_C")
+                //{
+                //    parts["Crystal_mk3"] = new Part
+                //    {
+                //        Name = "Purple Power Slug",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_SAM_C")
+                //{
+                //    parts["SAM"] = new Part
+                //    {
+                //        Name = "SAM",
+                //        StackSize = 100, // SS_MEDIUM
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "Desc_CrystalShard_C")
+                //{
+                //    parts["CrystalShard"] = new Part
+                //    {
+                //        Name = "Power Shard",
+                //        StackSize = 100, // SS_MEDIUM
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
+                //else if (className == "BP_ItemDescriptorPortableMiner_C")
+                //{
+                //    parts["PortableMiner"] = new Part
+                //    {
+                //        Name = "Portable Miner",
+                //        StackSize = 50, // SS_SMALL
+                //        IsFluid = false,
+                //        IsFicsmas = false,
+                //        EnergyGeneratedInMJ = 0
+                //    };
+                //}
 
-                if (Common.Blacklist.Any(building => producedIn.Contains(building))) continue;
+                //if (string.IsNullOrEmpty(className)) continue;
+
+                //// Ensures it's a recipe, we only care about items that are produced within a recipe.
+                //if (producedIn == null) continue;
+
+                //if (Common.Blacklist.Any(building => producedIn.Contains(building))) continue;
 
                 // Check if it's an alternate recipe and skip it for parts
-                if (className.StartsWith("Recipe_Alternate")) continue;
+                //if (className.StartsWith("Recipe_Alternate")) continue;
 
                 // Check if it's an unpackage recipe and skip it for parts
-                if (displayName != null && displayName.Contains("Unpackage")) continue;
+                //if (displayName != null && displayName.Contains("Unpackage")) continue;
 
-                // Extract the part name
-                if (products != null)
-                {
-                    System.Text.RegularExpressions.MatchCollection productMatches = System.Text.RegularExpressions.Regex.Matches(products, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)");
+                //// Extract the part name
+                //if (products != null)
+                //{
+                //    System.Text.RegularExpressions.MatchCollection productMatches = System.Text.RegularExpressions.Regex.Matches(products, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)");
 
-                    foreach (System.Text.RegularExpressions.Match match in productMatches)
-                    {
-                        var partName = Common.GetPartName(match.Groups[1].Value);  // Use the mProduct part name
-                        var friendlyName = Common.GetFriendlyName(displayName);  // Use the friendly name
+                //    foreach (System.Text.RegularExpressions.Match match in productMatches)
+                //    {
+                //        var partName = Common.GetPartName(match.Groups[1].Value);  // Use the mProduct part name
+                //        var friendlyName = Common.GetFriendlyName(displayName);  // Use the friendly name
 
-                        // Extract the product's Desc_ class name so we can find it in the class descriptors to get the stack size
-                        var productClass = System.Text.RegularExpressions.Regex.Match(match.Groups[0].Value, @"Desc_(.*?)\.Desc_")?.Groups[1].Value;
+                //        // Extract the product's Desc_ class name so we can find it in the class descriptors to get the stack size
+                //        var productClass = System.Text.RegularExpressions.Regex.Match(match.Groups[0].Value, @"Desc_(.*?)\.Desc_")?.Groups[1].Value;
 
-                        //var classDescriptor = rawData
-                        //    .SelectMany<dynamic, dynamic>((dynamic entry) => (IEnumerable<dynamic>)entry.Classes)
-                        //    .FirstOrDefault(e => e.ClassName == $"Desc_{productClass}_C");
+                //        //var classDescriptor = rawData
+                //        //    .SelectMany<dynamic, dynamic>((dynamic entry) => (IEnumerable<dynamic>)entry.Classes)
+                //        //    .FirstOrDefault(e => e.ClassName == $"Desc_{productClass}_C");
 
-                        JsonElement? productItem = FindData(data, $"Desc_{productClass}_C");
-                        if (productItem != null)
-                        {
-                            //Get the stack size
-                            string? stackSizeString = productItem.Value.TryGetProperty("mStackSize", out JsonElement mStackSizeElement) ? mStackSizeElement.GetString() : "SS_UNKNOWN";
-                            int stackSize = StackSizeConvert(stackSizeString);
+                //        JsonElement? productItem = FindData(data, $"Desc_{productClass}_C");
+                //        if (productItem != null)
+                //        {
+                //            //Get the stack size
+                //            string? stackSizeString = productItem.Value.TryGetProperty("mStackSize", out JsonElement mStackSizeElement) ? mStackSizeElement.GetString() : "SS_UNKNOWN";
+                //            int stackSize = StackSizeConvert(stackSizeString);
 
-                            string? energyValueString = productItem.Value.TryGetProperty("mEnergyValue", out JsonElement energyValueElement) ? energyValueElement.GetString() : "0";
-                            double energyValue = 0;
-                            if (energyValueString != null)
-                            {
-                                energyValue = double.Parse(energyValueString);
-                            }
+                //            string? energyValueString = productItem.Value.TryGetProperty("mEnergyValue", out JsonElement energyValueElement) ? energyValueElement.GetString() : "0";
+                //            double energyValue = 0;
+                //            if (energyValueString != null)
+                //            {
+                //                energyValue = double.Parse(energyValueString);
+                //            }
 
-                            // Extract stack size
-                            //var stackSize = 0;// StackSizeConvert(productItem?.mStackSize ?? "SS_UNKNOWN");
-                            // Extract the energy value
-                            //var energyValue = 0;// productItem?.mEnergyValue ?? 0;
+                //            // Extract stack size
+                //            //var stackSize = 0;// StackSizeConvert(productItem?.mStackSize ?? "SS_UNKNOWN");
+                //            // Extract the energy value
+                //            //var energyValue = 0;// productItem?.mEnergyValue ?? 0;
 
-                            // Check if the part is a collectable (e.g., Power Slug)
-                            if (IsCollectable(ingredients))
-                            {
-                                collectables[partName] = friendlyName;
-                            }
-                            else
-                            {
-                                parts[partName] = new Part
-                                {
-                                    Name = friendlyName,
-                                    StackSize = stackSize,
-                                    IsFluid = Common.IsFluid(partName),
-                                    IsFicsmas = Common.IsFicsmas(displayName),
-                                    EnergyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
-                                };
-                            }
-                        }
-                    }
-                }
+                //            // Check if the part is a collectable (e.g., Power Slug)
+                //            if (IsCollectable(ingredients))
+                //            {
+                //                collectables[partName] = friendlyName;
+                //            }
+                //            else
+                //            {
+                //                parts[partName] = new Part
+                //                {
+                //                    Name = friendlyName,
+                //                    StackSize = stackSize,
+                //                    IsFluid = Common.IsFluid(partName),
+                //                    IsFicsmas = Common.IsFicsmas(displayName),
+                //                    EnergyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
+                //                };
+                //            }
+                //        }
+                //    }
+                //}
             }
 
             // Sort the parts and collectables by key
             return new PartDataInterface
             {
                 Parts = parts.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                Collectables = collectables.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
                 RawResources = rawResources
             };
         }

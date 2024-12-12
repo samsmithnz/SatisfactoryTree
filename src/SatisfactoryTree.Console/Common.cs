@@ -87,6 +87,10 @@ namespace SatisfactoryTree.Console
 
         public static string GetPartName(string name)
         {
+            if (name == "BP_ItemDescriptorPortableMiner_C")
+            {
+                return "PortableMiner";
+            }
             name = name.Replace("Desc_", "").Replace("_C", "");
             return name;
         }

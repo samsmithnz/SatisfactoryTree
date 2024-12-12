@@ -39,7 +39,6 @@ namespace SatisfactoryTree.Console
             //                           return validBuilding;
             //                       });
 
-            List<string> rawParts = new();
             foreach (JsonElement entry in data)
             {
                 //Debug.Write(entry.ToString());
@@ -50,6 +49,10 @@ namespace SatisfactoryTree.Console
                     continue;
                 }
                 string className = entry.GetProperty("ClassName").ToString();
+                if (className == "Recipe_Alternate_AutomatedMiner_C")
+                {
+                    int i = 90;
+                }
                 string? ingredientsJSON = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
                 string? productsJSON = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
                 string? manufacturingDurationJSON = entry.TryGetProperty("mManufactoringDuration", out JsonElement mManufactoringDuration) ? mManufactoringDuration.GetString() : string.Empty;
@@ -67,9 +70,9 @@ namespace SatisfactoryTree.Console
                     {
                         foreach (Match match in ingredientMatches)
                         {
-                            string partName = ingredientMatches[0].Groups[1].Value;
+                            string partName = match.Groups[1].Value;
                             double partAmount = 0;
-                            double.TryParse(ingredientMatches[0].Groups[2].Value, out partAmount);
+                            double.TryParse(match.Groups[2].Value, out partAmount);
                             if (Common.IsFluid(partName))
                             {
                                 partAmount = partAmount / 1000;
@@ -85,10 +88,6 @@ namespace SatisfactoryTree.Console
                                 Amount = partAmount,
                                 PerMin = perMin
                             });
-                            if (!rawParts.Contains(partName))
-                            {
-                                rawParts.Add(partName);
-                            }
                         }
                     }
                 }
@@ -97,14 +96,23 @@ namespace SatisfactoryTree.Console
                 List<Product> products = new();
                 if (productsJSON != null && productsJSON.Length > 0)
                 {
-                    MatchCollection productMatches = Regex.Matches(productsJSON, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)");
+                    MatchCollection productMatches;
+                    if (className == "Recipe_Alternate_AutomatedMiner_C")
+                    {
+                        // BP_ItemDescriptorPortableMiner_C
+                        productMatches = Regex.Matches(productsJSON, @"ItemClass="".*?\/BP_ItemDescriptor(.*?)\.BP_ItemDescriptor.*?"",Amount=(\d+)");
+                    }
+                    else
+                    {
+                        productMatches = Regex.Matches(productsJSON, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)");
+                    }
                     if (productMatches != null)
                     {
                         foreach (Match match in productMatches)
                         {
-                            string partName = productMatches[0].Groups[1].Value;
+                            string partName = match.Groups[1].Value;
                             double partAmount = 0;
-                            double.TryParse(productMatches[0].Groups[2].Value, out partAmount);
+                            double.TryParse(match.Groups[2].Value, out partAmount);
                             if (Common.IsFluid(partName))
                             {
                                 partAmount = partAmount / 1000;
@@ -121,10 +129,6 @@ namespace SatisfactoryTree.Console
                                 PerMin = perMin,
                                 IsByProduct = products.Count > 0
                             });
-                            if (!rawParts.Contains(partName))
-                            {
-                                rawParts.Add(partName);
-                            }
                         }
                     }
                 }

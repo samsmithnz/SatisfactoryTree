@@ -12,7 +12,6 @@
     public class PartDataInterface
     {
         public Dictionary<string, Part> Parts { get; set; }
-        public Dictionary<string, string> Collectables { get; set; }
         public Dictionary<string, RawResource> RawResources { get; set; }
     }
 

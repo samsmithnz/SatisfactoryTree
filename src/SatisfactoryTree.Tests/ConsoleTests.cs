@@ -29,23 +29,21 @@ public class RecipesTests
     {
         //Arrange
         
-
         //Act
 
         //Assert
         Assert.IsNotNull(results);
-        //foreach (var item in results.Items.Parts)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(item.Key);
-        //}
-        Assert.AreEqual(179, results.Items.Parts.Count);
+        foreach (var item in results.Items.Parts)
+        {
+            System.Diagnostics.Debug.WriteLine(results.Items.Parts[item.Key].Name);
+        }
+        Assert.AreEqual(168, results.Items.Parts.Count);
     }
 
     [TestMethod]
     public void RecipesCountTest()
     {
         //Arrange
-
 
         //Act
 
