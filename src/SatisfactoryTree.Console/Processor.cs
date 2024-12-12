@@ -140,28 +140,24 @@ namespace SatisfactoryTree.Console
             //}
             //items.Parts = sortedItems;
 
-            //// Construct the final JSON object
-            //FinalData finalData = new FinalData(
-            //    null,
-            //    items,
-            //    items2,
-            //    null,
-            //    null);
-            //buildings, 
-            //items,
-            //recipes, 
-            //powerGenerationRecipes);
+            // Construct the final JSON object
+            FinalData finalData = new FinalData(
+                buildings,
+                null, //  items,
+                null, //items2,
+                recipes,
+                null);// powerGenerationRecipes);
 
 
-            //// Write the output to the file
-            //JsonSerializerOptions options = new() { WriteIndented = true };
-            //string outputJson = JsonSerializer.Serialize(finalData, options);
-            //await File.WriteAllTextAsync(outputFile, outputJson);
+            // Write the output to the file
+            JsonSerializerOptions options = new() { WriteIndented = true };
+            string outputJson = JsonSerializer.Serialize(finalData, options);
+            await File.WriteAllTextAsync(outputFile, outputJson);
             stopwatch.Stop();
 
             System.Console.WriteLine($"Processed parts, buildings, and recipes have been written to {outputFile}.");
             System.Console.WriteLine($"Total processing time: {stopwatch.Elapsed.TotalMilliseconds} ms");
-            return new();// finalData;
+            return finalData;
             //}
             //catch (Exception ex)
             //{

@@ -42,7 +42,7 @@ public class RecipesTests
     }
 
     [TestMethod]
-    public void Parts2CountTest()
+    public void RecipesCountTest()
     {
         //Arrange
 
@@ -55,7 +55,7 @@ public class RecipesTests
         //{
         //    System.Diagnostics.Debug.WriteLine(item.Key);
         //}
-        Assert.AreEqual(0, results.Items2.Parts.Count);
+        Assert.AreEqual(314, results.Recipes.Count);
     }
 
 }

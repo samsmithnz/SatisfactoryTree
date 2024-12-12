@@ -44,7 +44,7 @@ namespace SatisfactoryTree.Console
             {
                 //Debug.Write(entry.ToString());
                 string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
-                if (producedIn == "" || Common.Blacklist.Contains(producedIn))
+                if (string.IsNullOrEmpty(producedIn) || Common.Blacklist.Contains(producedIn))
                 {
                     continue;
                 }
@@ -118,7 +118,8 @@ namespace SatisfactoryTree.Console
                             {
                                 Part = partName,
                                 Amount = partAmount,
-                                PerMin = perMin
+                                PerMin = perMin,
+                                IsByProduct = products.Count > 0
                             });
                             if (!rawParts.Contains(partName))
                             {
