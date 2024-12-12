@@ -44,12 +44,12 @@ namespace SatisfactoryTree.Console
             {
                 //Debug.Write(entry.ToString());
                 string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
+                string? displayName = entry.TryGetProperty("mDisplayName", out JsonElement mDisplayName) ? mDisplayName.GetString() : string.Empty;
                 if (string.IsNullOrEmpty(producedIn) || Common.Blacklist.Contains(producedIn))
                 {
                     continue;
                 }
                 string className = entry.GetProperty("ClassName").ToString();
-                string? displayName = entry.TryGetProperty("mDisplayName", out JsonElement mDisplayName) ? mDisplayName.GetString() : string.Empty;
                 string? ingredientsJSON = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
                 string? productsJSON = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
                 string? manufacturingDurationJSON = entry.TryGetProperty("mManufactoringDuration", out JsonElement mManufactoringDuration) ? mManufactoringDuration.GetString() : string.Empty;
@@ -204,11 +204,6 @@ namespace SatisfactoryTree.Console
                 //    });
                 //}
 
-                if (className == "Recipe_IronPlate_C")
-                {
-                    int i = 0;
-                }
-
                 // Extract all producing buildings
                 var producedInMatches = Regex.Matches(producedIn, @"Build_\w+_C");
                 //.Cast<Match>()
@@ -220,6 +215,7 @@ namespace SatisfactoryTree.Console
                 //                             .Select((Func<Match, string>)(m => m.Groups[2].Value.ToLower()))
                 //                             //.Where((Func<string, bool>)(building => building != null && !sourceArray.Contains(building)))
                 //                             .ToList();
+
 
                 // Calculate power per building and choose the most relevant one
                 double powerPerBuilding = 0;

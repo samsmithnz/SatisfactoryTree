@@ -4443,36 +4443,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "BladeRunners",
-      "DisplayName": "Blade Runners",
-      "Ingredients": [
-        {
-          "Part": "Silica",
-          "Amount": 20,
-          "PerMin": 20
-        },
-        {
-          "Part": "Silica",
-          "Amount": 20,
-          "PerMin": 20
-        },
-        {
-          "Part": "Silica",
-          "Amount": 20,
-          "PerMin": 20
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "XmasBall2",
       "DisplayName": "Blue FICSMAS Ornament",
       "Ingredients": [
@@ -4547,31 +4517,6 @@
       "Building": {
         "Name": "constructormk1",
         "Power": 4,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "CandyCaneBasher",
-      "DisplayName": "Candy Cane Basher",
-      "Ingredients": [
-        {
-          "Part": "CandyCane",
-          "Amount": 25,
-          "PerMin": 18.75
-        },
-        {
-          "Part": "CandyCane",
-          "Amount": 25,
-          "PerMin": 18.75
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -4663,48 +4608,6 @@
       "Building": {
         "Name": "converter",
         "Power": 200,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "Chainsaw",
-      "DisplayName": "Chainsaw",
-      "Ingredients": [
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 5,
-          "PerMin": 5
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 5,
-          "PerMin": 5
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 5,
-          "PerMin": 5
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 5,
-          "PerMin": 5
-        }
-      ],
-      "Products": [
-        {
-          "Part": "Chainsaw",
-          "Amount": 1,
-          "PerMin": 1,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -5529,43 +5432,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "FactoryCart",
-      "DisplayName": "Factory Cart\u2122",
-      "Ingredients": [
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 4,
-          "PerMin": 12
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 4,
-          "PerMin": 12
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 4,
-          "PerMin": 12
-        }
-      ],
-      "Products": [
-        {
-          "Part": "GolfCart",
-          "Amount": 1,
-          "PerMin": 3,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "Fireworks_02",
       "DisplayName": "Fancy Fireworks",
       "Ingredients": [
@@ -6090,36 +5956,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "Gasmask",
-      "DisplayName": "Gas Mask",
-      "Ingredients": [
-        {
-          "Part": "Fabric",
-          "Amount": 50,
-          "PerMin": 50
-        },
-        {
-          "Part": "Fabric",
-          "Amount": 50,
-          "PerMin": 50
-        },
-        {
-          "Part": "Fabric",
-          "Amount": 50,
-          "PerMin": 50
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "NobeliskGas",
       "DisplayName": "Gas Nobelisk",
       "Ingredients": [
@@ -6152,43 +5988,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "GoldenCart",
-      "DisplayName": "Golden Factory Cart\u2122",
-      "Ingredients": [
-        {
-          "Part": "GoldIngot",
-          "Amount": 15,
-          "PerMin": 45
-        },
-        {
-          "Part": "GoldIngot",
-          "Amount": 15,
-          "PerMin": 45
-        },
-        {
-          "Part": "GoldIngot",
-          "Amount": 15,
-          "PerMin": 45
-        }
-      ],
-      "Products": [
-        {
-          "Part": "GolfCartGold",
-          "Amount": 1,
-          "PerMin": 3,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "Proteinrab",
       "DisplayName": "Hatcher Protein",
       "Ingredients": [
@@ -6209,41 +6008,6 @@
       "Building": {
         "Name": "constructormk1",
         "Power": 4,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "HazmatSuit",
-      "DisplayName": "Hazmat Suit",
-      "Ingredients": [
-        {
-          "Part": "Rubber",
-          "Amount": 50,
-          "PerMin": 25
-        },
-        {
-          "Part": "Rubber",
-          "Amount": 50,
-          "PerMin": 25
-        },
-        {
-          "Part": "Rubber",
-          "Amount": 50,
-          "PerMin": 25
-        },
-        {
-          "Part": "Rubber",
-          "Amount": 50,
-          "PerMin": 25
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -6414,41 +6178,6 @@
       "Building": {
         "Name": "assemblermk1",
         "Power": 15,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "Hoverpack",
-      "DisplayName": "Hoverpack",
-      "Ingredients": [
-        {
-          "Part": "Motor",
-          "Amount": 8,
-          "PerMin": 4
-        },
-        {
-          "Part": "Motor",
-          "Amount": 8,
-          "PerMin": 4
-        },
-        {
-          "Part": "Motor",
-          "Amount": 8,
-          "PerMin": 4
-        },
-        {
-          "Part": "Motor",
-          "Amount": 8,
-          "PerMin": 4
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -6696,41 +6425,6 @@
       "Building": {
         "Name": "constructormk1",
         "Power": 4,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "JetPack",
-      "DisplayName": "Jetpack",
-      "Ingredients": [
-        {
-          "Part": "Motor",
-          "Amount": 5,
-          "PerMin": 5
-        },
-        {
-          "Part": "Motor",
-          "Amount": 5,
-          "PerMin": 5
-        },
-        {
-          "Part": "Motor",
-          "Amount": 5,
-          "PerMin": 5
-        },
-        {
-          "Part": "Motor",
-          "Amount": 5,
-          "PerMin": 5
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -7116,31 +6810,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "NobeliskDetonator",
-      "DisplayName": "Nobelisk Detonator",
-      "Ingredients": [
-        {
-          "Part": "SteelPlate",
-          "Amount": 10,
-          "PerMin": 7.5
-        },
-        {
-          "Part": "SteelPlate",
-          "Amount": 10,
-          "PerMin": 7.5
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "NonFissileUranium",
       "DisplayName": "Non-Fissile Uranium",
       "Ingredients": [
@@ -7256,73 +6925,6 @@
       "Building": {
         "Name": "manufacturermk1",
         "Power": 55,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "NutritionalInhaler",
-      "DisplayName": "Nutritional Inhaler",
-      "Ingredients": [
-        {
-          "Part": "Shroom",
-          "Amount": 1,
-          "PerMin": 3
-        },
-        {
-          "Part": "Shroom",
-          "Amount": 1,
-          "PerMin": 3
-        },
-        {
-          "Part": "Shroom",
-          "Amount": 1,
-          "PerMin": 3
-        }
-      ],
-      "Products": [
-        {
-          "Part": "Medkit",
-          "Amount": 1,
-          "PerMin": 3,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "ObjectScanner",
-      "DisplayName": "Object Scanner",
-      "Ingredients": [
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 4,
-          "PerMin": 6
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 4,
-          "PerMin": 6
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 4,
-          "PerMin": 6
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -7714,38 +7316,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "Parachute",
-      "DisplayName": "Parachute",
-      "Ingredients": [
-        {
-          "Part": "Fabric",
-          "Amount": 20,
-          "PerMin": 30
-        },
-        {
-          "Part": "Fabric",
-          "Amount": 20,
-          "PerMin": 30
-        }
-      ],
-      "Products": [
-        {
-          "Part": "Parachute",
-          "Amount": 1,
-          "PerMin": 1.5,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "PetroleumCoke",
       "DisplayName": "Petroleum Coke",
       "Ingredients": [
@@ -7880,31 +7450,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "PortableMiner",
-      "DisplayName": "Portable Miner",
-      "Ingredients": [
-        {
-          "Part": "IronPlate",
-          "Amount": 2,
-          "PerMin": 3
-        },
-        {
-          "Part": "IronPlate",
-          "Amount": 2,
-          "PerMin": 3
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "PowerCrystalShard_1",
       "DisplayName": "Power Shard (1)",
       "Ingredients": [
@@ -8011,38 +7556,6 @@
       "Building": {
         "Name": "assemblermk1",
         "Power": 15,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "MedicinalInhalerAlienOrgans",
-      "DisplayName": "Protein Inhaler",
-      "Ingredients": [
-        {
-          "Part": "AlienProtein",
-          "Amount": 1,
-          "PerMin": 3
-        },
-        {
-          "Part": "AlienProtein",
-          "Amount": 1,
-          "PerMin": 3
-        }
-      ],
-      "Products": [
-        {
-          "Part": "Medkit",
-          "Amount": 1,
-          "PerMin": 3,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -8264,43 +7777,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "RebarGun",
-      "DisplayName": "Rebar Gun",
-      "Ingredients": [
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 6,
-          "PerMin": 6
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 6,
-          "PerMin": 6
-        },
-        {
-          "Part": "IronPlateReinforced",
-          "Amount": 6,
-          "PerMin": 6
-        }
-      ],
-      "Products": [
-        {
-          "Part": "RebarGunProjectile",
-          "Amount": 1,
-          "PerMin": 1,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "XmasBall1",
       "DisplayName": "Red FICSMAS Ornament",
       "Ingredients": [
@@ -8444,41 +7920,6 @@
       "Building": {
         "Name": "oilrefinery",
         "Power": 30,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "SpaceRifleMk1",
-      "DisplayName": "Rifle",
-      "Ingredients": [
-        {
-          "Part": "Motor",
-          "Amount": 2,
-          "PerMin": 1
-        },
-        {
-          "Part": "Motor",
-          "Amount": 2,
-          "PerMin": 1
-        },
-        {
-          "Part": "Motor",
-          "Amount": 2,
-          "PerMin": 1
-        },
-        {
-          "Part": "Motor",
-          "Amount": 2,
-          "PerMin": 1
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -8897,48 +8338,6 @@
       "Building": {
         "Name": "constructormk1",
         "Power": 4,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "SpaceElevator",
-      "DisplayName": "Space Elevator",
-      "Ingredients": [
-        {
-          "Part": "Cement",
-          "Amount": 500,
-          "PerMin": 30000
-        },
-        {
-          "Part": "Cement",
-          "Amount": 500,
-          "PerMin": 30000
-        },
-        {
-          "Part": "Cement",
-          "Amount": 500,
-          "PerMin": 30000
-        },
-        {
-          "Part": "Cement",
-          "Amount": 500,
-          "PerMin": 30000
-        }
-      ],
-      "Products": [
-        {
-          "Part": "SpaceElevator",
-          "Amount": 1,
-          "PerMin": 60,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -9441,43 +8840,6 @@
       "Building": {
         "Name": "quantumencoder",
         "Power": 1000,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "TherapeuticInhaler",
-      "DisplayName": "Therapeutic Inhaler",
-      "Ingredients": [
-        {
-          "Part": "Mycelia",
-          "Amount": 15,
-          "PerMin": 45
-        },
-        {
-          "Part": "Mycelia",
-          "Amount": 15,
-          "PerMin": 45
-        },
-        {
-          "Part": "Mycelia",
-          "Amount": 15,
-          "PerMin": 45
-        }
-      ],
-      "Products": [
-        {
-          "Part": "Medkit",
-          "Amount": 1,
-          "PerMin": 3,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },
@@ -10199,38 +9561,6 @@
       "IsFicsmas": false
     },
     {
-      "Id": "MedicinalInhaler",
-      "DisplayName": "Vitamin Inhaler",
-      "Ingredients": [
-        {
-          "Part": "Mycelia",
-          "Amount": 10,
-          "PerMin": 30
-        },
-        {
-          "Part": "Mycelia",
-          "Amount": 10,
-          "PerMin": 30
-        }
-      ],
-      "Products": [
-        {
-          "Part": "Medkit",
-          "Amount": 1,
-          "PerMin": 3,
-          "IsByProduct": false
-        }
-      ],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
       "Id": "Wire",
       "DisplayName": "Wire",
       "Ingredients": [
@@ -10251,101 +9581,6 @@
       "Building": {
         "Name": "constructormk1",
         "Power": 4,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "XenoBasher",
-      "DisplayName": "Xeno-Basher",
-      "Ingredients": [
-        {
-          "Part": "ModularFrame",
-          "Amount": 5,
-          "PerMin": 3.75
-        },
-        {
-          "Part": "ModularFrame",
-          "Amount": 5,
-          "PerMin": 3.75
-        },
-        {
-          "Part": "ModularFrame",
-          "Amount": 5,
-          "PerMin": 3.75
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "XenoZapper",
-      "DisplayName": "Xeno-Zapper",
-      "Ingredients": [
-        {
-          "Part": "IronRod",
-          "Amount": 10,
-          "PerMin": 15
-        },
-        {
-          "Part": "IronRod",
-          "Amount": 10,
-          "PerMin": 15
-        },
-        {
-          "Part": "IronRod",
-          "Amount": 10,
-          "PerMin": 15
-        },
-        {
-          "Part": "IronRod",
-          "Amount": 10,
-          "PerMin": 15
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
-        "MinPower": null,
-        "MaxPower": null
-      },
-      "IsAlternate": false,
-      "IsFicsmas": false
-    },
-    {
-      "Id": "ZipLine",
-      "DisplayName": "Zipline",
-      "Ingredients": [
-        {
-          "Part": "HighSpeedWire",
-          "Amount": 30,
-          "PerMin": 45
-        },
-        {
-          "Part": "HighSpeedWire",
-          "Amount": 30,
-          "PerMin": 45
-        },
-        {
-          "Part": "HighSpeedWire",
-          "Amount": 30,
-          "PerMin": 45
-        }
-      ],
-      "Products": [],
-      "Building": {
-        "Name": "",
-        "Power": 0,
         "MinPower": null,
         "MaxPower": null
       },

@@ -110,9 +110,9 @@ namespace SatisfactoryTree.Console
                 }
             }
 
-            //// Get parts
-            //PartDataInterface items = Parts.GetItems(data);
-            //Parts.FixItemNames(items);
+            // Get parts
+            PartDataInterface items = Parts.GetItems(data);
+            Parts.FixItemNames(items);
 
             //// get parts 2
             //PartDataInterface items2 = Parts.GetItems2(data);
@@ -132,13 +132,13 @@ namespace SatisfactoryTree.Console
             ////// IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
             //var powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
 
-            //// Since we've done some manipulation of the items data, re-sort it
-            //Dictionary<string, Part> sortedItems = new();
-            //foreach (string? key in items.Parts.Keys.OrderBy(k => k))
-            //{
-            //    sortedItems[key] = items.Parts[key];
-            //}
-            //items.Parts = sortedItems;
+            // Since we've done some manipulation of the items data, re-sort it
+            Dictionary<string, Part> sortedItems = new();
+            foreach (string? key in items.Parts.Keys.OrderBy(k => k))
+            {
+                sortedItems[key] = items.Parts[key];
+            }
+            items.Parts = sortedItems;
 
             // Construct the final JSON object
             FinalData finalData = new FinalData(
@@ -155,7 +155,7 @@ namespace SatisfactoryTree.Console
             await File.WriteAllTextAsync(outputFile, outputJson);
             stopwatch.Stop();
 
-            System.Console.WriteLine($"Processed parts, buildings, and recipes have been written to {outputFile}.");
+            System.Console.WriteLine($"Processed ${items.Parts.Count} parts, ${buildings.Count} buildings, and ${recipes.Count} recipes, all written to {outputFile}.");
             System.Console.WriteLine($"Total processing time: {stopwatch.Elapsed.TotalMilliseconds} ms");
             return finalData;
             //}

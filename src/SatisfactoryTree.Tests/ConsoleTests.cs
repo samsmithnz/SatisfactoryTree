@@ -51,11 +51,11 @@ public class RecipesTests
 
         //Assert
         Assert.IsNotNull(results);
-        //foreach (var item in results.Items2.Parts)
+        //foreach (var item in results.Recipes)
         //{
-        //    System.Diagnostics.Debug.WriteLine(item.Key);
+        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
         //}
-        Assert.AreEqual(314, results.Recipes.Count);
+        Assert.AreEqual(291, results.Recipes.Count);
     }
 
 }

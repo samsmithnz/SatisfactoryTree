@@ -254,10 +254,6 @@ namespace SatisfactoryTree.Console
                 }
 
                 if (string.IsNullOrEmpty(className)) continue;
-                if (className == "Chainsaw")
-                {
-                    int i = 0;
-                }
 
                 // Ensures it's a recipe, we only care about items that are produced within a recipe.
                 if (producedIn == null) continue;

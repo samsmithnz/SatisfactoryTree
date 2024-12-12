@@ -10,7 +10,9 @@ namespace SatisfactoryTree.Console
         // Blacklist for excluding items produced by the Build Gun
         public static readonly List<string> Blacklist = new List<string>
         {
-            "(\"/Game/FactoryGame/Equipment/BuildGun/BP_BuildGun.BP_BuildGun_C\")"
+            "(\"/Game/FactoryGame/Equipment/BuildGun/BP_BuildGun.BP_BuildGun_C\")",
+            "(\"/Script/FactoryGame.FGBuildGun\")",
+            "(\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkshopComponent.BP_WorkshopComponent_C\")"
         };
 
         public static readonly List<string> Whitelist = new List<string>
