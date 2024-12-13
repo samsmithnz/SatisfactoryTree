@@ -257,25 +257,28 @@ namespace SatisfactoryTree.Console
                 double? highPower = null;
                 if (selectedBuilding == "hadroncollider" || selectedBuilding == "converter" || selectedBuilding == "quantumencoder")
                 {
-                    double lowPowerLocal = 0;
-                    double highPowerLocal = 0;
                     // Get the power from the recipe instead of the building
+                    double lowPowerTemp = 0;
+                    double highPowerTemp = 0;
                     string? lowPowerJson = entry.GetProperty("mVariablePowerConsumptionConstant").ToString();
                     string? highPowerJson = entry.GetProperty("mVariablePowerConsumptionFactor").ToString();
-                    //lowPower = double.TryParse(lowPowerJson, out lp) ? lp : (double?)null;
-                    //highPower = double.TryParse(highPowerJson, out hp) ? hp : (double?)null;
 
                     if (lowPowerJson != null)
                     {
-                        double.TryParse(lowPowerJson.ToString(), out lowPowerLocal);
+                        double.TryParse(lowPowerJson.ToString(), out lowPowerTemp);
+                        lowPower = lowPowerTemp;
                     }
                     if (highPowerJson != null)
                     {
-                        double.TryParse(highPowerJson.ToString(), out highPowerLocal);
+                        double.TryParse(highPowerJson.ToString(), out highPowerTemp);
+                        highPower = highPowerTemp;
                     }
 
                     // Calculate the average power
-                    powerPerBuilding = (lowPowerLocal + highPowerLocal) / 2;
+                    if (lowPower != null && highPower != null)
+                    {
+                        powerPerBuilding = (double)((lowPower + highPower) / 2);
+                    }
 
                 }
 
