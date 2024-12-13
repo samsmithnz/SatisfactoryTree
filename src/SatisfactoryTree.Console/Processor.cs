@@ -102,11 +102,11 @@ namespace SatisfactoryTree.Console
 
             // Since we've done some manipulation of the items data, re-sort it
             Dictionary<string, Part> sortedItems = new();
-            foreach (string? key in items.Parts.Keys.OrderBy(k => k))
+            foreach (string? key in items.parts.Keys.OrderBy(k => k))
             {
-                sortedItems[key] = items.Parts[key];
+                sortedItems[key] = items.parts[key];
             }
-            items.Parts = sortedItems;
+            items.parts = sortedItems;
 
             // Construct the final JSON object
             FinalData finalData = new FinalData(
@@ -122,7 +122,7 @@ namespace SatisfactoryTree.Console
             await File.WriteAllTextAsync(outputFile, outputJson);
             stopwatch.Stop();
 
-            System.Console.WriteLine($"Processed {items.Parts.Count} parts, {buildings.Count} buildings, and {recipes.Count} recipes, all written to {outputFile}.");
+            System.Console.WriteLine($"Processed {items.parts.Count} parts, {buildings.Count} buildings, and {recipes.Count} recipes, all written to {outputFile}.");
             System.Console.WriteLine($"Total processing time: {stopwatch.Elapsed.TotalMilliseconds} ms");
             return finalData;
             //}

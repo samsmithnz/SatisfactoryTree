@@ -33,11 +33,11 @@ public class RecipesTests
 
         //Assert
         Assert.IsNotNull(results);
-        foreach (var item in results.Items.Parts)
+        foreach (var item in results.items.parts)
         {
-            System.Diagnostics.Debug.WriteLine(results.Items.Parts[item.Key].Name);
+            System.Diagnostics.Debug.WriteLine(results.items.parts[item.Key].name);
         }
-        Assert.AreEqual(168, results.Items.Parts.Count);
+        Assert.AreEqual(168, results.items.parts.Count);
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ public class RecipesTests
         //{
         //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
         //}
-        Assert.AreEqual(291, results.Recipes.Count);
+        Assert.AreEqual(291, results.recipes.Count);
     }
 
     [TestMethod]
@@ -69,7 +69,7 @@ public class RecipesTests
         //{
         //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
         //}
-        Assert.AreEqual(12, results.Buildings.Count);
+        Assert.AreEqual(12, results.buildings.Count);
     }
 
     [TestMethod]
@@ -85,7 +85,7 @@ public class RecipesTests
         //{
         //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
         //}
-        Assert.AreEqual(17, results.PowerGenerationRecipes.Count);
+        Assert.AreEqual(17, results.powerGenerationRecipes.Count);
     }
 
 }

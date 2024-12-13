@@ -2,52 +2,52 @@
 {
     public class Ingredient
     {
-        public string Part { get; set; }
-        public double Amount { get; set; }
-        public double PerMin { get; set; }
+        public string part { get; set; }
+        public double amount { get; set; }
+        public double perMin { get; set; }
     }
 
     public class Product
     {
-        public string Part { get; set; }
-        public double Amount { get; set; }
-        public double PerMin { get; set; }
-        public bool? IsByProduct { get; set; }
+        public string part { get; set; }
+        public double amount { get; set; }
+        public double perMin { get; set; }
+        public bool? isByProduct { get; set; }
     }
 
     public class Recipe
     {
-        public string Id { get; set; }
-        public string DisplayName { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
-        public List<Product> Products { get; set; }
-        public Building Building { get; set; }
-        public bool IsAlternate { get; set; }
-        public bool IsFicsmas { get; set; }
+        public string id { get; set; }
+        public string displayName { get; set; }
+        public List<Ingredient> ingredients { get; set; }
+        public List<Product> products { get; set; }
+        public Building building { get; set; }
+        public bool isAlternate { get; set; }
+        public bool isFicsmas { get; set; }
     }
 
     public class PowerGenerationRecipe
     {
-        public string Id { get; set; }
-        public string DisplayName { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
-        public List<Product> Products { get; set; }
-        public Building Building { get; set; }
+        public string id { get; set; }
+        public string displayName { get; set; }
+        public List<Ingredient> ingredients { get; set; }
+        public List<Product> products { get; set; }
+        public Building building { get; set; }
     }
 
     public class Fuel
     {
-        public string PrimaryFuel { get; set; }
-        public string SupplementalResource { get; set; }
-        public string ByProduct { get; set; }
-        public double ByProductAmount { get; set; }
+        public string primaryFuel { get; set; }
+        public string supplementaryFuel { get; set; }
+        public string byProduct { get; set; }
+        public double byProductAmount { get; set; }
     }
 
     public class Building
     {
-        public string Name { get; set; }
-        public double Power { get; set; }
-        public double? MinPower { get; set; }
-        public double? MaxPower { get; set; }
+        public string name { get; set; }
+        public double power { get; set; }
+        public double? minPower { get; set; }
+        public double? maxPower { get; set; }
     }
 }

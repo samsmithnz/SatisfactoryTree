@@ -31,18 +31,18 @@ namespace SatisfactoryTree.Console
             List<string> rawParts = new();
             foreach (Recipe recipe in recipes)
             {
-                foreach (Ingredient ingredient in recipe.Ingredients)
+                foreach (Ingredient ingredient in recipe.ingredients)
                 {
-                    if (!rawParts.Contains(ingredient.Part))
+                    if (!rawParts.Contains(ingredient.part))
                     {
-                        rawParts.Add(ingredient.Part);
+                        rawParts.Add(ingredient.part);
                     }
                 }
-                foreach (Product product in recipe.Products)
+                foreach (Product product in recipe.products)
                 {
-                    if (!rawParts.Contains(product.Part))
+                    if (!rawParts.Contains(product.part))
                     {
-                        rawParts.Add(product.Part);
+                        rawParts.Add(product.part);
                     }
                 }
             }
@@ -73,11 +73,11 @@ namespace SatisfactoryTree.Console
 
                 parts[partName] = new Part
                 {
-                    Name = displayName,
-                    StackSize = stackSize,
-                    IsFluid = Common.IsFluid(partName),
-                    IsFicsmas = Common.IsFicsmas(displayName),
-                    EnergyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
+                    name = displayName,
+                    stackSize = stackSize,
+                    isFluid = Common.IsFluid(partName),
+                    isFicsmas = Common.IsFicsmas(displayName),
+                    energyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
                 };
 
                 //// There are two exception products we need to check for and add to the parts list
@@ -370,8 +370,8 @@ namespace SatisfactoryTree.Console
             // Sort the parts and collectables by key
             return new PartDataInterface
             {
-                Parts = parts.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                RawResources = rawResources
+                parts = parts.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                rawResources = rawResources
             };
         }
 
@@ -457,8 +457,8 @@ namespace SatisfactoryTree.Console
                 {
                     RawResource resourceData = new()
                     {
-                        Name = displayName,
-                        Limit = limits.ContainsKey(className) ? limits[className] : 0
+                        name = displayName,
+                        limit = limits.ContainsKey(className) ? limits[className] : 0
                     };
                     rawResources[className] = resourceData;
                 }
@@ -467,20 +467,20 @@ namespace SatisfactoryTree.Console
             // Manually add "Leaves" and "Wood" to the rawResources list
             rawResources["Leaves"] = new RawResource
             {
-                Name = "Leaves",
-                Limit = limits.ContainsKey("Leaves") ? limits["Leaves"] : 100000000
+                name = "Leaves",
+                limit = limits.ContainsKey("Leaves") ? limits["Leaves"] : 100000000
             };
 
             rawResources["Wood"] = new RawResource
             {
-                Name = "Wood",
-                Limit = limits.ContainsKey("Wood") ? limits["Wood"] : 100000000
+                name = "Wood",
+                limit = limits.ContainsKey("Wood") ? limits["Wood"] : 100000000
             };
 
             rawResources["Mycelia"] = new RawResource
             {
-                Name = "Mycelia",
-                Limit = limits.ContainsKey("Mycelia") ? limits["Mycelia"] : 100000000
+                name = "Mycelia",
+                limit = limits.ContainsKey("Mycelia") ? limits["Mycelia"] : 100000000
             };
 
             return rawResources;
@@ -505,9 +505,9 @@ namespace SatisfactoryTree.Console
 
             foreach (var search in fixItems.Keys)
             {
-                if (items.Parts.ContainsKey(search))
+                if (items.parts.ContainsKey(search))
                 {
-                    items.Parts[search].Name = fixItems[search];
+                    items.parts[search].name = fixItems[search];
                 }
             }
         }
@@ -515,47 +515,47 @@ namespace SatisfactoryTree.Console
         public static void FixTurbofuel(PartDataInterface items, List<Recipe> recipes)
         {
             // Rename the current "Turbofuel" which is actually "Packaged Turbofuel"
-            items.Parts["PackagedTurboFuel"] = items.Parts["TurboFuel"];
+            items.parts["PackagedTurboFuel"] = items.parts["TurboFuel"];
 
             // Add the actual "Turbofuel" as a new item
-            items.Parts["LiquidTurboFuel"] = new Part
+            items.parts["LiquidTurboFuel"] = new Part
             {
-                Name = "Turbofuel",
-                StackSize = 0,
-                IsFluid = true,
-                IsFicsmas = false,
-                EnergyGeneratedInMJ = 2000
+                name = "Turbofuel",
+                stackSize = 0,
+                isFluid = true,
+                isFicsmas = false,
+                energyGeneratedInMJ = 2000
             };
 
             // Rename the packaged item to PackagedTurboFuel
-            items.Parts["PackagedTurboFuel"] = new Part
+            items.parts["PackagedTurboFuel"] = new Part
             {
-                Name = "Packaged Turbofuel",
-                StackSize = 100, // SS_MEDIUM
-                IsFluid = false,
-                IsFicsmas = false,
-                EnergyGeneratedInMJ = 2000
+                name = "Packaged Turbofuel",
+                stackSize = 100, // SS_MEDIUM
+                isFluid = false,
+                isFicsmas = false,
+                energyGeneratedInMJ = 2000
             };
 
             // Remove the incorrect packaged turbofuel
-            items.Parts.Remove("TurboFuel");
+            items.parts.Remove("TurboFuel");
 
             // Now we need to go through the recipes and wherever "TurboFuel" is mentioned, it needs to be changed to "PackagedTurboFuel"
             foreach (var recipe in recipes)
             {
-                foreach (var product in recipe.Products)
+                foreach (var product in recipe.products)
                 {
-                    if (product.Part == "TurboFuel")
+                    if (product.part == "TurboFuel")
                     {
-                        product.Part = "PackagedTurboFuel";
+                        product.part = "PackagedTurboFuel";
                     }
                 }
 
-                foreach (var ingredient in recipe.Ingredients)
+                foreach (var ingredient in recipe.ingredients)
                 {
-                    if (ingredient.Part == "TurboFuel")
+                    if (ingredient.part == "TurboFuel")
                     {
-                        ingredient.Part = "PackagedTurboFuel";
+                        ingredient.part = "PackagedTurboFuel";
                     }
                 }
             }

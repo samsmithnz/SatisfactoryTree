@@ -80,9 +80,9 @@ namespace SatisfactoryTree.Console
                             }
                             ingredients.Add(new()
                             {
-                                Part = partName,
-                                Amount = partAmount,
-                                PerMin = perMin
+                                part = partName,
+                                amount = partAmount,
+                                perMin = perMin
                             });
                         }
                     }
@@ -120,10 +120,10 @@ namespace SatisfactoryTree.Console
                             }
                             products.Add(new()
                             {
-                                Part = partName,
-                                Amount = partAmount,
-                                PerMin = perMin,
-                                IsByProduct = products.Count > 0
+                                part = partName,
+                                amount = partAmount,
+                                perMin = perMin,
+                                isByProduct = products.Count > 0
                             });
                         }
                     }
@@ -282,30 +282,30 @@ namespace SatisfactoryTree.Console
                 // Create building object with the selected building and calculated power
                 Building building = new Building
                 {
-                    Name = selectedBuilding ?? "", // Use the first valid building, or empty string if none
-                    Power = powerPerBuilding
+                    name = selectedBuilding ?? "", // Use the first valid building, or empty string if none
+                    power = powerPerBuilding
                 };
 
                 if (lowPower.HasValue && highPower.HasValue)
                 {
-                    building.MinPower = lowPower;
-                    building.MaxPower = highPower;
+                    building.minPower = lowPower;
+                    building.maxPower = highPower;
                 }
 
                 //if (blacklist. producedIn)
                 recipes.Add(new Recipe
                 {
-                    Id = className.Replace("Recipe_", "")?.Replace("_C", ""),
-                    DisplayName = displayName,
-                    Ingredients = ingredients,
-                    Products = products,
-                    Building = building,
-                    IsAlternate = displayName.Contains("Alternate"),
-                    IsFicsmas = Common.IsFicsmas(displayName)
+                    id = className.Replace("Recipe_", "")?.Replace("_C", ""),
+                    displayName = displayName,
+                    ingredients = ingredients,
+                    products = products,
+                    building = building,
+                    isAlternate = displayName.Contains("Alternate"),
+                    isFicsmas = Common.IsFicsmas(displayName)
                 });
             }
 
-            return recipes.OrderBy(r => r.DisplayName).ToList();
+            return recipes.OrderBy(r => r.displayName).ToList();
         }
 
         public static List<PowerGenerationRecipe> GetPowerGeneratingRecipes(List<JsonElement> data, PartDataInterface parts, Dictionary<string, double> producingBuildings)
@@ -365,8 +365,8 @@ namespace SatisfactoryTree.Console
 
                 var building = new Building
                 {
-                    Name = displayName.Replace(" ", ""), // Use the first valid building, or empty string if none
-                    Power = Math.Round(powerProduction) // generated power - can be rounded to the nearest whole number (all energy numbers are whole numbers)
+                    name = displayName.Replace(" ", ""), // Use the first valid building, or empty string if none
+                    power = Math.Round(powerProduction) // generated power - can be rounded to the nearest whole number (all energy numbers are whole numbers)
                 };
 
                 var supplementalRatio = supplementalToPowerRatio;
@@ -392,20 +392,20 @@ namespace SatisfactoryTree.Console
                         }
                         Fuel fuelItem = new()
                         {
-                            PrimaryFuel = primaryFuelName,
-                            SupplementalResource = fuel.TryGetProperty("mSupplementalResourceClass", out JsonElement mSupplementalResourceClass) ? Common.GetPartName(mSupplementalResourceClass.GetString()) : "",
-                            ByProduct = fuel.TryGetProperty("mByproduct", out JsonElement mByproduct) ? Common.GetPartName(mByproduct.GetString()) : "",
-                            ByProductAmount = byProductAmount
+                            primaryFuel = primaryFuelName,
+                            supplementaryFuel = fuel.TryGetProperty("mSupplementalResourceClass", out JsonElement mSupplementalResourceClass) ? Common.GetPartName(mSupplementalResourceClass.GetString()) : "",
+                            byProduct = fuel.TryGetProperty("mByproduct", out JsonElement mByproduct) ? Common.GetPartName(mByproduct.GetString()) : "",
+                            byProductAmount = byProductAmount
                         };
 
                         // Find the part for the primary fuel
-                        Part primaryFuelPart = parts.Parts[primaryFuelName];
+                        Part primaryFuelPart = parts.parts[primaryFuelName];
                         double primaryPerMin = 0;
-                        if (primaryFuelPart.EnergyGeneratedInMJ > 0)
+                        if (primaryFuelPart.energyGeneratedInMJ > 0)
                         {
                             // The rounding here is important to remove floating point errors that appear with some types
                             // (this is step 4 from above)
-                            primaryPerMin = Math.Round(powerMJ / primaryFuelPart.EnergyGeneratedInMJ, 4);
+                            primaryPerMin = Math.Round(powerMJ / primaryFuelPart.energyGeneratedInMJ, 4);
                         }
                         double primaryAmount = 0;
                         if (primaryPerMin > 0)
@@ -416,41 +416,41 @@ namespace SatisfactoryTree.Console
                             {
                                 new()
                                 {
-                                    Part = fuelItem.PrimaryFuel,
-                                    Amount = primaryAmount,
-                                    PerMin = primaryPerMin
+                                    part = fuelItem.primaryFuel,
+                                    amount = primaryAmount,
+                                    perMin = primaryPerMin
                                 }
                             };
 
-                            if (!string.IsNullOrEmpty(fuelItem.SupplementalResource) && supplementalRatio > 0)
+                            if (!string.IsNullOrEmpty(fuelItem.supplementaryFuel) && supplementalRatio > 0)
                             {
                                 ingredients.Add(new Ingredient
                                 {
-                                    Part = fuelItem.SupplementalResource,
-                                    Amount = (3 / 50.0) * supplementalRatio * building.Power / 60,
-                                    PerMin = (3 / 50.0) * supplementalRatio * building.Power // Calculate the ratio of the supplemental resource to the primary fuel
+                                    part = fuelItem.supplementaryFuel,
+                                    amount = (3 / 50.0) * supplementalRatio * building.power / 60,
+                                    perMin = (3 / 50.0) * supplementalRatio * building.power // Calculate the ratio of the supplemental resource to the primary fuel
                                 });
                             }
 
                             var products = new List<Product>();
-                            if (!string.IsNullOrEmpty(fuelItem.ByProduct))
+                            if (!string.IsNullOrEmpty(fuelItem.byProduct))
                             {
                                 products.Add(new Product
                                 {
-                                    Part = fuelItem.ByProduct,
-                                    Amount = fuelItem.ByProductAmount / 60,
-                                    PerMin = fuelItem.ByProductAmount,
-                                    IsByProduct = true
+                                    part = fuelItem.byProduct,
+                                    amount = fuelItem.byProductAmount / 60,
+                                    perMin = fuelItem.byProductAmount,
+                                    isByProduct = true
                                 });
                             }
 
                             recipes.Add(new PowerGenerationRecipe
                             {
-                                Id = Common.GetRecipeName(className) + '_' + fuelItem.PrimaryFuel,
-                                DisplayName = displayName + " (" + primaryFuelPart.Name + ")",
-                                Ingredients = ingredients,
-                                Products = products,
-                                Building = building
+                                id = Common.GetRecipeName(className) + '_' + fuelItem.primaryFuel,
+                                displayName = displayName + " (" + primaryFuelPart.name + ")",
+                                ingredients = ingredients,
+                                products = products,
+                                building = building
                             });
                         }
                     }
@@ -527,7 +527,7 @@ namespace SatisfactoryTree.Console
             //}
 
 
-            return recipes.OrderBy(r => r.DisplayName).ToList();
+            return recipes.OrderBy(r => r.displayName).ToList();
         }
     }
 }

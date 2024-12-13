@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\.github\dependabot.yml = ..\.github\dependabot.yml
 		..\content\en-US.json = ..\content\en-US.json
+		..\content\gameData.json = ..\content\gameData.json
 		..\GitVersion.yml = ..\GitVersion.yml
 		..\content\output.json = ..\content\output.json
 		..\README.md = ..\README.md
