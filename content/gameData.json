@@ -103,7 +103,7 @@
         "name": "Candy Cane",
         "stackSize": 100,
         "isFluid": false,
-        "isFicsmas": false,
+        "isFicsmas": true,
         "energyGeneratedInMJ": 0
       },
       "CartridgeChaos": {
@@ -14524,7 +14524,7 @@
         "maxPower": null
       },
       "isAlternate": false,
-      "isFicsmas": false
+      "isFicsmas": true
     },
     {
       "id": "IngotCaterium",

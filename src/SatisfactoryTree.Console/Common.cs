@@ -71,7 +71,8 @@ namespace SatisfactoryTree.Console
             }
             return displayName.Contains("FICSMAS", StringComparison.OrdinalIgnoreCase) ||
                    displayName.Contains("Gift", StringComparison.OrdinalIgnoreCase) ||
-                   displayName.Contains("Snow", StringComparison.OrdinalIgnoreCase);
+                   displayName.Contains("Snow", StringComparison.OrdinalIgnoreCase) ||
+                   displayName.Contains("Candy", StringComparison.OrdinalIgnoreCase);
         }
 
         public static string GetRecipeName(string name)
