@@ -49,10 +49,6 @@ namespace SatisfactoryTree.Console
                     continue;
                 }
                 string className = entry.GetProperty("ClassName").ToString();
-                if (className == "Recipe_Alternate_AutomatedMiner_C")
-                {
-                    int i = 90;
-                }
                 string? ingredientsJSON = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
                 string? productsJSON = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
                 string? manufacturingDurationJSON = entry.TryGetProperty("mManufactoringDuration", out JsonElement mManufactoringDuration) ? mManufactoringDuration.GetString() : string.Empty;
@@ -312,129 +308,226 @@ namespace SatisfactoryTree.Console
             return recipes.OrderBy(r => r.DisplayName).ToList();
         }
 
-        //public static List<PowerGenerationRecipe> GetPowerGeneratingRecipes(List<JsonElement> data, PartDataInterface parts, Dictionary<string, double> producingBuildings)
-        //{
-        //    var recipes = new List<PowerGenerationRecipe>();
+        public static List<PowerGenerationRecipe> GetPowerGeneratingRecipes(List<JsonElement> data, PartDataInterface parts, Dictionary<string, double> producingBuildings)
+        {
+            var recipes = new List<PowerGenerationRecipe>();
 
-        //    //var filteredData = data.Where(entry => entry.Classes != null)
-        //    //                       .SelectMany<dynamic, dynamic>(entry => (IEnumerable<dynamic>)entry.Classes)
-        //    //                       .Where(recipe =>
-        //    //                       {
-        //    //                           // Filter out recipes that don't have a producing building
-        //    //                           if (entry.mProducedIn == null) return false;
-        //    //                           // Filter out recipes that are in the blacklist (typically items produced by the Build Gun)
-        //    //                           if (Common.Blacklist.All(building => entry.mProducedIn.Contains(building))) return false;
+            //var filteredData = data.Where(entry => entry.Classes != null)
+            //                       .SelectMany<dynamic, dynamic>(entry => (IEnumerable<dynamic>)entry.Classes)
+            //                       .Where(recipe =>
+            //                       {
+            //                           // Filter out recipes that don't have a producing building
+            //                           if (entry.mProducedIn == null) return false;
+            //                           // Filter out recipes that are in the blacklist (typically items produced by the Build Gun)
+            //                           if (Common.Blacklist.All(building => entry.mProducedIn.Contains(building))) return false;
 
-        //    //                           // Extract all producing buildings
-        //    //                           var rawBuildingKeys = new List<dynamic>();
-        //    //                           foreach (Match match in Regex.Matches(entry.mProducedIn, @"\/([^/]+)\."))
-        //    //                           {
-        //    //                               rawBuildingKeys.Add((dynamic)match.Value);
-        //    //                           }
-        //    //                           if (!rawBuildingKeys.Any()) return false;
+            //                           // Extract all producing buildings
+            //                           var rawBuildingKeys = new List<dynamic>();
+            //                           foreach (Match match in Regex.Matches(entry.mProducedIn, @"\/([^/]+)\."))
+            //                           {
+            //                               rawBuildingKeys.Add((dynamic)match.Value);
+            //                           }
+            //                           if (!rawBuildingKeys.Any()) return false;
 
-        //    //                           // Process all buildings and check if any match the producingBuildings map
-        //    //                           var validBuilding = rawBuildingKeys.Any((Func<dynamic, bool>)(rawBuilding =>
-        //    //                           {
-        //    //                               var buildingKey = rawBuilding.Replace("/", "").Replace(".", "").ToLower().Replace("build_", "");
-        //    //                               return producingBuildings.ContainsKey(buildingKey);
-        //    //                           }));
+            //                           // Process all buildings and check if any match the producingBuildings map
+            //                           var validBuilding = rawBuildingKeys.Any((Func<dynamic, bool>)(rawBuilding =>
+            //                           {
+            //                               var buildingKey = rawBuilding.Replace("/", "").Replace(".", "").ToLower().Replace("build_", "");
+            //                               return producingBuildings.ContainsKey(buildingKey);
+            //                           }));
 
-        //    //                           return validBuilding;
-        //    //                       });
+            //                           return validBuilding;
+            //                       });
 
-        //    foreach (JsonElement entry in data)
-        //    {
-        //        string className = entry.GetProperty("ClassName").ToString();
-        //        string? displayName = entry.TryGetProperty("mDisplayName", out JsonElement mDisplayName) ? mDisplayName.GetString() : string.Empty;
-        //        string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
-        //        string? products = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
-        //        string? ingredients = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
+            foreach (JsonElement entry in data)
+            {
+                string className = entry.GetProperty("ClassName").ToString();
+                string? displayName = entry.TryGetProperty("mDisplayName", out JsonElement mDisplayName) ? mDisplayName.GetString() : string.Empty;
+                //string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
+                //string? products = entry.TryGetProperty("mProduct", out JsonElement mProduct) ? mProduct.GetString() : string.Empty;
+                //string? ingredients = entry.TryGetProperty("mIngredients", out JsonElement mIngredients) ? mIngredients.GetString() : string.Empty;
 
-        //        var building = new Building
-        //        {
-        //            Name = displayName.Replace(" ", ""), // Use the first valid building, or empty string if none
-        //            Power = Math.Round(entry.mPowerProduction) // generated power - can be rounded to the nearest whole number (all energy numbers are whole numbers)
-        //        };
+                string? powerProductionJSON = entry.TryGetProperty("mPowerProduction", out JsonElement mPowerProduction) ? mPowerProduction.GetString() : string.Empty;
+                double powerProduction = 0;
+                if (powerProductionJSON != null)
+                {
+                    double.TryParse(powerProductionJSON.ToString(), out powerProduction);
+                }
+                string? supplementalToPowerRatioJSON = entry.TryGetProperty("mSupplementalToPowerRatio", out JsonElement mSupplementalToPowerRatio) ? mSupplementalToPowerRatio.GetString() : string.Empty;
+                double supplementalToPowerRatio = 0;
+                if (supplementalToPowerRatioJSON != null)
+                {
+                    double.TryParse(supplementalToPowerRatioJSON.ToString(), out supplementalToPowerRatio);
+                }
 
-        //        var supplementalRatio = double.Parse(entry.mSupplementalToPowerRatio);
-        //        // 1. Generator MW generated. This is an hourly value.
-        //        // 2. Divide by 60, to get the minute value
-        //        // 3. Now calculate the MJ, using the MJ->MW constant (1/3600), (https://en.wikipedia.org/wiki/Joule#Conversions)
-        //        // 4. Now divide this number by the part energy to calculate how many pieces per min
-        //        var powerMJ = (entry.mPowerProduction / 60) / (1 / 3600.0);
+                //string? fuelJSON = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel.GetString() : string.Empty;
+                JsonElement? fuelJSON = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel : (JsonElement?)null;
 
-        //        var fuels = entry.mFuel is IEnumerable<dynamic> ? (IEnumerable<dynamic>)entry.mFuel : new List<dynamic> { entry.mFuel };
-        //        foreach (var fuel in fuels)
-        //        {
-        //            var fuelItem = new Fuel
-        //            {
-        //                PrimaryFuel = Common.GetPartName(fuel.mFuelClass),
-        //                SupplementalResource = fuel.mSupplementalResourceClass != null ? Common.GetPartName(fuel.mSupplementalResourceClass) : "",
-        //                ByProduct = fuel.mByproduct != null ? Common.GetPartName(fuel.mByproduct) : "",
-        //                ByProductAmount = fuel.mByproductAmount != null ? double.Parse(fuel.mByproductAmount) : 0
-        //            };
+                var building = new Building
+                {
+                    Name = displayName.Replace(" ", ""), // Use the first valid building, or empty string if none
+                    Power = Math.Round(powerProduction) // generated power - can be rounded to the nearest whole number (all energy numbers are whole numbers)
+                };
 
-        //            // Find the part for the primary fuel
-        //            var extractedPartText = Common.GetPartName(fuelItem.PrimaryFuel);
-        //            var primaryFuelPart = parts.Parts[extractedPartText];
-        //            double primaryPerMin = 0;
-        //            if (primaryFuelPart.EnergyGeneratedInMJ > 0)
-        //            {
-        //                // The rounding here is important to remove floating point errors that appear with some types
-        //                // (this is step 4 from above)
-        //                primaryPerMin = Math.Round(powerMJ / primaryFuelPart.EnergyGeneratedInMJ, 4);
-        //            }
-        //            double primaryAmount = 0;
-        //            if (primaryPerMin > 0)
-        //            {
-        //                primaryAmount = primaryPerMin / 60;
+                var supplementalRatio = supplementalToPowerRatio;
+                // 1. Generator MW generated. This is an hourly value.
+                // 2. Divide by 60, to get the minute value
+                // 3. Now calculate the MJ, using the MJ->MW constant (1/3600), (https://en.wikipedia.org/wiki/Joule#Conversions)
+                // 4. Now divide this number by the part energy to calculate how many pieces per min
+                var powerMJ = (powerProduction / 60) / (1 / 3600.0);
 
-        //                var ingredients = new List<Ingredient>
-        //                                        {
-        //                                            new Ingredient
-        //                                            {
-        //                                                Part = fuelItem.PrimaryFuel,
-        //                                                Amount = (int)primaryAmount,
-        //                                                PerMin = primaryPerMin
-        //                                            }
-        //                                        };
+                //1List<Ingredient> ingredients = new();
+                if (fuelJSON.HasValue && fuelJSON.Value.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (JsonElement fuel in fuelJSON.Value.EnumerateArray())
+                    {
 
-        //                if (!string.IsNullOrEmpty(fuelItem.SupplementalResource) && supplementalRatio > 0)
-        //                {
-        //                    ingredients.Add(new Ingredient
-        //                    {
-        //                        Part = fuelItem.SupplementalResource,
-        //                        Amount = (int)((3 / 50.0) * supplementalRatio * building.Power / 60),
-        //                        PerMin = (3 / 50.0) * supplementalRatio * building.Power // Calculate the ratio of the supplemental resource to the primary fuel
-        //                    });
-        //                }
+                        string? primaryFuel = fuel.TryGetProperty("mFuelClass", out JsonElement mFuelClass) ? mFuelClass.GetString() : string.Empty;
+                        string primaryFuelName = Common.GetPartName(primaryFuel);
+                        string? byProductAmountJSON = fuel.TryGetProperty("mByproductAmount", out JsonElement mByproductAmount) ? mByproductAmount.GetString() : string.Empty;
+                        double byProductAmount = 0;
+                        if (byProductAmountJSON != null)
+                        {
+                            double.TryParse(byProductAmountJSON.ToString(), out byProductAmount);
+                        }
+                        Fuel fuelItem = new()
+                        {
+                            PrimaryFuel = primaryFuelName,
+                            SupplementalResource = fuel.TryGetProperty("mSupplementalResourceClass", out JsonElement mSupplementalResourceClass) ? Common.GetPartName(mSupplementalResourceClass.GetString()) : "",
+                            ByProduct = fuel.TryGetProperty("mByproduct", out JsonElement mByproduct) ? Common.GetPartName(mByproduct.GetString()) : "",
+                            ByProductAmount = byProductAmount
+                        };
 
-        //                var products = new List<Product>();
-        //                if (!string.IsNullOrEmpty(fuelItem.ByProduct))
-        //                {
-        //                    products.Add(new Product
-        //                    {
-        //                        Part = fuelItem.ByProduct,
-        //                        Amount = (int)(fuelItem.ByProductAmount / 60),
-        //                        PerMin = fuelItem.ByProductAmount,
-        //                        IsByProduct = true
-        //                    });
-        //                }
+                        // Find the part for the primary fuel
+                        Part primaryFuelPart = parts.Parts[primaryFuelName];
+                        double primaryPerMin = 0;
+                        if (primaryFuelPart.EnergyGeneratedInMJ > 0)
+                        {
+                            // The rounding here is important to remove floating point errors that appear with some types
+                            // (this is step 4 from above)
+                            primaryPerMin = Math.Round(powerMJ / primaryFuelPart.EnergyGeneratedInMJ, 4);
+                        }
+                        double primaryAmount = 0;
+                        if (primaryPerMin > 0)
+                        {
+                            primaryAmount = primaryPerMin / 60;
 
-        //                recipes.Add(new PowerGenerationRecipe
-        //                {
-        //                    Id = Common.GetRecipeName(className) + '_' + fuelItem.PrimaryFuel,
-        //                    DisplayName = displayName + " (" + primaryFuelPart.Name + ")",
-        //                    Ingredients = ingredients,
-        //                    Products = products,
-        //                    Building = building
-        //                });
-        //            }
-        //        }
-        //    }
+                            List<Ingredient> ingredients = new()
+                            {
+                                new()
+                                {
+                                    Part = fuelItem.PrimaryFuel,
+                                    Amount = primaryAmount,
+                                    PerMin = primaryPerMin
+                                }
+                            };
 
-        //    return recipes.OrderBy(r => r.DisplayName).ToList();
-        //}
+                            if (!string.IsNullOrEmpty(fuelItem.SupplementalResource) && supplementalRatio > 0)
+                            {
+                                ingredients.Add(new Ingredient
+                                {
+                                    Part = fuelItem.SupplementalResource,
+                                    Amount = (3 / 50.0) * supplementalRatio * building.Power / 60,
+                                    PerMin = (3 / 50.0) * supplementalRatio * building.Power // Calculate the ratio of the supplemental resource to the primary fuel
+                                });
+                            }
+
+                            var products = new List<Product>();
+                            if (!string.IsNullOrEmpty(fuelItem.ByProduct))
+                            {
+                                products.Add(new Product
+                                {
+                                    Part = fuelItem.ByProduct,
+                                    Amount = fuelItem.ByProductAmount / 60,
+                                    PerMin = fuelItem.ByProductAmount,
+                                    IsByProduct = true
+                                });
+                            }
+
+                            recipes.Add(new PowerGenerationRecipe
+                            {
+                                Id = Common.GetRecipeName(className) + '_' + fuelItem.PrimaryFuel,
+                                DisplayName = displayName + " (" + primaryFuelPart.Name + ")",
+                                Ingredients = ingredients,
+                                Products = products,
+                                Building = building
+                            });
+                        }
+                    }
+                }
+            }
+
+            //var fuels = entry.mFuel is IEnumerable<dynamic> ? (IEnumerable<dynamic>)entry.mFuel : new List<dynamic> { entry.mFuel };
+            //foreach (var fuel in fuels)
+            //{
+            //    var fuelItem = new Fuel
+            //    {
+            //        PrimaryFuel = Common.GetPartName(fuel.mFuelClass),
+            //        SupplementalResource = fuel.mSupplementalResourceClass != null ? Common.GetPartName(fuel.mSupplementalResourceClass) : "",
+            //        ByProduct = fuel.mByproduct != null ? Common.GetPartName(fuel.mByproduct) : "",
+            //        ByProductAmount = fuel.mByproductAmount != null ? double.Parse(fuel.mByproductAmount) : 0
+            //    };
+
+            //    // Find the part for the primary fuel
+            //    var extractedPartText = Common.GetPartName(fuelItem.PrimaryFuel);
+            //    var primaryFuelPart = parts.Parts[extractedPartText];
+            //    double primaryPerMin = 0;
+            //    if (primaryFuelPart.EnergyGeneratedInMJ > 0)
+            //    {
+            //        // The rounding here is important to remove floating point errors that appear with some types
+            //        // (this is step 4 from above)
+            //        primaryPerMin = Math.Round(powerMJ / primaryFuelPart.EnergyGeneratedInMJ, 4);
+            //    }
+            //    double primaryAmount = 0;
+            //    if (primaryPerMin > 0)
+            //    {
+            //        primaryAmount = primaryPerMin / 60;
+
+            //        var ingredients = new List<Ingredient>
+            //                                {
+            //                                    new Ingredient
+            //                                    {
+            //                                        Part = fuelItem.PrimaryFuel,
+            //                                        Amount = (int)primaryAmount,
+            //                                        PerMin = primaryPerMin
+            //                                    }
+            //                                };
+
+            //        if (!string.IsNullOrEmpty(fuelItem.SupplementalResource) && supplementalRatio > 0)
+            //        {
+            //            ingredients.Add(new Ingredient
+            //            {
+            //                Part = fuelItem.SupplementalResource,
+            //                Amount = (int)((3 / 50.0) * supplementalRatio * building.Power / 60),
+            //                PerMin = (3 / 50.0) * supplementalRatio * building.Power // Calculate the ratio of the supplemental resource to the primary fuel
+            //            });
+            //        }
+
+            //        var products = new List<Product>();
+            //        if (!string.IsNullOrEmpty(fuelItem.ByProduct))
+            //        {
+            //            products.Add(new Product
+            //            {
+            //                Part = fuelItem.ByProduct,
+            //                Amount = (int)(fuelItem.ByProductAmount / 60),
+            //                PerMin = fuelItem.ByProductAmount,
+            //                IsByProduct = true
+            //            });
+            //        }
+
+            //        recipes.Add(new PowerGenerationRecipe
+            //        {
+            //            Id = Common.GetRecipeName(className) + '_' + fuelItem.PrimaryFuel,
+            //            DisplayName = displayName + " (" + primaryFuelPart.Name + ")",
+            //            Ingredients = ingredients,
+            //            Products = products,
+            //            Building = building
+            //        });
+            //    }
+            //}
+
+
+            return recipes.OrderBy(r => r.DisplayName).ToList();
+        }
     }
 }

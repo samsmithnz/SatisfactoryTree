@@ -19592,5 +19592,356 @@
       "IsFicsmas": false
     }
   ],
-  "PowerGenerationRecipes": null
+  "PowerGenerationRecipes": [
+    {
+      "Id": "Build_GeneratorBiomass_Automated_GenericBiomass",
+      "DisplayName": "Biomass Burner (Biomass)",
+      "Ingredients": [
+        {
+          "Part": "GenericBiomass",
+          "Amount": 0.16666666666666666,
+          "PerMin": 10
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "BiomassBurner",
+        "Power": 30,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorBiomass_Automated_Leaves",
+      "DisplayName": "Biomass Burner (Leaves)",
+      "Ingredients": [
+        {
+          "Part": "Leaves",
+          "Amount": 2,
+          "PerMin": 120
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "BiomassBurner",
+        "Power": 30,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorBiomass_Automated_Mycelia",
+      "DisplayName": "Biomass Burner (Mycelia)",
+      "Ingredients": [
+        {
+          "Part": "Mycelia",
+          "Amount": 1.5,
+          "PerMin": 90
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "BiomassBurner",
+        "Power": 30,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorBiomass_Automated_PackagedBiofuel",
+      "DisplayName": "Biomass Burner (Packaged Liquid Biofuel)",
+      "Ingredients": [
+        {
+          "Part": "PackagedBiofuel",
+          "Amount": 0.04,
+          "PerMin": 2.4
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "BiomassBurner",
+        "Power": 30,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorBiomass_Automated_Biofuel",
+      "DisplayName": "Biomass Burner (Solid Biofuel)",
+      "Ingredients": [
+        {
+          "Part": "Biofuel",
+          "Amount": 0.06666666666666667,
+          "PerMin": 4
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "BiomassBurner",
+        "Power": 30,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorBiomass_Automated_Wood",
+      "DisplayName": "Biomass Burner (Wood)",
+      "Ingredients": [
+        {
+          "Part": "Wood",
+          "Amount": 0.3,
+          "PerMin": 18
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "BiomassBurner",
+        "Power": 30,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorCoal_Coal",
+      "DisplayName": "Coal-Powered Generator (Coal)",
+      "Ingredients": [
+        {
+          "Part": "Coal",
+          "Amount": 0.25,
+          "PerMin": 15
+        },
+        {
+          "Part": "Water",
+          "Amount": 0.75,
+          "PerMin": 45
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Coal-PoweredGenerator",
+        "Power": 75,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorCoal_CompactedCoal",
+      "DisplayName": "Coal-Powered Generator (Compacted Coal)",
+      "Ingredients": [
+        {
+          "Part": "CompactedCoal",
+          "Amount": 0.11904833333333334,
+          "PerMin": 7.1429
+        },
+        {
+          "Part": "Water",
+          "Amount": 0.75,
+          "PerMin": 45
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Coal-PoweredGenerator",
+        "Power": 75,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorCoal_PetroleumCoke",
+      "DisplayName": "Coal-Powered Generator (Petroleum Coke)",
+      "Ingredients": [
+        {
+          "Part": "PetroleumCoke",
+          "Amount": 0.4166666666666667,
+          "PerMin": 25
+        },
+        {
+          "Part": "Water",
+          "Amount": 0.75,
+          "PerMin": 45
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Coal-PoweredGenerator",
+        "Power": 75,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorFuel_LiquidFuel",
+      "DisplayName": "Fuel-Powered Generator (Fuel)",
+      "Ingredients": [
+        {
+          "Part": "LiquidFuel",
+          "Amount": 250,
+          "PerMin": 15000
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Fuel-PoweredGenerator",
+        "Power": 250,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorFuel_IonizedFuel",
+      "DisplayName": "Fuel-Powered Generator (Ionized Fuel)",
+      "Ingredients": [
+        {
+          "Part": "IonizedFuel",
+          "Amount": 50,
+          "PerMin": 3000
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Fuel-PoweredGenerator",
+        "Power": 250,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorFuel_LiquidBiofuel",
+      "DisplayName": "Fuel-Powered Generator (Liquid Biofuel)",
+      "Ingredients": [
+        {
+          "Part": "LiquidBiofuel",
+          "Amount": 250,
+          "PerMin": 15000
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Fuel-PoweredGenerator",
+        "Power": 250,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorFuel_RocketFuel",
+      "DisplayName": "Fuel-Powered Generator (Rocket Fuel)",
+      "Ingredients": [
+        {
+          "Part": "RocketFuel",
+          "Amount": 62.5,
+          "PerMin": 3750
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Fuel-PoweredGenerator",
+        "Power": 250,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorFuel_LiquidTurboFuel",
+      "DisplayName": "Fuel-Powered Generator (Turbofuel)",
+      "Ingredients": [
+        {
+          "Part": "LiquidTurboFuel",
+          "Amount": 0.125,
+          "PerMin": 7.5
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "Fuel-PoweredGenerator",
+        "Power": 250,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorNuclear_FicsoniumFuelRod",
+      "DisplayName": "Nuclear Power Plant (Ficsonium Fuel Rod)",
+      "Ingredients": [
+        {
+          "Part": "FicsoniumFuelRod",
+          "Amount": 0.016666666666666666,
+          "PerMin": 1
+        },
+        {
+          "Part": "Water",
+          "Amount": 4,
+          "PerMin": 240
+        }
+      ],
+      "Products": [],
+      "Building": {
+        "Name": "NuclearPowerPlant",
+        "Power": 2500,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorNuclear_PlutoniumFuelRod",
+      "DisplayName": "Nuclear Power Plant (Plutonium Fuel Rod)",
+      "Ingredients": [
+        {
+          "Part": "PlutoniumFuelRod",
+          "Amount": 0.0016666666666666668,
+          "PerMin": 0.1
+        },
+        {
+          "Part": "Water",
+          "Amount": 4,
+          "PerMin": 240
+        }
+      ],
+      "Products": [
+        {
+          "Part": "PlutoniumWaste",
+          "Amount": 0.16666666666666666,
+          "PerMin": 10,
+          "IsByProduct": true
+        }
+      ],
+      "Building": {
+        "Name": "NuclearPowerPlant",
+        "Power": 2500,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    },
+    {
+      "Id": "Build_GeneratorNuclear_NuclearFuelRod",
+      "DisplayName": "Nuclear Power Plant (Uranium Fuel Rod)",
+      "Ingredients": [
+        {
+          "Part": "NuclearFuelRod",
+          "Amount": 0.0033333333333333335,
+          "PerMin": 0.2
+        },
+        {
+          "Part": "Water",
+          "Amount": 4,
+          "PerMin": 240
+        }
+      ],
+      "Products": [
+        {
+          "Part": "NuclearWaste",
+          "Amount": 0.8333333333333334,
+          "PerMin": 50,
+          "IsByProduct": true
+        }
+      ],
+      "Building": {
+        "Name": "NuclearPowerPlant",
+        "Power": 2500,
+        "MinPower": null,
+        "MaxPower": null
+      }
+    }
+  ]
 }

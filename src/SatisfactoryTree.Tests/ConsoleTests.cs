@@ -56,4 +56,36 @@ public class RecipesTests
         Assert.AreEqual(291, results.Recipes.Count);
     }
 
+    [TestMethod]
+    public void BuildingsCountTest()
+    {
+        //Arrange
+
+        //Act
+
+        //Assert
+        Assert.IsNotNull(results);
+        //foreach (var item in results.Recipes)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
+        //}
+        Assert.AreEqual(12, results.Buildings.Count);
+    }
+
+    [TestMethod]
+    public void PowerGeneratingBuildingsCountTest()
+    {
+        //Arrange
+
+        //Act
+
+        //Assert
+        Assert.IsNotNull(results);
+        //foreach (var item in results.Recipes)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
+        //}
+        Assert.AreEqual(17, results.PowerGenerationRecipes.Count);
+    }
+
 }

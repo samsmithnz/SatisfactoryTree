@@ -57,33 +57,6 @@ namespace SatisfactoryTree.Console
             return cleaned;
         }
 
-        public static void RemoveRubbishItems(PartDataInterface items, List<Recipe> recipes)
-        {
-            // Create a HashSet to store all product keys from recipes
-            var recipeProducts = new HashSet<string>();
-
-            // Loop through each recipe to collect all product keys
-            foreach (var recipe in recipes)
-            {
-                foreach (var product in recipe.Products)
-                {
-                    recipeProducts.Add(product.Part);
-                }
-                foreach (var ingredient in recipe.Ingredients)
-                {
-                    recipeProducts.Add(ingredient.Part);
-                }
-            }
-
-            // Loop through each item in items.Parts and remove any entries that do not exist in recipeProducts
-            var partsToRemove = items.Parts.Keys.Where(part => !recipeProducts.Contains(part)).ToList();
-
-            foreach (var part in partsToRemove)
-            {
-                items.Parts.Remove(part);
-            }
-        }
-
         public static async Task<FinalData> ProcessFileAsync(string inputFile, string outputFile)
         {
             Stopwatch stopwatch = new();
@@ -122,11 +95,10 @@ namespace SatisfactoryTree.Console
             // Get parts
             PartDataInterface items = Parts.GetItems(data, recipes);
             Parts.FixItemNames(items);
-            //RemoveRubbishItems(items, recipes);
             Parts.FixTurbofuel(items, recipes);
 
-            ////// IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
-            //var powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
+            // IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
+            var powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
 
             // Since we've done some manipulation of the items data, re-sort it
             Dictionary<string, Part> sortedItems = new();
@@ -141,7 +113,7 @@ namespace SatisfactoryTree.Console
                 buildings,
                 items,
                 recipes,
-                null);// powerGenerationRecipes);
+                powerGenerationRecipes);
 
 
             // Write the output to the file
