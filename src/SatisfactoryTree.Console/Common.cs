@@ -78,7 +78,7 @@ namespace SatisfactoryTree.Console
 
         public static string GetRecipeName(string name)
         {
-            return name.Replace(oldValue: "Recipe", "").Replace("_C", "");
+            return name.Replace(oldValue: "Build_", "").Replace("_C", "");
         }
 
         public static string GetBuildingName(string name)
@@ -106,6 +106,22 @@ namespace SatisfactoryTree.Console
             // Remove any text within brackets, including the brackets themselves
             return Regex.Replace(name, @"\s*\(.*?\)", "");
         }
-       
+
+        // Example: Build_GeneratorBiomass_Automated_C
+        // Change into "generatorbiomas"
+        public static string GetPowerProducerBuildingName(string className)
+        {
+            var match = Regex.Match(className, @"Build_(\w+)_");
+            if (match.Success)
+            {
+                var buildingName = match.Groups[1].Value.ToLower();
+                // If contains _automated, remove it
+                return buildingName.Replace("_automated", "");
+            }
+
+            return null;
+        }
+
+
     }
 }

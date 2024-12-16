@@ -69,16 +69,24 @@ namespace SatisfactoryTree.Console
             //string cleanedContent = CleanInput(fileContent);
             List<dynamic>? rawData = JsonSerializer.Deserialize<List<dynamic>>(fileContent);
             List<JsonElement> data = new();
+            List<JsonElement> rawResourcesData = new();
             if (rawData != null)
             {
                 foreach (JsonElement entry in rawData)
                 {
+                    string? nativeClass = entry.TryGetProperty("NativeClass", out JsonElement nativeClassElement) ? nativeClassElement.GetString() : string.Empty;
                     if (entry.TryGetProperty("Classes", out JsonElement classesElement) && classesElement.ValueKind == JsonValueKind.Array)
                     {
-                        foreach (JsonElement entryClass in classesElement.EnumerateArray())
-                        {
-                            data.Add(entryClass);
-                        }
+                        //foreach (JsonElement entryClass in classesElement.EnumerateArray())
+                        //{
+                        //    data.Add(entryClass);
+                        //}
+                        //if (nativeClass == "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'" ||
+                        //    nativeClass == "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorBiomass'")
+                        //{
+                        //    rawResourcesData.AddRange(classesElement.EnumerateArray().ToList());
+                        //}
+                        data.AddRange(classesElement.EnumerateArray());
                     }
                 }
             }
@@ -117,7 +125,7 @@ namespace SatisfactoryTree.Console
 
 
             // Write the output to the file
-            JsonSerializerOptions options = new() { WriteIndented = true };
+            JsonSerializerOptions options = new() { WriteIndented = true, DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull };
             string outputJson = JsonSerializer.Serialize(finalData, options);
             await File.WriteAllTextAsync(outputFile, outputJson);
             stopwatch.Stop();

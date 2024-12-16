@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace SatisfactoryTree.Console
@@ -13,6 +12,8 @@ namespace SatisfactoryTree.Console
             {
                 string className = entry.GetProperty("ClassName").ToString();
                 string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
+                //string? fuels = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel.GetString() : string.Empty;
+                JsonElement? fuelJSON = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel : (JsonElement?)null;
 
                 if (producedIn != null)
                 {
@@ -35,9 +36,11 @@ namespace SatisfactoryTree.Console
                         }
                     }
                 }
-                else if (className == "Desc_NuclearWaste_C")
+                // If a power generator
+                if (fuelJSON.HasValue)
                 {
-                    producingBuildingsSet.Add("nuclear power plant");
+                    string? name = Common.GetPowerProducerBuildingName(className);
+                    producingBuildingsSet.Add(name);
                 }
             }
 
@@ -62,7 +65,7 @@ namespace SatisfactoryTree.Console
                     if (powerConsumption > 0)
                     {
                         // Normalize the building name by removing "_Build" prefix, "_C" suffix, and lowercasing it
-                        string buildingName = Common.GetBuildingName(className).ToLower();
+                        string buildingName = Common.GetPowerProducerBuildingName(className); //Common.GetBuildingName(className).ToLower();
 
                         // Only include power data if the building is in the producingBuildings list
                         if (producingBuildings.Contains(buildingName))

@@ -5,50 +5,32 @@ namespace SatisfactoryTree.Console
 {
     public class Parts
     {
-        public static PartDataInterface GetItems2(List<JsonElement> data)
-        {
-            Dictionary<string, Part> parts = new();
-            Dictionary<string, string> collectables = new();
-            Dictionary<string, RawResource> rawResources = GetRawResources(data);
-
-            foreach (JsonElement item in data)
-            {
-
-            }
-            return new();
-        }
 
         public static PartDataInterface GetItems(List<JsonElement> data, List<Recipe> recipes)
         {
             Dictionary<string, Part> parts = new();
             Dictionary<string, string> collectables = new();
-            Dictionary<string, RawResource> rawResources = GetRawResources(data);
 
             // Scan all recipes (not parts), looking for parts that are used in recipes.
             //var filteredData = rawData.Where((dynamic entry) => entry.Classes != null)
             //           .SelectMany((dynamic entry) => (IEnumerable<dynamic>)entry.Classes);
 
-            List<string> rawParts = new();
+            HashSet<string> rawParts = new();
             foreach (Recipe recipe in recipes)
             {
                 foreach (Ingredient ingredient in recipe.ingredients)
                 {
-                    if (!rawParts.Contains(ingredient.part))
-                    {
-                        rawParts.Add(ingredient.part);
-                    }
+                    rawParts.Add(ingredient.part);
                 }
                 foreach (Product product in recipe.products)
                 {
-                    if (!rawParts.Contains(product.part))
-                    {
-                        rawParts.Add(product.part);
-                    }
+                    rawParts.Add(product.part);
                 }
             }
 
             foreach (JsonElement entry in data)
             {
+                //Check first if the part exists
                 string className = entry.GetProperty("ClassName").ToString();
                 string partName = Common.GetPartName(className);
                 if (!rawParts.Contains(partName))
@@ -367,6 +349,8 @@ namespace SatisfactoryTree.Console
                 //}
             }
 
+            Dictionary<string, RawResource> rawResources = GetRawResources(data, parts, recipes);
+
             // Sort the parts and collectables by key
             return new PartDataInterface
             {
@@ -425,64 +409,86 @@ namespace SatisfactoryTree.Console
             }
         }
 
-        public static Dictionary<string, RawResource> GetRawResources(List<JsonElement> data)
+        public static Dictionary<string, RawResource> GetRawResources(List<JsonElement> data, Dictionary<string, Part> parts, List<Recipe> recipes)
         {
             var rawResources = new Dictionary<string, RawResource>();
             var limits = new Dictionary<string, long>
-        {
-            { "Coal", 42300 },
-            { "LiquidOil", 12600 },
-            { "NitrogenGas", 12000 },
-            { "OreBauxite", 12300 },
-            { "OreCopper", 36900 },
-            { "OreGold", 15000 },
-            { "OreIron", 92100 },
-            { "OreUranium", 2100 },
-            { "RawQuartz", 13500 },
-            { "SAM", 10200 },
-            { "Stone", 69900 },
-            { "Sulfur", 10800 },
-            { "Water", 9007199254740991 }
-        };
+            {
+                { "Coal", 42300 },
+                { "LiquidOil", 12600 },
+                { "NitrogenGas", 12000 },
+                { "OreBauxite", 12300 },
+                { "OreCopper", 36900 },
+                { "OreGold", 15000 },
+                { "OreIron", 92100 },
+                { "OreUranium", 2100 },
+                { "RawQuartz", 13500 },
+                { "SAM", 10200 },
+                { "Stone", 69900 },
+                { "Sulfur", 10800 },
+                { "Water", 9007199254740991 }
+            };
 
             //var filteredData = data.Where((dynamic entry) => entry.Classes != null)
             //                       .SelectMany<dynamic, dynamic>((dynamic entry) => (IEnumerable<dynamic>)entry.Classes);
 
-            foreach (JsonElement resource in data)
+            //Start with a list of parts.
+            //loop through all the recipes, looking to see if the part is a product.
+            //If it's a product, it's not a raw material, remove it from the list
+            //the remaining list are the raw materials
+            HashSet<string> partsRemaining = new();
+            foreach (Recipe recipe in recipes)
             {
-                string className = Common.GetPartName(resource.GetProperty("ClassName").ToString());
-                string? displayName = resource.TryGetProperty("mDisplayName", out JsonElement displayNameElement) ? displayNameElement.GetString() : string.Empty;
-
-                if (!string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(displayName))
+                foreach (Ingredient ingredient in recipe.ingredients)
                 {
-                    RawResource resourceData = new()
-                    {
-                        name = displayName,
-                        limit = limits.ContainsKey(className) ? limits[className] : 0
-                    };
-                    rawResources[className] = resourceData;
+                    partsRemaining.Add(ingredient.part);
                 }
             }
 
-            // Manually add "Leaves" and "Wood" to the rawResources list
-            rawResources["Leaves"] = new RawResource
+            foreach (Recipe recipe in recipes)
             {
-                name = "Leaves",
-                limit = limits.ContainsKey("Leaves") ? limits["Leaves"] : 100000000
-            };
+                foreach (Product product in recipe.products)
+                {
+                    //if (product.part == "TimeCrystal")
+                    //{
+                    //    int y = 0;
+                    //}
+                    bool removePart = false;
+                    // don't process converter recipes here - as most of the raw ores are a product of the converter
+                    if (recipe.building.name != "converter" && recipe.building.name != "generatornuclear")
+                    {
+                        removePart = true;
+                    }
 
-            rawResources["Wood"] = new RawResource
+                    if (removePart)
+                    {
+                        partsRemaining.Remove(product.part);
+                    }
+                }
+            }
+            //Fiter out both Uranium and Plutonium waste
+            partsRemaining.Remove("NuclearWaste");
+            partsRemaining.Remove("PlutoniumWaste");
+            //Filter out specific Converter recipes that all have different 
+            partsRemaining.Remove("FicsiteIngot");
+            partsRemaining.Remove("TimeCrystal");
+            partsRemaining.Remove("QuantumEnergy");
+            //Add water - which comes into the game in a different way from every other product
+            partsRemaining.Add("Water");
+            partsRemaining.Add("LiquidOil");
+            partsRemaining.Add("NitrogenGas");
+            partsRemaining.Add("Coal");
+
+
+            foreach (string part in partsRemaining)
             {
-                name = "Wood",
-                limit = limits.ContainsKey("Wood") ? limits["Wood"] : 100000000
-            };
-
-            rawResources["Mycelia"] = new RawResource
-            {
-                name = "Mycelia",
-                limit = limits.ContainsKey("Mycelia") ? limits["Mycelia"] : 100000000
-            };
-
+                rawResources[part] = new RawResource
+                {
+                    name = part,
+                    limit = limits.ContainsKey(part) ? limits[part] : -1
+                };
+            }
+            rawResources = rawResources.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             return rawResources;
         }
 
@@ -490,18 +496,18 @@ namespace SatisfactoryTree.Console
         {
             // Go through the item names and do some manual fixes, e.g. renaming "Residual Plastic" to "Plastic"
             var fixItems = new Dictionary<string, string>
-        {
-            { "AlienProtein", "Alien Protein" },
-            { "CompactedCoal", "Compacted Coal" },
-            { "DarkEnergy", "Dark Matter Residue" },
-            { "HeavyOilResidue", "Heavy Oil Residue" },
-            { "LiquidFuel", "Fuel" },
-            { "Plastic", "Plastic" },
-            { "PolymerResin", "Polymer Resin" },
-            { "Rubber", "Rubber" },
-            { "Snow", "Snow" },
-            { "Water", "Water" }
-        };
+            {
+                { "AlienProtein", "Alien Protein" },
+                { "CompactedCoal", "Compacted Coal" },
+                { "DarkEnergy", "Dark Matter Residue" },
+                { "HeavyOilResidue", "Heavy Oil Residue" },
+                { "LiquidFuel", "Fuel" },
+                { "Plastic", "Plastic" },
+                { "PolymerResin", "Polymer Resin" },
+                { "Rubber", "Rubber" },
+                { "Snow", "Snow" },
+                { "Water", "Water" }
+            };
 
             foreach (var search in fixItems.Keys)
             {
@@ -514,51 +520,51 @@ namespace SatisfactoryTree.Console
 
         public static void FixTurbofuel(PartDataInterface items, List<Recipe> recipes)
         {
-            // Rename the current "Turbofuel" which is actually "Packaged Turbofuel"
-            items.parts["PackagedTurboFuel"] = items.parts["TurboFuel"];
+            //// Rename the current "Turbofuel" which is actually "Packaged Turbofuel"
+            //items.parts["PackagedTurboFuel"] = items.parts["TurboFuel"];
 
-            // Add the actual "Turbofuel" as a new item
-            items.parts["LiquidTurboFuel"] = new Part
-            {
-                name = "Turbofuel",
-                stackSize = 0,
-                isFluid = true,
-                isFicsmas = false,
-                energyGeneratedInMJ = 2000
-            };
+            //// Add the actual "Turbofuel" as a new item
+            //items.parts["LiquidTurboFuel"] = new Part
+            //{
+            //    name = "Turbofuel",
+            //    stackSize = 0,
+            //    isFluid = true,
+            //    isFicsmas = false,
+            //    energyGeneratedInMJ = 2000
+            //};
 
-            // Rename the packaged item to PackagedTurboFuel
-            items.parts["PackagedTurboFuel"] = new Part
-            {
-                name = "Packaged Turbofuel",
-                stackSize = 100, // SS_MEDIUM
-                isFluid = false,
-                isFicsmas = false,
-                energyGeneratedInMJ = 2000
-            };
+            //// Rename the packaged item to PackagedTurboFuel
+            //items.parts["PackagedTurboFuel"] = new Part
+            //{
+            //    name = "Packaged Turbofuel",
+            //    stackSize = 100, // SS_MEDIUM
+            //    isFluid = false,
+            //    isFicsmas = false,
+            //    energyGeneratedInMJ = 2000
+            //};
 
-            // Remove the incorrect packaged turbofuel
-            items.parts.Remove("TurboFuel");
+            //// Remove the incorrect packaged turbofuel
+            //items.parts.Remove("TurboFuel");
 
-            // Now we need to go through the recipes and wherever "TurboFuel" is mentioned, it needs to be changed to "PackagedTurboFuel"
-            foreach (var recipe in recipes)
-            {
-                foreach (var product in recipe.products)
-                {
-                    if (product.part == "TurboFuel")
-                    {
-                        product.part = "PackagedTurboFuel";
-                    }
-                }
+            //// Now we need to go through the recipes and wherever "TurboFuel" is mentioned, it needs to be changed to "PackagedTurboFuel"
+            //foreach (var recipe in recipes)
+            //{
+            //    foreach (var product in recipe.products)
+            //    {
+            //        if (product.part == "TurboFuel")
+            //        {
+            //            product.part = "PackagedTurboFuel";
+            //        }
+            //    }
 
-                foreach (var ingredient in recipe.ingredients)
-                {
-                    if (ingredient.part == "TurboFuel")
-                    {
-                        ingredient.part = "PackagedTurboFuel";
-                    }
-                }
-            }
+            //    foreach (var ingredient in recipe.ingredients)
+            //    {
+            //        if (ingredient.part == "TurboFuel")
+            //        {
+            //            ingredient.part = "PackagedTurboFuel";
+            //        }
+            //    }
+            //}
         }
     }
 }

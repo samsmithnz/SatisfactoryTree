@@ -28,7 +28,7 @@ public class RecipesTests
     public void PartsCountTest()
     {
         //Arrange
-        
+
         //Act
 
         //Assert
@@ -38,6 +38,22 @@ public class RecipesTests
             System.Diagnostics.Debug.WriteLine(results.items.parts[item.Key].name);
         }
         Assert.AreEqual(168, results.items.parts.Count);
+    }
+
+    [TestMethod]
+    public void PartsRawResourcesCountTest()
+    {
+        //Arrange
+        
+        //Act
+
+        //Assert
+        Assert.IsNotNull(results);
+        foreach (var item in results.items.rawResources)
+        {
+            System.Diagnostics.Debug.WriteLine(results.items.rawResources[item.Key].name);
+        }
+        Assert.AreEqual(24, results.items.rawResources.Count);
     }
 
     [TestMethod]
