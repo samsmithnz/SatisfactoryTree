@@ -1,7 +1,4 @@
-﻿using SatisfactoryTree.Console.Interfaces;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Text.RegularExpressions;
 
 namespace SatisfactoryTree.Console
 {
@@ -90,9 +87,7 @@ namespace SatisfactoryTree.Console
             name = Regex.Replace(name, @"_C$", ""); // Replace _C only at the end of the string
             name = name.Replace("Build_", "");
             return name;
-        }
-
-        
+        } 
 
         public static string GetBuildingName(string name)
         {

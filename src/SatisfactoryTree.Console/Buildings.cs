@@ -62,16 +62,13 @@ namespace SatisfactoryTree.Console
                 if (className != null && powerConsumptionString != "")
                 {
                     double powerConsumption = double.TryParse(powerConsumptionString, out double power) ? power : 0;
-                    if (powerConsumption > 0)
-                    {
-                        // Normalize the building name by removing "_Build" prefix, "_C" suffix, and lowercasing it
-                        string buildingName = Common.GetPowerProducerBuildingName(className); //Common.GetBuildingName(className).ToLower();
+                    // Normalize the building name by removing "_Build" prefix, "_C" suffix, and lowercasing it
+                    string buildingName = Common.GetPowerProducerBuildingName(className); //Common.GetBuildingName(className).ToLower();
 
-                        // Only include power data if the building is in the producingBuildings list
-                        if (producingBuildings.Contains(buildingName))
-                        {
-                            buildingsPowerMap[buildingName] = powerConsumption;
-                        }
+                    // Only include power data if the building is in the producingBuildings list
+                    if (producingBuildings.Contains(buildingName))
+                    {
+                        buildingsPowerMap[buildingName] = powerConsumption;
                     }
                 }
             }
