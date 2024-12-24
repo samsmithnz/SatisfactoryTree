@@ -52,12 +52,17 @@ namespace SatisfactoryTree.Console
                 {
                     energyValue = double.Parse(energyValueString);
                 }
+                bool isFluid = Common.IsFluid(partName);
+                if (isFluid)
+                {
+                    energyValue *= 1000; // Convert from MJ to kJ
+                }
 
                 parts[partName] = new Part
                 {
                     name = displayName,
                     stackSize = stackSize,
-                    isFluid = Common.IsFluid(partName),
+                    isFluid = isFluid,
                     isFicsmas = Common.IsFicsmas(displayName),
                     energyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
                 };
@@ -426,7 +431,10 @@ namespace SatisfactoryTree.Console
                 { "SAM", 10200 },
                 { "Stone", 69900 },
                 { "Sulfur", 10800 },
-                { "Water", 9007199254740991 }
+                { "Water", 9007199254740991 },
+                { "Crystal", 596 },
+                { "Crystal_mk2", 389 },
+                { "Crystal_mk3", 257 }
             };
 
             //var filteredData = data.Where((dynamic entry) => entry.Classes != null)
@@ -487,6 +495,17 @@ namespace SatisfactoryTree.Console
                     name = part,
                     limit = limits.ContainsKey(part) ? limits[part] : -1
                 };
+            }
+            // Update the resource part id with the part name
+            foreach (KeyValuePair<string, RawResource> rawResource in rawResources)
+            {
+                foreach (KeyValuePair<string, Part> part in parts)
+                {
+                    if (part.Key == rawResource.Key)
+                    {
+                        rawResource.Value.name = part.Value.name;
+                    }
+                }
             }
             rawResources = rawResources.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             return rawResources;
