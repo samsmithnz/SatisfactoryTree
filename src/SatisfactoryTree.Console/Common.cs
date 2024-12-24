@@ -101,6 +101,20 @@ namespace SatisfactoryTree.Console
             name = name.Replace("Build_", "");
             return name;
         }
+        
+        public static string GetPowerBuildingName(string name)
+        {
+            Match match = Regex.Match(name, @"Build_(\w+)_");
+            if (match.Success)
+            {
+                string buildingName = match.Groups[1].Value.ToLower();
+                // If contains _automated, remove it
+                return buildingName.Replace("_automated", "");
+            }
+            return "";
+        }
+
+
 
         public static string GetPartName(string name)
         {

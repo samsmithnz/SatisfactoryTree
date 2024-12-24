@@ -76,9 +76,6 @@ namespace SatisfactoryTree.Console
                 }
             }
 
-            // Manually add nuclear power plant
-            buildingsPowerMap["nuclearpowerplant"] = 0;
-
             // Finally sort the map by key
             var sortedMap = buildingsPowerMap.OrderBy(kvp => kvp.Key)
                                              .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);

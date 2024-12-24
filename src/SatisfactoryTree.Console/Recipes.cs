@@ -366,18 +366,18 @@ namespace SatisfactoryTree.Console
                 //string? fuelJSON = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel.GetString() : string.Empty;
                 JsonElement? fuelJSON = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel : (JsonElement?)null;
 
-                var building = new Building
+                Building building = new()
                 {
-                    name = displayName.Replace(" ", ""), // Use the first valid building, or empty string if none
+                    name = Common.GetPowerBuildingName(className), // Use the first valid building, or empty string if none
                     power = Math.Round(powerProduction) // generated power - can be rounded to the nearest whole number (all energy numbers are whole numbers)
                 };
 
-                var supplementalRatio = supplementalToPowerRatio;
+                double supplementalRatio = supplementalToPowerRatio;
                 // 1. Generator MW generated. This is an hourly value.
                 // 2. Divide by 60, to get the minute value
                 // 3. Now calculate the MJ, using the MJ->MW constant (1/3600), (https://en.wikipedia.org/wiki/Joule#Conversions)
                 // 4. Now divide this number by the part energy to calculate how many pieces per min
-                var powerMJ = (powerProduction / 60) / (1 / 3600.0);
+                double burnRateMJ = (powerProduction / 60d) / (1d / 3600d);
 
                 //1List<Ingredient> ingredients = new();
                 if (fuelJSON.HasValue && fuelJSON.Value.ValueKind == JsonValueKind.Array)
@@ -393,58 +393,60 @@ namespace SatisfactoryTree.Console
                         {
                             double.TryParse(byProductAmountJSON.ToString(), out byProductAmount);
                         }
+                        Part primaryFuelPart = parts.parts[primaryFuelName];
+                        double burnDurationInMins = primaryFuelPart.energyGeneratedInMJ / burnRateMJ;
+                        double burnDurationInS = burnDurationInMins * 60; // Convert to seconds
                         Fuel fuelItem = new()
                         {
                             primaryFuel = primaryFuelName,
                             supplementaryFuel = fuel.TryGetProperty("mSupplementalResourceClass", out JsonElement mSupplementalResourceClass) ? Common.GetPartName(mSupplementalResourceClass.GetString()) : "",
                             byProduct = fuel.TryGetProperty("mByproduct", out JsonElement mByproduct) ? Common.GetPartName(mByproduct.GetString()) : "",
-                            byProductAmount = byProductAmount
+                            byProductAmount = byProductAmount,
+                            byProductAmountPerMin = byProductAmount / burnDurationInMins,
+                            burnDurationInS = burnDurationInS
                         };
 
                         // Find the part for the primary fuel
-                        Part primaryFuelPart = parts.parts[primaryFuelName];
                         double primaryPerMin = 0;
                         if (primaryFuelPart.energyGeneratedInMJ > 0)
                         {
                             // The rounding here is important to remove floating point errors that appear with some types
                             // (this is step 4 from above)
-                            primaryPerMin = Math.Round(powerMJ / primaryFuelPart.energyGeneratedInMJ, 4);
+                            primaryPerMin = Math.Round(burnRateMJ / primaryFuelPart.energyGeneratedInMJ, 5);
                         }
                         double primaryAmount = 0;
                         if (primaryPerMin > 0)
                         {
-                            primaryAmount = primaryPerMin / 60;
+                            primaryAmount = primaryPerMin / 60d;
 
-                            List<Ingredient> ingredients = new()
+                            List<PowerIngredient> ingredients = new()
                             {
                                 new()
                                 {
                                     part = fuelItem.primaryFuel,
-                                    amount = primaryAmount,
-                                    perMin = primaryPerMin
+                                    perMin = primaryPerMin,
+                                    mwPerItem = building.power / primaryPerMin
                                 }
                             };
 
                             if (!string.IsNullOrEmpty(fuelItem.supplementaryFuel) && supplementalRatio > 0)
                             {
-                                ingredients.Add(new Ingredient
+                                ingredients.Add(new PowerIngredient
                                 {
                                     part = fuelItem.supplementaryFuel,
-                                    amount = (3 / 50.0) * supplementalRatio * building.power / 60,
-                                    perMin = (3 / 50.0) * supplementalRatio * building.power // Calculate the ratio of the supplemental resource to the primary fuel
+                                    perMin = (3d / 50d) * supplementalRatio * building.power, // Calculate the ratio of the supplemental resource to the primary fuel
+                                    supplementalRatio = (3d / 50d) * supplementalRatio
                                 });
                             }
 
-                            var products = new List<Product>();
+                            PowerProduct? products = null;
                             if (!string.IsNullOrEmpty(fuelItem.byProduct))
                             {
-                                products.Add(new Product
+                                products = new PowerProduct
                                 {
                                     part = fuelItem.byProduct,
-                                    amount = fuelItem.byProductAmount / 60,
-                                    perMin = fuelItem.byProductAmount,
-                                    isByProduct = true
-                                });
+                                    perMin = fuelItem.byProductAmountPerMin
+                                };
                             }
 
                             recipes.Add(new PowerGenerationRecipe
@@ -452,9 +454,13 @@ namespace SatisfactoryTree.Console
                                 id = Common.GetPowerGenerationRecipeName(className) + '_' + fuelItem.primaryFuel,
                                 displayName = displayName + " (" + primaryFuelPart.name + ")",
                                 ingredients = ingredients,
-                                products = products,
+                                byproduct = products,
                                 building = building
                             });
+                            if (recipes[recipes.Count - 1].id == "GeneratorFuel_RocketFuel")
+                            {
+                                System.Diagnostics.Debug.Write("GeneratorFuel_RocketFuel");
+                            }
                         }
                     }
                 }
