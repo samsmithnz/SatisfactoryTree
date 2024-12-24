@@ -65,10 +65,18 @@ public class RecipesTests
 
         //Assert
         Assert.IsNotNull(results);
-        //foreach (var item in results.Recipes)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
-        //}
+        bool alternateCoal2RecipeFound = false;
+        foreach (var item in results.recipes)
+        {
+            //Sometimes the "_C" gets stripped off the ID, so we need to check that it remains
+            if (item.id == "Alternate_Coal_2")
+            {
+                alternateCoal2RecipeFound = true;
+                break;
+            }
+            //System.Diagnostics.Debug.WriteLine(item.DisplayName);
+        }
+        Assert.IsTrue(alternateCoal2RecipeFound);
         Assert.AreEqual(291, results.recipes.Count);
     }
 
