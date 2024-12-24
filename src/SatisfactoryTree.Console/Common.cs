@@ -78,13 +78,28 @@ namespace SatisfactoryTree.Console
 
         public static string GetRecipeName(string name)
         {
-            return name.Replace(oldValue: "Build_", "").Replace("_C", "");
+            //return name.Replace(oldValue: "Build_", "").Replace("_C", "");
+            name = Regex.Replace(name, @"_C$", ""); // Replace _C only at the end of the string
+            name = name.Replace("Recipe_", "");
+            return name;
         }
+
+        public static string GetPowerGenerationRecipeName(string name)
+        {
+            //return name.Replace(oldValue: "Build_", "").Replace("_C", "");
+            name = Regex.Replace(name, @"_C$", ""); // Replace _C only at the end of the string
+            name = name.Replace("Build_", "");
+            return name;
+        }
+
+        
 
         public static string GetBuildingName(string name)
         {
-            string building = name.Replace("Build_", "").Replace("_C", "");
-            return building;
+            //name = name.Replace("Build_", "").Replace("_C", "");
+            name = Regex.Replace(name, @"_C$", ""); // Replace _C only at the end of the string
+            name = name.Replace("Build_", "");
+            return name;
         }
 
         public static string GetPartName(string name)
@@ -93,7 +108,9 @@ namespace SatisfactoryTree.Console
             {
                 return "PortableMiner";
             }
-            name = name.Replace("Desc_", "").Replace("_C", "");
+            //name = name.Replace("Desc_", "").Replace("_C", "");
+            name = Regex.Replace(name, @"_C$", ""); // Replace _C only at the end of the string
+            name = name.Replace("Desc_", "");
             return name;
         }
 

@@ -493,7 +493,7 @@ namespace SatisfactoryTree.Console
                 rawResources[part] = new RawResource
                 {
                     name = part,
-                    limit = limits.ContainsKey(part) ? limits[part] : -1
+                    limit = limits.ContainsKey(part) ? limits[part] : 100000000
                 };
             }
             // Update the resource part id with the part name
@@ -539,51 +539,51 @@ namespace SatisfactoryTree.Console
 
         public static void FixTurbofuel(PartDataInterface items, List<Recipe> recipes)
         {
-            //// Rename the current "Turbofuel" which is actually "Packaged Turbofuel"
-            //items.parts["PackagedTurboFuel"] = items.parts["TurboFuel"];
+            // Rename the current "Turbofuel" which is actually "Packaged Turbofuel"
+            items.parts["PackagedTurboFuel"] = items.parts["TurboFuel"];
 
-            //// Add the actual "Turbofuel" as a new item
-            //items.parts["LiquidTurboFuel"] = new Part
-            //{
-            //    name = "Turbofuel",
-            //    stackSize = 0,
-            //    isFluid = true,
-            //    isFicsmas = false,
-            //    energyGeneratedInMJ = 2000
-            //};
+            // Add the actual "Turbofuel" as a new item
+            items.parts["LiquidTurboFuel"] = new Part
+            {
+                name = "Turbofuel",
+                stackSize = 0,
+                isFluid = true,
+                isFicsmas = false,
+                energyGeneratedInMJ = 2000
+            };
 
-            //// Rename the packaged item to PackagedTurboFuel
-            //items.parts["PackagedTurboFuel"] = new Part
-            //{
-            //    name = "Packaged Turbofuel",
-            //    stackSize = 100, // SS_MEDIUM
-            //    isFluid = false,
-            //    isFicsmas = false,
-            //    energyGeneratedInMJ = 2000
-            //};
+            // Rename the packaged item to PackagedTurboFuel
+            items.parts["PackagedTurboFuel"] = new Part
+            {
+                name = "Packaged Turbofuel",
+                stackSize = 100, // SS_MEDIUM
+                isFluid = false,
+                isFicsmas = false,
+                energyGeneratedInMJ = 2000
+            };
 
-            //// Remove the incorrect packaged turbofuel
-            //items.parts.Remove("TurboFuel");
+            // Remove the incorrect packaged turbofuel
+            items.parts.Remove("TurboFuel");
 
-            //// Now we need to go through the recipes and wherever "TurboFuel" is mentioned, it needs to be changed to "PackagedTurboFuel"
-            //foreach (var recipe in recipes)
-            //{
-            //    foreach (var product in recipe.products)
-            //    {
-            //        if (product.part == "TurboFuel")
-            //        {
-            //            product.part = "PackagedTurboFuel";
-            //        }
-            //    }
+            // Now we need to go through the recipes and wherever "TurboFuel" is mentioned, it needs to be changed to "PackagedTurboFuel"
+            foreach (var recipe in recipes)
+            {
+                foreach (var product in recipe.products)
+                {
+                    if (product.part == "TurboFuel")
+                    {
+                        product.part = "PackagedTurboFuel";
+                    }
+                }
 
-            //    foreach (var ingredient in recipe.ingredients)
-            //    {
-            //        if (ingredient.part == "TurboFuel")
-            //        {
-            //            ingredient.part = "PackagedTurboFuel";
-            //        }
-            //    }
-            //}
+                foreach (var ingredient in recipe.ingredients)
+                {
+                    if (ingredient.part == "TurboFuel")
+                    {
+                        ingredient.part = "PackagedTurboFuel";
+                    }
+                }
+            }
         }
     }
 }

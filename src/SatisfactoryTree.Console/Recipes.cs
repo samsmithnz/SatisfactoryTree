@@ -298,7 +298,7 @@ namespace SatisfactoryTree.Console
                 //if (blacklist. producedIn)
                 recipes.Add(new Recipe
                 {
-                    id = className.Replace("Recipe_", "")?.Replace("_C", ""),
+                    id = Common.GetRecipeName(className),
                     displayName = displayName,
                     ingredients = ingredients,
                     products = products,
@@ -449,7 +449,7 @@ namespace SatisfactoryTree.Console
 
                             recipes.Add(new PowerGenerationRecipe
                             {
-                                id = Common.GetRecipeName(className) + '_' + fuelItem.primaryFuel,
+                                id = Common.GetPowerGenerationRecipeName(className) + '_' + fuelItem.primaryFuel,
                                 displayName = displayName + " (" + primaryFuelPart.name + ")",
                                 ingredients = ingredients,
                                 products = products,
