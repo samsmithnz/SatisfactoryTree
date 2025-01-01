@@ -6,7 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2476877E-F188-4D2B-9B1B-F8BDF762F076}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\dependabot.yml = ..\.github\dependabot.yml
+		..\content\en-US.json = ..\content\en-US.json
+		..\content\gameData.json = ..\content\gameData.json
 		..\GitVersion.yml = ..\GitVersion.yml
+		..\content\output.json = ..\content\output.json
 		..\README.md = ..\README.md
 		..\.github\workflows\workflow.yml = ..\.github\workflows\workflow.yml
 	EndProjectSection
@@ -17,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.Tests", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.Web", "SatisfactoryTree.Web\SatisfactoryTree.Web.csproj", "{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.ContentExtractor", "SatisfactoryTree.ContentExtractor\SatisfactoryTree.ContentExtractor.csproj", "{F57832D1-14D2-460C-99A8-3F3E80F32527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.ContentExtractor", "SatisfactoryTree.ContentExtractor\SatisfactoryTree.ContentExtractor.csproj", "{F57832D1-14D2-460C-99A8-3F3E80F32527}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.Console", "SatisfactoryTree.Console\SatisfactoryTree.Console.csproj", "{8BA214EA-DFC4-4986-A8FA-862B734603D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +46,10 @@ Global
 		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA214EA-DFC4-4986-A8FA-862B734603D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA214EA-DFC4-4986-A8FA-862B734603D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA214EA-DFC4-4986-A8FA-862B734603D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA214EA-DFC4-4986-A8FA-862B734603D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
