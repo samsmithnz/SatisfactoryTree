@@ -93,7 +93,7 @@ public class RecipesTests
         //{
         //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
         //}
-        Assert.AreEqual(12, results.buildings.Count);
+        Assert.AreEqual(15, results.buildings.Count);
     }
 
     [TestMethod]
