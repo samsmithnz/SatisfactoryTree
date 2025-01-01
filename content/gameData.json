@@ -663,7 +663,7 @@
         "energyGeneratedInMJ": 0
       },
       "OreUranium": {
-        "name": "Uranium Ore",
+        "name": "Uranium",
         "stackSize": 100,
         "isFluid": false,
         "isFicsmas": false,
@@ -10389,7 +10389,6 @@
           "mwPerItem": 3
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorbiomass",
         "power": 30
@@ -10405,7 +10404,6 @@
           "mwPerItem": 0.25
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorbiomass",
         "power": 30
@@ -10421,7 +10419,6 @@
           "mwPerItem": 0.3333333333333333
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorbiomass",
         "power": 30
@@ -10437,7 +10434,6 @@
           "mwPerItem": 12.5
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorbiomass",
         "power": 30
@@ -10453,7 +10449,6 @@
           "mwPerItem": 7.5
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorbiomass",
         "power": 30
@@ -10469,7 +10464,6 @@
           "mwPerItem": 1.6666666666666667
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorbiomass",
         "power": 30
@@ -10490,7 +10484,6 @@
           "supplementalRatio": 0.6
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorcoal",
         "power": 75
@@ -10511,7 +10504,6 @@
           "supplementalRatio": 0.6
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorcoal",
         "power": 75
@@ -10532,7 +10524,6 @@
           "supplementalRatio": 0.6
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorcoal",
         "power": 75
@@ -10548,7 +10539,6 @@
           "mwPerItem": 12.5
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorfuel",
         "power": 250
@@ -10564,7 +10554,6 @@
           "mwPerItem": 83.33333333333333
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorfuel",
         "power": 250
@@ -10580,7 +10569,6 @@
           "mwPerItem": 12.5
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorfuel",
         "power": 250
@@ -10596,7 +10584,6 @@
           "mwPerItem": 59.999952000038405
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorfuel",
         "power": 250
@@ -10612,7 +10599,6 @@
           "mwPerItem": 33.333333333333336
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatorfuel",
         "power": 250
@@ -10633,7 +10619,6 @@
           "supplementalRatio": 0.096
         }
       ],
-      "byproduct": null,
       "building": {
         "name": "generatornuclear",
         "power": 2500
