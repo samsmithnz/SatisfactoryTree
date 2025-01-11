@@ -1,12 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SatisfactoryTree.Console;
-using SatisfactoryTree.Console.Interfaces;
+using SatisfactoryTree.Console.OldModels;
 using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Tests;
 
 [TestClass]
-public class RecipesTests
+public class ConsoleOldModelTests
 {
 
     private FinalData? results = null;

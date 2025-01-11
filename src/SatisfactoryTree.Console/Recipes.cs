@@ -1,4 +1,4 @@
-﻿using SatisfactoryTree.Console.Interfaces;
+﻿using SatisfactoryTree.Console.OldModels;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 

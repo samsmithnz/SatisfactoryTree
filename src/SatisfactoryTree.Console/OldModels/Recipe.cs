@@ -1,4 +1,4 @@
-﻿namespace SatisfactoryTree.Console.Interfaces
+﻿namespace SatisfactoryTree.Console.OldModels
 {
     public class Ingredient
     {
@@ -14,6 +14,7 @@
         public double perMin { get; set; }
         public bool? isByProduct { get; set; }
     }
+
     public class PowerIngredient
     {
         public string part { get; set; }
