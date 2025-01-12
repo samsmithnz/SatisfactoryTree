@@ -1,10 +1,11 @@
-﻿namespace SatisfactoryTree.Console.OldModels
+namespace SatisfactoryTree.Console.OldModels
 {
     public class Ingredient
     {
         public string part { get; set; }
         public double amount { get; set; }
         public double perMin { get; set; }
+        public double? mwPerItem { get; set; }
     }
 
     public class Product
