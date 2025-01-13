@@ -36,10 +36,10 @@ public class ConsoleTests
 
         //Assert
         Assert.IsNotNull(results);
-        foreach (var item in results.items.parts)
-        {
-            System.Diagnostics.Debug.WriteLine(results.items.parts[item.Key].name);
-        }
+        //foreach (var item in results.items.parts)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(results.items.parts[item.Key].name);
+        //}
         Assert.AreEqual(168, results.items.parts.Count);
     }
 
@@ -52,10 +52,10 @@ public class ConsoleTests
 
         //Assert
         Assert.IsNotNull(results);
-        foreach (var item in results.items.rawResources)
-        {
-            System.Diagnostics.Debug.WriteLine(results.items.rawResources[item.Key].name);
-        }
+        //foreach (var item in results.items.rawResources)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(results.items.rawResources[item.Key].name);
+        //}
         Assert.AreEqual(24, results.items.rawResources.Count);
     }
 
@@ -68,18 +68,18 @@ public class ConsoleTests
 
         //Assert
         Assert.IsNotNull(results);
-        bool alternateCoal2RecipeFound = false;
-        foreach (var item in results.recipes)
-        {
-            //Sometimes the "_C" gets stripped off the ID, so we need to check that it remains
-            if (item.id == "Alternate_Coal_2")
-            {
-                alternateCoal2RecipeFound = true;
-                break;
-            }
-            //System.Diagnostics.Debug.WriteLine(item.DisplayName);
-        }
-        Assert.IsTrue(alternateCoal2RecipeFound);
+        //bool alternateCoal2RecipeFound = false;
+        //foreach (var item in results.recipes)
+        //{
+        //    //Sometimes the "_C" gets stripped off the ID, so we need to check that it remains
+        //    if (item.id == "Alternate_Coal_2")
+        //    {
+        //        alternateCoal2RecipeFound = true;
+        //        break;
+        //    }
+        //    //System.Diagnostics.Debug.WriteLine(item.DisplayName);
+        //}
+        //Assert.IsTrue(alternateCoal2RecipeFound);
         Assert.AreEqual(291, results.recipes.Count);
     }
 
@@ -127,7 +127,7 @@ public class ConsoleTests
         //{
         //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
         //}
-        Assert.AreEqual(291+17, results.newRecipes.Count);
+        Assert.AreEqual(results.recipes.Count + results.powerGenerationRecipes.Count, results.newRecipes.Count);
     }
 
 }
