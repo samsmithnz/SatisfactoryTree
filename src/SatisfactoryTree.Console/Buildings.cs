@@ -12,7 +12,6 @@ namespace SatisfactoryTree.Console
             {
                 string className = entry.GetProperty("ClassName").ToString();
                 string? producedIn = entry.TryGetProperty("mProducedIn", out JsonElement mProducedIn) ? mProducedIn.GetString() : string.Empty;
-                //string? fuels = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel.GetString() : string.Empty;
                 JsonElement? fuelJSON = entry.TryGetProperty("mFuel", out JsonElement mFuel) ? mFuel : (JsonElement?)null;
 
                 if (producedIn != null)
@@ -50,10 +49,7 @@ namespace SatisfactoryTree.Console
 
         public static Dictionary<string, double> GetPowerConsumptionForBuildings(List<JsonElement> data, List<string> producingBuildings)
         {
-            var buildingsPowerMap = new Dictionary<string, double>();
-
-            //var filteredData = data.Where(entry => entry.Classes != null)
-            //                       .SelectMany<dynamic, dynamic>(entry => entry.Classes);
+            Dictionary<string, double> buildingsPowerMap = new();
 
             foreach (JsonElement entry in data)
             {
@@ -74,7 +70,7 @@ namespace SatisfactoryTree.Console
             }
 
             // Finally sort the map by key
-            var sortedMap = buildingsPowerMap.OrderBy(kvp => kvp.Key)
+            Dictionary<string, double> sortedMap = buildingsPowerMap.OrderBy(kvp => kvp.Key)
                                              .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
             return sortedMap;

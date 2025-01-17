@@ -1,4 +1,4 @@
-﻿using SatisfactoryTree.Console.Interfaces;
+﻿using SatisfactoryTree.Console.OldModels;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -11,33 +11,6 @@ namespace SatisfactoryTree.Console
         public static List<Recipe> GetProductionRecipes(List<JsonElement> data, Dictionary<string, double> producingBuildings)
         {
             List<Recipe> recipes = new();
-
-            //var filteredData = data.Where(entry => entry.Classes != null)
-            //                       .SelectMany<dynamic, dynamic>(entry => (IEnumerable<dynamic>)entry.Classes)
-            //                       .Where(recipe =>
-            //                       {
-            //                           // Filter out recipes that don't have a producing building
-            //                           if (entry.mProducedIn == null) return false;
-            //                           // Filter out recipes that are in the blacklist (typically items produced by the Build Gun)
-            //                           if (Common.Blacklist.All(building => entry.mProducedIn.Contains(building))) return false;
-
-            //                           // Extract all producing buildings
-            //                           var rawBuildingKeys = new List<dynamic>();
-            //                           foreach (Match match in Regex.Matches(entry.mProducedIn, @"\/([^/]+)\."))
-            //                           {
-            //                               rawBuildingKeys.Add((dynamic)match.Value);
-            //                           }
-            //                           if (!rawBuildingKeys.Any()) return false;
-
-            //                           // Process all buildings and check if any match the producingBuildings map
-            //                           var validBuilding = rawBuildingKeys.Any((Func<dynamic, bool>)(rawBuilding =>
-            //                           {
-            //                               var buildingKey = rawBuilding.Replace("/", "").Replace(".", "").ToLower().Replace("build_", "");
-            //                               return producingBuildings.ContainsKey(buildingKey);
-            //                           }));
-
-            //                           return validBuilding;
-            //                       });
 
             foreach (JsonElement entry in data)
             {
@@ -128,94 +101,10 @@ namespace SatisfactoryTree.Console
                         }
                     }
                 }
-                //if (ingredientsJSON != null && ingredientsJSON.Length > 0)
-                //{
-                //    MatchCollection ingredientMatches = Regex.Matches(ingredientsJSON, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)");
-                //    if (ingredientMatches != null)
-                //    {
-                //        foreach (Match match in ingredientMatches)
-                //        {
-                //            string newRawPart = ingredientMatches[0].Groups[1].Value;
-                //            if (!rawParts.Contains(newRawPart))
-                //            {
-                //                rawParts.Add(newRawPart);
-                //            }
-                //        }
-                //    }
-                //}
-                //var ingredients = entry.mIngredients != null
-                //    ? Regex.Matches(entry.mIngredients, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)")
-                //            .Cast<Match>()
-                //            .Select((Func<Match, Ingredient>)(match =>
-                //            {
-                //                var partName = match.Groups[1].Value;
-                //                var amount = int.Parse(match.Groups[2].Value);
-                //                if (Common.IsFluid(partName))
-                //                {
-                //                    amount /= 1000;
-                //                }
-                //                var perMin = entry.mManufactoringDuration != null && amount > 0
-                //                    ? (60 / double.Parse(entry.mManufactoringDuration)) * amount
-                //                    : 0;
-
-                //                return new Ingredient
-                //                {
-                //                    Part = partName,
-                //                    Amount = amount,
-                //                    PerMin = perMin
-                //                };
-                //            }))
-                //            .Where((Func<Ingredient, bool>)(ingredient => ingredient != null))
-                //            .ToList()
-                //    : new List<Ingredient>();
-
-                //// Parse mProduct to extract all products
-                //var productMatches = Regex.Matches(products, @"ItemClass="".*?\/Desc_(.*?)\.Desc_.*?"",Amount=(\d+)")
-                //                          .Cast<Match>()
-                //                          .ToList();
-
-                //// Exception for automated miner recipes - as the product is a BP_ItemDescriptor
-                //if (className == "Recipe_Alternate_AutomatedMiner_C")
-                //{
-                //    productMatches = Regex.Matches(products, @"ItemClass="".*?\/BP_ItemDescriptor(.*?)\.BP_ItemDescriptor.*?"",Amount=(\d+)")
-                //                          .Cast<Match>()
-                //                          .ToList();
-                //}
-
-                //List<Product> productList = new();
-                //foreach (var match in productMatches)
-                //{
-                //    var productName = match.Groups[1].Value;
-                //    var amount = int.Parse(match.Groups[2].Value);
-                //    if (Common.IsFluid(productName))
-                //    {
-                //        amount /= 1000;  // Divide by 1000 for liquid/gas amounts
-                //    }
-                //    var perMin = entry.mManufactoringDuration != null && amount > 0
-                //        ? (60 / double.Parse(entry.mManufactoringDuration)) * amount
-                //        : 0;
-
-                //    products.Add(new Product
-                //    {
-                //        Part = productName,
-                //        Amount = amount,
-                //        PerMin = perMin,
-                //        IsByProduct = products.Count > 0
-                //    });
-                //}
+             
 
                 // Extract all producing buildings
                 var producedInMatches = Regex.Matches(producedIn, @"Build_\w+_C");
-                //.Cast<Match>()
-                //.Select((Func<Match, string>)(m => Common.GetBuildingName(m.Groups[2].Value).ToLower()))
-                ////.Where((Func<string, bool>)(building => building != null && !sourceArray.Contains(building)))
-                //.ToList();
-                //List<string> producedInMatches = Regex.Matches(producedIn, @"Build_\w+_C")
-                //                             .Cast<Match>()
-                //                             .Select((Func<Match, string>)(m => m.Groups[2].Value.ToLower()))
-                //                             //.Where((Func<string, bool>)(building => building != null && !sourceArray.Contains(building)))
-                //                             .ToList();
-
 
                 // Calculate power per building and choose the most relevant one
                 double powerPerBuilding = 0;
@@ -223,16 +112,6 @@ namespace SatisfactoryTree.Console
 
                 if (producedInMatches.Any())
                 {
-                    //powerPerBuilding = producedInMatches.Sum(building =>
-                    //{
-                    //    if (producingBuildings.ContainsKey(building))
-                    //    {
-                    //        double buildingPower = producingBuildings[building];
-                    //        selectedBuilding = selectedBuilding ?? building; // Set the first valid building as selected
-                    //        return buildingPower; // Add power for this building
-                    //    }
-                    //    return 0;
-                    //});
                     foreach (object? buildingMatch in producedInMatches)
                     {
                         if (buildingMatch != null)
@@ -314,33 +193,6 @@ namespace SatisfactoryTree.Console
         public static List<PowerGenerationRecipe> GetPowerGeneratingRecipes(List<JsonElement> data, PartDataInterface parts, Dictionary<string, double> producingBuildings)
         {
             var recipes = new List<PowerGenerationRecipe>();
-
-            //var filteredData = data.Where(entry => entry.Classes != null)
-            //                       .SelectMany<dynamic, dynamic>(entry => (IEnumerable<dynamic>)entry.Classes)
-            //                       .Where(recipe =>
-            //                       {
-            //                           // Filter out recipes that don't have a producing building
-            //                           if (entry.mProducedIn == null) return false;
-            //                           // Filter out recipes that are in the blacklist (typically items produced by the Build Gun)
-            //                           if (Common.Blacklist.All(building => entry.mProducedIn.Contains(building))) return false;
-
-            //                           // Extract all producing buildings
-            //                           var rawBuildingKeys = new List<dynamic>();
-            //                           foreach (Match match in Regex.Matches(entry.mProducedIn, @"\/([^/]+)\."))
-            //                           {
-            //                               rawBuildingKeys.Add((dynamic)match.Value);
-            //                           }
-            //                           if (!rawBuildingKeys.Any()) return false;
-
-            //                           // Process all buildings and check if any match the producingBuildings map
-            //                           var validBuilding = rawBuildingKeys.Any((Func<dynamic, bool>)(rawBuilding =>
-            //                           {
-            //                               var buildingKey = rawBuilding.Replace("/", "").Replace(".", "").ToLower().Replace("build_", "");
-            //                               return producingBuildings.ContainsKey(buildingKey);
-            //                           }));
-
-            //                           return validBuilding;
-            //                       });
 
             foreach (JsonElement entry in data)
             {
@@ -465,77 +317,7 @@ namespace SatisfactoryTree.Console
                     }
                 }
             }
-
-            //var fuels = entry.mFuel is IEnumerable<dynamic> ? (IEnumerable<dynamic>)entry.mFuel : new List<dynamic> { entry.mFuel };
-            //foreach (var fuel in fuels)
-            //{
-            //    var fuelItem = new Fuel
-            //    {
-            //        PrimaryFuel = Common.GetPartName(fuel.mFuelClass),
-            //        SupplementalResource = fuel.mSupplementalResourceClass != null ? Common.GetPartName(fuel.mSupplementalResourceClass) : "",
-            //        ByProduct = fuel.mByproduct != null ? Common.GetPartName(fuel.mByproduct) : "",
-            //        ByProductAmount = fuel.mByproductAmount != null ? double.Parse(fuel.mByproductAmount) : 0
-            //    };
-
-            //    // Find the part for the primary fuel
-            //    var extractedPartText = Common.GetPartName(fuelItem.PrimaryFuel);
-            //    var primaryFuelPart = parts.Parts[extractedPartText];
-            //    double primaryPerMin = 0;
-            //    if (primaryFuelPart.EnergyGeneratedInMJ > 0)
-            //    {
-            //        // The rounding here is important to remove floating point errors that appear with some types
-            //        // (this is step 4 from above)
-            //        primaryPerMin = Math.Round(powerMJ / primaryFuelPart.EnergyGeneratedInMJ, 4);
-            //    }
-            //    double primaryAmount = 0;
-            //    if (primaryPerMin > 0)
-            //    {
-            //        primaryAmount = primaryPerMin / 60;
-
-            //        var ingredients = new List<Ingredient>
-            //                                {
-            //                                    new Ingredient
-            //                                    {
-            //                                        Part = fuelItem.PrimaryFuel,
-            //                                        Amount = (int)primaryAmount,
-            //                                        PerMin = primaryPerMin
-            //                                    }
-            //                                };
-
-            //        if (!string.IsNullOrEmpty(fuelItem.SupplementalResource) && supplementalRatio > 0)
-            //        {
-            //            ingredients.Add(new Ingredient
-            //            {
-            //                Part = fuelItem.SupplementalResource,
-            //                Amount = (int)((3 / 50.0) * supplementalRatio * building.Power / 60),
-            //                PerMin = (3 / 50.0) * supplementalRatio * building.Power // Calculate the ratio of the supplemental resource to the primary fuel
-            //            });
-            //        }
-
-            //        var products = new List<Product>();
-            //        if (!string.IsNullOrEmpty(fuelItem.ByProduct))
-            //        {
-            //            products.Add(new Product
-            //            {
-            //                Part = fuelItem.ByProduct,
-            //                Amount = (int)(fuelItem.ByProductAmount / 60),
-            //                PerMin = fuelItem.ByProductAmount,
-            //                IsByProduct = true
-            //            });
-            //        }
-
-            //        recipes.Add(new PowerGenerationRecipe
-            //        {
-            //            Id = Common.GetRecipeName(className) + '_' + fuelItem.PrimaryFuel,
-            //            DisplayName = displayName + " (" + primaryFuelPart.Name + ")",
-            //            Ingredients = ingredients,
-            //            Products = products,
-            //            Building = building
-            //        });
-            //    }
-            //}
-
-
+           
             return recipes.OrderBy(r => r.displayName).ToList();
         }
     }

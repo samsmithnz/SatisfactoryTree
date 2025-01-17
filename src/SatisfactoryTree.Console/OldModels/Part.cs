@@ -1,4 +1,4 @@
-﻿namespace SatisfactoryTree.Console.Interfaces
+﻿namespace SatisfactoryTree.Console.OldModels
 {
     public class Part
     {
