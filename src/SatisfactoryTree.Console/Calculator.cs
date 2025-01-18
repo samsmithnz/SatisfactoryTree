@@ -1,10 +1,4 @@
 ﻿using SatisfactoryTree.Console.OldModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Console
 {
@@ -13,6 +7,9 @@ namespace SatisfactoryTree.Console
         public string Name { get; set; }
         public double Quantity { get; set; }
         public List<Item> Ingredients { get; set; }
+        public string Building { get; set; }
+        public double BuildingQuantity { get; set; }
+
         public int Counter { get; set; }
     }
 
@@ -27,12 +24,14 @@ namespace SatisfactoryTree.Console
             int counter = 1;
 
             //Add the goal item
-            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = new(), Counter = counter });
+            NewRecipe recipe = FindRecipe(finalData, partName);
+            double buildingRatio = quantity / recipe.products[0].perMin;
+            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = new(), Building = recipe.building.name, BuildingQuantity = buildingRatio, Counter = counter });
             //Get the dependencies/ingredients for the goal item
             results.AddRange(GetIngredients(finalData, partName, quantity, counter));
 
             //transfer the results list into a dictonary to combine results
-            Dictionary<string, Item> resultsDictionary = new();  
+            Dictionary<string, Item> resultsDictionary = new();
             foreach (Item item in results)
             {
                 //if the item doesn't exist in the dictionary, add it
@@ -80,11 +79,20 @@ namespace SatisfactoryTree.Console
                 {
                     foreach (Ingredient ingredient in newRecipe.ingredients)
                     {
+                        //Get this ingredient's recipe
+                        NewRecipe ingredientRecipe = FindRecipe(finalData, ingredient.part);
+                        string? buildingName = null;
+                        double buildingRatio = 0;
+                        if (ingredientRecipe != null)
+                        {
+                            buildingName = ingredientRecipe.building.name;
+                            buildingRatio = ingredient.perMin * ratio / ingredientRecipe.products[0].perMin;
+                        }
+
                         //Add this ingredient
-                        results.Add(new() { Name = ingredient.part, Quantity = ingredient.perMin * ratio, Ingredients = new(), Counter = counter });
+                        results.Add(new() { Name = ingredient.part, Quantity = ingredient.perMin * ratio, Ingredients = new(), Building = buildingName, BuildingQuantity = buildingRatio, Counter = counter });
                         //Search for this ingredient's dependencies
                         results.AddRange(GetIngredients(finalData, ingredient.part, ingredient.perMin * ratio, counter));
-
                     }
                 }
                 ////Check to see if the part is a raw material

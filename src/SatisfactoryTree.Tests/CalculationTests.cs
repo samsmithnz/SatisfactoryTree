@@ -50,12 +50,18 @@ namespace SatisfactoryTree.Tests
             //Assert
             Assert.IsNotNull(results);
             Assert.AreEqual(2, results.Count);
+
             Assert.AreEqual("IronIngot", results[0].Name);
             Assert.AreEqual(30, results[0].Quantity);
             Assert.AreEqual(1, results[0].Counter);
+            Assert.AreEqual("smeltermk1", results[0].Building);
+            Assert.AreEqual(1, results[0].BuildingQuantity);
+
             Assert.AreEqual("OreIron", results[1].Name);
             Assert.AreEqual(30, results[1].Quantity);
             Assert.AreEqual(2, results[1].Counter);
+            Assert.AreEqual(null, results[1].Building);
+            Assert.AreEqual(0, results[1].BuildingQuantity);
         }
 
         [TestMethod]
@@ -79,12 +85,20 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual("IronPlate", results[0].Name);
             Assert.AreEqual(30, results[0].Quantity);
             Assert.AreEqual(1, results[0].Counter);
+            Assert.AreEqual("constructormk1", results[0].Building);
+            Assert.AreEqual(1.5, results[0].BuildingQuantity);
+
             Assert.AreEqual("IronIngot", results[1].Name);
             Assert.AreEqual(45, results[1].Quantity);
             Assert.AreEqual(2, results[1].Counter);
+            Assert.AreEqual("smeltermk1", results[1].Building);
+            Assert.AreEqual(1.5, results[1].BuildingQuantity);
+
             Assert.AreEqual("OreIron", results[2].Name);
             Assert.AreEqual(45, results[2].Quantity);
             Assert.AreEqual(3, results[2].Counter);
+            Assert.AreEqual(null, results[2].Building);
+            Assert.AreEqual(0, results[2].BuildingQuantity);
         }
 
         [TestMethod]
