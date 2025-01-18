@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SatisfactoryTree.Console;
-using SatisfactoryTree.Console.OldModels;   
 using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Tests;
