@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,25 @@ namespace SatisfactoryTree.Console
             results.Add(new() { Name = partName, Quantity = quantity, Ingredients = new(), Counter = counter });
             //Get the dependencies/ingredients for the goal item
             results.AddRange(GetIngredients(finalData, partName, quantity, counter));
+
+            //transfer the results list into a dictonary to combine results
+            Dictionary<string, Item> resultsDictionary = new();  
+            foreach (Item item in results)
+            {
+                //if the item doesn't exist in the dictionary, add it
+                if (!resultsDictionary.ContainsKey(item.Name))
+                {
+                    resultsDictionary.Add(item.Name, item);
+                }
+                else
+                {
+                    //if the item exists in the dictionary, add the quantity to the existing item
+                    resultsDictionary[item.Name].Quantity += item.Quantity;
+                }
+            }
+
+            //sort the dictonary back into a list
+            results = resultsDictionary.Values.ToList();
 
             //sort the results by counter to show the goal items first and raw items last, and then part name
             results = results.OrderBy(x => x.Counter).ThenBy(x => x.Name).ToList();
