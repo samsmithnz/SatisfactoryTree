@@ -2,13 +2,15 @@
 @code {
     public class Product
     {
-        public Product(string partId, string recipeId, double quantity)
+        public Product(string partId, string partImage, string recipeId, double quantity)
         {
             PartId = partId;
+            PartImage = "" + partImage + "_64.png";
             RecipeId = recipeId;
             Quantity = quantity;
         }
         public string PartId { get; set; }
+        public string PartImage { get; set; }
         public string RecipeId { get; set; }
         public double Quantity { get; set; }
     }
@@ -24,61 +26,99 @@
     }
     public class Recipe
     {
-        public Recipe(string partId, string recipeId, string recipeName)
+        public Recipe(string partId, string recipeId, string recipeName, List<Ingredient> ingredients, double quantity)
         {
             PartId = partId;
             RecipeId = recipeId;
             RecipeName = recipeName;
+            Ingredients = ingredients;
+            Quantity = quantity;
         }
         public string PartId { get; set; }
         public string RecipeId { get; set; }
         public string RecipeName { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
+        public double Quantity { get; set; }
+    }
+    public class Ingredient
+    {
+        public Ingredient(string partId, string partName, string partImage, double quantity)
+        {
+            PartId = partId;
+            PartName = partName;
+            PartImage = "" + partImage + "_64.png";
+            Quantity = quantity;
+        }
+        public string PartId { get; set; }
+        public string PartName { get; set; }
+        public string PartImage { get; set; }
+        public double Quantity { get; set; }
     }
 
-    List<Product> Products = new() { new Product("ironPlate", "ironPlate", 30), new Product("ironIngot", "ironIngot", 45) };
+    List<Product> Products = new() { new Product("ironPlate", "iron-plate", "ironPlate", 30), new Product("ironPlate", "iron-plate", "alt_SteelPlate", 3), new Product("ironIngot", "iron-ingot", "ironIngot", 45) };
     List<string> Imports = new() { "Hi", "Bye" };
-    List<string> Storage = new() { "Hi", "Bye" };
+    List<string> Storages = new() { "Hi", "Bye" };
     List<Part> Parts = new() { new Part("ironIngot", "Iron Ingot"), new Part("ironPlate", "Iron Plate") };
-    List<Recipe> Recipes = new() { new Recipe("ironIngot", "ironIngot", "Iron Ingots"), new Recipe("ironPlate", "ironPlate", "Iron Plates"), new Recipe("ironPlate", "alt_SteelPlate", "Alt: Steel Plates") };
+    List<Recipe> Recipes = new() {
+        new Recipe("ironIngot", "ironIngot", "Iron Ingots", new() { new("ironore","Iron Ore", "iron-ore", 30) }, 30),
+        new Recipe("ironPlate", "ironPlate", "Iron Plates", new() { new("ironIngot", "Iron Ingot", "iron-ingot", 30) }, 20),
+        new Recipe("ironPlate", "alt_SteelPlate", "Alt: Steel Plates", new() { new("ironIngot", "Iron Ingot", "iron-ingot", 15), new("steelIngot", "Steel Ingot", "steel-ingot", 15) }, 20)
+};
 }
 
 <PageTitle>Home</PageTitle>
 
 <h3>Products</h3>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Part</th>
-        <th scope="col">Recipe</th>
-        <th scope="col">Quantity</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var product in Products)
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4"> Part</div>
+        <div class="col-sm-4"> Recipe</div>
+        <div class="col-sm-4"> Quantity</div>
+    </div>
+    @foreach (Product product in Products)
     {
-        <tr>
-            <td>
-                <select class="form-control" @bind="@product.PartId">
-                    <option value=""></option>
-                    @foreach (var part in Parts)
-                    {
-                        <option value="@part.PartId">@part.PartName</option>
-                    }
-                </select>
-            </td>
-            <td>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                    <img src="satisfactory-assets/item/@product.PartImage" alt="Part Image" style="width:40px; height:40px; padding-right:4px;">
+                    <select class="form-control" @bind="@product.PartId">
+                        <option value=""></option>
+                        @foreach (Part part in Parts)
+                        {
+                            <option value="@part.PartId">@part.PartName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
                 <select class="form-control" @bind="@product.RecipeId">
-                    @foreach (var recipe in Recipes)
+                    @foreach (Recipe recipe in Recipes.Where(p => p.PartId == product.PartId))
                     {
                         <option value="@recipe.RecipeId">@recipe.RecipeName</option>
                     }
                 </select>
-            </td>
-            <td><input type="text" class="form-control" @bind="product.Quantity"></td>
-        </tr>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" @bind="product.Quantity">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <b>Requires:</b>
+                @foreach (Ingredient ingredient in Recipes.FirstOrDefault(r => r.RecipeId == product.RecipeId)?.Ingredients ?? new List<Ingredient>())
+                {
+                    <span class="badge bg-primary">
+                        <img src="satisfactory-assets/item/@ingredient.PartImage" alt="Part Image" style="width:40px; height:40px; padding-right:4px;">
+                        <span>@ingredient.PartName: @(ingredient.Quantity * (product.Quantity / ingredient.Quantity)) per/min</span>
+                    </span>
+                }
+                <span class="badge bg-secondary">&nbsp;<img src="satisfactory-assets/building/constructormk1_64.png" alt="Part Image" style="width:40px; height:40px; padding-right:4px;"> Constructor: x1.0</span>
+                <span class="badge bg-success">&nbsp;Power: 30MW</span>
+            </div>
+        </div>
     }
-    </tbody>
-</table>
+</div>
+<br />
 
 <h3>Imports</h3>
 <table>
@@ -87,9 +127,10 @@
         <td>Part</td>
         <td>Quantity</td>
     </tr>
-    @foreach (var item in Imports)
+    @foreach (string item in Imports)
     {
-        @item<br>
+        @item
+        <br>
     }
 </table>
 
@@ -99,8 +140,9 @@
         <td>Part</td>
         <td>Quantity</td>
     </tr>
-    @foreach (var item in Storage)
+    @foreach (string item in Storages)
     {
-        @item<br>
+        @item
+        <br>
     }
 </table>
