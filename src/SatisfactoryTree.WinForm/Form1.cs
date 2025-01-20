@@ -1,7 +1,7 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using SatisfactoryTree.Console;
-using SatisfactoryTree.Console.NewModels;
-using SatisfactoryTree.Console.OldModels;
+using SatisfactoryTree.Console.WebModels;
+using SatisfactoryTree.Console.ExtractionModels;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -54,7 +54,7 @@ namespace SatisfactoryTree.WinForm
             List<ComboItem> parts = new();
             if (data.items != null && data.items.parts != null)
             {
-                foreach (KeyValuePair<string, Console.OldModels.Part> part in data.items.parts)
+                foreach (KeyValuePair<string, Console.ExtractionModels.Part> part in data.items.parts)
                 {
                     parts.Add(new ComboItem(part.Key, part.Value.name));
                 }

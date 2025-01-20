@@ -1,4 +1,4 @@
-namespace SatisfactoryTree.Console.OldModels
+namespace SatisfactoryTree.Logic.Extraction.ExtractionModels
 {
     public class Ingredient
     {

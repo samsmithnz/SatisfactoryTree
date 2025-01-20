@@ -1,12 +1,12 @@
-﻿using SatisfactoryTree.Console.ExtractionModels;
+﻿using SatisfactoryTree.Logic.Extraction;
+using SatisfactoryTree.Logic.Extraction.ExtractionModels;
 using System.Diagnostics;
 using System.Text.Json;
 
-namespace SatisfactoryTree.Console
+namespace SatisfactoryTree.Logic
 {
-    public class Processor
+    public class DataFileExtraction
     {
-
         public string InputFile { get; set; } = "";
         public string OutputFile { get; set; } = "";
 
@@ -35,7 +35,7 @@ namespace SatisfactoryTree.Console
             OutputFile = Path.Combine(projectContentPath, "gameData.json");
         }
 
-        public static async Task<ExtractionModels.FinalData> ProcessFileOldModel(string inputFile, string outputFile)
+        public static async Task<FinalData> ExtractDataFile(string inputFile, string outputFile)
         {
             Stopwatch stopwatch = new();
             stopwatch.Start();
@@ -65,10 +65,10 @@ namespace SatisfactoryTree.Console
             Dictionary<string, double> buildings = Buildings.GetPowerConsumptionForBuildings(data, producingBuildings);
 
             // Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
-            List<ExtractionModels.Recipe> recipes = Recipes.GetProductionRecipes(data, buildings);
+            List<Recipe> recipes = Recipes.GetProductionRecipes(data, buildings);
 
             // Get parts
-            ExtractionModels.PartDataInterface items = Parts.GetItems(data, recipes);
+            PartDataInterface items = Parts.GetItems(data, recipes);
             Parts.FixItemNames(items);
             Parts.FixTurbofuel(items, recipes);
 
@@ -76,7 +76,7 @@ namespace SatisfactoryTree.Console
             List<PowerGenerationRecipe> powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
 
             // Since we've done some manipulation of the items data, re-sort it
-            Dictionary<string, ExtractionModels.Part> sortedItems = new();
+            Dictionary<string, Part> sortedItems = new();
             foreach (string? key in items.parts.Keys.OrderBy(k => k))
             {
                 sortedItems[key] = items.parts[key];
@@ -140,7 +140,7 @@ namespace SatisfactoryTree.Console
             newRecipes = newRecipes.OrderBy(r => r.id).ToList();
 
             // Construct the final JSON object
-            ExtractionModels.FinalData finalData = new(
+            FinalData finalData = new(
                 buildings,
                 items,
                 recipes,

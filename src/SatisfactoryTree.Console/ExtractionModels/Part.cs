@@ -1,4 +1,4 @@
-namespace SatisfactoryTree.Console.NewModels
+﻿namespace SatisfactoryTree.Console.ExtractionModels
 {
     public class Part
     {

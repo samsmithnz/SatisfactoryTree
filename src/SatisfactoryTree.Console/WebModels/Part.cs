@@ -1,4 +1,4 @@
-﻿namespace SatisfactoryTree.Console.OldModels
+namespace SatisfactoryTree.Console.WebModels
 {
     public class Part
     {

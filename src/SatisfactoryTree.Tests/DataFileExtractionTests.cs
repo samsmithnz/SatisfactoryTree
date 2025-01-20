@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 namespace SatisfactoryTree.Tests;
 
 [TestClass]
-public class ConsoleTests
+public class DataFileExtractionTests
 {
 
-    private Console.OldModels.FinalData? results = null;
+    private Console.ExtractionModels.FinalData? results = null;
 
     [TestInitialize]
     public async Task Initialize()

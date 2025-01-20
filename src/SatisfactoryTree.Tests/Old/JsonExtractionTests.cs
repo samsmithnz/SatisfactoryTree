@@ -3,7 +3,7 @@ using SatisfactoryTree.ContentExtractor;
 using SatisfactoryTree.Models;
 using System.Diagnostics;
 
-namespace SatisfactoryTree.Tests
+namespace SatisfactoryTree.Tests.Old
 {
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [TestClass]

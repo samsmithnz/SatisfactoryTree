@@ -1,8 +1,8 @@
-﻿using SatisfactoryTree.Console.ExtractionModels;
+﻿using SatisfactoryTree.Logic.Extraction.ExtractionModels;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-namespace SatisfactoryTree.Console
+namespace SatisfactoryTree.Logic.Extraction
 {
     public class Recipes
     {

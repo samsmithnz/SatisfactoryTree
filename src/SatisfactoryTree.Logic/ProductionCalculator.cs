@@ -1,6 +1,6 @@
-﻿using SatisfactoryTree.Console.ExtractionModels;
+﻿using SatisfactoryTree.Logic.Extraction.ExtractionModels;
 
-namespace SatisfactoryTree.Console
+namespace SatisfactoryTree.Logic
 {
     public class Item
     {
@@ -13,11 +13,11 @@ namespace SatisfactoryTree.Console
         public int Counter { get; set; }
     }
 
-    public class Calculator
+    public class ProductionCalculator
     {
 
         //Using a target item, calculate the total number of items needed to produce the target item
-        public Calculator() { }
+        public ProductionCalculator() { }
         public List<Item> CalculateProduction(FinalData finalData, string partName, double quantity)
         {
             List<Item> results = new();

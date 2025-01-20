@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.WinForm", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.BlazorApp", "SatisfactoryTree.BlazorApp\SatisfactoryTree.BlazorApp.csproj", "{395A5AA8-BA2C-47AF-8F46-B3DCA87F1A77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.Logic", "SatisfactoryTree.Logic\SatisfactoryTree.Logic.csproj", "{F9AB4AB9-71B1-4BBB-B5F1-9C2F29F41BB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{395A5AA8-BA2C-47AF-8F46-B3DCA87F1A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{395A5AA8-BA2C-47AF-8F46-B3DCA87F1A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{395A5AA8-BA2C-47AF-8F46-B3DCA87F1A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9AB4AB9-71B1-4BBB-B5F1-9C2F29F41BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9AB4AB9-71B1-4BBB-B5F1-9C2F29F41BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9AB4AB9-71B1-4BBB-B5F1-9C2F29F41BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9AB4AB9-71B1-4BBB-B5F1-9C2F29F41BB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

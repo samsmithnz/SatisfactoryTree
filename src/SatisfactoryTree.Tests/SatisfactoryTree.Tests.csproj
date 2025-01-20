@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SatisfactoryTree.Console\SatisfactoryTree.Console.csproj" />
     <ProjectReference Include="..\SatisfactoryTree.ContentExtractor\SatisfactoryTree.ContentExtractor.csproj" />
+    <ProjectReference Include="..\SatisfactoryTree.Logic\SatisfactoryTree.Logic.csproj" />
     <ProjectReference Include="..\SatisfactoryTree\SatisfactoryTree.csproj" />
   </ItemGroup>
 

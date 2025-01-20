@@ -1,7 +1,7 @@
-﻿using SatisfactoryTree.Console.ExtractionModels;
+﻿using SatisfactoryTree.Logic.Extraction.ExtractionModels;
 using System.Text.Json;
 
-namespace SatisfactoryTree.Console
+namespace SatisfactoryTree.Logic.Extraction
 {
     public class Parts
     {

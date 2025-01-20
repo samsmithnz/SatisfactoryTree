@@ -1,34 +1,5 @@
-namespace SatisfactoryTree.Console.OldModels
+namespace SatisfactoryTree.Logic.Extraction.ExtractionModels
 {
-    //public class Ingredient
-    //{
-    //    public string part { get; set; }
-    //    public double amount { get; set; }
-    //    public double perMin { get; set; }
-    //}
-
-    //public class Product
-    //{
-    //    public string part { get; set; }
-    //    public double amount { get; set; }
-    //    public double perMin { get; set; }
-    //    public bool? isByProduct { get; set; }
-    //}
-
-    //public class PowerIngredient
-    //{
-    //    public string part { get; set; }
-    //    public double perMin { get; set; }
-    //    public double? mwPerItem { get; set; }
-    //    public double? supplementalRatio { get; set; }
-    //}
-
-    //public class PowerProduct
-    //{
-    //    public string part { get; set; }
-    //    public double perMin { get; set; }
-    //    //public double supplementalRatio { get; set; }
-    //}
 
     public class NewRecipe
     {

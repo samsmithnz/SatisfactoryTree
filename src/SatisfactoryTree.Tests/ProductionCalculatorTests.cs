@@ -1,20 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SatisfactoryTree.Console;
+using SatisfactoryTree.Logic;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Tests
 {
     [TestClass]
-    public class CalculationTests
+    public class ProductionCalculatorTests
     {
-        private Console.OldModels.FinalData? finalData = null;
+        private SatisfactoryTree.Logic.Extraction.ExtractionModels.FinalData? finalData = null;
 
         [TestInitialize]
         public async Task Initialize()
         {
             //arrange
-            Processor processor = new();
+            DataFileExtraction processor = new();
             processor.GetContentFiles();
             if (processor != null)
             {
@@ -22,7 +22,7 @@ namespace SatisfactoryTree.Tests
                 string outputFile = processor.OutputFile;
 
                 //act
-                finalData = await Processor.ProcessFileOldModel(inputFile, outputFile);
+                finalData = await DataFileExtraction.ExtractDataFile(inputFile, outputFile);
 
                 //assert
                 if (finalData == null)
@@ -44,7 +44,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            Calculator calculator = new();
+            ProductionCalculator calculator = new();
             List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
@@ -76,7 +76,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            Calculator calculator = new();
+            ProductionCalculator calculator = new();
             List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
@@ -113,7 +113,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            Calculator calculator = new();
+            ProductionCalculator calculator = new();
             List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
