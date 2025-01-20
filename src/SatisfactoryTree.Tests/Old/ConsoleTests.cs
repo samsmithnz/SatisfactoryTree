@@ -1,132 +1,132 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SatisfactoryTree.Console;
-using System.Threading.Tasks;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using SatisfactoryTree.Console;
+//using System.Threading.Tasks;
 
-namespace SatisfactoryTree.Tests;
+//namespace SatisfactoryTree.Tests.Old;
 
-[TestClass]
-public class ConsoleTests
-{
+//[TestClass]
+//public class ConsoleTests
+//{
 
-    private Console.ExtractionModels.FinalData? results = null;
+//    private Console.ExtractionModels.FinalData? results = null;
 
-    [TestInitialize]
-    public async Task Initialize()
-    {
-        //arrange
-        Processor processor = new();
-        processor.GetContentFiles();
-        if (processor != null)
-        {
-            string inputFile = processor.InputFile;
-            string outputFile = processor.OutputFile;
+//    [TestInitialize]
+//    public async Task Initialize()
+//    {
+//        //arrange
+//        Processor processor = new();
+//        processor.GetContentFiles();
+//        if (processor != null)
+//        {
+//            string inputFile = processor.InputFile;
+//            string outputFile = processor.OutputFile;
 
-            //act
-            results = await Processor.ProcessFileOldModel(inputFile, outputFile);
-        }
-    }
+//            //act
+//            results = await Processor.ProcessFileOldModel(inputFile, outputFile);
+//        }
+//    }
 
-    [TestMethod]
-    public void PartsCountTest()
-    {
-        //Arrange
+//    [TestMethod]
+//    public void PartsCountTest()
+//    {
+//        //Arrange
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(results);
-        //foreach (var item in results.items.parts)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(results.items.parts[item.Key].name);
-        //}
-        Assert.AreEqual(168, results.items.parts.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(results);
+//        //foreach (var item in results.items.parts)
+//        //{
+//        //    System.Diagnostics.Debug.WriteLine(results.items.parts[item.Key].name);
+//        //}
+//        Assert.AreEqual(168, results.items.parts.Count);
+//    }
 
-    [TestMethod]
-    public void PartsRawResourcesCountTest()
-    {
-        //Arrange
+//    [TestMethod]
+//    public void PartsRawResourcesCountTest()
+//    {
+//        //Arrange
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(results);
-        //foreach (var item in results.items.rawResources)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(results.items.rawResources[item.Key].name);
-        //}
-        Assert.AreEqual(24, results.items.rawResources.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(results);
+//        //foreach (var item in results.items.rawResources)
+//        //{
+//        //    System.Diagnostics.Debug.WriteLine(results.items.rawResources[item.Key].name);
+//        //}
+//        Assert.AreEqual(24, results.items.rawResources.Count);
+//    }
 
-    [TestMethod]
-    public void RecipesCountTest()
-    {
-        //Arrange
+//    [TestMethod]
+//    public void RecipesCountTest()
+//    {
+//        //Arrange
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(results);
-        //bool alternateCoal2RecipeFound = false;
-        //foreach (var item in results.recipes)
-        //{
-        //    //Sometimes the "_C" gets stripped off the ID, so we need to check that it remains
-        //    if (item.id == "Alternate_Coal_2")
-        //    {
-        //        alternateCoal2RecipeFound = true;
-        //        break;
-        //    }
-        //    //System.Diagnostics.Debug.WriteLine(item.DisplayName);
-        //}
-        //Assert.IsTrue(alternateCoal2RecipeFound);
-        Assert.AreEqual(291, results.recipes.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(results);
+//        //bool alternateCoal2RecipeFound = false;
+//        //foreach (var item in results.recipes)
+//        //{
+//        //    //Sometimes the "_C" gets stripped off the ID, so we need to check that it remains
+//        //    if (item.id == "Alternate_Coal_2")
+//        //    {
+//        //        alternateCoal2RecipeFound = true;
+//        //        break;
+//        //    }
+//        //    //System.Diagnostics.Debug.WriteLine(item.DisplayName);
+//        //}
+//        //Assert.IsTrue(alternateCoal2RecipeFound);
+//        Assert.AreEqual(291, results.recipes.Count);
+//    }
 
-    [TestMethod]
-    public void BuildingsCountTest()
-    {
-        //Arrange
+//    [TestMethod]
+//    public void BuildingsCountTest()
+//    {
+//        //Arrange
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(results);
-        //foreach (var item in results.Recipes)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
-        //}
-        Assert.AreEqual(15, results.buildings.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(results);
+//        //foreach (var item in results.Recipes)
+//        //{
+//        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
+//        //}
+//        Assert.AreEqual(15, results.buildings.Count);
+//    }
 
-    [TestMethod]
-    public void PowerGeneratingBuildingsCountTest()
-    {
-        //Arrange
+//    [TestMethod]
+//    public void PowerGeneratingBuildingsCountTest()
+//    {
+//        //Arrange
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(results);
-        //foreach (var item in results.Recipes)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
-        //}
-        Assert.AreEqual(17, results.powerGenerationRecipes.Count);
-    }
-    [TestMethod]
-    public void NewRecipesCountTest()
-    {
-        //Arrange
+//        //Assert
+//        Assert.IsNotNull(results);
+//        //foreach (var item in results.Recipes)
+//        //{
+//        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
+//        //}
+//        Assert.AreEqual(17, results.powerGenerationRecipes.Count);
+//    }
+//    [TestMethod]
+//    public void NewRecipesCountTest()
+//    {
+//        //Arrange
 
-        //Act
+//        //Act
 
-        //Assert
-        Assert.IsNotNull(results);
-        //foreach (var item in results.Recipes)
-        //{
-        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
-        //}
-        Assert.AreEqual(results.recipes.Count + results.powerGenerationRecipes.Count, results.newRecipes.Count);
-    }
+//        //Assert
+//        Assert.IsNotNull(results);
+//        //foreach (var item in results.Recipes)
+//        //{
+//        //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
+//        //}
+//        Assert.AreEqual(results.recipes.Count + results.powerGenerationRecipes.Count, results.newRecipes.Count);
+//    }
 
-}
+//}
