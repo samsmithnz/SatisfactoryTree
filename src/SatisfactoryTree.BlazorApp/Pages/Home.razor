@@ -69,6 +69,7 @@
 <PageTitle>Home</PageTitle>
 
 <h3>Products</h3>
+<button class="btn btn-primary" @onclick="AddProductPart">Add Part</button>
 <div class="container">
     <div class="row">
         <div class="col-sm-4"> Part</div>
@@ -107,13 +108,13 @@
                 <b>Requires:</b>
                 @foreach (Ingredient ingredient in Recipes.FirstOrDefault(r => r.RecipeId == product.RecipeId)?.Ingredients ?? new List<Ingredient>())
                 {
-                    <span class="badge bg-primary">
-                        <img src="satisfactory-assets/item/@ingredient.PartImage" alt="Part Image" style="width:40px; height:40px; padding-right:4px;">
+                    <span class="badge rounded-pill bg-primary">
+                        <img src="satisfactory-assets/item/@ingredient.PartImage" alt="Part Image" style="width:32px; height:32px; padding-right:4px;">
                         <span>@ingredient.PartName: @(ingredient.Quantity * (product.Quantity / ingredient.Quantity)) per/min</span>
                     </span>
                 }
-                <span class="badge bg-secondary">&nbsp;<img src="satisfactory-assets/building/constructormk1_64.png" alt="Part Image" style="width:40px; height:40px; padding-right:4px;"> Constructor: x1.0</span>
-                <span class="badge bg-success">&nbsp;Power: 30MW</span>
+                <span class="badge rounded-pill bg-secondary">&nbsp;<img src="satisfactory-assets/building/constructormk1_64.png" alt="Part Image" style="width:32px; height:32px; padding-right:4px;"> Constructor: x1.0</span>
+                <span class="badge rounded-pill bg-success">&nbsp;Power: 30MW</span>
             </div>
         </div>
     }
@@ -146,3 +147,14 @@
         <br>
     }
 </table>
+
+<p role="status">Current count: @currentCount</p>
+
+@code {
+    private int currentCount = 0;
+
+    private void AddProductPart()
+    {
+        Products.Add(new("","","",1));
+    }
+}
