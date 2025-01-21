@@ -1,4 +1,5 @@
 ﻿using SatisfactoryTree.Logic.Extraction.ExtractionModels;
+using SatisfactoryTree.Logic;
 
 namespace SatisfactoryTree.Logic
 {
@@ -122,5 +123,58 @@ namespace SatisfactoryTree.Logic
             }
             return null;
         }
+
+        public static List<Models.Product> GetProducts()
+        {
+            List<Models.Product> products = new()
+            {
+                new Models.Product("ironPlate", "iron-plate", "ironPlate", 30),
+                new Models.Product("ironPlate", "iron-plate", "alt_SteelPlate", 3),
+                new Models.Product("ironIngot", "iron-ingot", "ironIngot", 45)
+            };
+            return products;
+        }
+
+        public static List<string> GetImports()
+        {
+            List<string> imports = new() { "Hi", "Bye" };
+            return imports;
+        }
+
+        public static List<string> GetStorages()
+        {
+            List<string> storages = new() { "Hi", "Bye" };
+            return storages;
+        }
+
+        public static List<Models.Part> GetParts()
+        {
+            List<Models.Part> parts = new() { new Models.Part("ironIngot", "Iron Ingot"), new Models.Part("ironPlate", "Iron Plate") };
+            return parts;
+        }
+
+        public static List<Models.Recipe> GetRecipes()
+        {
+            List<Models.Recipe> recipes = new()
+            {
+                new Models.Recipe("ironIngot", "ironIngot", "Iron Ingots", new()
+                {
+                    new("ironore", "Iron Ore", "iron-ore", 30)
+                }, 30),
+                new Models.Recipe("ironPlate", "ironPlate", "Iron Plates", new()
+                {
+                    new("ironIngot", "Iron Ingot", "iron-ingot", 30)
+                }, 20),
+                new Models.Recipe("ironPlate", "alt_SteelPlate", "Alt: Steel Plates", new()
+                {
+                    new("ironIngot", "Iron Ingot", "iron-ingot", 15),
+                    new("steelIngot", "Steel Ingot", "steel-ingot", 15)
+                }, 20)
+            };
+            return recipes;
+        }
+
+
+
     }
 }

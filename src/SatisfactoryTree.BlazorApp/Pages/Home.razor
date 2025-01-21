@@ -1,70 +1,7 @@
 ﻿@page "/"
-@code {
-    public class Product
-    {
-        public Product(string partId, string partImage, string recipeId, double quantity)
-        {
-            PartId = partId;
-            PartImage = "" + partImage + "_64.png";
-            RecipeId = recipeId;
-            Quantity = quantity;
-        }
-        public string PartId { get; set; }
-        public string PartImage { get; set; }
-        public string RecipeId { get; set; }
-        public double Quantity { get; set; }
-    }
-    public class Part
-    {
-        public Part(string partId, string partName)
-        {
-            PartId = partId;
-            PartName = partName;
-        }
-        public string PartId { get; set; }
-        public string PartName { get; set; }
-    }
-    public class Recipe
-    {
-        public Recipe(string partId, string recipeId, string recipeName, List<Ingredient> ingredients, double quantity)
-        {
-            PartId = partId;
-            RecipeId = recipeId;
-            RecipeName = recipeName;
-            Ingredients = ingredients;
-            Quantity = quantity;
-        }
-        public string PartId { get; set; }
-        public string RecipeId { get; set; }
-        public string RecipeName { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
-        public double Quantity { get; set; }
-    }
-    public class Ingredient
-    {
-        public Ingredient(string partId, string partName, string partImage, double quantity)
-        {
-            PartId = partId;
-            PartName = partName;
-            PartImage = "" + partImage + "_64.png";
-            Quantity = quantity;
-        }
-        public string PartId { get; set; }
-        public string PartName { get; set; }
-        public string PartImage { get; set; }
-        public double Quantity { get; set; }
-    }
-
-    List<Product> Products = new() { new Product("ironPlate", "iron-plate", "ironPlate", 30), new Product("ironPlate", "iron-plate", "alt_SteelPlate", 3), new Product("ironIngot", "iron-ingot", "ironIngot", 45) };
-    List<string> Imports = new() { "Hi", "Bye" };
-    List<string> Storages = new() { "Hi", "Bye" };
-    List<Part> Parts = new() { new Part("ironIngot", "Iron Ingot"), new Part("ironPlate", "Iron Plate") };
-    List<Recipe> Recipes = new() {
-        new Recipe("ironIngot", "ironIngot", "Iron Ingots", new() { new("ironore","Iron Ore", "iron-ore", 30) }, 30),
-        new Recipe("ironPlate", "ironPlate", "Iron Plates", new() { new("ironIngot", "Iron Ingot", "iron-ingot", 30) }, 20),
-        new Recipe("ironPlate", "alt_SteelPlate", "Alt: Steel Plates", new() { new("ironIngot", "Iron Ingot", "iron-ingot", 15), new("steelIngot", "Steel Ingot", "steel-ingot", 15) }, 20)
-};
-}
+@using SatisfactoryTree.Logic
+@using SatisfactoryTree.Logic.Models
+@inject ProductionCalculator ProductionCalculator
 
 <PageTitle>Home</PageTitle>
 
@@ -156,5 +93,22 @@
     private void AddProductPart()
     {
         Products.Add(new("","","",1));
+    }
+}
+
+@code {
+    List<Product> Products = new();
+    List<string> Imports = new();
+    List<string> Storages = new();
+    List<Part> Parts = new();
+    List<Recipe> Recipes = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Products = ProductionCalculator.GetProducts();
+        Imports = ProductionCalculator.GetImports();
+        Storages = ProductionCalculator.GetStorages();
+        Parts = ProductionCalculator.GetParts();
+        Recipes = ProductionCalculator.GetRecipes();
     }
 }
