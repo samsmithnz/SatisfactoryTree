@@ -1,5 +1,8 @@
 ﻿using SatisfactoryTree.Logic.Extraction.ExtractionModels;
 using SatisfactoryTree.Logic;
+using System.Text.Json;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace SatisfactoryTree.Logic
 {
@@ -16,9 +19,21 @@ namespace SatisfactoryTree.Logic
 
     public class ProductionCalculator
     {
+        private readonly HttpClient _httpClient;
+        public FinalData _finalData { get; set; }
 
         //Using a target item, calculate the total number of items needed to produce the target item
-        public ProductionCalculator() { }
+        public ProductionCalculator(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task InitializeAsync()
+        {
+            _finalData = await _httpClient.GetFromJsonAsync<FinalData>("content/gameData.json");
+
+        }
+
         public List<Item> CalculateProduction(FinalData finalData, string partName, double quantity)
         {
             List<Item> results = new();
@@ -150,6 +165,14 @@ namespace SatisfactoryTree.Logic
         public static List<Models.Part> GetParts()
         {
             List<Models.Part> parts = new() { new Models.Part("ironIngot", "Iron Ingot"), new Models.Part("ironPlate", "Iron Plate") };
+            //List<Models.Part> parts = new();
+            //if (FinalData != null)
+            //{
+            //    foreach (KeyValuePair<string, Part> item in FinalData.items.parts)
+            //    {
+            //        parts.Add(new Models.Part(item.Key, item.Value.name));
+            //    }
+            //}
             return parts;
         }
 

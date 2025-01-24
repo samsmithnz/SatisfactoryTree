@@ -44,7 +44,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            ProductionCalculator calculator = new();
+            ProductionCalculator calculator = new(finalData);
             List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
@@ -76,7 +76,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            ProductionCalculator calculator = new();
+            ProductionCalculator calculator = new(finalData);
             List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
@@ -113,7 +113,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            ProductionCalculator calculator = new();
+            ProductionCalculator calculator = new(finalData);
             List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert

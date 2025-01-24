@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using SatisfactoryTree.Logic
 @using SatisfactoryTree.Logic.Models
+@* @inject Blazored.LocalStorage.ILocalStorageService LocalStorage *@
+@inject HttpClient _httpClient
 @inject ProductionCalculator ProductionCalculator
 
 <PageTitle>Home</PageTitle>
@@ -88,27 +90,27 @@
 <p role="status">Current count: @currentCount</p>
 
 @code {
-    private int currentCount = 0;
 
-    private void AddProductPart()
-    {
-        Products.Add(new("","","",1));
-    }
-}
-
-@code {
+    List<Part> Parts = new();
     List<Product> Products = new();
     List<string> Imports = new();
     List<string> Storages = new();
-    List<Part> Parts = new();
     List<Recipe> Recipes = new();
 
     protected override async Task OnInitializedAsync()
     {
+        // Fetch the JSON file from the content folder
+        await ProductionCalculator.InitializeAsync();
+        Parts = ProductionCalculator.GetParts();
         Products = ProductionCalculator.GetProducts();
         Imports = ProductionCalculator.GetImports();
         Storages = ProductionCalculator.GetStorages();
-        Parts = ProductionCalculator.GetParts();
         Recipes = ProductionCalculator.GetRecipes();
+    }
+
+    private int currentCount = 0;
+    private void AddProductPart()
+    {
+        Products.Add(new("", "", "", 1));
     }
 }
