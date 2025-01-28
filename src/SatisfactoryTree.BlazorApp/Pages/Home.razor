@@ -3,7 +3,7 @@
 @using SatisfactoryTree.Logic.Models
 @* @inject Blazored.LocalStorage.ILocalStorageService LocalStorage *@
 @inject HttpClient _httpClient
-@inject ProductionCalculator ProductionCalculator
+@inject ProductionCalculator _productionCalculator
 
 <PageTitle>Home</PageTitle>
 
@@ -47,13 +47,37 @@
                 <b>Requires:</b>
                 @foreach (Ingredient ingredient in Recipes.FirstOrDefault(r => r.RecipeId == product.RecipeId)?.Ingredients ?? new List<Ingredient>())
                 {
-                    <span class="badge rounded-pill bg-primary">
-                        <img src="satisfactory-assets/item/@ingredient.PartImage" alt="Part Image" style="width:32px; height:32px; padding-right:4px;">
-                        <span>@ingredient.PartName: @(ingredient.Quantity * (product.Quantity / ingredient.Quantity)) per/min</span>
-                    </span>
+                    <table style="display: inline-block; border-collapse: collapse; margin: 2px 2px 2px 2px;">
+                        <tr>
+                            <td style="border: 1px solid lightgray;">
+                                <img src="satisfactory-assets/item/@ingredient.PartImage" alt="Part Image" style="width: 32px; height: 32px; padding-right:4px;">
+                            </td>
+                            <td style="border: 1px solid lightgray;">
+                                @ingredient.PartName: @(ingredient.Quantity * (product.Quantity / ingredient.Quantity)) per/min
+                            </td>
+                        </tr>
+                    </table>
                 }
-                <span class="badge rounded-pill bg-secondary">&nbsp;<img src="satisfactory-assets/building/constructormk1_64.png" alt="Part Image" style="width:32px; height:32px; padding-right:4px;"> Constructor: x1.0</span>
-                <span class="badge rounded-pill bg-success">&nbsp;Power: 30MW</span>
+                <table style="display: inline-block; border-collapse: collapse; margin: 2px 2px 2px 2px;">
+                    <tr>
+                        <td style="border: 1px solid lightgray;">
+                            <img src="satisfactory-assets/building/constructormk1_64.png" alt="Building Image" style="width: 32px; height: 32px; padding-right:4px;">
+                        </td>
+                        <td style="border: 1px solid lightgray;">
+                            Constructor: x1.0
+                        </td>
+                    </tr>
+                </table>
+                <table style="display: inline-block; border-collapse: collapse; margin: 2px 2px 2px 2px;">
+                    <tr>
+                        <td style="border: 1px solid lightgray;">
+                            <img src="satisfactory-assets/building/constructormk1_64.png" alt="Power Image" style="width: 32px; height: 32px; padding-right:4px;">
+                        </td>
+                        <td style="border: 1px solid lightgray;">
+                            Power: 30MW
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     }
@@ -100,12 +124,12 @@
     protected override async Task OnInitializedAsync()
     {
         // Fetch the JSON file from the content folder
-        await ProductionCalculator.InitializeAsync();
-        Parts = ProductionCalculator.GetParts();
+        await _productionCalculator.InitializeAsync();
+        Parts = _productionCalculator.GetParts();
+        Recipes = _productionCalculator.GetRecipes();
         Products = ProductionCalculator.GetProducts();
         Imports = ProductionCalculator.GetImports();
         Storages = ProductionCalculator.GetStorages();
-        Recipes = ProductionCalculator.GetRecipes();
     }
 
     private int currentCount = 0;

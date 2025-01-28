@@ -120,6 +120,19 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
+        private Part FindPart(FinalData finalData, string partName)
+        {
+            foreach (KeyValuePair<string, Part> part in finalData.items.parts)
+            {
+                if (part.Key == partName)
+                {
+                    return part.Value;
+                }
+            }
+            return null;
+        }
+
+
         private NewRecipe FindRecipe(FinalData finalData, string partName)
         {
             foreach (NewRecipe recipe in finalData.newRecipes)
@@ -143,9 +156,9 @@ namespace SatisfactoryTree.Logic
         {
             List<Models.Product> products = new()
             {
-                new Models.Product("ironPlate", "iron-plate", "ironPlate", 30),
-                new Models.Product("ironPlate", "iron-plate", "alt_SteelPlate", 3),
-                new Models.Product("ironIngot", "iron-ingot", "ironIngot", 45)
+                new Models.Product("IronPlate", "iron-plate", "IronPlate", 30),
+                new Models.Product("IronPlate", "iron-plate", "Alternate_SteelCastedPlate", 3),
+                new Models.Product("IronIngot", "iron-ingot", "IronIngot", 45)
             };
             return products;
         }
@@ -162,38 +175,53 @@ namespace SatisfactoryTree.Logic
             return storages;
         }
 
-        public static List<Models.Part> GetParts()
+        public List<Models.Part> GetParts()
         {
-            List<Models.Part> parts = new() { new Models.Part("ironIngot", "Iron Ingot"), new Models.Part("ironPlate", "Iron Plate") };
-            //List<Models.Part> parts = new();
-            //if (FinalData != null)
-            //{
-            //    foreach (KeyValuePair<string, Part> item in FinalData.items.parts)
-            //    {
-            //        parts.Add(new Models.Part(item.Key, item.Value.name));
-            //    }
-            //}
+            //List<Models.Part> parts = new() { new Models.Part("ironIngot", "Iron Ingot"), new Models.Part("ironPlate", "Iron Plate") };
+            List<Models.Part> parts = new();
+            if (_finalData != null)
+            {
+                foreach (KeyValuePair<string, Part> item in _finalData.items.parts)
+                {
+                    parts.Add(new Models.Part(item.Key, item.Value.name));
+                }
+            }
             return parts;
         }
 
-        public static List<Models.Recipe> GetRecipes()
+        public List<Models.Recipe> GetRecipes()
         {
-            List<Models.Recipe> recipes = new()
+            //List<Models.Recipe> recipes = new()
+            //{
+            //    new Models.Recipe("IronIngot", "IngotIron", "Iron Ingots", new()
+            //    {
+            //        new("OreIron", "Iron Ore", "iron-ore", 30)
+            //    }, 30),
+            //    new Models.Recipe("IronPlate", "IronPlate", "Iron Plates", new()
+            //    {
+            //        new("IronIngot", "Iron Ingot", "iron-ingot", 30)
+            //    }, 20),
+            //    new Models.Recipe("IronPlate", "Alternate_SteelCastedPlate", "Alternate: Steel Cast Plate", new()
+            //    {
+            //        new("IronIngot", "Iron Ingot", "iron-ingot", 15),
+            //        new("SteelIngot", "Steel Ingot", "steel-ingot", 15)
+            //    }, 45)
+            //};
+            List<Models.Recipe> recipes = new();
+            if (_finalData != null)
             {
-                new Models.Recipe("ironIngot", "ironIngot", "Iron Ingots", new()
+                foreach (Recipe item in _finalData.recipes)
                 {
-                    new("ironore", "Iron Ore", "iron-ore", 30)
-                }, 30),
-                new Models.Recipe("ironPlate", "ironPlate", "Iron Plates", new()
-                {
-                    new("ironIngot", "Iron Ingot", "iron-ingot", 30)
-                }, 20),
-                new Models.Recipe("ironPlate", "alt_SteelPlate", "Alt: Steel Plates", new()
-                {
-                    new("ironIngot", "Iron Ingot", "iron-ingot", 15),
-                    new("steelIngot", "Steel Ingot", "steel-ingot", 15)
-                }, 20)
-            };
+                    List<Models.Ingredient> ingredients = new();
+                    foreach (Ingredient ingredient in item.ingredients)
+                    {
+                        Part part = FindPart(_finalData, ingredient.part);
+                        ingredients.Add(new Models.Ingredient(ingredient.part, part.name, part.name.Replace(" ","-").ToLower(), ingredient.perMin));
+                    }
+                    recipes.Add(new Models.Recipe(item.products[0].part, item.id, item.displayName, ingredients,
+                        item.products[0].amount));
+                }
+            }
             return recipes;
         }
 

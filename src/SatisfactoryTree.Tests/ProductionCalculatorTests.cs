@@ -1,19 +1,83 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSubstitute;
 using SatisfactoryTree.Logic;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Tests
 {
+    public class MockHttpMessageHandler : HttpMessageHandler
+    {
+        private readonly HttpResponseMessage _response;
+
+        public MockHttpMessageHandler(HttpResponseMessage response)
+        {
+            _response = response;
+        }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(_response);
+        }
+    }
+
     [TestClass]
     public class ProductionCalculatorTests
     {
         private SatisfactoryTree.Logic.Extraction.ExtractionModels.FinalData? finalData = null;
+        private ProductionCalculator _calculator;
 
         [TestInitialize]
         public async Task Initialize()
         {
             //arrange
+            var json = await File.ReadAllTextAsync(Path.Combine("content", "gameData.json"));
+            finalData = JsonSerializer.Deserialize<SatisfactoryTree.Logic.Extraction.ExtractionModels.FinalData>(json);
+
+            //Substitute.GetFromJsonAsync
+            //finalData = JsonSerializer.Deserialize<SatisfactoryTree.Logic.Extraction.ExtractionModels.FinalData>(json);
+
+            ////GetFromJsonAsync
+            //var httpMessageHandler = Substitute.ForPartsOf<HttpMessageHandler>();
+            //httpMessageHandler
+            //    .When(x => x.SendAsync(Arg.Any<HttpRequestMessage>(), Arg.Any<CancellationToken>()))
+            //    .DoNotCallBase()
+            //    .Returns(Task.FromResult(new HttpResponseMessage
+            //    {
+            //        StatusCode = HttpStatusCode.OK,
+            //        Content = new StringContent(json)
+            //    }));
+
+            //var httpClientFactory = Substitute.For<IHttpClientFactory>();
+            //httpClientFactory.CreateClient(Arg.Any<string>()).Returns(new HttpClient(httpMessageHandler)
+            //{
+            //    BaseAddress = new Uri("http://localhost")
+            //});
+
+            var responseMessage = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(json)
+            };
+
+            var mockHttpMessageHandler = new MockHttpMessageHandler(responseMessage);
+            var httpClient = new HttpClient(mockHttpMessageHandler)
+            {
+                BaseAddress = new Uri("http://localhost")
+            };
+
+            _calculator = new ProductionCalculator(httpClient);
+            _calculator._finalData = finalData;
+
+            //var productionCalculator = new ProductionCalculator(httpClientFactory.CreateClient(""));
+
+
             DataFileExtraction processor = new();
             processor.GetContentFiles();
             if (processor != null)
@@ -44,8 +108,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            ProductionCalculator calculator = new(finalData);
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+            List<Item>? results = _calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
             Assert.IsNotNull(results);
@@ -76,8 +139,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            ProductionCalculator calculator = new(finalData);
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+            List<Item>? results = _calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
             Assert.IsNotNull(results);
@@ -113,8 +175,7 @@ namespace SatisfactoryTree.Tests
             }
 
             //Act
-            ProductionCalculator calculator = new(finalData);
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+            List<Item>? results = _calculator.CalculateProduction(finalData, partName, quantity);
 
             //Assert
             Assert.IsNotNull(results);
