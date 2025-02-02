@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MermaidDotNet" Version="0.6.35" />
+  </ItemGroup>
+
 </Project>
