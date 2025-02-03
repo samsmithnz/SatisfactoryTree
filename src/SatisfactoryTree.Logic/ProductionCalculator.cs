@@ -1,7 +1,4 @@
 ﻿using SatisfactoryTree.Logic.Extraction.ExtractionModels;
-using SatisfactoryTree.Logic;
-using System.Text.Json;
-using System.Net.Http;
 using System.Net.Http.Json;
 
 namespace SatisfactoryTree.Logic
