@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MermaidDotNet" Version="0.7.17" />
+    <PackageReference Include="MermaidDotNet" Version="0.7.24" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
