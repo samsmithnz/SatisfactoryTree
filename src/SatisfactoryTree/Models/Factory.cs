@@ -27,6 +27,11 @@
             ProductionGoals.RemoveAll(g => g.Id == goalId);
         }
 
+        public void RemoveProductionGoal(ProductionGoal goal)
+        {
+            ProductionGoals.Remove(goal);
+        }
+
         public List<ProductionGoal> GetActiveGoals()
         {
             return ProductionGoals.Where(g => !g.IsCompleted).ToList();
