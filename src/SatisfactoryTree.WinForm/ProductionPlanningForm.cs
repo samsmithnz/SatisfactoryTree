@@ -115,7 +115,7 @@ namespace SatisfactoryTree.WinForm
                 {
                     try
                     {
-                        var goal = _productionService.AddProductionGoal(
+                        var goal = _productionService.AddProductionGoalWithDependencies(
                             dialog.ItemName, 
                             dialog.TargetQuantity, 
                             _selectedFactoryId, 
