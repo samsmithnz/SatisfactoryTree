@@ -17,38 +17,42 @@ namespace SatisfactoryTree.WinForm
         private void ProductionPlanningForm_Load(object sender, EventArgs e)
         {
             LoadFactories();
-            RefreshActiveGoals();
-            RefreshCompletedGoals();
-            RefreshStorage();
+            RefreshFactoryDetails();
         }
 
         private void LoadFactories()
         {
-            cmbFactories.Items.Clear();
-            cmbProductionFactory.Items.Clear();
+            treeFactories.Nodes.Clear();
 
             foreach (var factory in _productionService.GetAllFactories())
             {
-                var displayText = $"{factory.Name} ({factory.Id})";
-                cmbFactories.Items.Add(new ComboBoxItem { Text = displayText, Value = factory.Id });
-                cmbProductionFactory.Items.Add(new ComboBoxItem { Text = displayText, Value = factory.Id });
+                var factoryNode = new TreeNode(factory.Name)
+                {
+                    Tag = factory.Id,
+                    Name = factory.Id
+                };
+                treeFactories.Nodes.Add(factoryNode);
             }
 
-            if (cmbFactories.Items.Count > 0)
+            if (treeFactories.Nodes.Count > 0)
             {
-                cmbFactories.SelectedIndex = 0;
-                cmbProductionFactory.SelectedIndex = 0;
+                treeFactories.SelectedNode = treeFactories.Nodes[0];
+                _selectedFactoryId = treeFactories.Nodes[0].Tag.ToString() ?? "default";
             }
         }
 
-        private void cmbFactories_SelectedIndexChanged(object sender, EventArgs e)
+        private void treeFactories_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (cmbFactories.SelectedItem is ComboBoxItem selectedItem)
+            if (e.Node?.Tag != null)
             {
-                _selectedFactoryId = selectedItem.Value;
-                RefreshActiveGoals();
-                RefreshStorage();
+                _selectedFactoryId = e.Node.Tag.ToString() ?? "default";
+                RefreshFactoryDetails();
             }
+        }
+
+        private void treeFactoryDetails_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // Handle selection of specific factory details for editing
         }
 
         private void btnAddFactory_Click(object sender, EventArgs e)
@@ -65,6 +69,7 @@ namespace SatisfactoryTree.WinForm
                 _productionService.AddFactory(factoryId, txtFactoryName.Text);
                 txtFactoryName.Clear();
                 LoadFactories();
+                RefreshFactoryDetails();
                 MessageBox.Show("Factory added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -73,9 +78,10 @@ namespace SatisfactoryTree.WinForm
             }
         }
 
-        private void btnAddGoal_Click(object sender, EventArgs e)
+        private void btnAddProductionItem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtItemName.Text))
+            // TODO: Open add production item dialog
+            if (string.IsNullOrWhiteSpace(txtProductionItem.Text))
             {
                 MessageBox.Show("Please enter an item name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -83,16 +89,22 @@ namespace SatisfactoryTree.WinForm
 
             try
             {
-                _productionService.AddProductionGoal(txtItemName.Text, txtTargetQuantity.Value, _selectedFactoryId);
-                txtItemName.Clear();
-                txtTargetQuantity.Value = 100;
-                RefreshActiveGoals();
+                _productionService.AddProductionGoal(txtProductionItem.Text, txtProductionQuantity.Value, _selectedFactoryId);
+                txtProductionItem.Clear();
+                txtProductionQuantity.Value = 100;
+                RefreshFactoryDetails();
                 MessageBox.Show("Production goal added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error adding production goal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnEditProductionItem_Click(object sender, EventArgs e)
+        {
+            // TODO: Open edit production item dialog
+            MessageBox.Show("Edit Production Item functionality will be implemented.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnProcessProduction_Click(object sender, EventArgs e)
@@ -103,20 +115,12 @@ namespace SatisfactoryTree.WinForm
                 return;
             }
 
-            if (cmbProductionFactory.SelectedItem is not ComboBoxItem selectedFactory)
-            {
-                MessageBox.Show("Please select a factory.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             try
             {
-                _productionService.ProcessProduction(txtProductionItem.Text, txtProductionQuantity.Value, selectedFactory.Value);
+                _productionService.ProcessProduction(txtProductionItem.Text, txtProductionQuantity.Value, _selectedFactoryId);
                 txtProductionItem.Clear();
                 txtProductionQuantity.Value = 10;
-                RefreshActiveGoals();
-                RefreshCompletedGoals();
-                RefreshStorage();
+                RefreshFactoryDetails();
                 MessageBox.Show("Production processed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -125,67 +129,52 @@ namespace SatisfactoryTree.WinForm
             }
         }
 
-        private void RefreshActiveGoals()
+        private void RefreshFactoryDetails()
         {
-            lstActiveGoals.Items.Clear();
-
-            var factory = _productionService.GetFactory(_selectedFactoryId);
-            if (factory == null) return;
-
-            var activeGoals = factory.GetActiveGoals();
-            foreach (var goal in activeGoals)
-            {
-                var item = new ListViewItem(goal.ItemName);
-                item.SubItems.Add(goal.TargetQuantity.ToString("N0"));
-                item.SubItems.Add(goal.CurrentQuantity.ToString("N0"));
-                item.SubItems.Add(goal.ProgressPercentage.ToString("N1") + "%");
-                item.SubItems.Add(factory.Name);
-                item.Tag = goal;
-                lstActiveGoals.Items.Add(item);
-            }
-        }
-
-        private void RefreshCompletedGoals()
-        {
-            lstCompletedGoals.Items.Clear();
-
-            var completedGoals = _productionService.GetAllCompletedGoals();
-            foreach (var goal in completedGoals)
-            {
-                var factory = _productionService.GetFactory(goal.FactoryId);
-                var item = new ListViewItem(goal.ItemName);
-                item.SubItems.Add(goal.TargetQuantity.ToString("N0"));
-                item.SubItems.Add(goal.CompletedDate?.ToString("yyyy-MM-dd HH:mm") ?? "");
-                item.SubItems.Add(factory?.Name ?? "Unknown");
-                item.Tag = goal;
-                lstCompletedGoals.Items.Add(item);
-            }
-        }
-
-        private void RefreshStorage()
-        {
-            lstStorage.Items.Clear();
+            treeFactoryDetails.Nodes.Clear();
 
             foreach (var factory in _productionService.GetAllFactories())
             {
-                foreach (var storageItem in factory.Storage.GetAllItems())
+                var factoryNode = new TreeNode($"{factory.Name} ({factory.Id})")
                 {
-                    var item = new ListViewItem(storageItem.Key);
-                    item.SubItems.Add(storageItem.Value.ToString("N0"));
-                    item.SubItems.Add(factory.Name);
-                    lstStorage.Items.Add(item);
+                    Tag = factory.Id,
+                    Name = factory.Id
+                };
+
+                // Add Production Goals section
+                var goalsNode = new TreeNode("Production Goals");
+                var activeGoals = factory.GetActiveGoals();
+                foreach (var goal in activeGoals)
+                {
+                    var goalText = $"{goal.ItemName}: {goal.CurrentQuantity:N0}/{goal.TargetQuantity:N0} ({goal.ProgressPercentage:F1}%)";
+                    var goalNode = new TreeNode(goalText) { Tag = goal };
+                    goalsNode.Nodes.Add(goalNode);
                 }
-            }
-        }
+                factoryNode.Nodes.Add(goalsNode);
 
-        private class ComboBoxItem
-        {
-            public string Text { get; set; } = "";
-            public string Value { get; set; } = "";
+                // Add Storage section
+                var storageNode = new TreeNode("Storage");
+                foreach (var item in factory.Storage.GetAllItems())
+                {
+                    var itemText = $"{item.Key}: {item.Value:N0}";
+                    var itemNode = new TreeNode(itemText) { Tag = item };
+                    storageNode.Nodes.Add(itemNode);
+                }
+                factoryNode.Nodes.Add(storageNode);
 
-            public override string ToString()
-            {
-                return Text;
+                // Add Completed Goals section
+                var completedNode = new TreeNode("Completed Goals");
+                var completedGoals = factory.GetCompletedGoals();
+                foreach (var goal in completedGoals)
+                {
+                    var goalText = $"{goal.ItemName}: {goal.TargetQuantity:N0} (Completed: {goal.CompletedDate?.ToString("MM/dd/yyyy")})";
+                    var goalNode = new TreeNode(goalText) { Tag = goal };
+                    completedNode.Nodes.Add(goalNode);
+                }
+                factoryNode.Nodes.Add(completedNode);
+
+                treeFactoryDetails.Nodes.Add(factoryNode);
+                factoryNode.Expand();
             }
         }
     }
