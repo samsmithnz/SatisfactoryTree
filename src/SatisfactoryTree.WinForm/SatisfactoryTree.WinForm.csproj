@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SatisfactoryTree.Console\SatisfactoryTree.Console.csproj" />
+    <ProjectReference Include="..\SatisfactoryTree\SatisfactoryTree.csproj" />
   </ItemGroup>
 
 </Project>
