@@ -37,6 +37,7 @@ namespace SatisfactoryTree.WinForm
             this.grpInputMethod = new System.Windows.Forms.GroupBox();
             this.rbImportInputs = new System.Windows.Forms.RadioButton();
             this.rbProduceOnsite = new System.Windows.Forms.RadioButton();
+            this.chkAutoDependencies = new System.Windows.Forms.CheckBox();
             this.grpRecipeInfo = new System.Windows.Forms.GroupBox();
             this.lblRecipe = new System.Windows.Forms.Label();
             this.cmbRecipe = new System.Windows.Forms.ComboBox();
