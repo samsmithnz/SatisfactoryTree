@@ -39,6 +39,7 @@ namespace SatisfactoryTree.Console.OldModels
         public Building building { get; set; }
         public bool isAlternate { get; set; }
         public bool isFicsmas { get; set; }
+        public bool usesSAMOre { get; set; }
     }
 
     //public class PowerGenerationRecipe

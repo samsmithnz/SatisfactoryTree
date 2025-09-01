@@ -174,6 +174,9 @@ namespace SatisfactoryTree.Console
                     building.maxPower = highPower;
                 }
 
+                // Check if any ingredient is SAMIngot to set usesSAMOre flag
+                bool usesSAMOre = ingredients.Any(ingredient => ingredient.part == "SAMIngot");
+
                 //if (blacklist. producedIn)
                 recipes.Add(new Recipe
                 {
@@ -183,7 +186,8 @@ namespace SatisfactoryTree.Console
                     products = products,
                     building = building,
                     isAlternate = displayName.Contains("Alternate"),
-                    isFicsmas = Common.IsFicsmas(displayName)
+                    isFicsmas = Common.IsFicsmas(displayName),
+                    usesSAMOre = usesSAMOre
                 });
             }
 
