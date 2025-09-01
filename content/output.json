@@ -10,15 +10,6 @@
       "ResourceSinkPoints": "1"
     },
     {
-      "ClassName": "Desc_Water_C",
-      "DisplayName": "Water",
-      "Description": "It's water.",
-      "StackSize": 0,
-      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=0.000000)",
-      "FluidColor": "(B=212,G=176,R=122,A=0)",
-      "ResourceSinkPoints": "5"
-    },
-    {
       "ClassName": "Desc_Coal_C",
       "DisplayName": "Coal",
       "Description": "Mainly used as fuel for vehicles & Coal-Powered Generators, or in Steel production.",
@@ -44,6 +35,15 @@
       "PingColor": "(R=1.000000,G=0.956156,B=0.260000,A=1.000000)",
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "11"
+    },
+    {
+      "ClassName": "Desc_Water_C",
+      "DisplayName": "Water",
+      "Description": "It's water.",
+      "StackSize": 0,
+      "PingColor": "(R=0.000000,G=0.000000,B=0.000000,A=0.000000)",
+      "FluidColor": "(B=212,G=176,R=122,A=0)",
+      "ResourceSinkPoints": "5"
     },
     {
       "ClassName": "Desc_SAM_C",
@@ -118,22 +118,13 @@
       "ResourceSinkPoints": "30"
     },
     {
-      "ClassName": "Desc_Cement_C",
-      "DisplayName": "Concrete",
-      "Description": "Used for building.\r\nGood for stable Foundations.",
-      "StackSize": 500,
+      "ClassName": "Desc_AluminumIngot_C",
+      "DisplayName": "Aluminum Ingot",
+      "Description": "Smelted from Aluminum Scrap, which is refined from Alumina Solution.\r\nUsed to produce specialized aluminum-based parts.",
+      "StackSize": 100,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "12"
-    },
-    {
-      "ClassName": "Desc_Silica_C",
-      "DisplayName": "Silica",
-      "Description": "Derived from Raw Quartz. Commonly used to create glass structures, in advanced refinement processes, and for alternative production of electronics.",
-      "StackSize": 200,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "20"
+      "ResourceSinkPoints": "131"
     },
     {
       "ClassName": "Desc_IronPlate_C",
@@ -145,69 +136,6 @@
       "ResourceSinkPoints": "6"
     },
     {
-      "ClassName": "Desc_SteelPlate_C",
-      "DisplayName": "Steel Beam",
-      "Description": "Primarily used when constructing slightly more advanced buildings.",
-      "StackSize": 200,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "64"
-    },
-    {
-      "ClassName": "Desc_AluminumIngot_C",
-      "DisplayName": "Aluminum Ingot",
-      "Description": "Smelted from Aluminum Scrap, which is refined from Alumina Solution.\r\nUsed to produce specialized aluminum-based parts.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "131"
-    },
-    {
-      "ClassName": "Desc_Battery_C",
-      "DisplayName": "Battery",
-      "Description": "Primarily used as fuel for Drones and vehicles.",
-      "StackSize": 200,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "465"
-    },
-    {
-      "ClassName": "Desc_Fuel_C",
-      "DisplayName": "Packaged Fuel",
-      "Description": "Fuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=21,G=125,R=235,A=255)",
-      "ResourceSinkPoints": "270"
-    },
-    {
-      "ClassName": "Desc_PackagedIonizedFuel_C",
-      "DisplayName": "Packaged Ionized Fuel",
-      "Description": "Ionized Fuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "5246"
-    },
-    {
-      "ClassName": "Desc_PackagedRocketFuel_C",
-      "DisplayName": "Packaged Rocket Fuel",
-      "Description": "Rocket Fuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "1028"
-    },
-    {
-      "ClassName": "Desc_TurboFuel_C",
-      "DisplayName": "Packaged Turbofuel",
-      "Description": "Turbofuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=46,G=41,R=212,A=255)",
-      "ResourceSinkPoints": "570"
-    },
-    {
       "ClassName": "Desc_IronRod_C",
       "DisplayName": "Iron Rod",
       "Description": "Used for crafting.\r\nOne of the most basic parts.",
@@ -215,24 +143,6 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "4"
-    },
-    {
-      "ClassName": "Desc_Wire_C",
-      "DisplayName": "Wire",
-      "Description": "Used for crafting.\r\nOne of the most basic parts.",
-      "StackSize": 500,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "6"
-    },
-    {
-      "ClassName": "Desc_Cable_C",
-      "DisplayName": "Cable",
-      "Description": "Used for crafting.\r\nPrimarily used to build Power Lines.",
-      "StackSize": 200,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "24"
     },
     {
       "ClassName": "Desc_IronIngot_C",
@@ -244,6 +154,15 @@
       "ResourceSinkPoints": "2"
     },
     {
+      "ClassName": "Desc_Cable_C",
+      "DisplayName": "Cable",
+      "Description": "Used for crafting.\r\nPrimarily used to build Power Lines.",
+      "StackSize": 200,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "24"
+    },
+    {
       "ClassName": "Desc_IronPlateReinforced_C",
       "DisplayName": "Reinforced Iron Plate",
       "Description": "Used for crafting.\r\nA sturdier and more durable Iron Plate.",
@@ -251,6 +170,24 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "120"
+    },
+    {
+      "ClassName": "Desc_Wire_C",
+      "DisplayName": "Wire",
+      "Description": "Used for crafting.\r\nOne of the most basic parts.",
+      "StackSize": 500,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "6"
+    },
+    {
+      "ClassName": "Desc_Cement_C",
+      "DisplayName": "Concrete",
+      "Description": "Used for building.\r\nGood for stable Foundations.",
+      "StackSize": 500,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "12"
     },
     {
       "ClassName": "Desc_Rotor_C",
@@ -308,7 +245,7 @@
     },
     {
       "ClassName": "Desc_IronScrew_C",
-      "DisplayName": "Screw",
+      "DisplayName": "Screws",
       "Description": "Used for crafting.\r\nOne of the most basic parts.",
       "StackSize": 500,
       "PingColor": null,
@@ -343,6 +280,15 @@
       "ResourceSinkPoints": "170"
     },
     {
+      "ClassName": "Desc_PackagedRocketFuel_C",
+      "DisplayName": "Packaged Rocket Fuel",
+      "Description": "Rocket Fuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "1028"
+    },
+    {
       "ClassName": "Desc_CrystalOscillator_C",
       "DisplayName": "Crystal Oscillator",
       "Description": "An electronic oscillator circuit that uses the mechanical resonance of a vibrating crystal to create an electrical signal with a precise frequency.",
@@ -359,6 +305,15 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "1520"
+    },
+    {
+      "ClassName": "Desc_TurboFuel_C",
+      "DisplayName": "Packaged Turbofuel",
+      "Description": "Turbofuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=46,G=41,R=212,A=255)",
+      "ResourceSinkPoints": "570"
     },
     {
       "ClassName": "Desc_DarkMatter_C",
@@ -399,7 +354,7 @@
     {
       "ClassName": "Desc_FicsiteMesh_C",
       "DisplayName": "Ficsite Trigon",
-      "Description": "The Ficsite Trigon, made from Ficsite Ingots, is perfectly shaped for all construction challenges. It's performance is so exceptional, it basically solved structural engineering.",
+      "Description": "The Ficsite Trigon, made from Ficsite Ingots, is perfectly shaped for all construction challenges. Its performance is so exceptional, it basically solved structural engineering.",
       "StackSize": 200,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
@@ -496,9 +451,18 @@
       "ResourceSinkPoints": "11000"
     },
     {
+      "ClassName": "Desc_PackagedIonizedFuel_C",
+      "DisplayName": "Packaged Ionized Fuel",
+      "Description": "Ionized Fuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "5246"
+    },
+    {
       "ClassName": "Desc_SAMFluctuator_C",
       "DisplayName": "SAM Fluctuator",
-      "Description": "The SAM Fluctuator is able to regulate and direct the behaviour of Reanimated SAM through the application of electric charges with varying frequencies.\r\nThis control facilitates technologies such as matter-to-energy conversion and spatiotemporal matter manipulation.",
+      "Description": "The SAM Fluctuator is able to regulate and direct the behavior of Reanimated SAM through the application of electric charges with varying frequencies.\r\nThis control facilitates technologies such as matter-to-energy conversion and spatiotemporal matter manipulation.",
       "StackSize": 100,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
@@ -577,6 +541,15 @@
       "ResourceSinkPoints": "60"
     },
     {
+      "ClassName": "Desc_Fuel_C",
+      "DisplayName": "Packaged Fuel",
+      "Description": "Fuel, packaged for alternative transport. Can be used as fuel for vehicles and the Jetpack.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=21,G=125,R=235,A=255)",
+      "ResourceSinkPoints": "270"
+    },
+    {
       "ClassName": "Desc_CircuitBoard_C",
       "DisplayName": "Circuit Board",
       "Description": "Advanced electronics that have a plethora of different uses.",
@@ -611,6 +584,15 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "60"
+    },
+    {
+      "ClassName": "Desc_SteelPlate_C",
+      "DisplayName": "Steel Beam",
+      "Description": "Primarily used when constructing slightly more advanced buildings.",
+      "StackSize": 200,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "64"
     },
     {
       "ClassName": "Desc_PolymerResin_C",
@@ -730,6 +712,15 @@
       "ResourceSinkPoints": "20"
     },
     {
+      "ClassName": "Desc_Silica_C",
+      "DisplayName": "Silica",
+      "Description": "Derived from Raw Quartz. Commonly used to create glass structures, in advanced refinement processes, and for alternative production of electronics.",
+      "StackSize": 200,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "20"
+    },
+    {
       "ClassName": "Desc_Computer_C",
       "DisplayName": "Computer",
       "Description": "A complex logic machine that is used to control advanced behavior in other machines.",
@@ -831,7 +822,7 @@
     {
       "ClassName": "Desc_PlutoniumCell_C",
       "DisplayName": "Encased Plutonium Cell",
-      "Description": "Plutonium Pellets encased in concrete.\r\nUsed to produce Plutonium Fuel Rods for Nuclear Power production.\r\n\r\nCaution: Moderately Radioactive.",
+      "Description": "Plutonium Pellets encased in concrete.\r\nUsed to produce Plutonium Fuel Rods for Nuclear Power production.\r\n\r\nPower Usage: 250-750 MW (500 MW average).\r\n﻿Caution: Moderately Radioactive.",
       "StackSize": 200,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
@@ -910,6 +901,15 @@
       "ResourceSinkPoints": "147"
     },
     {
+      "ClassName": "Desc_Battery_C",
+      "DisplayName": "Battery",
+      "Description": "Primarily used as fuel for Drones and vehicles.",
+      "StackSize": 200,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "465"
+    },
+    {
       "ClassName": "Desc_DissolvedSilica_C",
       "DisplayName": "Dissolved Silica",
       "Description": "Silica dissolved in Water, produced as part of the alternative refinement of Raw Quartz.\r\nThe Silica can be extracted from the Water to complete the refinement process.",
@@ -939,7 +939,7 @@
     {
       "ClassName": "Desc_Ficsonium_C",
       "DisplayName": "Ficsonium",
-      "Description": "Usage and production of this material is strictly prohibited. On Earth, that is. There are no rules in space, only efficiency. \r\n\r\nPower Usage: 500-1500 MW (1000 MW average).",
+      "Description": "Usage and production of this material is strictly prohibited. On Earth, that is. There are no rules in space, only efficiency. \r\n\r\nPower Usage: 500-1500 MW (1000 MW average).\r\nCaution: Moderately Radioactive.",
       "StackSize": 100,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
@@ -991,33 +991,6 @@
       "ResourceSinkPoints": "58"
     },
     {
-      "ClassName": "Desc_NuclearFuelRod_C",
-      "DisplayName": "Uranium Fuel Rod",
-      "Description": "Used as fuel for Nuclear Power Plants.\r\n\r\nCaution: Produces radioactive Uranium Waste when consumed.\r\nCaution: Moderately Radioactive.",
-      "StackSize": 50,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "43468"
-    },
-    {
-      "ClassName": "Desc_PlutoniumFuelRod_C",
-      "DisplayName": "Plutonium Fuel Rod",
-      "Description": "Used as fuel for Nuclear Power Plants.\r\n\r\nCaution: Produces radioactive Plutonium Waste when consumed.\r\nCaution: HIGHLY Radioactive.",
-      "StackSize": 50,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "153184"
-    },
-    {
-      "ClassName": "Desc_FicsoniumFuelRod_C",
-      "DisplayName": "Ficsonium Fuel Rod",
-      "Description": "Used as fuel for Nuclear Power Plants.\r\nThe power source that put FICSIT on the map. Literally. The crater is still there.\r\n\r\nCaution: Moderately Radioactive.",
-      "StackSize": 50,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "0"
-    },
-    {
       "ClassName": "Desc_CartridgeChaos_C",
       "DisplayName": "Turbo Rifle Ammo",
       "Description": "Lightweight, compact, and volatile. These rounds provide extreme capacity and rate of fire at the cost of accuracy.",
@@ -1025,15 +998,6 @@
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
       "ResourceSinkPoints": "120"
-    },
-    {
-      "ClassName": "Desc_CrystalShard_C",
-      "DisplayName": "Power Shard",
-      "Description": "Power Slug mucus compressed into a solid crystal-like shard. \r\nIt radiates a strange power.",
-      "StackSize": 100,
-      "PingColor": null,
-      "FluidColor": "(B=255,G=255,R=255,A=0)",
-      "ResourceSinkPoints": "0"
     },
     {
       "ClassName": "Desc_GenericBiomass_C",
@@ -1117,9 +1081,45 @@
       "ResourceSinkPoints": "140"
     },
     {
+      "ClassName": "Desc_CrystalShard_C",
+      "DisplayName": "Power Shard",
+      "Description": "Power Slug mucus compressed into a solid crystal-like shard. \r\nIt radiates a strange power.",
+      "StackSize": 100,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "0"
+    },
+    {
+      "ClassName": "Desc_PlutoniumFuelRod_C",
+      "DisplayName": "Plutonium Fuel Rod",
+      "Description": "Used as fuel for Nuclear Power Plants.\r\n\r\nCaution: Produces radioactive Plutonium Waste when consumed.\r\nCaution: HIGHLY Radioactive.",
+      "StackSize": 50,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "153184"
+    },
+    {
+      "ClassName": "Desc_NuclearFuelRod_C",
+      "DisplayName": "Uranium Fuel Rod",
+      "Description": "Used as fuel for Nuclear Power Plants.\r\n\r\nCaution: Produces radioactive Uranium Waste when consumed.\r\nCaution: Moderately Radioactive.",
+      "StackSize": 50,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "43468"
+    },
+    {
+      "ClassName": "Desc_FicsoniumFuelRod_C",
+      "DisplayName": "Ficsonium Fuel Rod",
+      "Description": "Used as fuel for Nuclear Power Plants.\r\nThe power source that put FICSIT on the map. Literally. The crater is still there.\r\n\r\nCaution: Moderately Radioactive.",
+      "StackSize": 50,
+      "PingColor": null,
+      "FluidColor": "(B=255,G=255,R=255,A=0)",
+      "ResourceSinkPoints": "0"
+    },
+    {
       "ClassName": "Desc_AlienPowerFuel_C",
       "DisplayName": "Alien Power Matrix",
-      "Description": "This intricate condensed-matter matrix is used to enhance the output of the Alien Power Augmenter. \r\n\r\nInitially developed in efforts to create a human-made Somersloop, the Alien Power Matrix cannot sustain the extra-dimensional energy connection on its own. However, it can effectively stabilize the energy stream of the Somersloop.",
+      "Description": "This intricate condensed-matter matrix is used to enhance the output of the Alien Power Augmenter.\r\n\r\nInitially developed in efforts to create a human-made Somersloop, the Alien Power Matrix cannot sustain the extra-dimensional energy connection on its own. However, it can effectively stabilize the energy stream of the Somersloop.",
       "StackSize": 50,
       "PingColor": null,
       "FluidColor": "(B=255,G=255,R=255,A=0)",
@@ -5717,7 +5717,7 @@
     },
     {
       "ClassName": "Recipe_Alternate_IronIngot_Leached_C",
-      "DisplayName": "Alternate: Leached Iron ingot",
+      "DisplayName": "Alternate: Leached Iron Ingot",
       "Ingredients": [
         {
           "Key": "Desc_OreIron_C",
@@ -6082,7 +6082,7 @@
     },
     {
       "ClassName": "Recipe_Alternate_Screw_2_C",
-      "DisplayName": "Alternate: Steel Screw",
+      "DisplayName": "Alternate: Steel Screws",
       "Ingredients": [
         {
           "Key": "Desc_SteelPlate_C",
@@ -6101,7 +6101,7 @@
     },
     {
       "ClassName": "Recipe_Alternate_Screw_C",
-      "DisplayName": "Alternate: Cast Screw",
+      "DisplayName": "Alternate: Cast Screws",
       "Ingredients": [
         {
           "Key": "Desc_IronIngot_C",
@@ -6991,41 +6991,6 @@
       "IsAlternateRecipe": false
     },
     {
-      "ClassName": "Recipe_AlienPowerFuel_C",
-      "DisplayName": "Alien Power Matrix",
-      "Ingredients": [
-        {
-          "Key": "Desc_SAMFluctuator_C",
-          "Value": 5.0
-        },
-        {
-          "Key": "Desc_CrystalShard_C",
-          "Value": 3.0
-        },
-        {
-          "Key": "Desc_QuantumOscillator_C",
-          "Value": 3.0
-        },
-        {
-          "Key": "Desc_QuantumEnergy_C",
-          "Value": 24000.0
-        }
-      ],
-      "Products": [
-        {
-          "Key": "Desc_AlienPowerFuel_C",
-          "Value": 1.0
-        },
-        {
-          "Key": "Desc_DarkEnergy_C",
-          "Value": 24000.0
-        }
-      ],
-      "ProducedIn": "QuantumEncoder",
-      "ManufactoringDuration": 24.000000,
-      "IsAlternateRecipe": false
-    },
-    {
       "ClassName": "Recipe_Protein_Stinger_C",
       "DisplayName": "Stinger Protein",
       "Ingredients": [
@@ -7099,6 +7064,41 @@
       ],
       "ProducedIn": "ConstructorMk1",
       "ManufactoringDuration": 4.000000,
+      "IsAlternateRecipe": false
+    },
+    {
+      "ClassName": "Recipe_AlienPowerFuel_C",
+      "DisplayName": "Alien Power Matrix",
+      "Ingredients": [
+        {
+          "Key": "Desc_SAMFluctuator_C",
+          "Value": 5.0
+        },
+        {
+          "Key": "Desc_CrystalShard_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_QuantumOscillator_C",
+          "Value": 3.0
+        },
+        {
+          "Key": "Desc_QuantumEnergy_C",
+          "Value": 24000.0
+        }
+      ],
+      "Products": [
+        {
+          "Key": "Desc_AlienPowerFuel_C",
+          "Value": 1.0
+        },
+        {
+          "Key": "Desc_DarkEnergy_C",
+          "Value": 24000.0
+        }
+      ],
+      "ProducedIn": "QuantumEncoder",
+      "ManufactoringDuration": 24.000000,
       "IsAlternateRecipe": false
     },
     {
@@ -7383,7 +7383,7 @@
     },
     {
       "ClassName": "Recipe_Screw_C",
-      "DisplayName": "Screw",
+      "DisplayName": "Screws",
       "Ingredients": [
         {
           "Key": "Desc_IronRod_C",
