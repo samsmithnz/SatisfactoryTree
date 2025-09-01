@@ -1,23 +1,39 @@
 using SatisfactoryTree.Models;
 using SatisfactoryTree.Services;
+using SatisfactoryTree.WinForm.Services;
 
 namespace SatisfactoryTree.WinForm
 {
     public partial class ProductionPlanningForm : Form
     {
         private readonly ProductionPlanningService _productionService;
+        private readonly SatisfactoryDataService _dataService;
         private string _selectedFactoryId = "default";
 
         public ProductionPlanningForm()
         {
             InitializeComponent();
             _productionService = new ProductionPlanningService();
+            _dataService = SatisfactoryDataService.Instance;
         }
 
         private void ProductionPlanningForm_Load(object sender, EventArgs e)
         {
             LoadFactories();
             RefreshFactoryDetails();
+            SetupAutoComplete();
+        }
+
+        private void SetupAutoComplete()
+        {
+            // Add AutoComplete source for production item names
+            var itemNames = _dataService.GetItemDisplayNames();
+            var autoCompleteSource = new AutoCompleteStringCollection();
+            autoCompleteSource.AddRange(itemNames.ToArray());
+            
+            txtProductionItem.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtProductionItem.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtProductionItem.AutoCompleteCustomSource = autoCompleteSource;
         }
 
         private void LoadFactories()
@@ -222,13 +238,49 @@ namespace SatisfactoryTree.WinForm
                         Tag = goal
                     };
                     
+                    // Get actual recipe information for this item
+                    var item = _dataService.GetItemByDisplayName(goal.ItemName);
+                    var recipes = item?.ClassName != null ? _dataService.GetRecipesForItem(item.ClassName) : new List<NewRecipe>();
+                    var primaryRecipe = recipes.FirstOrDefault(r => !r.IsAlternateRecipe) ?? recipes.FirstOrDefault();
+                    
                     // Add detailed production information
                     itemNode.Nodes.Add(new TreeNode($"📊 Target Quantity: {goal.TargetQuantity:N0}"));
                     itemNode.Nodes.Add(new TreeNode($"📈 Current Progress: {goal.CurrentQuantity:N0} ({goal.ProgressPercentage:F1}%)"));
-                    itemNode.Nodes.Add(new TreeNode($"🏗️ Recipe: Standard Recipe (placeholder)"));
-                    itemNode.Nodes.Add(new TreeNode($"🏭 Buildings Required: Calculated based on recipe"));
-                    itemNode.Nodes.Add(new TreeNode($"📥 Inputs: Will show required inputs"));
-                    itemNode.Nodes.Add(new TreeNode($"⚡ Power Usage: Will show power requirements"));
+                    
+                    if (primaryRecipe != null)
+                    {
+                        var recipeName = primaryRecipe.IsAlternateRecipe ? 
+                            $"Alternate: {primaryRecipe.DisplayName}" : 
+                            primaryRecipe.DisplayName ?? "Standard Recipe";
+                        itemNode.Nodes.Add(new TreeNode($"🏗️ Recipe: {recipeName}"));
+                        
+                        var buildingName = _dataService.GetBuildingDisplayName(primaryRecipe.ProducedIn);
+                        var buildingsRequired = _dataService.CalculateBuildingsRequired(primaryRecipe, goal.TargetQuantity);
+                        itemNode.Nodes.Add(new TreeNode($"🏭 Buildings Required: {buildingsRequired:N0} {buildingName}"));
+                        
+                        var inputRequirements = _dataService.GetRecipeInputRequirements(primaryRecipe, goal.TargetQuantity);
+                        if (inputRequirements.Any())
+                        {
+                            var inputsNode = new TreeNode("📥 Inputs Required:");
+                            foreach (var input in inputRequirements)
+                            {
+                                inputsNode.Nodes.Add(new TreeNode($"  • {input.Key}: {input.Value:N1}/min"));
+                            }
+                            itemNode.Nodes.Add(inputsNode);
+                        }
+                        
+                        // Estimate power usage
+                        var powerPerBuilding = GetEstimatedPowerUsage(buildingName);
+                        var totalPower = buildingsRequired * powerPerBuilding;
+                        itemNode.Nodes.Add(new TreeNode($"⚡ Power Usage: {totalPower:N1} MW"));
+                    }
+                    else
+                    {
+                        itemNode.Nodes.Add(new TreeNode($"🏗️ Recipe: No recipe data available"));
+                        itemNode.Nodes.Add(new TreeNode($"🏭 Buildings Required: Unknown"));
+                        itemNode.Nodes.Add(new TreeNode($"📥 Inputs: Unknown"));
+                        itemNode.Nodes.Add(new TreeNode($"⚡ Power Usage: Unknown"));
+                    }
                     
                     productionItemsNode.Nodes.Add(itemNode);
                 }
@@ -248,6 +300,21 @@ namespace SatisfactoryTree.WinForm
                     childNode.Expand();
                 }
             }
+        }
+
+        private decimal GetEstimatedPowerUsage(string buildingType)
+        {
+            // Estimated power usage values for different building types
+            return buildingType.ToLower() switch
+            {
+                "constructor" => 4,
+                "assembler" => 15,
+                "foundry" => 16,
+                "manufacturer" => 55,
+                "refinery" => 30,
+                "smelter" => 4,
+                _ => 10 // Default estimate
+            };
         }
     }
 }

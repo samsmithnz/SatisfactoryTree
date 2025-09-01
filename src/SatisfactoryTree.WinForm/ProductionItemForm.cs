@@ -1,5 +1,6 @@
 using SatisfactoryTree.Models;
 using SatisfactoryTree.Services;
+using SatisfactoryTree.WinForm.Services;
 
 namespace SatisfactoryTree.WinForm
 {
@@ -8,6 +9,7 @@ namespace SatisfactoryTree.WinForm
         private readonly ProductionPlanningService _productionService;
         private readonly string _factoryId;
         private ProductionGoal? _existingGoal;
+        private readonly SatisfactoryDataService _dataService;
 
         public string ItemName => txtItemName.Text;
         public decimal TargetQuantity => txtTargetQuantity.Value;
@@ -20,14 +22,15 @@ namespace SatisfactoryTree.WinForm
             _productionService = productionService;
             _factoryId = factoryId;
             _existingGoal = existingGoal;
+            _dataService = SatisfactoryDataService.Instance;
             
             LoadForm();
         }
 
         private void LoadForm()
         {
-            // Load sample recipes (in a real implementation, this would come from the SatisfactoryTree dependency)
-            LoadSampleRecipes();
+            // Load actual recipes from SatisfactoryTree data
+            LoadAvailableItems();
 
             if (_existingGoal != null)
             {
@@ -48,41 +51,52 @@ namespace SatisfactoryTree.WinForm
             UpdateRecipeInfo();
         }
 
-        private void LoadSampleRecipes()
+        private void LoadAvailableItems()
         {
-            // Sample recipes for demonstration
-            // In a real implementation, this would load from the SatisfactoryTree dependency
-            var sampleRecipes = new Dictionary<string, List<string>>
-            {
-                { "Iron Plate", new List<string> { "Standard Recipe", "Alternative: Coated Iron Plate" } },
-                { "Iron Rod", new List<string> { "Standard Recipe", "Alternative: Steel Rod" } },
-                { "Steel Ingot", new List<string> { "Standard Recipe", "Alternative: Solid Steel Ingot" } },
-                { "Reinforced Plate", new List<string> { "Standard Recipe", "Alternative: Adhered Iron Plate" } },
-                { "Concrete", new List<string> { "Standard Recipe", "Alternative: Wet Concrete" } },
-                { "Copper Ingot", new List<string> { "Standard Recipe" } },
-                { "Wire", new List<string> { "Standard Recipe", "Alternative: Fused Wire" } },
-                { "Cable", new List<string> { "Standard Recipe", "Alternative: Coated Cable" } }
-            };
+            // Add AutoComplete source for item names
+            var itemNames = _dataService.GetItemDisplayNames();
+            var autoCompleteSource = new AutoCompleteStringCollection();
+            autoCompleteSource.AddRange(itemNames.ToArray());
+            
+            txtItemName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtItemName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtItemName.AutoCompleteCustomSource = autoCompleteSource;
+        }
 
+        private void LoadRecipesForItem()
+        {
             cmbRecipe.Items.Clear();
             
             string itemName = txtItemName.Text.Trim();
-            if (sampleRecipes.ContainsKey(itemName))
+            if (string.IsNullOrEmpty(itemName))
+                return;
+
+            // Find the item by display name
+            var item = _dataService.GetItemByDisplayName(itemName);
+            if (item?.ClassName == null)
+                return;
+
+            // Get recipes that produce this item
+            var recipes = _dataService.GetRecipesForItem(item.ClassName);
+            
+            foreach (var recipe in recipes.OrderBy(r => r.IsAlternateRecipe ? 1 : 0))
             {
-                foreach (var recipe in sampleRecipes[itemName])
-                {
-                    cmbRecipe.Items.Add(recipe);
-                }
-                if (cmbRecipe.Items.Count > 0)
-                {
-                    cmbRecipe.SelectedIndex = 0;
-                }
+                var displayName = recipe.IsAlternateRecipe ? 
+                    $"Alternate: {recipe.DisplayName}" : 
+                    recipe.DisplayName ?? "Standard Recipe";
+                
+                cmbRecipe.Items.Add(new RecipeItem(recipe, displayName));
+            }
+            
+            if (cmbRecipe.Items.Count > 0)
+            {
+                cmbRecipe.SelectedIndex = 0;
             }
         }
 
         private void txtItemName_TextChanged(object sender, EventArgs e)
         {
-            LoadSampleRecipes();
+            LoadRecipesForItem();
             UpdateRecipeInfo();
         }
 
@@ -135,81 +149,59 @@ namespace SatisfactoryTree.WinForm
         {
             string itemName = txtItemName.Text.Trim();
             decimal targetQuantity = txtTargetQuantity.Value;
-            string recipe = cmbRecipe.SelectedItem?.ToString() ?? "";
-
-            // Sample calculations for demonstration
-            var recipeData = GetSampleRecipeData(itemName, recipe);
             
-            if (recipeData != null)
+            if (string.IsNullOrWhiteSpace(itemName) || cmbRecipe.SelectedItem == null)
             {
-                decimal productionPerMinute = recipeData.OutputPerMinute;
-                decimal buildingsRequired = Math.Ceiling(targetQuantity / productionPerMinute);
-                decimal totalPowerUsage = buildingsRequired * recipeData.PowerUsage;
-
-                txtBuildingsRequired.Text = $"{buildingsRequired:N0} {recipeData.BuildingType}";
-                txtPowerUsage.Text = $"{totalPowerUsage:N0} MW";
-
-                // Update inputs needed
+                txtBuildingsRequired.Text = "";
+                txtPowerUsage.Text = "";
                 lstInputsNeeded.Items.Clear();
-                foreach (var input in recipeData.Inputs)
-                {
-                    decimal inputNeeded = (targetQuantity / productionPerMinute) * input.Value;
-                    var item = new ListViewItem(input.Key);
-                    item.SubItems.Add($"{inputNeeded:N1}/min");
-                    lstInputsNeeded.Items.Add(item);
-                }
+                return;
+            }
+
+            // Get the selected recipe
+            var selectedRecipeItem = cmbRecipe.SelectedItem as RecipeItem;
+            if (selectedRecipeItem?.Recipe == null)
+                return;
+
+            var recipe = selectedRecipeItem.Recipe;
+            
+            // Calculate production requirements
+            var outputPerMinute = _dataService.CalculateOutputPerMinute(recipe);
+            var buildingsRequired = _dataService.CalculateBuildingsRequired(recipe, targetQuantity);
+            var buildingDisplayName = _dataService.GetBuildingDisplayName(recipe.ProducedIn);
+
+            // For power usage, we'll use estimated values since power consumption isn't in the recipe data
+            var estimatedPowerPerBuilding = GetEstimatedPowerUsage(buildingDisplayName);
+            var totalPowerUsage = buildingsRequired * estimatedPowerPerBuilding;
+
+            txtBuildingsRequired.Text = $"{buildingsRequired:N0} {buildingDisplayName}";
+            txtPowerUsage.Text = $"{totalPowerUsage:N1} MW";
+
+            // Update inputs needed
+            lstInputsNeeded.Items.Clear();
+            var inputRequirements = _dataService.GetRecipeInputRequirements(recipe, targetQuantity);
+            
+            foreach (var input in inputRequirements)
+            {
+                var item = new ListViewItem(input.Key);
+                item.SubItems.Add($"{input.Value:N1}/min");
+                lstInputsNeeded.Items.Add(item);
             }
         }
 
-        private RecipeData? GetSampleRecipeData(string itemName, string recipe)
+        private decimal GetEstimatedPowerUsage(string buildingType)
         {
-            // Sample recipe data for demonstration
-            // In a real implementation, this would come from the SatisfactoryTree dependency
-            var sampleData = new Dictionary<string, RecipeData>
+            // Estimated power usage values for different building types
+            return buildingType.ToLower() switch
             {
-                { "Iron Plate", new RecipeData 
-                    { 
-                        OutputPerMinute = 20, 
-                        BuildingType = "Constructor", 
-                        PowerUsage = 4,
-                        Inputs = new Dictionary<string, decimal> { { "Iron Ingot", 30 } }
-                    }
-                },
-                { "Iron Rod", new RecipeData 
-                    { 
-                        OutputPerMinute = 15, 
-                        BuildingType = "Constructor", 
-                        PowerUsage = 4,
-                        Inputs = new Dictionary<string, decimal> { { "Iron Ingot", 15 } }
-                    }
-                },
-                { "Steel Ingot", new RecipeData 
-                    { 
-                        OutputPerMinute = 45, 
-                        BuildingType = "Foundry", 
-                        PowerUsage = 16,
-                        Inputs = new Dictionary<string, decimal> { { "Iron Ore", 45 }, { "Coal", 45 } }
-                    }
-                },
-                { "Reinforced Plate", new RecipeData 
-                    { 
-                        OutputPerMinute = 5, 
-                        BuildingType = "Assembler", 
-                        PowerUsage = 15,
-                        Inputs = new Dictionary<string, decimal> { { "Iron Plate", 30 }, { "Screw", 60 } }
-                    }
-                },
-                { "Wire", new RecipeData 
-                    { 
-                        OutputPerMinute = 30, 
-                        BuildingType = "Constructor", 
-                        PowerUsage = 4,
-                        Inputs = new Dictionary<string, decimal> { { "Copper Ingot", 15 } }
-                    }
-                }
+                "constructor" => 4,
+                "assembler" => 15,
+                "foundry" => 16,
+                "manufacturer" => 55,
+                "refinery" => 30,
+                "smelter" => 4,
+                _ => 10 // Default estimate
             };
-
-            return sampleData.ContainsKey(itemName) ? sampleData[itemName] : null;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -236,12 +228,21 @@ namespace SatisfactoryTree.WinForm
             this.Close();
         }
 
-        private class RecipeData
+        private class RecipeItem
         {
-            public decimal OutputPerMinute { get; set; }
-            public string BuildingType { get; set; } = "";
-            public decimal PowerUsage { get; set; }
-            public Dictionary<string, decimal> Inputs { get; set; } = new();
+            public NewRecipe Recipe { get; }
+            public string DisplayName { get; }
+
+            public RecipeItem(NewRecipe recipe, string displayName)
+            {
+                Recipe = recipe;
+                DisplayName = displayName;
+            }
+
+            public override string ToString()
+            {
+                return DisplayName;
+            }
         }
     }
 }
