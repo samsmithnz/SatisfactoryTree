@@ -168,4 +168,25 @@ public class ConsoleTests
         System.Diagnostics.Debug.WriteLine($"Found {nonSamRecipeCount} recipes that do not use SAM ore");
     }
 
+    [TestMethod]
+    public void SAMOreSpecificRecipeTest()
+    {
+        //Arrange
+        
+        //Act
+        
+        //Assert
+        Assert.IsNotNull(results);
+        
+        // Find a specific recipe that should use SAM ore (based on our earlier analysis)
+        var darkMatterRecipe = results.newRecipes.FirstOrDefault(r => r.displayName == "Dark Matter Residue");
+        Assert.IsNotNull(darkMatterRecipe, "Dark Matter Residue recipe not found");
+        Assert.IsTrue(darkMatterRecipe.usesSAMOre, "Dark Matter Residue recipe should use SAM ore");
+        
+        // Find a recipe that should NOT use SAM ore
+        var ironPlateRecipe = results.newRecipes.FirstOrDefault(r => r.displayName == "Iron Plate");
+        Assert.IsNotNull(ironPlateRecipe, "Iron Plate recipe not found");
+        Assert.IsFalse(ironPlateRecipe.usesSAMOre, "Iron Plate recipe should NOT use SAM ore");
+    }
+
 }
