@@ -184,8 +184,13 @@ namespace SatisfactoryTree.WinForm
                     primaryRecipe?.DisplayName ?? "Standard Recipe";
                 listItem.SubItems.Add(recipeName);
                 
-                // Add quantity column (with 3 decimal places)
-                listItem.SubItems.Add($"{goal.TargetQuantity:N3}");
+                // Add quantity column (with 3 decimal places and progress)
+                var quantityText = $"{goal.TargetQuantity:N3}";
+                if (goal.CurrentQuantity > 0)
+                {
+                    quantityText += $" ({goal.ProgressPercentage:F1}% complete)";
+                }
+                listItem.SubItems.Add(quantityText);
                 
                 // Add inputs column
                 var inputsText = "";
