@@ -14,7 +14,9 @@ namespace SatisfactoryTree.WinForm
         public string ItemName => txtItemName.Text;
         public decimal TargetQuantity => txtTargetQuantity.Value;
         public bool ImportInputs => rbImportInputs.Checked;
+        public bool AutoDependencies => chkAutoDependencies.Checked;
         public string? SelectedRecipe => cmbRecipe.SelectedItem?.ToString();
+        public string? SelectedRecipeClassName => (cmbRecipe.SelectedItem as RecipeItem)?.Recipe?.ClassName;
 
         public ProductionItemForm(ProductionPlanningService productionService, string factoryId, ProductionGoal? existingGoal = null)
         {
@@ -108,12 +110,15 @@ namespace SatisfactoryTree.WinForm
         private void rbImportInputs_CheckedChanged(object sender, EventArgs e)
         {
             grpRecipeInfo.Enabled = !rbImportInputs.Checked;
+            chkAutoDependencies.Enabled = false;
+            chkAutoDependencies.Checked = false;
             UpdateRecipeInfo();
         }
 
         private void rbProduceOnsite_CheckedChanged(object sender, EventArgs e)
         {
             grpRecipeInfo.Enabled = rbProduceOnsite.Checked;
+            chkAutoDependencies.Enabled = rbProduceOnsite.Checked;
             UpdateRecipeInfo();
         }
 

@@ -37,7 +37,7 @@ namespace SatisfactoryTree.WinForm
             this.txtFactoryName = new System.Windows.Forms.TextBox();
             this.lblFactoryName = new System.Windows.Forms.Label();
             this.pnlRightDetails = new System.Windows.Forms.Panel();
-            this.treeFactoryDetails = new System.Windows.Forms.TreeView();
+            this.listProductionItems = new System.Windows.Forms.ListView();
             this.grpProductionActions = new System.Windows.Forms.GroupBox();
             this.btnAddProductionItem = new System.Windows.Forms.Button();
             this.btnEditProductionItem = new System.Windows.Forms.Button();
@@ -139,7 +139,7 @@ namespace SatisfactoryTree.WinForm
             // 
             // pnlRightDetails
             // 
-            this.pnlRightDetails.Controls.Add(this.treeFactoryDetails);
+            this.pnlRightDetails.Controls.Add(this.listProductionItems);
             this.pnlRightDetails.Controls.Add(this.grpProductionActions);
             this.pnlRightDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRightDetails.Location = new System.Drawing.Point(0, 0);
@@ -147,15 +147,19 @@ namespace SatisfactoryTree.WinForm
             this.pnlRightDetails.Size = new System.Drawing.Size(896, 600);
             this.pnlRightDetails.TabIndex = 0;
             // 
-            // treeFactoryDetails
+            // listProductionItems
             // 
-            this.treeFactoryDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeFactoryDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.treeFactoryDetails.Location = new System.Drawing.Point(0, 0);
-            this.treeFactoryDetails.Name = "treeFactoryDetails";
-            this.treeFactoryDetails.Size = new System.Drawing.Size(896, 470);
-            this.treeFactoryDetails.TabIndex = 0;
-            this.treeFactoryDetails.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeFactoryDetails_AfterSelect);
+            this.listProductionItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listProductionItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listProductionItems.FullRowSelect = true;
+            this.listProductionItems.GridLines = true;
+            this.listProductionItems.Location = new System.Drawing.Point(0, 0);
+            this.listProductionItems.Name = "listProductionItems";
+            this.listProductionItems.Size = new System.Drawing.Size(896, 470);
+            this.listProductionItems.TabIndex = 0;
+            this.listProductionItems.UseCompatibleStateImageBehavior = false;
+            this.listProductionItems.View = System.Windows.Forms.View.Details;
+            this.listProductionItems.SelectedIndexChanged += new System.EventHandler(this.listProductionItems_SelectedIndexChanged);
             // 
             // grpProductionActions
             // 
@@ -291,7 +295,7 @@ namespace SatisfactoryTree.WinForm
         private System.Windows.Forms.TextBox txtFactoryName;
         private System.Windows.Forms.Label lblFactoryName;
         private System.Windows.Forms.Panel pnlRightDetails;
-        private System.Windows.Forms.TreeView treeFactoryDetails;
+        private System.Windows.Forms.ListView listProductionItems;
         private System.Windows.Forms.GroupBox grpProductionActions;
         private System.Windows.Forms.Button btnAddProductionItem;
         private System.Windows.Forms.Button btnEditProductionItem;

@@ -19,9 +19,22 @@ namespace SatisfactoryTree.WinForm
 
         private void ProductionPlanningForm_Load(object sender, EventArgs e)
         {
+            InitializeListView();
             LoadFactories();
             RefreshFactoryDetails();
             SetupAutoComplete();
+        }
+
+        private void InitializeListView()
+        {
+            // Initialize ListView columns according to the requirements
+            listProductionItems.Columns.Clear();
+            listProductionItems.Columns.Add("Item", 200);
+            listProductionItems.Columns.Add("Recipe", 200);
+            listProductionItems.Columns.Add("Quantity", 100);
+            listProductionItems.Columns.Add("Inputs", 250);
+            listProductionItems.Columns.Add("Buildings", 150);
+            listProductionItems.Columns.Add("Power (MW)", 100);
         }
 
         private void SetupAutoComplete()
@@ -66,9 +79,9 @@ namespace SatisfactoryTree.WinForm
             }
         }
 
-        private void treeFactoryDetails_AfterSelect(object sender, TreeViewEventArgs e)
+        private void listProductionItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Handle selection of specific factory details for editing
+            // Handle selection of specific production items for editing
         }
 
         private void btnAddFactory_Click(object sender, EventArgs e)
@@ -102,9 +115,20 @@ namespace SatisfactoryTree.WinForm
                 {
                     try
                     {
-                        _productionService.AddProductionGoal(dialog.ItemName, dialog.TargetQuantity, _selectedFactoryId);
+                        var goal = _productionService.AddProductionGoalWithDependencies(
+                            dialog.ItemName, 
+                            dialog.TargetQuantity, 
+                            _selectedFactoryId, 
+                            !dialog.ImportInputs && dialog.AutoDependencies,
+                            dialog.SelectedRecipeClassName);
+                        
                         RefreshFactoryDetails();
-                        MessageBox.Show($"Production goal added successfully!\n\nItem: {dialog.ItemName}\nQuantity: {dialog.TargetQuantity:N0}\nMethod: {(dialog.ImportInputs ? "Import Inputs" : "Produce Onsite")}", 
+                        
+                        var dependencyMessage = goal.DependentGoals.Any() 
+                            ? $"\n\nAuto-created {goal.DependentGoals.Count} dependency goals recursively." 
+                            : "";
+                        
+                        MessageBox.Show($"Production goal added successfully!\n\nItem: {dialog.ItemName}\nQuantity: {dialog.TargetQuantity:N0}\nMethod: {(dialog.ImportInputs ? "Import Inputs" : "Produce Onsite")}{dependencyMessage}", 
                             "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
@@ -117,32 +141,9 @@ namespace SatisfactoryTree.WinForm
 
         private void btnEditProductionItem_Click(object sender, EventArgs e)
         {
-            var selectedNode = treeFactoryDetails.SelectedNode;
-            if (selectedNode?.Tag is ProductionGoal goal)
-            {
-                using (var dialog = new ProductionItemForm(_productionService, _selectedFactoryId, goal))
-                {
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        try
-                        {
-                            // Update the existing goal
-                            goal.TargetQuantity = dialog.TargetQuantity;
-                            RefreshFactoryDetails();
-                            MessageBox.Show($"Production goal updated successfully!\n\nItem: {dialog.ItemName}\nNew Quantity: {dialog.TargetQuantity:N0}", 
-                                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Error updating production goal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a production goal to edit.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            // For now, check if any production item is selected
+            // TODO: Implement editing functionality
+            MessageBox.Show("Edit functionality will be implemented based on selected production item.", "Edit Item", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnProcessProduction_Click(object sender, EventArgs e)
@@ -169,136 +170,102 @@ namespace SatisfactoryTree.WinForm
 
         private void RefreshFactoryDetails()
         {
-            treeFactoryDetails.Nodes.Clear();
+            listProductionItems.Items.Clear();
 
-            foreach (var factory in _productionService.GetAllFactories())
+            // Get the currently selected factory
+            var selectedFactory = _productionService.GetAllFactories().FirstOrDefault(f => f.Id == _selectedFactoryId);
+            if (selectedFactory == null) return;
+
+            // Get all goals including dependencies 
+            var allGoals = _productionService.GetAllGoalsIncludingDependencies(_selectedFactoryId);
+            
+            foreach (var goal in allGoals)
             {
-                var factoryNode = new TreeNode($"🏭 {factory.Name} ({factory.Id})")
-                {
-                    Tag = factory.Id,
-                    Name = factory.Id
-                };
-
-                // Add Goal Production section
-                var goalProductionNode = new TreeNode("🎯 Goal Production");
-                var activeGoals = factory.GetActiveGoals();
-                var completedGoals = factory.GetCompletedGoals();
+                // Get actual recipe information for this item
+                var item = _dataService.GetItemByDisplayName(goal.ItemName);
+                var recipes = item?.ClassName != null ? _dataService.GetRecipesForItem(item.ClassName) : new List<NewRecipe>();
+                var primaryRecipe = recipes.FirstOrDefault(r => !r.IsAlternateRecipe) ?? recipes.FirstOrDefault();
                 
-                if (activeGoals.Any() || completedGoals.Any())
+                // Use specified recipe if available
+                if (!string.IsNullOrEmpty(goal.RecipeClassName))
                 {
-                    foreach (var goal in activeGoals)
+                    var specifiedRecipe = _dataService.GetRecipeByClassName(goal.RecipeClassName);
+                    if (specifiedRecipe != null)
                     {
-                        var goalText = $"📋 {goal.ItemName}: {goal.CurrentQuantity:N0}/{goal.TargetQuantity:N0} ({goal.ProgressPercentage:F1}%) - Active";
-                        var goalNode = new TreeNode(goalText) { Tag = goal };
-                        goalProductionNode.Nodes.Add(goalNode);
-                    }
-                    
-                    foreach (var goal in completedGoals.Take(5)) // Show last 5 completed goals
-                    {
-                        var goalText = $"✅ {goal.ItemName}: {goal.TargetQuantity:N0} - Completed {goal.CompletedDate?.ToString("MM/dd")}";
-                        var goalNode = new TreeNode(goalText) { Tag = goal };
-                        goalProductionNode.Nodes.Add(goalNode);
+                        primaryRecipe = specifiedRecipe;
                     }
                 }
-                else
+                
+                // Create main production item row
+                var icon = goal.ProduceInternally ? "🔧" : "📥";
+                var indent = string.IsNullOrEmpty(goal.ParentGoalId) ? "" : "  → ";
+                var listItem = new ListViewItem($"{indent}{icon} {goal.ItemName}");
+                listItem.Tag = goal;
+                
+                // Add recipe column
+                var recipeName = goal.ProduceInternally && primaryRecipe != null
+                    ? (primaryRecipe.IsAlternateRecipe ? $"Alternate: {primaryRecipe.DisplayName}" : primaryRecipe.DisplayName ?? "Standard Recipe")
+                    : "Import";
+                listItem.SubItems.Add(recipeName);
+                
+                // Add quantity column (with 3 decimal places and progress)
+                var quantityText = $"{goal.TargetQuantity:N3}";
+                if (goal.CurrentQuantity > 0)
                 {
-                    goalProductionNode.Nodes.Add(new TreeNode("No production goals"));
+                    quantityText += $" ({goal.ProgressPercentage:F1}% complete)";
                 }
-                factoryNode.Nodes.Add(goalProductionNode);
-
-                // Add Imports section (placeholder for future implementation)
-                var importsNode = new TreeNode("📥 Imports");
-                importsNode.Nodes.Add(new TreeNode("Import functionality will be implemented"));
-                factoryNode.Nodes.Add(importsNode);
-
-                // Add Items Being Exported or in Storage section
-                var storageNode = new TreeNode("📦 Storage & Exports");
-                var storageItems = factory.Storage.GetAllItems();
-                if (storageItems.Any())
+                listItem.SubItems.Add(quantityText);
+                
+                // Add inputs column
+                var inputsText = "";
+                var buildingsText = "";
+                var powerText = "";
+                
+                if (goal.ProduceInternally && primaryRecipe != null)
                 {
-                    foreach (var item in storageItems.OrderBy(x => x.Key))
+                    var inputRequirements = _dataService.GetRecipeInputRequirements(primaryRecipe, goal.TargetQuantity);
+                    if (inputRequirements.Any())
                     {
-                        var itemText = $"📋 {item.Key}: {item.Value:N0} units";
-                        var itemNode = new TreeNode(itemText) { Tag = item };
-                        storageNode.Nodes.Add(itemNode);
-                    }
-                }
-                else
-                {
-                    storageNode.Nodes.Add(new TreeNode("No items in storage"));
-                }
-                factoryNode.Nodes.Add(storageNode);
-
-                // Add Production Items section with detailed information
-                var productionItemsNode = new TreeNode("⚙️ Production Items");
-                foreach (var goal in activeGoals)
-                {
-                    var itemNode = new TreeNode($"🔧 {goal.ItemName} Production")
-                    {
-                        Tag = goal
-                    };
-                    
-                    // Get actual recipe information for this item
-                    var item = _dataService.GetItemByDisplayName(goal.ItemName);
-                    var recipes = item?.ClassName != null ? _dataService.GetRecipesForItem(item.ClassName) : new List<NewRecipe>();
-                    var primaryRecipe = recipes.FirstOrDefault(r => !r.IsAlternateRecipe) ?? recipes.FirstOrDefault();
-                    
-                    // Add detailed production information
-                    itemNode.Nodes.Add(new TreeNode($"📊 Target Quantity: {goal.TargetQuantity:N0}"));
-                    itemNode.Nodes.Add(new TreeNode($"📈 Current Progress: {goal.CurrentQuantity:N0} ({goal.ProgressPercentage:F1}%)"));
-                    
-                    if (primaryRecipe != null)
-                    {
-                        var recipeName = primaryRecipe.IsAlternateRecipe ? 
-                            $"Alternate: {primaryRecipe.DisplayName}" : 
-                            primaryRecipe.DisplayName ?? "Standard Recipe";
-                        itemNode.Nodes.Add(new TreeNode($"🏗️ Recipe: {recipeName}"));
-                        
-                        var buildingName = _dataService.GetBuildingDisplayName(primaryRecipe.ProducedIn);
-                        var buildingsRequired = _dataService.CalculateBuildingsRequired(primaryRecipe, goal.TargetQuantity);
-                        itemNode.Nodes.Add(new TreeNode($"🏭 Buildings Required: {buildingsRequired:N0} {buildingName}"));
-                        
-                        var inputRequirements = _dataService.GetRecipeInputRequirements(primaryRecipe, goal.TargetQuantity);
-                        if (inputRequirements.Any())
-                        {
-                            var inputsNode = new TreeNode("📥 Inputs Required:");
-                            foreach (var input in inputRequirements)
-                            {
-                                inputsNode.Nodes.Add(new TreeNode($"  • {input.Key}: {input.Value:N1}/min"));
-                            }
-                            itemNode.Nodes.Add(inputsNode);
-                        }
-                        
-                        // Estimate power usage
-                        var powerPerBuilding = GetEstimatedPowerUsage(buildingName);
-                        var totalPower = buildingsRequired * powerPerBuilding;
-                        itemNode.Nodes.Add(new TreeNode($"⚡ Power Usage: {totalPower:N1} MW"));
+                        inputsText = string.Join(", ", inputRequirements.Select(i => $"🧱 {i.Key}: {i.Value:N1}/min"));
                     }
                     else
                     {
-                        itemNode.Nodes.Add(new TreeNode($"🏗️ Recipe: No recipe data available"));
-                        itemNode.Nodes.Add(new TreeNode($"🏭 Buildings Required: Unknown"));
-                        itemNode.Nodes.Add(new TreeNode($"📥 Inputs: Unknown"));
-                        itemNode.Nodes.Add(new TreeNode($"⚡ Power Usage: Unknown"));
+                        inputsText = "No inputs required";
                     }
                     
-                    productionItemsNode.Nodes.Add(itemNode);
+                    // Add buildings column
+                    var buildingName = _dataService.GetBuildingDisplayName(primaryRecipe.ProducedIn);
+                    var buildingsRequired = _dataService.CalculateBuildingsRequired(primaryRecipe, goal.TargetQuantity);
+                    buildingsText = $"🏭 {buildingName}: {buildingsRequired:N0}";
+                    
+                    // Add power column  
+                    var powerPerBuilding = GetEstimatedPowerUsage(buildingName);
+                    var totalPower = buildingsRequired * powerPerBuilding;
+                    powerText = $"{totalPower:N1}";
+                }
+                else
+                {
+                    inputsText = "Imported";
+                    buildingsText = "N/A";
+                    powerText = "0";
                 }
                 
-                if (!activeGoals.Any())
-                {
-                    productionItemsNode.Nodes.Add(new TreeNode("No active production items"));
-                }
-                factoryNode.Nodes.Add(productionItemsNode);
-
-                treeFactoryDetails.Nodes.Add(factoryNode);
-                factoryNode.Expand();
+                listItem.SubItems.Add(inputsText);
+                listItem.SubItems.Add(buildingsText);
+                listItem.SubItems.Add(powerText);
                 
-                // Expand the main sections
-                foreach (TreeNode childNode in factoryNode.Nodes)
-                {
-                    childNode.Expand();
-                }
+                listProductionItems.Items.Add(listItem);
+            }
+            
+            if (!allGoals.Any())
+            {
+                var emptyItem = new ListViewItem("No active production items");
+                emptyItem.SubItems.Add("");
+                emptyItem.SubItems.Add("");
+                emptyItem.SubItems.Add("");
+                emptyItem.SubItems.Add("");
+                emptyItem.SubItems.Add("");
+                listProductionItems.Items.Add(emptyItem);
             }
         }
 
