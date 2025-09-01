@@ -1,53 +1,32 @@
-﻿//using SatisfactoryTree.Models;
+﻿using SatisfactoryTree.Models;
 
-//namespace SatisfactoryTree.Helpers
-//{
-//    public static class AllItems
-//    {
-//        public static List<Item> GetAllItems()
-//        {
-//            List<Item> items = new()
-//            {
-//                ItemPoolTier0.IronOre(),
-//                ItemPoolTier0.CopperOre(),
-//                ItemPoolTier0.Limestone(),
-//                ItemPoolTier0.AlienProtein(),
-//                ItemPoolTier0.Leaves(),
-//                ItemPoolTier0.Mycelia(),
-//                ItemPoolTier0.Wood(),
-//                ItemPoolTier0.Coal(),
-//                ItemPoolTier0.Water(),
-//                ItemPoolTier0.CrudeOil(),
-//                ItemPoolTier0.CateriumOre(),
-//                ItemPoolTier0.Bauxite(),
-//                ItemPoolTier0.RawQuartz(),
-//                ItemPoolTier0.Sulfur(),
-//                ItemPoolTier0.Uranium(),
-//                ItemPoolTier0.NitrogenGas(),
+namespace SatisfactoryTree.Helpers
+{
+    public static class AllItems
+    {
+        public static List<Item> GetAllItems()
+        {
+            List<Item> items = new()
+            {
+                ItemPoolTier0.IronOre(),
+                ItemPoolTier0.CopperOre(),
+                ItemPoolTier0.Limestone(),
+                ItemPoolTier0.Coal(),
+                ItemPoolTier0.Water(),
 
-//                ItemPoolTier1.IronIngot(),
-//                ItemPoolTier1.CopperIngot(),
-//                ItemPoolTier1.Concrete(),
-//                ItemPoolTier1.Biomass(),
-//                ItemPoolTier1.SteelIngot(),
-//                ItemPoolTier1.Plastic(),
-//                ItemPoolTier1.Rubber(),
-//                ItemPoolTier1.CateriumIngot(),
-//                ItemPoolTier1.AluminaSolution(),
-//                ItemPoolTier1.QuartzCrystal(),
-//                ItemPoolTier1.Silica(),
-//                ItemPoolTier1.SulfuricAcid(),
+                ItemPoolTier1.IronIngot(),
+                ItemPoolTier1.CopperIngot(),
+                ItemPoolTier1.Concrete(),
 
-//                ItemPoolTier2.IronPlate(),
-//                ItemPoolTier2.IronRod(),
-//                ItemPoolTier2.Wire(),
-//                ItemPoolTier2.CopperSheet(),
-//                ItemPoolTier2.Cable(),
-//                ItemPoolTier2.Screw(),
-//                ItemPoolTier2.SolidBiofuel(),
-//                ItemPoolTier2.SteelPipe(),
-//                ItemPoolTier2.SteelBeam(),
-//                ItemPoolTier2.HeavyOilResidue(),
+                ItemPoolTier2.IronPlate(),
+                ItemPoolTier2.IronRod(),
+                ItemPoolTier2.Wire(),
+                ItemPoolTier2.CopperSheet(),
+                ItemPoolTier2.Cable(),
+                ItemPoolTier2.Screw(),
+
+                ItemPoolTier3.ReinforcedIronPlate(),
+                ItemPoolTier3.Rotor(),
 //                ItemPoolTier2.Quickwire(),
 //                ItemPoolTier2.AluminumScrap(),
 //                ItemPoolTier2.EncasedUraniumCell(),
@@ -108,22 +87,22 @@
 //                ItemPoolTierA.PlutoniumFuelRod(),
                 
 //                ItemPoolTierB.PlutoniumWaste(),
-//            };
+            };
 
-//            return items;
-//        }
+            return items;
+        }
 
-//        public static Item? FindItem(string name)
-//        {
-//            List<Item> items = GetAllItems();
-//            foreach (Item item in items)
-//            {
-//                if (item.Name == name)
-//                {
-//                    return item;
-//                }
-//            }
-//            return null;
-//        }
-//    }
-//}
+        public static Item? FindItem(string name)
+        {
+            List<Item> items = GetAllItems();
+            foreach (Item item in items)
+            {
+                if (item.Name == name)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+    }
+}
