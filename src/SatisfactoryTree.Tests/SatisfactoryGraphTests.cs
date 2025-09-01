@@ -88,5 +88,60 @@ namespace SatisfactoryTree.Tests
             Assert.AreEqual(ItemType.Production, ironOre.ItemType);
             Assert.AreEqual(ResearchType.Tier1, ironOre.ResearchType);
         }
+
+        [TestMethod]
+        public void SatisfactoryGraph_FilterByReinforcedIronPlate_IncludesDependencies()
+        {
+            // Act
+            SatisfactoryGraph graph = new("Reinforced Iron Plate", ResearchType.Tier8);
+            
+            // Assert
+            Assert.IsNotNull(graph.Items);
+            Assert.IsTrue(graph.Items.Count > 1);
+            // Should contain the target item and its dependencies
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Reinforced Iron Plate"));
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Iron Plate"));
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Screw"));
+        }
+
+        [TestMethod]
+        public void SatisfactoryGraph_FilterByRotor_IncludesComplexDependencies()
+        {
+            // Act
+            SatisfactoryGraph graph = new("Rotor", ResearchType.Tier8);
+            
+            // Assert
+            Assert.IsNotNull(graph.Items);
+            Assert.IsTrue(graph.Items.Count > 2);
+            // Should contain rotor and dependency tree
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Rotor"));
+        }
+
+        [TestMethod]
+        public void SatisfactoryGraph_ResearchTypeFiltering_WorksCorrectly()
+        {
+            // Act
+            SatisfactoryGraph graphTier1 = new("", ResearchType.Tier1);
+            SatisfactoryGraph graphTier5 = new("", ResearchType.Tier5);
+            
+            // Assert
+            Assert.IsTrue(graphTier1.Items.Count < graphTier5.Items.Count);
+            // Tier1 should not contain Tier5 items
+            Assert.IsFalse(graphTier1.Items.Any(i => i.ResearchType > ResearchType.Tier1));
+        }
+
+        [TestMethod]
+        public void SatisfactoryGraph_WithMultipleTiers_ContainsExpectedCounts()
+        {
+            // Act
+            SatisfactoryGraph graph = new("", ResearchType.Tier8);
+            
+            // Assert
+            Assert.IsTrue(graph.Items.Count > 5); // Should have many items enabled now
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Iron Ore"));
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Iron Ingot"));
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Iron Plate"));
+            Assert.IsTrue(graph.Items.Any(i => i.Name == "Reinforced Iron Plate"));
+        }
     }
 }
