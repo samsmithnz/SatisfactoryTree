@@ -76,6 +76,66 @@ namespace SatisfactoryTree.Services
             return Factories.Values.SelectMany(f => f.GetCompletedGoals()).ToList();
         }
 
+        public List<ProductionGoal> GetTopLevelGoals(string factoryId = "default")
+        {
+            var factory = GetFactory(factoryId);
+            if (factory == null) return new List<ProductionGoal>();
+
+            return factory.GetActiveGoals().Where(g => string.IsNullOrEmpty(g.ParentGoalId)).ToList();
+        }
+
+        public List<ProductionGoal> GetAllGoalsIncludingDependencies(string factoryId = "default")
+        {
+            var factory = GetFactory(factoryId);
+            if (factory == null) return new List<ProductionGoal>();
+
+            var allGoals = new List<ProductionGoal>();
+            var topLevelGoals = factory.GetActiveGoals().Where(g => string.IsNullOrEmpty(g.ParentGoalId));
+
+            foreach (var goal in topLevelGoals)
+            {
+                allGoals.Add(goal);
+                allGoals.AddRange(goal.GetAllDependencies());
+            }
+
+            return allGoals;
+        }
+
+        public void ToggleGoalProductionMethod(string goalId, bool produceInternally)
+        {
+            var goal = GetAllActiveGoals().FirstOrDefault(g => g.Id == goalId);
+            if (goal != null)
+            {
+                goal.ProduceInternally = produceInternally;
+                
+                if (!produceInternally)
+                {
+                    // Clear dependencies if switching to import
+                    goal.DependentGoals.Clear();
+                }
+            }
+        }
+
+        public void RemoveProductionGoal(string goalId, string factoryId = "default")
+        {
+            var factory = GetFactory(factoryId);
+            if (factory == null) return;
+
+            var goal = factory.GetActiveGoals().FirstOrDefault(g => g.Id == goalId);
+            if (goal != null)
+            {
+                // Remove from parent if this is a dependent goal
+                if (!string.IsNullOrEmpty(goal.ParentGoalId))
+                {
+                    var parentGoal = factory.GetActiveGoals().FirstOrDefault(g => g.Id == goal.ParentGoalId);
+                    parentGoal?.RemoveDependentGoal(goalId);
+                }
+
+                // Remove from factory
+                factory.RemoveProductionGoal(goal);
+            }
+        }
+
         public void TransferItemsBetweenFactories(string fromFactoryId, string toFactoryId, string itemName, decimal quantity)
         {
             var fromFactory = GetFactory(fromFactoryId);

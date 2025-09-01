@@ -132,9 +132,10 @@ namespace SatisfactoryTree.WinForm
             // 
             this.grpInputMethod.Controls.Add(this.rbImportInputs);
             this.grpInputMethod.Controls.Add(this.rbProduceOnsite);
+            this.grpInputMethod.Controls.Add(this.chkAutoDependencies);
             this.grpInputMethod.Location = new System.Drawing.Point(12, 130);
             this.grpInputMethod.Name = "grpInputMethod";
-            this.grpInputMethod.Size = new System.Drawing.Size(460, 60);
+            this.grpInputMethod.Size = new System.Drawing.Size(460, 85);
             this.grpInputMethod.TabIndex = 2;
             this.grpInputMethod.TabStop = false;
             this.grpInputMethod.Text = "Input Method";
@@ -163,6 +164,17 @@ namespace SatisfactoryTree.WinForm
             this.rbProduceOnsite.UseVisualStyleBackColor = true;
             this.rbProduceOnsite.CheckedChanged += new System.EventHandler(this.rbProduceOnsite_CheckedChanged);
             // 
+            // chkAutoDependencies
+            // 
+            this.chkAutoDependencies.AutoSize = true;
+            this.chkAutoDependencies.Enabled = false;
+            this.chkAutoDependencies.Location = new System.Drawing.Point(15, 50);
+            this.chkAutoDependencies.Name = "chkAutoDependencies";
+            this.chkAutoDependencies.Size = new System.Drawing.Size(280, 19);
+            this.chkAutoDependencies.TabIndex = 2;
+            this.chkAutoDependencies.Text = "Auto-populate production dependencies recursively";
+            this.chkAutoDependencies.UseVisualStyleBackColor = true;
+            // 
             // grpRecipeInfo
             // 
             this.grpRecipeInfo.Controls.Add(this.lblRecipe);
@@ -173,7 +185,7 @@ namespace SatisfactoryTree.WinForm
             this.grpRecipeInfo.Controls.Add(this.lstInputsNeeded);
             this.grpRecipeInfo.Controls.Add(this.lblPowerUsage);
             this.grpRecipeInfo.Controls.Add(this.txtPowerUsage);
-            this.grpRecipeInfo.Location = new System.Drawing.Point(12, 200);
+            this.grpRecipeInfo.Location = new System.Drawing.Point(12, 225);
             this.grpRecipeInfo.Name = "grpRecipeInfo";
             this.grpRecipeInfo.Size = new System.Drawing.Size(460, 250);
             this.grpRecipeInfo.TabIndex = 3;
@@ -268,7 +280,7 @@ namespace SatisfactoryTree.WinForm
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(300, 470);
+            this.btnOK.Location = new System.Drawing.Point(300, 495);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 30);
             this.btnOK.TabIndex = 4;
@@ -279,7 +291,7 @@ namespace SatisfactoryTree.WinForm
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(390, 470);
+            this.btnCancel.Location = new System.Drawing.Point(390, 495);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 30);
             this.btnCancel.TabIndex = 5;
@@ -292,7 +304,7 @@ namespace SatisfactoryTree.WinForm
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(484, 512);
+            this.ClientSize = new System.Drawing.Size(484, 537);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.grpRecipeInfo);
@@ -328,6 +340,7 @@ namespace SatisfactoryTree.WinForm
         private System.Windows.Forms.GroupBox grpInputMethod;
         private System.Windows.Forms.RadioButton rbImportInputs;
         private System.Windows.Forms.RadioButton rbProduceOnsite;
+        private System.Windows.Forms.CheckBox chkAutoDependencies;
         private System.Windows.Forms.GroupBox grpRecipeInfo;
         private System.Windows.Forms.Label lblRecipe;
         private System.Windows.Forms.ComboBox cmbRecipe;

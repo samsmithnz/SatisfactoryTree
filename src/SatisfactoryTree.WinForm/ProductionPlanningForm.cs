@@ -115,9 +115,20 @@ namespace SatisfactoryTree.WinForm
                 {
                     try
                     {
-                        _productionService.AddProductionGoal(dialog.ItemName, dialog.TargetQuantity, _selectedFactoryId);
+                        var goal = _productionService.AddProductionGoal(
+                            dialog.ItemName, 
+                            dialog.TargetQuantity, 
+                            _selectedFactoryId, 
+                            !dialog.ImportInputs && dialog.AutoDependencies,
+                            dialog.SelectedRecipeClassName);
+                        
                         RefreshFactoryDetails();
-                        MessageBox.Show($"Production goal added successfully!\n\nItem: {dialog.ItemName}\nQuantity: {dialog.TargetQuantity:N0}\nMethod: {(dialog.ImportInputs ? "Import Inputs" : "Produce Onsite")}", 
+                        
+                        var dependencyMessage = goal.DependentGoals.Any() 
+                            ? $"\n\nAuto-created {goal.DependentGoals.Count} dependency goals recursively." 
+                            : "";
+                        
+                        MessageBox.Show($"Production goal added successfully!\n\nItem: {dialog.ItemName}\nQuantity: {dialog.TargetQuantity:N0}\nMethod: {(dialog.ImportInputs ? "Import Inputs" : "Produce Onsite")}{dependencyMessage}", 
                             "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
@@ -165,23 +176,36 @@ namespace SatisfactoryTree.WinForm
             var selectedFactory = _productionService.GetAllFactories().FirstOrDefault(f => f.Id == _selectedFactoryId);
             if (selectedFactory == null) return;
 
-            var activeGoals = selectedFactory.GetActiveGoals();
+            // Get all goals including dependencies 
+            var allGoals = _productionService.GetAllGoalsIncludingDependencies(_selectedFactoryId);
             
-            foreach (var goal in activeGoals)
+            foreach (var goal in allGoals)
             {
                 // Get actual recipe information for this item
                 var item = _dataService.GetItemByDisplayName(goal.ItemName);
                 var recipes = item?.ClassName != null ? _dataService.GetRecipesForItem(item.ClassName) : new List<NewRecipe>();
                 var primaryRecipe = recipes.FirstOrDefault(r => !r.IsAlternateRecipe) ?? recipes.FirstOrDefault();
                 
+                // Use specified recipe if available
+                if (!string.IsNullOrEmpty(goal.RecipeClassName))
+                {
+                    var specifiedRecipe = _dataService.GetRecipeByClassName(goal.RecipeClassName);
+                    if (specifiedRecipe != null)
+                    {
+                        primaryRecipe = specifiedRecipe;
+                    }
+                }
+                
                 // Create main production item row
-                var listItem = new ListViewItem($"🔧 {goal.ItemName}");
+                var icon = goal.ProduceInternally ? "🔧" : "📥";
+                var indent = string.IsNullOrEmpty(goal.ParentGoalId) ? "" : "  → ";
+                var listItem = new ListViewItem($"{indent}{icon} {goal.ItemName}");
                 listItem.Tag = goal;
                 
                 // Add recipe column
-                var recipeName = primaryRecipe?.IsAlternateRecipe == true ? 
-                    $"Alternate: {primaryRecipe.DisplayName}" : 
-                    primaryRecipe?.DisplayName ?? "Standard Recipe";
+                var recipeName = goal.ProduceInternally && primaryRecipe != null
+                    ? (primaryRecipe.IsAlternateRecipe ? $"Alternate: {primaryRecipe.DisplayName}" : primaryRecipe.DisplayName ?? "Standard Recipe")
+                    : "Import";
                 listItem.SubItems.Add(recipeName);
                 
                 // Add quantity column (with 3 decimal places and progress)
@@ -197,7 +221,7 @@ namespace SatisfactoryTree.WinForm
                 var buildingsText = "";
                 var powerText = "";
                 
-                if (primaryRecipe != null)
+                if (goal.ProduceInternally && primaryRecipe != null)
                 {
                     var inputRequirements = _dataService.GetRecipeInputRequirements(primaryRecipe, goal.TargetQuantity);
                     if (inputRequirements.Any())
@@ -221,9 +245,9 @@ namespace SatisfactoryTree.WinForm
                 }
                 else
                 {
-                    inputsText = "Unknown";
-                    buildingsText = "Unknown";
-                    powerText = "Unknown";
+                    inputsText = "Imported";
+                    buildingsText = "N/A";
+                    powerText = "0";
                 }
                 
                 listItem.SubItems.Add(inputsText);
@@ -233,7 +257,7 @@ namespace SatisfactoryTree.WinForm
                 listProductionItems.Items.Add(listItem);
             }
             
-            if (!activeGoals.Any())
+            if (!allGoals.Any())
             {
                 var emptyItem = new ListViewItem("No active production items");
                 emptyItem.SubItems.Add("");

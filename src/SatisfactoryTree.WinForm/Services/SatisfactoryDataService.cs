@@ -142,5 +142,58 @@ namespace SatisfactoryTree.WinForm.Services
 
             return buildingMap.ContainsKey(producedIn ?? "") ? buildingMap[producedIn!] : producedIn ?? "Unknown";
         }
+
+        public bool IsRawMaterial(string itemDisplayName)
+        {
+            var item = GetItemByDisplayName(itemDisplayName);
+            if (item?.ClassName == null) return true; // Assume unknown items are raw materials
+
+            var recipes = GetRecipesForItem(item.ClassName);
+            
+            // If no recipes produce this item, it's likely a raw material
+            if (!recipes.Any()) return true;
+
+            // Check if all recipes for this item have no inputs (raw material recipes)
+            return recipes.All(recipe => recipe.Ingredients == null || !recipe.Ingredients.Any());
+        }
+
+        public NewRecipe? GetPrimaryRecipeForItem(string itemDisplayName)
+        {
+            var item = GetItemByDisplayName(itemDisplayName);
+            if (item?.ClassName == null) return null;
+
+            var recipes = GetRecipesForItem(item.ClassName);
+            
+            // Prefer non-alternate recipes, then take the first one
+            return recipes.FirstOrDefault(r => !r.IsAlternateRecipe) ?? recipes.FirstOrDefault();
+        }
+
+        public List<KeyValuePair<string, decimal>> GetRecipeInputsWithQuantities(NewRecipe recipe, decimal targetQuantityPerMinute)
+        {
+            var inputs = new List<KeyValuePair<string, decimal>>();
+            
+            if (recipe.Ingredients == null || recipe.Products == null) 
+                return inputs;
+
+            // Calculate how much this recipe produces per minute
+            var outputPerMinute = CalculateOutputPerMinute(recipe);
+            if (outputPerMinute <= 0) return inputs;
+
+            // Calculate how many recipes we need to run to get the target quantity per minute
+            var recipesNeeded = targetQuantityPerMinute / outputPerMinute;
+
+            // Calculate input requirements
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                if (ingredient.Key != null)
+                {
+                    var itemDisplayName = GetItemByClassName(ingredient.Key)?.DisplayName ?? ingredient.Key;
+                    var requiredPerMinute = ingredient.Value * recipesNeeded * (60m / recipe.ManufactoringDuration);
+                    inputs.Add(new KeyValuePair<string, decimal>(itemDisplayName, requiredPerMinute));
+                }
+            }
+
+            return inputs;
+        }
     }
 }
