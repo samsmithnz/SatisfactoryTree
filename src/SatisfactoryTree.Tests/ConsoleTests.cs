@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SatisfactoryTree.Console;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Tests;
@@ -127,6 +128,44 @@ public class ConsoleTests
         //    System.Diagnostics.Debug.WriteLine(item.DisplayName);
         //}
         Assert.AreEqual(results.recipes.Count + results.powerGenerationRecipes.Count, results.newRecipes.Count);
+    }
+
+    [TestMethod]
+    public void SAMOreDetectionTest()
+    {
+        //Arrange
+        
+        //Act
+        
+        //Assert
+        Assert.IsNotNull(results);
+        
+        // Count recipes that use SAM ore
+        int samRecipeCount = 0;
+        int nonSamRecipeCount = 0;
+        
+        foreach (var recipe in results.newRecipes)
+        {
+            bool hasSAMIngot = recipe.ingredients.Any(ingredient => ingredient.part == "SAMIngot");
+            
+            if (hasSAMIngot)
+            {
+                samRecipeCount++;
+                Assert.IsTrue(recipe.usesSAMOre, $"Recipe '{recipe.displayName}' has SAMIngot ingredient but usesSAMOre is false");
+            }
+            else
+            {
+                nonSamRecipeCount++;
+                Assert.IsFalse(recipe.usesSAMOre, $"Recipe '{recipe.displayName}' has no SAMIngot ingredient but usesSAMOre is true");
+            }
+        }
+        
+        // Verify we found some SAM recipes (based on the data we saw earlier, there should be 22)
+        Assert.IsTrue(samRecipeCount > 0, "No recipes with SAMIngot were found");
+        Assert.IsTrue(nonSamRecipeCount > 0, "No recipes without SAMIngot were found");
+        
+        System.Diagnostics.Debug.WriteLine($"Found {samRecipeCount} recipes that use SAM ore");
+        System.Diagnostics.Debug.WriteLine($"Found {nonSamRecipeCount} recipes that do not use SAM ore");
     }
 
 }

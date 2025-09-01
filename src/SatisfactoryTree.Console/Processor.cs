@@ -96,7 +96,8 @@ namespace SatisfactoryTree.Console
                     products = recipe.products,
                     building = recipe.building,
                     isAlternate = recipe.isAlternate,
-                    isFicsmas = recipe.isFicsmas
+                    isFicsmas = recipe.isFicsmas,
+                    usesSAMOre = recipe.usesSAMOre
                 });
             }
             //Now add the power generation recipes
@@ -126,6 +127,10 @@ namespace SatisfactoryTree.Console
                         }
                     );
                 }
+                
+                // Check if any ingredient is SAMIngot to set usesSAMOre flag
+                bool usesSAMOre = ingredients.Any(ingredient => ingredient.part == "SAMIngot");
+                
                 newRecipes.Add(new NewRecipe()
                 {
                     id = recipe.id,
@@ -134,7 +139,8 @@ namespace SatisfactoryTree.Console
                     products = products,
                     building = recipe.building,
                     isAlternate = false,
-                    isFicsmas = false
+                    isFicsmas = false,
+                    usesSAMOre = usesSAMOre
                 });
             }
             //sort the new recipes list by id
