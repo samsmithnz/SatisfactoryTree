@@ -1,4 +1,5 @@
-﻿using SatisfactoryTree.Models;
+﻿using SatisfactoryTree.Helpers;
+using SatisfactoryTree.Models;
 
 namespace SatisfactoryTree
 {
@@ -20,8 +21,7 @@ namespace SatisfactoryTree
         private static List<Item> BuildSatisfactoryTree(string nameFilter,
             ResearchType researchType)
         {
-            //TODO
-            List<Item> items = null;// AllItems.GetAllItems();
+            List<Item> items = AllItems.GetAllItems();
 
             //Filter by science level
             for (int i = items.Count - 1; i >= 0; i--)
