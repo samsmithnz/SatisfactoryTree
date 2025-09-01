@@ -474,7 +474,7 @@
         "energyGeneratedInMJ": 0
       },
       "IronScrew": {
-        "name": "Screw",
+        "name": "Screws",
         "stackSize": 500,
         "isFluid": false,
         "isFicsmas": false,
@@ -1808,7 +1808,7 @@
     },
     {
       "id": "Alternate_Screw",
-      "displayName": "Alternate: Cast Screw",
+      "displayName": "Alternate: Cast Screws",
       "ingredients": [
         {
           "part": "IronIngot",
@@ -3444,7 +3444,7 @@
     },
     {
       "id": "Alternate_IronIngot_Leached",
-      "displayName": "Alternate: Leached Iron ingot",
+      "displayName": "Alternate: Leached Iron Ingot",
       "ingredients": [
         {
           "part": "OreIron",
@@ -4558,7 +4558,7 @@
     },
     {
       "id": "Alternate_Screw_2",
-      "displayName": "Alternate: Steel Screw",
+      "displayName": "Alternate: Steel Screws",
       "ingredients": [
         {
           "part": "SteelPlate",
@@ -8968,7 +8968,7 @@
     },
     {
       "id": "Screw",
-      "displayName": "Screw",
+      "displayName": "Screws",
       "ingredients": [
         {
           "part": "IronRod",
@@ -12672,7 +12672,7 @@
     },
     {
       "id": "Alternate_IronIngot_Leached",
-      "displayName": "Alternate: Leached Iron ingot",
+      "displayName": "Alternate: Leached Iron Ingot",
       "ingredients": [
         {
           "part": "OreIron",
@@ -13520,7 +13520,7 @@
     },
     {
       "id": "Alternate_Screw",
-      "displayName": "Alternate: Cast Screw",
+      "displayName": "Alternate: Cast Screws",
       "ingredients": [
         {
           "part": "IronIngot",
@@ -13545,7 +13545,7 @@
     },
     {
       "id": "Alternate_Screw_2",
-      "displayName": "Alternate: Steel Screw",
+      "displayName": "Alternate: Steel Screws",
       "ingredients": [
         {
           "part": "SteelPlate",
@@ -18475,7 +18475,7 @@
     },
     {
       "id": "Screw",
-      "displayName": "Screw",
+      "displayName": "Screws",
       "ingredients": [
         {
           "part": "IronRod",
