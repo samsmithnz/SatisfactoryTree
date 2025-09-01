@@ -70,11 +70,11 @@ namespace SatisfactoryTree.WinForm
             // splitContainer
             // 
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 40);
+            this.splitContainer.Location = new System.Drawing.Point(0, 35);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Panel1.Controls.Add(this.pnlLeftMenu);
             this.splitContainer.Panel2.Controls.Add(this.pnlRightDetails);
-            this.splitContainer.Size = new System.Drawing.Size(1200, 600);
+            this.splitContainer.Size = new System.Drawing.Size(1200, 605);
             this.splitContainer.SplitterDistance = 300;
             this.splitContainer.TabIndex = 1;
             // 
