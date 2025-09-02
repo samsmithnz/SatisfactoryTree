@@ -11,13 +11,13 @@ namespace SatisfactoryTree.Tests
         public void ProductionRowControl_ProductionGoalBinding_UpdatesCorrectly()
         {
             // Arrange
-            var service = new ProductionPlanningService();
-            var goal = service.AddProductionGoal("Iron Plate", 100);
+            ProductionPlanningService service = new ProductionPlanningService();
+            ProductionGoal goal = service.AddProductionGoal("Iron Plate", 100);
             goal.ProduceInternally = true;
             goal.CurrentQuantity = 25; // 25% progress
 
             // Act - This would normally be done with a UI control, but we can verify the data model
-            var progressPercentage = goal.ProgressPercentage;
+            decimal progressPercentage = goal.ProgressPercentage;
 
             // Assert
             Assert.AreEqual(25, progressPercentage);
@@ -30,8 +30,8 @@ namespace SatisfactoryTree.Tests
         public void ProductionRowControl_RecipeClassNameBinding_StoresCorrectly()
         {
             // Arrange
-            var service = new ProductionPlanningService();
-            var goal = service.AddProductionGoal("Iron Plate", 100);
+            ProductionPlanningService service = new ProductionPlanningService();
+            ProductionGoal goal = service.AddProductionGoal("Iron Plate", 100);
 
             // Act
             goal.RecipeClassName = "Recipe_IronPlate_C";
@@ -44,8 +44,8 @@ namespace SatisfactoryTree.Tests
         public void ProductionRowControl_QuantityUpdate_CalculatesCorrectly()
         {
             // Arrange
-            var service = new ProductionPlanningService();
-            var goal = service.AddProductionGoal("Iron Plate", 100);
+            ProductionPlanningService service = new ProductionPlanningService();
+            ProductionGoal goal = service.AddProductionGoal("Iron Plate", 100);
 
             // Act
             goal.TargetQuantity = 250;
@@ -58,8 +58,8 @@ namespace SatisfactoryTree.Tests
         public void ProductionRowControl_ToggleProductionMethod_UpdatesStateCorrectly()
         {
             // Arrange
-            var service = new ProductionPlanningService();
-            var goal = service.AddProductionGoal("Iron Plate", 100);
+            ProductionPlanningService service = new ProductionPlanningService();
+            ProductionGoal goal = service.AddProductionGoal("Iron Plate", 100);
             goal.ProduceInternally = true;
 
             // Act
@@ -73,12 +73,12 @@ namespace SatisfactoryTree.Tests
         public void ProductionRowControl_ProgressCalculation_HandlesEdgeCases()
         {
             // Arrange
-            var service = new ProductionPlanningService();
-            var goal = service.AddProductionGoal("Iron Plate", 0); // Zero target
+            ProductionPlanningService service = new ProductionPlanningService();
+            ProductionGoal goal = service.AddProductionGoal("Iron Plate", 0); // Zero target
 
             // Act
             goal.CurrentQuantity = 10;
-            var progressPercentage = goal.ProgressPercentage;
+            decimal progressPercentage = goal.ProgressPercentage;
 
             // Assert
             Assert.AreEqual(0, progressPercentage); // Should handle division by zero
