@@ -37,7 +37,10 @@ namespace SatisfactoryTree.WinForm
             this.txtFactoryName = new System.Windows.Forms.TextBox();
             this.lblFactoryName = new System.Windows.Forms.Label();
             this.pnlRightDetails = new System.Windows.Forms.Panel();
-            this.listProductionItems = new System.Windows.Forms.ListView();
+            this.pnlProductionItemsContainer = new System.Windows.Forms.Panel();
+            this.headerControl = new SatisfactoryTree.WinForm.ProductionHeaderControl();
+            this.pnlProductionItems = new System.Windows.Forms.Panel();
+            this.vScrollBar = new System.Windows.Forms.VScrollBar();
             this.grpProductionActions = new System.Windows.Forms.GroupBox();
             this.btnAddProductionItem = new System.Windows.Forms.Button();
             this.btnEditProductionItem = new System.Windows.Forms.Button();
@@ -53,6 +56,7 @@ namespace SatisfactoryTree.WinForm
             this.pnlLeftMenu.SuspendLayout();
             this.grpFactoryActions.SuspendLayout();
             this.pnlRightDetails.SuspendLayout();
+            this.pnlProductionItemsContainer.SuspendLayout();
             this.grpProductionActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionQuantity)).BeginInit();
             this.SuspendLayout();
@@ -139,7 +143,7 @@ namespace SatisfactoryTree.WinForm
             // 
             // pnlRightDetails
             // 
-            this.pnlRightDetails.Controls.Add(this.listProductionItems);
+            this.pnlRightDetails.Controls.Add(this.pnlProductionItemsContainer);
             this.pnlRightDetails.Controls.Add(this.grpProductionActions);
             this.pnlRightDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRightDetails.Location = new System.Drawing.Point(0, 0);
@@ -147,19 +151,44 @@ namespace SatisfactoryTree.WinForm
             this.pnlRightDetails.Size = new System.Drawing.Size(896, 600);
             this.pnlRightDetails.TabIndex = 0;
             // 
-            // listProductionItems
+            // pnlProductionItemsContainer
             // 
-            this.listProductionItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listProductionItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.listProductionItems.FullRowSelect = true;
-            this.listProductionItems.GridLines = true;
-            this.listProductionItems.Location = new System.Drawing.Point(0, 0);
-            this.listProductionItems.Name = "listProductionItems";
-            this.listProductionItems.Size = new System.Drawing.Size(896, 470);
-            this.listProductionItems.TabIndex = 0;
-            this.listProductionItems.UseCompatibleStateImageBehavior = false;
-            this.listProductionItems.View = System.Windows.Forms.View.Details;
-            this.listProductionItems.SelectedIndexChanged += new System.EventHandler(this.listProductionItems_SelectedIndexChanged);
+            this.pnlProductionItemsContainer.Controls.Add(this.pnlProductionItems);
+            this.pnlProductionItemsContainer.Controls.Add(this.vScrollBar);
+            this.pnlProductionItemsContainer.Controls.Add(this.headerControl);
+            this.pnlProductionItemsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProductionItemsContainer.Location = new System.Drawing.Point(0, 0);
+            this.pnlProductionItemsContainer.Name = "pnlProductionItemsContainer";
+            this.pnlProductionItemsContainer.Size = new System.Drawing.Size(896, 470);
+            this.pnlProductionItemsContainer.TabIndex = 2;
+            // 
+            // headerControl
+            // 
+            this.headerControl.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.headerControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.headerControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerControl.Location = new System.Drawing.Point(0, 0);
+            this.headerControl.Name = "headerControl";
+            this.headerControl.Size = new System.Drawing.Size(879, 25);
+            this.headerControl.TabIndex = 2;
+            // 
+            // pnlProductionItems
+            // 
+            this.pnlProductionItems.AutoScroll = false;
+            this.pnlProductionItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProductionItems.Location = new System.Drawing.Point(0, 25);
+            this.pnlProductionItems.Name = "pnlProductionItems";
+            this.pnlProductionItems.Size = new System.Drawing.Size(879, 445);
+            this.pnlProductionItems.TabIndex = 0;
+            // 
+            // vScrollBar
+            // 
+            this.vScrollBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.vScrollBar.Location = new System.Drawing.Point(879, 25);
+            this.vScrollBar.Name = "vScrollBar";
+            this.vScrollBar.Size = new System.Drawing.Size(17, 445);
+            this.vScrollBar.TabIndex = 1;
+            this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Scroll);
             // 
             // grpProductionActions
             // 
@@ -276,6 +305,7 @@ namespace SatisfactoryTree.WinForm
             this.grpFactoryActions.ResumeLayout(false);
             this.grpFactoryActions.PerformLayout();
             this.pnlRightDetails.ResumeLayout(false);
+            this.pnlProductionItemsContainer.ResumeLayout(false);
             this.grpProductionActions.ResumeLayout(false);
             this.grpProductionActions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionQuantity)).EndInit();
@@ -295,7 +325,10 @@ namespace SatisfactoryTree.WinForm
         private System.Windows.Forms.TextBox txtFactoryName;
         private System.Windows.Forms.Label lblFactoryName;
         private System.Windows.Forms.Panel pnlRightDetails;
-        private System.Windows.Forms.ListView listProductionItems;
+        private System.Windows.Forms.Panel pnlProductionItemsContainer;
+        private SatisfactoryTree.WinForm.ProductionHeaderControl headerControl;
+        private System.Windows.Forms.Panel pnlProductionItems;
+        private System.Windows.Forms.VScrollBar vScrollBar;
         private System.Windows.Forms.GroupBox grpProductionActions;
         private System.Windows.Forms.Button btnAddProductionItem;
         private System.Windows.Forms.Button btnEditProductionItem;
