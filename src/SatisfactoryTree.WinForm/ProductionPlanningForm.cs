@@ -9,6 +9,7 @@ namespace SatisfactoryTree.WinForm
         private readonly ProductionPlanningService _productionService;
         private readonly SatisfactoryDataService _dataService;
         private string _selectedFactoryId = "default";
+        private List<ProductionRowControl> _rowControls = new List<ProductionRowControl>();
 
         public ProductionPlanningForm()
         {
@@ -19,22 +20,27 @@ namespace SatisfactoryTree.WinForm
 
         private void ProductionPlanningForm_Load(object sender, EventArgs e)
         {
-            InitializeListView();
             LoadFactories();
             RefreshFactoryDetails();
             SetupAutoComplete();
+            SetupScrolling();
         }
 
-        private void InitializeListView()
+        private void SetupScrolling()
         {
-            // Initialize ListView columns according to the requirements
-            listProductionItems.Columns.Clear();
-            listProductionItems.Columns.Add("Item", 200);
-            listProductionItems.Columns.Add("Recipe", 200);
-            listProductionItems.Columns.Add("Quantity", 100);
-            listProductionItems.Columns.Add("Inputs", 250);
-            listProductionItems.Columns.Add("Buildings", 150);
-            listProductionItems.Columns.Add("Power (MW)", 100);
+            // Setup manual scrolling for the production items panel
+            vScrollBar.ValueChanged += vScrollBar_Scroll;
+            pnlProductionItems.Resize += PnlProductionItems_Resize;
+        }
+
+        private void PnlProductionItems_Resize(object? sender, EventArgs e)
+        {
+            // Update row control widths when panel resizes
+            foreach (var rowControl in _rowControls)
+            {
+                rowControl.Width = pnlProductionItems.Width - 20;
+            }
+            UpdateScrollBar();
         }
 
         private void SetupAutoComplete()
@@ -81,7 +87,17 @@ namespace SatisfactoryTree.WinForm
 
         private void listProductionItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Handle selection of specific production items for editing
+            // Handle selection of specific production items for editing - now handled by row controls
+        }
+
+        private void vScrollBar_Scroll(object? sender, EventArgs e)
+        {
+            // Move all row controls up/down based on scroll position
+            int scrollOffset = -vScrollBar.Value;
+            for (int i = 0; i < _rowControls.Count; i++)
+            {
+                _rowControls[i].Location = new Point(0, (i * 37) + scrollOffset);
+            }
         }
 
         private void btnAddFactory_Click(object sender, EventArgs e)
@@ -170,7 +186,15 @@ namespace SatisfactoryTree.WinForm
 
         private void RefreshFactoryDetails()
         {
-            listProductionItems.Items.Clear();
+            // Clear existing row controls
+            foreach (var control in _rowControls)
+            {
+                control.ProductionGoalChanged -= OnProductionGoalChanged;
+                control.EditRequested -= OnEditRequested;
+                control.Dispose();
+            }
+            _rowControls.Clear();
+            pnlProductionItems.Controls.Clear();
 
             // Get the currently selected factory
             var selectedFactory = _productionService.GetAllFactories().FirstOrDefault(f => f.Id == _selectedFactoryId);
@@ -179,93 +203,94 @@ namespace SatisfactoryTree.WinForm
             // Get all goals including dependencies 
             var allGoals = _productionService.GetAllGoalsIncludingDependencies(_selectedFactoryId);
             
+            int yPosition = 0;
+            const int rowHeight = 37; // Height of each row control (35 + 2 for margin)
+
             foreach (var goal in allGoals)
             {
-                // Get actual recipe information for this item
-                var item = _dataService.GetItemByDisplayName(goal.ItemName);
-                var recipes = item?.ClassName != null ? _dataService.GetRecipesForItem(item.ClassName) : new List<NewRecipe>();
-                var primaryRecipe = recipes.FirstOrDefault(r => !r.IsAlternateRecipe) ?? recipes.FirstOrDefault();
-                
-                // Use specified recipe if available
-                if (!string.IsNullOrEmpty(goal.RecipeClassName))
+                // Create new row control
+                var rowControl = new ProductionRowControl(_productionService, _selectedFactoryId)
                 {
-                    var specifiedRecipe = _dataService.GetRecipeByClassName(goal.RecipeClassName);
-                    if (specifiedRecipe != null)
-                    {
-                        primaryRecipe = specifiedRecipe;
-                    }
-                }
-                
-                // Create main production item row
-                var icon = goal.ProduceInternally ? "🔧" : "📥";
-                var indent = string.IsNullOrEmpty(goal.ParentGoalId) ? "" : "  → ";
-                var listItem = new ListViewItem($"{indent}{icon} {goal.ItemName}");
-                listItem.Tag = goal;
-                
-                // Add recipe column
-                var recipeName = goal.ProduceInternally && primaryRecipe != null
-                    ? (primaryRecipe.IsAlternateRecipe ? $"Alternate: {primaryRecipe.DisplayName}" : primaryRecipe.DisplayName ?? "Standard Recipe")
-                    : "Import";
-                listItem.SubItems.Add(recipeName);
-                
-                // Add quantity column (with 3 decimal places and progress)
-                var quantityText = $"{goal.TargetQuantity:N3}";
-                if (goal.CurrentQuantity > 0)
-                {
-                    quantityText += $" ({goal.ProgressPercentage:F1}% complete)";
-                }
-                listItem.SubItems.Add(quantityText);
-                
-                // Add inputs column
-                var inputsText = "";
-                var buildingsText = "";
-                var powerText = "";
-                
-                if (goal.ProduceInternally && primaryRecipe != null)
-                {
-                    var inputRequirements = _dataService.GetRecipeInputRequirements(primaryRecipe, goal.TargetQuantity);
-                    if (inputRequirements.Any())
-                    {
-                        inputsText = string.Join(", ", inputRequirements.Select(i => $"🧱 {i.Key}: {i.Value:N1}/min"));
-                    }
-                    else
-                    {
-                        inputsText = "No inputs required";
-                    }
-                    
-                    // Add buildings column
-                    var buildingName = _dataService.GetBuildingDisplayName(primaryRecipe.ProducedIn);
-                    var buildingsRequired = _dataService.CalculateBuildingsRequired(primaryRecipe, goal.TargetQuantity);
-                    buildingsText = $"🏭 {buildingName}: {buildingsRequired:N0}";
-                    
-                    // Add power column  
-                    var powerPerBuilding = GetEstimatedPowerUsage(buildingName);
-                    var totalPower = buildingsRequired * powerPerBuilding;
-                    powerText = $"{totalPower:N1}";
-                }
-                else
-                {
-                    inputsText = "Imported";
-                    buildingsText = "N/A";
-                    powerText = "0";
-                }
-                
-                listItem.SubItems.Add(inputsText);
-                listItem.SubItems.Add(buildingsText);
-                listItem.SubItems.Add(powerText);
-                
-                listProductionItems.Items.Add(listItem);
+                    ProductionGoal = goal,
+                    Location = new Point(0, yPosition),
+                    Width = pnlProductionItems.Width - 20, // Leave some margin for scrollbar
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                };
+
+                // Subscribe to events
+                rowControl.ProductionGoalChanged += OnProductionGoalChanged;
+                rowControl.EditRequested += OnEditRequested;
+
+                _rowControls.Add(rowControl);
+                pnlProductionItems.Controls.Add(rowControl);
+
+                yPosition += rowHeight;
             }
             
             if (!allGoals.Any())
             {
-                var emptyItem = new ListViewItem("No active production items");
-                emptyItem.SubItems.Add("");
-                emptyItem.SubItems.Add("");
-                emptyItem.SubItems.Add("");
-                emptyItem.SubItems.Add("");
-                emptyItem.SubItems.Add("");
-                listProductionItems.Items.Add(emptyItem);
+                // Show empty state
+                var emptyLabel = new Label
+                {
+                    Text = "No active production items",
+                    Location = new Point(10, 10),
+                    Size = new Size(pnlProductionItems.Width - 20, 30),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    ForeColor = Color.Gray
+                };
+                pnlProductionItems.Controls.Add(emptyLabel);
+            }
+
+            // Update scrollbar
+            UpdateScrollBar();
+        }
+
+        private void UpdateScrollBar()
+        {
+            int totalHeight = _rowControls.Count * 37; // 37 = row height
+            int visibleHeight = pnlProductionItems.Height;
+
+            if (totalHeight > visibleHeight)
+            {
+                vScrollBar.Visible = true;
+                vScrollBar.Maximum = totalHeight - visibleHeight + vScrollBar.LargeChange;
+                vScrollBar.LargeChange = Math.Max(1, visibleHeight / 4);
+                vScrollBar.SmallChange = 37; // One row height
+            }
+            else
+            {
+                vScrollBar.Visible = false;
+                vScrollBar.Value = 0;
+            }
+        }
+
+        private void OnProductionGoalChanged(object? sender, ProductionGoal goal)
+        {
+            // Handle production goal changes from row controls
+            // Refresh the display to show updated calculations
+            var senderControl = sender as ProductionRowControl;
+            if (senderControl != null)
+            {
+                // Update just this control instead of full refresh for better performance
+                // The row control itself handles most updates, but we might need to
+                // refresh dependencies if they changed
+                RefreshFactoryDetails();
+            }
+        }
+
+        private void OnEditRequested(object? sender, ProductionGoal goal)
+        {
+            // Handle edit requests from row controls
+            using (var dialog = new ProductionItemForm(_productionService, _selectedFactoryId))
+            {
+                // Pre-populate the dialog with current goal data
+                // Note: The ProductionItemForm would need to be updated to support editing
+                // For now, show the same add dialog
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Handle updates...
+                    RefreshFactoryDetails();
+                }
             }
         }
 
