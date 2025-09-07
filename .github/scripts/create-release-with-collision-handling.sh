@@ -19,20 +19,44 @@ fi
 echo "Starting release creation with base version: $BASE_VERSION"
 echo "Repository: $GITHUB_REPOSITORY"
 
+# Validate version format
+if ! [[ "$BASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "❌ Invalid version format. Expected: major.minor.patch (e.g., 2.0.26)"
+    exit 1
+fi
+
 # Function to check if a tag exists
 check_tag_exists() {
     local tag="$1"
     local response
+    local http_code
+    
+    echo "Checking if tag $tag exists..."
     response=$(curl -s -o /dev/null -w "%{http_code}" \
         -H "Authorization: token $GITHUB_TOKEN" \
         -H "Accept: application/vnd.github.v3+json" \
-        "https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs/tags/$tag")
+        "https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs/tags/$tag" 2>/dev/null)
     
-    if [ "$response" = "200" ]; then
-        return 0  # Tag exists
-    else
-        return 1  # Tag doesn't exist
-    fi
+    http_code="$response"
+    
+    case "$http_code" in
+        "200")
+            echo "Tag $tag exists"
+            return 0  # Tag exists
+            ;;
+        "404")
+            echo "Tag $tag does not exist"
+            return 1  # Tag doesn't exist
+            ;;
+        "403")
+            echo "⚠️  API rate limit or authentication issue (HTTP 403)"
+            return 2  # Rate limit or auth issue
+            ;;
+        *)
+            echo "⚠️  Unexpected API response: HTTP $http_code"
+            return 3  # Other error
+            ;;
+    esac
 }
 
 # Function to create a release
@@ -53,22 +77,37 @@ create_release() {
             \"name\": \"$tag\",
             \"draft\": false,
             \"prerelease\": false
-        }")
+        }" 2>/dev/null)
     
     local http_status
     http_status=$(echo "$response" | tail -n1 | sed 's/.*HTTP_STATUS://')
     local body
     body=$(echo "$response" | sed '$d')
     
-    if [ "$http_status" = "201" ]; then
-        echo "✅ Successfully created release $tag"
-        echo "$body" | jq -r '.html_url'
-        return 0
-    else
-        echo "❌ Failed to create release $tag (HTTP $http_status)"
-        echo "$body"
-        return 1
-    fi
+    case "$http_status" in
+        "201")
+            echo "✅ Successfully created release $tag"
+            if command -v jq >/dev/null 2>&1; then
+                echo "$body" | jq -r '.html_url' 2>/dev/null || echo "Release created but couldn't parse URL"
+            fi
+            return 0
+            ;;
+        "422")
+            echo "❌ Release creation failed - tag might already exist (HTTP 422)"
+            echo "$body"
+            return 1
+            ;;
+        "403")
+            echo "❌ Authentication or rate limit issue (HTTP 403)"
+            echo "$body"
+            return 2
+            ;;
+        *)
+            echo "❌ Failed to create release $tag (HTTP $http_status)"
+            echo "$body"
+            return 1
+            ;;
+    esac
 }
 
 # Function to increment patch version
@@ -77,6 +116,12 @@ increment_patch_version() {
     # Split version into major.minor.patch
     local major minor patch
     IFS='.' read -r major minor patch <<< "$version"
+    
+    # Validate that all parts are numbers
+    if ! [[ "$major" =~ ^[0-9]+$ ]] || ! [[ "$minor" =~ ^[0-9]+$ ]] || ! [[ "$patch" =~ ^[0-9]+$ ]]; then
+        echo "❌ Invalid version format: $version"
+        return 1
+    fi
     
     # Increment patch version
     patch=$((patch + 1))
@@ -89,26 +134,58 @@ current_version="$BASE_VERSION"
 max_attempts=10
 attempt=1
 
+echo "Starting release creation process..."
+
 while [ $attempt -le $max_attempts ]; do
     tag="v$current_version"
     
-    echo "Attempt $attempt: Checking if tag $tag exists..."
+    echo ""
+    echo "═══ Attempt $attempt/$max_attempts ═══"
     
-    if check_tag_exists "$tag"; then
-        echo "⚠️  Tag $tag already exists, incrementing version..."
-        current_version=$(increment_patch_version "$current_version")
-        attempt=$((attempt + 1))
-    else
-        echo "✅ Tag $tag is available, creating release..."
-        if create_release "$current_version"; then
-            echo "🎉 Release created successfully with version $current_version"
-            exit 0
-        else
-            echo "❌ Failed to create release, this might be a race condition"
+    # Check if tag exists
+    tag_check_result=0
+    check_tag_exists "$tag" || tag_check_result=$?
+    
+    case $tag_check_result in
+        0)
+            # Tag exists, increment version
+            echo "⚠️  Tag $tag already exists, incrementing version..."
             current_version=$(increment_patch_version "$current_version")
+            if [ $? -ne 0 ]; then
+                echo "❌ Failed to increment version"
+                exit 1
+            fi
             attempt=$((attempt + 1))
-        fi
-    fi
+            ;;
+        1)
+            # Tag doesn't exist, try to create release
+            echo "✅ Tag $tag is available, attempting to create release..."
+            if create_release "$current_version"; then
+                echo "🎉 Release created successfully with version $current_version"
+                exit 0
+            else
+                create_result=$?
+                if [ $create_result -eq 2 ]; then
+                    echo "❌ Authentication/rate limit issue, aborting"
+                    exit 1
+                else
+                    echo "❌ Failed to create release, this might be a race condition"
+                    current_version=$(increment_patch_version "$current_version")
+                    if [ $? -ne 0 ]; then
+                        echo "❌ Failed to increment version"
+                        exit 1
+                    fi
+                    attempt=$((attempt + 1))
+                fi
+            fi
+            ;;
+        2|3)
+            # API error, wait and retry
+            echo "⚠️  API error, waiting before retry..."
+            sleep 5
+            attempt=$((attempt + 1))
+            ;;
+    esac
     
     if [ $attempt -le $max_attempts ]; then
         echo "Waiting 2 seconds before next attempt..."
@@ -116,5 +193,7 @@ while [ $attempt -le $max_attempts ]; do
     fi
 done
 
+echo ""
 echo "❌ Failed to create release after $max_attempts attempts"
+echo "Last attempted version: $current_version"
 exit 1
