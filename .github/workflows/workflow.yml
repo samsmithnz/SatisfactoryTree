@@ -33,12 +33,12 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: .NET test
-      run: dotnet test src/SatisfactoryTree.Tests/SatisfactoryTree.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=TestResults/ -e:CoverletOutputFormat=lcov
+      run: dotnet test src/SatisfactoryTree.Logic.Tests/SatisfactoryTree.Logic.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=TestResults/ -e:CoverletOutputFormat=lcov
     - name: Publish coverage report to coveralls.io
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: src/SatisfactoryTree.Tests/TestResults/coverage.info 
+        path-to-lcov: src/SatisfactoryTree.Logic.Tests/TestResults/coverage.info 
     - name: .NET publish
       run: dotnet publish src/SatisfactoryTree/SatisfactoryTree.csproj -c Release -p:Version='${{ steps.gitversion.outputs.MajorMinorPatch }}'
     - name: Upload package back to GitHub
