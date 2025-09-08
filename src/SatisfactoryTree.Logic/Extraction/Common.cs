@@ -145,7 +145,7 @@ namespace SatisfactoryTree.Logic.Extraction
                 return buildingName.Replace("_automated", "");
             }
 
-            return null;
+            return "";
         }
 
 
