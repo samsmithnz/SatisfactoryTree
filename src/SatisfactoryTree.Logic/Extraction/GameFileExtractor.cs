@@ -1,17 +1,15 @@
-﻿using Newtonsoft.Json;
-using SatisfactoryTree.Logic.Models;
-using System;
-using System.Collections.Generic;
+﻿using SatisfactoryTree.Logic.Models;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace SatisfactoryTree.Logic.Extraction
 {
     public class GameFileExtractor
     {
-        public static NewContent ExtractJsonFile()
+        public string InputFile { get; set; } = "";
+        public string OutputFile { get; set; } = "";
+
+        public void GetContentFiles()
         {
             // Load the content file
             string contentPath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
@@ -32,231 +30,142 @@ namespace SatisfactoryTree.Logic.Extraction
                 Debug.WriteLine("Copying file to " + projectContentPath);
                 File.Copy(contentPath, projectContentFile, true);
             }
-            string jsonString = File.ReadAllText(projectContentFile);
-            List<RawNativeClass>? rawJSONDoc = System.Text.Json.JsonSerializer.Deserialize<List<RawNativeClass>>(jsonString);
-            if (rawJSONDoc == null)
-            {
-                throw new Exception("Failed to deserialize JSON file");
-            }
+            InputFile = projectContentFile;
+            OutputFile = Path.Combine(projectContentPath, "gameData.json");
+        }
 
-            // Process the content into an object list
-            NewContent processedResult = new();
-            List<RawItem> rawItems = new();
-            List<string> itemList = new();
-            List<Part> items = new();
-            foreach (RawNativeClass nativeClass in rawJSONDoc)
+        public static async Task<ExtractedData> ProcessFileOldModel(string inputFile, string outputFile)
+        {
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            //try
+            //{
+            //Read file contexts from text file
+            string fileContent = File.ReadAllText(inputFile);
+            List<dynamic>? rawData = System.Text.Json.JsonSerializer.Deserialize<List<dynamic>>(fileContent);
+            List<JsonElement> data = new();
+            List<JsonElement> rawResourcesData = new();
+            if (rawData != null)
             {
-                if (nativeClass != null && nativeClass.Classes != null &&
-                    nativeClass.NativeClassName == "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'")
+                foreach (JsonElement entry in rawData)
                 {
-                    foreach (RawItem rawItem in nativeClass.Classes)
+                    string? nativeClass = entry.TryGetProperty("NativeClass", out JsonElement nativeClassElement) ? nativeClassElement.GetString() : string.Empty;
+                    if (entry.TryGetProperty("Classes", out JsonElement classesElement) && classesElement.ValueKind == JsonValueKind.Array)
                     {
-                        string result2 = ($"DisplayName: {rawItem.DisplayName}, ClassName: {rawItem.ClassName}, StackSize: {rawItem.StackSize}");
-                        items.Add(new Part(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
-                        itemList.Add(result2);
-                    }
-                }
-                else if (nativeClass != null && nativeClass.Classes != null)
-                {
-                    rawItems.AddRange(nativeClass.Classes);
-                }
-            }
-
-            //Get all recipes that are not Christmas or BuildGun or WorkshopComponent
-            List<RawItem> rawRecipes = new();
-            List<Building> buildings = new();
-            foreach (RawItem rawItem in rawItems)
-            {
-                if (rawItem != null && rawItem.ClassName != null &&
-                    rawItem.ClassName.StartsWith("Recipe_") &&
-                    !string.IsNullOrEmpty(rawItem.Ingredients) &&
-                    !rawItem.Ingredients.Contains("Christmas") &&
-                    rawItem.ProducedIn != null &&
-                    !rawItem.ProducedIn.Contains("BP_BuildGun_C") &&
-                    !rawItem.ProducedIn.Contains("BP_WorkshopComponent_C"))
-                {
-                    rawRecipes.Add(rawItem);
-                }
-                string producedIn = rawItem.ProducedIn;
-                if (!string.IsNullOrEmpty(rawItem.ProducedIn))
-                {
-                    producedIn = GetProcessedProducedIn(rawItem.ProducedIn);
-                }
-                if (rawItem != null && rawItem.ClassName != null &&
-                    rawItem.ClassName.StartsWith("Recipe_") &&
-                    !string.IsNullOrEmpty(producedIn) &&
-                    !producedIn.Contains("BP_BuildGun_C") &&
-                    !producedIn.Contains("FGBuildGun") &&
-                    !producedIn.Contains("BP_WorkshopComponent_C") &&
-                    !buildings.Contains(new(producedIn)))
-                {
-                    buildings.Add(new Building(producedIn));
-                }
-
-            }
-
-            //Now loop through the items checking if they have a recipe
-            foreach (RawItem rawItem in rawItems)
-            {
-                if (rawItem != null && rawItem.ClassName != null &&
-                    rawItem.ClassName.StartsWith("Desc_"))
-                {
-                    foreach (RawItem recipe in rawRecipes)
-                    {
-                        string result2 = ($"DisplayName: {rawItem.DisplayName}, ClassName: {rawItem.ClassName}, StackSize: {rawItem.StackSize}");
-                        if (rawItem.DisplayName != "" &&
-                            rawItem.StackSize != null &&
-                            recipe.Products != null &&
-                            recipe.Products.Contains(rawItem.ClassName) &&
-                            itemList.Contains(result2) == false &&
-                            recipe.ProducedIn != null &&
-                            !recipe.ProducedIn.Contains("BP_BuildGun_C") &&
-                            !recipe.ProducedIn.Contains("BP_WorkshopComponent_C"))
-                        {
-                            items.Add(new Part(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
-                            itemList.Add(result2);
-                        }
-                        else if (rawItem.DisplayName == "Iron Ore" ||
-                            rawItem.DisplayName == "Copper Ore" ||
-                            rawItem.DisplayName == "Coal" ||
-                            rawItem.DisplayName == "SAM" ||
-                            rawItem.DisplayName == "Cat Ore" ||
-                            rawItem.DisplayName == "AL Ore")
-                        {
-                            items.Add(new Part(rawItem.ClassName, rawItem.DisplayName, rawItem.Description, GetStackSizeQuantity(rawItem.StackSize), rawItem.PingColor, rawItem.FluidColor, rawItem.ResourceSinkPoints));
-                            itemList.Add(result2);
-                        }
+                        data.AddRange(classesElement.EnumerateArray());
                     }
                 }
             }
 
-            //Order the list alphabetically
-            itemList.Sort();
+            // Get an array of all buildings that produce something
+            List<string> producingBuildings = ProcessRawBuildings.GetProducingBuildings(data);
 
-            //processedResult.ItemList = itemList;
-            processedResult.Items = items;
-            foreach (RawItem recipe in rawRecipes)
+            // Get power consumption for the producing buildings
+            Dictionary<string, double> buildings = ProcessRawBuildings.GetPowerConsumptionForBuildings(data, producingBuildings);
+
+            // Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
+            List<Recipe> recipes = ProcessRawRecipes.GetProductionRecipes(data, buildings);
+
+            // Get parts
+            RawPartsAndRawMaterials items = ProcessRawParts.GetItems(data, recipes);
+            ProcessRawParts.FixItemNames(items);
+            ProcessRawParts.FixTurbofuel(items, recipes);
+
+            // IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
+            List<PowerGenerationRecipe> powerGenerationRecipes = ProcessRawRecipes.GetPowerGeneratingRecipes(data, items, buildings);
+
+            // Since we've done some manipulation of the items data, re-sort it
+            Dictionary<string, Part> sortedItems = new();
+            foreach (string? key in items.Parts.Keys.OrderBy(k => k))
             {
-                if (recipe != null)
+                sortedItems[key] = items.Parts[key];
+            }
+            items.Parts = sortedItems;
+
+            //Build the new recipe collection
+            List<Recipe> newRecipes = new();
+            foreach (Recipe recipe in recipes)
+            {
+                newRecipes.Add(new()
                 {
-                    decimal manufactoringDuration = 0;
-                    decimal.TryParse(recipe.ManufactoringDuration, out manufactoringDuration);
-                    List<KeyValuePair<string?, decimal>>? ingredients = ProcessJSONList(recipe.Ingredients);
-                    List<KeyValuePair<string?, decimal>>? products = ProcessJSONList(recipe.Products);
-                    processedResult.Recipes.Add(new Recipe(recipe.ClassName, recipe.DisplayName, ingredients, products, GetProcessedProducedIn(recipe.ProducedIn), manufactoringDuration, recipe.IsAlternateRecipe));
-                }
+                    id = recipe.id,
+                    displayName = recipe.displayName,
+                    ingredients = recipe.ingredients,
+                    products = recipe.products,
+                    building = recipe.building,
+                    isAlternate = recipe.isAlternate,
+                    isFicsmas = recipe.isFicsmas,
+                    usesSAMOre = recipe.usesSAMOre
+                });
             }
-            processedResult.Buildings = buildings;
-
-            string jsonStringToSave = JsonConvert.SerializeObject(processedResult, Newtonsoft.Json.Formatting.Indented);
-            SaveJSON(projectContentPath, jsonStringToSave);
-
-            return processedResult;
-        }
-
-        private static List<KeyValuePair<string?, decimal>>? ProcessJSONList(string? list)
-        {
-            List<KeyValuePair<string?, decimal>>? result = new();
-            if (list != null)
+            //Now add the power generation recipes
+            foreach (PowerGenerationRecipe recipe in powerGenerationRecipes)
             {
-                // Remove outer parentheses
-                string listString = list.Trim('(', ')');
-
-                // Split by "),(" to get individual strings
-                string[] listPairs = listString.Split(new string[] { "),(" }, StringSplitOptions.None);
-
-                // Loop through the pairs
-                foreach (string pair in listPairs)
+                List<Ingredient> ingredients = new();
+                foreach (PowerIngredient ingredient in recipe.ingredients)
                 {
-                    // Split by "," to get ItemClass and Amount
-                    string[] keyValue = pair.Split(',');
-                    string itemClass = GetTextAfterLastDot(keyValue[0].Split('=')[1].Trim('"'));
-                    string amount = keyValue[1].Split('=')[1];
-                    //Console.WriteLine($"ItemClass: {itemClass}, Amount: {amount}");
-                    result.Add(new(itemClass, decimal.Parse(amount)));
+                    ingredients.Add(new Ingredient()
+                    {
+                        part = ingredient.part,
+                        amount = ingredient.perMin,
+                        perMin = ingredient.perMin,
+                        mwPerItem = ingredient.mwPerItem,
+                    });
                 }
-            }
-            return result;
-        }
+                List<Product> products = new();
+                if (recipe.byproduct != null)
+                {
+                    products.Add(
+                        new Product()
+                        {
+                            part = recipe.byproduct.part,
+                            amount = recipe.byproduct.perMin,
+                            perMin = recipe.byproduct.perMin,
+                            isByProduct = true
+                        }
+                    );
+                }
 
-        private static string GetTextAfterLastDot(string input)
-        {
-            int lastDotIndex = input.LastIndexOf('.');
-            if (lastDotIndex == -1)
-            {
-                return string.Empty; // or handle the case where there's no dot in the string
-            }
-            return input.Substring(lastDotIndex + 1).Trim('\'');
-        }
+                // Check if any ingredient is SAMIngot to set usesSAMOre flag
+                bool usesSAMOre = ingredients.Any(ingredient => ingredient.part == "SAMIngot");
 
-        private static bool SaveJSON(string path, string jsonString)
-        {
-            // Save the JSON string to a file.
-            string pathToJSON = Path.Combine(path, "output.json");
-            File.WriteAllText(pathToJSON, jsonString);
-            return true;
-        }
+                newRecipes.Add(new()
+                {
+                    id = recipe.id,
+                    displayName = recipe.displayName,
+                    ingredients = ingredients,
+                    products = products,
+                    building = recipe.building,
+                    isAlternate = false,
+                    isFicsmas = false,
+                    usesSAMOre = usesSAMOre
+                });
+            }
+            //sort the new recipes list by id
+            newRecipes = newRecipes.OrderBy(r => r.id).ToList();
 
-        private static int GetStackSizeQuantity(string stackSize)
-        {
-            if (stackSize == "SS_HUGE")
-            {
-                return 500;
-            }
-            else if (stackSize == "SS_BIG")
-            {
-                return 200;
-            }
-            else if (stackSize == "SS_MEDIUM")
-            {
-                return 100;
-            }
-            else if (stackSize == "SS_SMALL")
-            {
-                return 50;
-            }
-            else if (stackSize == "SS_FLUID")
-            {
-                return 0;
-            }
-            else
-            {
-                return -1;
-            }
-        }
+            // Construct the final JSON object
+            ExtractedData finalData = new(
+                buildings,
+                items,
+                recipes,
+                powerGenerationRecipes);
 
-        private static string GetProcessedProducedIn(string producedIn)
-        {
-            producedIn = producedIn.Replace(",\"/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C\"", "");
-            producedIn = producedIn.Replace(",\"/Script/FactoryGame.FGBuildableAutomatedWorkBench\"", "");
-            producedIn = producedIn.Replace(",\"/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C\"", "");
-            switch (producedIn)
-            {
-                case "(\"/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C\")":
-                    return "ConstructorMk1";
-                case "(\"/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C\")":
-                    return "SmelterMk1";
-                case "(\"/Game/FactoryGame/Buildable/Factory/AssemblerMk1/Build_AssemblerMk1.Build_AssemblerMk1_C\")":
-                    return "AssemblerMk1";
-                case "(\"/Game/FactoryGame/Buildable/Factory/FoundryMk1/Build_FoundryMk1.Build_FoundryMk1_C\")":
-                    return "FoundryMk1";
-                case "(\"/Game/FactoryGame/Buildable/Factory/Blender/Build_Blender.Build_Blender_C\")":
-                    return "Blender";
-                case "(\"/Game/FactoryGame/Buildable/Factory/OilRefinery/Build_OilRefinery.Build_OilRefinery_C\")":
-                    return "Refinery";
-                case "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")":
-                    return "Packager";
-                case "(\"/Game/FactoryGame/Buildable/Factory/ManufacturerMk1/Build_ManufacturerMk1.Build_ManufacturerMk1_C\")":
-                    return "ManufacturerMk1";
-                case "(\"/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C\")":
-                    return "HadronCollider";
-                case "(\"/Game/FactoryGame/Buildable/Factory/QuantumEncoder/Build_QuantumEncoder.Build_QuantumEncoder_C\")":
-                    return "QuantumEncoder";
-                case "(\"/Game/FactoryGame/Buildable/Factory/Converter/Build_Converter.Build_Converter_C\")":
-                    return "Converter";
-                default:
-                    return producedIn;
-            }
+            // Write the output to the file
+            JsonSerializerOptions options = new() { WriteIndented = true, DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull };
+            string outputJson = System.Text.Json.JsonSerializer.Serialize(finalData, options);
+            await File.WriteAllTextAsync(outputFile, outputJson);
+            stopwatch.Stop();
+
+            System.Console.WriteLine($"Processed {items.Parts.Count} parts, {buildings.Count} buildings, and {recipes.Count} recipes, all written to {outputFile}.");
+            System.Console.WriteLine($"Total processing time: {stopwatch.Elapsed.TotalMilliseconds} ms");
+            return finalData;
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Console.Error.WriteLine($"Error processing file: {ex.Message}");
+            //    return null;
+            //}
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace SatisfactoryTree.Console
 {
-    public class Buildings
+    public class ProcessRawBuildings
     {
         public static List<string> GetProducingBuildings(List<JsonElement> data)
         {

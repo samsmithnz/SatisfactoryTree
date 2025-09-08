@@ -8,6 +8,9 @@
         }
 
         public string Name { get; set; }
+        public double Power { get; set; }
+        public double? MinPower { get; set; }
+        public double? MaxPower { get; set; }
 
         public override bool Equals(object? obj)
         {

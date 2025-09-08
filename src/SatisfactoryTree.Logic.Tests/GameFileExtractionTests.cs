@@ -10,13 +10,14 @@ namespace SatisfactoryTree.Logic.Tests
     public class GameFileExtractionTests
     {
         [TestMethod]
-        public void TestExtractItemsFromJson()
+        public async Task TestExtractItemsFromJson()
         {
             // Arrange
-
+            GameFileExtractor gameFileExtractor = new GameFileExtractor();
+            gameFileExtractor.GetContentFiles();
 
             // Act
-            NewContent result = GameFileExtractor.ExtractJsonFile();
+            ExtractedData result = await GameFileExtractor.ProcessFileOldModel(gameFileExtractor.InputFile, gameFileExtractor.OutputFile);
 
 
             // Assert
@@ -29,9 +30,9 @@ namespace SatisfactoryTree.Logic.Tests
             //{
             //    Debug.WriteLine(($"ClassName: {item.ClassName}, DisplayName: {item.DisplayName}, Ingredients: {item.Ingredients}"));
             //}
-            Assert.AreEqual(125, result.Items.Count);
-            Assert.AreEqual(266, result.Recipes.Count);
-            Assert.AreEqual(11, result.Buildings.Count);
+            Assert.AreEqual(168, result.parts.Count);
+            Assert.AreEqual(291, result.recipes.Count);
+            Assert.AreEqual(15, result.buildings.Count);
             //Debug.WriteLine(result.Items.Count + " items");
             //Debug.WriteLine(result.Recipes.Count + " recipes");
             //Debug.WriteLine(result.Buildings.Count + " buildings");

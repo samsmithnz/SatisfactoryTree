@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace SatisfactoryTree.Console
 {
-    public class Recipes
+    public class ProcessRawRecipes
     {
         private static readonly string[] sourceArray = ["bp_workbenchcomponent", "bp_workshopcomponent", "factorygame"];
 

@@ -4,8 +4,8 @@ namespace SatisfactoryTree.Logic.Extraction
 {
     public class NewContent
     {
-        public List<Part> Items = [];
-        public List<Recipe> Recipes = [];
+        public List<RawPart> Items = [];
+        public List<RawRecipe> Recipes = [];
         public List<Building> Buildings = [];
     }
 }

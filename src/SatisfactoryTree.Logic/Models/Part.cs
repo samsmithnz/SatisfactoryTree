@@ -1,16 +1,17 @@
-﻿namespace SatisfactoryTree.Logic.Models
-{
-    public class Part(string? className, string? displayName, string? description, int stackSize, string? pingColor, string? fluidColor, string? resourceSinkPoints)
-    {
-        //Common properties
-        public string? ClassName { get; set; } = className;
-        public string? DisplayName { get; set; } = displayName;
-        public string? Description { get; set; } = description;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-        //Item properties
-        public int StackSize { get; set; } = stackSize;
-        public string? PingColor { get; set; } = pingColor;
-        public string? FluidColor { get; set; } = fluidColor;
-        public string? ResourceSinkPoints { get; set; } = resourceSinkPoints;
+namespace SatisfactoryTree.Logic.Models
+{
+    public class Part
+    {
+        public string name { get; set; }
+        public int stackSize { get; set; }
+        public bool isFluid { get; set; }
+        public bool isFicsmas { get; set; }
+        public double energyGeneratedInMJ { get; set; }
     }
 }

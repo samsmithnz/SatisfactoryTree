@@ -1,12 +1,12 @@
-﻿using SatisfactoryTree.Console.OldModels;
+﻿using SatisfactoryTree.Logic.Models;
 using System.Text.Json;
 
-namespace SatisfactoryTree.Console
+namespace SatisfactoryTree.Logic.Extraction
 {
-    public class Parts
+    public class ProcessRawParts
     {
 
-        public static PartDataInterface GetItems(List<JsonElement> data, List<Recipe> recipes)
+        public static RawPartsAndRawMaterials GetItems(List<JsonElement> data, List<Recipe> recipes)
         {
             Dictionary<string, Part> parts = new();
             Dictionary<string, string> collectables = new();
@@ -66,10 +66,10 @@ namespace SatisfactoryTree.Console
             Dictionary<string, RawResource> rawResources = GetRawResources(data, parts, recipes);
 
             // Sort the parts and collectables by key
-            return new PartDataInterface
+            return new RawPartsAndRawMaterials
             {
-                parts = parts.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                rawResources = rawResources
+                Parts = parts.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                RawResources = rawResources
             };
         }
 
@@ -133,7 +133,7 @@ namespace SatisfactoryTree.Console
                 {
                     bool removePart = false;
                     // don't process converter recipes here - as most of the raw ores are a product of the converter
-                    if (recipe.building.name != "converter" && recipe.building.name != "generatornuclear")
+                    if (recipe.building.Name != "converter" && recipe.building.Name != "generatornuclear")
                     {
                         removePart = true;
                     }
@@ -181,7 +181,7 @@ namespace SatisfactoryTree.Console
             return rawResources;
         }
 
-        public static void FixItemNames(PartDataInterface items)
+        public static void FixItemNames(RawPartsAndRawMaterials items)
         {
             // Go through the item names and do some manual fixes, e.g. renaming "Residual Plastic" to "Plastic"
             var fixItems = new Dictionary<string, string>
@@ -200,20 +200,20 @@ namespace SatisfactoryTree.Console
 
             foreach (var search in fixItems.Keys)
             {
-                if (items.parts.ContainsKey(search))
+                if (items.Parts.ContainsKey(search))
                 {
-                    items.parts[search].name = fixItems[search];
+                    items.Parts[search].name = fixItems[search];
                 }
             }
         }
 
-        public static void FixTurbofuel(PartDataInterface items, List<Recipe> recipes)
+        public static void FixTurbofuel(RawPartsAndRawMaterials items, List<Recipe> recipes)
         {
             // Rename the current "Turbofuel" which is actually "Packaged Turbofuel"
-            items.parts["PackagedTurboFuel"] = items.parts["TurboFuel"];
+            items.Parts["PackagedTurboFuel"] = items.Parts["TurboFuel"];
 
             // Add the actual "Turbofuel" as a new item
-            items.parts["LiquidTurboFuel"] = new Part
+            items.Parts["LiquidTurboFuel"] = new Part
             {
                 name = "Turbofuel",
                 stackSize = 0,
@@ -223,7 +223,7 @@ namespace SatisfactoryTree.Console
             };
 
             // Rename the packaged item to PackagedTurboFuel
-            items.parts["PackagedTurboFuel"] = new Part
+            items.Parts["PackagedTurboFuel"] = new Part
             {
                 name = "Packaged Turbofuel",
                 stackSize = 100, // SS_MEDIUM
@@ -233,7 +233,7 @@ namespace SatisfactoryTree.Console
             };
 
             // Remove the incorrect packaged turbofuel
-            items.parts.Remove("TurboFuel");
+            items.Parts.Remove("TurboFuel");
 
             // Now we need to go through the recipes and wherever "TurboFuel" is mentioned, it needs to be changed to "PackagedTurboFuel"
             foreach (Recipe recipe in recipes)

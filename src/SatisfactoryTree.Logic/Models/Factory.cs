@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SatisfactoryTree.Logic.Extraction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace SatisfactoryTree.Logic.Models
 {
     public class Factory
     {
-        public List<Part> Imports { get; set; }
-        public List<Part> Surplus { get; set; }
-        public List<Part> PartGoals { get; set; }
-        public List<Part> Parts { get; set; }
+        public List<RawPart> Imports { get; set; }
+        public List<RawPart> Surplus { get; set; }
+        public List<RawPart> PartGoals { get; set; }
+        public List<RawPart> Parts { get; set; }
 
         public Factory()
         {
-            Imports = new List<Part>();
-            Surplus = new List<Part>();
-            PartGoals = new List<Part>();
-            Parts = new List<Part>();
+            Imports = new List<RawPart>();
+            Surplus = new List<RawPart>();
+            PartGoals = new List<RawPart>();
+            Parts = new List<RawPart>();
         }
     }
 }
