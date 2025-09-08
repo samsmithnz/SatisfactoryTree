@@ -12,5 +12,13 @@ namespace SatisfactoryTree.Logic.Models
         public List<Part> Surplus { get; set; }
         public List<Part> PartGoals { get; set; }
         public List<Part> Parts { get; set; }
+
+        public Factory()
+        {
+            Imports = new List<Part>();
+            Surplus = new List<Part>();
+            PartGoals = new List<Part>();
+            Parts = new List<Part>();
+        }
     }
 }
