@@ -29,13 +29,16 @@ namespace SatisfactoryTree.Logic.Tests
             //{
             //    Debug.WriteLine(($"ClassName: {item.ClassName}, DisplayName: {item.DisplayName}, Ingredients: {item.Ingredients}"));
             //}
-            Debug.WriteLine(result.Items.Count + " items");
-            Debug.WriteLine(result.Recipes.Count + " recipes");
-            Debug.WriteLine(result.Buildings.Count + " buildings");
-            foreach (Building item in result.Buildings)
-            {
-                Debug.WriteLine(item.Name);
-            }
+            Assert.AreEqual(125, result.Items.Count);
+            Assert.AreEqual(266, result.Recipes.Count);
+            Assert.AreEqual(11, result.Buildings.Count);
+            //Debug.WriteLine(result.Items.Count + " items");
+            //Debug.WriteLine(result.Recipes.Count + " recipes");
+            //Debug.WriteLine(result.Buildings.Count + " buildings");
+            //foreach (Building item in result.Buildings)
+            //{
+            //    Debug.WriteLine(item.Name);
+            //}
 
         }
     }
