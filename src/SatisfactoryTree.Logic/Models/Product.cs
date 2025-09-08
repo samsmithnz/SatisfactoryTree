@@ -8,5 +8,4 @@
         public bool? isByProduct { get; set; }
     }
 
-  
 }
