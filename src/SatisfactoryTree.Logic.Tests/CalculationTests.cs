@@ -130,5 +130,26 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(12, results[5].Quantity);
             Assert.AreEqual(4, results[5].Counter);
         }
+
+        [TestMethod]
+        public void HeavyModularFrameCalculationTest()
+        {
+            //Arrange
+            string partName = "ModularFrameHeavy";
+            double quantity = 1;
+            if (finalData == null)
+            {
+                Assert.Fail("Final data is null");
+            }
+
+            //Act
+            Calculator calculator = new();
+            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+
+            //Assert
+            Assert.IsNotNull(results);
+            Assert.AreEqual(15, results.Count);
+
+        }
     }
 }
