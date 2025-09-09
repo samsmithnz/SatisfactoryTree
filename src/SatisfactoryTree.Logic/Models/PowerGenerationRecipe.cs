@@ -2,10 +2,10 @@
 {
     public class PowerGenerationRecipe
     {
-        public string id { get; set; }
-        public string displayName { get; set; }
-        public List<PowerIngredient> ingredients { get; set; }
-        public PowerProduct byproduct { get; set; }
-        public Building building { get; set; }
+        public string id { get; set; } = string.Empty;
+        public string displayName { get; set; } = string.Empty;
+        public List<PowerIngredient> ingredients { get; set; } = new List<PowerIngredient>();
+        public PowerProduct byproduct { get; set; } = new PowerProduct();
+        public Building building { get; set; } = new Building();
     }
 }

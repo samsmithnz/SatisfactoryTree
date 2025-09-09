@@ -2,10 +2,9 @@
 {
     public class Ingredient
     {
-        public string part { get; set; }
+        public string part { get; set; } = string.Empty;
         public double amount { get; set; }
         public double perMin { get; set; }
         public double? mwPerItem { get; set; }
     }
-
 }

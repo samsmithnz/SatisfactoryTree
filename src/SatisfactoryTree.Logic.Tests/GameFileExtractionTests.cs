@@ -13,11 +13,9 @@ namespace SatisfactoryTree.Logic.Tests
         public async Task TestExtractItemsFromJson()
         {
             // Arrange
-            GameFileExtractor gameFileExtractor = new GameFileExtractor();
-            gameFileExtractor.GetContentFiles();
 
             // Act
-            ExtractedData result = await GameFileExtractor.ProcessFileOldModel(gameFileExtractor.InputFile, gameFileExtractor.OutputFile);
+            ExtractedData result = await GameFileExtractor.ProcessFileOldModel();
 
 
             // Assert

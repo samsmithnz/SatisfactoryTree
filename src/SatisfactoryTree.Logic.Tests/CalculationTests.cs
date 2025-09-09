@@ -13,21 +13,14 @@ namespace SatisfactoryTree.Logic.Tests
         public async Task Initialize()
         {
             //arrange
-            GameFileExtractor processor = new();
-            processor.GetContentFiles();
-            if (processor != null)
+
+            //act
+            finalData = await GameFileExtractor.LoadDataFromFile();
+
+            //assert
+            if (finalData == null)
             {
-                string inputFile = processor.InputFile;
-                string outputFile = processor.OutputFile;
-
-                //act
-                finalData = await GameFileExtractor.ProcessFileOldModel(inputFile, outputFile);
-
-                //assert
-                if (finalData == null)
-                {
-                    Assert.Fail("Final data is null");
-                }
+                Assert.Fail("Final data is null");
             }
         }
 

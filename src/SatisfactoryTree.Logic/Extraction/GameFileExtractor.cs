@@ -6,10 +6,10 @@ namespace SatisfactoryTree.Logic.Extraction
 {
     public class GameFileExtractor
     {
-        public string InputFile { get; set; } = "";
-        public string OutputFile { get; set; } = "";
+        public static string InputFile { get; set; } = "";
+        public static string OutputFile { get; set; } = "";
 
-        public void GetContentFiles()
+        public static bool GetContentFiles()
         {
             // Load the content file
             string contentPath = @"C:\Program Files (x86)\Steam\steamapps\common\Satisfactory\CommunityResources\Docs\en-US.json";
@@ -32,16 +32,18 @@ namespace SatisfactoryTree.Logic.Extraction
             }
             InputFile = projectContentFile;
             OutputFile = Path.Combine(projectContentPath, "gameData.json");
+            return true;
         }
 
-        public static async Task<ExtractedData> ProcessFileOldModel(string inputFile, string outputFile)
+        public static async Task<ExtractedData> ProcessFileOldModel()
         {
             Stopwatch stopwatch = new();
             stopwatch.Start();
             //try
             //{
             //Read file contexts from text file
-            string fileContent = File.ReadAllText(inputFile);
+            GetContentFiles();
+            string fileContent = File.ReadAllText(InputFile);
             List<dynamic>? rawData = System.Text.Json.JsonSerializer.Deserialize<List<dynamic>>(fileContent);
             List<JsonElement> data = new();
             List<JsonElement> rawResourcesData = new();
@@ -145,7 +147,7 @@ namespace SatisfactoryTree.Logic.Extraction
             newRecipes = newRecipes.OrderBy(r => r.id).ToList();
 
             // Construct the final JSON object
-            ExtractedData finalData = new(
+            ExtractedData extractedData = new(
                 buildings,
                 items,
                 recipes,
@@ -153,19 +155,58 @@ namespace SatisfactoryTree.Logic.Extraction
 
             // Write the output to the file
             JsonSerializerOptions options = new() { WriteIndented = true, DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull };
-            string outputJson = System.Text.Json.JsonSerializer.Serialize(finalData, options);
-            await File.WriteAllTextAsync(outputFile, outputJson);
+            string outputJson = System.Text.Json.JsonSerializer.Serialize(extractedData, options);
+            await File.WriteAllTextAsync(OutputFile, outputJson);
             stopwatch.Stop();
 
-            System.Console.WriteLine($"Processed {items.Parts.Count} parts, {buildings.Count} buildings, and {recipes.Count} recipes, all written to {outputFile}.");
+            System.Console.WriteLine($"Processed {items.Parts.Count} parts, {buildings.Count} buildings, and {recipes.Count} recipes, all written to {OutputFile}.");
             System.Console.WriteLine($"Total processing time: {stopwatch.Elapsed.TotalMilliseconds} ms");
-            return finalData;
+            return extractedData;
             //}
             //catch (Exception ex)
             //{
             //    System.Console.Error.WriteLine($"Error processing file: {ex.Message}");
             //    return null;
             //}
+        }
+
+        public static async Task<ExtractedData?> LoadDataFromFile()
+        {
+            try
+            {
+                GetContentFiles();
+                string targetFile = OutputFile;             
+
+                if (!File.Exists(targetFile))
+                {
+                    throw new FileNotFoundException($"Configuration file not found: {targetFile}");
+                }
+
+                string jsonContent = await File.ReadAllTextAsync(targetFile);
+                
+                JsonSerializerOptions options = new() 
+                { 
+                    PropertyNameCaseInsensitive = true,
+                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull 
+                };
+                
+                ExtractedData? extractedData = JsonSerializer.Deserialize<ExtractedData>(jsonContent, options);
+                
+                if (extractedData == null)
+                {
+                    throw new InvalidOperationException("Failed to deserialize the configuration file");
+                }
+
+                System.Console.WriteLine($"Successfully loaded data from {targetFile}");
+                System.Console.WriteLine($"Loaded {extractedData.parts?.Count ?? 0} parts, {extractedData.buildings?.Count ?? 0} buildings, {extractedData.recipes?.Count ?? 0} recipes, and {extractedData.powerGenerationRecipes?.Count ?? 0} power generation recipes");
+                
+                return extractedData;
+            }
+            catch (Exception ex)
+            {
+                System.Console.Error.WriteLine($"Error loading data from file: {ex.Message}");
+                return null;
+            }
         }
     }
 }

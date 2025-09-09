@@ -17,7 +17,12 @@ namespace SatisfactoryTree.Console
     {
 
         //Using a target item, calculate the total number of items needed to produce the target item
-        public Calculator() { }
+        public Calculator() { 
+        
+        
+        }
+
+
         public List<Item> CalculateProduction(ExtractedData extractedData, string partName, double quantity)
         {
             List<Item> results = new();
