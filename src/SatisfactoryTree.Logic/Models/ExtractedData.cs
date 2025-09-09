@@ -4,20 +4,20 @@ namespace SatisfactoryTree.Logic.Models
 {
     public class ExtractedData
     {
-        public Dictionary<string, double> buildings { get; set; }
-        public Dictionary<string, Part> parts { get; set; }
-        public Dictionary<string, RawResource> rawResources { get; set; }
-        public List<Recipe> recipes { get; set; }
-        public List<PowerGenerationRecipe> powerGenerationRecipes { get; set; }
+        public Dictionary<string, double> Buildings { get; set; }
+        public Dictionary<string, Part> Parts { get; set; }
+        public Dictionary<string, RawResource> RawResources { get; set; }
+        public List<Recipe> Recipes { get; set; }
+        public List<PowerGenerationRecipe> PowerGenerationRecipes { get; set; }
 
         // Parameterless constructor for JSON deserialization
         public ExtractedData()
         {
-            buildings = new Dictionary<string, double>();
-            parts = new Dictionary<string, Part>();
-            rawResources = new Dictionary<string, RawResource>();
-            recipes = new List<Recipe>();
-            powerGenerationRecipes = new List<PowerGenerationRecipe>();
+            Buildings = new Dictionary<string, double>();
+            Parts = new Dictionary<string, Part>();
+            RawResources = new Dictionary<string, RawResource>();
+            Recipes = new List<Recipe>();
+            PowerGenerationRecipes = new List<PowerGenerationRecipe>();
         }
 
         public ExtractedData(
@@ -26,11 +26,11 @@ namespace SatisfactoryTree.Logic.Models
             List<Recipe> recipes,
             List<PowerGenerationRecipe> powerGenerationRecipes)
         {
-            this.buildings = buildings;
-            this.parts = items.Parts;
-            this.rawResources = items.RawResources;
-            this.recipes = recipes;
-            this.powerGenerationRecipes = powerGenerationRecipes;
+            this.Buildings = buildings;
+            this.Parts = items.Parts;
+            this.RawResources = items.RawResources;
+            this.Recipes = recipes;
+            this.PowerGenerationRecipes = powerGenerationRecipes;
         }
     }
 }

@@ -90,14 +90,14 @@ namespace SatisfactoryTree.Logic.Extraction
             {
                 newRecipes.Add(new()
                 {
-                    id = recipe.id,
-                    displayName = recipe.displayName,
-                    ingredients = recipe.ingredients,
-                    products = recipe.products,
-                    building = recipe.building,
-                    isAlternate = recipe.isAlternate,
-                    isFicsmas = recipe.isFicsmas,
-                    usesSAMOre = recipe.usesSAMOre
+                    Name = recipe.Name,
+                    DisplayName = recipe.DisplayName,
+                    Ingredients = recipe.Ingredients,
+                    Products = recipe.Products,
+                    Building = recipe.Building,
+                    IsAlternate = recipe.IsAlternate,
+                    IsFicsmas = recipe.IsFicsmas,
+                    UsesSAMOre = recipe.UsesSAMOre
                 });
             }
             //Now add the power generation recipes
@@ -133,18 +133,18 @@ namespace SatisfactoryTree.Logic.Extraction
 
                 newRecipes.Add(new()
                 {
-                    id = recipe.id,
-                    displayName = recipe.displayName,
-                    ingredients = ingredients,
-                    products = products,
-                    building = recipe.building,
-                    isAlternate = false,
-                    isFicsmas = false,
-                    usesSAMOre = usesSAMOre
+                    Name = recipe.id,
+                    DisplayName = recipe.displayName,
+                    Ingredients = ingredients,
+                    Products = products,
+                    Building = recipe.building,
+                    IsAlternate = false,
+                    IsFicsmas = false,
+                    UsesSAMOre = usesSAMOre
                 });
             }
             //sort the new recipes list by id
-            newRecipes = newRecipes.OrderBy(r => r.id).ToList();
+            newRecipes = newRecipes.OrderBy(r => r.Name).ToList();
 
             // Construct the final JSON object
             ExtractedData extractedData = new(
@@ -198,7 +198,7 @@ namespace SatisfactoryTree.Logic.Extraction
                 }
 
                 System.Console.WriteLine($"Successfully loaded data from {targetFile}");
-                System.Console.WriteLine($"Loaded {extractedData.parts?.Count ?? 0} parts, {extractedData.buildings?.Count ?? 0} buildings, {extractedData.recipes?.Count ?? 0} recipes, and {extractedData.powerGenerationRecipes?.Count ?? 0} power generation recipes");
+                System.Console.WriteLine($"Loaded {extractedData.Parts?.Count ?? 0} parts, {extractedData.Buildings?.Count ?? 0} buildings, {extractedData.Recipes?.Count ?? 0} recipes, and {extractedData.PowerGenerationRecipes?.Count ?? 0} power generation recipes");
                 
                 return extractedData;
             }

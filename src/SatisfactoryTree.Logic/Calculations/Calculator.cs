@@ -30,8 +30,8 @@ namespace SatisfactoryTree.Console
 
             //Add the goal item
             Recipe recipe = FindRecipe(extractedData, partName);
-            double buildingRatio = quantity / recipe.products[0].perMin;
-            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = new(), Building = recipe.building.Name, BuildingQuantity = buildingRatio, Counter = counter });
+            double buildingRatio = quantity / recipe.Products[0].perMin;
+            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = new(), Building = recipe.Building.Name, BuildingQuantity = buildingRatio, Counter = counter });
             //Get the dependencies/ingredients for the goal item
             results.AddRange(GetIngredients(extractedData, partName, quantity, counter));
 
@@ -67,10 +67,10 @@ namespace SatisfactoryTree.Console
             Recipe newRecipe = FindRecipe(finalData, partName);
 
             //If we have a recipe, calculate the ingredients
-            if (newRecipe != null && newRecipe.products != null)
+            if (newRecipe != null && newRecipe.Products != null)
             {
                 double ratio = 0;
-                foreach (Product product in newRecipe.products)
+                foreach (Product product in newRecipe.Products)
                 {
                     if (product.part == partName)
                     {
@@ -80,9 +80,9 @@ namespace SatisfactoryTree.Console
                 }
 
                 //If we have a recipe, calculate the ingredients
-                if (newRecipe != null && newRecipe.ingredients != null)
+                if (newRecipe != null && newRecipe.Ingredients != null)
                 {
-                    foreach (Ingredient ingredient in newRecipe.ingredients)
+                    foreach (Ingredient ingredient in newRecipe.Ingredients)
                     {
                         //Get this ingredient's recipe
                         Recipe ingredientRecipe = FindRecipe(finalData, ingredient.part);
@@ -90,8 +90,8 @@ namespace SatisfactoryTree.Console
                         double buildingRatio = 0;
                         if (ingredientRecipe != null)
                         {
-                            buildingName = ingredientRecipe.building.Name;
-                            buildingRatio = ingredient.perMin * ratio / ingredientRecipe.products[0].perMin;
+                            buildingName = ingredientRecipe.Building.Name;
+                            buildingRatio = ingredient.perMin * ratio / ingredientRecipe.Products[0].perMin;
                         }
 
                         //Add this ingredient
@@ -111,12 +111,12 @@ namespace SatisfactoryTree.Console
 
         private Recipe FindRecipe(ExtractedData finalData, string partName)
         {
-            foreach (Recipe recipe in finalData.recipes)
+            foreach (Recipe recipe in finalData.Recipes)
             {
                 //Skip alternative recipes for now
-                if (recipe != null && recipe.isAlternate == false && recipe.building.Name != "converter")
+                if (recipe != null && recipe.IsAlternate == false && recipe.Building.Name != "converter")
                 {
-                    foreach (Product product in recipe.products)
+                    foreach (Product product in recipe.Products)
                     {
                         if (product.part == partName)
                         {

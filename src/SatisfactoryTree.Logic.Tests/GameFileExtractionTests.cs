@@ -28,9 +28,9 @@ namespace SatisfactoryTree.Logic.Tests
             //{
             //    Debug.WriteLine(($"ClassName: {item.ClassName}, DisplayName: {item.DisplayName}, Ingredients: {item.Ingredients}"));
             //}
-            Assert.AreEqual(168, result.parts.Count);
-            Assert.AreEqual(291, result.recipes.Count);
-            Assert.AreEqual(15, result.buildings.Count);
+            Assert.AreEqual(168, result.Parts.Count);
+            Assert.AreEqual(291, result.Recipes.Count);
+            Assert.AreEqual(15, result.Buildings.Count);
             //Debug.WriteLine(result.Items.Count + " items");
             //Debug.WriteLine(result.Recipes.Count + " recipes");
             //Debug.WriteLine(result.Buildings.Count + " buildings");

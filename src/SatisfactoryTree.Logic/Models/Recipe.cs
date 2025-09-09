@@ -2,13 +2,13 @@
 {
     public class Recipe
     {
-        public string id { get; set; } = string.Empty;
-        public string displayName { get; set; } = string.Empty;
-        public List<Ingredient> ingredients { get; set; } = new List<Ingredient>();
-        public List<Product> products { get; set; } = new List<Product>();
-        public Building building { get; set; } = new Building();
-        public bool isAlternate { get; set; }
-        public bool isFicsmas { get; set; }
-        public bool usesSAMOre { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string DisplayName { get; set; } = string.Empty;
+        public List<Ingredient> Ingredients { get; set; } = new();
+        public List<Product> Products { get; set; } = new();
+        public Building Building { get; set; } = new();
+        public bool IsAlternate { get; set; }
+        public bool IsFicsmas { get; set; }
+        public bool UsesSAMOre { get; set; }
     }
 }

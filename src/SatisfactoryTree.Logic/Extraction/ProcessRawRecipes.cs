@@ -179,18 +179,18 @@ namespace SatisfactoryTree.Logic.Extraction
                 //if (blacklist. producedIn)
                 recipes.Add(new Recipe
                 {
-                    id = Common.GetRecipeName(className),
-                    displayName = displayName,
-                    ingredients = ingredients,
-                    products = products,
-                    building = building,
-                    isAlternate = displayName.Contains("Alternate"),
-                    isFicsmas = Common.IsFicsmas(displayName),
-                    usesSAMOre = usesSAMOre
+                    Name = Common.GetRecipeName(className),
+                    DisplayName = displayName,
+                    Ingredients = ingredients,
+                    Products = products,
+                    Building = building,
+                    IsAlternate = displayName.Contains("Alternate"),
+                    IsFicsmas = Common.IsFicsmas(displayName),
+                    UsesSAMOre = usesSAMOre
                 });
             }
 
-            return recipes.OrderBy(r => r.displayName).ToList();
+            return recipes.OrderBy(r => r.DisplayName).ToList();
         }
 
         public static List<PowerGenerationRecipe> GetPowerGeneratingRecipes(List<JsonElement> data, RawPartsAndRawMaterials parts, Dictionary<string, double> producingBuildings)
@@ -248,7 +248,7 @@ namespace SatisfactoryTree.Logic.Extraction
                             double.TryParse(byProductAmountJSON.ToString(), out byProductAmount);
                         }
                         Part primaryFuelPart = parts.Parts[primaryFuelName];
-                        double burnDurationInMins = primaryFuelPart.energyGeneratedInMJ / burnRateMJ;
+                        double burnDurationInMins = primaryFuelPart.EnergyGeneratedInMJ / burnRateMJ;
                         double burnDurationInS = burnDurationInMins * 60; // Convert to seconds
                         Fuel fuelItem = new()
                         {
@@ -262,11 +262,11 @@ namespace SatisfactoryTree.Logic.Extraction
 
                         // Find the part for the primary fuel
                         double primaryPerMin = 0;
-                        if (primaryFuelPart.energyGeneratedInMJ > 0)
+                        if (primaryFuelPart.EnergyGeneratedInMJ > 0)
                         {
                             // The rounding here is important to remove floating point errors that appear with some types
                             // (this is step 4 from above)
-                            primaryPerMin = Math.Round(burnRateMJ / primaryFuelPart.energyGeneratedInMJ, 5);
+                            primaryPerMin = Math.Round(burnRateMJ / primaryFuelPart.EnergyGeneratedInMJ, 5);
                         }
                         double primaryAmount = 0;
                         if (primaryPerMin > 0)
@@ -306,7 +306,7 @@ namespace SatisfactoryTree.Logic.Extraction
                             recipes.Add(new PowerGenerationRecipe
                             {
                                 id = Common.GetPowerGenerationRecipeName(className) + '_' + fuelItem.primaryFuel,
-                                displayName = displayName + " (" + primaryFuelPart.name + ")",
+                                displayName = displayName + " (" + primaryFuelPart.Name + ")",
                                 ingredients = ingredients,
                                 byproduct = products,
                                 building = building

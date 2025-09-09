@@ -15,11 +15,11 @@ namespace SatisfactoryTree.Logic.Extraction
             HashSet<string> rawParts = new();
             foreach (Recipe recipe in recipes)
             {
-                foreach (Ingredient ingredient in recipe.ingredients)
+                foreach (Ingredient ingredient in recipe.Ingredients)
                 {
                     rawParts.Add(ingredient.part);
                 }
-                foreach (Product product in recipe.products)
+                foreach (Product product in recipe.Products)
                 {
                     rawParts.Add(product.part);
                 }
@@ -55,11 +55,11 @@ namespace SatisfactoryTree.Logic.Extraction
 
                 parts[partName] = new Part
                 {
-                    name = displayName,
-                    stackSize = stackSize,
-                    isFluid = isFluid,
-                    isFicsmas = Common.IsFicsmas(displayName),
-                    energyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
+                    Name = displayName,
+                    StackSize = stackSize,
+                    IsFluid = isFluid,
+                    IsFicsmas = Common.IsFicsmas(displayName),
+                    EnergyGeneratedInMJ = Math.Round(energyValue) // Round to the nearest whole number (all energy numbers are whole numbers)
                 };           
             }
 
@@ -121,7 +121,7 @@ namespace SatisfactoryTree.Logic.Extraction
             HashSet<string> partsRemaining = new();
             foreach (Recipe recipe in recipes)
             {
-                foreach (Ingredient ingredient in recipe.ingredients)
+                foreach (Ingredient ingredient in recipe.Ingredients)
                 {
                     partsRemaining.Add(ingredient.part);
                 }
@@ -129,11 +129,11 @@ namespace SatisfactoryTree.Logic.Extraction
 
             foreach (Recipe recipe in recipes)
             {
-                foreach (Product product in recipe.products)
+                foreach (Product product in recipe.Products)
                 {
                     bool removePart = false;
                     // don't process converter recipes here - as most of the raw ores are a product of the converter
-                    if (recipe.building.Name != "converter" && recipe.building.Name != "generatornuclear")
+                    if (recipe.Building.Name != "converter" && recipe.Building.Name != "generatornuclear")
                     {
                         removePart = true;
                     }
@@ -173,7 +173,7 @@ namespace SatisfactoryTree.Logic.Extraction
                 {
                     if (part.Key == rawResource.Key)
                     {
-                        rawResource.Value.name = part.Value.name;
+                        rawResource.Value.name = part.Value.Name;
                     }
                 }
             }
@@ -202,7 +202,7 @@ namespace SatisfactoryTree.Logic.Extraction
             {
                 if (items.Parts.ContainsKey(search))
                 {
-                    items.Parts[search].name = fixItems[search];
+                    items.Parts[search].Name = fixItems[search];
                 }
             }
         }
@@ -215,21 +215,21 @@ namespace SatisfactoryTree.Logic.Extraction
             // Add the actual "Turbofuel" as a new item
             items.Parts["LiquidTurboFuel"] = new Part
             {
-                name = "Turbofuel",
-                stackSize = 0,
-                isFluid = true,
-                isFicsmas = false,
-                energyGeneratedInMJ = 2000
+                Name = "Turbofuel",
+                StackSize = 0,
+                IsFluid = true,
+                IsFicsmas = false,
+                EnergyGeneratedInMJ = 2000
             };
 
             // Rename the packaged item to PackagedTurboFuel
             items.Parts["PackagedTurboFuel"] = new Part
             {
-                name = "Packaged Turbofuel",
-                stackSize = 100, // SS_MEDIUM
-                isFluid = false,
-                isFicsmas = false,
-                energyGeneratedInMJ = 2000
+                Name = "Packaged Turbofuel",
+                StackSize = 100, // SS_MEDIUM
+                IsFluid = false,
+                IsFicsmas = false,
+                EnergyGeneratedInMJ = 2000
             };
 
             // Remove the incorrect packaged turbofuel
@@ -238,7 +238,7 @@ namespace SatisfactoryTree.Logic.Extraction
             // Now we need to go through the recipes and wherever "TurboFuel" is mentioned, it needs to be changed to "PackagedTurboFuel"
             foreach (Recipe recipe in recipes)
             {
-                foreach (Product product in recipe.products)
+                foreach (Product product in recipe.Products)
                 {
                     if (product.part == "TurboFuel")
                     {
@@ -246,7 +246,7 @@ namespace SatisfactoryTree.Logic.Extraction
                     }
                 }
 
-                foreach (Ingredient ingredient in recipe.ingredients)
+                foreach (Ingredient ingredient in recipe.Ingredients)
                 {
                     if (ingredient.part == "TurboFuel")
                     {
