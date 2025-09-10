@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace SatisfactoryTree.Logic.Extraction
 {
-    public class GameFileExtractor
+    public class FactoryCatalogExtractor
     {
         public static string InputFile { get; set; } = "";
         public static string OutputFile { get; set; } = "";
@@ -35,7 +35,7 @@ namespace SatisfactoryTree.Logic.Extraction
             return true;
         }
 
-        public static async Task<ExtractedData> ProcessFileOldModel()
+        public static async Task<FactoryCatalog> ProcessGameFile()
         {
             Stopwatch stopwatch = new();
             stopwatch.Start();
@@ -147,7 +147,7 @@ namespace SatisfactoryTree.Logic.Extraction
             newRecipes = newRecipes.OrderBy(r => r.Name).ToList();
 
             // Construct the final JSON object
-            ExtractedData extractedData = new(
+            FactoryCatalog factoryCatalog = new(
                 buildings,
                 items,
                 recipes,
@@ -155,13 +155,13 @@ namespace SatisfactoryTree.Logic.Extraction
 
             // Write the output to the file
             JsonSerializerOptions options = new() { WriteIndented = true, DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull };
-            string outputJson = System.Text.Json.JsonSerializer.Serialize(extractedData, options);
+            string outputJson = System.Text.Json.JsonSerializer.Serialize(factoryCatalog, options);
             await File.WriteAllTextAsync(OutputFile, outputJson);
             stopwatch.Stop();
 
             System.Console.WriteLine($"Processed {items.Parts.Count} parts, {buildings.Count} buildings, and {recipes.Count} recipes, all written to {OutputFile}.");
             System.Console.WriteLine($"Total processing time: {stopwatch.Elapsed.TotalMilliseconds} ms");
-            return extractedData;
+            return factoryCatalog;
             //}
             //catch (Exception ex)
             //{
@@ -170,7 +170,7 @@ namespace SatisfactoryTree.Logic.Extraction
             //}
         }
 
-        public static async Task<ExtractedData?> LoadDataFromFile()
+        public static async Task<FactoryCatalog?> LoadDataFromFile()
         {
             try
             {
@@ -190,17 +190,17 @@ namespace SatisfactoryTree.Logic.Extraction
                     DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull 
                 };
                 
-                ExtractedData? extractedData = JsonSerializer.Deserialize<ExtractedData>(jsonContent, options);
+                FactoryCatalog? factoryCatalog = JsonSerializer.Deserialize<FactoryCatalog>(jsonContent, options);
                 
-                if (extractedData == null)
+                if (factoryCatalog == null)
                 {
                     throw new InvalidOperationException("Failed to deserialize the configuration file");
                 }
 
                 System.Console.WriteLine($"Successfully loaded data from {targetFile}");
-                System.Console.WriteLine($"Loaded {extractedData.Parts?.Count ?? 0} parts, {extractedData.Buildings?.Count ?? 0} buildings, {extractedData.Recipes?.Count ?? 0} recipes, and {extractedData.PowerGenerationRecipes?.Count ?? 0} power generation recipes");
+                System.Console.WriteLine($"Loaded {factoryCatalog.Parts?.Count ?? 0} parts, {factoryCatalog.Buildings?.Count ?? 0} buildings, {factoryCatalog.Recipes?.Count ?? 0} recipes, and {factoryCatalog.PowerGenerationRecipes?.Count ?? 0} power generation recipes");
                 
-                return extractedData;
+                return factoryCatalog;
             }
             catch (Exception ex)
             {

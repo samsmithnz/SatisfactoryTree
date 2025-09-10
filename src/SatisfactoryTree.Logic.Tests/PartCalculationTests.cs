@@ -6,7 +6,7 @@ namespace SatisfactoryTree.Logic.Tests
     [TestClass]
     public class PartCalculationTests
     {
-        private ExtractedData? finalData = null;
+        private FactoryCatalog? finalData = null;
 
         [TestInitialize]
         public async Task Initialize()
@@ -14,7 +14,7 @@ namespace SatisfactoryTree.Logic.Tests
             //arrange
 
             //act
-            finalData = await GameFileExtractor.LoadDataFromFile();
+            finalData = await FactoryCatalogExtractor.LoadDataFromFile();
 
             //assert
             if (finalData == null)
@@ -36,7 +36,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);
@@ -68,7 +68,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);
@@ -105,7 +105,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);
@@ -143,7 +143,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity);
+            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);

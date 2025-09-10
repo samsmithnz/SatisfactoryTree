@@ -7,7 +7,7 @@ namespace SatisfactoryTree.Logic.Tests
 {
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [TestClass]
-    public class GameFileExtractionTests
+    public class FactoryCatalogTests
     {
         [TestMethod]
         public async Task TestExtractItemsFromJson()
@@ -15,7 +15,7 @@ namespace SatisfactoryTree.Logic.Tests
             // Arrange
 
             // Act
-            ExtractedData result = await GameFileExtractor.ProcessFileOldModel();
+            FactoryCatalog result = await FactoryCatalogExtractor.ProcessGameFile();
 
 
             // Assert

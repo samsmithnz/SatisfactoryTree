@@ -2,7 +2,7 @@
 
 namespace SatisfactoryTree.Logic.Models
 {
-    public class ExtractedData
+    public class FactoryCatalog
     {
         public Dictionary<string, double> Buildings { get; set; }
         public Dictionary<string, Part> Parts { get; set; }
@@ -11,7 +11,7 @@ namespace SatisfactoryTree.Logic.Models
         public List<PowerGenerationRecipe> PowerGenerationRecipes { get; set; }
 
         // Parameterless constructor for JSON deserialization
-        public ExtractedData()
+        public FactoryCatalog()
         {
             Buildings = new Dictionary<string, double>();
             Parts = new Dictionary<string, Part>();
@@ -20,7 +20,7 @@ namespace SatisfactoryTree.Logic.Models
             PowerGenerationRecipes = new List<PowerGenerationRecipe>();
         }
 
-        public ExtractedData(
+        public FactoryCatalog(
             Dictionary<string, Double> buildings,
             RawPartsAndRawMaterials items,
             List<Recipe> recipes,
