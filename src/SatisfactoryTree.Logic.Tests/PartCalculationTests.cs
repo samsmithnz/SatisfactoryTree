@@ -1,13 +1,12 @@
-﻿using SatisfactoryTree.Console;
-using SatisfactoryTree.Logic.Extraction;
+﻿using SatisfactoryTree.Logic.Extraction;
 using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Logic.Tests
 {
     [TestClass]
-    public class CalculationTests
+    public class PartCalculationTests
     {
-        private ExtractedData finalData = null;
+        private ExtractedData? finalData = null;
 
         [TestInitialize]
         public async Task Initialize()

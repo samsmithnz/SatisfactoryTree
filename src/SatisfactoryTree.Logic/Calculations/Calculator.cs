@@ -1,27 +1,12 @@
 ﻿using SatisfactoryTree.Logic.Models;
 
-namespace SatisfactoryTree.Console
+namespace SatisfactoryTree.Logic
 {
-    public class Item
-    {
-        public string Name { get; set; }
-        public double Quantity { get; set; }
-        public List<Item> Ingredients { get; set; }
-        public string Building { get; set; }
-        public double BuildingQuantity { get; set; }
-
-        public int Counter { get; set; }
-    }
-
     public class Calculator
     {
 
         //Using a target item, calculate the total number of items needed to produce the target item
-        public Calculator() { 
-        
-        
-        }
-
+        public Calculator() { }
 
         public List<Item> CalculateProduction(ExtractedData extractedData, string partName, double quantity)
         {

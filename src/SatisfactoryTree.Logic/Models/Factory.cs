@@ -2,17 +2,17 @@
 {
     public class Factory
     {
-        public List<Part> Imports { get; set; }
-        public List<Part> Surplus { get; set; }
-        public List<Part> PartGoals { get; set; }
-        public List<Part> Parts { get; set; }
+        public List<Item> ImportedParts { get; set; }
+        public List<Item> ExportedParts { get; set; }
+        public List<Item> ComponentParts { get; set; }
+        public List<Item> Surplus { get; set; }
 
         public Factory()
         {
-            Imports = new();
+            ImportedParts = new();
+            ExportedParts = new();
+            ComponentParts = new();
             Surplus = new();
-            PartGoals = new();
-            Parts = new();
         }
     }
 }
