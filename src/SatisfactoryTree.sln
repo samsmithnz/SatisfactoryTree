@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11005.162 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2476877E-F188-4D2B-9B1B-F8BDF762F076}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree", "Satisfa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.Tests", "SatisfactoryTree.Tests\SatisfactoryTree.Tests.csproj", "{58B24603-0A48-4125-876C-2FE691118494}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.Web", "SatisfactoryTree.Web\SatisfactoryTree.Web.csproj", "{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SatisfactoryTree.ContentExtractor", "SatisfactoryTree.ContentExtractor\SatisfactoryTree.ContentExtractor.csproj", "{F57832D1-14D2-460C-99A8-3F3E80F32527}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.Console", "SatisfactoryTree.Console\SatisfactoryTree.Console.csproj", "{8BA214EA-DFC4-4986-A8FA-862B734603D3}"
@@ -29,6 +27,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.Logic", "SatisfactoryTree.Logic\SatisfactoryTree.Logic.csproj", "{0C4EC08E-3F49-4FD1-A04E-35ADDE2A4DAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.Logic.Tests", "SatisfactoryTree.Logic.Tests\SatisfactoryTree.Logic.Tests.csproj", "{DCAFB1D3-347D-4D67-A558-CA46D1CF4A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatisfactoryTree.Web", "SatisfactoryTree.Web\SatisfactoryTree.Web.csproj", "{34A7D59E-38E4-44CE-827F-3FE39474742D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +44,6 @@ Global
 		{58B24603-0A48-4125-876C-2FE691118494}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58B24603-0A48-4125-876C-2FE691118494}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58B24603-0A48-4125-876C-2FE691118494}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FC2FE1D-B59B-4BCC-A7F1-392E10D093BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F57832D1-14D2-460C-99A8-3F3E80F32527}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,6 +64,10 @@ Global
 		{DCAFB1D3-347D-4D67-A558-CA46D1CF4A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCAFB1D3-347D-4D67-A558-CA46D1CF4A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCAFB1D3-347D-4D67-A558-CA46D1CF4A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34A7D59E-38E4-44CE-827F-3FE39474742D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A7D59E-38E4-44CE-827F-3FE39474742D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A7D59E-38E4-44CE-827F-3FE39474742D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34A7D59E-38E4-44CE-827F-3FE39474742D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
