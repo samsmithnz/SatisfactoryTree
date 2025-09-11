@@ -1,5 +1,4 @@
 ﻿using SatisfactoryTree.Logic.Models;
-using System.Linq;
 
 namespace SatisfactoryTree.Logic
 {

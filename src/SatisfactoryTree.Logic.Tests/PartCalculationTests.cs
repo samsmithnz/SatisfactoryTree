@@ -6,7 +6,7 @@ namespace SatisfactoryTree.Logic.Tests
     [TestClass]
     public class PartCalculationTests
     {
-        private FactoryCatalog? finalData = null;
+        private FactoryCatalog? factoryCatalog = null;
 
         [TestInitialize]
         public async Task Initialize()
@@ -14,10 +14,10 @@ namespace SatisfactoryTree.Logic.Tests
             //arrange
 
             //act
-            finalData = await FactoryCatalogExtractor.LoadDataFromFile();
+            factoryCatalog = await FactoryCatalogExtractor.LoadDataFromFile();
 
             //assert
-            if (finalData == null)
+            if (factoryCatalog == null)
             {
                 Assert.Fail("Final data is null");
             }
@@ -29,14 +29,14 @@ namespace SatisfactoryTree.Logic.Tests
             //Arrange
             string partName = "IronIngot";
             double quantity = 30;
-            if (finalData == null)
+            if (factoryCatalog == null)
             {
                 Assert.Fail("Final data is null");
             }
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
+            List<Item>? results = calculator.CalculateProduction(factoryCatalog, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);
@@ -61,14 +61,14 @@ namespace SatisfactoryTree.Logic.Tests
             //Arrange
             string partName = "IronPlate";
             double quantity = 30;
-            if (finalData == null)
+            if (factoryCatalog == null)
             {
                 Assert.Fail("Final data is null");
             }
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
+            List<Item>? results = calculator.CalculateProduction(factoryCatalog, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);
@@ -98,14 +98,14 @@ namespace SatisfactoryTree.Logic.Tests
             //Arrange
             string partName = "IronPlateReinforced";
             double quantity = 1;
-            if (finalData == null)
+            if (factoryCatalog == null)
             {
                 Assert.Fail("Final data is null");
             }
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
+            List<Item>? results = calculator.CalculateProduction(factoryCatalog, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);
@@ -136,14 +136,14 @@ namespace SatisfactoryTree.Logic.Tests
             //Arrange
             string partName = "ModularFrameHeavy";
             double quantity = 1;
-            if (finalData == null)
+            if (factoryCatalog == null)
             {
                 Assert.Fail("Final data is null");
             }
 
             //Act
             Calculator calculator = new();
-            List<Item>? results = calculator.CalculateProduction(finalData, partName, quantity, new());
+            List<Item>? results = calculator.CalculateProduction(factoryCatalog, partName, quantity, new());
 
             //Assert
             Assert.IsNotNull(results);
