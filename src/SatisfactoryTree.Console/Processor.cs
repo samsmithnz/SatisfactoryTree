@@ -60,21 +60,21 @@ namespace SatisfactoryTree.Console
             }
 
             // Get an array of all buildings that produce something
-            List<string> producingBuildings = Buildings.GetProducingBuildings(data);
+            List<string> producingBuildings = ProcessRawBuildings.GetProducingBuildings(data);
 
             // Get power consumption for the producing buildings
-            Dictionary<string, double> buildings = Buildings.GetPowerConsumptionForBuildings(data, producingBuildings);
+            Dictionary<string, double> buildings = ProcessRawBuildings.GetPowerConsumptionForBuildings(data, producingBuildings);
 
             // Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
-            List<OldModels.Recipe> recipes = Recipes.GetProductionRecipes(data, buildings);
+            List<OldModels.Recipe> recipes = ProcessRawRecipes.GetProductionRecipes(data, buildings);
 
             // Get parts
-            OldModels.PartDataInterface items = Parts.GetItems(data, recipes);
-            Parts.FixItemNames(items);
-            Parts.FixTurbofuel(items, recipes);
+            OldModels.PartDataInterface items = ProcessRawParts.GetItems(data, recipes);
+            ProcessRawParts.FixItemNames(items);
+            ProcessRawParts.FixTurbofuel(items, recipes);
 
             // IMPORTANT: The order here matters - don't run this before fixing the turbofuel.
-            List<PowerGenerationRecipe> powerGenerationRecipes = Recipes.GetPowerGeneratingRecipes(data, items, buildings);
+            List<PowerGenerationRecipe> powerGenerationRecipes = ProcessRawRecipes.GetPowerGeneratingRecipes(data, items, buildings);
 
             // Since we've done some manipulation of the items data, re-sort it
             Dictionary<string, OldModels.Part> sortedItems = new();
