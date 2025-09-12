@@ -1,0 +1,21 @@
+﻿@using SatisfactoryTree.Logic.Models
+@code {
+    [Parameter]
+    public Factory? Factory { get; set; }
+}
+
+@if (Factory?.TargetParts != null && Factory.TargetParts.Any())
+{
+    <ul>
+        @foreach (var item in Factory.TargetParts)
+        {
+            <li>
+                <strong>@item.Name</strong> - Quantity: @item.Quantity
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No items in this factory.</p>
+}
