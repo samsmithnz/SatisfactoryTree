@@ -1,5 +1,6 @@
 ﻿using SatisfactoryTree.Logic.Models;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text.Json;
 
 namespace SatisfactoryTree.Logic.Extraction
@@ -22,17 +23,80 @@ namespace SatisfactoryTree.Logic.Extraction
             string projectContentPath = Path.Combine(parentDir.FullName, "content");
             string projectContentFile = Path.Combine(projectContentPath, "en-US.json");
 
-            // If the file exists, copy it to the content folder, that is located in the content folder in the root of the project
-            if (File.Exists(contentPath) &&
-                Directory.Exists(projectContentPath))
+            // Only copy if the file doesn't exist or if the files are different
+            if (File.Exists(contentPath) && Directory.Exists(projectContentPath))
             {
-                //Get the current directory
-                Debug.WriteLine("Copying file to " + projectContentPath);
-                File.Copy(contentPath, projectContentFile, true);
+                bool shouldCopy = !File.Exists(projectContentFile) || !FilesAreEqual(contentPath, projectContentFile);
+
+                if (shouldCopy)
+                {
+                    Debug.WriteLine("Copying file to " + projectContentPath);
+                    CopyFileWithRetry(contentPath, projectContentFile);
+                }
+                else
+                {
+                    Debug.WriteLine("File already exists and is identical, skipping copy.");
+                }
             }
+
             InputFile = projectContentFile;
             OutputFile = Path.Combine(projectContentPath, "gameData.json");
             return true;
+        }
+
+        private static bool FilesAreEqual(string filePath1, string filePath2)
+        {
+            try
+            {
+                // First check file sizes - if different, files are definitely different
+                FileInfo fileInfo1 = new(filePath1);
+                FileInfo fileInfo2 = new(filePath2);
+
+                if (fileInfo1.Length != fileInfo2.Length)
+                {
+                    return false;
+                }
+
+                // If sizes are the same, compare checksums
+                using SHA256 sha256 = System.Security.Cryptography.SHA256.Create();
+
+                byte[] hash1, hash2;
+                using (FileStream stream1 = new FileStream(filePath1, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    hash1 = sha256.ComputeHash(stream1);
+                }
+
+                using (FileStream stream2 = new FileStream(filePath2, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    hash2 = sha256.ComputeHash(stream2);
+                }
+
+                return hash1.SequenceEqual(hash2);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error comparing files: {ex.Message}");
+                return false; // Assume files are different if we can't compare them
+            }
+        }
+
+        private static void CopyFileWithRetry(string source, string destination, int maxRetries = 3)
+        {
+            for (int i = 0; i < maxRetries; i++)
+            {
+                try
+                {
+                    using var sourceStream = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    using var destinationStream = new FileStream(destination, FileMode.Create, FileAccess.Write);
+                    sourceStream.CopyTo(destinationStream);
+                    return; // Success
+                }
+                catch (IOException ex) when (i < maxRetries - 1)
+                {
+                    Debug.WriteLine($"Copy attempt {i + 1} failed: {ex.Message}. Retrying in 1 second...");
+                    Thread.Sleep(1000); // Wait 1 second before retry
+                }
+            }
         }
 
         public static async Task<FactoryCatalog> ProcessGameFile()
@@ -175,7 +239,7 @@ namespace SatisfactoryTree.Logic.Extraction
             try
             {
                 GetContentFiles();
-                string targetFile = OutputFile;             
+                string targetFile = OutputFile;
 
                 if (!File.Exists(targetFile))
                 {
@@ -183,15 +247,15 @@ namespace SatisfactoryTree.Logic.Extraction
                 }
 
                 string jsonContent = await File.ReadAllTextAsync(targetFile);
-                
-                JsonSerializerOptions options = new() 
-                { 
+
+                JsonSerializerOptions options = new()
+                {
                     PropertyNameCaseInsensitive = true,
-                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull 
+                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
                 };
-                
+
                 FactoryCatalog? factoryCatalog = JsonSerializer.Deserialize<FactoryCatalog>(jsonContent, options);
-                
+
                 if (factoryCatalog == null)
                 {
                     throw new InvalidOperationException("Failed to deserialize the configuration file");
@@ -199,7 +263,7 @@ namespace SatisfactoryTree.Logic.Extraction
 
                 System.Console.WriteLine($"Successfully loaded data from {targetFile}");
                 System.Console.WriteLine($"Loaded {factoryCatalog.Parts?.Count ?? 0} parts, {factoryCatalog.Buildings?.Count ?? 0} buildings, {factoryCatalog.Recipes?.Count ?? 0} recipes, and {factoryCatalog.PowerGenerationRecipes?.Count ?? 0} power generation recipes");
-                
+
                 return factoryCatalog;
             }
             catch (Exception ex)
