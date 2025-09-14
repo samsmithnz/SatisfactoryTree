@@ -32,6 +32,55 @@
         
         return $"images/parts/{imageName}_256.png";
     }
+
+    private string GetBuildingImagePath(string buildingName)
+    {
+        // Handle building name mappings to match image files
+        string imageName = buildingName switch
+        {
+            "smeltermk1" => "SmelterMk1_256.png",
+            "foundry" => "Foundry_256.png",
+            "constructormk1" => "ConstructorMk1_256.png",
+            "assemblermk1" => "AssemblerMk1_256.png",
+            "manufacturer" => "Manufacturer_256.png",
+            "refinery" => "OilRefinery_256.png",
+            "packager" => "Packager_256.png",
+            "blender" => "Blender_256.png",
+            "hadronCollider" => "ParticleAccelerator_256.png",
+            "generatorcoal" => "CoalGenerator_256.png",
+            "generatorfuel" => "FuelGenerator_256.png",
+            "generatornuclear" => "NuclearPowerplant_256.png",
+            "generatorbiomass" => "BiomassBurner_256.png",
+            "generatorgeothermal" => "GeothermalPowerGenerator_256.png",
+            "minermk1" => "MinerMk1_256.png",
+            "minermk2" => "MinerMk2_256.png",
+            "minermk3" => "MinerMk3_256.png",
+            "oilpump" => "OilExtractor_256.png",
+            "waterpump" => "WaterExtractor_256.png",
+            "frackingextractor" => "ResourceWellExtractor_256.png",
+            "frackingsmasher" => "ResourceWellPressurizer_256.png",
+            "resourcesink" => "ResourceSink_256.png",
+            _ => $"{buildingName}_256.png" // Default: use building name as-is
+        };
+        
+        return $"images/buildings/{imageName}";
+    }
+
+    private bool HasBuildingImage(string buildingName)
+    {
+        // Check if we have a specific image mapping for this building
+        return buildingName switch
+        {
+            "smeltermk1" or "foundry" or "constructormk1" or "assemblermk1" or "manufacturer" or
+            "refinery" or "packager" or "blender" or "hadronCollider" or
+            "generatorcoal" or "generatorfuel" or "generatornuclear" or
+            "generatorbiomass" or "generatorgeothermal" or
+            "minermk1" or "minermk2" or "minermk3" or
+            "oilpump" or "waterpump" or "frackingextractor" or
+            "frackingsmasher" or "resourcesink" => true,
+            _ => false
+        };
+    }
 }
 
 <div class="factory-container">
@@ -55,6 +104,7 @@
                 @foreach (var item in Factory.ComponentParts)
                 {
                     <li>
+                        <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
                         <TypeaheadDropdown TItem="Part"
                                          Items="@(Parts?.Values)"
                                          DisplayNameSelector="@(part => part.Name)"
@@ -75,8 +125,17 @@
                                 }
                             </ItemTemplate>
                         </TypeaheadDropdown>
-                        <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                        <strong>@item.Name</strong> - Quantity: @item.Quantity - Building: @item.Building x @item.BuildingQuantity
+                        Quantity: <input type="text" value="@item.Quantity.ToString()"><br>
+                        Building: 
+                        @if (HasBuildingImage(item.Building))
+                        {
+                            <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
+                        }
+                        else
+                        {
+                            <i class="fas fa-building building-icon" title="@item.Building"></i>
+                        }
+                        @item.Building x @item.BuildingQuantity
                     </li>
                 }
             }
@@ -127,5 +186,37 @@
         vertical-align: middle;
         border-radius: 4px;
         object-fit: cover;
+    }
+
+    .building-image {
+        width: 42px;
+        height: 42px;
+        margin-left: 4px;
+        margin-right: 4px;
+        vertical-align: middle;
+        border-radius: 4px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+    }
+
+    .building-icon {
+        font-size: 32px;
+        width: 42px;
+        height: 42px;
+        margin-left: 4px;
+        margin-right: 4px;
+        vertical-align: middle;
+        color: #6c757d;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f8f9fa;
+    }
+
+    .building-icon:hover {
+        color: #495057;
+        background-color: #e9ecef;
     }
 </style>
