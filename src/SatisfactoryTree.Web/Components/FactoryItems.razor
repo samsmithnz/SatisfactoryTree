@@ -38,10 +38,10 @@
         // Handle building name mappings to match image files
         string imageName = buildingName switch
         {
-            "smelter" => "SmelterMk1_256.png",
+            "smeltermk1" => "SmelterMk1_256.png",
             "foundry" => "Foundry_256.png",
-            "constructor" => "ConstructorMk1_256.png",
-            "assembler" => "AssemblerMk1_256.png",
+            "constructormk1" => "ConstructorMk1_256.png",
+            "assemblermk1" => "AssemblerMk1_256.png",
             "manufacturer" => "Manufacturer_256.png",
             "refinery" => "OilRefinery_256.png",
             "packager" => "Packager_256.png",
@@ -64,6 +64,22 @@
         };
         
         return $"images/buildings/{imageName}";
+    }
+
+    private bool HasBuildingImage(string buildingName)
+    {
+        // Check if we have a specific image mapping for this building
+        return buildingName switch
+        {
+            "smeltermk1" or "foundry" or "constructormk1" or "assemblermk1" or "manufacturer" or
+            "refinery" or "packager" or "blender" or "hadronCollider" or
+            "generatorcoal" or "generatorfuel" or "generatornuclear" or
+            "generatorbiomass" or "generatorgeothermal" or
+            "minermk1" or "minermk2" or "minermk3" or
+            "oilpump" or "waterpump" or "frackingextractor" or
+            "frackingsmasher" or "resourcesink" => true,
+            _ => false
+        };
     }
 }
 
@@ -110,7 +126,14 @@
                         </TypeaheadDropdown>
                         <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
                         <strong>@item.Name</strong> - Quantity: @item.Quantity - Building: 
-                        <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
+                        @if (HasBuildingImage(item.Building))
+                        {
+                            <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
+                        }
+                        else
+                        {
+                            <i class="fas fa-building building-icon" title="@item.Building"></i>
+                        }
                         @item.Building x @item.BuildingQuantity
                     </li>
                 }
@@ -173,5 +196,26 @@
         border-radius: 4px;
         object-fit: cover;
         border: 1px solid #ddd;
+    }
+
+    .building-icon {
+        font-size: 32px;
+        width: 42px;
+        height: 42px;
+        margin-left: 4px;
+        margin-right: 4px;
+        vertical-align: middle;
+        color: #6c757d;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f8f9fa;
+    }
+
+    .building-icon:hover {
+        color: #495057;
+        background-color: #e9ecef;
     }
 </style>
