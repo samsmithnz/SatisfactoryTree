@@ -13,12 +13,12 @@ Welcome to your new app.
 @inject HttpClient Http
 
 @code {
+    FactoryCatalog? factoryCatalog;
     private Factory? factory;
 
     protected override async Task OnInitializedAsync()
     {
-        FactoryCatalog factoryCatalog = await Http.GetFromJsonAsync<FactoryCatalog>("content/gameData.json");
-        // FactoryCatalog? factoryCatalog = await FactoryCatalogExtractor.LoadDataFromFile(true);
+        factoryCatalog = await Http.GetFromJsonAsync<FactoryCatalog>("content/gameData.json");
         if (factoryCatalog == null)
         {
             throw new Exception("FactoryCatalog could not be loaded or found");
@@ -28,8 +28,7 @@ Welcome to your new app.
 
         //Calculate the production
         Calculator calculator = new();
-        factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);
-
+        factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);        
     }
 }
 
@@ -37,4 +36,4 @@ Welcome to your new app.
 <p>Target parts: @factory?.TargetParts.Count</p>
 <p>Imported parts: @factory?.ImportedParts.Count</p>
 <p>Component parts: @factory?.ComponentParts.Count</p>
-<FactoryItems Factory="factory" />
+<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
