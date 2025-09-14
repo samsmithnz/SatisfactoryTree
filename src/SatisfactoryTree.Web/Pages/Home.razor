@@ -1,0 +1,39 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+
+@using SatisfactoryTree.Logic
+@using SatisfactoryTree.Logic.Extraction
+@using SatisfactoryTree.Logic.Models
+@inject HttpClient Http
+
+@code {
+    FactoryCatalog? factoryCatalog;
+    private Factory? factory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        factoryCatalog = await Http.GetFromJsonAsync<FactoryCatalog>("content/gameData.json");
+        if (factoryCatalog == null)
+        {
+            throw new Exception("FactoryCatalog could not be loaded or found");
+        }
+        factory = new();
+        factory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 5 });
+
+        //Calculate the production
+        Calculator calculator = new();
+        factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);        
+    }
+}
+
+<h3>Factory Items</h3>
+<p>Target parts: @factory?.TargetParts.Count</p>
+<p>Imported parts: @factory?.ImportedParts.Count</p>
+<p>Component parts: @factory?.ComponentParts.Count</p>
+<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />

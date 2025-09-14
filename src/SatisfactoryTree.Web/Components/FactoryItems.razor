@@ -1,0 +1,244 @@
+﻿@using SatisfactoryTree.Logic.Models
+
+@code {
+    [Parameter]
+    public Factory? Factory { get; set; }
+    [Parameter]
+    public Dictionary<string, Part>? Parts { get; set; }
+    
+    private Dictionary<string, string> searchTerms = new();
+    private Dictionary<string, List<Part>> filteredParts = new();
+    private Dictionary<string, bool> showDropdowns = new();
+
+    private void OnSearchInput(ChangeEventArgs e, string itemId)
+    {
+        string searchTerm = e.Value?.ToString() ?? "";
+        searchTerms[itemId] = searchTerm;
+        FilterParts(itemId);
+    }
+
+    private void FilterParts(string itemId)
+    {
+        if (Parts == null || !searchTerms.ContainsKey(itemId) || string.IsNullOrWhiteSpace(searchTerms[itemId]))
+        {
+            filteredParts[itemId] = new();
+            showDropdowns[itemId] = false;
+            return;
+        }
+
+        var searchTerm = searchTerms[itemId];
+        filteredParts[itemId] = Parts.Values
+            .Where(p => p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(p => p.Name)
+            .Take(10)
+            .ToList();
+        
+        showDropdowns[itemId] = filteredParts[itemId].Any();
+        StateHasChanged();
+    }
+
+    private void SelectPart(Part part, string itemId, Item item)
+    {
+        item.Name = part.Name;
+        searchTerms[itemId] = part.Name;
+        showDropdowns[itemId] = false;
+        StateHasChanged();
+    }
+
+    private void OnInputFocus(string itemId)
+    {
+        if (searchTerms.ContainsKey(itemId) && !string.IsNullOrWhiteSpace(searchTerms[itemId]))
+        {
+            FilterParts(itemId);
+        }
+    }
+
+    private void OnInputBlur(string itemId)
+    {
+        Task.Delay(200).ContinueWith(_ => 
+        {
+            showDropdowns[itemId] = false;
+            InvokeAsync(StateHasChanged);
+        });
+    }
+
+    private string GetItemId(Item item, int index) => $"item_{index}_{item.Name}";
+}
+
+<div class="factory-container">
+    <p><b>Factory parts:</b></p>
+    @if (Factory?.TargetParts != null && Factory.TargetParts.Any())
+    {
+        <ul>
+            @foreach (Item item in Factory.TargetParts)
+            {
+                <li>
+                    <strong>@item.Name</strong> - Quantity: @item.Quantity
+                </li>
+            }
+        </ul>
+
+        <p><b>Component parts:</b></p>
+        <ul>
+            @if (Factory?.ComponentParts != null && Factory.ComponentParts.Any())
+            {
+                @for (int i = 0; i < Factory.ComponentParts.Count; i++)
+                {
+                    var item = Factory.ComponentParts[i];
+                    var itemId = GetItemId(item, i);
+                    
+                    <li>
+                        <div class="typeahead-container">
+                            <div class="typeahead-wrapper">
+                                <input type="text" 
+                                       value="@(searchTerms.ContainsKey(itemId) ? searchTerms[itemId] : item.Name)"
+                                       @oninput="(e) => OnSearchInput(e, itemId)"
+                                       @onfocus="() => OnInputFocus(itemId)"
+                                       @onblur="() => OnInputBlur(itemId)"
+                                       placeholder="Search for parts..." 
+                                       class="form-control typeahead-input" 
+                                       autocomplete="off" />
+                                
+                                @if (showDropdowns.ContainsKey(itemId) && showDropdowns[itemId] && 
+                                     filteredParts.ContainsKey(itemId) && filteredParts[itemId].Any())
+                                {
+                                    <div class="typeahead-dropdown">
+                                        @foreach (var part in filteredParts[itemId])
+                                        {
+                                            <div class="typeahead-item" @onclick="() => SelectPart(part, itemId, item)">
+                                                <strong>@part.Name</strong>
+                                                @if (part.IsFluid)
+                                                {
+                                                    <span class="badge badge-fluid">Fluid</span>
+                                                }
+                                                @if (part.IsFicsmas)
+                                                {
+                                                    <span class="badge badge-ficsmas">FICSMAS</span>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <strong>@item.Name</strong> - Quantity: @item.Quantity - Building: @item.Building x @item.BuildingQuantity
+                    </li>
+                }
+            }
+            else
+            {
+                <li>No component parts.</li>
+            }
+        </ul>
+
+        <p><b>Imported parts:</b></p>
+        <ul>
+            @if (Factory?.ImportedParts != null && Factory.ImportedParts.Any())
+            {
+                @foreach (Item item in Factory.ImportedParts)
+                {
+                    <li>
+                        <strong>@item.Name</strong> - Quantity: @item.Quantity - from factory: TBD
+                    </li>
+                }
+            }
+            else
+            {
+                <li>No imported parts.</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No items in this factory.</p>
+    }
+</div>
+
+<style>
+    .factory-container {
+        max-width: 800px;
+        margin: 20px 0;
+    }
+    
+    .typeahead-container {
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+        width: 250px;
+    }
+    
+    .typeahead-wrapper {
+        position: relative;
+        width: 100%;
+    }
+    
+    .typeahead-input {
+        width: 100%;
+        padding: 6px 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    
+    .typeahead-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ced4da;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .typeahead-item {
+        padding: 8px 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #f8f9fa;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .typeahead-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .typeahead-item:last-child {
+        border-bottom: none;
+    }
+        
+    .badge {
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-size: 9px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    .badge-fluid {
+        background-color: #17a2b8;
+        color: white;
+    }
+    
+    .badge-ficsmas {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .form-control {
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+    }
+</style>
