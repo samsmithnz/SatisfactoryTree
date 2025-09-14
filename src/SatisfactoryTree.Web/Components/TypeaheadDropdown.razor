@@ -1,0 +1,216 @@
+@typeparam TItem
+@using System.Linq.Expressions
+@using System.Reflection
+
+@code {
+    [Parameter, EditorRequired]
+    public IEnumerable<TItem>? Items { get; set; }
+    
+    [Parameter, EditorRequired]
+    public Func<TItem, string>? DisplayNameSelector { get; set; }
+    
+    [Parameter, EditorRequired]
+    public Func<TItem, object>? IdSelector { get; set; }
+    
+    [Parameter]
+    public TItem? SelectedItem { get; set; }
+    
+    [Parameter]
+    public EventCallback<TItem> SelectedItemChanged { get; set; }
+    
+    [Parameter]
+    public string Placeholder { get; set; } = "Search...";
+    
+    [Parameter]
+    public string CssClass { get; set; } = "";
+    
+    [Parameter]
+    public int MaxResults { get; set; } = 10;
+
+    [Parameter]
+    public RenderFragment<TItem>? ItemTemplate { get; set; }
+    
+    private string searchTerm = "";
+    private List<TItem> filteredItems = new();
+    private bool showDropdown = false;
+    private string uniqueId = Guid.NewGuid().ToString("N")[..8];
+
+    protected override void OnParametersSet()
+    {
+        if (SelectedItem != null && DisplayNameSelector != null)
+        {
+            searchTerm = DisplayNameSelector(SelectedItem);
+        }
+    }
+
+    private void OnSearchInput(ChangeEventArgs e)
+    {
+        searchTerm = e.Value?.ToString() ?? "";
+        FilterItems();
+    }
+
+    private void FilterItems()
+    {
+        if (Items == null || DisplayNameSelector == null || string.IsNullOrWhiteSpace(searchTerm))
+        {
+            filteredItems.Clear();
+            showDropdown = false;
+            return;
+        }
+
+        filteredItems = Items
+            .Where(item => DisplayNameSelector(item).Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(item => DisplayNameSelector(item))
+            .Take(MaxResults)
+            .ToList();
+        
+        showDropdown = filteredItems.Any();
+        StateHasChanged();
+    }
+
+    private async Task SelectItem(TItem item)
+    {
+        if (DisplayNameSelector == null) return;
+        
+        SelectedItem = item;
+        searchTerm = DisplayNameSelector(item);
+        showDropdown = false;
+        
+        await SelectedItemChanged.InvokeAsync(item);
+        StateHasChanged();
+    }
+
+    private void OnInputFocus()
+    {
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            FilterItems();
+        }
+    }
+
+    private void OnInputBlur()
+    {
+        // Delay to allow for click events on dropdown items
+        Task.Delay(200).ContinueWith(_ => 
+        {
+            showDropdown = false;
+            InvokeAsync(StateHasChanged);
+        });
+    }
+}
+
+<div class="typeahead-container @CssClass">
+    <div class="typeahead-wrapper">
+        <input type="text" 
+               id="typeahead-@uniqueId"
+               value="@searchTerm"
+               @oninput="OnSearchInput"
+               @onfocus="OnInputFocus"
+               @onblur="OnInputBlur"
+               placeholder="@Placeholder" 
+               class="form-control typeahead-input" 
+               autocomplete="off" />
+        
+        @if (showDropdown && filteredItems.Any())
+        {
+            <div class="typeahead-dropdown">
+                @foreach (var item in filteredItems)
+                {
+                    <div class="typeahead-item" @onclick="() => SelectItem(item)">
+                        @if (ItemTemplate != null)
+                        {
+                            @ItemTemplate(item)
+                        }
+                        else if (DisplayNameSelector != null)
+                        {
+                            @DisplayNameSelector(item)
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .typeahead-container {
+        position: relative;
+        display: inline-block;
+        width: 250px;
+    }
+    
+    .typeahead-wrapper {
+        position: relative;
+        width: 100%;
+    }
+    
+    .typeahead-input {
+        width: 100%;
+        padding: 6px 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    
+    .typeahead-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ced4da;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .typeahead-item {
+        padding: 8px 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #f8f9fa;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .typeahead-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .typeahead-item:last-child {
+        border-bottom: none;
+    }
+        
+    .badge {
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-size: 9px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    .badge-fluid {
+        background-color: #17a2b8;
+        color: white;
+    }
+    
+    .badge-ficsmas {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .form-control {
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+    }
+</style>
