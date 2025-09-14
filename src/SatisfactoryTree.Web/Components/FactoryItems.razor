@@ -18,6 +18,20 @@
         Parts.TryGetValue(item.Name, out Part? part);
         return part;
     }
+
+    private string GetPartImagePath(string partName)
+    {
+        // Handle special mapping cases where the part name doesn't directly match the image name
+        string imageName = partName switch
+        {
+            "IronPlateReinforced" => "ReinforcedIronPlate",
+            "OreIron" => "IronOre", 
+            "IronScrew" => "IronScrews",
+            _ => partName.Replace(" ", "") // Default: remove spaces
+        };
+        
+        return $"images/parts/{imageName}_256.png";
+    }
 }
 
 <div class="factory-container">
@@ -28,6 +42,7 @@
             @foreach (Item item in Factory.TargetParts)
             {
                 <li>
+                    <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
                     <strong>@item.Name</strong> - Quantity: @item.Quantity
                 </li>
             }
@@ -60,6 +75,7 @@
                                 }
                             </ItemTemplate>
                         </TypeaheadDropdown>
+                        <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
                         <strong>@item.Name</strong> - Quantity: @item.Quantity - Building: @item.Building x @item.BuildingQuantity
                     </li>
                 }
@@ -77,6 +93,7 @@
                 @foreach (Item item in Factory.ImportedParts)
                 {
                     <li>
+                        <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
                         <strong>@item.Name</strong> - Quantity: @item.Quantity - from factory: TBD
                     </li>
                 }
@@ -101,5 +118,14 @@
     
     .me-2 {
         margin-right: 10px;
+    }
+
+    .part-image {
+        width: 42px;
+        height: 42px;
+        margin-right: 8px;
+        vertical-align: middle;
+        border-radius: 4px;
+        object-fit: cover;
     }
 </style>
