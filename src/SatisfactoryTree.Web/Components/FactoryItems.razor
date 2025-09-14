@@ -32,6 +32,39 @@
         
         return $"images/parts/{imageName}_256.png";
     }
+
+    private string GetBuildingImagePath(string buildingName)
+    {
+        // Handle building name mappings to match image files
+        string imageName = buildingName switch
+        {
+            "smelter" => "SmelterMk1_256.png",
+            "foundry" => "Foundry_256.png",
+            "constructor" => "ConstructorMk1_256.png",
+            "assembler" => "AssemblerMk1_256.png",
+            "manufacturer" => "Manufacturer_256.png",
+            "refinery" => "OilRefinery_256.png",
+            "packager" => "Packager_256.png",
+            "blender" => "Blender_256.png",
+            "hadronCollider" => "ParticleAccelerator_256.png",
+            "generatorcoal" => "CoalGenerator_256.png",
+            "generatorfuel" => "FuelGenerator_256.png",
+            "generatornuclear" => "NuclearPowerplant_256.png",
+            "generatorbiomass" => "BiomassBurner_256.png",
+            "generatorgeothermal" => "GeothermalPowerGenerator_256.png",
+            "minermk1" => "MinerMk1_256.png",
+            "minermk2" => "MinerMk2_256.png",
+            "minermk3" => "MinerMk3_256.png",
+            "oilpump" => "OilExtractor_256.png",
+            "waterpump" => "WaterExtractor_256.png",
+            "frackingextractor" => "ResourceWellExtractor_256.png",
+            "frackingsmasher" => "ResourceWellPressurizer_256.png",
+            "resourcesink" => "ResourceSink_256.png",
+            _ => $"{buildingName}_256.png" // Default: use building name as-is
+        };
+        
+        return $"images/buildings/{imageName}";
+    }
 }
 
 <div class="factory-container">
@@ -76,7 +109,9 @@
                             </ItemTemplate>
                         </TypeaheadDropdown>
                         <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                        <strong>@item.Name</strong> - Quantity: @item.Quantity - Building: @item.Building x @item.BuildingQuantity
+                        <strong>@item.Name</strong> - Quantity: @item.Quantity - Building: 
+                        <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
+                        @item.Building x @item.BuildingQuantity
                     </li>
                 }
             }
@@ -127,5 +162,16 @@
         vertical-align: middle;
         border-radius: 4px;
         object-fit: cover;
+    }
+
+    .building-image {
+        width: 42px;
+        height: 42px;
+        margin-left: 4px;
+        margin-right: 4px;
+        vertical-align: middle;
+        border-radius: 4px;
+        object-fit: cover;
+        border: 1px solid #ddd;
     }
 </style>
