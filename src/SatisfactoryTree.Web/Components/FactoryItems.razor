@@ -29,7 +29,7 @@
             "IronScrew" => "IronScrews",
             _ => partName.Replace(" ", "") // Default: remove spaces
         };
-        
+
         return $"images/parts/{imageName}_256.png";
     }
 
@@ -62,7 +62,7 @@
             "resourcesink" => "ResourceSink_256.png",
             _ => $"{buildingName}_256.png" // Default: use building name as-is
         };
-        
+
         return $"images/buildings/{imageName}";
     }
 
@@ -80,6 +80,20 @@
             "frackingsmasher" or "resourcesink" => true,
             _ => false
         };
+    }
+
+    private double GetBuildingPower(string building, double quantity)
+    {
+        switch (building)
+        {
+            case "constructormk1":
+            case "smeltermk1":
+                return 4 * quantity;
+            case "assemblermk1":
+                return 15 * quantity;
+            default:
+                return 0;
+        }
     }
 }
 
@@ -142,10 +156,10 @@
                         {
                             <i class="fas fa-building building-icon" title="@item.Building"></i>
                         }
-                        @item.Building x @item.BuildingQuantity
+                        @item.Building x@(@item.BuildingQuantity)
                         </span>
-                        <span class="badge" badge-gray">
-                            [Power] nMW
+                        <span class="badge badge-gray">
+                            [Power Icon] @(@GetBuildingPower(@item.Building, @item.BuildingQuantity))MW
                         </span>
                        
                     </li>
