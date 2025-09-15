@@ -126,6 +126,11 @@
                             </ItemTemplate>
                         </TypeaheadDropdown>
                         Quantity: <input type="text" value="@item.Quantity.ToString()"><br>
+                        @foreach (Item ingredient in item.Ingredients)
+                        {
+                            <img src="@GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="part-image" />
+                            <span>@ingredient.Name </span><span> x</span><span>@ingredient.Quantity</span>
+                        }
                         Building: 
                         @if (HasBuildingImage(item.Building))
                         {
