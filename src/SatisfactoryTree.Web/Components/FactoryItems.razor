@@ -142,7 +142,11 @@
                         {
                             <i class="fas fa-building building-icon" title="@item.Building"></i>
                         }
-                        @item.Building x @item.BuildingQuantity</span>
+                        @item.Building x @item.BuildingQuantity
+                        </span>
+                        <span class="badge" badge-gray">
+                            [Power] nMW
+                        </span>
                        
                     </li>
                     <hr>
@@ -155,6 +159,11 @@
         </ul>
 
         <p><b>Imported parts:</b></p>
+        <p><b>Raw resources:</b></p>
+        <span class="badge badge-blue">
+            <img src='@GetPartImagePath("OreIron")' alt="OreIron" class="ingredient-image" />
+            <span>Iron Ore 60 per/min</span>
+        </span>
         <ul>
             @if (Factory?.ImportedParts != null && Factory.ImportedParts.Any())
             {
