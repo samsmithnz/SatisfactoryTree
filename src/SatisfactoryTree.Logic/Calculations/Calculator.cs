@@ -11,16 +11,16 @@ namespace SatisfactoryTree.Logic
         public List<Item> CalculateFactoryProduction(FactoryCatalog factoryCatalog, Factory factory)
         {
             List<Item> results = new();
-     
+
             foreach (Item item in factory.TargetParts)
             {
                 results.AddRange(CalculateProduction(factoryCatalog, item.Name, item.Quantity, factory.ImportedParts));
             }
 
-            return results; 
+            return results;
         }
 
-        public List<Item> CalculateProduction(FactoryCatalog factoryCatalog, string partName, double quantity, List<Item> importedParts )
+        public List<Item> CalculateProduction(FactoryCatalog factoryCatalog, string partName, double quantity, List<Item> importedParts)
         {
             List<Item> results = new();
             int counter = 1;
@@ -28,7 +28,7 @@ namespace SatisfactoryTree.Logic
             //Add the goal item
             Recipe? recipe = FindRecipe(factoryCatalog, partName);
             double buildingRatio = quantity / recipe.Products[0].perMin;
-            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = new(), Building = recipe.Building.Name, BuildingQuantity = buildingRatio, Counter = counter });
+            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = GetIngredients(factoryCatalog, partName, quantity, counter, new(), false), Building = recipe.Building.Name, BuildingQuantity = buildingRatio, Counter = counter });
             //Get the dependencies/ingredients for the goal item
             results.AddRange(GetIngredients(factoryCatalog, partName, quantity, counter, importedParts));
 
@@ -57,11 +57,11 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        private List<Item> GetIngredients(FactoryCatalog finalData, string partName, double quantity, int counter, List<Item> importedParts)
+        private List<Item> GetIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, List<Item> importedParts, bool recursivelySearch = true)
         {
             List<Item> results = new();
             counter++;
-            Recipe? newRecipe = FindRecipe(finalData, partName);
+            Recipe? newRecipe = FindRecipe(factoryCatalog, partName);
 
             //If we have a recipe, calculate the ingredients
             if (newRecipe != null && newRecipe.Products != null)
@@ -105,7 +105,7 @@ namespace SatisfactoryTree.Logic
                         // Only add the ingredient if there's still a need after imports
                         if (needed > 0)
                         {
-                            Recipe? ingredientRecipe = FindRecipe(finalData, ingredient.part);
+                            Recipe? ingredientRecipe = FindRecipe(factoryCatalog, ingredient.part);
                             string buildingName = "";
                             double buildingRatio = 0;
                             if (ingredientRecipe != null)
@@ -125,7 +125,10 @@ namespace SatisfactoryTree.Logic
                             };
 
                             results.Add(newIngredient);
-                            results.AddRange(GetIngredients(finalData, ingredient.part, needed, counter, importedParts));
+                            if (recursivelySearch == true)
+                            {
+                                results.AddRange(GetIngredients(factoryCatalog, ingredient.part, needed, counter, importedParts));
+                            }
                         }
                         // If all was satisfied by imports, you may want to log or track that as well if needed
                     }

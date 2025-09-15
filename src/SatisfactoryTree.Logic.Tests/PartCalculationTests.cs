@@ -78,6 +78,9 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(1, results[0].Counter);
             Assert.AreEqual("constructormk1", results[0].Building);
             Assert.AreEqual(1.5, results[0].BuildingQuantity);
+            Assert.AreEqual(1, results[0].Ingredients.Count);
+            Assert.AreEqual("IronIngot", results[0].Ingredients[0].Name);
+            Assert.AreEqual(45, results[0].Ingredients[0].Quantity);
 
             Assert.AreEqual("IronIngot", results[1].Name);
             Assert.AreEqual(45, results[1].Quantity);
