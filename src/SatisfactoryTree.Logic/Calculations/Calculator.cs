@@ -142,6 +142,10 @@ namespace SatisfactoryTree.Logic
 
         private List<Item> SortItems(List<Item> results)
         {
+            foreach (Item item in results)
+            {
+
+            }
             return results;
         }
 
