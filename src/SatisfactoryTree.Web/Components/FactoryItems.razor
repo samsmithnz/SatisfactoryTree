@@ -84,9 +84,9 @@
 }
 
 <div class="factory-container">
-    <p><b>Factory parts:</b></p>
     @if (Factory?.TargetParts != null && Factory.TargetParts.Any())
     {
+        <p><b>Target parts:</b></p>
         <ul>
             @foreach (Item item in Factory.TargetParts)
             {
@@ -101,7 +101,7 @@
         <ul>
             @if (Factory?.ComponentParts != null && Factory.ComponentParts.Any())
             {
-                @foreach (var item in Factory.ComponentParts)
+                @foreach (Item item in Factory.ComponentParts)
                 {
                     <li>
                         <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
@@ -128,10 +128,12 @@
                         Quantity: <input type="text" value="@item.Quantity.ToString()"><br>
                         @foreach (Item ingredient in item.Ingredients)
                         {
-                            <img src="@GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="part-image" />
-                            <span>@ingredient.Name </span><span> x</span><span>@ingredient.Quantity</span>
+                            <span class="badge badge-blue">
+                                <img src="@GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="ingredient-image" />
+                                @ingredient.Name @ingredient.Quantity per/min
+                            </span>
                         }
-                        Building: 
+                        <span class="badge badge-yellow"> 
                         @if (HasBuildingImage(item.Building))
                         {
                             <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
@@ -140,7 +142,8 @@
                         {
                             <i class="fas fa-building building-icon" title="@item.Building"></i>
                         }
-                        @item.Building x @item.BuildingQuantity
+                        @item.Building x @item.BuildingQuantity</span>
+                       
                     </li>
                     <hr>
                 }
@@ -194,9 +197,18 @@
         object-fit: cover;
     }
 
+    .ingredient-image {
+        width: 32px;
+        height: 32px;
+        margin-right: 8px;
+        vertical-align: middle;
+        border-radius: 4px;
+        object-fit: cover;
+    }
+
     .building-image {
-        width: 42px;
-        height: 42px;
+        width: 32px;
+        height: 32px;
         margin-left: 4px;
         margin-right: 4px;
         vertical-align: middle;
@@ -207,8 +219,8 @@
 
     .building-icon {
         font-size: 32px;
-        width: 42px;
-        height: 42px;
+        width: 32px;
+        height: 32px;
         margin-left: 4px;
         margin-right: 4px;
         vertical-align: middle;
