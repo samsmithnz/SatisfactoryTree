@@ -54,6 +54,9 @@ namespace SatisfactoryTree.Logic
             //sort the results by counter to show the goal items first and raw items last, and then part name
             results = results.OrderBy(x => x.Counter).ThenBy(x => x.Name).ToList();
 
+            //Sort back through the counter to ensure that raw materials have the highest count, and end products have the lowest count. 
+            results = SortItems(results);
+
             return results;
         }
 
@@ -134,6 +137,11 @@ namespace SatisfactoryTree.Logic
                     }
                 }
             }
+            return results;
+        }
+
+        private List<Item> SortItems(List<Item> results)
+        {
             return results;
         }
 
