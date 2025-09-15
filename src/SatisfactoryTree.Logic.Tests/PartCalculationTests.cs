@@ -116,21 +116,32 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual("IronPlateReinforced", results[0].Name);
             Assert.AreEqual(1, results[0].Quantity);
             Assert.AreEqual(1, results[0].Counter);
+            Assert.AreEqual(2, results[0].Ingredients.Count);
+
             Assert.AreEqual("IronPlate", results[1].Name);
             Assert.AreEqual(6, results[1].Quantity);
             Assert.AreEqual(2, results[1].Counter);
+            Assert.AreEqual(1, results[1].Ingredients.Count);
+
             Assert.AreEqual("IronScrew", results[2].Name);
             Assert.AreEqual(12, results[2].Quantity);
             Assert.AreEqual(2, results[2].Counter);
+            Assert.AreEqual(1, results[2].Ingredients.Count);
+
             Assert.AreEqual("IronIngot", results[3].Name);
             Assert.AreEqual(12, results[3].Quantity);
             Assert.AreEqual(3, results[3].Counter);
+            Assert.AreEqual(1, results[3].Ingredients.Count);
+
             Assert.AreEqual("IronRod", results[4].Name);
             Assert.AreEqual(3, results[4].Quantity);
             Assert.AreEqual(3, results[4].Counter);
+            Assert.AreEqual(1, results[4].Ingredients.Count);
+
             Assert.AreEqual("OreIron", results[5].Name);
             Assert.AreEqual(12, results[5].Quantity);
             Assert.AreEqual(4, results[5].Counter);
+            Assert.AreEqual(0, results[5].Ingredients.Count);
         }
 
         [TestMethod]
