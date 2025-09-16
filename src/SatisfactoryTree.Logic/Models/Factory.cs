@@ -2,13 +2,15 @@
 {
     public class Factory
     {
+        public string Name { get; set; }
         public List<Item> ImportedParts { get; set; }
         public List<Item> TargetParts { get; set; }
         public List<Item> ComponentParts { get; set; }
         public List<Item> Surplus { get; set; }
 
-        public Factory()
+        public Factory(string name)
         {
+            Name = name;
             ImportedParts = new();
             TargetParts = new();
             ComponentParts = new();

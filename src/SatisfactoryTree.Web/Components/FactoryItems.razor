@@ -98,6 +98,7 @@
 }
 
 <div class="factory-container">
+    <h3><input type="text" value="@Factory?.Name" /></h3>
     @if (Factory?.TargetParts != null && Factory.TargetParts.Any())
     {
         <p><b>Target parts:</b></p>
@@ -106,7 +107,7 @@
             {
                 <li>
                     <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                    <strong>@item.Name</strong> - Quantity: @item.Quantity
+                    <strong>@item.Name</strong> - @item.Quantity per/min
                 </li>
             }
         </ul>

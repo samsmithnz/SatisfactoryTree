@@ -32,9 +32,9 @@ namespace SatisfactoryTree.Logic.Tests
             {
                 Assert.Fail("Final data is null");
             }
-            Factory screwsFactory = new();
+            Factory screwsFactory = new("Screws factory");
             screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
-            Factory reinforcedPlatesFactory = new();
+            Factory reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
             reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
             reinforcedPlatesFactory.ImportedParts.Add(new() { Name = "IronScrew", Quantity = 12 });
             //Plan plan = new();
@@ -92,9 +92,9 @@ namespace SatisfactoryTree.Logic.Tests
             {
                 Assert.Fail("Final data is null");
             }
-            Factory screwsFactory = new();
+            Factory screwsFactory = new("Screws factory");
             screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 6 });
-            Factory reinforcedPlatesFactory = new();
+            Factory reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
             reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
             reinforcedPlatesFactory.ImportedParts.Add(new() { Name = "IronScrew", Quantity = 6 });
             //Plan plan = new();

@@ -142,11 +142,68 @@ namespace SatisfactoryTree.Logic
 
         private List<Item> SortItems(List<Item> results)
         {
-            foreach (Item item in results)
-            {
+            // Create a lookup for dependency counting
+            var itemLookup = results.ToDictionary(item => item.Name, item => item);
+            var dependencyDepth = new Dictionary<string, int>();
 
+            // Calculate the dependency depth for each item recursively
+            int CalculateDepth(string itemName, HashSet<string> visiting)
+            {
+                if (dependencyDepth.ContainsKey(itemName))
+                    return dependencyDepth[itemName];
+
+                if (visiting.Contains(itemName))
+                    return 0; // Circular dependency, treat as raw material
+
+                if (!itemLookup.ContainsKey(itemName))
+                    return 0; // Item not found, treat as raw material
+
+                var item = itemLookup[itemName];
+                
+                // If item has no ingredients or empty ingredients list, it's a raw material (depth 0)
+                if (item.Ingredients == null || !item.Ingredients.Any())
+                {
+                    dependencyDepth[itemName] = 0;
+                    return 0;
+                }
+
+                visiting.Add(itemName);
+                int maxChildDepth = 0;
+
+                foreach (var ingredient in item.Ingredients)
+                {
+                    int childDepth = CalculateDepth(ingredient.Name, visiting);
+                    maxChildDepth = Math.Max(maxChildDepth, childDepth);
+                }
+
+                visiting.Remove(itemName);
+                int depth = maxChildDepth + 1;
+                dependencyDepth[itemName] = depth;
+                return depth;
             }
-            return results;
+
+            // Calculate depth for all items
+            foreach (var item in results)
+            {
+                CalculateDepth(item.Name, new HashSet<string>());
+            }
+
+            // Update counter values based on dependency depth
+            // Raw materials (depth 0) get counter 1, next level gets counter 2, etc.
+            foreach (var item in results)
+            {
+                if (dependencyDepth.ContainsKey(item.Name))
+                {
+                    item.Counter = dependencyDepth[item.Name] + 1;
+                }
+                else
+                {
+                    item.Counter = 1; // Default to raw material level
+                }
+            }
+
+            // Sort by counter (raw materials first), then by name for consistent ordering
+            return results.OrderByDescending(x => x.Counter).ThenBy(x => x.Name).ToList();
         }
 
         private Recipe? FindRecipe(FactoryCatalog finalData, string partName)

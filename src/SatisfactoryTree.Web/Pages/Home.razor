@@ -18,7 +18,7 @@
         {
             throw new Exception("FactoryCatalog could not be loaded or found");
         }
-        factory = new();
+        factory = new("Reinforced Iron Plates factory");
         factory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 5 });
 
         //Calculate the production
@@ -87,7 +87,7 @@
 </svg>
 <br />
 
-<h3>Items</h3>
+<h3>The plan</h3>
 <p>Target parts: @factory?.TargetParts.Count</p>
 <p>Imported parts: @factory?.ImportedParts.Count</p>
 <p>Component parts: @factory?.ComponentParts.Count</p>
