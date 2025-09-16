@@ -28,7 +28,8 @@ namespace SatisfactoryTree.Logic
             //Add the goal item
             Recipe? recipe = FindRecipe(factoryCatalog, partName);
             double buildingRatio = quantity / recipe.Products[0].perMin;
-            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = GetIngredients(factoryCatalog, partName, quantity, counter, new(), false), Building = recipe.Building.Name, BuildingQuantity = buildingRatio, Counter = counter });
+            var ingredients = GetIngredients(factoryCatalog, partName, quantity, counter, new(), false);
+            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = ingredients, Building = recipe.Building.Name, BuildingQuantity = buildingRatio, Counter = counter });
             //Get the dependencies/ingredients for the goal item
             results.AddRange(GetIngredients(factoryCatalog, partName, quantity, counter, importedParts));
 
