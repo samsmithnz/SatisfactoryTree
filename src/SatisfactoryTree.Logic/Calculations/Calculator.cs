@@ -122,7 +122,7 @@ namespace SatisfactoryTree.Logic
                             {
                                 Name = ingredient.part,
                                 Quantity = needed,
-                                Ingredients = GetIngredients(factoryCatalog, ingredient.part, quantity, counter, new(), false),
+                                Ingredients = GetIngredients(factoryCatalog, ingredient.part, needed, counter, new(), false),
                                 Building = buildingName,
                                 BuildingQuantity = buildingRatio,
                                 Counter = counter
