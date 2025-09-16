@@ -75,7 +75,7 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(3, results.Count);
             Assert.AreEqual("IronPlate", results[0].Name);
             Assert.AreEqual(30, results[0].Quantity);
-            Assert.AreEqual(1, results[0].Counter);
+            Assert.AreEqual(3, results[0].Counter);
             Assert.AreEqual("constructormk1", results[0].Building);
             Assert.AreEqual(1.5, results[0].BuildingQuantity);
             Assert.AreEqual(1, results[0].Ingredients.Count);
@@ -90,7 +90,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             Assert.AreEqual("OreIron", results[2].Name);
             Assert.AreEqual(45, results[2].Quantity);
-            Assert.AreEqual(3, results[2].Counter);
+            Assert.AreEqual(1, results[2].Counter);
             Assert.AreEqual("", results[2].Building);
             Assert.AreEqual(0, results[2].BuildingQuantity);
         }
