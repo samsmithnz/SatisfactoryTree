@@ -53,16 +53,16 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(4, results.Count);
             Assert.AreEqual("IronPlateReinforced", results[0].Name);
             Assert.AreEqual(1, results[0].Quantity);
-            Assert.AreEqual(1, results[0].Counter);
+            Assert.AreEqual(4, results[0].Counter);
             Assert.AreEqual("IronPlate", results[1].Name);
             Assert.AreEqual(6, results[1].Quantity);
-            Assert.AreEqual(2, results[1].Counter);
+            Assert.AreEqual(3, results[1].Counter);
             Assert.AreEqual("IronIngot", results[2].Name);
             Assert.AreEqual(9, results[2].Quantity);
-            Assert.AreEqual(3, results[2].Counter);
+            Assert.AreEqual(2, results[2].Counter);
             Assert.AreEqual("OreIron", results[3].Name);
             Assert.AreEqual(9, results[3].Quantity);
-            Assert.AreEqual(4, results[3].Counter);
+            Assert.AreEqual(1, results[3].Counter);
             Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[0].Name);
             Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[0].Quantity);
 
@@ -72,16 +72,16 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(4, results2.Count);
             Assert.AreEqual("IronScrew", results2[0].Name);
             Assert.AreEqual(12, results2[0].Quantity);
-            Assert.AreEqual(1, results2[0].Counter);
+            Assert.AreEqual(4, results2[0].Counter);
             Assert.AreEqual("IronRod", results2[1].Name);
             Assert.AreEqual(3, results2[1].Quantity);
-            Assert.AreEqual(2, results2[1].Counter);
+            Assert.AreEqual(3, results2[1].Counter);
             Assert.AreEqual("IronIngot", results2[2].Name);
             Assert.AreEqual(3, results2[2].Quantity);
-            Assert.AreEqual(3, results2[2].Counter);
+            Assert.AreEqual(2, results2[2].Counter);
             Assert.AreEqual("OreIron", results2[3].Name);
             Assert.AreEqual(3, results2[3].Quantity);
-            Assert.AreEqual(4, results2[3].Counter);
+            Assert.AreEqual(1, results2[3].Counter);
         }
 
         [TestMethod]
@@ -113,22 +113,22 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(6, results.Count);
             Assert.AreEqual("IronPlateReinforced", results[0].Name);
             Assert.AreEqual(1, results[0].Quantity);
-            Assert.AreEqual(1, results[0].Counter);
-            Assert.AreEqual("IronPlate", results[1].Name);
+            Assert.AreEqual(5, results[0].Counter);
+            Assert.AreEqual("IronScrew", results[1].Name);
             Assert.AreEqual(6, results[1].Quantity);
-            Assert.AreEqual(2, results[1].Counter);
-            Assert.AreEqual("IronScrew", results[2].Name);
+            Assert.AreEqual(4, results[1].Counter);
+            Assert.AreEqual("IronPlate", results[2].Name);
             Assert.AreEqual(6, results[2].Quantity);
-            Assert.AreEqual(2, results[2].Counter);
-            Assert.AreEqual("IronIngot", results[3].Name);
-            Assert.AreEqual(10.5, results[3].Quantity);
+            Assert.AreEqual(3, results[2].Counter);
+            Assert.AreEqual("IronRod", results[3].Name);
+            Assert.AreEqual(1.5, results[3].Quantity);
             Assert.AreEqual(3, results[3].Counter);
-            Assert.AreEqual("IronRod", results[4].Name);
-            Assert.AreEqual(1.5, results[4].Quantity);
-            Assert.AreEqual(3, results[4].Counter);
+            Assert.AreEqual("IronIngot", results[4].Name);
+            Assert.AreEqual(10.5, results[4].Quantity);
+            Assert.AreEqual(2, results[4].Counter);
             Assert.AreEqual("OreIron", results[5].Name);
             Assert.AreEqual(10.5, results[5].Quantity);
-            Assert.AreEqual(4, results[5].Counter);
+            Assert.AreEqual(1, results[5].Counter);
             Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[0].Name);
             Assert.AreEqual(6, reinforcedPlatesFactory.ImportedParts[0].Quantity);
 
@@ -138,13 +138,13 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(4, results2.Count);
             Assert.AreEqual("IronScrew", results2[0].Name);
             Assert.AreEqual(6, results2[0].Quantity);
-            Assert.AreEqual(1, results2[0].Counter);
+            Assert.AreEqual(3, results2[0].Counter);
             Assert.AreEqual("IronRod", results2[1].Name);
             Assert.AreEqual(1.5, results2[1].Quantity);
             Assert.AreEqual(2, results2[1].Counter);
             Assert.AreEqual("IronIngot", results2[2].Name);
             Assert.AreEqual(1.5, results2[2].Quantity);
-            Assert.AreEqual(3, results2[2].Counter);
+            Assert.AreEqual(1, results2[2].Counter);
             Assert.AreEqual("OreIron", results2[3].Name);
             Assert.AreEqual(1.5, results2[3].Quantity);
             Assert.AreEqual(4, results2[3].Counter);
