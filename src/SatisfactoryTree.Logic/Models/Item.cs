@@ -7,6 +7,7 @@
         public List<Item> Ingredients { get; set; } = new();
         public string Building { get; set; } = string.Empty;
         public double BuildingQuantity { get; set; }
+        public double BuildingPowerUsage { get; set; }
 
         public int Counter { get; set; }
     }

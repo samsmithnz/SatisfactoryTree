@@ -124,6 +124,7 @@ namespace SatisfactoryTree.Logic
                                 Ingredients = GetIngredients(factoryCatalog, ingredient.part, quantity, counter, new(), false),
                                 Building = buildingName,
                                 BuildingQuantity = buildingRatio,
+                                BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
                                 Counter = counter
                             };
 
@@ -138,6 +139,29 @@ namespace SatisfactoryTree.Logic
                 }
             }
             return results;
+        }
+
+
+
+        private double GetBuildingPower(FactoryCatalog factoryCatalog, string building, double quantity)
+        {
+            double buildingPower = 0;
+            foreach (KeyValuePair<string, double> item in factoryCatalog.Buildings)
+            {
+                if (building == item.Key)
+                {
+                    buildingPower = item.Value;
+                    break;
+                }
+            }
+            //break the quantity into whole and fractional parts
+            int wholeBuildingCount = (int)Math.Floor(quantity);
+            double fractionalBuildingCount = quantity - wholeBuildingCount;
+            //Power usage = initial power usage x (clock speed / 100)1.321928;
+            double result = (buildingPower * wholeBuildingCount) + (buildingPower * Math.Pow(fractionalBuildingCount, 1.321928));
+            //round to 3 decimal places
+            result = (double)Math.Round((decimal)result, 3);
+            return result;
         }
 
         private List<Item> SortItems(List<Item> results)
@@ -159,7 +183,7 @@ namespace SatisfactoryTree.Logic
                     return 0; // Item not found, treat as raw material
 
                 var item = itemLookup[itemName];
-                
+
                 // If item has no ingredients or empty ingredients list, it's a raw material (depth 0)
                 if (item.Ingredients == null || !item.Ingredients.Any())
                 {

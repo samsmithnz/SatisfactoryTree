@@ -81,20 +81,6 @@
             _ => false
         };
     }
-
-    private double GetBuildingPower(string building, double quantity)
-    {
-        switch (building)
-        {
-            case "constructormk1":
-            case "smeltermk1":
-                return 4 * quantity;
-            case "assemblermk1":
-                return 15 * quantity;
-            default:
-                return 0;
-        }
-    }
 }
 
 <div class="factory-container">
@@ -160,7 +146,7 @@
                         @item.Building x@(@item.BuildingQuantity)
                         </span>
                         <span class="badge badge-gray">
-                            [Power Icon] @(@GetBuildingPower(@item.Building, @item.BuildingQuantity))MW
+							[Power Icon] @item.BuildingPowerUsage MW
                         </span>
                        
                     </li>
