@@ -9,6 +9,14 @@ namespace SatisfactoryTree.Logic.Models
         public List<Building> Buildings { get; set; } = new();
         public List<Factory> Factories { get; set; } = new();
 
-    }   
+        public void UpdatePlanCalculations(FactoryCatalog factoryCatalog)
+        {
+            Calculator calculator = new();
+            foreach (Factory factory in Factories)
+            {
+                factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);
+            }
+        }
 
+    }
 }

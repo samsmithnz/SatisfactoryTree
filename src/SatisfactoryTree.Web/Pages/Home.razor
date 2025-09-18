@@ -9,7 +9,9 @@
 
 @code {
     FactoryCatalog? factoryCatalog;
-    private Factory? factory;
+    private Plan? plan;
+    private Factory? screwsFactory;
+    private Factory? reinforcedPlatesFactory;
 
     protected override async Task OnInitializedAsync()
     {
@@ -18,12 +20,17 @@
         {
             throw new Exception("FactoryCatalog could not be loaded or found");
         }
-        factory = new("Reinforced Iron Plates factory");
-        factory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 5 });
+        plan = new();
+        screwsFactory = new("Screws factory");
+        screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+        plan.Factories.Add(screwsFactory);
+        reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
+        reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
+        reinforcedPlatesFactory.ImportedParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+        plan.Factories.Add(reinforcedPlatesFactory);
 
         //Calculate the production
-        Calculator calculator = new();
-        factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);        
+        plan.UpdatePlanCalculations(factoryCatalog);        
     }
 }
 
@@ -88,7 +95,10 @@
 <br />
 
 <h3>The plan</h3>
-<p>Target parts: @factory?.TargetParts.Count</p>
-<p>Imported parts: @factory?.ImportedParts.Count</p>
-<p>Component parts: @factory?.ComponentParts.Count</p>
-<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+@foreach(Factory factory in plan.Factories)
+{
+    <p>Target parts: @factory?.TargetParts.Count</p>
+    <p>Imported parts: @factory?.ImportedParts.Count</p>
+    <p>Component parts: @factory?.ComponentParts.Count</p>
+    <FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+}
