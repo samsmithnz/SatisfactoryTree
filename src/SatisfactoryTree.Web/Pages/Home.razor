@@ -25,12 +25,12 @@
                 throw new Exception("FactoryCatalog could not be loaded or found");
             }
             plan = new();
-            screwsFactory = new("Screws factory");
+            screwsFactory = new(1, "Screws factory");
             screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
             plan.Factories.Add(screwsFactory);
-            reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
+            reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
             reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-            reinforcedPlatesFactory.ImportedParts.Add("Screws factory", new() { Name = "IronScrew", Quantity = 12 });
+            reinforcedPlatesFactory.ImportedParts.Add(1, new() { Name = "IronScrew", Quantity = 12 });
             plan.Factories.Add(reinforcedPlatesFactory);
 
             //Calculate the production

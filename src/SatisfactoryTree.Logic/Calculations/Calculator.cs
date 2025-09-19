@@ -20,7 +20,7 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        public List<Item> CalculateProduction(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<string, Item> importedParts)
+        public List<Item> CalculateProduction(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, Item> importedParts)
         {
             List<Item> results = new();
             int counter = 1;
@@ -61,7 +61,7 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        private List<Item> GetIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<string, Item> importedParts, bool recursivelySearch = true)
+        private List<Item> GetIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<int, Item> importedParts, bool recursivelySearch = true)
         {
             List<Item> results = new();
             counter++;
@@ -86,7 +86,7 @@ namespace SatisfactoryTree.Logic
                     foreach (Ingredient ingredient in newRecipe.Ingredients)
                     {
                         // Check importedParts for this ingredient
-                        KeyValuePair<string, Item> imported = importedParts.FirstOrDefault(ip => ip.Value != null && ip.Value.Name == ingredient.part && ip.Value.Quantity > 0);
+                        KeyValuePair<int, Item> imported = importedParts.FirstOrDefault(ip => ip.Value != null && ip.Value.Name == ingredient.part && ip.Value.Quantity > 0);
                         double needed = ingredient.perMin * ratio;
                         double importedUsed = 0;
 
