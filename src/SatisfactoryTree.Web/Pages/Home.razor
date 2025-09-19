@@ -12,93 +12,122 @@
     private Plan? plan;
     private Factory? screwsFactory;
     private Factory? reinforcedPlatesFactory;
+    private bool isLoading = true;
+    private string? errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
-        factoryCatalog = await Http.GetFromJsonAsync<FactoryCatalog>("content/gameData.json");
-        if (factoryCatalog == null)
+        try
         {
-            throw new Exception("FactoryCatalog could not be loaded or found");
-        }
-        plan = new();
-        screwsFactory = new("Screws factory");
-        screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
-        plan.Factories.Add(screwsFactory);
-        reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
-        reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-        reinforcedPlatesFactory.ImportedParts.Add("Screws factory", new() { Name = "IronScrew", Quantity = 12 });
-        plan.Factories.Add(reinforcedPlatesFactory);
+            factoryCatalog = await Http.GetFromJsonAsync<FactoryCatalog>("content/gameData.json");
+            if (factoryCatalog == null)
+            {
+                throw new Exception("FactoryCatalog could not be loaded or found");
+            }
+            plan = new();
+            screwsFactory = new("Screws factory");
+            screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+            plan.Factories.Add(screwsFactory);
+            reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
+            reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
+            reinforcedPlatesFactory.ImportedParts.Add("Screws factory", new() { Name = "IronScrew", Quantity = 12 });
+            plan.Factories.Add(reinforcedPlatesFactory);
 
-        //Calculate the production
-        plan.UpdatePlanCalculations(factoryCatalog);        
+            //Calculate the production
+            plan.UpdatePlanCalculations(factoryCatalog);
+            
+            isLoading = false;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+            isLoading = false;
+        }
     }
 }
 
-<br />
-<!-- Example badges -->
-<span class="badge badge-green">Success</span>
-<span class="badge badge-blue">Info</span>
-<span class="badge badge-yellow">Warning</span>
-<span class="badge badge-red">Error</span>
-<span class="badge badge-grey">Default</span>
-<style>
-    .badge {
-        display: inline-block;
-        padding: 0.25em 0.75em;
-        font-size: 1em;
-        font-weight: 600;
-        border-radius: 2em;
-        background: #eee;
-        color: #333;
-        margin: 0 0.2em 0.3em 0;
-        vertical-align: middle;
-        line-height: 1.5;
-        border: 1px solid transparent;
-        transition: background 0.2s, color 0.2s;
-    }
-
-    .badge-green {
-        background: #2ea44f;
-        color: #fff;
-    }
-
-    .badge-blue {
-        background: #2188ff;
-        color: #fff;
-    }
-
-    .badge-yellow {
-        background: #ffea7f;
-        color: #735c0f;
-    }
-
-    .badge-red {
-        background: #d73a49;
-        color: #fff;
-    }
-
-    .badge-grey {
-        background: #6a737d;
-        color: #fff;
-    }
-
-    .badge-purple {
-        background: #6f42c1;
-        color: #fff;
-    }
-</style>
-<br>
-<svg height="24" width="90" xmlns="http://www.w3.org/2000/svg">
-  <rect rx="12" height="24" width="90" fill="#2ea44f"/>
-  <text x="45" y="16" fill="#fff" font-size="14" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">Success</text>
-</svg>
-<br />
-
-<h3>The plan</h3>
-@foreach(Factory factory in plan.Factories)
+@if (isLoading)
 {
-    <p>Target parts: @factory?.TargetParts.Count</p>
-    <p>Imported parts: @factory?.ImportedParts.Count</p>
-    <p>Component parts: @factory?.ComponentParts.Count</p>
-    <FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+    <p>Loading...</p>
+}
+else if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @errorMessage
+    </div>
+}
+else if (plan?.Factories != null)
+{
+    <br />
+    <!-- Example badges -->
+    <span class="badge badge-green">Success</span>
+    <span class="badge badge-blue">Info</span>
+    <span class="badge badge-yellow">Warning</span>
+    <span class="badge badge-red">Error</span>
+    <span class="badge badge-grey">Default</span>
+    <style>
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.75em;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 2em;
+            background: #eee;
+            color: #333;
+            margin: 0 0.2em 0.3em 0;
+            vertical-align: middle;
+            line-height: 1.5;
+            border: 1px solid transparent;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .badge-green {
+            background: #2ea44f;
+            color: #fff;
+        }
+
+        .badge-blue {
+            background: #2188ff;
+            color: #fff;
+        }
+
+        .badge-yellow {
+            background: #ffea7f;
+            color: #735c0f;
+        }
+
+        .badge-red {
+            background: #d73a49;
+            color: #fff;
+        }
+
+        .badge-grey {
+            background: #6a737d;
+            color: #fff;
+        }
+
+        .badge-purple {
+            background: #6f42c1;
+            color: #fff;
+        }
+    </style>
+    <br>
+    <svg height="24" width="90" xmlns="http://www.w3.org/2000/svg">
+      <rect rx="12" height="24" width="90" fill="#2ea44f"/>
+      <text x="45" y="16" fill="#fff" font-size="14" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">Success</text>
+    </svg>
+    <br />
+
+    <h3>The plan</h3>
+    @foreach(Factory factory in plan.Factories)
+    {
+        <p>Target parts: @(factory?.TargetParts?.Count ?? 0)</p>
+        <p>Imported parts: @(factory?.ImportedParts?.Count ?? 0)</p>
+        <p>Component parts: @(factory?.ComponentParts?.Count ?? 0)</p>
+        <FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+    }
+}
+else
+{
+    <p>No data available.</p>
 }
