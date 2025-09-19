@@ -1,6 +1,4 @@
-﻿using SatisfactoryTree.Logic.Extraction;
-
-namespace SatisfactoryTree.Logic.Models
+﻿namespace SatisfactoryTree.Logic.Models
 {
     public class Plan
     {
@@ -12,10 +10,15 @@ namespace SatisfactoryTree.Logic.Models
         public void UpdatePlanCalculations(FactoryCatalog factoryCatalog)
         {
             Calculator calculator = new();
+            // complete inital calculations
             foreach (Factory factory in Factories)
             {
                 factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);
             }
+
+            // check that we produce all requested imported products
+            // if we don't produce enough, reduce the imported amount, and not that there is not enough.
+            // if an exported product is allocated, note that too, it's it's destination
         }
 
     }

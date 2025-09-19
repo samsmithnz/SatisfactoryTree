@@ -168,11 +168,11 @@
         <ul>
             @if (Factory?.ImportedParts != null && Factory.ImportedParts.Any())
             {
-                @foreach (Item item in Factory.ImportedParts)
+                @foreach (KeyValuePair<string, Item> item in Factory.ImportedParts)
                 {
                     <li>
-                        <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                        <strong>@item.Name</strong> - Quantity: @item.Quantity - from factory: TBD
+                        <img src="@GetPartImagePath(item.Value.Name)" alt="@item.Value.Name" class="part-image" />
+                        <strong>@item.Value.Name</strong> - Quantity: @item.Value.Quantity - from factory: @item.Key
                     </li>
                 }
             }

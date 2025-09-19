@@ -26,7 +26,7 @@
         plan.Factories.Add(screwsFactory);
         reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
         reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-        reinforcedPlatesFactory.ImportedParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+        reinforcedPlatesFactory.ImportedParts.Add("Screws factory", new() { Name = "IronScrew", Quantity = 12 });
         plan.Factories.Add(reinforcedPlatesFactory);
 
         //Calculate the production

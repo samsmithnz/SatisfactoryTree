@@ -36,7 +36,7 @@ namespace SatisfactoryTree.Logic.Tests
             screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
             Factory reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
             reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-            reinforcedPlatesFactory.ImportedParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+            reinforcedPlatesFactory.ImportedParts.Add("Screws factory", new() { Name = "IronScrew", Quantity = 12 });
             //Plan plan = new();
             //plan.Factories.Add(screwsFactory);
             //plan.Factories.Add(reinforcedPlatesFactory);
@@ -63,8 +63,9 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual("OreIron", results[3].Name);
             Assert.AreEqual(9, results[3].Quantity);
             Assert.AreEqual(1, results[3].Counter);
-            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[0].Name);
-            Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[0].Quantity);
+            Assert.IsTrue(reinforcedPlatesFactory.ImportedParts.ContainsKey("Screws factory"));
+            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts["Screws factory"].Name);
+            Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts["Screws factory"].Quantity);
 
             Assert.IsNotNull(screwsFactory);
             Assert.IsNotNull(screwsFactory.ComponentParts);
@@ -96,7 +97,7 @@ namespace SatisfactoryTree.Logic.Tests
             screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 6 });
             Factory reinforcedPlatesFactory = new("Reinforced Iron Plates factory");
             reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-            reinforcedPlatesFactory.ImportedParts.Add(new() { Name = "IronScrew", Quantity = 6 });
+            reinforcedPlatesFactory.ImportedParts.Add("Screws factory",new() { Name = "IronScrew", Quantity = 6 });
             //Plan plan = new();
             //plan.Factories.Add(screwsFactory);
             //plan.Factories.Add(reinforcedPlatesFactory);
@@ -129,8 +130,9 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual("OreIron", results[5].Name);
             Assert.AreEqual(10.5, results[5].Quantity);
             Assert.AreEqual(1, results[5].Counter);
-            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[0].Name);
-            Assert.AreEqual(6, reinforcedPlatesFactory.ImportedParts[0].Quantity);
+            Assert.IsTrue(reinforcedPlatesFactory.ImportedParts.ContainsKey("Screws factory"));
+            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts["Screws factory"].Name);
+            Assert.AreEqual(6, reinforcedPlatesFactory.ImportedParts["Screws factory"].Quantity);
 
             Assert.IsNotNull(screwsFactory);
             Assert.IsNotNull(screwsFactory.ComponentParts);
