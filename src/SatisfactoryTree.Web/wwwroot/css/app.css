@@ -122,42 +122,38 @@ code {
 }
 
 .component-badges {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 5px !important;
-    margin-top: 5px !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
 }
 
 .quantity-label {
-    font-weight: 600 !important;
-    white-space: nowrap !important;
-    font-size: 14px !important;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: 14px;
 }
 
 .quantity-input {
-    width: 100px !important;
-    min-width: 100px !important;
+    width: 100px;
+    min-width: 100px;
 }
 
-/* Badges - Maximum specificity with attribute selectors */
-span.badge[class*="badge"],
-.badge[class*="badge"],
-span[class*="badge"],
-div span.badge,
-li span.badge {
-    display: inline-block !important;
-    padding: 0.25em 0.75em !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    border-radius: 2em !important;
-    background: #eee !important;
-    color: #333 !important;
-    margin: 0 0.2em 0.3em 0 !important;
-    vertical-align: middle !important;
-    line-height: 1.5 !important;
-    border: 1px solid transparent !important;
-    transition: background 0.2s, color 0.2s !important;
-    text-transform: none !important;
+/* Badges - Use a single, specific class for custom badges */
+.badge-custom {
+    display: inline-block;
+    padding: 0.25em 0.75em;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2em;
+    background: #eee;
+    color: #333;
+    margin: 0 0.2em 0.3em 0;
+    vertical-align: middle;
+    line-height: 1.5;
+    border: 1px solid transparent;
+    transition: background 0.2s, color 0.2s;
+    text-transform: none;
 }
 
 /* Specific badge colors with maximum specificity */
