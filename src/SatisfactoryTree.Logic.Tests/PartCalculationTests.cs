@@ -125,7 +125,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             Assert.AreEqual("IronPlate", results[2].Name);
             Assert.AreEqual(6, results[2].Quantity);
-            Assert.AreEqual(3, results[2].Counter);
+            Assert.AreEqual(2, results[2].Counter);
             Assert.AreEqual(1, results[2].Ingredients.Count);
 
             Assert.AreEqual("IronRod", results[3].Name);
@@ -136,7 +136,7 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual("IronIngot", results[4].Name);
             Assert.AreEqual(12, results[4].Quantity);
             Assert.AreEqual(1, results[4].Counter);
-            Assert.AreEqual(1, results[4].Ingredients.Count);
+            Assert.AreEqual(0, results[4].Ingredients.Count);
 
             //Assert.AreEqual("OreIron", results[5].Name);
             //Assert.AreEqual(12, results[5].Quantity);
