@@ -117,23 +117,23 @@ namespace SatisfactoryTree.Logic
                             {
                                 buildingName = ingredientRecipe.Building.Name;
                                 buildingRatio = needed / ingredientRecipe.Products[0].perMin;
-                            }
 
-                            Item newIngredient = new()
-                            {
-                                Name = ingredient.part,
-                                Quantity = needed,
-                                Ingredients = GetIngredients(factoryCatalog, ingredient.part, needed, counter, new(), false),
-                                Building = buildingName,
-                                BuildingQuantity = buildingRatio,
-                                BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
-                                Counter = counter
-                            };
+                                Item newIngredient = new()
+                                {
+                                    Name = ingredient.part,
+                                    Quantity = needed,
+                                    Ingredients = GetIngredients(factoryCatalog, ingredient.part, needed, counter, new(), false),
+                                    Building = buildingName,
+                                    BuildingQuantity = buildingRatio,
+                                    BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
+                                    Counter = counter
+                                };
 
-                            results.Add(newIngredient);
-                            if (recursivelySearch == true)
-                            {
-                                results.AddRange(GetIngredients(factoryCatalog, ingredient.part, needed, counter, importedParts));
+                                results.Add(newIngredient);
+                                if (recursivelySearch == true)
+                                {
+                                    results.AddRange(GetIngredients(factoryCatalog, ingredient.part, needed, counter, importedParts));
+                                }
                             }
                         }
                         // If all was satisfied by imports, you may want to log or track that as well if needed
