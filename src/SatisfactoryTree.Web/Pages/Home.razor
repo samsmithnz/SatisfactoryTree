@@ -58,7 +58,7 @@ else if (!string.IsNullOrEmpty(errorMessage))
 }
 else if (plan?.Factories != null)
 {
-    <br />
+@*     <br />
     <!-- Example badges -->
     <span class="badge badge-green">Success</span>
     <span class="badge badge-blue">Info</span>
@@ -71,14 +71,11 @@ else if (plan?.Factories != null)
       <rect rx="12" height="24" width="90" fill="#2ea44f"/>
       <text x="45" y="16" fill="#fff" font-size="14" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">Success</text>
     </svg>
-    <br />
+    <br /> *@
 
     <h3>The plan</h3>
     @foreach(Factory factory in plan.Factories)
     {
-        <p>Target parts: @(factory?.TargetParts?.Count ?? 0)</p>
-        <p>Imported parts: @(factory?.ImportedParts?.Count ?? 0)</p>
-        <p>Component parts: @(factory?.ComponentParts?.Count ?? 0)</p>
         <FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
     }
 }
