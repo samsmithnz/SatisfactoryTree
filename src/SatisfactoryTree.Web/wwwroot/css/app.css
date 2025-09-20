@@ -26,7 +26,7 @@ a, .btn-link {
 }
 
 .valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
+    outline: none;
 }
 
 .invalid {
@@ -104,197 +104,188 @@ code {
 }
 
 /* ===============================================
-   COMMON COMPONENT STYLES - CONSISTENT SIZING
+   COMPONENT STYLES WITH MAXIMUM SPECIFICITY
    =============================================== */
 
-/* Form Controls */
-.form-control {
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 14px;
-    padding: 6px 10px;
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0,123,255,.25);
-}
-
-/* Badges */
-.badge {
-    display: inline-block;
-    padding: 0.25em 0.75em;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 2em;
-    background: #eee;
-    color: #333;
-    margin: 0 0.2em 0.3em 0;
-    vertical-align: middle;
-    line-height: 1.5;
-    border: 1px solid transparent;
-    transition: background 0.2s, color 0.2s;
-}
-
-.badge-green {
-    background: #2ea44f !important;
-    color: #fff !important;
-}
-
-.badge-blue {
-    background: #2188ff !important;
-    color: #fff !important;
-}
-
-.badge-yellow {
-    background: #ffea7f !important;
-    color: #735c0f !important;
-}
-
-.badge-red {
-    background: #d73a49 !important;
-    color: #fff !important;
-}
-
-.badge-grey {
-    background: #6a737d !important;
-    color: #fff !important;
-}
-
-.badge-purple {
-    background: #6f42c1 !important;
-    color: #fff !important;
-}
-
-.badge-fluid {
-    background-color: #17a2b8 !important;
-    color: white !important;
-}
-
-.badge-ficsmas {
-    background-color: #28a745 !important;
-    color: white !important;
-}
-
-/* Small badges for dropdowns */
-.badge-small {
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* Typeahead Components */
-.typeahead-container {
-    position: relative;
-    display: inline-block;
-    width: 250px;
-}
-
-.typeahead-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.typeahead-input {
-    width: 100%;
-    padding: 6px 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.typeahead-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ced4da;
-    border-top: none;
-    border-radius: 0 0 4px 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.typeahead-item {
-    padding: 8px 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #f8f9fa;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-}
-
-.typeahead-item:hover {
-    background-color: #f8f9fa;
-}
-
-.typeahead-item:last-child {
-    border-bottom: none;
-}
-
-/* Factory Components */
 .factory-container {
     max-width: 800px;
     margin: 20px 0;
 }
 
-.part-image {
+/* Badges - Maximum specificity with attribute selectors */
+span.badge[class*="badge"],
+.badge[class*="badge"],
+span[class*="badge"],
+div span.badge,
+li span.badge {
+    display: inline-block !important;
+    padding: 0.25em 0.75em !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 2em !important;
+    background: #eee !important;
+    color: #333 !important;
+    margin: 0 0.2em 0.3em 0 !important;
+    vertical-align: middle !important;
+    line-height: 1.5 !important;
+    border: 1px solid transparent !important;
+    transition: background 0.2s, color 0.2s !important;
+    text-transform: none !important;
+}
+
+/* Specific badge colors with maximum specificity */
+span.badge.badge-blue[class*="badge-blue"],
+.badge.badge-blue[class*="badge-blue"],
+div span.badge.badge-blue,
+li span.badge.badge-blue {
+    background: #2188ff !important;
+    color: #fff !important;
+}
+
+span.badge.badge-yellow[class*="badge-yellow"],
+.badge.badge-yellow[class*="badge-yellow"],
+div span.badge.badge-yellow,
+li span.badge.badge-yellow {
+    background: #ffea7f !important;
+    color: #735c0f !important;
+}
+
+span.badge.badge-grey[class*="badge-grey"],
+.badge.badge-grey[class*="badge-grey"],
+div span.badge.badge-grey,
+li span.badge.badge-grey {
+    background: #6a737d !important;
+    color: #fff !important;
+}
+
+span.badge.badge-green[class*="badge-green"],
+.badge.badge-green[class*="badge-green"] {
+    background: #2ea44f !important;
+    color: #fff !important;
+}
+
+span.badge.badge-red[class*="badge-red"],
+.badge.badge-red[class*="badge-red"] {
+    background: #d73a49 !important;
+    color: #fff !important;
+}
+
+span.badge.badge-fluid[class*="badge-fluid"],
+.badge.badge-fluid[class*="badge-fluid"],
+div span.badge.badge-fluid,
+li span.badge.badge-fluid {
+    background-color: #17a2b8 !important;
+    color: white !important;
+}
+
+span.badge.badge-ficsmas[class*="badge-ficsmas"],
+.badge.badge-ficsmas[class*="badge-ficsmas"],
+div span.badge.badge-ficsmas,
+li span.badge.badge-ficsmas {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+span.badge.badge-small[class*="badge-small"],
+.badge.badge-small[class*="badge-small"] {
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+/* Images - Maximum specificity, clean borders */
+img.part-image[class*="part-image"],
+div img.part-image,
+li img.part-image,
+ul li img.part-image,
+.factory-container img.part-image {
     width: 42px !important;
     height: 42px !important;
-    margin-right: 8px;
-    vertical-align: middle;
-    border-radius: 4px;
-    object-fit: cover;
+    max-width: 42px !important;
+    max-height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    margin-right: 8px !important;
+    vertical-align: middle !important;
+    border-radius: 4px !important;
+    object-fit: cover !important;
+    border: none !important;
 }
 
-.ingredient-image {
+img.ingredient-image[class*="ingredient-image"],
+div img.ingredient-image,
+span img.ingredient-image,
+.badge img.ingredient-image {
     width: 32px !important;
     height: 32px !important;
-    margin-right: 8px;
-    vertical-align: middle;
-    border-radius: 4px;
-    object-fit: cover;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    margin-right: 8px !important;
+    vertical-align: middle !important;
+    border-radius: 4px !important;
+    object-fit: cover !important;
+    border: none !important;
 }
 
-.building-image {
+img.building-image[class*="building-image"],
+div img.building-image,
+span img.building-image {
     width: 32px !important;
     height: 32px !important;
-    margin-left: 4px;
-    margin-right: 4px;
-    vertical-align: middle;
-    border-radius: 4px;
-    object-fit: cover;
-    border: 1px solid #ddd;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+    vertical-align: middle !important;
+    border-radius: 4px !important;
+    object-fit: cover !important;
+    border: 1px solid #ddd !important;
 }
 
+/* Form Controls */
+input.form-control[class*="form-control"],
+.form-control[class*="form-control"] {
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    padding: 6px 10px !important;
+}
+
+input.form-control:focus[class*="form-control"],
+.form-control:focus[class*="form-control"] {
+    outline: none !important;
+    border-color: #007bff !important;
+    box-shadow: 0 0 0 2px rgba(0,123,255,.25) !important;
+}
+
+/* Icons */
 .building-icon, .power-icon {
-    font-size: 24px;
-    width: 32px;
-    height: 32px;
-    margin-left: 4px;
-    margin-right: 4px;
-    vertical-align: middle;
-    color: #6c757d;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f8f9fa;
+    font-size: 24px !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+    vertical-align: middle !important;
+    color: #6c757d !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    background-color: #f8f9fa !important;
 }
 
 .building-icon:hover, .power-icon:hover {
-    color: #495057;
-    background-color: #e9ecef;
+    color: #495057 !important;
+    background-color: #e9ecef !important;
 }
 
 /* Utility Classes */
 .me-2 {
-    margin-right: 10px;
+    margin-right: 10px !important;
 }
