@@ -183,7 +183,7 @@
             <ul>
                 @if (Factory.ImportedParts != null && Factory.ImportedParts.Any())
                 {
-                    @foreach (KeyValuePair<string, Item> item in Factory.ImportedParts)
+                    @foreach (KeyValuePair<int, Item> item in Factory.ImportedParts)
                     {
                         <li>
                             <img src="@GetPartImagePath(item.Value.Name)" alt="@item.Value.Name" class="part-image" />
