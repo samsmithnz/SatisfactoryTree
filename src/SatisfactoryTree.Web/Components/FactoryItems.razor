@@ -101,7 +101,7 @@
 @if (Factory != null)
 {
     <div class="factory-container">
-        <h3><input type="text" value="@Factory.Name" /></h3>
+        <h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
         @if (Factory.TargetParts != null && Factory.TargetParts.Any())
         {
             <p><b>Target parts:</b></p>
@@ -135,15 +135,15 @@
                                     <strong>@GetPartDisplayName(part)</strong>
                                     @if (GetPartIsFluid(part))
                                     {
-                                        <span class="badge badge-fluid">Fluid</span>
+                                        <span class="badge badge-small badge-fluid">Fluid</span>
                                     }
                                     @if (GetPartIsFicsmas(part))
                                     {
-                                        <span class="badge badge-ficsmas">FICSMAS</span>
+                                        <span class="badge badge-small badge-ficsmas">FICSMAS</span>
                                     }
                                 </ItemTemplate>
                             </TypeaheadDropdown>
-                            Quantity: <input type="text" value="@item.Quantity.ToString()"><br>
+                            Quantity: <input type="text" value="@item.Quantity.ToString()" class="form-control"><br>
                             @if (item.Ingredients != null)
                             {
                                 @foreach (Item ingredient in item.Ingredients)
@@ -155,20 +155,19 @@
                                 }
                             }
                             <span class="badge badge-yellow"> 
-                            @if (!string.IsNullOrEmpty(item.Building) && HasBuildingImage(item.Building))
-                            {
-                                <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
-                            }
-                            else if (!string.IsNullOrEmpty(item.Building))
-                            {
-                                <i class="fas fa-building building-icon" title="@item.Building"></i>
-                            }
-                            @item.Building x@item.BuildingQuantity
+                                @if (!string.IsNullOrEmpty(item.Building) && HasBuildingImage(item.Building))
+                                {
+                                    <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
+                                }
+                                else if (!string.IsNullOrEmpty(item.Building))
+                                {
+                                    <i class="fas fa-building building-icon" title="@item.Building"></i>
+                                }
+                                @item.Building x@item.BuildingQuantity
                             </span>
                             <span class="badge badge-grey">
-                                <i class="fas fa-bolt" title="Power Usage"></i> @item.BuildingPowerUsage MW
+                                <i class="fas fa-bolt power-icon" title="Power Usage"></i> @item.BuildingPowerUsage MW
                             </span>
-                           
                         </li>
                         <hr>
                     }
@@ -209,64 +208,3 @@
         }
     </div>
 }
-
-<style>
-    .factory-container {
-        max-width: 800px;
-        margin: 20px 0;
-    }
-    
-    .me-2 {
-        margin-right: 10px;
-    }
-
-    .part-image {
-        width: 42px;
-        height: 42px;
-        margin-right: 8px;
-        vertical-align: middle;
-        border-radius: 4px;
-        object-fit: cover;
-    }
-
-    .ingredient-image {
-        width: 32px;
-        height: 32px;
-        margin-right: 8px;
-        vertical-align: middle;
-        border-radius: 4px;
-        object-fit: cover;
-    }
-
-    .building-image {
-        width: 32px;
-        height: 32px;
-        margin-left: 4px;
-        margin-right: 4px;
-        vertical-align: middle;
-        border-radius: 4px;
-        object-fit: cover;
-        border: 1px solid #ddd;
-    }
-
-    .building-icon {
-        font-size: 24px;
-        width: 32px;
-        height: 32px;
-        margin-left: 4px;
-        margin-right: 4px;
-        vertical-align: middle;
-        color: #6c757d;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background-color: #f8f9fa;
-    }
-
-    .building-icon:hover {
-        color: #495057;
-        background-color: #e9ecef;
-    }
-</style>
