@@ -8,7 +8,7 @@
 
     private void OnPartSelected(Part selectedPart, Item item)
     {
-        item.Name = selectedPart.Name;
+        item.Name = selectedPart.Name ?? selectedPart.Name ?? "";
         StateHasChanged();
     }
 
@@ -29,7 +29,7 @@
             "IronScrew" => "IronScrews",
             _ => partName.Replace(" ", "") // Default: remove spaces
         };
-        
+
         return $"images/parts/{imageName}_256.png";
     }
 
@@ -62,7 +62,7 @@
             "resourcesink" => "ResourceSink_256.png",
             _ => $"{buildingName}_256.png" // Default: use building name as-is
         };
-        
+
         return $"images/buildings/{imageName}";
     }
 
@@ -81,142 +81,136 @@
             _ => false
         };
     }
+
+    private string GetPartDisplayName(Part part)
+    {
+        return part.Name ?? "Unknown";
+    }
+
+    private bool GetPartIsFluid(Part part)
+    {
+        return part.IsFluid;
+    }
+
+    private bool GetPartIsFicsmas(Part part)
+    {
+        return part.IsFicsmas;
+    }
 }
 
-<div class="factory-container">
-    <p><b>Factory parts:</b></p>
-    @if (Factory?.TargetParts != null && Factory.TargetParts.Any())
-    {
-        <ul>
-            @foreach (Item item in Factory.TargetParts)
-            {
-                <li>
-                    <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                    <strong>@item.Name</strong> - Quantity: @item.Quantity
-                </li>
-            }
-        </ul>
-
-        <p><b>Component parts:</b></p>
-        <ul>
-            @if (Factory?.ComponentParts != null && Factory.ComponentParts.Any())
-            {
-                @foreach (var item in Factory.ComponentParts)
+@if (Factory != null)
+{
+    <div class="factory-container">
+        <h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
+        @if (Factory.TargetParts != null && Factory.TargetParts.Any())
+        {
+            <p><b>Target parts:</b></p>
+            <ul>
+                @foreach (Item item in Factory.TargetParts)
                 {
                     <li>
                         <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                        <TypeaheadDropdown TItem="Part"
-                                         Items="@(Parts?.Values)"
-                                         DisplayNameSelector="@(part => part.Name)"
-                                         IdSelector="@(part => part.Name)"
-                                         SelectedItem="@GetCurrentPart(item)"
-                                         SelectedItemChanged="@(part => OnPartSelected(part, item))"
-                                         Placeholder="Search for parts..."
-                                         CssClass="me-2">
-                            <ItemTemplate Context="part">
-                                <strong>@part.Name</strong>
-                                @if (part.IsFluid)
-                                {
-                                    <span class="badge badge-fluid">Fluid</span>
-                                }
-                                @if (part.IsFicsmas)
-                                {
-                                    <span class="badge badge-ficsmas">FICSMAS</span>
-                                }
-                            </ItemTemplate>
-                        </TypeaheadDropdown>
-                        Quantity: <input type="text" value="@item.Quantity.ToString()"><br>
-                        Building: 
-                        @if (HasBuildingImage(item.Building))
-                        {
-                            <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
-                        }
-                        else
-                        {
-                            <i class="fas fa-building building-icon" title="@item.Building"></i>
-                        }
-                        @item.Building x @item.BuildingQuantity
+                        <strong>@item.Name</strong> - @item.Quantity per/min
                     </li>
                 }
-            }
-            else
-            {
-                <li>No component parts.</li>
-            }
-        </ul>
+            </ul>
 
-        <p><b>Imported parts:</b></p>
-        <ul>
-            @if (Factory?.ImportedParts != null && Factory.ImportedParts.Any())
-            {
-                @foreach (Item item in Factory.ImportedParts)
+            <p><b>Component parts:</b></p>
+            <ul>
+                @if (Factory.ComponentParts != null && Factory.ComponentParts.Any())
                 {
-                    <li>
-                        <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                        <strong>@item.Name</strong> - Quantity: @item.Quantity - from factory: TBD
-                    </li>
+                    @foreach (Item item in Factory.ComponentParts)
+                    {
+                        <li>
+                            <div class="component-part-row">
+                                <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
+                                <TypeaheadDropdown TItem="Part"
+                                                 Items="@(Parts?.Values)"
+                                                 DisplayNameSelector="@(part => GetPartDisplayName(part))"
+                                                 IdSelector="@(part => GetPartDisplayName(part))"
+                                                 SelectedItem="@GetCurrentPart(item)"
+                                                 SelectedItemChanged="@(part => OnPartSelected(part, item))"
+                                                 Placeholder="Search for parts..."
+                                                 CssClass="me-2">
+                                    <ItemTemplate Context="part">
+                                        <strong>@GetPartDisplayName(part)</strong>
+                                        @if (GetPartIsFluid(part))
+                                        {
+                                            <span class="badge badge-small badge-fluid">Fluid</span>
+                                        }
+                                        @if (GetPartIsFicsmas(part))
+                                        {
+                                            <span class="badge badge-small badge-ficsmas">FICSMAS</span>
+                                        }
+                                    </ItemTemplate>
+                                </TypeaheadDropdown>
+                                <span class="quantity-label">Quantity:</span>
+                                <input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
+                            </div>
+                            
+                            <div class="component-badges">
+                                @if (item.Ingredients != null)
+                                {
+                                    @foreach (Item ingredient in item.Ingredients)
+                                    {
+                                        <span class="badge badge-blue">
+                                            <img src="@GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="ingredient-image" />
+                                            @ingredient.Name @ingredient.Quantity per/min
+                                        </span>
+                                    }
+                                }
+                                <span class="badge badge-yellow"> 
+                                    @if (!string.IsNullOrEmpty(item.Building) && HasBuildingImage(item.Building))
+                                    {
+                                        <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
+                                    }
+                                    else if (!string.IsNullOrEmpty(item.Building))
+                                    {
+                                        <i class="fas fa-building building-icon" title="@item.Building"></i>
+                                    }
+                                    @item.Building x @Math.Round(item.BuildingQuantity, 2)
+                                </span>
+                                <span class="badge badge-grey">
+                                    <i class="fas fa-bolt power-icon" title="Power Usage"></i> @Math.Round(item.BuildingPowerUsage, 1) MW
+                                </span>
+                            </div>
+                        </li>
+                        <hr>
+                    }
                 }
-            }
-            else
-            {
-                <li>No imported parts.</li>
-            }
-        </ul>
-    }
-    else
-    {
-        <p>No items in this factory.</p>
-    }
-</div>
+                else
+                {
+                    <li>No component parts.</li>
+                }
+            </ul>
 
-<style>
-    .factory-container {
-        max-width: 800px;
-        margin: 20px 0;
-    }
-    
-    .me-2 {
-        margin-right: 10px;
-    }
+            <p><b>Imported parts:</b></p>
+            <ul>
+                @if (Factory.ImportedParts != null && Factory.ImportedParts.Any())
+                {
+                    @foreach (KeyValuePair<int, Item> item in Factory.ImportedParts)
+                    {
+                        <li>
+                            <img src="@GetPartImagePath(item.Value.Name)" alt="@item.Value.Name" class="part-image" />
+                            <strong>@item.Value.Name</strong> - Quantity: @item.Value.Quantity - from factory: @item.Key
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li>No imported parts.</li>
+                }
+            </ul>
 
-    .part-image {
-        width: 42px;
-        height: 42px;
-        margin-right: 8px;
-        vertical-align: middle;
-        border-radius: 4px;
-        object-fit: cover;
-    }
-
-    .building-image {
-        width: 42px;
-        height: 42px;
-        margin-left: 4px;
-        margin-right: 4px;
-        vertical-align: middle;
-        border-radius: 4px;
-        object-fit: cover;
-        border: 1px solid #ddd;
-    }
-
-    .building-icon {
-        font-size: 32px;
-        width: 42px;
-        height: 42px;
-        margin-left: 4px;
-        margin-right: 4px;
-        vertical-align: middle;
-        color: #6c757d;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background-color: #f8f9fa;
-    }
-
-    .building-icon:hover {
-        color: #495057;
-        background-color: #e9ecef;
-    }
-</style>
+            <p><b>Raw resources:</b></p>
+            <span class="badge badge-blue">
+                <img src='@GetPartImagePath("OreIron")' alt="OreIron" class="ingredient-image" />
+                <span>Iron Ore 60 per/min</span>
+            </span>
+        }
+        else
+        {
+            <p>No items in this factory.</p>
+        }
+    </div>
+}

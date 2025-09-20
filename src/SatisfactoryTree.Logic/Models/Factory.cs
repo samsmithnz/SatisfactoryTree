@@ -2,13 +2,17 @@
 {
     public class Factory
     {
-        public List<Item> ImportedParts { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Dictionary<int, Item> ImportedParts { get; set; }
         public List<Item> TargetParts { get; set; }
         public List<Item> ComponentParts { get; set; }
         public List<Item> Surplus { get; set; }
 
-        public Factory()
+        public Factory(int id, string name)
         {
+            Id = id;
+            Name = name;
             ImportedParts = new();
             TargetParts = new();
             ComponentParts = new();
