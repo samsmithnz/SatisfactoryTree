@@ -1,4 +1,6 @@
 ﻿@using SatisfactoryTree.Logic.Models
+@using SatisfactoryTree.Web.Services
+@inject IFactoryItemDisplayService DisplayService
 
 @code {
     [Parameter]
@@ -18,84 +20,6 @@
         Parts.TryGetValue(item.Name, out Part? part);
         return part;
     }
-
-    private string GetPartImagePath(string partName)
-    {
-        // Handle special mapping cases where the part name doesn't directly match the image name
-        string imageName = partName switch
-        {
-            "IronPlateReinforced" => "ReinforcedIronPlate",
-            "OreIron" => "IronOre", 
-            "IronScrew" => "IronScrews",
-            _ => partName.Replace(" ", "") // Default: remove spaces
-        };
-
-        return $"images/parts/{imageName}_256.png";
-    }
-
-    private string GetBuildingImagePath(string buildingName)
-    {
-        // Handle building name mappings to match image files
-        string imageName = buildingName switch
-        {
-            "smeltermk1" => "SmelterMk1_256.png",
-            "foundry" => "Foundry_256.png",
-            "constructormk1" => "ConstructorMk1_256.png",
-            "assemblermk1" => "AssemblerMk1_256.png",
-            "manufacturer" => "Manufacturer_256.png",
-            "refinery" => "OilRefinery_256.png",
-            "packager" => "Packager_256.png",
-            "blender" => "Blender_256.png",
-            "hadronCollider" => "ParticleAccelerator_256.png",
-            "generatorcoal" => "CoalGenerator_256.png",
-            "generatorfuel" => "FuelGenerator_256.png",
-            "generatornuclear" => "NuclearPowerplant_256.png",
-            "generatorbiomass" => "BiomassBurner_256.png",
-            "generatorgeothermal" => "GeothermalPowerGenerator_256.png",
-            "minermk1" => "MinerMk1_256.png",
-            "minermk2" => "MinerMk2_256.png",
-            "minermk3" => "MinerMk3_256.png",
-            "oilpump" => "OilExtractor_256.png",
-            "waterpump" => "WaterExtractor_256.png",
-            "frackingextractor" => "ResourceWellExtractor_256.png",
-            "frackingsmasher" => "ResourceWellPressurizer_256.png",
-            "resourcesink" => "ResourceSink_256.png",
-            _ => $"{buildingName}_256.png" // Default: use building name as-is
-        };
-
-        return $"images/buildings/{imageName}";
-    }
-
-    private bool HasBuildingImage(string buildingName)
-    {
-        // Check if we have a specific image mapping for this building
-        return buildingName switch
-        {
-            "smeltermk1" or "foundry" or "constructormk1" or "assemblermk1" or "manufacturer" or
-            "refinery" or "packager" or "blender" or "hadronCollider" or
-            "generatorcoal" or "generatorfuel" or "generatornuclear" or
-            "generatorbiomass" or "generatorgeothermal" or
-            "minermk1" or "minermk2" or "minermk3" or
-            "oilpump" or "waterpump" or "frackingextractor" or
-            "frackingsmasher" or "resourcesink" => true,
-            _ => false
-        };
-    }
-
-    private string GetPartDisplayName(Part part)
-    {
-        return part.Name ?? "Unknown";
-    }
-
-    private bool GetPartIsFluid(Part part)
-    {
-        return part.IsFluid;
-    }
-
-    private bool GetPartIsFicsmas(Part part)
-    {
-        return part.IsFicsmas;
-    }
 }
 
 @if (Factory != null)
@@ -109,7 +33,7 @@
                 @foreach (Item item in Factory.TargetParts)
                 {
                     <li>
-                        <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
+                        <img src="@DisplayService.GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
                         <strong>@item.Name</strong> - @item.Quantity per/min
                     </li>
                 }
@@ -123,22 +47,22 @@
                     {
                         <li>
                             <div class="component-part-row">
-                                <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
+                                <img src="@DisplayService.GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
                                 <TypeaheadDropdown TItem="Part"
                                                  Items="@(Parts?.Values)"
-                                                 DisplayNameSelector="@(part => GetPartDisplayName(part))"
-                                                 IdSelector="@(part => GetPartDisplayName(part))"
+                                                 DisplayNameSelector="@(part => DisplayService.GetPartDisplayName(part))"
+                                                 IdSelector="@(part => DisplayService.GetPartDisplayName(part))"
                                                  SelectedItem="@GetCurrentPart(item)"
                                                  SelectedItemChanged="@(part => OnPartSelected(part, item))"
                                                  Placeholder="Search for parts..."
                                                  CssClass="me-2">
                                     <ItemTemplate Context="part">
-                                        <strong>@GetPartDisplayName(part)</strong>
-                                        @if (GetPartIsFluid(part))
+                                        <strong>@DisplayService.GetPartDisplayName(part)</strong>
+                                        @if (DisplayService.GetPartIsFluid(part))
                                         {
                                             <span class="badge badge-small badge-fluid">Fluid</span>
                                         }
-                                        @if (GetPartIsFicsmas(part))
+                                        @if (DisplayService.GetPartIsFicsmas(part))
                                         {
                                             <span class="badge badge-small badge-ficsmas">FICSMAS</span>
                                         }
@@ -154,15 +78,15 @@
                                     @foreach (Item ingredient in item.Ingredients)
                                     {
                                         <span class="badge badge-blue">
-                                            <img src="@GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="ingredient-image" />
+                                            <img src="@DisplayService.GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="ingredient-image" />
                                             @ingredient.Name @ingredient.Quantity per/min
                                         </span>
                                     }
                                 }
                                 <span class="badge badge-yellow"> 
-                                    @if (!string.IsNullOrEmpty(item.Building) && HasBuildingImage(item.Building))
+                                    @if (!string.IsNullOrEmpty(item.Building) && DisplayService.HasBuildingImage(item.Building))
                                     {
-                                        <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
+                                        <img src="@DisplayService.GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
                                     }
                                     else if (!string.IsNullOrEmpty(item.Building))
                                     {
@@ -191,7 +115,7 @@
                     @foreach (KeyValuePair<int, Item> item in Factory.ImportedParts)
                     {
                         <li>
-                            <img src="@GetPartImagePath(item.Value.Name)" alt="@item.Value.Name" class="part-image" />
+                            <img src="@DisplayService.GetPartImagePath(item.Value.Name)" alt="@item.Value.Name" class="part-image" />
                             <strong>@item.Value.Name</strong> - Quantity: @item.Value.Quantity - from factory: @item.Key
                         </li>
                     }
@@ -204,7 +128,7 @@
 
             <p><b>Raw resources:</b></p>
             <span class="badge badge-blue">
-                <img src='@GetPartImagePath("OreIron")' alt="OreIron" class="ingredient-image" />
+                <img src='@DisplayService.GetPartImagePath("OreIron")' alt="OreIron" class="ingredient-image" />
                 <span>Iron Ore 60 per/min</span>
             </span>
         }
