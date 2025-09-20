@@ -112,6 +112,33 @@ code {
     margin: 20px 0;
 }
 
+/* Component Part Layout */
+.component-part-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 10px !important;
+    flex-wrap: wrap !important;
+}
+
+.component-badges {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+    margin-top: 5px !important;
+}
+
+.quantity-label {
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    font-size: 14px !important;
+}
+
+.quantity-input {
+    width: 100px !important;
+    min-width: 100px !important;
+}
+
 /* Badges - Maximum specificity with attribute selectors */
 span.badge[class*="badge"],
 .badge[class*="badge"],
@@ -211,6 +238,7 @@ ul li img.part-image,
     border-radius: 4px !important;
     object-fit: cover !important;
     border: none !important;
+    flex-shrink: 0 !important;
 }
 
 img.ingredient-image[class*="ingredient-image"],

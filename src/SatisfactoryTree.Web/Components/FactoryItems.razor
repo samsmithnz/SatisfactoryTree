@@ -122,52 +122,58 @@
                     @foreach (Item item in Factory.ComponentParts)
                     {
                         <li>
-                            <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                            <TypeaheadDropdown TItem="Part"
-                                             Items="@(Parts?.Values)"
-                                             DisplayNameSelector="@(part => GetPartDisplayName(part))"
-                                             IdSelector="@(part => GetPartDisplayName(part))"
-                                             SelectedItem="@GetCurrentPart(item)"
-                                             SelectedItemChanged="@(part => OnPartSelected(part, item))"
-                                             Placeholder="Search for parts..."
-                                             CssClass="me-2">
-                                <ItemTemplate Context="part">
-                                    <strong>@GetPartDisplayName(part)</strong>
-                                    @if (GetPartIsFluid(part))
+                            <div class="component-part-row">
+                                <img src="@GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
+                                <TypeaheadDropdown TItem="Part"
+                                                 Items="@(Parts?.Values)"
+                                                 DisplayNameSelector="@(part => GetPartDisplayName(part))"
+                                                 IdSelector="@(part => GetPartDisplayName(part))"
+                                                 SelectedItem="@GetCurrentPart(item)"
+                                                 SelectedItemChanged="@(part => OnPartSelected(part, item))"
+                                                 Placeholder="Search for parts..."
+                                                 CssClass="me-2">
+                                    <ItemTemplate Context="part">
+                                        <strong>@GetPartDisplayName(part)</strong>
+                                        @if (GetPartIsFluid(part))
+                                        {
+                                            <span class="badge badge-small badge-fluid">Fluid</span>
+                                        }
+                                        @if (GetPartIsFicsmas(part))
+                                        {
+                                            <span class="badge badge-small badge-ficsmas">FICSMAS</span>
+                                        }
+                                    </ItemTemplate>
+                                </TypeaheadDropdown>
+                                <span class="quantity-label">Quantity:</span>
+                                <input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
+                            </div>
+                            
+                            <div class="component-badges">
+                                @if (item.Ingredients != null)
+                                {
+                                    @foreach (Item ingredient in item.Ingredients)
                                     {
-                                        <span class="badge badge-small badge-fluid">Fluid</span>
+                                        <span class="badge badge-blue">
+                                            <img src="@GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="ingredient-image" />
+                                            @ingredient.Name @ingredient.Quantity per/min
+                                        </span>
                                     }
-                                    @if (GetPartIsFicsmas(part))
+                                }
+                                <span class="badge badge-yellow"> 
+                                    @if (!string.IsNullOrEmpty(item.Building) && HasBuildingImage(item.Building))
                                     {
-                                        <span class="badge badge-small badge-ficsmas">FICSMAS</span>
+                                        <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
                                     }
-                                </ItemTemplate>
-                            </TypeaheadDropdown>
-                            Quantity: <input type="text" value="@item.Quantity.ToString()" class="form-control"><br>
-                            @if (item.Ingredients != null)
-                            {
-                                @foreach (Item ingredient in item.Ingredients)
-                                {
-                                    <span class="badge badge-blue">
-                                        <img src="@GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="ingredient-image" />
-                                        @ingredient.Name @ingredient.Quantity per/min
-                                    </span>
-                                }
-                            }
-                            <span class="badge badge-yellow"> 
-                                @if (!string.IsNullOrEmpty(item.Building) && HasBuildingImage(item.Building))
-                                {
-                                    <img src="@GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
-                                }
-                                else if (!string.IsNullOrEmpty(item.Building))
-                                {
-                                    <i class="fas fa-building building-icon" title="@item.Building"></i>
-                                }
-                                @item.Building x @item.BuildingQuantity
-                            </span>
-                            <span class="badge badge-grey">
-                                <i class="fas fa-bolt power-icon" title="Power Usage"></i> @item.BuildingPowerUsage MW
-                            </span>
+                                    else if (!string.IsNullOrEmpty(item.Building))
+                                    {
+                                        <i class="fas fa-building building-icon" title="@item.Building"></i>
+                                    }
+                                    @item.Building x @Math.Round(item.BuildingQuantity, 2)
+                                </span>
+                                <span class="badge badge-grey">
+                                    <i class="fas fa-bolt power-icon" title="Power Usage"></i> @Math.Round(item.BuildingPowerUsage, 1) MW
+                                </span>
+                            </div>
                         </li>
                         <hr>
                     }
