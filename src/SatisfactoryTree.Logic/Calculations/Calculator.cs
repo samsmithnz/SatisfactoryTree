@@ -212,7 +212,7 @@ namespace SatisfactoryTree.Logic
                 var item = itemLookup[itemName];
 
                 // If item has no ingredients or empty ingredients list, it's a raw material (depth 0)
-                if (item.Ingredients == null || !item.Ingredients.Any())
+                if (item.Ingredients == null || item.Ingredients.Count == 0)
                 {
                     dependencyDepth[itemName] = 0;
                     return 0;
