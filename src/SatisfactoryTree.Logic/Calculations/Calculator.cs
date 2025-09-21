@@ -26,26 +26,32 @@ namespace SatisfactoryTree.Logic
             //Add the goal item
             Recipe? recipe = FindRecipe(factoryCatalog, partName);
             if (recipe == null)
+            { 
                 return results;
+            }
 
             double buildingRatio = quantity / recipe.Products[0].perMin;
-            
+
             // Create a working copy of imported parts to track usage
-            var workingImportedParts = new Dictionary<string, double>();
+            Dictionary<string, double> workingImportedParts = new();
             foreach (var import in importedParts.Values)
             {
                 if (import?.Item != null && !string.IsNullOrEmpty(import.Item.Name))
                 {
                     if (workingImportedParts.ContainsKey(import.Item.Name))
+                    {
                         workingImportedParts[import.Item.Name] += import.Item.Quantity;
+                    }
                     else
+                    {
                         workingImportedParts[import.Item.Name] = import.Item.Quantity;
+                    }
                 }
             }
 
             List<Item> ingredients = GetIngredients(factoryCatalog, partName, quantity, counter, new Dictionary<string, double>(), false);
             results.Add(new() { Name = partName, Quantity = quantity, Ingredients = ingredients, Building = recipe.Building.Name, BuildingQuantity = buildingRatio, Counter = counter });
-            
+
             //Get the dependencies/ingredients for the goal item
             results.AddRange(GetIngredients(factoryCatalog, partName, quantity, counter, workingImportedParts));
 
@@ -82,14 +88,21 @@ namespace SatisfactoryTree.Logic
 
         private void UpdateImportedPartsUsage(Dictionary<int, ImportedItem> importedParts, Dictionary<string, double> workingImportedParts)
         {
-            foreach (var import in importedParts.Values)
+            foreach (ImportedItem import in importedParts.Values)
             {
                 if (import?.Item != null && !string.IsNullOrEmpty(import.Item.Name))
                 {
                     double originalQuantity = import.Item.Quantity;
-                    double remainingQuantity = workingImportedParts.ContainsKey(import.Item.Name) 
-                        ? workingImportedParts[import.Item.Name] 
-                        : originalQuantity;
+                    double remainingQuantity;
+                    if (workingImportedParts.ContainsKey(import.Item.Name))
+                    {
+                        remainingQuantity = (double)workingImportedParts[import.Item.Name];
+                    }
+                    else
+                    {
+                        remainingQuantity = (double)originalQuantity;
+                    }
+
                     double usedQuantity = originalQuantity - remainingQuantity;
                     import.ProductFulfilled = Math.Max(0, usedQuantity);
                 }
@@ -121,18 +134,18 @@ namespace SatisfactoryTree.Logic
                     foreach (Ingredient ingredient in newRecipe.Ingredients)
                     {
                         double needed = ingredient.perMin * ratio;
-                        
+
                         // Check if we have imports available for this ingredient
                         if (availableImports.ContainsKey(ingredient.part) && availableImports[ingredient.part] > 0)
                         {
                             double availableFromImport = availableImports[ingredient.part];
                             double usedFromImport = Math.Min(needed, availableFromImport);
-                            
+
                             // Update the available import quantity
                             availableImports[ingredient.part] -= usedFromImport;
                             if (availableImports[ingredient.part] < 0.001) // Handle floating point precision
                                 availableImports[ingredient.part] = 0;
-                            
+
                             // Reduce the needed quantity by what we got from imports
                             needed -= usedFromImport;
                         }
@@ -201,15 +214,21 @@ namespace SatisfactoryTree.Logic
             int CalculateDepth(string itemName, HashSet<string> visiting)
             {
                 if (dependencyDepth.ContainsKey(itemName))
+                {
                     return dependencyDepth[itemName];
+                }
 
                 if (visiting.Contains(itemName))
+                {
                     return 0; // Circular dependency, treat as raw material
+                }
 
                 if (!itemLookup.ContainsKey(itemName))
+                {
                     return 0; // Item not found, treat as raw material
+                }
 
-                var item = itemLookup[itemName];
+                Item item = itemLookup[itemName];
 
                 // If item has no ingredients or empty ingredients list, it's a raw material (depth 0)
                 if (item.Ingredients == null || item.Ingredients.Count == 0)
@@ -234,14 +253,14 @@ namespace SatisfactoryTree.Logic
             }
 
             // Calculate depth for all items
-            foreach (var item in results)
+            foreach (Item item in results)
             {
                 CalculateDepth(item.Name, new HashSet<string>());
             }
 
             // Update counter values based on dependency depth
             // Raw materials (depth 0) get counter 1, next level gets counter 2, etc.
-            foreach (var item in results)
+            foreach (Item item in results)
             {
                 if (dependencyDepth.ContainsKey(item.Name))
                 {

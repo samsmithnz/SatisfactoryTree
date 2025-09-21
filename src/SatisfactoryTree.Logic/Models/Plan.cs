@@ -146,7 +146,7 @@ namespace SatisfactoryTree.Logic.Models
             // Initialize exports list if it doesn't exist
             if (sourceFactory.Surplus == null)
             {
-                sourceFactory.Surplus = new List<Item>();
+                sourceFactory.Surplus = new();
             }
 
             // Find existing export entry or create new one
@@ -170,7 +170,7 @@ namespace SatisfactoryTree.Logic.Models
         {
             // For now, we'll use the surplus list to store planning notes
             // In a more complete implementation, you might want a dedicated Notes property
-            factory.Surplus ??= new List<Item>();
+            factory.Surplus ??= new();
 
             factory.Surplus.Add(new Item
             {
@@ -183,11 +183,11 @@ namespace SatisfactoryTree.Logic.Models
 
         public Dictionary<string, List<string>> GetPlanValidationReport()
         {
-            var report = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> report = new();
 
             foreach (Factory factory in Factories)
             {
-                var factoryIssues = new List<string>();
+                List<string> factoryIssues = new();
 
                 if (factory.Surplus != null)
                 {
