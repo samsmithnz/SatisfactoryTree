@@ -11,16 +11,14 @@ namespace SatisfactoryTree.Logic
         public List<Item> CalculateFactoryProduction(FactoryCatalog factoryCatalog, Factory factory)
         {
             List<Item> results = new();
-
             foreach (Item item in factory.TargetParts)
             {
                 results.AddRange(CalculateProduction(factoryCatalog, item.Name, item.Quantity, factory.ImportedParts));
             }
-
             return results;
         }
 
-        public List<Item> CalculateProduction(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, Item> importedParts)
+        public List<Item> CalculateProduction(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, ImportedItem> importedParts)
         {
             List<Item> results = new();
             int counter = 1;
@@ -61,7 +59,7 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        private List<Item> GetIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<int, Item> importedParts, bool recursivelySearch = true)
+        private List<Item> GetIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<int, ImportedItem> importedParts, bool recursivelySearch = true)
         {
             List<Item> results = new();
             counter++;
@@ -86,14 +84,14 @@ namespace SatisfactoryTree.Logic
                     foreach (Ingredient ingredient in newRecipe.Ingredients)
                     {
                         // Check importedParts for this ingredient
-                        KeyValuePair<int, Item> imported = importedParts.FirstOrDefault(ip => ip.Value != null && ip.Value.Name == ingredient.part && ip.Value.Quantity > 0);
+                        KeyValuePair<int, ImportedItem> imported = importedParts.FirstOrDefault(ip => ip.Value != null && ip.Value.Item != null && ip.Value.Item.Name == ingredient.part && ip.Value.Item.Quantity > 0);
                         double needed = ingredient.perMin * ratio;
                         double importedUsed = 0;
 
                         // Check if we found a valid imported item
-                        if (imported.Value != null && imported.Value.Quantity > 0)
+                        if (imported.Value != null && imported.Value.Item != null && imported.Value.Item.Quantity > 0)
                         {
-                            if (imported.Value.Quantity >= needed)
+                            if (imported.Value.Item.Quantity >= needed)
                             {
                                 importedUsed = needed;
                                 //imported.Quantity -= needed;
@@ -101,8 +99,8 @@ namespace SatisfactoryTree.Logic
                             }
                             else
                             {
-                                importedUsed = imported.Value.Quantity;
-                                needed -= imported.Value.Quantity;
+                                importedUsed = imported.Value.Item.Quantity;
+                                needed -= imported.Value.Item.Quantity;
                                 //imported.Quantity = 0;
                             }
                         }

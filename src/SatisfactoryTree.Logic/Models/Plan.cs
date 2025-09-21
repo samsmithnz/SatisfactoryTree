@@ -55,12 +55,12 @@ namespace SatisfactoryTree.Logic.Models
                     continue;
                 }
 
-                Dictionary<int, Item> updatedImports = new();
+                Dictionary<int, ImportedItem> updatedImports = new();
 
-                foreach (KeyValuePair<int, Item> import in factory.ImportedParts.ToList())
+                foreach (KeyValuePair<int, ImportedItem> import in factory.ImportedParts.ToList())
                 {
                     int sourceFactoryId = import.Key;
-                    Item importedItem = import.Value;
+                    ImportedItem importedItem = import.Value;
 
                     // Find the source factory
                     Factory? sourceFactory = Factories.FirstOrDefault(f => f.Id == sourceFactoryId);
@@ -68,49 +68,49 @@ namespace SatisfactoryTree.Logic.Models
                     if (sourceFactory == null)
                     {
                         // Source factory not found - mark as unavailable
-                        importedItem.Quantity = 0;
-                        AddPlanningNote(factory, $"Warning: Source factory '{sourceFactoryId}' not found for import '{importedItem.Name}'");
+                        importedItem.Item.Quantity = 0;
+                        AddPlanningNote(factory, $"Warning: Source factory '{sourceFactoryId}' not found for import '{importedItem.Item.Name}'");
                         continue;
                     }
 
                     // Check if source factory produces this item
                     if (factoryProduction.ContainsKey(sourceFactoryId) &&
-                        factoryProduction[sourceFactoryId].ContainsKey(importedItem.Name))
+                        factoryProduction[sourceFactoryId].ContainsKey(importedItem.FactoryName))
                     {
-                        double availableQuantity = factoryProduction[sourceFactoryId][importedItem.Name];
-                        double requestedQuantity = importedItem.Quantity;
+                        double availableQuantity = factoryProduction[sourceFactoryId][importedItem.Item.Name];
+                        double requestedQuantity = importedItem.Item.Quantity;
 
                         if (availableQuantity >= requestedQuantity)
                         {
                             // Sufficient production available
-                            factoryProduction[sourceFactoryId][importedItem.Name] -= requestedQuantity;
+                            factoryProduction[sourceFactoryId][importedItem.Item.Name] -= requestedQuantity;
                             updatedImports[sourceFactoryId] = importedItem;
 
                             // Mark as allocated in source factory
-                            MarkAsExported(sourceFactory, importedItem.Name, requestedQuantity, factory.Name);
+                            MarkAsExported(sourceFactory, importedItem.Item.Name, requestedQuantity, factory.Name);
                         }
                         else if (availableQuantity > 0)
                         {
                             // Partial allocation possible
-                            importedItem.Quantity = availableQuantity;
-                            factoryProduction[sourceFactoryId][importedItem.Name] = 0;
+                            importedItem.Item.Quantity = availableQuantity;
+                            factoryProduction[sourceFactoryId][importedItem.Item.Name] = 0;
                             updatedImports[sourceFactoryId] = importedItem;
 
-                            AddPlanningNote(factory, $"Warning: Only {availableQuantity:F2} of {requestedQuantity:F2} '{importedItem.Name}' available from '{sourceFactoryId}'");
-                            MarkAsExported(sourceFactory, importedItem.Name, availableQuantity, factory.Name);
+                            AddPlanningNote(factory, $"Warning: Only {availableQuantity:F2} of {requestedQuantity:F2} '{importedItem.Item.Name}' available from '{sourceFactoryId}'");
+                            MarkAsExported(sourceFactory, importedItem.Item.Name, availableQuantity, factory.Name);
                         }
                         else
                         {
                             // No production available
-                            importedItem.Quantity = 0;
-                            AddPlanningNote(factory, $"Error: No '{importedItem.Name}' available from '{sourceFactoryId}' (already fully allocated)");
+                            importedItem.Item.Quantity = 0;
+                            AddPlanningNote(factory, $"Error: No '{importedItem.Item.Name}' available from '{sourceFactoryId}' (already fully allocated)");
                         }
                     }
                     else
                     {
                         // Source factory doesn't produce this item
-                        importedItem.Quantity = 0;
-                        AddPlanningNote(factory, $"Error: Factory '{sourceFactoryId}' does not produce '{importedItem.Name}'");
+                        importedItem.Item.Quantity = 0;
+                        AddPlanningNote(factory, $"Error: Factory '{sourceFactoryId}' does not produce '{importedItem.Item.Name}'");
                     }
                 }
 

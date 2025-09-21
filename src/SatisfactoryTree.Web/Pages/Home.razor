@@ -8,57 +8,57 @@
 @inject HttpClient Http
 
 @code {
-    FactoryCatalog? factoryCatalog;
-    private Plan? plan;
-    private Factory? screwsFactory;
-    private Factory? reinforcedPlatesFactory;
-    private bool isLoading = true;
-    private string? errorMessage;
+	FactoryCatalog? factoryCatalog;
+	private Plan? plan;
+	private Factory? screwsFactory;
+	private Factory? reinforcedPlatesFactory;
+	private bool isLoading = true;
+	private string? errorMessage;
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            factoryCatalog = await Http.GetFromJsonAsync<FactoryCatalog>("content/gameData.json");
-            if (factoryCatalog == null)
-            {
-                throw new Exception("FactoryCatalog could not be loaded or found");
-            }
-            plan = new();
-            screwsFactory = new(1, "Screws factory");
-            screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
-            plan.Factories.Add(screwsFactory);
-            reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-            reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-            reinforcedPlatesFactory.ImportedParts.Add(1, new() { Name = "IronScrew", Quantity = 12 });
-            plan.Factories.Add(reinforcedPlatesFactory);
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			factoryCatalog = await Http.GetFromJsonAsync<FactoryCatalog>("content/gameData.json");
+			if (factoryCatalog == null)
+			{
+				throw new Exception("FactoryCatalog could not be loaded or found");
+			}
+			plan = new();
+			screwsFactory = new(1, "Screws factory");
+			screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+			plan.Factories.Add(screwsFactory);
+			reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
+			reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
+			reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
+			plan.Factories.Add(reinforcedPlatesFactory);
 
-            //Calculate the production
-            plan.UpdatePlanCalculations(factoryCatalog);
-            
-            isLoading = false;
-        }
-        catch (Exception ex)
-        {
-            errorMessage = ex.Message;
-            isLoading = false;
-        }
-    }
+			//Calculate the production
+			plan.UpdatePlanCalculations(factoryCatalog);
+
+			isLoading = false;
+		}
+		catch (Exception ex)
+		{
+			errorMessage = ex.Message;
+			isLoading = false;
+		}
+	}
 }
 
 @if (isLoading)
 {
-    <p>Loading...</p>
+	<p>Loading...</p>
 }
 else if (!string.IsNullOrEmpty(errorMessage))
 {
-    <div class="alert alert-danger">
-        <strong>Error:</strong> @errorMessage
-    </div>
+	<div class="alert alert-danger">
+		<strong>Error:</strong> @errorMessage
+	</div>
 }
 else if (plan?.Factories != null)
 {
-@*     <br />
+	@*     <br />
     <!-- Example badges -->
     <span class="badge badge-green">Success</span>
     <span class="badge badge-blue">Info</span>
@@ -73,13 +73,13 @@ else if (plan?.Factories != null)
     </svg>
     <br /> *@
 
-    <h3>The plan</h3>
-    @foreach(Factory factory in plan.Factories)
-    {
-        <FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
-    }
+	<h3>The plan</h3>
+	@foreach (Factory factory in plan.Factories)
+	{
+		<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+	}
 }
 else
 {
-    <p>No data available.</p>
+	<p>No data available.</p>
 }

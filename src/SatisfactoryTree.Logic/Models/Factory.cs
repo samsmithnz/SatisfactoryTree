@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Dictionary<int, Item> ImportedParts { get; set; }
+        public Dictionary<int, ImportedItem> ImportedParts { get; set; }
         public List<Item> TargetParts { get; set; }
         public List<Item> ComponentParts { get; set; }
         public List<Item> Surplus { get; set; }
