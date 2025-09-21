@@ -98,7 +98,7 @@ namespace SatisfactoryTree.Logic.Tests
         //    plan.Factories.Add(screwsFactorySetup);
         //    Factory reinforcedPlatesFactorySetup = new(2,"Reinforced Iron Plates factory");
         //    reinforcedPlatesFactorySetup.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-        //    reinforcedPlatesFactorySetup.ImportedParts.Add(1,("Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
+        //    reinforcedPlatesFactorySetup.ImportedParts.Add(1, new ImportedItem(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
         //    plan.Factories.Add(reinforcedPlatesFactorySetup);
 
         //    //Act
