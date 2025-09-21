@@ -75,7 +75,7 @@ namespace SatisfactoryTree.Logic.Models
 
                     // Check if source factory produces this item
                     if (factoryProduction.ContainsKey(sourceFactoryId) &&
-                        factoryProduction[sourceFactoryId].ContainsKey(importedItem.FactoryName))
+                        factoryProduction[sourceFactoryId].ContainsKey(importedItem.Item.Name))
                     {
                         double availableQuantity = factoryProduction[sourceFactoryId][importedItem.Item.Name];
                         double requestedQuantity = importedItem.Item.Quantity;
