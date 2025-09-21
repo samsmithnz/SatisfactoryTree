@@ -1,6 +1,7 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px; /* Set base font size to 14px */
+    scroll-behavior: smooth; /* Enable smooth scrolling for anchor links */
 }
 
 h1:focus {
@@ -104,6 +105,40 @@ code {
 }
 
 /* ===============================================
+   NAVIGATION ENHANCEMENTS
+   =============================================== */
+
+.nav-divider {
+    margin: 0.5rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-section-header {
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.nav-section-header small {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.factory-link {
+    font-size: 0.875rem !important;
+}
+
+.factory-link .bi {
+    font-size: 1rem;
+}
+
+/* Factory Sections */
+.factory-section {
+    scroll-margin-top: 2rem; /* Offset for fixed navbar */
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+}
+
+/* ===============================================
    COMPONENT STYLES WITH MAXIMUM SPECIFICITY
    =============================================== */
 
@@ -122,38 +157,42 @@ code {
 }
 
 .component-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 5px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+    margin-top: 5px !important;
 }
 
 .quantity-label {
-    font-weight: 600;
-    white-space: nowrap;
-    font-size: 14px;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    font-size: 14px !important;
 }
 
 .quantity-input {
-    width: 100px;
-    min-width: 100px;
+    width: 100px !important;
+    min-width: 100px !important;
 }
 
-/* Badges - Use a single, specific class for custom badges */
-.badge-custom {
-    display: inline-block;
-    padding: 0.25em 0.75em;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 2em;
-    background: #eee;
-    color: #333;
-    margin: 0 0.2em 0.3em 0;
-    vertical-align: middle;
-    line-height: 1.5;
-    border: 1px solid transparent;
-    transition: background 0.2s, color 0.2s;
-    text-transform: none;
+/* Badges - Maximum specificity with attribute selectors */
+span.badge[class*="badge"],
+.badge[class*="badge"],
+span[class*="badge"],
+div span.badge,
+li span.badge {
+    display: inline-block !important;
+    padding: 0.25em 0.75em !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 2em !important;
+    background: #eee !important;
+    color: #333 !important;
+    margin: 0 0.2em 0.3em 0 !important;
+    vertical-align: middle !important;
+    line-height: 1.5 !important;
+    border: 1px solid transparent !important;
+    transition: background 0.2s, color 0.2s !important;
+    text-transform: none !important;
 }
 
 /* Specific badge colors with maximum specificity */

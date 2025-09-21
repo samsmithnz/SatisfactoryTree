@@ -5,7 +5,9 @@
 @using SatisfactoryTree.Logic
 @using SatisfactoryTree.Logic.Extraction
 @using SatisfactoryTree.Logic.Models
+@using SatisfactoryTree.Web.Services
 @inject HttpClient Http
+@inject PlanService PlanService
 
 @code {
 	FactoryCatalog? factoryCatalog;
@@ -36,6 +38,9 @@
 			//Calculate the production
 			plan.UpdatePlanCalculations(factoryCatalog);
 
+			// Update the PlanService so NavMenu can access the plan
+			PlanService.Plan = plan;
+
 			isLoading = false;
 		}
 		catch (Exception ex)
@@ -43,6 +48,19 @@
 			errorMessage = ex.Message;
 			isLoading = false;
 		}
+	}
+
+	private string GetFactoryAnchor(Factory factory)
+	{
+		// Create a URL-friendly anchor from the factory name (same logic as NavMenu)
+		return factory.Name.ToLowerInvariant()
+			.Replace(" ", "-")
+			.Replace("'", "")
+			.Replace("&", "and")
+			.Replace("/", "-")
+			.Replace("\\", "-")
+			.Replace("(", "")
+			.Replace(")", "");
 	}
 }
 
@@ -58,25 +76,12 @@ else if (!string.IsNullOrEmpty(errorMessage))
 }
 else if (plan?.Factories != null)
 {
-	@*     <br />
-    <!-- Example badges -->
-    <span class="badge badge-green">Success</span>
-    <span class="badge badge-blue">Info</span>
-    <span class="badge badge-yellow">Warning</span>
-    <span class="badge badge-red">Error</span>
-    <span class="badge badge-grey">Default</span>
-    
-    <br>
-    <svg height="24" width="90" xmlns="http://www.w3.org/2000/svg">
-      <rect rx="12" height="24" width="90" fill="#2ea44f"/>
-      <text x="45" y="16" fill="#fff" font-size="14" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">Success</text>
-    </svg>
-    <br /> *@
-
 	<h3>The plan</h3>
 	@foreach (Factory factory in plan.Factories)
 	{
-		<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+		<div id="@GetFactoryAnchor(factory)" class="factory-section">
+			<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+		</div>
 	}
 }
 else
