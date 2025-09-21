@@ -134,7 +134,7 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.IsTrue(reinforcedPlatesFactory.ImportedParts.ContainsKey(1));
             Assert.AreEqual("Screws factory", reinforcedPlatesFactory.ImportedParts[1].FactoryName);
             Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Item.Name);
-            Assert.AreEqual(6, reinforcedPlatesFactory.ImportedParts[1].Item.Quantity);
+            Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[1].Item.Quantity);
 
             Assert.IsNotNull(screwsFactory);
             Assert.IsNotNull(screwsFactory.ComponentParts);
