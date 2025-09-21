@@ -1,6 +1,5 @@
 ﻿using SatisfactoryTree.Logic.Extraction;
 using SatisfactoryTree.Logic.Models;
-using System.Xml.Linq;
 
 namespace SatisfactoryTree.Logic.Tests
 {
