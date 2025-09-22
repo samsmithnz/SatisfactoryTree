@@ -287,10 +287,12 @@ namespace SatisfactoryTree.Console
 
                             if (!string.IsNullOrEmpty(fuelItem.supplementaryFuel) && supplementalRatio > 0)
                             {
+                                double supplementaryPerMin = (3d / 50d) * supplementalRatio * building.power;
                                 ingredients.Add(new PowerIngredient
                                 {
                                     part = fuelItem.supplementaryFuel,
-                                    perMin = (3d / 50d) * supplementalRatio * building.power, // Calculate the ratio of the supplemental resource to the primary fuel
+                                    perMin = supplementaryPerMin, // Calculate the ratio of the supplemental resource to the primary fuel
+                                    mwPerItem = supplementaryPerMin > 0 ? building.power / supplementaryPerMin : 0,
                                     supplementalRatio = (3d / 50d) * supplementalRatio
                                 });
                             }
