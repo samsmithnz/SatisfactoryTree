@@ -44,6 +44,23 @@
                     </a>
                 </div>
             }
+            <div class="nav-item px-3">
+                <button class="btn btn-outline-light btn-sm add-factory-btn" @onclick="AddNewFactory">
+                    <span class="bi bi-plus-circle" aria-hidden="true"></span> Add factory
+                </button>
+            </div>
+        }
+        else if (PlanService.Plan != null)
+        {
+            <hr class="nav-divider">
+            <div class="nav-section-header px-3">
+                <small class="text-muted text-uppercase">Factories</small>
+            </div>
+            <div class="nav-item px-3">
+                <button class="btn btn-outline-light btn-sm add-factory-btn" @onclick="AddNewFactory">
+                    <span class="bi bi-plus-circle" aria-hidden="true"></span> Add factory
+                </button>
+            </div>
         }
     </nav>
 </div>
@@ -92,5 +109,12 @@
         // The browser will handle the anchor scrolling automatically due to the href="#anchor"
         // The CSS smooth scrolling will make it animate nicely
         StateHasChanged();
+    }
+
+    private void AddNewFactory()
+    {
+        PlanService.AddFactory();
+        // Close the nav menu on mobile after clicking
+        collapseNavMenu = true;
     }
 }
