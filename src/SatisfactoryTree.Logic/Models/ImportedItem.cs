@@ -5,7 +5,7 @@
         public int FactoryId { get; set; }
         public string FactoryName { get; set; } = string.Empty;
         public Item Item { get; set; } = new();
-        public double ProductFulfilled { get; set; } = 0;
+        public double PartQuantityImported { get; set; } = 0;
 
         public ImportedItem(int factoryId, string factoryName, Item item)
         {

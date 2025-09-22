@@ -11,9 +11,9 @@ namespace SatisfactoryTree.Logic
         public List<Item> CalculateFactoryProduction(FactoryCatalog factoryCatalog, Factory factory)
         {
             List<Item> results = new();
-            foreach (Item item in factory.TargetParts)
+            foreach (ExportedItem item in factory.ExportedParts)
             {
-                results.AddRange(CalculateProduction(factoryCatalog, item.Name, item.Quantity, factory.ImportedParts));
+                results.AddRange(CalculateProduction(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts));
             }
             return results;
         }
@@ -104,7 +104,7 @@ namespace SatisfactoryTree.Logic
                     }
 
                     double usedQuantity = originalQuantity - remainingQuantity;
-                    import.ProductFulfilled = Math.Max(0, usedQuantity);
+                    import.PartQuantityImported = Math.Max(0, usedQuantity);
                 }
             }
         }

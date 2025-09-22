@@ -26,15 +26,15 @@
 {
     <div class="factory-container">
         <h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
-        @if (Factory.TargetParts != null && Factory.TargetParts.Any())
+        @if (Factory.ExportedParts != null && Factory.ExportedParts.Any())
         {
-            <p><b>Target parts:</b></p>
+            <p><b>Exported parts:</b></p>
             <ul>
-                @foreach (Item item in Factory.TargetParts)
+                @foreach (ExportedItem item in Factory.ExportedParts)
                 {
                     <li>
-                        <img src="@DisplayService.GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                        <strong>@item.Name</strong> - @item.Quantity per/min
+                        <img src="@DisplayService.GetPartImagePath(item.Item.Name)" alt="@item.Item.Name" class="part-image" />
+						<strong>@item.Item.Name</strong> - @item.Item.Quantity per/min (@item.PartQuantityExported per/min exported))
                     </li>
                 }
             </ul>
@@ -116,7 +116,7 @@
                     {
                         <li>
                             <img src="@DisplayService.GetPartImagePath(item.Value.Item.Name)" alt="@item.Value.Item.Name" class="part-image" />
-                            <strong>@item.Value.Item.Name</strong> - Quantity: @item.Value.Item.Quantity - from factory: @item.Value.FactoryName
+                            <strong>@item.Value.Item.Name</strong> - Quantity: @item.Value.Item.Quantity - from factory: @item.Value.FactoryName (@item.Value.PartQuantityImported per/min imported)
                         </li>
                     }
                 }

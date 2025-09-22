@@ -32,9 +32,9 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.Fail("Final data is null");
             }
             Factory screwsFactory = new(1, "Screws factory");
-            screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+            screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
             Factory reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-            reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
+            reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
             reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
             //Plan plan = new();
             //plan.Factories.Add(screwsFactory);
@@ -94,9 +94,9 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.Fail("Final data is null");
             }
             Factory screwsFactory = new(1, "Screws factory");
-            screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 6 });
+            screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 6 }));
             Factory reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-            reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
+            reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
             
             // NOTE: This test is expecting that the Plan level balancing will handle the fact that
             // the screws factory only produces 6 screws but we're trying to import 12.
