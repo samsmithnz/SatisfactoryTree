@@ -26,20 +26,24 @@
 			{
 				throw new Exception("FactoryCatalog could not be loaded or found");
 			}
-			plan = new();
-			screwsFactory = new(1, "Screws factory");
-			screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
-			plan.Factories.Add(screwsFactory);
-			reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-			reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
-			reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
-			plan.Factories.Add(reinforcedPlatesFactory);
 
-			//Calculate the production
-			plan.UpdatePlanCalculations(factoryCatalog);
-
-			// Update the PlanService so NavMenu can access the plan
-			PlanService.Plan = plan;
+			// Try to load saved plan first
+			plan = await PlanService.LoadPlanAsync();
+			
+			if (plan == null || !plan.Factories.Any())
+			{
+				// No saved plan, create default plan
+				await CreateDefaultPlan();
+			}
+			else
+			{
+				// Recalculate loaded plan to ensure data consistency
+				if (factoryCatalog != null)
+				{
+					plan.UpdatePlanCalculations(factoryCatalog);
+				}
+				PlanService.Plan = plan;
+			}
 
 			isLoading = false;
 		}
@@ -48,6 +52,34 @@
 			errorMessage = ex.Message;
 			isLoading = false;
 		}
+	}
+
+	private async Task CreateDefaultPlan()
+	{
+		plan = new();
+		screwsFactory = new(1, "Screws factory");
+		screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
+		plan.Factories.Add(screwsFactory);
+		reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
+		reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
+		reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
+		plan.Factories.Add(reinforcedPlatesFactory);
+
+		//Calculate the production
+		if (factoryCatalog != null)
+		{
+			plan.UpdatePlanCalculations(factoryCatalog);
+		}
+
+		// Update the PlanService so NavMenu can access the plan (this will also save it)
+		PlanService.Plan = plan;
+	}
+
+	private async Task ResetToDefault()
+	{
+		await PlanService.ClearSavedPlanAsync();
+		await CreateDefaultPlan();
+		StateHasChanged();
 	}
 
 	private string GetFactoryAnchor(Factory factory)
@@ -76,7 +108,12 @@ else if (!string.IsNullOrEmpty(errorMessage))
 }
 else if (plan?.Factories != null)
 {
-	<h3>The plan</h3>
+	<div class="d-flex justify-content-between align-items-center mb-3">
+		<h3 class="mb-0">The plan</h3>
+		<button type="button" class="btn btn-outline-secondary btn-sm" @onclick="ResetToDefault">
+			<i class="fa fa-refresh"></i> Reset to Default
+		</button>
+	</div>
 	@foreach (Factory factory in plan.Factories)
 	{
 		<div id="@GetFactoryAnchor(factory)" class="factory-section">
