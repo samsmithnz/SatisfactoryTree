@@ -26,7 +26,7 @@ namespace SatisfactoryTree.Logic
             //Add the goal item
             Recipe? recipe = FindRecipe(factoryCatalog, partName);
             if (recipe == null)
-            { 
+            {
                 return results;
             }
 
