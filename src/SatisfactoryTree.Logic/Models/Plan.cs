@@ -1,4 +1,3 @@
-﻿
 namespace SatisfactoryTree.Logic.Models
 {
     public class Plan
@@ -24,194 +23,79 @@ namespace SatisfactoryTree.Logic.Models
 
         private void BalanceImportsAndExports()
         {
-            // Create a map of what each factory produces (exports)
-            Dictionary<int, Dictionary<string, double>> factoryProduction = new();
-
+            // Initialize exported quantities based on each factory's target production
             foreach (Factory factory in Factories)
             {
-                factoryProduction[factory.Id] = new();
-
-                // Add target parts as potential exports
-                if (factory.TargetParts != null)
+                foreach (ExportedItem exportedItem in factory.ExportedParts)
                 {
-                    foreach (Item targetPart in factory.TargetParts)
-                    {
-                        factoryProduction[factory.Id][targetPart.Name] = targetPart.Quantity;
-                    }
-                }
-
-                // Initialize surplus list if it doesn't exist
-                if (factory.Surplus == null)
-                {
-                    factory.Surplus = new();
+                    // Initialize the exported quantity to the target production amount
+                    exportedItem.PartQuantityExported = exportedItem.Item.Quantity;
                 }
             }
 
-            // Check and balance imported parts
+            // Process each factory's import requests
             foreach (Factory factory in Factories)
             {
-                if (factory.ImportedParts == null)
-                {
-                    continue;
-                }
-
-                Dictionary<int, Item> updatedImports = new();
-
-                foreach (KeyValuePair<int, Item> import in factory.ImportedParts.ToList())
+                foreach (KeyValuePair<int, ImportedItem> import in factory.ImportedParts)
                 {
                     int sourceFactoryId = import.Key;
-                    Item importedItem = import.Value;
-
+                    ImportedItem importedItem = import.Value;
+                    
                     // Find the source factory
                     Factory? sourceFactory = Factories.FirstOrDefault(f => f.Id == sourceFactoryId);
-
                     if (sourceFactory == null)
                     {
-                        // Source factory not found - mark as unavailable
-                        importedItem.Quantity = 0;
-                        AddPlanningNote(factory, $"Warning: Source factory '{sourceFactoryId}' not found for import '{importedItem.Name}'");
+                        // Source factory not found
+                        importedItem.PartQuantityImported = 0;
                         continue;
                     }
 
-                    // Check if source factory produces this item
-                    if (factoryProduction.ContainsKey(sourceFactoryId) &&
-                        factoryProduction[sourceFactoryId].ContainsKey(importedItem.Name))
+                    // Find the matching exported item
+                    ExportedItem? exportedItem = sourceFactory.ExportedParts
+                        .FirstOrDefault(e => e.Item.Name == importedItem.Item.Name);
+                    
+                    if (exportedItem == null)
                     {
-                        double availableQuantity = factoryProduction[sourceFactoryId][importedItem.Name];
-                        double requestedQuantity = importedItem.Quantity;
+                        // Source factory doesn't export this item
+                        importedItem.PartQuantityImported = 0;
+                        continue;
+                    }
 
-                        if (availableQuantity >= requestedQuantity)
-                        {
-                            // Sufficient production available
-                            factoryProduction[sourceFactoryId][importedItem.Name] -= requestedQuantity;
-                            updatedImports[sourceFactoryId] = importedItem;
+                    double requestedQuantity = importedItem.Item.Quantity;
+                    double availableQuantity = exportedItem.PartQuantityExported;
 
-                            // Mark as allocated in source factory
-                            MarkAsExported(sourceFactory, importedItem.Name, requestedQuantity, factory.Name);
-                        }
-                        else if (availableQuantity > 0)
-                        {
-                            // Partial allocation possible
-                            importedItem.Quantity = availableQuantity;
-                            factoryProduction[sourceFactoryId][importedItem.Name] = 0;
-                            updatedImports[sourceFactoryId] = importedItem;
-
-                            AddPlanningNote(factory, $"Warning: Only {availableQuantity:F2} of {requestedQuantity:F2} '{importedItem.Name}' available from '{sourceFactoryId}'");
-                            MarkAsExported(sourceFactory, importedItem.Name, availableQuantity, factory.Name);
-                        }
-                        else
-                        {
-                            // No production available
-                            importedItem.Quantity = 0;
-                            AddPlanningNote(factory, $"Error: No '{importedItem.Name}' available from '{sourceFactoryId}' (already fully allocated)");
-                        }
+                    if (availableQuantity >= requestedQuantity)
+                    {
+                        // Full allocation possible
+                        exportedItem.PartQuantityExported -= requestedQuantity;
+                        importedItem.PartQuantityImported = requestedQuantity;
+                    }
+                    else if (availableQuantity > 0)
+                    {
+                        // Partial allocation possible
+                        importedItem.PartQuantityImported = availableQuantity;
+                        exportedItem.PartQuantityExported = 0;
                     }
                     else
                     {
-                        // Source factory doesn't produce this item
-                        importedItem.Quantity = 0;
-                        AddPlanningNote(factory, $"Error: Factory '{sourceFactoryId}' does not produce '{importedItem.Name}'");
+                        // No quantity available
+                        importedItem.PartQuantityImported = 0;
                     }
                 }
-
-                // Update the factory's imported parts with validated quantities
-                factory.ImportedParts = updatedImports;
             }
 
-            // Mark remaining production as surplus
+            // Update the final PartQuantityExported to reflect what was actually used
             foreach (Factory factory in Factories)
             {
-                if (factoryProduction.ContainsKey(factory.Id))
+                foreach (ExportedItem exportedItem in factory.ExportedParts)
                 {
-                    foreach (var remainingProduction in factoryProduction[factory.Id])
-                    {
-                        if (remainingProduction.Value > 0)
-                        {
-                            // Add to surplus
-                            var surplusItem = new Item
-                            {
-                                Name = remainingProduction.Key,
-                                Quantity = remainingProduction.Value
-                            };
-
-                            factory.Surplus.Add(surplusItem);
-                        }
-                    }
+                    // PartQuantityExported now represents what was actually exported (allocated)
+                    double originalProduction = exportedItem.Item.Quantity;
+                    double remainingQuantity = exportedItem.PartQuantityExported;
+                    exportedItem.PartQuantityExported = originalProduction - remainingQuantity;
                 }
             }
         }
 
-        private void MarkAsExported(Factory sourceFactory, string itemName, double quantity, string destinationFactory)
-        {
-            // Initialize exports list if it doesn't exist
-            if (sourceFactory.Surplus == null)
-            {
-                sourceFactory.Surplus = new List<Item>();
-            }
-
-            // Find existing export entry or create new one
-            var exportItem = sourceFactory.Surplus.FirstOrDefault(s => s.Name == $"Export to {destinationFactory}: {itemName}");
-
-            if (exportItem != null)
-            {
-                exportItem.Quantity += quantity;
-            }
-            else
-            {
-                sourceFactory.Surplus.Add(new Item
-                {
-                    Name = $"Export to {destinationFactory}: {itemName}",
-                    Quantity = quantity
-                });
-            }
-        }
-
-        private void AddPlanningNote(Factory factory, string note)
-        {
-            // For now, we'll use the surplus list to store planning notes
-            // In a more complete implementation, you might want a dedicated Notes property
-            factory.Surplus ??= new List<Item>();
-
-            factory.Surplus.Add(new Item
-            {
-                Name = $"Planning Note",
-                Quantity = 0,
-                // You might want to add a Notes property to Item class for this
-                Building = note
-            });
-        }
-
-        public Dictionary<string, List<string>> GetPlanValidationReport()
-        {
-            var report = new Dictionary<string, List<string>>();
-
-            foreach (Factory factory in Factories)
-            {
-                var factoryIssues = new List<string>();
-
-                if (factory.Surplus != null)
-                {
-                    foreach (var surplus in factory.Surplus)
-                    {
-                        if (surplus.Name == "Planning Note")
-                        {
-                            factoryIssues.Add(surplus.Building); // Using Building field to store the note text
-                        }
-                        else if (surplus.Name.StartsWith("Export to"))
-                        {
-                            factoryIssues.Add($"Exporting: {surplus.Name} - {surplus.Quantity:F2} per/min");
-                        }
-                        else if (surplus.Quantity > 0)
-                        {
-                            factoryIssues.Add($"Surplus: {surplus.Name} - {surplus.Quantity:F2} per/min");
-                        }
-                    }
-                }
-
-                report[factory.Name] = factoryIssues;
-            }
-
-            return report;
-        }
     }
 }

@@ -1,4 +1,8 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using SatisfactoryTree.Web.Services
+@inject PlanService PlanService
+@implements IDisposable
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">SatisfactoryTree.Web</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -24,6 +28,23 @@
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
             </NavLink>
         </div>
+
+        @if (PlanService.HasPlan && PlanService.Plan?.Factories != null && PlanService.Plan.Factories.Any())
+        {
+            <hr class="nav-divider">
+            <div class="nav-section-header px-3">
+                <small class="text-muted text-uppercase">Factories</small>
+            </div>
+            @foreach (var factory in PlanService.Plan.Factories)
+            {
+                <div class="nav-item px-3">
+                    <a class="nav-link factory-link" href="#@GetFactoryAnchor(factory)" @onclick="() => ScrollToFactory(factory)" @onclick:preventDefault="false">
+                        <span class="bi bi-gear-fill" aria-hidden="true"></span> 
+                        <span class="factory-name">@factory.Name</span>
+                    </a>
+                </div>
+            }
+        }
     </nav>
 </div>
 
@@ -32,8 +53,44 @@
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    protected override void OnInitialized()
+    {
+        PlanService.PlanChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        PlanService.PlanChanged -= StateHasChanged;
+    }
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private string GetFactoryAnchor(SatisfactoryTree.Logic.Models.Factory factory)
+    {
+        // Create a URL-friendly anchor from the factory name
+        return factory.Name.ToLowerInvariant()
+            .Replace(" ", "-")
+            .Replace("'", "")
+            .Replace("&", "and")
+            .Replace("/", "-")
+            .Replace("\\", "-")
+            .Replace("(", "")
+            .Replace(")", "");
+    }
+
+    private async Task ScrollToFactory(SatisfactoryTree.Logic.Models.Factory factory)
+    {
+        // Close the nav menu on mobile after clicking
+        collapseNavMenu = true;
+        
+        // Small delay to let the page render and nav menu close
+        await Task.Delay(100);
+        
+        // The browser will handle the anchor scrolling automatically due to the href="#anchor"
+        // The CSS smooth scrolling will make it animate nicely
+        StateHasChanged();
     }
 }

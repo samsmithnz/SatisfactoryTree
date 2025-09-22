@@ -1,6 +1,5 @@
 ﻿using SatisfactoryTree.Logic.Extraction;
 using SatisfactoryTree.Logic.Models;
-using System.Xml.Linq;
 
 namespace SatisfactoryTree.Logic.Tests
 {
@@ -33,10 +32,10 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.Fail("Final data is null");
             }
             Factory screwsFactory = new(1, "Screws factory");
-            screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 12 });
+            screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
             Factory reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-            reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-            reinforcedPlatesFactory.ImportedParts.Add(1, new() { Name = "IronScrew", Quantity = 12 });
+            reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
+            reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
             //Plan plan = new();
             //plan.Factories.Add(screwsFactory);
             //plan.Factories.Add(reinforcedPlatesFactory);
@@ -64,8 +63,9 @@ namespace SatisfactoryTree.Logic.Tests
             //Assert.AreEqual(9, results[3].Quantity);
             //Assert.AreEqual(1, results[3].Counter);
             Assert.IsTrue(reinforcedPlatesFactory.ImportedParts.ContainsKey(1));
-            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Name);
-            Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[1].Quantity);
+            Assert.AreEqual("Screws factory", reinforcedPlatesFactory.ImportedParts[1].FactoryName);
+            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Item.Name);
+            Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[1].Item.Quantity);
 
             Assert.IsNotNull(screwsFactory);
             Assert.IsNotNull(screwsFactory.ComponentParts);
@@ -94,13 +94,14 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.Fail("Final data is null");
             }
             Factory screwsFactory = new(1, "Screws factory");
-            screwsFactory.TargetParts.Add(new() { Name = "IronScrew", Quantity = 6 });
+            screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 6 }));
             Factory reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-            reinforcedPlatesFactory.TargetParts.Add(new() { Name = "IronPlateReinforced", Quantity = 1 });
-            reinforcedPlatesFactory.ImportedParts.Add(1,new() { Name = "IronScrew", Quantity = 6 });
-            //Plan plan = new();
-            //plan.Factories.Add(screwsFactory);
-            //plan.Factories.Add(reinforcedPlatesFactory);
+            reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
+            
+            // NOTE: This test is expecting that the Plan level balancing will handle the fact that
+            // the screws factory only produces 6 screws but we're trying to import 12.
+            // For now, we'll test with the correct quantity that would be available after balancing.
+            reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 6 }));
 
             //Act
             Calculator calculator = new();
@@ -131,8 +132,9 @@ namespace SatisfactoryTree.Logic.Tests
             //Assert.AreEqual(10.5, results[5].Quantity);
             //Assert.AreEqual(1, results[5].Counter);
             Assert.IsTrue(reinforcedPlatesFactory.ImportedParts.ContainsKey(1));
-            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Name);
-            Assert.AreEqual(6, reinforcedPlatesFactory.ImportedParts[1].Quantity);
+            Assert.AreEqual("Screws factory", reinforcedPlatesFactory.ImportedParts[1].FactoryName);
+            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Item.Name);
+            Assert.AreEqual(6, reinforcedPlatesFactory.ImportedParts[1].Item.Quantity);
 
             Assert.IsNotNull(screwsFactory);
             Assert.IsNotNull(screwsFactory.ComponentParts);
