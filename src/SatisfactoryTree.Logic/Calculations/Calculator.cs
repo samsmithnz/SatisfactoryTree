@@ -50,7 +50,17 @@ namespace SatisfactoryTree.Logic
             }
 
             List<Item> ingredients = GetIngredients(factoryCatalog, partName, quantity, counter, new Dictionary<string, double>(), false);
-            results.Add(new() { Name = partName, Quantity = quantity, Ingredients = ingredients, Building = recipe.Building.Name, BuildingQuantity = buildingRatio, Counter = counter });
+            
+            // Add the goal item WITH power calculation
+            results.Add(new() { 
+                Name = partName, 
+                Quantity = quantity, 
+                Ingredients = ingredients, 
+                Building = recipe.Building.Name, 
+                BuildingQuantity = buildingRatio, 
+                BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
+                Counter = counter 
+            });
 
             //Get the dependencies/ingredients for the goal item
             results.AddRange(GetIngredients(factoryCatalog, partName, quantity, counter, workingImportedParts));
@@ -68,6 +78,9 @@ namespace SatisfactoryTree.Logic
                 {
                     //if the item exists in the dictionary, add the quantity to the existing item
                     resultsDictionary[item.Name].Quantity += item.Quantity;
+                    // Also combine building quantities and power usage
+                    resultsDictionary[item.Name].BuildingQuantity += item.BuildingQuantity;
+                    resultsDictionary[item.Name].BuildingPowerUsage += item.BuildingPowerUsage;
                 }
             }
 
