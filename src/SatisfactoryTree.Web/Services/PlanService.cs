@@ -26,5 +26,10 @@ namespace SatisfactoryTree.Web.Services
         }
 
         public bool HasPlan => _plan != null && _plan.Factories.Any();
+
+        public void NotifyPlanChanged()
+        {
+            PlanChanged?.Invoke();
+        }
     }
 }

@@ -59,6 +59,7 @@
             if (PlanService.Plan != null && PlanService.FactoryCatalog != null)
             {
                 PlanService.Plan.UpdatePlanCalculations(PlanService.FactoryCatalog);
+                PlanService.NotifyPlanChanged();
             }
             
             isAddingExportedPart = false;
