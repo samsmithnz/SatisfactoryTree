@@ -7,6 +7,8 @@
 
         public ExportedItem(Item item)
         {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
             Item = item;
         }
     }
