@@ -1,6 +1,7 @@
 ﻿@using SatisfactoryTree.Logic.Models
 @using SatisfactoryTree.Web.Services
 @inject IFactoryItemDisplayService DisplayService
+@inject PlanService PlanService
 
 @code {
     [Parameter]
@@ -53,6 +54,12 @@
             var newItem = new Item { Name = selectedPartToExport.Name, Quantity = exportedQuantity };
             var exportedItem = new ExportedItem(newItem);
             Factory.ExportedParts.Add(exportedItem);
+            
+            // Update calculations after adding the exported part
+            if (PlanService.Plan != null && PlanService.FactoryCatalog != null)
+            {
+                PlanService.Plan.UpdatePlanCalculations(PlanService.FactoryCatalog);
+            }
             
             isAddingExportedPart = false;
             selectedPartToExport = null;

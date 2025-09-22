@@ -39,6 +39,7 @@
 			plan.UpdatePlanCalculations(factoryCatalog);
 
 			// Update the PlanService so NavMenu can access the plan
+			PlanService.FactoryCatalog = factoryCatalog;
 			PlanService.Plan = plan;
 
 			isLoading = false;
