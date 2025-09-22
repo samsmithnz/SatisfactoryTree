@@ -8,10 +8,10 @@
 @using SatisfactoryTree.Web.Services
 @inject HttpClient Http
 @inject PlanService PlanService
+@implements IDisposable
 
 @code {
 	FactoryCatalog? factoryCatalog;
-	private Plan? plan;
 	private Factory? screwsFactory;
 	private Factory? reinforcedPlatesFactory;
 	private bool isLoading = true;
@@ -26,20 +26,30 @@
 			{
 				throw new Exception("FactoryCatalog could not be loaded or found");
 			}
-			plan = new();
-			screwsFactory = new(1, "Screws factory");
-			screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
-			plan.Factories.Add(screwsFactory);
-			reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-			reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
-			reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
-			plan.Factories.Add(reinforcedPlatesFactory);
+			
+			// Initialize the plan if it doesn't exist
+			if (PlanService.Plan == null)
+			{
+				var plan = new Plan();
+				screwsFactory = new(1, "Screws factory");
+				screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
+				plan.Factories.Add(screwsFactory);
+				reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
+				reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
+				reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
+				plan.Factories.Add(reinforcedPlatesFactory);
 
-			//Calculate the production
-			plan.UpdatePlanCalculations(factoryCatalog);
+				//Calculate the production
+				plan.UpdatePlanCalculations(factoryCatalog);
 
-			// Update the PlanService so NavMenu can access the plan
-			PlanService.Plan = plan;
+				// Update the PlanService so NavMenu can access the plan
+				PlanService.Plan = plan;
+			}
+			else
+			{
+				// Recalculate if plan already exists (in case new factories were added)
+				RecalculatePlan();
+			}
 
 			isLoading = false;
 		}
@@ -47,6 +57,30 @@
 		{
 			errorMessage = ex.Message;
 			isLoading = false;
+		}
+	}
+
+	protected override void OnInitialized()
+	{
+		PlanService.PlanChanged += OnPlanChanged;
+	}
+
+	public void Dispose()
+	{
+		PlanService.PlanChanged -= OnPlanChanged;
+	}
+
+	private void OnPlanChanged()
+	{
+		RecalculatePlan();
+		InvokeAsync(StateHasChanged);
+	}
+
+	private void RecalculatePlan()
+	{
+		if (PlanService.Plan != null && factoryCatalog != null)
+		{
+			PlanService.Plan.UpdatePlanCalculations(factoryCatalog);
 		}
 	}
 
@@ -74,10 +108,10 @@ else if (!string.IsNullOrEmpty(errorMessage))
 		<strong>Error:</strong> @errorMessage
 	</div>
 }
-else if (plan?.Factories != null)
+else if (PlanService.Plan?.Factories != null)
 {
 	<h3>The plan</h3>
-	@foreach (Factory factory in plan.Factories)
+	@foreach (Factory factory in PlanService.Plan.Factories)
 	{
 		<div id="@GetFactoryAnchor(factory)" class="factory-section">
 			<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
