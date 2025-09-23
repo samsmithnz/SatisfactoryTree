@@ -1,4 +1,5 @@
-﻿using SatisfactoryTree.Logic.Models;
+﻿using SatisfactoryTree.Logic.Calculations;
+using SatisfactoryTree.Logic.Models;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -210,10 +211,14 @@ namespace SatisfactoryTree.Logic.Extraction
             //sort the new recipes list by id
             newRecipes = newRecipes.OrderBy(r => r.Name).ToList();
 
+            //Get the parts lookup
+            List<LookupItem> partsLookup = Lookups.GetParts(items.Parts);
+
             // Construct the final JSON object
             FactoryCatalog factoryCatalog = new(
                 buildings,
                 items,
+                partsLookup,
                 recipes,
                 powerGenerationRecipes);
 

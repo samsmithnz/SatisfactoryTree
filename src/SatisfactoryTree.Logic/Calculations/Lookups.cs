@@ -5,15 +5,15 @@ namespace SatisfactoryTree.Logic.Calculations
     public class Lookups
     {
 
-        public static List<LookupItem> GetParts(FactoryCatalog factoryCatalog)
+        public static List<LookupItem> GetParts(Dictionary<string, Part> parts)
         {
-            List<LookupItem> parts = new();
-            foreach (KeyValuePair<string, Part> item in factoryCatalog.Parts)
+            List<LookupItem> items = new();
+            foreach (KeyValuePair<string, Part> item in parts)
             {
-                parts.Add(new(item.Key, item.Value.Name));
+                items.Add(new(item.Key, item.Value.Name));
             }
             //order the parts by name
-            return parts.OrderBy(p => p.Name).ToList();
+            return items.OrderBy(p => p.Name).ToList();
         }
 
         public static List<Recipe> GetRecipes(FactoryCatalog factoryCatalog, string partName)

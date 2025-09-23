@@ -31,7 +31,7 @@ namespace SatisfactoryTree.Logic.Tests
             //Arrange
 
             //Act
-            List<LookupItem> parts = Lookups.GetParts(factoryCatalog);
+            List<LookupItem> parts = Lookups.GetParts(factoryCatalog.Parts);
 
             //Assert
             Assert.IsNotNull(parts);
