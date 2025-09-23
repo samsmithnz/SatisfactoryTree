@@ -139,6 +139,47 @@ code {
 }
 
 /* ===============================================
+   EXPORTED PARTS STYLING
+   =============================================== */
+
+.exported-part-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.5rem 0 !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.exported-part-item:last-child {
+    border-bottom: none !important;
+}
+
+.exported-part-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.add-exported-part-form {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.375rem !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.add-exported-part-form h5 {
+    margin-bottom: 0.75rem !important;
+    color: #495057 !important;
+}
+
+.add-exported-part-form label {
+    font-weight: 600 !important;
+    margin-bottom: 0.25rem !important;
+    display: block !important;
+}
+
+/* ===============================================
    COMPONENT STYLES WITH MAXIMUM SPECIFICITY
    =============================================== */
 
@@ -348,29 +389,7 @@ input.form-control:focus[class*="form-control"],
     background-color: #e9ecef !important;
 }
 
+/* Utility Classes */
 .me-2 {
     margin-right: 10px !important;
-}
-
-.add-exported-part-form {
-    background-color: #f8f9fa;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #dee2e6;
-}
-
-.add-exported-part-form h5 {
-    margin-bottom: 15px;
-    color: #495057;
-}
-
-.add-exported-part-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.add-exported-part-form .form-control {
-    max-width: 300px;
 }

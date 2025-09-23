@@ -31,17 +31,20 @@ namespace SatisfactoryTree.Logic.Tests
             //Arrange
 
             //Act
-            List<Part> parts = Lookups.GetParts(factoryCatalog);
+            List<LookupItem> parts = Lookups.GetParts(factoryCatalog);
 
             //Assert
             Assert.IsNotNull(parts);
             Assert.AreEqual(168, parts.Count);
 
+            Assert.AreEqual("SpaceElevatorPart_5", parts[0].Id);
             Assert.AreEqual("Adaptive Control Unit", parts[0].Name);
-            Assert.AreEqual(0, parts[0].EnergyGeneratedInMJ);
+            //Assert.AreEqual(0, parts[0].EnergyGeneratedInMJ);
 
+
+            Assert.AreEqual("Battery", parts[14].Id);
             Assert.AreEqual("Battery", parts[14].Name);
-            Assert.AreEqual(6000, parts[14].EnergyGeneratedInMJ);
+            //Assert.AreEqual(6000, parts[14].EnergyGeneratedInMJ);
         }
 
         [TestMethod]

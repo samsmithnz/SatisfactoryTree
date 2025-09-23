@@ -1,22 +1,16 @@
 ﻿using SatisfactoryTree.Logic.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Logic.Calculations
 {
     public class Lookups
     {
 
-        public static List<Part> GetParts(FactoryCatalog factoryCatalog)
+        public static List<LookupItem> GetParts(FactoryCatalog factoryCatalog)
         {
-            List<Part> parts = new();
-            foreach (var item in factoryCatalog.Parts)
+            List<LookupItem> parts = new();
+            foreach (KeyValuePair<string, Part> item in factoryCatalog.Parts)
             {
-                parts.Add(item.Value);
+                parts.Add(new(item.Key, item.Value.Name));
             }
             //order the parts by name
             return parts.OrderBy(p => p.Name).ToList();
