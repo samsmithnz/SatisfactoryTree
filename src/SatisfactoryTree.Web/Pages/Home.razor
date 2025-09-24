@@ -8,6 +8,7 @@
 @using SatisfactoryTree.Web.Services
 @inject HttpClient Http
 @inject PlanService PlanService
+@inject IJSRuntime JS
 @implements IDisposable
 
 @code {
@@ -16,6 +17,7 @@
 	private Factory? reinforcedPlatesFactory;
 	private bool isLoading = true;
 	private string? errorMessage;
+	private int? factoryIdToScrollTo; // local cache for scrolling
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -75,8 +77,29 @@
 
 	private void OnPlanChanged()
 	{
+		// Capture last added factory ID (if any) before recalculation
+		factoryIdToScrollTo = PlanService.LastAddedFactoryId;
 		RecalculatePlan();
 		InvokeAsync(StateHasChanged);
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (factoryIdToScrollTo.HasValue && PlanService.Plan != null)
+		{
+			var factory = PlanService.Plan.Factories.FirstOrDefault(f => f.Id == factoryIdToScrollTo.Value);
+			if (factory != null)
+			{
+				string anchor = GetFactoryAnchor(factory);
+				try
+				{
+					await JS.InvokeVoidAsync("scrollToFactoryAnchor", anchor);
+				}
+				catch { /* ignore JS errors */ }
+			}
+			PlanService.ClearLastAddedFactory();
+			factoryIdToScrollTo = null;
+		}
 	}
 
 	private void RecalculatePlan()
