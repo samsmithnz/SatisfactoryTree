@@ -6,28 +6,30 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
 {
     public string GetPartImagePath(string partName)
     {
-        // Handle special mapping cases where the part name doesn't directly match the image name
-        string imageName = partName switch
-        {
-            "IronPlateReinforced" => "ReinforcedIronPlate",
-            "OreIron" => "IronOre", 
-            "IronScrew" => "IronScrews",
-            _ => partName.Replace(" ", "") // Default: remove spaces
-        };
+        //// Handle special mapping cases where the part name doesn't directly match the image name
+        //string imageName = partName switch
+        //{
+        //    "IronPlateReinforced" => "ReinforcedIronPlate",
+        //    "OreIron" => "IronOre", 
+        //    "IronScrew" => "IronScrews",
+        //    _ => partName.Replace(" ", "") // Default: remove spaces
+        //};
+        string imageName = partName.Replace(" ", "");
 
         return $"images/parts/{imageName}_256.png";
     }
 
     public string GetBuildingImagePath(string buildingName)
     {
+        Console.WriteLine(buildingName);
         // Handle building name mappings to match image files
         string imageName = buildingName switch
         {
             "smeltermk1" => "SmelterMk1_256.png",
-            "foundry" => "Foundry_256.png",
+            "foundrymk1" => "Foundry_256.png",
             "constructormk1" => "ConstructorMk1_256.png",
             "assemblermk1" => "AssemblerMk1_256.png",
-            "manufacturer" => "Manufacturer_256.png",
+            "manufacturermk1" => "Manufacturer_256.png",
             "refinery" => "OilRefinery_256.png",
             "packager" => "Packager_256.png",
             "blender" => "Blender_256.png",
@@ -47,6 +49,7 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
             "resourcesink" => "ResourceSink_256.png",
             _ => $"{buildingName}_256.png" // Default: use building name as-is
         };
+        Console.WriteLine(imageName);
 
         return $"images/buildings/{imageName}";
     }
@@ -56,10 +59,10 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
         string name = buildingName switch
         {
             "smeltermk1" => "Smelter",
-            "foundry" => "Foundry",
+            "foundrymk1" => "Foundry",
             "constructormk1" => "Constructor",
             "assemblermk1" => "Assembler",
-            "manufacturer" => "Manufacturer",
+            "manufacturermk1" => "Manufacturer",
             "refinery" => "Refinery",
             "packager" => "Packager",
             "blender" => "Blender",
@@ -87,7 +90,7 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
         // Check if we have a specific image mapping for this building
         return buildingName switch
         {
-            "smeltermk1" or "foundry" or "constructormk1" or "assemblermk1" or "manufacturer" or
+            "smeltermk1" or "foundrymk1" or "constructormk1" or "assemblermk1" or "manufacturermk1" or
             "oilrefinery" or "packager" or "blender" or "hadronCollider" or
             "generatorcoal" or "generatorfuel" or "generatornuclear" or
             "generatorbiomass" or "generatorgeothermal" or
