@@ -133,6 +133,9 @@ namespace SatisfactoryTree.Logic.Extraction
             // Pass the producing buildings with power data to getRecipes to calculate perMin and powerPerProduct
             List<Recipe> recipes = ProcessRawRecipes.GetProductionRecipes(data, buildings);
 
+            //Find the unpackage oil recipe and make it an alternate recipe
+            recipes.FirstOrDefault(r => r.Name == "UnpackageOil")!.IsAlternate = true;
+
             // Get parts
             RawPartsAndRawMaterials items = ProcessRawParts.GetItems(data, recipes);
             ProcessRawParts.FixItemNames(items);

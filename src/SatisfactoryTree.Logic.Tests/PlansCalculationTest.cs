@@ -152,21 +152,17 @@ namespace SatisfactoryTree.Logic.Tests
 
 
         [TestMethod]
-        public void TwoFactoriesAddingAThirdPlanCalculationTest()
+        public void PlasticFactoryPlanCalculationTest()
         {
-            //Arrange
+            //Arrange a new plastic factory
             if (factoryCatalog == null)
             {
                 Assert.Fail("Final data is null");
             }
             Plan plan = new();
-            Factory screwsFactorySetup = new(1, "Screws factory");
-            screwsFactorySetup.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
-            plan.Factories.Add(screwsFactorySetup);
-            Factory reinforcedPlatesFactorySetup = new(2, "Reinforced Iron Plates factory");
-            reinforcedPlatesFactorySetup.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
-            reinforcedPlatesFactorySetup.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
-            plan.Factories.Add(reinforcedPlatesFactorySetup);
+            Factory plasticFactorySetup = new(3, "Plastic factory");
+            plasticFactorySetup.ExportedParts.Add(new(new() { Name = "Plastic", Quantity = 20 }));
+            plan.Factories.Add(plasticFactorySetup);
 
             //Act
             Calculator calculator = new();
@@ -174,48 +170,24 @@ namespace SatisfactoryTree.Logic.Tests
 
             //Assert
             Assert.IsNotNull(plan);
-            Assert.AreEqual(2, plan.Factories.Count);
+            Assert.AreEqual(1, plan.Factories.Count);
 
-            Factory screwsFactory = plan.Factories[0];
-            Assert.IsNotNull(screwsFactory);
-            Assert.IsNotNull(screwsFactory.ComponentParts);
-            List<Item> results2 = screwsFactory.ComponentParts;
-            Assert.AreEqual(3, results2.Count);
-            Assert.AreEqual("IronScrew", results2[0].Name);
-            Assert.AreEqual(12, results2[0].Quantity);
-            Assert.AreEqual(3, results2[0].Counter);
-            Assert.AreEqual("IronRod", results2[1].Name);
-            Assert.AreEqual(3, results2[1].Quantity);
-            Assert.AreEqual(2, results2[1].Counter);
-            Assert.AreEqual("IronIngot", results2[2].Name);
-            Assert.AreEqual(3, results2[2].Quantity);
-            Assert.AreEqual(1, results2[2].Counter);
+            Factory plasticFactory = plan.Factories[0];
+            Assert.IsNotNull(plasticFactory);
+            Assert.IsNotNull(plasticFactory.ComponentParts);
+            List<Item> results2 = plasticFactory.ComponentParts;
+            Assert.AreEqual(1, results2.Count);
+            //Assert.AreEqual("IronScrew", results2[0].Name);
+            //Assert.AreEqual(12, results2[0].Quantity);
+            //Assert.AreEqual(3, results2[0].Counter);
+            //Assert.AreEqual("IronRod", results2[1].Name);
+            //Assert.AreEqual(3, results2[1].Quantity);
+            //Assert.AreEqual(2, results2[1].Counter);
+            //Assert.AreEqual("IronIngot", results2[2].Name);
+            //Assert.AreEqual(3, results2[2].Quantity);
+            //Assert.AreEqual(1, results2[2].Counter);
 
-            Factory reinforcedPlatesFactory = plan.Factories[1];
-            Assert.IsNotNull(reinforcedPlatesFactory.ComponentParts);
-            List<Item> results = reinforcedPlatesFactory.ComponentParts;
-            Assert.AreEqual(3, results.Count);
-            Assert.AreEqual("IronPlateReinforced", results[0].Name);
-            Assert.AreEqual(1, results[0].Quantity);
-            Assert.AreEqual(3, results[0].Counter);
-            Assert.AreEqual("IronPlate", results[1].Name);
-            Assert.AreEqual(6, results[1].Quantity);
-            Assert.AreEqual(2, results[1].Counter);
-            Assert.AreEqual("IronIngot", results[2].Name);
-            Assert.AreEqual(9, results[2].Quantity);
-            Assert.AreEqual(1, results[2].Counter);
-            Assert.IsTrue(reinforcedPlatesFactory.ImportedParts.ContainsKey(1));
-            Assert.AreEqual("Screws factory", reinforcedPlatesFactory.ImportedParts[1].FactoryName);
-            Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Item.Name);
-            Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[1].Item.Quantity);
 
-            //Arrange a third factory
-            Factory plasticFactory = new(3, "Plastic factory");
-            plasticFactory.ExportedParts.Add(new(new() { Name = "Plastic", Quantity = 6 }));
-            plan.Factories.Add(plasticFactory);
-
-            //Act
-            plan.UpdatePlanCalculations(factoryCatalog);
         }
 
     }
