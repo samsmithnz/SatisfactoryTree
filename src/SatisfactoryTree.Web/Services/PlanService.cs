@@ -6,6 +6,7 @@ namespace SatisfactoryTree.Web.Services
     {
         private Plan? _plan;
         private FactoryCatalog? _factoryCatalog;
+        private int? _lastAddedFactoryId; // track last added factory
         
         public event Action? PlanChanged;
 
@@ -26,6 +27,32 @@ namespace SatisfactoryTree.Web.Services
         }
 
         public bool HasPlan => _plan != null && _plan.Factories.Any();
+
+        public int? LastAddedFactoryId => _lastAddedFactoryId;
+
+        public void ClearLastAddedFactory() => _lastAddedFactoryId = null;
+
+        public void AddFactory()
+        {
+            if (_plan == null)
+            {
+                _plan = new Plan();
+            }
+
+            // Find the next available ID
+            int nextId = _plan.Factories.Any() ? _plan.Factories.Max(f => f.Id) + 1 : 1;
+            
+            // Create a new factory with the default name pattern
+            string factoryName = $"Factory {nextId}";
+            var newFactory = new Factory(nextId, factoryName);
+            
+            _plan.Factories.Add(newFactory);
+
+            _lastAddedFactoryId = newFactory.Id; // mark for scrolling
+
+            // Notify listeners so the new factory renders
+            PlanChanged?.Invoke();
+        }
 
         public void AddExportedPartToFactory(int factoryId, string itemName, double quantity)
         {
