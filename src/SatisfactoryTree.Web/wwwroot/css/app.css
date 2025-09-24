@@ -355,7 +355,7 @@ span img.building-image {
     vertical-align: middle !important;
     border-radius: 4px !important;
     object-fit: cover !important;
-    border: 1px solid #ddd !important;
+    border: none !important;
 }
 
 /* Form Controls */
