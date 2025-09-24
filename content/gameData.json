@@ -8992,7 +8992,7 @@
         "Name": "packager",
         "Power": 10
       },
-      "IsAlternate": false,
+      "IsAlternate": true,
       "IsFicsmas": false,
       "UsesSAMOre": false
     },

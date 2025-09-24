@@ -23,7 +23,7 @@
     <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="8.0.20" />
     <PackageReference Include="Microsoft.NET.Sdk.WebAssembly.Pack" Version="8.0.20" />
     <Content Update="wwwroot\content\gameData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

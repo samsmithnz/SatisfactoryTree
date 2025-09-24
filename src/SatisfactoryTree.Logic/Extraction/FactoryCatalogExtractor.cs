@@ -135,6 +135,7 @@ namespace SatisfactoryTree.Logic.Extraction
 
             //Find the unpackage oil recipe and make it an alternate recipe
             recipes.FirstOrDefault(r => r.Name == "UnpackageOil")!.IsAlternate = true;
+            recipes.FirstOrDefault(r => r.Name == "PackagedCrudeOil")!.IsAlternate = true;
 
             // Get parts
             RawPartsAndRawMaterials items = ProcessRawParts.GetItems(data, recipes);
