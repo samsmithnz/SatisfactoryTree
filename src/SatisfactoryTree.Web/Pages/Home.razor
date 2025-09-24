@@ -8,6 +8,7 @@
 @using SatisfactoryTree.Web.Services
 @inject HttpClient Http
 @inject PlanService PlanService
+@implements IDisposable
 
 @code {
 	FactoryCatalog? factoryCatalog;
@@ -39,6 +40,7 @@
 			plan.UpdatePlanCalculations(factoryCatalog);
 
 			// Update the PlanService so NavMenu can access the plan
+			PlanService.FactoryCatalog = factoryCatalog;
 			PlanService.Plan = plan;
 
 			isLoading = false;
@@ -48,6 +50,21 @@
 			errorMessage = ex.Message;
 			isLoading = false;
 		}
+	}
+
+	protected override void OnInitialized()
+	{
+		PlanService.PlanChanged += OnPlanChanged;
+	}
+
+	private void OnPlanChanged()
+	{
+		InvokeAsync(StateHasChanged);
+	}
+
+	public void Dispose()
+	{
+		PlanService.PlanChanged -= OnPlanChanged;
 	}
 
 	private string GetFactoryAnchor(Factory factory)
@@ -74,13 +91,13 @@ else if (!string.IsNullOrEmpty(errorMessage))
 		<strong>Error:</strong> @errorMessage
 	</div>
 }
-else if (plan?.Factories != null)
+else if (PlanService.Plan?.Factories != null)
 {
 	<h3>The plan</h3>
-	@foreach (Factory factory in plan.Factories)
+	@foreach (Factory factory in PlanService.Plan.Factories)
 	{
 		<div id="@GetFactoryAnchor(factory)" class="factory-section">
-			<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+			<FactoryItems Factory="factory" FactoryCatalog="PlanService.FactoryCatalog" />
 		</div>
 	}
 }
