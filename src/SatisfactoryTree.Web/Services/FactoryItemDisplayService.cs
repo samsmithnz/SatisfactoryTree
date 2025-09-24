@@ -51,6 +51,37 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
         return $"images/buildings/{imageName}";
     }
 
+    public string GetBuildingName(string buildingName)
+    {
+        string name = buildingName switch
+        {
+            "smeltermk1" => "Smelter",
+            "foundry" => "Foundry",
+            "constructormk1" => "Constructor",
+            "assemblermk1" => "Assembler",
+            "manufacturer" => "Manufacturer",
+            "refinery" => "Refinery",
+            "packager" => "Packager",
+            "blender" => "Blender",
+            "hadronCollider" => "Particle Accelerator",
+            "generatorcoal" => "Coal Generator",
+            "generatorfuel" => "Fuel Generator",
+            "generatornuclear" => "Nuclear Power Plant",
+            "generatorbiomass" => "Biomass Burner",
+            "generatorgeothermal" => "Geothermal Power Generator",
+            "minermk1" => "Miner Mk1",
+            "minermk2" => "Miner Mk2",
+            "minermk3" => "Miner Mk3",
+            "oilpump" => "Oil Extractor",
+            "waterpump" => "Water Extractor",
+            "frackingextractor" => "Resource Well Extractor",
+            "frackingsmasher" => "Resource Well Pressurizer",
+            "resourcesink" => "Resource Sink",
+            _ => $"{buildingName}" // Default: use building name as-is
+        };
+        return name;
+    }
+
     public bool HasBuildingImage(string buildingName)
     {
         // Check if we have a specific image mapping for this building
@@ -81,4 +112,5 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
     {
         return part.IsFicsmas;
     }
+
 }

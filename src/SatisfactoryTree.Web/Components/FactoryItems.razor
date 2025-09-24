@@ -196,7 +196,7 @@
                                 {
                                     <i class="fas fa-building building-icon" title="@item.Building"></i>
                                 }
-                                @item.Building x @Math.Round(item.BuildingQuantity, 2)
+                                @DisplayService.GetBuildingName(item.Building) x @Math.Round(item.BuildingQuantity, 2)
                             </span>
                             <span class="badge badge-grey">
                                 <i class="fas fa-bolt power-icon" title="Power Usage"></i> @Math.Round(item.BuildingPowerUsage, 1) MW

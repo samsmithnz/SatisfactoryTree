@@ -22,15 +22,36 @@ namespace SatisfactoryTree.Web.Services
 
         public FactoryCatalog? FactoryCatalog
         {
-            get => _factoryCatalog;
-            set => _factoryCatalog = value;
+            get
+            {
+                return _factoryCatalog;
+            }
+            set
+            {
+                _factoryCatalog = value;
+            }
         }
 
-        public bool HasPlan => _plan != null && _plan.Factories.Any();
+        public bool HasPlan
+        {
+            get
+            {
+                return _plan != null && _plan.Factories.Any();
+            }
+        }
 
-        public int? LastAddedFactoryId => _lastAddedFactoryId;
+        public int? LastAddedFactoryId
+        {
+            get
+            {
+                return _lastAddedFactoryId;
+            }
+        }
 
-        public void ClearLastAddedFactory() => _lastAddedFactoryId = null;
+        public void ClearLastAddedFactory()
+        {
+            _lastAddedFactoryId = null;
+        }
 
         public void AddFactory()
         {
@@ -40,14 +61,21 @@ namespace SatisfactoryTree.Web.Services
             }
 
             // Find the next available ID
-            int nextId = _plan.Factories.Any() ? _plan.Factories.Max(f => f.Id) + 1 : 1;
+            int nextId;
+            if (_plan.Factories.Any())
+            {
+                nextId = _plan.Factories.Max(f => f.Id) + 1;
+            }
+            else
+            {
+                nextId = 1;
+            }
 
             // Create a new factory with the default name pattern
             string factoryName = $"Factory {nextId}";
             Factory newFactory = new(nextId, factoryName);
 
             _plan.Factories.Add(newFactory);
-
             _lastAddedFactoryId = newFactory.Id; // mark for scrolling
 
             // Notify listeners so the new factory renders
