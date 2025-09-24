@@ -236,57 +236,64 @@ li span.badge {
     text-transform: none !important;
 }
 
-/* Specific badge colors with maximum specificity */
+/* Specific badge colors with lighter fill + solid border */
 span.badge.badge-blue[class*="badge-blue"],
 .badge.badge-blue[class*="badge-blue"],
 div span.badge.badge-blue,
 li span.badge.badge-blue {
-    background: #2188ff !important;
-    color: #fff !important;
+    background: #e6f2ff !important; /* light fill */
+    color: #0b4480 !important;
+    border-color: #2188ff !important;
 }
 
 span.badge.badge-yellow[class*="badge-yellow"],
 .badge.badge-yellow[class*="badge-yellow"],
 div span.badge.badge-yellow,
 li span.badge.badge-yellow {
-    background: #ffea7f !important;
+    background: #fff8d1 !important; /* light fill */
     color: #735c0f !important;
+    border-color: #ffcf33 !important;
 }
 
 span.badge.badge-grey[class*="badge-grey"],
 .badge.badge-grey[class*="badge-grey"],
 div span.badge.badge-grey,
 li span.badge.badge-grey {
-    background: #6a737d !important;
-    color: #fff !important;
+    background: #f1f2f4 !important; /* light fill */
+    color: #2f353a !important;
+    border-color: #6a737d !important;
 }
 
 span.badge.badge-green[class*="badge-green"],
 .badge.badge-green[class*="badge-green"] {
-    background: #2ea44f !important;
-    color: #fff !important;
+    background: #e6f9ec !important; /* light fill */
+    color: #146c2b !important;
+    border-color: #2ea44f !important;
 }
 
 span.badge.badge-red[class*="badge-red"],
 .badge.badge-red[class*="badge-red"] {
-    background: #d73a49 !important;
-    color: #fff !important;
+    background: #fde2e4 !important; /* light fill */
+    color: #8a1320 !important;
+    border-color: #d73a49 !important;
 }
 
 span.badge.badge-fluid[class*="badge-fluid"],
 .badge.badge-fluid[class*="badge-fluid"],
 div span.badge.badge-fluid,
 li span.badge.badge-fluid {
-    background-color: #17a2b8 !important;
-    color: white !important;
+    background-color: #e0f7fb !important; /* light fill */
+    color: #075864 !important;
+    border-color: #17a2b8 !important;
 }
 
 span.badge.badge-ficsmas[class*="badge-ficsmas"],
 .badge.badge-ficsmas[class*="badge-ficsmas"],
 div span.badge.badge-ficsmas,
 li span.badge.badge-ficsmas {
-    background-color: #28a745 !important;
-    color: white !important;
+    background-color: #e2f8e6 !important; /* light fill */
+    color: #1c5f28 !important;
+    border-color: #28a745 !important;
 }
 
 span.badge.badge-small[class*="badge-small"],
