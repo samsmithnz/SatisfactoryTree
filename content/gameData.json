@@ -1292,6 +1292,680 @@
       "limit": 100000000
     }
   },
+  "PartsLookup": [
+    {
+      "Id": "SpaceElevatorPart_5",
+      "Name": "Adaptive Control Unit"
+    },
+    {
+      "Id": "SpaceElevatorPart_12",
+      "Name": "AI Expansion Server"
+    },
+    {
+      "Id": "CircuitBoardHighSpeed",
+      "Name": "AI Limiter"
+    },
+    {
+      "Id": "AluminumPlate",
+      "Name": "Alclad Aluminum Sheet"
+    },
+    {
+      "Id": "AlienDNACapsule",
+      "Name": "Alien DNA Capsule"
+    },
+    {
+      "Id": "AlienPowerFuel",
+      "Name": "Alien Power Matrix"
+    },
+    {
+      "Id": "AlienProtein",
+      "Name": "Alien Protein"
+    },
+    {
+      "Id": "AluminaSolution",
+      "Name": "Alumina Solution"
+    },
+    {
+      "Id": "AluminumCasing",
+      "Name": "Aluminum Casing"
+    },
+    {
+      "Id": "AluminumIngot",
+      "Name": "Aluminum Ingot"
+    },
+    {
+      "Id": "AluminumScrap",
+      "Name": "Aluminum Scrap"
+    },
+    {
+      "Id": "SpaceElevatorPart_7",
+      "Name": "Assembly Director System"
+    },
+    {
+      "Id": "SpaceElevatorPart_3",
+      "Name": "Automated Wiring"
+    },
+    {
+      "Id": "SpaceElevatorPart_11",
+      "Name": "Ballistic Warp Drive"
+    },
+    {
+      "Id": "Battery",
+      "Name": "Battery"
+    },
+    {
+      "Id": "OreBauxite",
+      "Name": "Bauxite"
+    },
+    {
+      "Id": "SpaceElevatorPart_10",
+      "Name": "Biochemical Sculptor"
+    },
+    {
+      "Id": "GenericBiomass",
+      "Name": "Biomass"
+    },
+    {
+      "Id": "Gunpowder",
+      "Name": "Black Powder"
+    },
+    {
+      "Id": "XmasBall2",
+      "Name": "Blue FICSMAS Ornament"
+    },
+    {
+      "Id": "Crystal",
+      "Name": "Blue Power Slug"
+    },
+    {
+      "Id": "Cable",
+      "Name": "Cable"
+    },
+    {
+      "Id": "CandyCane",
+      "Name": "Candy Cane"
+    },
+    {
+      "Id": "GoldIngot",
+      "Name": "Caterium Ingot"
+    },
+    {
+      "Id": "OreGold",
+      "Name": "Caterium Ore"
+    },
+    {
+      "Id": "CircuitBoard",
+      "Name": "Circuit Board"
+    },
+    {
+      "Id": "NobeliskCluster",
+      "Name": "Cluster Nobelisk"
+    },
+    {
+      "Id": "Coal",
+      "Name": "Coal"
+    },
+    {
+      "Id": "CompactedCoal",
+      "Name": "Compacted Coal"
+    },
+    {
+      "Id": "Computer",
+      "Name": "Computer"
+    },
+    {
+      "Id": "Cement",
+      "Name": "Concrete"
+    },
+    {
+      "Id": "CoolingSystem",
+      "Name": "Cooling System"
+    },
+    {
+      "Id": "XmasBall3",
+      "Name": "Copper FICSMAS Ornament"
+    },
+    {
+      "Id": "CopperIngot",
+      "Name": "Copper Ingot"
+    },
+    {
+      "Id": "OreCopper",
+      "Name": "Copper Ore"
+    },
+    {
+      "Id": "CopperDust",
+      "Name": "Copper Powder"
+    },
+    {
+      "Id": "CopperSheet",
+      "Name": "Copper Sheet"
+    },
+    {
+      "Id": "LiquidOil",
+      "Name": "Crude Oil"
+    },
+    {
+      "Id": "CrystalOscillator",
+      "Name": "Crystal Oscillator"
+    },
+    {
+      "Id": "DarkMatter",
+      "Name": "Dark Matter Crystal"
+    },
+    {
+      "Id": "DarkEnergy",
+      "Name": "Dark Matter Residue"
+    },
+    {
+      "Id": "Diamond",
+      "Name": "Diamonds"
+    },
+    {
+      "Id": "DissolvedSilica",
+      "Name": "Dissolved Silica"
+    },
+    {
+      "Id": "ElectromagneticControlRod",
+      "Name": "Electromagnetic Control Rod"
+    },
+    {
+      "Id": "FluidCanister",
+      "Name": "Empty Canister"
+    },
+    {
+      "Id": "GasTank",
+      "Name": "Empty Fluid Tank"
+    },
+    {
+      "Id": "SteelPlateReinforced",
+      "Name": "Encased Industrial Beam"
+    },
+    {
+      "Id": "PlutoniumCell",
+      "Name": "Encased Plutonium Cell"
+    },
+    {
+      "Id": "UraniumCell",
+      "Name": "Encased Uranium Cell"
+    },
+    {
+      "Id": "QuantumEnergy",
+      "Name": "Excited Photonic Matter"
+    },
+    {
+      "Id": "Rebar_Explosive",
+      "Name": "Explosive Rebar"
+    },
+    {
+      "Id": "Fabric",
+      "Name": "Fabric"
+    },
+    {
+      "Id": "Fireworks_Projectile_02",
+      "Name": "Fancy Fireworks"
+    },
+    {
+      "Id": "FicsiteIngot",
+      "Name": "Ficsite Ingot"
+    },
+    {
+      "Id": "FicsiteMesh",
+      "Name": "Ficsite Trigon"
+    },
+    {
+      "Id": "XmasBow",
+      "Name": "FICSMAS Bow"
+    },
+    {
+      "Id": "Gift",
+      "Name": "FICSMAS Gift"
+    },
+    {
+      "Id": "XmasBallCluster",
+      "Name": "FICSMAS Ornament Bundle"
+    },
+    {
+      "Id": "XmasBranch",
+      "Name": "FICSMAS Tree Branch"
+    },
+    {
+      "Id": "XmasStar",
+      "Name": "FICSMAS Wonder Star"
+    },
+    {
+      "Id": "XmasWreath",
+      "Name": "FICSMAS Wreath"
+    },
+    {
+      "Id": "Ficsonium",
+      "Name": "Ficsonium"
+    },
+    {
+      "Id": "FicsoniumFuelRod",
+      "Name": "Ficsonium Fuel Rod"
+    },
+    {
+      "Id": "LiquidFuel",
+      "Name": "Fuel"
+    },
+    {
+      "Id": "ModularFrameFused",
+      "Name": "Fused Modular Frame"
+    },
+    {
+      "Id": "Filter",
+      "Name": "Gas Filter"
+    },
+    {
+      "Id": "NobeliskGas",
+      "Name": "Gas Nobelisk"
+    },
+    {
+      "Id": "HatcherParts",
+      "Name": "Hatcher Remains"
+    },
+    {
+      "Id": "AluminumPlateReinforced",
+      "Name": "Heat Sink"
+    },
+    {
+      "Id": "ModularFrameHeavy",
+      "Name": "Heavy Modular Frame"
+    },
+    {
+      "Id": "HeavyOilResidue",
+      "Name": "Heavy Oil Residue"
+    },
+    {
+      "Id": "HighSpeedConnector",
+      "Name": "High-Speed Connector"
+    },
+    {
+      "Id": "HogParts",
+      "Name": "Hog Remains"
+    },
+    {
+      "Id": "CartridgeSmartProjectile",
+      "Name": "Homing Rifle Ammo"
+    },
+    {
+      "Id": "HazmatFilter",
+      "Name": "Iodine-Infused Filter"
+    },
+    {
+      "Id": "IonizedFuel",
+      "Name": "Ionized Fuel"
+    },
+    {
+      "Id": "XmasBall4",
+      "Name": "Iron FICSMAS Ornament"
+    },
+    {
+      "Id": "IronIngot",
+      "Name": "Iron Ingot"
+    },
+    {
+      "Id": "OreIron",
+      "Name": "Iron Ore"
+    },
+    {
+      "Id": "IronPlate",
+      "Name": "Iron Plate"
+    },
+    {
+      "Id": "SpikedRebar",
+      "Name": "Iron Rebar"
+    },
+    {
+      "Id": "IronRod",
+      "Name": "Iron Rod"
+    },
+    {
+      "Id": "Leaves",
+      "Name": "Leaves"
+    },
+    {
+      "Id": "Stone",
+      "Name": "Limestone"
+    },
+    {
+      "Id": "LiquidBiofuel",
+      "Name": "Liquid Biofuel"
+    },
+    {
+      "Id": "SpaceElevatorPart_6",
+      "Name": "Magnetic Field Generator"
+    },
+    {
+      "Id": "SpaceElevatorPart_4",
+      "Name": "Modular Engine"
+    },
+    {
+      "Id": "ModularFrame",
+      "Name": "Modular Frame"
+    },
+    {
+      "Id": "Motor",
+      "Name": "Motor"
+    },
+    {
+      "Id": "Mycelia",
+      "Name": "Mycelia"
+    },
+    {
+      "Id": "TemporalProcessor",
+      "Name": "Neural-Quantum Processor"
+    },
+    {
+      "Id": "NitricAcid",
+      "Name": "Nitric Acid"
+    },
+    {
+      "Id": "NitrogenGas",
+      "Name": "Nitrogen Gas"
+    },
+    {
+      "Id": "NobeliskExplosive",
+      "Name": "Nobelisk"
+    },
+    {
+      "Id": "NonFissibleUranium",
+      "Name": "Non-Fissile Uranium"
+    },
+    {
+      "Id": "SpaceElevatorPart_9",
+      "Name": "Nuclear Pasta"
+    },
+    {
+      "Id": "NobeliskNuke",
+      "Name": "Nuke Nobelisk"
+    },
+    {
+      "Id": "PackagedAlumina",
+      "Name": "Packaged Alumina Solution"
+    },
+    {
+      "Id": "Fuel",
+      "Name": "Packaged Fuel"
+    },
+    {
+      "Id": "PackagedOilResidue",
+      "Name": "Packaged Heavy Oil Residue"
+    },
+    {
+      "Id": "PackagedIonizedFuel",
+      "Name": "Packaged Ionized Fuel"
+    },
+    {
+      "Id": "PackagedBiofuel",
+      "Name": "Packaged Liquid Biofuel"
+    },
+    {
+      "Id": "PackagedNitricAcid",
+      "Name": "Packaged Nitric Acid"
+    },
+    {
+      "Id": "PackagedNitrogenGas",
+      "Name": "Packaged Nitrogen Gas"
+    },
+    {
+      "Id": "PackagedOil",
+      "Name": "Packaged Oil"
+    },
+    {
+      "Id": "PackagedRocketFuel",
+      "Name": "Packaged Rocket Fuel"
+    },
+    {
+      "Id": "PackagedSulfuricAcid",
+      "Name": "Packaged Sulfuric Acid"
+    },
+    {
+      "Id": "PackagedTurboFuel",
+      "Name": "Packaged Turbofuel"
+    },
+    {
+      "Id": "PackagedWater",
+      "Name": "Packaged Water"
+    },
+    {
+      "Id": "PetroleumCoke",
+      "Name": "Petroleum Coke"
+    },
+    {
+      "Id": "Plastic",
+      "Name": "Plastic"
+    },
+    {
+      "Id": "PlutoniumFuelRod",
+      "Name": "Plutonium Fuel Rod"
+    },
+    {
+      "Id": "PlutoniumPellet",
+      "Name": "Plutonium Pellet"
+    },
+    {
+      "Id": "PlutoniumWaste",
+      "Name": "Plutonium Waste"
+    },
+    {
+      "Id": "PolymerResin",
+      "Name": "Polymer Resin"
+    },
+    {
+      "Id": "PortableMiner",
+      "Name": "Portable Miner"
+    },
+    {
+      "Id": "CrystalShard",
+      "Name": "Power Shard"
+    },
+    {
+      "Id": "PressureConversionCube",
+      "Name": "Pressure Conversion Cube"
+    },
+    {
+      "Id": "NobeliskShockwave",
+      "Name": "Pulse Nobelisk"
+    },
+    {
+      "Id": "Crystal_mk3",
+      "Name": "Purple Power Slug"
+    },
+    {
+      "Id": "QuartzCrystal",
+      "Name": "Quartz Crystal"
+    },
+    {
+      "Id": "HighSpeedWire",
+      "Name": "Quickwire"
+    },
+    {
+      "Id": "ModularFrameLightweight",
+      "Name": "Radio Control Unit"
+    },
+    {
+      "Id": "RawQuartz",
+      "Name": "Raw Quartz"
+    },
+    {
+      "Id": "SAMIngot",
+      "Name": "Reanimated SAM"
+    },
+    {
+      "Id": "XmasBall1",
+      "Name": "Red FICSMAS Ornament"
+    },
+    {
+      "Id": "IronPlateReinforced",
+      "Name": "Reinforced Iron Plate"
+    },
+    {
+      "Id": "CartridgeStandard",
+      "Name": "Rifle Ammo"
+    },
+    {
+      "Id": "RocketFuel",
+      "Name": "Rocket Fuel"
+    },
+    {
+      "Id": "Rotor",
+      "Name": "Rotor"
+    },
+    {
+      "Id": "Rubber",
+      "Name": "Rubber"
+    },
+    {
+      "Id": "SAM",
+      "Name": "SAM"
+    },
+    {
+      "Id": "SAMFluctuator",
+      "Name": "SAM Fluctuator"
+    },
+    {
+      "Id": "IronScrew",
+      "Name": "Screws"
+    },
+    {
+      "Id": "Rebar_Spreadshot",
+      "Name": "Shatter Rebar"
+    },
+    {
+      "Id": "Silica",
+      "Name": "Silica"
+    },
+    {
+      "Id": "SingularityCell",
+      "Name": "Singularity Cell"
+    },
+    {
+      "Id": "SpaceElevatorPart_1",
+      "Name": "Smart Plating"
+    },
+    {
+      "Id": "GunpowderMK2",
+      "Name": "Smokeless Powder"
+    },
+    {
+      "Id": "Snow",
+      "Name": "Snow"
+    },
+    {
+      "Id": "SnowballProjectile",
+      "Name": "Snowball"
+    },
+    {
+      "Id": "Biofuel",
+      "Name": "Solid Biofuel"
+    },
+    {
+      "Id": "Fireworks_Projectile_03",
+      "Name": "Sparkly Fireworks"
+    },
+    {
+      "Id": "SpitterParts",
+      "Name": "Spitter Remains"
+    },
+    {
+      "Id": "Stator",
+      "Name": "Stator"
+    },
+    {
+      "Id": "SteelPlate",
+      "Name": "Steel Beam"
+    },
+    {
+      "Id": "SteelIngot",
+      "Name": "Steel Ingot"
+    },
+    {
+      "Id": "SteelPipe",
+      "Name": "Steel Pipe"
+    },
+    {
+      "Id": "StingerParts",
+      "Name": "Stinger Remains"
+    },
+    {
+      "Id": "Rebar_Stunshot",
+      "Name": "Stun Rebar"
+    },
+    {
+      "Id": "Sulfur",
+      "Name": "Sulfur"
+    },
+    {
+      "Id": "SulfuricAcid",
+      "Name": "Sulfuric Acid"
+    },
+    {
+      "Id": "ComputerSuper",
+      "Name": "Supercomputer"
+    },
+    {
+      "Id": "QuantumOscillator",
+      "Name": "Superposition Oscillator"
+    },
+    {
+      "Id": "Fireworks_Projectile_01",
+      "Name": "Sweet Fireworks"
+    },
+    {
+      "Id": "SpaceElevatorPart_8",
+      "Name": "Thermal Propulsion Rocket"
+    },
+    {
+      "Id": "TimeCrystal",
+      "Name": "Time Crystal"
+    },
+    {
+      "Id": "MotorLightweight",
+      "Name": "Turbo Motor"
+    },
+    {
+      "Id": "CartridgeChaos",
+      "Name": "Turbo Rifle Ammo"
+    },
+    {
+      "Id": "LiquidTurboFuel",
+      "Name": "Turbofuel"
+    },
+    {
+      "Id": "OreUranium",
+      "Name": "Uranium"
+    },
+    {
+      "Id": "NuclearFuelRod",
+      "Name": "Uranium Fuel Rod"
+    },
+    {
+      "Id": "NuclearWaste",
+      "Name": "Uranium Waste"
+    },
+    {
+      "Id": "SpaceElevatorPart_2",
+      "Name": "Versatile Framework"
+    },
+    {
+      "Id": "Water",
+      "Name": "Water"
+    },
+    {
+      "Id": "Wire",
+      "Name": "Wire"
+    },
+    {
+      "Id": "Wood",
+      "Name": "Wood"
+    },
+    {
+      "Id": "Crystal_mk2",
+      "Name": "Yellow Power Slug"
+    }
+  ],
   "Recipes": [
     {
       "Name": "SpaceElevatorPart_5",

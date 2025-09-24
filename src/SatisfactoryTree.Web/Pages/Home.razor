@@ -50,6 +50,9 @@
 				// Recalculate if plan already exists (in case new factories were added)
 				RecalculatePlan();
 			}
+        
+			// Update the PlanService so NavMenu can access the plan
+			PlanService.FactoryCatalog = factoryCatalog;
 
 			isLoading = false;
 		}
@@ -114,7 +117,7 @@ else if (PlanService.Plan?.Factories != null)
 	@foreach (Factory factory in PlanService.Plan.Factories)
 	{
 		<div id="@GetFactoryAnchor(factory)" class="factory-section">
-			<FactoryItems Factory="factory" Parts="factoryCatalog?.Parts" />
+			<FactoryItems Factory="factory" FactoryCatalog="PlanService.FactoryCatalog" />
 		</div>
 	}
 }

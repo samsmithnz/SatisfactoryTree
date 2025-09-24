@@ -35,6 +35,7 @@ jobs:
     - name: .NET test
       run: dotnet test src/SatisfactoryTree.Logic.Tests/SatisfactoryTree.Logic.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=TestResults/ -e:CoverletOutputFormat=lcov
     - name: Publish coverage report to coveralls.io
+      if: false
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}

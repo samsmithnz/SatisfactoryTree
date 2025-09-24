@@ -50,16 +50,17 @@ namespace SatisfactoryTree.Logic
             }
 
             List<Item> ingredients = GetIngredients(factoryCatalog, partName, quantity, counter, new Dictionary<string, double>(), false);
-            
+
             // Add the goal item WITH power calculation
-            results.Add(new() { 
-                Name = partName, 
-                Quantity = quantity, 
-                Ingredients = ingredients, 
-                Building = recipe.Building.Name, 
-                BuildingQuantity = buildingRatio, 
+            results.Add(new()
+            {
+                Name = partName,
+                Quantity = quantity,
+                Ingredients = ingredients,
+                Building = recipe.Building.Name,
+                BuildingQuantity = buildingRatio,
                 BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
-                Counter = counter 
+                Counter = counter
             });
 
             //Get the dependencies/ingredients for the goal item
@@ -305,7 +306,9 @@ namespace SatisfactoryTree.Logic
                     }
                 }
             }
+
             return null;
         }
+
     }
 }
