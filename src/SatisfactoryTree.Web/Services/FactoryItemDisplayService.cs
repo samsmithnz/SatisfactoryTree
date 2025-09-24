@@ -57,7 +57,7 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
         return buildingName switch
         {
             "smeltermk1" or "foundry" or "constructormk1" or "assemblermk1" or "manufacturer" or
-            "refinery" or "packager" or "blender" or "hadronCollider" or
+            "oilrefinery" or "packager" or "blender" or "hadronCollider" or
             "generatorcoal" or "generatorfuel" or "generatornuclear" or
             "generatorbiomass" or "generatorgeothermal" or
             "minermk1" or "minermk2" or "minermk3" or
