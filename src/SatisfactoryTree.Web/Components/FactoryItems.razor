@@ -3,15 +3,16 @@
 @inject IFactoryItemDisplayService DisplayService
 @inject PlanService PlanService
 @implements IDisposable
+@using System.Linq
 
 @code {
     [Parameter]
     public Factory? Factory { get; set; }
     [Parameter]
-    public Dictionary<string, Part>? Parts { get; set; }
+    public FactoryCatalog FactoryCatalog { get; set; } = new();
 
     private bool isAddingExportedPart = false;
-    private Part? selectedPartToExport = null;
+    private LookupItem? selectedPartToExport = null; // only for the add-export UI
     private double exportedQuantity = 1.0;
 
     protected override void OnInitialized()
@@ -19,27 +20,32 @@
         PlanService.PlanChanged += OnPlanChanged;
     }
 
-    private void OnPlanChanged()
+    protected override void OnParametersSet()
     {
-        InvokeAsync(StateHasChanged);
+        // Fallback: if PartsLookup is empty (or null) but Parts dictionary is populated, build it
+        if ((FactoryCatalog.PartsLookup == null || FactoryCatalog.PartsLookup.Count == 0) && FactoryCatalog.Parts != null && FactoryCatalog.Parts.Count > 0)
+        {
+            try
+            {
+                FactoryCatalog.PartsLookup = FactoryCatalog.Parts
+                    .Select(kvp => new LookupItem(kvp.Key, kvp.Value?.Name ?? kvp.Key))
+                    .OrderBy(l => l.Name)
+                    .ToList();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"FactoryItems: Failed to build PartsLookup fallback: {ex.Message}");
+            }
+        }
     }
 
-    public void Dispose()
-    {
-        PlanService.PlanChanged -= OnPlanChanged;
-    }
+    private void OnPlanChanged() => InvokeAsync(StateHasChanged);
 
-    private void OnPartSelected(Part selectedPart, Item item)
-    {
-        item.Name = selectedPart.Name ?? selectedPart.Name ?? "";
-        StateHasChanged();
-    }
+    public void Dispose() => PlanService.PlanChanged -= OnPlanChanged;
 
-    private Part? GetCurrentPart(Item item)
+    private LookupItem? GetCurrentLookup(Item item)
     {
-        if (Parts == null) return null;
-        Parts.TryGetValue(item.Name, out Part? part);
-        return part;
+        return FactoryCatalog.PartsLookup?.FirstOrDefault(p => p.Id == item.Name);
     }
 
     private void StartAddingExportedPart()
@@ -47,20 +53,17 @@
         isAddingExportedPart = true;
         selectedPartToExport = null;
         exportedQuantity = 1.0;
-        StateHasChanged();
     }
 
     private void CancelAddingExportedPart()
     {
         isAddingExportedPart = false;
         selectedPartToExport = null;
-        StateHasChanged();
     }
 
-    private void OnExportPartSelected(Part selectedPart)
+    private void OnExportPartSelected(LookupItem selectedPart)
     {
         selectedPartToExport = selectedPart;
-        StateHasChanged();
     }
 
     private async Task AddExportedPart()
@@ -69,37 +72,29 @@
         {
             try
             {
-                // Use the PlanService method to properly add the exported part and update calculations
-                PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Name, exportedQuantity);
-                
+                PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Id, exportedQuantity);
                 isAddingExportedPart = false;
                 selectedPartToExport = null;
-                
-                // Force a state change
                 await InvokeAsync(StateHasChanged);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error adding exported part: {ex.Message}");
-                // Optionally show error to user
             }
         }
     }
 
     private async Task RemoveExportedPart(ExportedItem exportedItem)
     {
-        if (Factory != null)
+        if (Factory == null) return;
+        try
         {
-            try
-            {
-                PlanService.RemoveExportedPartFromFactory(Factory.Id, exportedItem.Item.Name);
-                await InvokeAsync(StateHasChanged);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error removing exported part: {ex.Message}");
-                // Optionally show error to user
-            }
+            PlanService.RemoveExportedPartFromFactory(Factory.Id, exportedItem.Item.Name);
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error removing exported part: {ex.Message}");
         }
     }
 }
@@ -140,26 +135,14 @@
                 <h5>Add New Exported Part</h5>
                 <div class="mb-2">
                     <label>Select Part:</label>
-                    <TypeaheadDropdown TItem="Part"
-                                     Items="@(Parts?.Values)"
-                                     DisplayNameSelector="@(part => DisplayService.GetPartDisplayName(part))"
-                                     IdSelector="@(part => DisplayService.GetPartDisplayName(part))"
-                                     SelectedItem="@selectedPartToExport"
-                                     SelectedItemChanged="@OnExportPartSelected"
-                                     Placeholder="Search for parts to export..."
-                                     CssClass="me-2">
-                        <ItemTemplate Context="part">
-                            <strong>@DisplayService.GetPartDisplayName(part)</strong>
-                            @if (DisplayService.GetPartIsFluid(part))
-                            {
-                                <span class="badge badge-small badge-fluid">Fluid</span>
-                            }
-                            @if (DisplayService.GetPartIsFicsmas(part))
-                            {
-                                <span class="badge badge-small badge-ficsmas">FICSMAS</span>
-                            }
-                        </ItemTemplate>
-                    </TypeaheadDropdown>
+                    <TypeaheadDropdown TItem="LookupItem"
+                                       Items="@FactoryCatalog.PartsLookup"
+                                       DisplayNameSelector="@(p => p.Name)"
+                                       IdSelector="@(p => p.Id)"
+                                       SelectedItem="@selectedPartToExport"
+                                       SelectedItemChanged="@OnExportPartSelected"
+                                       Placeholder="Search for parts to export..."
+                                       CssClass="me-2" />
                 </div>
                 <div class="mb-2">
                     <label>Quantity per/min:</label>
@@ -181,26 +164,14 @@
                     <li>
                         <div class="component-part-row">
                             <img src="@DisplayService.GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                            <TypeaheadDropdown TItem="Part"
-                                             Items="@(Parts?.Values)"
-                                             DisplayNameSelector="@(part => DisplayService.GetPartDisplayName(part))"
-                                             IdSelector="@(part => DisplayService.GetPartDisplayName(part))"
-                                             SelectedItem="@GetCurrentPart(item)"
-                                             SelectedItemChanged="@(part => OnPartSelected(part, item))"
-                                             Placeholder="Search for parts..."
-                                             CssClass="me-2">
-                                <ItemTemplate Context="part">
-                                    <strong>@DisplayService.GetPartDisplayName(part)</strong>
-                                    @if (DisplayService.GetPartIsFluid(part))
-                                    {
-                                        <span class="badge badge-small badge-fluid">Fluid</span>
-                                    }
-                                    @if (DisplayService.GetPartIsFicsmas(part))
-                                    {
-                                        <span class="badge badge-small badge-ficsmas">FICSMAS</span>
-                                    }
-                                </ItemTemplate>
-                            </TypeaheadDropdown>
+                            <TypeaheadDropdown TItem="LookupItem"
+                                               Items="@FactoryCatalog.PartsLookup"
+                                               DisplayNameSelector="@(p => p.Name)"
+                                               IdSelector="@(p => p.Id)"
+                                               SelectedItem="@GetCurrentLookup(item)"
+                                               SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
+                                               Placeholder="Search for parts..."
+                                               CssClass="me-2" />
                             <span class="quantity-label">Quantity:</span>
                             <input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
                         </div>

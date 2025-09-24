@@ -97,7 +97,7 @@ else if (PlanService.Plan?.Factories != null)
 	@foreach (Factory factory in PlanService.Plan.Factories)
 	{
 		<div id="@GetFactoryAnchor(factory)" class="factory-section">
-			<FactoryItems Factory="factory" Parts="PlanService.FactoryCatalog?.Parts" />
+			<FactoryItems Factory="factory" FactoryCatalog="PlanService.FactoryCatalog" />
 		</div>
 	}
 }
