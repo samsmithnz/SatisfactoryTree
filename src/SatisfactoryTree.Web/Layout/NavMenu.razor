@@ -18,16 +18,6 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
 
         @if (PlanService.HasPlan && PlanService.Plan?.Factories != null && PlanService.Plan.Factories.Any())
         {
@@ -35,7 +25,7 @@
             <div class="nav-section-header px-3">
                 <small class="text-muted text-uppercase">Factories</small>
             </div>
-            @foreach (var factory in PlanService.Plan.Factories)
+            @foreach (Logic.Models.Factory factory in PlanService.Plan.Factories)
             {
                 <div class="nav-item px-3">
                     <a class="nav-link factory-link" href="#@GetFactoryAnchor(factory)" @onclick="() => ScrollToFactory(factory)" @onclick:preventDefault="false">
