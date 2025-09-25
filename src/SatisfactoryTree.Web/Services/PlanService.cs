@@ -1,8 +1,9 @@
+using SatisfactoryTree.Logic.Abstractions;
 using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Web.Services
 {
-    public class PlanService
+    public class PlanService : IPlanService
     {
         private Plan? _plan;
         private FactoryCatalog? _factoryCatalog;
@@ -85,18 +86,18 @@ namespace SatisfactoryTree.Web.Services
         public void AddExportedPartToFactory(int factoryId, string itemName, double quantity)
         {
             if (_plan == null || _factoryCatalog == null)
-            { 
+            {
                 return;
             }
 
-            Factory factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
             if (factory == null)
-            { 
+            {
                 return;
             }
 
             // Check if this exported part already exists
-            ExportedItem existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);
+            ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);
             if (existingExport != null)
             {
                 // Update existing quantity
@@ -115,17 +116,17 @@ namespace SatisfactoryTree.Web.Services
         public void RemoveExportedPartFromFactory(int factoryId, string itemName)
         {
             if (_plan == null)
-            { 
+            {
                 return;
             }
 
-            Factory factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
             if (factory == null)
-            { 
+            {
                 return;
             }
 
-            ExportedItem exportToRemove = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);
+            ExportedItem? exportToRemove = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);
             if (exportToRemove != null)
             {
                 factory.ExportedParts.Remove(exportToRemove);
@@ -138,13 +139,13 @@ namespace SatisfactoryTree.Web.Services
         public void AddImportedPartToFactory(int factoryId, int sourceFactoryId, string sourceFactoryName, string itemName, double quantity)
         {
             if (_plan == null)
-            { 
+            {
                 return;
             }
 
-            Factory factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
             if (factory == null)
-            { 
+            {
                 return;
             }
 
@@ -159,7 +160,7 @@ namespace SatisfactoryTree.Web.Services
         public void RefreshPlanCalculations()
         {
             if (_plan == null || _factoryCatalog == null)
-            { 
+            {
                 return;
             }
 

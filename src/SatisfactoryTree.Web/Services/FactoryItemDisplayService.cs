@@ -1,3 +1,4 @@
+using SatisfactoryTree.Logic.Abstractions;
 using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Web.Services;
@@ -10,7 +11,7 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
         //string imageName = partName switch
         //{
         //    "IronPlateReinforced" => "ReinforcedIronPlate",
-        //    "OreIron" => "IronOre", 
+        //    "OreIron" => "IronOre",
         //    "IronScrew" => "IronScrews",
         //    _ => partName.Replace(" ", "") // Default: remove spaces
         //};
@@ -30,7 +31,7 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
             "constructormk1" => "ConstructorMk1_256.png",
             "assemblermk1" => "AssemblerMk1_256.png",
             "manufacturermk1" => "Manufacturer_256.png",
-            "refinery" => "OilRefinery_256.png",
+            "refinery" or "oilrefinery" => "OilRefinery_256.png",
             "packager" => "Packager_256.png",
             "blender" => "Blender_256.png",
             "hadronCollider" => "ParticleAccelerator_256.png",
@@ -63,7 +64,7 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
             "constructormk1" => "Constructor",
             "assemblermk1" => "Assembler",
             "manufacturermk1" => "Manufacturer",
-            "refinery" => "Refinery",
+            "refinery" or "oilrefinery" => "Refinery",
             "packager" => "Packager",
             "blender" => "Blender",
             "hadronCollider" => "Particle Accelerator",
@@ -91,7 +92,7 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
         return buildingName switch
         {
             "smeltermk1" or "foundrymk1" or "constructormk1" or "assemblermk1" or "manufacturermk1" or
-            "oilrefinery" or "packager" or "blender" or "hadronCollider" or
+            "oilrefinery" or "refinery" or "packager" or "blender" or "hadronCollider" or
             "generatorcoal" or "generatorfuel" or "generatornuclear" or
             "generatorbiomass" or "generatorgeothermal" or
             "minermk1" or "minermk2" or "minermk3" or
@@ -115,5 +116,4 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
     {
         return part.IsFicsmas;
     }
-
 }

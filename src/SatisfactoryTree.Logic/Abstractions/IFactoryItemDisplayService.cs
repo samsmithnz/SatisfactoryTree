@@ -1,6 +1,6 @@
 using SatisfactoryTree.Logic.Models;
 
-namespace SatisfactoryTree.Web.Services;
+namespace SatisfactoryTree.Logic.Abstractions;
 
 public interface IFactoryItemDisplayService
 {

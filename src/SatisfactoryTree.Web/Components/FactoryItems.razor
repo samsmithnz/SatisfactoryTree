@@ -1,7 +1,10 @@
 ﻿@using SatisfactoryTree.Logic.Models
 @using SatisfactoryTree.Web.Services
-@inject IFactoryItemDisplayService DisplayService
-@inject PlanService PlanService
+@using SatisfactoryTree.Logic.Abstractions
+@using SatisfactoryTree.Logic.Services
+@inject SatisfactoryTree.Logic.Abstractions.IFactoryItemDisplayService DisplayService
+@inject IPlanService PlanService
+@inject PartLookupService PartLookupService
 @implements IDisposable
 @using System.Linq
 
@@ -23,35 +26,18 @@
 
 	protected override void OnParametersSet()
 	{
-		// Fallback: if PartsLookup is empty (or null) but Parts dictionary is populated, build it
-		if ((FactoryCatalog.PartsLookup == null || FactoryCatalog.PartsLookup.Count == 0) && FactoryCatalog.Parts != null && FactoryCatalog.Parts.Count > 0)
+		// Use PartLookupService to ensure lookup and cache display names
+		try
 		{
-			try
+			PartLookupService.EnsurePartsLookup(FactoryCatalog);
+			if (_partsDisplayLookup == null)
 			{
-				FactoryCatalog.PartsLookup = FactoryCatalog.Parts
-					.Select(kvp => new LookupItem(kvp.Key, kvp.Value?.Name ?? kvp.Key))
-					.OrderBy(l => l.Name)
-					.ToList();
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"FactoryItems: Failed to build PartsLookup fallback: {ex.Message}");
+				_partsDisplayLookup = PartLookupService.BuildDisplayLookup(FactoryCatalog);
 			}
 		}
-
-		// Build / rebuild quick lookup dictionary if needed
-		if (_partsDisplayLookup == null && FactoryCatalog.PartsLookup != null)
+		catch (Exception ex)
 		{
-			try
-			{
-				_partsDisplayLookup = FactoryCatalog.PartsLookup
-					.GroupBy(p => p.Id) // guard against duplicates
-					.ToDictionary(g => g.Key, g => g.First().Name);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"FactoryItems: Failed to build display name lookup: {ex.Message}");
-			}
+			Console.WriteLine($"FactoryItems: Failed initializing lookups: {ex.Message}");
 		}
 	}
 
@@ -65,7 +51,7 @@
 		{
 			return display;
 		}
-		return partCode;
+		return PartLookupService.GetPartDisplayName(FactoryCatalog, partCode, _partsDisplayLookup);
 	}
 
 	private void OnPlanChanged() => InvokeAsync(StateHasChanged);
@@ -74,7 +60,7 @@
 
 	private LookupItem? GetCurrentLookup(Item item)
 	{
-		return FactoryCatalog.PartsLookup?.FirstOrDefault(p => p.Id == item.Name);
+		return PartLookupService.GetCurrentLookup(item, FactoryCatalog);
 	}
 
 	private void StartAddingExportedPart()
@@ -194,13 +180,13 @@
 						<div class="component-part-row">
 							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" />
 							<TypeaheadDropdown TItem="LookupItem"
-											   Items="@FactoryCatalog.PartsLookup"
-											   DisplayNameSelector="@(p => p.Name)"
-											   IdSelector="@(p => p.Id)"
-											   SelectedItem="@GetCurrentLookup(item)"
-											   SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
-											   Placeholder="Search for parts..."
-											   CssClass="me-2" />
+									   Items="@FactoryCatalog.PartsLookup"
+									   DisplayNameSelector="@(p => p.Name)"
+									   IdSelector="@(p => p.Id)"
+									   SelectedItem="@GetCurrentLookup(item)"
+									   SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
+									   Placeholder="Search for parts..."
+									   CssClass="me-2" />
 							<span class="quantity-label">Quantity:</span>
 							<input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
 						</div>
@@ -248,7 +234,7 @@
 				@foreach (KeyValuePair<int, ImportedItem> item in Factory.ImportedParts)
 				{
 					<li>
-						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Value.Item.Name))" alt="@GetPartDisplayName(item.Value.Item.Name) class="part-image" />
+						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Value.Item.Name))" alt="@GetPartDisplayName(item.Value.Item.Name)" class="part-image" />
 						<strong>@GetPartDisplayName(item.Value.Item.Name)</strong> - Quantity: @Math.Round(item.Value.Item.Quantity, 1) - from factory: @item.Value.FactoryName (@Math.Round(item.Value.PartQuantityImported, 1) per/min imported)
 					</li>
 				}
