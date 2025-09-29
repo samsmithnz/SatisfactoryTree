@@ -80,7 +80,6 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual("Screws factory", reinforcedPlatesFactory.ImportedParts[1].FactoryName);
             Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Item.Name);
             Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[1].Item.Quantity);
-
         }
 
         [TestMethod]
@@ -148,6 +147,46 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual("IronScrew", reinforcedPlatesFactory.ImportedParts[1].Item.Name);
             Assert.AreEqual(12, reinforcedPlatesFactory.ImportedParts[1].Item.Quantity);
             Assert.AreEqual(10, reinforcedPlatesFactory.ImportedParts[1].PartQuantityImported);
+
+        }
+
+
+        [TestMethod]
+        public void PlasticFactoryPlanCalculationTest()
+        {
+            //Arrange a new plastic factory
+            if (factoryCatalog == null)
+            {
+                Assert.Fail("Final data is null");
+            }
+            Plan plan = new();
+            Factory plasticFactorySetup = new(3, "Plastic factory");
+            plasticFactorySetup.ExportedParts.Add(new(new() { Name = "Plastic", Quantity = 20 }));
+            plan.Factories.Add(plasticFactorySetup);
+
+            //Act
+            Calculator calculator = new();
+            plan.UpdatePlanCalculations(factoryCatalog);
+
+            //Assert
+            Assert.IsNotNull(plan);
+            Assert.AreEqual(1, plan.Factories.Count);
+
+            Factory plasticFactory = plan.Factories[0];
+            Assert.IsNotNull(plasticFactory);
+            Assert.IsNotNull(plasticFactory.ComponentParts);
+            List<Item> results2 = plasticFactory.ComponentParts;
+            Assert.AreEqual(1, results2.Count);
+            //Assert.AreEqual("IronScrew", results2[0].Name);
+            //Assert.AreEqual(12, results2[0].Quantity);
+            //Assert.AreEqual(3, results2[0].Counter);
+            //Assert.AreEqual("IronRod", results2[1].Name);
+            //Assert.AreEqual(3, results2[1].Quantity);
+            //Assert.AreEqual(2, results2[1].Counter);
+            //Assert.AreEqual("IronIngot", results2[2].Name);
+            //Assert.AreEqual(3, results2[2].Quantity);
+            //Assert.AreEqual(1, results2[2].Counter);
+
 
         }
 

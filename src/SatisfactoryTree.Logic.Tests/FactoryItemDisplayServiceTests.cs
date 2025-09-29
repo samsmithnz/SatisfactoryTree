@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SatisfactoryTree.Web.Services;
+using SatisfactoryTree.Logic.Extraction;
 using SatisfactoryTree.Logic.Models;
+using SatisfactoryTree.Web.Services;
 
 namespace SatisfactoryTree.Logic.Tests
 {
@@ -8,11 +9,13 @@ namespace SatisfactoryTree.Logic.Tests
     public class FactoryItemDisplayServiceTests
     {
         private FactoryItemDisplayService service;
+        private FactoryCatalog factoryCatalog;
 
         [TestInitialize]
-        public void TestInitialize()
+        public async Task TestInitialize()
         {
-            service = new FactoryItemDisplayService();
+            service = new();
+            factoryCatalog = await FactoryCatalogExtractor.ProcessGameFile();
         }
 
         [TestMethod]
@@ -20,9 +23,10 @@ namespace SatisfactoryTree.Logic.Tests
         {
             // Arrange
             string partName = "IronPlateReinforced";
+            Part part = factoryCatalog.Parts.FirstOrDefault(p=>p.Key== partName).Value;
 
             // Act
-            string result = service.GetPartImagePath(partName);
+            string result = service.GetPartImagePath(service.GetPartDisplayName(part));
 
             // Assert
             Assert.AreEqual("images/parts/ReinforcedIronPlate_256.png", result);
@@ -33,9 +37,10 @@ namespace SatisfactoryTree.Logic.Tests
         {
             // Arrange
             string partName = "OreIron";
+            Part part = factoryCatalog.Parts.FirstOrDefault(p => p.Key == partName).Value;
 
             // Act
-            string result = service.GetPartImagePath(partName);
+            string result = service.GetPartImagePath(service.GetPartDisplayName(part));
 
             // Assert
             Assert.AreEqual("images/parts/IronOre_256.png", result);
@@ -46,22 +51,24 @@ namespace SatisfactoryTree.Logic.Tests
         {
             // Arrange
             string partName = "IronScrew";
+            Part part = factoryCatalog.Parts.FirstOrDefault(p => p.Key == partName).Value;
 
             // Act
-            string result = service.GetPartImagePath(partName);
+            string result = service.GetPartImagePath(service.GetPartDisplayName(part));
 
             // Assert
-            Assert.AreEqual("images/parts/IronScrews_256.png", result);
+            Assert.AreEqual("images/parts/Screws_256.png", result);
         }
 
         [TestMethod]
         public void GetPartImagePath_WithDefaultPart_RemovesSpaces()
         {
             // Arrange
-            string partName = "Iron Ingot";
+            string partName = "IronIngot";
+            Part part = factoryCatalog.Parts.FirstOrDefault(p => p.Key == partName).Value;
 
             // Act
-            string result = service.GetPartImagePath(partName);
+            string result = service.GetPartImagePath(service.GetPartDisplayName(part));
 
             // Assert
             Assert.AreEqual("images/parts/IronIngot_256.png", result);
