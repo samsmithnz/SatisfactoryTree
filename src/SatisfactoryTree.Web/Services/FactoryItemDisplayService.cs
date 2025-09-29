@@ -22,7 +22,6 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
 
     public string GetBuildingImagePath(string buildingName)
     {
-        Console.WriteLine(buildingName);
         // Handle building name mappings to match image files
         string imageName = buildingName switch
         {
