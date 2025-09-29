@@ -32,14 +32,14 @@
 			// Initialize the plan if it doesn't exist
 			if (PlanService.Plan == null)
 			{
-				var plan = new Plan();
-				screwsFactory = new(1, "Screws factory");
-				screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
-				plan.Factories.Add(screwsFactory);
-				reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
-				reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
-				reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
-				plan.Factories.Add(reinforcedPlatesFactory);
+				Plan plan = new();
+				// screwsFactory = new(1, "Screws factory");
+				// screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
+				// plan.Factories.Add(screwsFactory);
+				// reinforcedPlatesFactory = new(2, "Reinforced Iron Plates factory");
+				// reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
+				// reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
+				// plan.Factories.Add(reinforcedPlatesFactory);
 
 				//Calculate the production
 				plan.UpdatePlanCalculations(factoryCatalog);

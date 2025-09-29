@@ -1,239 +1,254 @@
 ﻿@using SatisfactoryTree.Logic.Models
 @using SatisfactoryTree.Web.Services
-@inject IFactoryItemDisplayService DisplayService
-@inject PlanService PlanService
+@using SatisfactoryTree.Logic.Abstractions
+@using SatisfactoryTree.Logic.Services
+@inject SatisfactoryTree.Logic.Abstractions.IFactoryItemDisplayService DisplayService
+@inject IPlanService PlanService
+@inject PartLookupService PartLookupService
 @implements IDisposable
 @using System.Linq
 
 @code {
-    [Parameter]
-    public Factory? Factory { get; set; }
-    [Parameter]
-    public FactoryCatalog FactoryCatalog { get; set; } = new();
+	[Parameter]
+	public Factory? Factory { get; set; }
+	[Parameter]
+	public FactoryCatalog FactoryCatalog { get; set; } = new();
 
-    private bool isAddingExportedPart = false;
-    private LookupItem? selectedPartToExport = null; // only for the add-export UI
-    private double exportedQuantity = 1.0;
+	private bool isAddingExportedPart = false;
+	private LookupItem? selectedPartToExport = null; // only for the add-export UI
+	private double exportedQuantity = 1.0;
+	private Dictionary<string, string>? _partsDisplayLookup; // id -> display name cache
 
-    protected override void OnInitialized()
-    {
-        PlanService.PlanChanged += OnPlanChanged;
-    }
+	protected override void OnInitialized()
+	{
+		PlanService.PlanChanged += OnPlanChanged;
+	}
 
-    protected override void OnParametersSet()
-    {
-        // Fallback: if PartsLookup is empty (or null) but Parts dictionary is populated, build it
-        if ((FactoryCatalog.PartsLookup == null || FactoryCatalog.PartsLookup.Count == 0) && FactoryCatalog.Parts != null && FactoryCatalog.Parts.Count > 0)
-        {
-            try
-            {
-                FactoryCatalog.PartsLookup = FactoryCatalog.Parts
-                    .Select(kvp => new LookupItem(kvp.Key, kvp.Value?.Name ?? kvp.Key))
-                    .OrderBy(l => l.Name)
-                    .ToList();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine($"FactoryItems: Failed to build PartsLookup fallback: {ex.Message}");
-            }
-        }
-    }
+	protected override void OnParametersSet()
+	{
+		// Use PartLookupService to ensure lookup and cache display names
+		try
+		{
+			PartLookupService.EnsurePartsLookup(FactoryCatalog);
+			if (_partsDisplayLookup == null)
+			{
+				_partsDisplayLookup = PartLookupService.BuildDisplayLookup(FactoryCatalog);
+			}
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"FactoryItems: Failed initializing lookups: {ex.Message}");
+		}
+	}
 
-    private void OnPlanChanged() => InvokeAsync(StateHasChanged);
+	private string GetPartDisplayName(string partCode)
+	{
+		if (string.IsNullOrWhiteSpace(partCode))
+		{
+			return partCode;
+		}
+		if (_partsDisplayLookup != null && _partsDisplayLookup.TryGetValue(partCode, out var display))
+		{
+			return display;
+		}
+		return PartLookupService.GetPartDisplayName(FactoryCatalog, partCode, _partsDisplayLookup);
+	}
 
-    public void Dispose() => PlanService.PlanChanged -= OnPlanChanged;
+	private void OnPlanChanged() => InvokeAsync(StateHasChanged);
 
-    private LookupItem? GetCurrentLookup(Item item)
-    {
-        return FactoryCatalog.PartsLookup?.FirstOrDefault(p => p.Id == item.Name);
-    }
+	public void Dispose() => PlanService.PlanChanged -= OnPlanChanged;
 
-    private void StartAddingExportedPart()
-    {
-        isAddingExportedPart = true;
-        selectedPartToExport = null;
-        exportedQuantity = 1.0;
-    }
+	private LookupItem? GetCurrentLookup(Item item)
+	{
+		return PartLookupService.GetCurrentLookup(item, FactoryCatalog);
+	}
 
-    private void CancelAddingExportedPart()
-    {
-        isAddingExportedPart = false;
-        selectedPartToExport = null;
-    }
+	private void StartAddingExportedPart()
+	{
+		isAddingExportedPart = true;
+		selectedPartToExport = null;
+		exportedQuantity = 1.0;
+	}
 
-    private void OnExportPartSelected(LookupItem selectedPart)
-    {
-        selectedPartToExport = selectedPart;
-    }
+	private void CancelAddingExportedPart()
+	{
+		isAddingExportedPart = false;
+		selectedPartToExport = null;
+	}
 
-    private async Task AddExportedPart()
-    {
-        if (Factory != null && selectedPartToExport != null)
-        {
-            try
-            {
-                PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Id, exportedQuantity);
-                isAddingExportedPart = false;
-                selectedPartToExport = null;
-                await InvokeAsync(StateHasChanged);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error adding exported part: {ex.Message}");
-            }
-        }
-    }
+	private void OnExportPartSelected(LookupItem selectedPart)
+	{
+		selectedPartToExport = selectedPart;
+	}
 
-    private async Task RemoveExportedPart(ExportedItem exportedItem)
-    {
-        if (Factory == null) return;
-        try
-        {
-            PlanService.RemoveExportedPartFromFactory(Factory.Id, exportedItem.Item.Name);
-            await InvokeAsync(StateHasChanged);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error removing exported part: {ex.Message}");
-        }
-    }
+	private async Task AddExportedPart()
+	{
+		if (Factory != null && selectedPartToExport != null)
+		{
+			try
+			{
+				PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Id, exportedQuantity);
+				isAddingExportedPart = false;
+				selectedPartToExport = null;
+				await InvokeAsync(StateHasChanged);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error adding exported part: {ex.Message}");
+			}
+		}
+	}
+
+	private async Task RemoveExportedPart(ExportedItem exportedItem)
+	{
+		if (Factory == null) return;
+		try
+		{
+			PlanService.RemoveExportedPartFromFactory(Factory.Id, exportedItem.Item.Name);
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error removing exported part: {ex.Message}");
+		}
+	}
 }
 
 @if (Factory != null)
 {
-    <div class="factory-container">
-        <h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
-        
-        <p><b>Exported parts:</b></p>
-        @if (Factory.ExportedParts != null && Factory.ExportedParts.Any())
-        {
-            <ul>
-                @foreach (ExportedItem item in Factory.ExportedParts)
-                {
-                    <li class="exported-part-item">
-                        <div class="exported-part-info">
-                            <img src="@DisplayService.GetPartImagePath(item.Item.Name)" alt="@item.Item.Name" class="part-image" />
-                            <strong>@item.Item.Name</strong> - @item.Item.Quantity per/min (@item.PartQuantityExported per/min exported)
-                        </div>
-                        <button class="btn btn-sm btn-danger" @onclick="() => RemoveExportedPart(item)">Remove</button>
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p class="text-muted">No exported parts defined.</p>
-        }
+	<div class="factory-container">
+		<h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
 
-        @if (!isAddingExportedPart)
-        {
-            <button class="btn btn-primary me-2" @onclick="StartAddingExportedPart">Add Exported Part</button>
-        }
-        else
-        {
-            <div class="add-exported-part-form card p-3 mb-3">
-                <h5>Add New Exported Part</h5>
-                <div class="mb-2">
-                    <label>Select Part:</label>
-                    <TypeaheadDropdown TItem="LookupItem"
-                                       Items="@FactoryCatalog.PartsLookup"
-                                       DisplayNameSelector="@(p => p.Name)"
-                                       IdSelector="@(p => p.Id)"
-                                       SelectedItem="@selectedPartToExport"
-                                       SelectedItemChanged="@OnExportPartSelected"
-                                       Placeholder="Search for parts to export..."
-                                       CssClass="me-2" />
-                </div>
-                <div class="mb-2">
-                    <label>Quantity per/min:</label>
-                    <input type="number" class="form-control" @bind="exportedQuantity" min="0" step="0.1" />
-                </div>
-                <div>
-                    <button class="btn btn-success me-2" @onclick="AddExportedPart" disabled="@(selectedPartToExport == null)">Add</button>
-                    <button class="btn btn-secondary" @onclick="CancelAddingExportedPart">Cancel</button>
-                </div>
-            </div>
-        }
+		<p><b>Exported parts:</b></p>
+		@if (Factory.ExportedParts != null && Factory.ExportedParts.Any())
+		{
+			<ul>
+				@foreach (ExportedItem item in Factory.ExportedParts)
+				{
+					<li class="exported-part-item">
+						<div class="exported-part-info">
+							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" />
+							<strong>@GetPartDisplayName(item.Item.Name)</strong> - @item.Item.Quantity per/min (@item.PartQuantityExported per/min exported)
+						</div>
+						<button class="btn btn-sm btn-danger" @onclick="() => RemoveExportedPart(item)">Remove</button>
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p class="text-muted">No exported parts defined.</p>
+		}
 
-        <p><b>Component parts:</b></p>
-        <ul>
-            @if (Factory.ComponentParts != null && Factory.ComponentParts.Any())
-            {
-                @foreach (Item item in Factory.ComponentParts)
-                {
-                    <li>
-                        <div class="component-part-row">
-                            <img src="@DisplayService.GetPartImagePath(item.Name)" alt="@item.Name" class="part-image" />
-                            <TypeaheadDropdown TItem="LookupItem"
-                                               Items="@FactoryCatalog.PartsLookup"
-                                               DisplayNameSelector="@(p => p.Name)"
-                                               IdSelector="@(p => p.Id)"
-                                               SelectedItem="@GetCurrentLookup(item)"
-                                               SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
-                                               Placeholder="Search for parts..."
-                                               CssClass="me-2" />
-                            <span class="quantity-label">Quantity:</span>
-                            <input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
-                        </div>
-                        
-                        <div class="component-badges">
-                            @if (item.Ingredients != null)
-                            {
-                                @foreach (Item ingredient in item.Ingredients)
-                                {
-                                    <span class="badge badge-blue">
-                                        <img src="@DisplayService.GetPartImagePath(ingredient.Name)" alt="@ingredient.Name" class="ingredient-image" />
-                                        @ingredient.Name @Math.Round(ingredient.Quantity, 1) per/min
-                                    </span>
-                                }
-                            }
-                            <span class="badge badge-yellow"> 
-                                @if (!string.IsNullOrEmpty(item.Building) && DisplayService.HasBuildingImage(item.Building))
-                                {
-                                    <img src="@DisplayService.GetBuildingImagePath(item.Building)" alt="@item.Building" class="building-image" />
-                                }
-                                else if (!string.IsNullOrEmpty(item.Building))
-                                {
-                                    <i class="fas fa-building building-icon" title="@item.Building"></i>
-                                }
-                                @item.Building x @Math.Round(item.BuildingQuantity, 2)
-                            </span>
-                            <span class="badge badge-grey">
-                                <i class="fas fa-bolt power-icon" title="Power Usage"></i> @Math.Round(item.BuildingPowerUsage, 1) MW
-                            </span>
-                        </div>
-                    </li>
-                    <hr>
-                }
-            }
-            else
-            {
-                <li>No component parts calculated yet.</li>
-            }
-        </ul>
+		@if (!isAddingExportedPart)
+		{
+			<button class="btn btn-primary me-2" @onclick="StartAddingExportedPart">Add Exported Part</button>
+		}
+		else
+		{
+			<div class="add-exported-part-form card p-3 mb-3">
+				<h5>Add New Exported Part</h5>
+				<div class="mb-2">
+					<label>Select Part:</label>
+					<TypeaheadDropdown TItem="LookupItem"
+									   Items="@FactoryCatalog.PartsLookup"
+									   DisplayNameSelector="@(p => p.Name)"
+									   IdSelector="@(p => p.Id)"
+									   SelectedItem="@selectedPartToExport"
+									   SelectedItemChanged="@OnExportPartSelected"
+									   Placeholder="Search for parts to export..."
+									   CssClass="me-2" />
+				</div>
+				<div class="mb-2">
+					<label>Quantity per/min:</label>
+					<input type="number" class="form-control" @bind="exportedQuantity" min="0" step="0.1" />
+				</div>
+				<div>
+					<button class="btn btn-success me-2" @onclick="AddExportedPart" disabled="@(selectedPartToExport == null)">Add</button>
+					<button class="btn btn-secondary" @onclick="CancelAddingExportedPart">Cancel</button>
+				</div>
+			</div>
+		}
 
-        <p><b>Imported parts:</b></p>
-        <ul>
-            @if (Factory.ImportedParts != null && Factory.ImportedParts.Any())
-            {
-                @foreach (KeyValuePair<int, ImportedItem> item in Factory.ImportedParts)
-                {
-                    <li>
-                        <img src="@DisplayService.GetPartImagePath(item.Value.Item.Name)" alt="@item.Value.Item.Name" class="part-image" />
-                        <strong>@item.Value.Item.Name</strong> - Quantity: @Math.Round(item.Value.Item.Quantity, 1) - from factory: @item.Value.FactoryName (@Math.Round(item.Value.PartQuantityImported, 1) per/min imported)
-                    </li>
-                }
-            }
-            else
-            {
-                <li>No imported parts.</li>
-            }
-        </ul>
+		<p><b>Component parts:</b></p>
+		<ul>
+			@if (Factory.ComponentParts != null && Factory.ComponentParts.Any())
+			{
+				@foreach (Item item in Factory.ComponentParts)
+				{
+					<li>
+						<div class="component-part-row">
+							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" />
+							<TypeaheadDropdown TItem="LookupItem"
+									   Items="@FactoryCatalog.PartsLookup"
+									   DisplayNameSelector="@(p => p.Name)"
+									   IdSelector="@(p => p.Id)"
+									   SelectedItem="@GetCurrentLookup(item)"
+									   SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
+									   Placeholder="Search for parts..."
+									   CssClass="me-2" />
+							<span class="quantity-label">Quantity:</span>
+							<input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
+						</div>
 
-        <p><b>Raw resources:</b></p>
-        <span class="badge badge-blue">
-            <img src='@DisplayService.GetPartImagePath("OreIron")' alt="OreIron" class="ingredient-image" />
-            <span>Iron Ore 60 per/min</span>
-        </span>
-    </div>
+						<div class="component-badges">
+							@if (item.Ingredients != null)
+							{
+								@foreach (Item ingredient in item.Ingredients)
+								{
+									<span class="badge badge-blue">
+										<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
+										@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
+									</span>
+								}
+							}
+							<span class="badge badge-yellow">
+								@if (!string.IsNullOrEmpty(item.Building) && DisplayService.HasBuildingImage(item.Building))
+								{
+									<img src="@DisplayService.GetBuildingImagePath(item.Building)" alt="@DisplayService.GetBuildingName(item.Building)" class="building-image" />
+								}
+								else if (!string.IsNullOrEmpty(item.Building))
+								{
+									<i class="fas fa-building building-icon" title="@item.Building"></i>
+								}
+								@DisplayService.GetBuildingName(item.Building) x @Math.Round(item.BuildingQuantity, 2)
+							</span>
+							<span class="badge badge-grey">
+								<i class="fas fa-bolt power-icon" title="Power Usage"></i> @Math.Round(item.BuildingPowerUsage, 1) MW
+							</span>
+						</div>
+					</li>
+					<hr>
+				}
+			}
+			else
+			{
+				<li>No component parts calculated yet.</li>
+			}
+		</ul>
+
+		<p><b>Imported parts:</b></p>
+		<ul>
+			@if (Factory.ImportedParts != null && Factory.ImportedParts.Any())
+			{
+				@foreach (KeyValuePair<int, ImportedItem> item in Factory.ImportedParts)
+				{
+					<li>
+						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Value.Item.Name))" alt="@GetPartDisplayName(item.Value.Item.Name)" class="part-image" />
+						<strong>@GetPartDisplayName(item.Value.Item.Name)</strong> - Quantity: @Math.Round(item.Value.Item.Quantity, 1) - from factory: @item.Value.FactoryName (@Math.Round(item.Value.PartQuantityImported, 1) per/min imported)
+					</li>
+				}
+			}
+			else
+			{
+				<li>No imported parts.</li>
+			}
+		</ul>
+
+		<p><b>Raw resources:</b></p>
+		<span class="badge badge-blue">
+			<img src="@DisplayService.GetPartImagePath(GetPartDisplayName("OreIron"))" alt="@GetPartDisplayName("OreIron")" class="ingredient-image" />
+			<span>@GetPartDisplayName("OreIron") 60 per/min</span>
+		</span>
+	</div>
 }
