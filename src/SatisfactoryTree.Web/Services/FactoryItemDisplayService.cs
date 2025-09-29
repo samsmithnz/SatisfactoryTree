@@ -7,14 +7,6 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
 {
     public string GetPartImagePath(string partName)
     {
-        //// Handle special mapping cases where the part name doesn't directly match the image name
-        //string imageName = partName switch
-        //{
-        //    "IronPlateReinforced" => "ReinforcedIronPlate",
-        //    "OreIron" => "IronOre",
-        //    "IronScrew" => "IronScrews",
-        //    _ => partName.Replace(" ", "") // Default: remove spaces
-        //};
         string imageName = partName.Replace(" ", "");
 
         return $"images/parts/{imageName}_256.png";
