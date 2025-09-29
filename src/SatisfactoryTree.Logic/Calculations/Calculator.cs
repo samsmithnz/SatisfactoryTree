@@ -141,36 +141,36 @@ namespace SatisfactoryTree.Logic
                 }
             }
 
-            // Validate immediate ingredients only (no recursion to raw materials)
-            List<Item> immediateIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports);
+            // Get immediate ingredients for embedded display (validation mode - no recursion)
+            List<Item> embeddedIngredients = GetImmediateIngredientsForDisplay(factoryCatalog, partName, quantity, counter);
 
-            // Add the goal item with validation info
+            // Add the goal item with embedded ingredients (like original method)
             Item goalItem = new()
             {
                 Name = partName,
                 Quantity = quantity,
-                Ingredients = immediateIngredients,
+                Ingredients = embeddedIngredients,
                 Building = recipe.Building.Name,
                 BuildingQuantity = buildingRatio,
                 BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
                 Counter = counter
             };
 
-            // Check if any immediate ingredients are missing and populate MissingIngredients
-            foreach (var ingredient in immediateIngredients)
+            results.Add(goalItem);
+
+            // Validate immediate ingredients and track missing ones for badges
+            List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports);
+            
+            // Only track missing ingredients for badge display - don't add as separate items in validation mode
+            foreach (var ingredient in missingIngredients)
             {
-                if (ingredient.HasMissingIngredients || ingredient.Quantity > 0) // If quantity > 0, it means it's not fully satisfied by imports
+                if (ingredient.Quantity > 0.001) // Has unmet need
                 {
-                    goalItem.MissingIngredients.AddRange(ingredient.MissingIngredients);
-                    if (ingredient.Quantity > 0 && !goalItem.MissingIngredients.Contains(ingredient.Name))
-                    {
-                        goalItem.MissingIngredients.Add(ingredient.Name);
-                    }
+                    goalItem.MissingIngredients.Add(ingredient.Name);
+                    // In validation mode, we don't add missing ingredients as separate calculation items
+                    // They will be shown as badges on the UI instead
                 }
             }
-
-            results.Add(goalItem);
-            results.AddRange(immediateIngredients);
 
             return results;
         }
@@ -248,6 +248,46 @@ namespace SatisfactoryTree.Logic
                     }
                 }
             }
+            return results;
+        }
+
+        private List<Item> GetImmediateIngredientsForDisplay(FactoryCatalog factoryCatalog, string partName, double quantity, int counter)
+        {
+            List<Item> results = new();
+            Recipe? recipe = FindRecipe(factoryCatalog, partName);
+
+            if (recipe != null && recipe.Products != null && recipe.Ingredients != null)
+            {
+                double ratio = 0;
+                foreach (Product product in recipe.Products)
+                {
+                    if (product.part == partName)
+                    {
+                        ratio = quantity / product.perMin;
+                        break;
+                    }
+                }
+
+                // Create immediate ingredients without recursion
+                foreach (Ingredient ingredient in recipe.Ingredients)
+                {
+                    double needed = ingredient.perMin * ratio;
+                    
+                    Item ingredientItem = new()
+                    {
+                        Name = ingredient.part,
+                        Quantity = needed,
+                        Ingredients = new List<Item>(), // No recursion - empty ingredients
+                        Building = string.Empty, // Not needed for embedded display
+                        BuildingQuantity = 0,
+                        BuildingPowerUsage = 0,
+                        Counter = counter + 1
+                    };
+
+                    results.Add(ingredientItem);
+                }
+            }
+
             return results;
         }
 
