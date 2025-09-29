@@ -49,7 +49,6 @@ public class FactoryItemDisplayService : IFactoryItemDisplayService
             "resourcesink" => "ResourceSink_256.png",
             _ => $"{buildingName}_256.png" // Default: use building name as-is
         };
-        Console.WriteLine(imageName);
 
         return $"images/buildings/{imageName}";
     }
