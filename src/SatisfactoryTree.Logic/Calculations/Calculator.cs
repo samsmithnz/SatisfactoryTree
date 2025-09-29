@@ -18,6 +18,16 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
+        public List<Item> ValidateFactorySetup(FactoryCatalog factoryCatalog, Factory factory)
+        {
+            List<Item> results = new();
+            foreach (ExportedItem item in factory.ExportedParts)
+            {
+                results.AddRange(ValidateProductionSetup(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts));
+            }
+            return results;
+        }
+
         public List<Item> CalculateProduction(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, ImportedItem> importedParts)
         {
             List<Item> results = new();
@@ -97,6 +107,147 @@ namespace SatisfactoryTree.Logic
             // Update the imported parts with actual usage
             UpdateImportedPartsUsage(importedParts, workingImportedParts);
 
+            return results;
+        }
+
+        public List<Item> ValidateProductionSetup(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, ImportedItem> importedParts)
+        {
+            List<Item> results = new();
+            int counter = 1;
+
+            // Find recipe for the target part
+            Recipe? recipe = FindRecipe(factoryCatalog, partName);
+            if (recipe == null)
+            {
+                return results;
+            }
+
+            double buildingRatio = quantity / recipe.Products[0].perMin;
+
+            // Create a working copy of imported parts to track availability
+            Dictionary<string, double> availableImports = new();
+            foreach (var import in importedParts.Values)
+            {
+                if (import?.Item != null && !string.IsNullOrEmpty(import.Item.Name))
+                {
+                    if (availableImports.ContainsKey(import.Item.Name))
+                    {
+                        availableImports[import.Item.Name] += import.Item.Quantity;
+                    }
+                    else
+                    {
+                        availableImports[import.Item.Name] = import.Item.Quantity;
+                    }
+                }
+            }
+
+            // Validate immediate ingredients only (no recursion to raw materials)
+            List<Item> immediateIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports);
+
+            // Add the goal item with validation info
+            Item goalItem = new()
+            {
+                Name = partName,
+                Quantity = quantity,
+                Ingredients = immediateIngredients,
+                Building = recipe.Building.Name,
+                BuildingQuantity = buildingRatio,
+                BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
+                Counter = counter
+            };
+
+            // Check if any immediate ingredients are missing and populate MissingIngredients
+            foreach (var ingredient in immediateIngredients)
+            {
+                if (ingredient.HasMissingIngredients || ingredient.Quantity > 0) // If quantity > 0, it means it's not fully satisfied by imports
+                {
+                    goalItem.MissingIngredients.AddRange(ingredient.MissingIngredients);
+                    if (ingredient.Quantity > 0 && !goalItem.MissingIngredients.Contains(ingredient.Name))
+                    {
+                        goalItem.MissingIngredients.Add(ingredient.Name);
+                    }
+                }
+            }
+
+            results.Add(goalItem);
+            results.AddRange(immediateIngredients);
+
+            return results;
+        }
+
+        private List<Item> ValidateImmediateIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<string, double> availableImports)
+        {
+            List<Item> results = new();
+            counter++;
+            Recipe? newRecipe = FindRecipe(factoryCatalog, partName);
+
+            // If we have a recipe, validate the immediate ingredients
+            if (newRecipe != null && newRecipe.Products != null)
+            {
+                double ratio = 0;
+                foreach (Product product in newRecipe.Products)
+                {
+                    if (product.part == partName)
+                    {
+                        ratio = quantity / product.perMin;
+                        break;
+                    }
+                }
+
+                // Validate each immediate ingredient
+                if (newRecipe.Ingredients != null)
+                {
+                    foreach (Ingredient ingredient in newRecipe.Ingredients)
+                    {
+                        double needed = ingredient.perMin * ratio;
+                        double remainingNeed = needed;
+
+                        // Check if we have imports available for this ingredient
+                        if (availableImports.ContainsKey(ingredient.part) && availableImports[ingredient.part] > 0)
+                        {
+                            double availableFromImport = availableImports[ingredient.part];
+                            double usedFromImport = Math.Min(remainingNeed, availableFromImport);
+
+                            // Update the available import quantity
+                            availableImports[ingredient.part] -= usedFromImport;
+                            if (availableImports[ingredient.part] < 0.001) // Handle floating point precision
+                                availableImports[ingredient.part] = 0;
+
+                            // Reduce the needed quantity by what we got from imports
+                            remainingNeed -= usedFromImport;
+                        }
+
+                        // Create ingredient item with validation info
+                        Recipe? ingredientRecipe = FindRecipe(factoryCatalog, ingredient.part);
+                        string buildingName = ingredientRecipe?.Building.Name ?? string.Empty;
+                        double buildingRatio = 0;
+                        
+                        if (ingredientRecipe != null && remainingNeed > 0.001)
+                        {
+                            buildingRatio = remainingNeed / ingredientRecipe.Products[0].perMin;
+                        }
+
+                        Item ingredientItem = new()
+                        {
+                            Name = ingredient.part,
+                            Quantity = remainingNeed, // This represents the unmet need
+                            Ingredients = new List<Item>(), // Don't recurse - only immediate validation
+                            Building = buildingName,
+                            BuildingQuantity = buildingRatio,
+                            BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
+                            Counter = counter
+                        };
+
+                        // If there's still remaining need, mark this ingredient as missing
+                        if (remainingNeed > 0.001)
+                        {
+                            ingredientItem.MissingIngredients.Add(ingredient.part);
+                        }
+
+                        results.Add(ingredientItem);
+                    }
+                }
+            }
             return results;
         }
 

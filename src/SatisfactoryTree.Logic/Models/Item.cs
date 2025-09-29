@@ -10,5 +10,7 @@
         public double BuildingPowerUsage { get; set; }
 
         public int Counter { get; set; }
+        public List<string> MissingIngredients { get; set; } = new();
+        public bool HasMissingIngredients => MissingIngredients.Any();
     }
 }

@@ -6,15 +6,23 @@ namespace SatisfactoryTree.Logic.Models
         public List<Recipe> Recipes { get; set; } = new();
         public List<Building> Buildings { get; set; } = new();
         public List<Factory> Factories { get; set; } = new();
+        public bool UseValidationMode { get; set; } = true; // New: Use validation instead of full calculation
 
         public void UpdatePlanCalculations(FactoryCatalog factoryCatalog)
         {
             Calculator calculator = new();
 
-            // Complete initial calculations
+            // Complete initial calculations - use validation mode or full calculation based on flag
             foreach (Factory factory in Factories)
             {
-                factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);
+                if (UseValidationMode)
+                {
+                    factory.ComponentParts = calculator.ValidateFactorySetup(factoryCatalog, factory);
+                }
+                else
+                {
+                    factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);
+                }
             }
 
             // Balance imports and exports across factories

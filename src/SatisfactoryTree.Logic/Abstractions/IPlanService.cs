@@ -21,6 +21,9 @@ public interface IPlanService
 
     void AddImportedPartToFactory(int factoryId, int sourceFactoryId, string sourceFactoryName, string itemName, double quantity);
 
+    void AddAllMissingIngredients(int factoryId);
+    List<string> GetMissingIngredients(int factoryId);
+
     void RefreshPlanCalculations();
 
     void NotifyPlanChanged();
