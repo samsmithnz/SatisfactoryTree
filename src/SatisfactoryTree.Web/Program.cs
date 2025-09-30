@@ -13,8 +13,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 // Register display service using the abstraction from Logic
 builder.Services.AddScoped<SatisfactoryTree.Logic.Abstractions.IFactoryItemDisplayService, FactoryItemDisplayService>();
 
-// Register plan service via abstraction
-builder.Services.AddScoped<IPlanService, PlanService>();
+// Register plan service directly
+builder.Services.AddScoped<PlanService>();
 
 // Register logic services
 builder.Services.AddScoped<PartLookupService>();

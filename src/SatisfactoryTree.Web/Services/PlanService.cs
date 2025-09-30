@@ -1,9 +1,8 @@
-using SatisfactoryTree.Logic.Abstractions;
 using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Web.Services
 {
-    public class PlanService : IPlanService
+    public class PlanService
     {
         private Plan? _plan;
         private FactoryCatalog? _factoryCatalog;
