@@ -1,7 +1,7 @@
 # Copilot Instructions
 
 Scope
-- This repository uses .NET 8 and Blazor WebAssembly. Apply these rules to all C# code in all projects.
+- This repository uses .NET 9 and Blazor WebAssembly. Apply these rules to all C# code in all projects.
 
 Code style
 - Do not use implicit typing. Never use `var`. Always use explicit types.
