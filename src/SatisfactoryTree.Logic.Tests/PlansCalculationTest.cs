@@ -42,6 +42,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             //Act
             Calculator calculator = new();
+            plan.UseValidationMode = false; // Use full calculation mode for this test
             plan.UpdatePlanCalculations(factoryCatalog);
 
             //Assert
@@ -101,6 +102,7 @@ namespace SatisfactoryTree.Logic.Tests
 
             //Act
             Calculator calculator = new();
+            plan.UseValidationMode = false; // Use full calculation mode for this test
             plan.UpdatePlanCalculations(factoryCatalog);
 
             //Assert
