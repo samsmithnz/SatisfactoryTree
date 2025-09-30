@@ -112,6 +112,26 @@
 			Console.WriteLine($"Error removing exported part: {ex.Message}");
 		}
 	}
+
+	private async Task AddAllMissingIngredients()
+	{
+		if (Factory == null) return;
+		try
+		{
+			PlanService.AddAllMissingIngredients(Factory.Id);
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error adding missing ingredients: {ex.Message}");
+		}
+	}
+
+	private List<string> GetMissingIngredients()
+	{
+		if (Factory == null) return new List<string>();
+		return PlanService.GetMissingIngredients(Factory.Id);
+	}
 }
 
 @if (Factory != null)
@@ -171,6 +191,22 @@
 		}
 
 		<p><b>Component parts:</b></p>
+		@if (GetMissingIngredients().Any())
+		{
+			<div class="alert alert-warning d-flex justify-content-between align-items-center mb-3" style="padding: 0.75rem 1rem;">
+				<div>
+					<i class="fas fa-exclamation-triangle me-2"></i>
+					<strong>Missing Ingredients:</strong> 
+					@foreach (var missingIngredient in GetMissingIngredients())
+					{
+						<span class="badge badge-red ms-1">@GetPartDisplayName(missingIngredient)</span>
+					}
+				</div>
+				<button class="btn btn-sm btn-primary" @onclick="AddAllMissingIngredients">
+					<i class="fas fa-plus-circle me-1"></i>Add All Missing Ingredients
+				</button>
+			</div>
+		}
 		<ul>
 			@if (Factory.ComponentParts != null && Factory.ComponentParts.Any())
 			{
@@ -199,6 +235,16 @@
 									<span class="badge badge-blue">
 										<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
 										@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
+									</span>
+								}
+							}
+							@if (item.HasMissingIngredients)
+							{
+								@foreach (var missingIngredient in item.MissingIngredients)
+								{
+									<span class="badge badge-red" title="Missing ingredient - not available as import">
+										<i class="fas fa-exclamation-triangle me-1"></i>
+										@GetPartDisplayName(missingIngredient) (Missing)
 									</span>
 								}
 							}
