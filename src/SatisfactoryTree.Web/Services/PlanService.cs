@@ -178,6 +178,7 @@ namespace SatisfactoryTree.Web.Services
             }
         }
 
+        [Obsolete("This method no longer adds ingredients to ExportedParts. Missing ingredients should be resolved by importing from other factories. This method is kept for API compatibility but does nothing.")]
         public void AddAllMissingIngredients(int factoryId)
         {
             if (_plan == null || _factoryCatalog == null)
