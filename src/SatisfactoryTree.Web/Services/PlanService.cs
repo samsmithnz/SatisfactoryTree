@@ -1,9 +1,8 @@
-using SatisfactoryTree.Logic.Abstractions;
 using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Web.Services
 {
-    public class PlanService : IPlanService
+    public class PlanService
     {
         private Plan? _plan;
         private FactoryCatalog? _factoryCatalog;
@@ -177,6 +176,92 @@ namespace SatisfactoryTree.Web.Services
                 // Log error or handle it appropriately
                 Console.WriteLine($"Error updating plan calculations: {ex.Message}");
             }
+        }
+
+        public void AddAllMissingIngredients(int factoryId)
+        {
+            if (_plan == null || _factoryCatalog == null)
+            {
+                return;
+            }
+
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            if (factory == null)
+            {
+                return;
+            }
+
+            // Get all missing ingredients for this factory
+            var missingIngredients = GetMissingIngredients(factoryId);
+
+            // Add each missing ingredient as an exported part to this factory with default recipe quantities
+            foreach (string ingredientName in missingIngredients)
+            {
+                // Find the default recipe for this ingredient
+                Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
+                if (recipe != null && recipe.Products != null && recipe.Products.Any())
+                {
+                    // Use the recipe's default production rate
+                    double defaultQuantity = recipe.Products[0].perMin;
+                    
+                    // Check if this ingredient is already being exported
+                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
+                    if (existingExport == null)
+                    {
+                        // Add as new exported part
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                    }
+                }
+            }
+
+            // Recalculate the entire plan
+            RefreshPlanCalculations();
+        }
+
+        public List<string> GetMissingIngredients(int factoryId)
+        {
+            if (_plan == null)
+            {
+                return new List<string>();
+            }
+
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            if (factory == null)
+            {
+                return new List<string>();
+            }
+
+            List<string> missingIngredients = new();
+            
+            // Collect all missing ingredients from component parts
+            foreach (Item item in factory.ComponentParts)
+            {
+                if (item.HasMissingIngredients)
+                {
+                    missingIngredients.AddRange(item.MissingIngredients);
+                }
+            }
+
+            // Remove duplicates and return
+            return missingIngredients.Distinct().ToList();
+        }
+
+        private Recipe? FindRecipe(FactoryCatalog factoryCatalog, string partName)
+        {
+            foreach (Recipe recipe in factoryCatalog.Recipes)
+            {
+                if (recipe.Products != null)
+                {
+                    foreach (Product product in recipe.Products)
+                    {
+                        if (product.part == partName)
+                        {
+                            return recipe;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public void NotifyPlanChanged()
