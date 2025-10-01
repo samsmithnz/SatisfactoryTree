@@ -194,25 +194,8 @@ namespace SatisfactoryTree.Web.Services
             // Get all missing ingredients for this factory
             var missingIngredients = GetMissingIngredients(factoryId);
 
-            // Add each missing ingredient as an exported part to this factory with default recipe quantities
-            foreach (string ingredientName in missingIngredients)
-            {
-                // Find the default recipe for this ingredient
-                Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
-                if (recipe != null && recipe.Products != null && recipe.Products.Any())
-                {
-                    // Use the recipe's default production rate
-                    double defaultQuantity = recipe.Products[0].perMin;
-                    
-                    // Check if this ingredient is already being exported
-                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
-                    if (existingExport == null)
-                    {
-                        // Add as new exported part
-                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
-                    }
-                }
-            }
+            // Add each missing ingredient as an exported part
+            AddIngredientsToFactory(factory, missingIngredients);
 
             // Recalculate the entire plan
             RefreshPlanCalculations();
@@ -265,8 +248,22 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
+            // Add each missing ingredient as an exported part
+            AddIngredientsToFactory(factory, componentItem.MissingIngredients);
+
+            // Recalculate the entire plan
+            RefreshPlanCalculations();
+        }
+
+        private void AddIngredientsToFactory(Factory factory, IEnumerable<string> ingredientNames)
+        {
+            if (_factoryCatalog == null)
+            {
+                return;
+            }
+
             // Add each missing ingredient as an exported part to this factory with default recipe quantities
-            foreach (string ingredientName in componentItem.MissingIngredients)
+            foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
                 Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
@@ -284,9 +281,6 @@ namespace SatisfactoryTree.Web.Services
                     }
                 }
             }
-
-            // Recalculate the entire plan
-            RefreshPlanCalculations();
         }
 
         private Recipe? FindRecipe(FactoryCatalog factoryCatalog, string partName)
