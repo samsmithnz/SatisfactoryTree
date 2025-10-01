@@ -246,6 +246,49 @@ namespace SatisfactoryTree.Web.Services
             return missingIngredients.Distinct().ToList();
         }
 
+        public void AddMissingIngredientsForItem(int factoryId, Item componentItem)
+        {
+            if (_plan == null || _factoryCatalog == null || componentItem == null)
+            {
+                return;
+            }
+
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            if (factory == null)
+            {
+                return;
+            }
+
+            // Get missing ingredients for this specific component item
+            if (!componentItem.HasMissingIngredients)
+            {
+                return;
+            }
+
+            // Add each missing ingredient as an exported part to this factory with default recipe quantities
+            foreach (string ingredientName in componentItem.MissingIngredients)
+            {
+                // Find the default recipe for this ingredient
+                Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
+                if (recipe != null && recipe.Products != null && recipe.Products.Any())
+                {
+                    // Use the recipe's default production rate
+                    double defaultQuantity = recipe.Products[0].perMin;
+                    
+                    // Check if this ingredient is already being exported
+                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
+                    if (existingExport == null)
+                    {
+                        // Add as new exported part
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                    }
+                }
+            }
+
+            // Recalculate the entire plan
+            RefreshPlanCalculations();
+        }
+
         private Recipe? FindRecipe(FactoryCatalog factoryCatalog, string partName)
         {
             foreach (Recipe recipe in factoryCatalog.Recipes)
