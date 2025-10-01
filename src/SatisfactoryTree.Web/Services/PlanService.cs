@@ -194,7 +194,7 @@ namespace SatisfactoryTree.Web.Services
             // Get all missing ingredients for this factory
             var missingIngredients = GetMissingIngredients(factoryId);
 
-            // Add each missing ingredient as an exported part
+            // Add missing ingredients to factory
             AddIngredientsToFactory(factory, missingIngredients);
 
             // Recalculate the entire plan
@@ -248,7 +248,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add each missing ingredient as an exported part
+            // Add missing ingredients to factory
             AddIngredientsToFactory(factory, componentItem.MissingIngredients);
 
             // Recalculate the entire plan
@@ -262,7 +262,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add each missing ingredient as an exported part to this factory with default recipe quantities
+            // Add ingredients as exported parts with default recipe quantities
             foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
