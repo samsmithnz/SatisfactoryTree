@@ -262,7 +262,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add ingredients as exported parts with default recipe quantities
+            // Add ingredients as exported parts with default recipe quantities (skips duplicates)
             foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
