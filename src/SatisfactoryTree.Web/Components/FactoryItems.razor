@@ -154,10 +154,10 @@
 		<h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
 
 		<p><b>Exported parts:</b></p>
-		@if (Factory.ExportedParts != null && Factory.ExportedParts.Any())
+		@if (Factory.ExportedParts != null && Factory.ExportedParts.Any(e => !e.IsAutoAdded))
 		{
 			<ul>
-				@foreach (ExportedItem item in Factory.ExportedParts)
+				@foreach (ExportedItem item in Factory.ExportedParts.Where(e => !e.IsAutoAdded))
 				{
 					<li class="exported-part-item">
 						<div class="exported-part-info">

@@ -276,8 +276,8 @@ namespace SatisfactoryTree.Web.Services
                     ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
                     if (existingExport == null)
                     {
-                        // Add as new exported part
-                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                        // Add as new exported part, marked as auto-added so it doesn't show in Exported Parts section
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }) { IsAutoAdded = true });
                     }
                 }
             }

@@ -4,6 +4,7 @@
     {
         public Item Item { get; set; } = new();
         public double PartQuantityExported { get; set; } = 0;
+        public bool IsAutoAdded { get; set; } = false;
 
         public ExportedItem(Item item)
         {

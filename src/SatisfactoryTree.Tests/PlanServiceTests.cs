@@ -71,6 +71,11 @@ namespace SatisfactoryTree.Tests
             {
                 Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == ingredient),
                     $"Missing ingredient {ingredient} should have been added to ExportedParts");
+                
+                // Verify that auto-added ingredients are marked with IsAutoAdded flag
+                var addedItem = factory.ExportedParts.First(e => e.Item.Name == ingredient);
+                Assert.IsTrue(addedItem.IsAutoAdded,
+                    $"Auto-added ingredient {ingredient} should have IsAutoAdded flag set to true");
             }
         }
 
@@ -106,11 +111,16 @@ namespace SatisfactoryTree.Tests
             Assert.IsTrue(factory.ExportedParts.Count > 1,
                 "Should have added missing ingredients to ExportedParts");
             
-            // The originally missing ingredients should now be in ExportedParts
+            // The originally missing ingredients should now be in ExportedParts with IsAutoAdded flag
             foreach (var ingredient in missingIngredientsBefore)
             {
                 Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == ingredient),
                     $"Originally missing ingredient {ingredient} should be in ExportedParts");
+                
+                // Verify that auto-added ingredients are marked with IsAutoAdded flag
+                var addedItem = factory.ExportedParts.First(e => e.Item.Name == ingredient);
+                Assert.IsTrue(addedItem.IsAutoAdded,
+                    $"Auto-added ingredient {ingredient} should have IsAutoAdded flag set to true");
             }
         }
     }
