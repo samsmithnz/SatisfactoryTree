@@ -30,7 +30,7 @@ namespace SatisfactoryTree.Tests
         }
 
         [TestMethod]
-        public void AddAllMissingIngredients_ShouldAddToComponentParts()
+        public void AddAllMissingIngredients_ShouldAddToExportedParts()
         {
             // Arrange
             if (planService == null || planService.Plan == null)
@@ -41,13 +41,14 @@ namespace SatisfactoryTree.Tests
             // Create a factory that produces Iron Plates
             Factory factory = new(1, "Test Factory");
             factory.ExportedParts.Add(new ExportedItem(new Item { Name = "IronPlate", Quantity = 30 }));
+            factory.UserDefinedExports.Add("IronPlate"); // Track as user-defined
             planService.Plan.Factories.Add(factory);
 
             // Calculate component parts to get missing ingredients
             planService.RefreshPlanCalculations();
 
-            // Get the count of component parts before adding missing ingredients
-            int componentPartsCountBefore = factory.ComponentParts.Count;
+            // Get the count of exported parts before adding missing ingredients
+            int exportedPartsCountBefore = factory.ExportedParts.Count;
             var missingIngredientsBefore = planService.GetMissingIngredients(factory.Id);
             Assert.IsTrue(missingIngredientsBefore.Count > 0, "Should have missing ingredients initially");
 
@@ -55,23 +56,25 @@ namespace SatisfactoryTree.Tests
             planService.AddAllMissingIngredients(factory.Id);
 
             // Assert
-            // Missing ingredients should be added to ComponentParts, not ExportedParts
-            int componentPartsCountAfter = factory.ComponentParts.Count;
-            int exportedPartsCount = factory.ExportedParts.Count;
+            // Missing ingredients should be added to ExportedParts so they can be produced
+            int exportedPartsCountAfter = factory.ExportedParts.Count;
             
-            // ExportedParts should NOT increase - it should still only have Iron Plate
-            Assert.AreEqual(1, exportedPartsCount, 
-                "ExportedParts should not change - should still only contain the user-defined Iron Plate");
-            
-            // ComponentParts should increase with the calculated production steps
-            Assert.IsTrue(componentPartsCountAfter > componentPartsCountBefore, 
-                "Adding missing ingredients should add items to ComponentParts");
+            // ExportedParts count should increase by number of missing ingredients
+            Assert.IsTrue(exportedPartsCountAfter > exportedPartsCountBefore, 
+                "Adding missing ingredients should add items to ExportedParts");
 
-            // The originally missing ingredients should now be in ComponentParts
+            // The originally missing ingredients should now be in ExportedParts
             foreach (var ingredient in missingIngredientsBefore)
             {
-                Assert.IsTrue(factory.ComponentParts.Any(c => c.Name == ingredient),
-                    $"Missing ingredient {ingredient} should have been added to ComponentParts");
+                Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == ingredient),
+                    $"Missing ingredient {ingredient} should have been added to ExportedParts");
+            }
+            
+            // But they should NOT be in UserDefinedExports (they're auto-added)
+            foreach (var ingredient in missingIngredientsBefore)
+            {
+                Assert.IsFalse(factory.UserDefinedExports.Contains(ingredient),
+                    $"Auto-added ingredient {ingredient} should NOT be in UserDefinedExports");
             }
         }
 
@@ -87,6 +90,7 @@ namespace SatisfactoryTree.Tests
             // Create a factory that produces Iron Plates
             Factory factory = new(1, "Test Factory");
             factory.ExportedParts.Add(new ExportedItem(new Item { Name = "IronPlate", Quantity = 30 }));
+            factory.UserDefinedExports.Add("IronPlate"); // Track as user-defined
             planService.Plan.Factories.Add(factory);
 
             // Calculate component parts to get missing ingredients
@@ -103,16 +107,22 @@ namespace SatisfactoryTree.Tests
             Assert.IsTrue(factory.ComponentParts.Count > 0, 
                 "ComponentParts should be present");
             
-            // ExportedParts should NOT have changed - should still only have the user-defined Iron Plate
-            Assert.AreEqual(1, factory.ExportedParts.Count,
-                "ExportedParts should not change - should still only contain the user-defined Iron Plate");
+            // ExportedParts should now include the missing ingredients
+            Assert.IsTrue(factory.ExportedParts.Count > 1,
+                "Should have added missing ingredients to ExportedParts");
             
-            // The originally missing ingredients should now be in ComponentParts
+            // The originally missing ingredients should now be in ExportedParts
             foreach (var ingredient in missingIngredientsBefore)
             {
-                Assert.IsTrue(factory.ComponentParts.Any(c => c.Name == ingredient),
-                    $"Originally missing ingredient {ingredient} should be in ComponentParts");
+                Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == ingredient),
+                    $"Originally missing ingredient {ingredient} should be in ExportedParts");
             }
+            
+            // But only the user-defined export (IronPlate) should be in UserDefinedExports
+            Assert.AreEqual(1, factory.UserDefinedExports.Count,
+                "Should still have only 1 user-defined export");
+            Assert.IsTrue(factory.UserDefinedExports.Contains("IronPlate"),
+                "IronPlate should be in UserDefinedExports");
         }
     }
 }

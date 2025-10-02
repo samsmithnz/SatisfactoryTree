@@ -1,4 +1,3 @@
-using SatisfactoryTree.Logic;
 using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Web.Services
@@ -108,6 +107,9 @@ namespace SatisfactoryTree.Web.Services
                 // Add new exported part
                 factory.ExportedParts.Add(new(new Item { Name = itemName, Quantity = quantity }));
             }
+            
+            // Track this as a user-defined export
+            factory.UserDefinedExports.Add(itemName);
 
             // Recalculate the entire plan
             RefreshPlanCalculations();
@@ -130,6 +132,9 @@ namespace SatisfactoryTree.Web.Services
             if (exportToRemove != null)
             {
                 factory.ExportedParts.Remove(exportToRemove);
+                
+                // Remove from user-defined exports tracking
+                factory.UserDefinedExports.Remove(itemName);
 
                 // Recalculate the entire plan
                 RefreshPlanCalculations();
@@ -195,11 +200,11 @@ namespace SatisfactoryTree.Web.Services
             // Get all missing ingredients for this factory
             var missingIngredients = GetMissingIngredients(factoryId);
 
-            // Add missing ingredients to factory using Calculator
+            // Add missing ingredients to factory
             AddIngredientsToFactory(factory, missingIngredients);
-            
-            // Notify UI that plan has changed (but don't recalculate everything)
-            PlanChanged?.Invoke();
+
+            // Recalculate the entire plan
+            RefreshPlanCalculations();
         }
 
         public List<string> GetMissingIngredients(int factoryId)
@@ -249,11 +254,11 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add missing ingredients to factory using Calculator
+            // Add missing ingredients to factory
             AddIngredientsToFactory(factory, componentItem.MissingIngredients);
-            
-            // Notify UI that plan has changed (but don't recalculate everything)
-            PlanChanged?.Invoke();
+
+            // Recalculate the entire plan
+            RefreshPlanCalculations();
         }
 
         private void AddIngredientsToFactory(Factory factory, IEnumerable<string> ingredientNames)
@@ -263,8 +268,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Calculate component parts for each missing ingredient using the Calculator
-            Calculator calculator = new();
+            // Add ingredients as exported parts with default recipe quantities (skips duplicates)
             foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
@@ -274,15 +278,13 @@ namespace SatisfactoryTree.Web.Services
                     // Use the recipe's default production rate
                     double defaultQuantity = recipe.Products[0].perMin;
                     
-                    // Calculate the production requirements for this ingredient
-                    List<Item> calculatedItems = calculator.CalculateProduction(
-                        _factoryCatalog, 
-                        ingredientName, 
-                        defaultQuantity, 
-                        factory.ImportedParts);
-                    
-                    // Add the calculated items directly to ComponentParts
-                    factory.ComponentParts.AddRange(calculatedItems);
+                    // Check if this ingredient is already being exported
+                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
+                    if (existingExport == null)
+                    {
+                        // Add as new exported part (but don't track as user-defined)
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                    }
                 }
             }
         }
