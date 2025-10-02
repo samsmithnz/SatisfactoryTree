@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SatisfactoryTree.Logic.Extraction;
 using SatisfactoryTree.Logic.Models;
 using SatisfactoryTree.Web.Services;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SatisfactoryTree.Tests
@@ -29,7 +30,7 @@ namespace SatisfactoryTree.Tests
         }
 
         [TestMethod]
-        public void AddAllMissingIngredients_ShouldNotAddToExportedParts()
+        public void AddAllMissingIngredients_ShouldAddToExportedParts()
         {
             // Arrange
             if (planService == null || planService.Plan == null)
@@ -47,27 +48,34 @@ namespace SatisfactoryTree.Tests
 
             // Get the count of exported parts before adding missing ingredients
             int exportedPartsCountBefore = factory.ExportedParts.Count;
-            var missingIngredients = planService.GetMissingIngredients(factory.Id);
+            var missingIngredientsBefore = planService.GetMissingIngredients(factory.Id);
 
             // Act
             planService.AddAllMissingIngredients(factory.Id);
 
             // Assert
-            // The missing ingredients should NOT be added to ExportedParts
-            // They should remain in ComponentParts only
+            // Missing ingredients should be added to ExportedParts so they can be produced
             int exportedPartsCountAfter = factory.ExportedParts.Count;
             
-            // The key assertion: ExportedParts count should not increase
-            Assert.AreEqual(exportedPartsCountBefore, exportedPartsCountAfter, 
-                "Adding missing ingredients should not add items to ExportedParts");
+            // The key assertion: ExportedParts count should increase by number of missing ingredients
+            Assert.IsTrue(exportedPartsCountAfter > exportedPartsCountBefore, 
+                "Adding missing ingredients should add items to ExportedParts");
+            Assert.AreEqual(missingIngredientsBefore.Count, exportedPartsCountAfter - exportedPartsCountBefore,
+                "Should add exactly the number of missing ingredients that were present");
 
-            // Missing ingredients should still be tracked in ComponentParts
-            Assert.IsTrue(factory.ComponentParts.Count > 0, 
-                "ComponentParts should still contain items");
+            // After adding missing ingredients, there might be new missing ingredients at lower levels
+            // (e.g., adding IronIngot makes IronOre missing), which is expected behavior
+            var missingIngredientsAfter = planService.GetMissingIngredients(factory.Id);
+            // We just verify that the originally missing ingredients were added
+            foreach (var ingredient in missingIngredientsBefore)
+            {
+                Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == ingredient),
+                    $"Missing ingredient {ingredient} should have been added to ExportedParts");
+            }
         }
 
         [TestMethod]
-        public void AddAllMissingIngredients_ComponentPartsShouldRemainCalculated()
+        public void AddAllMissingIngredients_ShouldResolveComponentPartDependencies()
         {
             // Arrange
             if (planService == null || planService.Plan == null)
@@ -84,7 +92,7 @@ namespace SatisfactoryTree.Tests
             planService.RefreshPlanCalculations();
 
             var missingIngredientsBefore = planService.GetMissingIngredients(factory.Id);
-            var componentPartsCountBefore = factory.ComponentParts.Count;
+            Assert.IsTrue(missingIngredientsBefore.Count > 0, "Should have missing ingredients initially");
 
             // Act
             planService.AddAllMissingIngredients(factory.Id);
@@ -94,12 +102,16 @@ namespace SatisfactoryTree.Tests
             Assert.IsTrue(factory.ComponentParts.Count > 0, 
                 "ComponentParts should still be calculated");
             
-            // The structure of ComponentParts should be based on ExportedParts
-            // which should not have changed
-            Assert.AreEqual(1, factory.ExportedParts.Count,
-                "Should still have only the original exported part");
-            Assert.AreEqual("IronPlate", factory.ExportedParts[0].Item.Name,
-                "Original exported part should remain unchanged");
+            // ExportedParts should now include the missing ingredients
+            Assert.IsTrue(factory.ExportedParts.Count > 1,
+                "Should have added missing ingredients to ExportedParts");
+            
+            // The originally missing ingredients should now be in ExportedParts
+            foreach (var ingredient in missingIngredientsBefore)
+            {
+                Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == ingredient),
+                    $"Originally missing ingredient {ingredient} should be in ExportedParts");
+            }
         }
     }
 }

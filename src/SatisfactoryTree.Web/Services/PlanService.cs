@@ -178,7 +178,6 @@ namespace SatisfactoryTree.Web.Services
             }
         }
 
-        [Obsolete("This method no longer modifies ExportedParts. Use imports from other factories to resolve missing ingredients.")]
         public void AddAllMissingIngredients(int factoryId)
         {
             if (_plan == null || _factoryCatalog == null)
@@ -195,19 +194,27 @@ namespace SatisfactoryTree.Web.Services
             // Get all missing ingredients for this factory
             var missingIngredients = GetMissingIngredients(factoryId);
 
-            // Missing ingredients are already tracked in ComponentParts.
-            // They should be resolved by either:
-            // 1. Importing them from another factory
-            // 2. Creating a separate factory to produce them
-            // 
-            // Adding them to ExportedParts would make them exports, which is incorrect.
-            // ComponentParts are calculated from ExportedParts, so missing ingredients
-            // remain as warnings in ComponentParts until properly resolved.
-            //
-            // This method now does nothing - the missing ingredients alert serves as
-            // a reminder to the user to set up proper imports or production chains.
+            // Add each missing ingredient as an exported part to this factory with default recipe quantities
+            foreach (string ingredientName in missingIngredients)
+            {
+                // Find the default recipe for this ingredient
+                Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
+                if (recipe != null && recipe.Products != null && recipe.Products.Any())
+                {
+                    // Use the recipe's default production rate
+                    double defaultQuantity = recipe.Products[0].perMin;
+                    
+                    // Check if this ingredient is already being exported
+                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
+                    if (existingExport == null)
+                    {
+                        // Add as new exported part
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                    }
+                }
+            }
 
-            // Recalculate the entire plan (in case anything changed)
+            // Recalculate the entire plan
             RefreshPlanCalculations();
         }
 
