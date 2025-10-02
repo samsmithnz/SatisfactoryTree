@@ -1,3 +1,4 @@
+using SatisfactoryTree.Logic;
 using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Web.Services
@@ -194,11 +195,11 @@ namespace SatisfactoryTree.Web.Services
             // Get all missing ingredients for this factory
             var missingIngredients = GetMissingIngredients(factoryId);
 
-            // Add missing ingredients to factory
+            // Add missing ingredients to factory using Calculator
             AddIngredientsToFactory(factory, missingIngredients);
-
-            // Recalculate the entire plan
-            RefreshPlanCalculations();
+            
+            // Notify UI that plan has changed (but don't recalculate everything)
+            PlanChanged?.Invoke();
         }
 
         public List<string> GetMissingIngredients(int factoryId)
@@ -248,11 +249,11 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add missing ingredients to factory
+            // Add missing ingredients to factory using Calculator
             AddIngredientsToFactory(factory, componentItem.MissingIngredients);
-
-            // Recalculate the entire plan
-            RefreshPlanCalculations();
+            
+            // Notify UI that plan has changed (but don't recalculate everything)
+            PlanChanged?.Invoke();
         }
 
         private void AddIngredientsToFactory(Factory factory, IEnumerable<string> ingredientNames)
@@ -262,7 +263,8 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add ingredients as exported parts with default recipe quantities (skips duplicates)
+            // Calculate component parts for each missing ingredient using the Calculator
+            Calculator calculator = new();
             foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
@@ -272,13 +274,15 @@ namespace SatisfactoryTree.Web.Services
                     // Use the recipe's default production rate
                     double defaultQuantity = recipe.Products[0].perMin;
                     
-                    // Check if this ingredient is already being exported
-                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
-                    if (existingExport == null)
-                    {
-                        // Add as new exported part, marked as auto-added so it doesn't show in Exported Parts section
-                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }) { IsAutoAdded = true });
-                    }
+                    // Calculate the production requirements for this ingredient
+                    List<Item> calculatedItems = calculator.CalculateProduction(
+                        _factoryCatalog, 
+                        ingredientName, 
+                        defaultQuantity, 
+                        factory.ImportedParts);
+                    
+                    // Add the calculated items directly to ComponentParts
+                    factory.ComponentParts.AddRange(calculatedItems);
                 }
             }
         }
