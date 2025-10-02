@@ -194,25 +194,8 @@ namespace SatisfactoryTree.Web.Services
             // Get all missing ingredients for this factory
             var missingIngredients = GetMissingIngredients(factoryId);
 
-            // Add each missing ingredient as an exported part to this factory with default recipe quantities
-            foreach (string ingredientName in missingIngredients)
-            {
-                // Find the default recipe for this ingredient
-                Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
-                if (recipe != null && recipe.Products != null && recipe.Products.Any())
-                {
-                    // Use the recipe's default production rate
-                    double defaultQuantity = recipe.Products[0].perMin;
-                    
-                    // Check if this ingredient is already being exported
-                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
-                    if (existingExport == null)
-                    {
-                        // Add as new exported part
-                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
-                    }
-                }
-            }
+            // Add missing ingredients to factory
+            AddIngredientsToFactory(factory, missingIngredients);
 
             // Recalculate the entire plan
             RefreshPlanCalculations();
@@ -244,6 +227,60 @@ namespace SatisfactoryTree.Web.Services
 
             // Remove duplicates and return
             return missingIngredients.Distinct().ToList();
+        }
+
+        public void AddMissingIngredientsForItem(int factoryId, Item componentItem)
+        {
+            if (_plan == null || _factoryCatalog == null || componentItem == null)
+            {
+                return;
+            }
+
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            if (factory == null)
+            {
+                return;
+            }
+
+            // Get missing ingredients for this specific component item
+            if (!componentItem.HasMissingIngredients)
+            {
+                return;
+            }
+
+            // Add missing ingredients to factory
+            AddIngredientsToFactory(factory, componentItem.MissingIngredients);
+
+            // Recalculate the entire plan
+            RefreshPlanCalculations();
+        }
+
+        private void AddIngredientsToFactory(Factory factory, IEnumerable<string> ingredientNames)
+        {
+            if (_factoryCatalog == null)
+            {
+                return;
+            }
+
+            // Add ingredients as exported parts with default recipe quantities (skips duplicates)
+            foreach (string ingredientName in ingredientNames)
+            {
+                // Find the default recipe for this ingredient
+                Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
+                if (recipe != null && recipe.Products != null && recipe.Products.Any())
+                {
+                    // Use the recipe's default production rate
+                    double defaultQuantity = recipe.Products[0].perMin;
+                    
+                    // Check if this ingredient is already being exported
+                    ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
+                    if (existingExport == null)
+                    {
+                        // Add as new exported part
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                    }
+                }
+            }
         }
 
         private Recipe? FindRecipe(FactoryCatalog factoryCatalog, string partName)

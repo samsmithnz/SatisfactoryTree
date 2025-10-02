@@ -127,6 +127,20 @@
 		}
 	}
 
+	private async Task AddMissingIngredientsForItem(Item item)
+	{
+		if (Factory == null || item == null) return;
+		try
+		{
+			PlanService.AddMissingIngredientsForItem(Factory.Id, item);
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error adding missing ingredients for item: {ex.Message}");
+		}
+	}
+
 	private List<string> GetMissingIngredients()
 	{
 		if (Factory == null) return new List<string>();
@@ -191,28 +205,28 @@
 		}
 
 		<p><b>Component parts:</b></p>
-		@if (GetMissingIngredients().Any())
-		{
-			<div class="alert alert-warning d-flex justify-content-between align-items-center mb-3" style="padding: 0.75rem 1rem;">
-				<div>
-					<i class="fas fa-exclamation-triangle me-2"></i>
-					<strong>Missing Ingredients:</strong> 
-					@foreach (var missingIngredient in GetMissingIngredients())
-					{
-						<span class="badge badge-red ms-1">@GetPartDisplayName(missingIngredient)</span>
-					}
-				</div>
-				<button class="btn btn-sm btn-primary" @onclick="AddAllMissingIngredients">
-					<i class="fas fa-plus-circle me-1"></i>Add All Missing Ingredients
-				</button>
-			</div>
-		}
 		<ul>
 			@if (Factory.ComponentParts != null && Factory.ComponentParts.Any())
 			{
 				@foreach (Item item in Factory.ComponentParts)
 				{
 					<li>
+						@if (item.HasMissingIngredients)
+						{
+							<div class="alert alert-warning d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
+								<div>
+									<i class="fas fa-exclamation-triangle me-2"></i>
+									<strong>Missing Ingredients:</strong> 
+									@foreach (var missingIngredient in item.MissingIngredients)
+									{
+										<span class="badge badge-red ms-1">@GetPartDisplayName(missingIngredient)</span>
+									}
+								</div>
+								<button class="btn btn-sm btn-primary" @onclick="() => AddMissingIngredientsForItem(item)">
+									<i class="fas fa-plus-circle me-1"></i>Add Missing Ingredients
+								</button>
+							</div>
+						}
 						<div class="component-part-row">
 							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" />
 							<TypeaheadDropdown TItem="LookupItem"
