@@ -157,6 +157,50 @@
 		return item.MissingIngredients.Any(missingIngredient =>
 			!Factory.ExportedParts.Any(e => e.Item.Name == missingIngredient));
 	}
+
+	private bool IsRawResource(Item item)
+	{
+		if (item == null || FactoryCatalog?.RawResources == null)
+			return false;
+
+		// Check if the item's name exists in the RawResources dictionary
+		return FactoryCatalog.RawResources.ContainsKey(item.Name);
+	}
+
+	private List<Item> GetRawResourceItems()
+	{
+		var rawResources = new List<Item>();
+		
+		if (Factory == null)
+			return rawResources;
+
+		// Add raw resources from ComponentParts
+		if (Factory.ComponentParts != null)
+		{
+			rawResources.AddRange(Factory.ComponentParts.Where(item => IsRawResource(item)));
+		}
+
+		// Also add raw resources from ExportedParts that are NOT user-defined
+		// (these are auto-added missing ingredients that happen to be raw resources)
+		if (Factory.ExportedParts != null)
+		{
+			var autoAddedRawResources = Factory.ExportedParts
+				.Where(e => !Factory.UserDefinedExports.Contains(e.Item.Name) && IsRawResource(e.Item))
+				.Select(e => e.Item);
+			rawResources.AddRange(autoAddedRawResources);
+		}
+
+		return rawResources;
+	}
+
+	private List<Item> GetNonRawResourceComponents()
+	{
+		if (Factory?.ComponentParts == null)
+			return new List<Item>();
+
+		// Return component parts that are NOT raw resources
+		return Factory.ComponentParts.Where(item => !IsRawResource(item)).ToList();
+	}
 }
 
 @if (Factory != null)
@@ -217,9 +261,9 @@
 
 		<p><b>Component parts:</b></p>
 		<ul>
-			@if (Factory.ComponentParts != null && Factory.ComponentParts.Any())
+			@if (GetNonRawResourceComponents().Any())
 			{
-				@foreach (Item item in Factory.ComponentParts)
+				@foreach (Item item in GetNonRawResourceComponents())
 				{
 					<li>
 						@if (HasUnresolvedMissingIngredients(item))
@@ -317,9 +361,19 @@
 		</ul>
 
 		<p><b>Raw resources:</b></p>
-		<span class="badge badge-blue">
-			<img src="@DisplayService.GetPartImagePath(GetPartDisplayName("OreIron"))" alt="@GetPartDisplayName("OreIron")" class="ingredient-image" />
-			<span>@GetPartDisplayName("OreIron") 60 per/min</span>
-		</span>
+		@if (GetRawResourceItems().Any())
+		{
+			@foreach (Item item in GetRawResourceItems())
+			{
+				<span class="badge badge-blue">
+					<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" />
+					<span>@GetPartDisplayName(item.Name) @Math.Round(item.Quantity, 1) per/min</span>
+				</span>
+			}
+		}
+		else
+		{
+			<span class="text-muted">No raw resources needed.</span>
+		}
 	</div>
 }
