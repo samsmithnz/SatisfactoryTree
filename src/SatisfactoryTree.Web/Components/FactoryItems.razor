@@ -149,6 +149,38 @@
 		selectedRecipeToExport = selectedRecipe;
 	}
 
+	private void OnExportRecipeSelectedFromDropdown(string? recipeId)
+	{
+		if (!string.IsNullOrEmpty(recipeId) && availableRecipes != null)
+		{
+			selectedRecipeToExport = availableRecipes.FirstOrDefault(r => r.Id == recipeId);
+		}
+	}
+
+	private void OnExportedPartRecipeChanged(Item item, string? recipeId)
+	{
+		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null)
+		{
+			var recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
+			if (recipe != null)
+			{
+				item.Recipe = recipe;
+			}
+		}
+	}
+
+	private void OnComponentRecipeChangedFromDropdown(Item item, string? recipeId)
+	{
+		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null)
+		{
+			var recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
+			if (recipe != null)
+			{
+				item.Recipe = recipe;
+			}
+		}
+	}
+
 	private async Task AddExportedPart()
 	{
 		if (Factory != null && selectedPartToExport != null)
@@ -291,14 +323,22 @@
 							<strong>@GetPartDisplayName(item.Item.Name)</strong> - @item.Item.Quantity per/min (@item.PartQuantityExported per/min exported)
 							<br />
 							<span class="text-muted small">Recipe: </span>
-							<TypeaheadDropdown TItem="LookupItem"
-									   Items="@GetRecipesForPart(item.Item.Name)"
-									   DisplayNameSelector="@(r => r.Name)"
-									   IdSelector="@(r => r.Id)"
-									   SelectedItem="@GetCurrentRecipeLookup(item.Item)"
-									   SelectedItemChanged="@(recipe => OnComponentRecipeChanged(item.Item, recipe))"
-									   Placeholder="Select recipe..."
-									   CssClass="d-inline-block" />
+							@{
+								var exportedRecipes = GetRecipesForPart(item.Item.Name);
+								if (exportedRecipes.Any())
+								{
+									<select class="form-control d-inline-block" style="width: auto;" @onchange="@(e => OnExportedPartRecipeChanged(item.Item, e.Value?.ToString()))">
+										@foreach (var recipe in exportedRecipes)
+										{
+											<option value="@recipe.Id" selected="@(item.Item.Recipe?.Name == recipe.Id)">@recipe.Name</option>
+										}
+									</select>
+								}
+								else
+								{
+									<span class="text-muted small">No recipes available</span>
+								}
+							}
 						</div>
 						<button class="btn btn-sm btn-danger" @onclick="() => RemoveExportedPart(item)">Remove</button>
 					</li>
@@ -331,14 +371,19 @@
 				</div>
 				<div class="mb-2">
 					<label>Select Recipe:</label>
-					<TypeaheadDropdown TItem="LookupItem"
-									   Items="@availableRecipes"
-									   DisplayNameSelector="@(r => r.Name)"
-									   IdSelector="@(r => r.Id)"
-									   SelectedItem="@selectedRecipeToExport"
-									   SelectedItemChanged="@OnExportRecipeSelected"
-									   Placeholder="Search for recipe..."
-									   CssClass="me-2" />
+					@if (availableRecipes.Any())
+					{
+						<select class="form-control" @onchange="@(e => OnExportRecipeSelectedFromDropdown(e.Value?.ToString()))">
+							@foreach (var recipe in availableRecipes)
+							{
+								<option value="@recipe.Id" selected="@(selectedRecipeToExport?.Id == recipe.Id)">@recipe.Name</option>
+							}
+						</select>
+					}
+					else
+					{
+						<p class="text-muted small">No recipes available for this part</p>
+					}
 				</div>
 				<div class="mb-2">
 					<label>Quantity per/min:</label>
@@ -387,14 +432,22 @@
 							<span class="quantity-label">Quantity:</span>
 							<input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
 							<span class="ms-2">Recipe:</span>
-							<TypeaheadDropdown TItem="LookupItem"
-									   Items="@GetRecipesForPart(item.Name)"
-									   DisplayNameSelector="@(r => r.Name)"
-									   IdSelector="@(r => r.Id)"
-									   SelectedItem="@GetCurrentRecipeLookup(item)"
-									   SelectedItemChanged="@(recipe => OnComponentRecipeChanged(item, recipe))"
-									   Placeholder="Select recipe..."
-									   CssClass="ms-2" />
+							@{
+								var componentRecipes = GetRecipesForPart(item.Name);
+								if (componentRecipes.Any())
+								{
+									<select class="form-control d-inline-block ms-2" style="width: auto;" @onchange="@(e => OnComponentRecipeChangedFromDropdown(item, e.Value?.ToString()))">
+										@foreach (var recipe in componentRecipes)
+										{
+											<option value="@recipe.Id" selected="@(item.Recipe?.Name == recipe.Id)">@recipe.Name</option>
+										}
+									</select>
+								}
+								else
+								{
+									<span class="text-muted small ms-2">No recipes available</span>
+								}
+							}
 						</div>
 
 						<div class="component-badges">
