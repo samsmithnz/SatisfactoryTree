@@ -165,6 +165,8 @@
 			if (recipe != null)
 			{
 				item.Recipe = recipe;
+				// Re-validate ingredients when recipe changes
+				PlanService.RefreshPlanCalculations();
 			}
 		}
 	}
@@ -177,6 +179,8 @@
 			if (recipe != null)
 			{
 				item.Recipe = recipe;
+				// Re-validate ingredients when recipe changes
+				PlanService.RefreshPlanCalculations();
 			}
 		}
 	}
