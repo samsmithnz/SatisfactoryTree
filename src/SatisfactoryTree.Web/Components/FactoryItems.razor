@@ -214,8 +214,10 @@
 			// Remove the component part from the factory's component parts list
 			Factory.ComponentParts.Remove(componentItem);
 			
-			// Re-validate the factory setup after removal
-			PlanService.RefreshPlanCalculations();
+			// Note: We intentionally do NOT call RefreshPlanCalculations() here
+			// because it would recalculate and add the component back.
+			// The removal persists until the next calculation is triggered
+			// by another action (recipe change, quantity change, etc.)
 			
 			await InvokeAsync(StateHasChanged);
 		}
