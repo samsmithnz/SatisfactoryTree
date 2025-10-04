@@ -276,20 +276,6 @@
 		}
 	}
 
-	private async Task AddMissingIngredientsForItem(Item item)
-	{
-		if (Factory == null || item == null) return;
-		try
-		{
-			PlanService.AddMissingIngredientsForItem(Factory.Id, item);
-			await InvokeAsync(StateHasChanged);
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine($"Error adding missing ingredients for item: {ex.Message}");
-		}
-	}
-
 	private List<string> GetMissingIngredients()
 	{
 		if (Factory == null) return new List<string>();
