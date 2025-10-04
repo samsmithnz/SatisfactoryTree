@@ -12,5 +12,6 @@
         public int Counter { get; set; }
         public List<string> MissingIngredients { get; set; } = new();
         public bool HasMissingIngredients => MissingIngredients.Any();
+        public Recipe? Recipe { get; set; }
     }
 }

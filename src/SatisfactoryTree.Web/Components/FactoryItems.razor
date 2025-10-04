@@ -18,6 +18,8 @@
 	private LookupItem? selectedPartToExport = null; // only for the add-export UI
 	private double exportedQuantity = 1.0;
 	private Dictionary<string, string>? _partsDisplayLookup; // id -> display name cache
+	private List<LookupItem> availableRecipes = new(); // recipes for the selected part
+	private LookupItem? selectedRecipeToExport = null; // selected recipe for export
 
 	protected override void OnInitialized()
 	{
@@ -47,7 +49,7 @@
 		{
 			return partCode;
 		}
-		if (_partsDisplayLookup != null && _partsDisplayLookup.TryGetValue(partCode, out var display))
+		if (_partsDisplayLookup != null && _partsDisplayLookup.TryGetValue(partCode, out string? display))
 		{
 			return display;
 		}
@@ -63,10 +65,45 @@
 		return PartLookupService.GetCurrentLookup(item, FactoryCatalog);
 	}
 
+	private List<LookupItem> GetRecipesForPart(string partName)
+	{
+		if (FactoryCatalog == null || string.IsNullOrEmpty(partName))
+		{
+			return new List<LookupItem>();
+		}
+		
+		List<Recipe> recipes = SatisfactoryTree.Logic.Calculations.Lookups.GetRecipes(FactoryCatalog, partName);
+		return recipes.Select(r => new LookupItem(r.Name, r.DisplayName)).ToList();
+	}
+
+	private LookupItem? GetCurrentRecipeLookup(Item item)
+	{
+		if (item?.Recipe == null)
+		{
+			return null;
+		}
+		return new LookupItem(item.Recipe.Name, item.Recipe.DisplayName);
+	}
+
+	private void OnComponentRecipeChanged(Item item, LookupItem? selectedRecipe)
+	{
+		if (item != null && selectedRecipe != null && FactoryCatalog != null)
+		{
+			// Find and assign the selected recipe to the item
+			Recipe? recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == selectedRecipe.Id);
+			if (recipe != null)
+			{
+				item.Recipe = recipe;
+			}
+		}
+	}
+
 	private void StartAddingExportedPart()
 	{
 		isAddingExportedPart = true;
 		selectedPartToExport = null;
+		selectedRecipeToExport = null;
+		availableRecipes.Clear();
 		exportedQuantity = 1.0;
 	}
 
@@ -74,11 +111,120 @@
 	{
 		isAddingExportedPart = false;
 		selectedPartToExport = null;
+		selectedRecipeToExport = null;
+		availableRecipes.Clear();
 	}
 
 	private void OnExportPartSelected(LookupItem selectedPart)
 	{
 		selectedPartToExport = selectedPart;
+		
+		// Load recipes for the selected part
+		if (selectedPart != null && FactoryCatalog != null)
+		{
+			List<Recipe> recipes = SatisfactoryTree.Logic.Calculations.Lookups.GetRecipes(FactoryCatalog, selectedPart.Id);
+			availableRecipes = recipes.Select(r => new LookupItem(r.Name, r.DisplayName)).ToList();
+			
+			// Auto-select the first non-alternative recipe
+			Recipe? defaultRecipe = recipes.FirstOrDefault(r => !r.IsAlternate);
+			if (defaultRecipe != null)
+			{
+				selectedRecipeToExport = new LookupItem(defaultRecipe.Name, defaultRecipe.DisplayName);
+			}
+			else if (recipes.Any())
+			{
+				// If no non-alternative recipe, select the first one
+				Recipe firstRecipe = recipes.First();
+				selectedRecipeToExport = new LookupItem(firstRecipe.Name, firstRecipe.DisplayName);
+			}
+			else
+			{
+				selectedRecipeToExport = null;
+			}
+		}
+	}
+
+	private void OnExportRecipeSelected(LookupItem selectedRecipe)
+	{
+		selectedRecipeToExport = selectedRecipe;
+	}
+
+	private void OnExportRecipeSelectedFromDropdown(string? recipeId)
+	{
+		if (!string.IsNullOrEmpty(recipeId) && availableRecipes != null)
+		{
+			selectedRecipeToExport = availableRecipes.FirstOrDefault(r => r.Id == recipeId);
+		}
+	}
+
+	private void OnExportedPartRecipeChanged(Item item, string? recipeId)
+	{
+		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null)
+		{
+			Recipe? recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
+			if (recipe != null)
+			{
+				item.Recipe = recipe;
+				// Re-validate ingredients when recipe changes
+				PlanService.RefreshPlanCalculations();
+			}
+		}
+	}
+
+	private void OnExportedPartQuantityChanged(Item item, string? quantityStr)
+	{
+		if (item != null && !string.IsNullOrEmpty(quantityStr) && double.TryParse(quantityStr, out double quantity))
+		{
+			item.Quantity = quantity;
+			// Re-validate component part requirements when quantity changes
+			PlanService.RefreshPlanCalculations();
+		}
+	}
+
+	private void OnComponentPartQuantityChanged(Item item, string? quantityStr)
+	{
+		if (item != null && !string.IsNullOrEmpty(quantityStr) && double.TryParse(quantityStr, out double quantity))
+		{
+			item.Quantity = quantity;
+			// Recalculate dependent ingredients/part components when quantity changes
+			PlanService.RefreshPlanCalculations();
+		}
+	}
+
+	private void OnComponentRecipeChangedFromDropdown(Item item, string? recipeId)
+	{
+		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null)
+		{
+			Recipe? recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
+			if (recipe != null)
+			{
+				item.Recipe = recipe;
+				// Re-validate ingredients when recipe changes
+				PlanService.RefreshPlanCalculations();
+			}
+		}
+	}
+
+	private async Task RemoveComponentPart(Item componentItem)
+	{
+		if (Factory == null || componentItem == null) return;
+		
+		try
+		{
+			// Remove the component part from the factory's component parts list
+			Factory.ComponentParts.Remove(componentItem);
+			
+			// Note: We intentionally do NOT call RefreshPlanCalculations() here
+			// because it would recalculate and add the component back.
+			// The removal persists until the next calculation is triggered
+			// by another action (recipe change, quantity change, etc.)
+			
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error removing component part: {ex.Message}");
+		}
 	}
 
 	private async Task AddExportedPart()
@@ -87,9 +233,12 @@
 		{
 			try
 			{
-				PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Id, exportedQuantity);
+				string? recipeName = selectedRecipeToExport?.Id;
+				PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Id, exportedQuantity, recipeName);
 				isAddingExportedPart = false;
 				selectedPartToExport = null;
+				selectedRecipeToExport = null;
+				availableRecipes.Clear();
 				await InvokeAsync(StateHasChanged);
 			}
 			catch (Exception ex)
@@ -169,7 +318,7 @@
 
 	private List<Item> GetRawResourceItems()
 	{
-		var rawResources = new List<Item>();
+		List<Item> rawResources = new List<Item>();
 		
 		if (Factory == null)
 			return rawResources;
@@ -184,7 +333,7 @@
 		// (these are auto-added missing ingredients that happen to be raw resources)
 		if (Factory.ExportedParts != null)
 		{
-			var autoAddedRawResources = Factory.ExportedParts
+			IEnumerable<Item> autoAddedRawResources = Factory.ExportedParts
 				.Where(e => !Factory.UserDefinedExports.Contains(e.Item.Name) && IsRawResource(e.Item))
 				.Select(e => e.Item);
 			rawResources.AddRange(autoAddedRawResources);
@@ -217,7 +366,26 @@
 					<li class="exported-part-item">
 						<div class="exported-part-info">
 							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" />
-							<strong>@GetPartDisplayName(item.Item.Name)</strong> - @item.Item.Quantity per/min (@item.PartQuantityExported per/min exported)
+							<strong>@GetPartDisplayName(item.Item.Name)</strong> - 
+							<input type="number" value="@item.Item.Quantity" @onchange="@(e => OnExportedPartQuantityChanged(item.Item, e.Value?.ToString()))" class="form-control d-inline-block" style="width: 100px;" min="0" step="0.1" /> per/min (@item.PartQuantityExported per/min exported)
+							<br />
+							<span class="text-muted small">Recipe: </span>
+							@{
+								List<LookupItem> exportedRecipes = GetRecipesForPart(item.Item.Name);
+								if (exportedRecipes.Any())
+								{
+									<select class="form-control d-inline-block" style="width: auto;" @onchange="@(e => OnExportedPartRecipeChanged(item.Item, e.Value?.ToString()))">
+										@foreach (LookupItem recipe in exportedRecipes)
+										{
+											<option value="@recipe.Id" selected="@(item.Item.Recipe?.Name == recipe.Id)">@recipe.Name</option>
+										}
+									</select>
+								}
+								else
+								{
+									<span class="text-muted small">No recipes available</span>
+								}
+							}
 						</div>
 						<button class="btn btn-sm btn-danger" @onclick="() => RemoveExportedPart(item)">Remove</button>
 					</li>
@@ -249,6 +417,22 @@
 									   CssClass="me-2" />
 				</div>
 				<div class="mb-2">
+					<label>Select Recipe:</label>
+					@if (availableRecipes.Any())
+					{
+						<select class="form-control" @onchange="@(e => OnExportRecipeSelectedFromDropdown(e.Value?.ToString()))">
+							@foreach (LookupItem recipe in availableRecipes)
+							{
+								<option value="@recipe.Id" selected="@(selectedRecipeToExport?.Id == recipe.Id)">@recipe.Name</option>
+							}
+						</select>
+					}
+					else
+					{
+						<p class="text-muted small">No recipes available for this part</p>
+					}
+				</div>
+				<div class="mb-2">
 					<label>Quantity per/min:</label>
 					<input type="number" class="form-control" @bind="exportedQuantity" min="0" step="0.1" />
 				</div>
@@ -272,7 +456,7 @@
 								<div>
 									<i class="fas fa-exclamation-triangle me-2"></i>
 									<strong>Missing Ingredients:</strong> 
-									@foreach (var missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
+									@foreach (string missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
 									{
 										<span class="badge badge-red ms-1">@GetPartDisplayName(missingIngredient)</span>
 									}
@@ -293,7 +477,27 @@
 									   Placeholder="Search for parts..."
 									   CssClass="me-2" />
 							<span class="quantity-label">Quantity:</span>
-							<input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
+							<input type="number" value="@item.Quantity" @onchange="@(e => OnComponentPartQuantityChanged(item, e.Value?.ToString()))" class="form-control quantity-input" min="0" step="0.1" />
+							<span class="ms-2">Recipe:</span>
+							@{
+								List<LookupItem> componentRecipes = GetRecipesForPart(item.Name);
+								if (componentRecipes.Any())
+								{
+									<select class="form-control d-inline-block ms-2" style="width: auto;" @onchange="@(e => OnComponentRecipeChangedFromDropdown(item, e.Value?.ToString()))">
+										@foreach (LookupItem recipe in componentRecipes)
+										{
+											<option value="@recipe.Id" selected="@(item.Recipe?.Name == recipe.Id)">@recipe.Name</option>
+										}
+									</select>
+								}
+								else
+								{
+									<span class="text-muted small ms-2">No recipes available</span>
+								}
+							}
+							<button class="btn btn-sm btn-danger ms-2" @onclick="() => RemoveComponentPart(item)">
+								<i class="fas fa-times"></i>
+							</button>
 						</div>
 
 						<div class="component-badges">
@@ -309,7 +513,7 @@
 							}
 							@if (item.HasMissingIngredients)
 							{
-								@foreach (var missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
+								@foreach (string missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
 								{
 									<span class="badge badge-red" title="Missing ingredient - not available as import">
 										<i class="fas fa-exclamation-triangle me-1"></i>

@@ -70,7 +70,8 @@ namespace SatisfactoryTree.Logic
                 Building = recipe.Building.Name,
                 BuildingQuantity = buildingRatio,
                 BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
-                Counter = counter
+                Counter = counter,
+                Recipe = recipe
             });
 
             //Get the dependencies/ingredients for the goal item
@@ -153,7 +154,8 @@ namespace SatisfactoryTree.Logic
                 Building = recipe.Building.Name,
                 BuildingQuantity = buildingRatio,
                 BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
-                Counter = counter
+                Counter = counter,
+                Recipe = recipe
             };
 
             results.Add(goalItem);
@@ -161,16 +163,18 @@ namespace SatisfactoryTree.Logic
             // Validate immediate ingredients and track missing ones for badges
             List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports);
             
-            // Only track missing ingredients for badge display - don't add as separate items in validation mode
+            // Track missing ingredients on the goal item for badge display
             foreach (var ingredient in missingIngredients)
             {
                 if (ingredient.Quantity > 0.001) // Has unmet need
                 {
                     goalItem.MissingIngredients.Add(ingredient.Name);
-                    // In validation mode, we don't add missing ingredients as separate calculation items
-                    // They will be shown as badges on the UI instead
                 }
             }
+            
+            // Add ALL ingredient items (not just those with unmet needs) as component parts
+            // These represent the ingredients that need to be produced locally
+            results.AddRange(missingIngredients);
 
             return results;
         }
@@ -235,7 +239,8 @@ namespace SatisfactoryTree.Logic
                             Building = buildingName,
                             BuildingQuantity = buildingRatio,
                             BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
-                            Counter = counter
+                            Counter = counter,
+                            Recipe = ingredientRecipe
                         };
 
                         // If there's still remaining need, mark this ingredient as missing
@@ -372,7 +377,8 @@ namespace SatisfactoryTree.Logic
                                     Building = buildingName,
                                     BuildingQuantity = buildingRatio,
                                     BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
-                                    Counter = counter
+                                    Counter = counter,
+                                    Recipe = ingredientRecipe
                                 };
 
                                 results.Add(newIngredient);

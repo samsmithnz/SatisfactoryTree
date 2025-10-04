@@ -82,7 +82,7 @@ namespace SatisfactoryTree.Web.Services
             PlanChanged?.Invoke();
         }
 
-        public void AddExportedPartToFactory(int factoryId, string itemName, double quantity)
+        public void AddExportedPartToFactory(int factoryId, string itemName, double quantity, string? recipeName = null)
         {
             if (_plan == null || _factoryCatalog == null)
             {
@@ -95,17 +95,29 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
+            // Find the specific recipe if provided, otherwise find default recipe
+            Recipe? recipe = null;
+            if (!string.IsNullOrEmpty(recipeName))
+            {
+                recipe = _factoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeName);
+            }
+            if (recipe == null)
+            {
+                recipe = FindRecipe(_factoryCatalog, itemName);
+            }
+
             // Check if this exported part already exists
             ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);
             if (existingExport != null)
             {
-                // Update existing quantity
+                // Update existing quantity and recipe
                 existingExport.Item.Quantity = quantity;
+                existingExport.Item.Recipe = recipe;
             }
             else
             {
-                // Add new exported part
-                factory.ExportedParts.Add(new(new Item { Name = itemName, Quantity = quantity }));
+                // Add new exported part with recipe
+                factory.ExportedParts.Add(new(new Item { Name = itemName, Quantity = quantity, Recipe = recipe }));
             }
             
             // Track this as a user-defined export
@@ -268,7 +280,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add ingredients as exported parts with default recipe quantities (skips duplicates)
+            // Add ingredients as exported parts with default recipe quantities (sums quantities if already exists)
             foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
@@ -282,8 +294,13 @@ namespace SatisfactoryTree.Web.Services
                     ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
                     if (existingExport == null)
                     {
-                        // Add as new exported part (but don't track as user-defined)
-                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                        // Add as new exported part (but don't track as user-defined) with recipe
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity, Recipe = recipe }));
+                    }
+                    else
+                    {
+                        // Sum the quantities together instead of skipping
+                        existingExport.Item.Quantity += defaultQuantity;
                     }
                 }
             }
