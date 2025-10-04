@@ -164,5 +164,35 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual(12, results.Count);
 
         }
+
+        [TestMethod]
+        public void RecipeIsIncludedInItemTest()
+        {
+            //Arrange
+            string partName = "IronPlate";
+            double quantity = 30;
+            if (factoryCatalog == null)
+            {
+                Assert.Fail("Final data is null");
+            }
+
+            //Act
+            Calculator calculator = new();
+            List<Item>? results = calculator.CalculateProduction(factoryCatalog, partName, quantity, new());
+
+            //Assert
+            Assert.IsNotNull(results);
+            Assert.AreEqual(2, results.Count);
+            
+            // Verify the first item has a recipe
+            Assert.IsNotNull(results[0].Recipe, "Recipe should be included for IronPlate");
+            Assert.IsNotNull(results[0].Recipe.Name, "Recipe Name should not be null");
+            Assert.IsNotNull(results[0].Recipe.DisplayName, "Recipe DisplayName should not be null");
+            
+            // Verify the second item (ingredient) also has a recipe
+            Assert.IsNotNull(results[1].Recipe, "Recipe should be included for IronIngot");
+            Assert.IsNotNull(results[1].Recipe.Name, "Recipe Name should not be null for IronIngot");
+            Assert.IsNotNull(results[1].Recipe.DisplayName, "Recipe DisplayName should not be null for IronIngot");
+        }
     }
 }
