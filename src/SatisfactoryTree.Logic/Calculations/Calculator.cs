@@ -175,16 +175,17 @@ namespace SatisfactoryTree.Logic
             // Validate immediate ingredients and track missing ones for badges
             List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports);
             
-            // Only track missing ingredients for badge display - don't add as separate items in validation mode
+            // Track missing ingredients on the goal item for badge display
             foreach (var ingredient in missingIngredients)
             {
                 if (ingredient.Quantity > 0.001) // Has unmet need
                 {
                     goalItem.MissingIngredients.Add(ingredient.Name);
-                    // In validation mode, we don't add missing ingredients as separate calculation items
-                    // They will be shown as badges on the UI instead
                 }
             }
+            
+            // Add the ingredient items with remaining need as component parts
+            results.AddRange(missingIngredients.Where(mi => mi.Quantity > 0.001));
 
             return results;
         }
