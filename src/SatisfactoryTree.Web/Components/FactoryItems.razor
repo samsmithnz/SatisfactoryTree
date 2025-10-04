@@ -146,6 +146,17 @@
 		if (Factory == null) return new List<string>();
 		return PlanService.GetMissingIngredients(Factory.Id);
 	}
+
+	private bool HasUnresolvedMissingIngredients(Item item)
+	{
+		if (Factory == null || item == null || !item.HasMissingIngredients)
+			return false;
+
+		// Check if any missing ingredients are NOT in ExportedParts
+		// If all missing ingredients are in ExportedParts, they're being produced, so the warning can be hidden
+		return item.MissingIngredients.Any(missingIngredient =>
+			!Factory.ExportedParts.Any(e => e.Item.Name == missingIngredient));
+	}
 }
 
 @if (Factory != null)
@@ -211,13 +222,13 @@
 				@foreach (Item item in Factory.ComponentParts)
 				{
 					<li>
-						@if (item.HasMissingIngredients)
+						@if (HasUnresolvedMissingIngredients(item))
 						{
 							<div class="alert alert-warning d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
 								<div>
 									<i class="fas fa-exclamation-triangle me-2"></i>
 									<strong>Missing Ingredients:</strong> 
-									@foreach (var missingIngredient in item.MissingIngredients)
+									@foreach (var missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
 									{
 										<span class="badge badge-red ms-1">@GetPartDisplayName(missingIngredient)</span>
 									}
@@ -254,7 +265,7 @@
 							}
 							@if (item.HasMissingIngredients)
 							{
-								@foreach (var missingIngredient in item.MissingIngredients)
+								@foreach (var missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
 								{
 									<span class="badge badge-red" title="Missing ingredient - not available as import">
 										<i class="fas fa-exclamation-triangle me-1"></i>
