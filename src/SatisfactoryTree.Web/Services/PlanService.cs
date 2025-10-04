@@ -280,7 +280,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add ingredients as exported parts with default recipe quantities (skips duplicates)
+            // Add ingredients as exported parts with default recipe quantities (sums quantities if already exists)
             foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
@@ -296,6 +296,11 @@ namespace SatisfactoryTree.Web.Services
                     {
                         // Add as new exported part (but don't track as user-defined) with recipe
                         factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity, Recipe = recipe }));
+                    }
+                    else
+                    {
+                        // Sum the quantities together instead of skipping
+                        existingExport.Item.Quantity += defaultQuantity;
                     }
                 }
             }
