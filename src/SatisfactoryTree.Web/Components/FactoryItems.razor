@@ -205,6 +205,26 @@
 		}
 	}
 
+	private async Task RemoveComponentPart(Item componentItem)
+	{
+		if (Factory == null || componentItem == null) return;
+		
+		try
+		{
+			// Remove the component part from the factory's component parts list
+			Factory.ComponentParts.Remove(componentItem);
+			
+			// Re-validate the factory setup after removal
+			PlanService.RefreshPlanCalculations();
+			
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error removing component part: {ex.Message}");
+		}
+	}
+
 	private async Task AddExportedPart()
 	{
 		if (Factory != null && selectedPartToExport != null)
@@ -473,6 +493,9 @@
 									<span class="text-muted small ms-2">No recipes available</span>
 								}
 							}
+							<button class="btn btn-sm btn-danger ms-2" @onclick="() => RemoveComponentPart(item)">
+								<i class="fas fa-times"></i>
+							</button>
 						</div>
 
 						<div class="component-badges">
