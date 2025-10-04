@@ -8,6 +8,12 @@
         public List<ExportedItem> ExportedParts { get; set; }
         public List<Item> ComponentParts { get; set; }
         public List<Item> Surplus { get; set; }
+        
+        /// <summary>
+        /// Tracks the names of parts that were explicitly added by the user to export.
+        /// Used to distinguish user-defined exports from auto-added missing ingredients in the UI.
+        /// </summary>
+        public HashSet<string> UserDefinedExports { get; set; }
 
         public Factory(int id, string name)
         {
@@ -17,6 +23,7 @@
             ExportedParts = new();
             ComponentParts = new();
             Surplus = new();
+            UserDefinedExports = new();
         }
     }
 }

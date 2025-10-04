@@ -107,6 +107,9 @@ namespace SatisfactoryTree.Web.Services
                 // Add new exported part
                 factory.ExportedParts.Add(new(new Item { Name = itemName, Quantity = quantity }));
             }
+            
+            // Track this as a user-defined export
+            factory.UserDefinedExports.Add(itemName);
 
             // Recalculate the entire plan
             RefreshPlanCalculations();
@@ -129,6 +132,9 @@ namespace SatisfactoryTree.Web.Services
             if (exportToRemove != null)
             {
                 factory.ExportedParts.Remove(exportToRemove);
+                
+                // Remove from user-defined exports tracking
+                factory.UserDefinedExports.Remove(itemName);
 
                 // Recalculate the entire plan
                 RefreshPlanCalculations();
@@ -276,7 +282,7 @@ namespace SatisfactoryTree.Web.Services
                     ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
                     if (existingExport == null)
                     {
-                        // Add as new exported part
+                        // Add as new exported part (but don't track as user-defined)
                         factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
                     }
                 }
