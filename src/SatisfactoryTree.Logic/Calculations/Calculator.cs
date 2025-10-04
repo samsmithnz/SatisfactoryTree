@@ -184,8 +184,9 @@ namespace SatisfactoryTree.Logic
                 }
             }
             
-            // Add the ingredient items with remaining need as component parts
-            results.AddRange(missingIngredients.Where(mi => mi.Quantity > 0.001));
+            // Add ALL ingredient items (not just those with unmet needs) as component parts
+            // These represent the ingredients that need to be produced locally
+            results.AddRange(missingIngredients);
 
             return results;
         }
