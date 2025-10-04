@@ -218,6 +218,11 @@
 						<div class="exported-part-info">
 							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" />
 							<strong>@GetPartDisplayName(item.Item.Name)</strong> - @item.Item.Quantity per/min (@item.PartQuantityExported per/min exported)
+							@if (item.Item.Recipe != null)
+							{
+								<br />
+								<span class="text-muted small">Recipe: @item.Item.Recipe.DisplayName</span>
+							}
 						</div>
 						<button class="btn btn-sm btn-danger" @onclick="() => RemoveExportedPart(item)">Remove</button>
 					</li>
@@ -294,6 +299,10 @@
 									   CssClass="me-2" />
 							<span class="quantity-label">Quantity:</span>
 							<input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
+							@if (item.Recipe != null)
+							{
+								<span class="text-muted small ms-2">(@item.Recipe.DisplayName)</span>
+							}
 						</div>
 
 						<div class="component-badges">

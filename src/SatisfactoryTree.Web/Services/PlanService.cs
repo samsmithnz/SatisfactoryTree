@@ -95,17 +95,21 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
+            // Find the recipe for this part
+            Recipe? recipe = FindRecipe(_factoryCatalog, itemName);
+
             // Check if this exported part already exists
             ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);
             if (existingExport != null)
             {
-                // Update existing quantity
+                // Update existing quantity and recipe
                 existingExport.Item.Quantity = quantity;
+                existingExport.Item.Recipe = recipe;
             }
             else
             {
-                // Add new exported part
-                factory.ExportedParts.Add(new(new Item { Name = itemName, Quantity = quantity }));
+                // Add new exported part with recipe
+                factory.ExportedParts.Add(new(new Item { Name = itemName, Quantity = quantity, Recipe = recipe }));
             }
             
             // Track this as a user-defined export
@@ -282,8 +286,8 @@ namespace SatisfactoryTree.Web.Services
                     ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
                     if (existingExport == null)
                     {
-                        // Add as new exported part (but don't track as user-defined)
-                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity }));
+                        // Add as new exported part (but don't track as user-defined) with recipe
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity, Recipe = recipe }));
                     }
                 }
             }

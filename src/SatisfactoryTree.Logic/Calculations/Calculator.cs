@@ -70,7 +70,8 @@ namespace SatisfactoryTree.Logic
                 Building = recipe.Building.Name,
                 BuildingQuantity = buildingRatio,
                 BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
-                Counter = counter
+                Counter = counter,
+                Recipe = recipe
             });
 
             //Get the dependencies/ingredients for the goal item
@@ -153,7 +154,8 @@ namespace SatisfactoryTree.Logic
                 Building = recipe.Building.Name,
                 BuildingQuantity = buildingRatio,
                 BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
-                Counter = counter
+                Counter = counter,
+                Recipe = recipe
             };
 
             results.Add(goalItem);
@@ -235,7 +237,8 @@ namespace SatisfactoryTree.Logic
                             Building = buildingName,
                             BuildingQuantity = buildingRatio,
                             BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
-                            Counter = counter
+                            Counter = counter,
+                            Recipe = ingredientRecipe
                         };
 
                         // If there's still remaining need, mark this ingredient as missing
@@ -372,7 +375,8 @@ namespace SatisfactoryTree.Logic
                                     Building = buildingName,
                                     BuildingQuantity = buildingRatio,
                                     BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
-                                    Counter = counter
+                                    Counter = counter,
+                                    Recipe = ingredientRecipe
                                 };
 
                                 results.Add(newIngredient);
