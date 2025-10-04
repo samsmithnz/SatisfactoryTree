@@ -82,7 +82,7 @@ namespace SatisfactoryTree.Web.Services
             PlanChanged?.Invoke();
         }
 
-        public void AddExportedPartToFactory(int factoryId, string itemName, double quantity)
+        public void AddExportedPartToFactory(int factoryId, string itemName, double quantity, string? recipeName = null)
         {
             if (_plan == null || _factoryCatalog == null)
             {
@@ -95,8 +95,16 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Find the recipe for this part
-            Recipe? recipe = FindRecipe(_factoryCatalog, itemName);
+            // Find the specific recipe if provided, otherwise find default recipe
+            Recipe? recipe = null;
+            if (!string.IsNullOrEmpty(recipeName))
+            {
+                recipe = _factoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeName);
+            }
+            if (recipe == null)
+            {
+                recipe = FindRecipe(_factoryCatalog, itemName);
+            }
 
             // Check if this exported part already exists
             ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);

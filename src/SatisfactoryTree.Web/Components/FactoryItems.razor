@@ -18,6 +18,8 @@
 	private LookupItem? selectedPartToExport = null; // only for the add-export UI
 	private double exportedQuantity = 1.0;
 	private Dictionary<string, string>? _partsDisplayLookup; // id -> display name cache
+	private List<LookupItem> availableRecipes = new(); // recipes for the selected part
+	private LookupItem? selectedRecipeToExport = null; // selected recipe for export
 
 	protected override void OnInitialized()
 	{
@@ -63,10 +65,45 @@
 		return PartLookupService.GetCurrentLookup(item, FactoryCatalog);
 	}
 
+	private List<LookupItem> GetRecipesForPart(string partName)
+	{
+		if (FactoryCatalog == null || string.IsNullOrEmpty(partName))
+		{
+			return new List<LookupItem>();
+		}
+		
+		var recipes = SatisfactoryTree.Logic.Calculations.Lookups.GetRecipes(FactoryCatalog, partName);
+		return recipes.Select(r => new LookupItem(r.Name, r.DisplayName)).ToList();
+	}
+
+	private LookupItem? GetCurrentRecipeLookup(Item item)
+	{
+		if (item?.Recipe == null)
+		{
+			return null;
+		}
+		return new LookupItem(item.Recipe.Name, item.Recipe.DisplayName);
+	}
+
+	private void OnComponentRecipeChanged(Item item, LookupItem? selectedRecipe)
+	{
+		if (item != null && selectedRecipe != null && FactoryCatalog != null)
+		{
+			// Find and assign the selected recipe to the item
+			var recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == selectedRecipe.Id);
+			if (recipe != null)
+			{
+				item.Recipe = recipe;
+			}
+		}
+	}
+
 	private void StartAddingExportedPart()
 	{
 		isAddingExportedPart = true;
 		selectedPartToExport = null;
+		selectedRecipeToExport = null;
+		availableRecipes.Clear();
 		exportedQuantity = 1.0;
 	}
 
@@ -74,11 +111,42 @@
 	{
 		isAddingExportedPart = false;
 		selectedPartToExport = null;
+		selectedRecipeToExport = null;
+		availableRecipes.Clear();
 	}
 
 	private void OnExportPartSelected(LookupItem selectedPart)
 	{
 		selectedPartToExport = selectedPart;
+		
+		// Load recipes for the selected part
+		if (selectedPart != null && FactoryCatalog != null)
+		{
+			var recipes = SatisfactoryTree.Logic.Calculations.Lookups.GetRecipes(FactoryCatalog, selectedPart.Id);
+			availableRecipes = recipes.Select(r => new LookupItem(r.Name, r.DisplayName)).ToList();
+			
+			// Auto-select the first non-alternative recipe
+			var defaultRecipe = recipes.FirstOrDefault(r => !r.IsAlternate);
+			if (defaultRecipe != null)
+			{
+				selectedRecipeToExport = new LookupItem(defaultRecipe.Name, defaultRecipe.DisplayName);
+			}
+			else if (recipes.Any())
+			{
+				// If no non-alternative recipe, select the first one
+				var firstRecipe = recipes.First();
+				selectedRecipeToExport = new LookupItem(firstRecipe.Name, firstRecipe.DisplayName);
+			}
+			else
+			{
+				selectedRecipeToExport = null;
+			}
+		}
+	}
+
+	private void OnExportRecipeSelected(LookupItem selectedRecipe)
+	{
+		selectedRecipeToExport = selectedRecipe;
 	}
 
 	private async Task AddExportedPart()
@@ -87,9 +155,12 @@
 		{
 			try
 			{
-				PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Id, exportedQuantity);
+				string? recipeName = selectedRecipeToExport?.Id;
+				PlanService.AddExportedPartToFactory(Factory.Id, selectedPartToExport.Id, exportedQuantity, recipeName);
 				isAddingExportedPart = false;
 				selectedPartToExport = null;
+				selectedRecipeToExport = null;
+				availableRecipes.Clear();
 				await InvokeAsync(StateHasChanged);
 			}
 			catch (Exception ex)
@@ -218,11 +289,16 @@
 						<div class="exported-part-info">
 							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" />
 							<strong>@GetPartDisplayName(item.Item.Name)</strong> - @item.Item.Quantity per/min (@item.PartQuantityExported per/min exported)
-							@if (item.Item.Recipe != null)
-							{
-								<br />
-								<span class="text-muted small">Recipe: @item.Item.Recipe.DisplayName</span>
-							}
+							<br />
+							<span class="text-muted small">Recipe: </span>
+							<TypeaheadDropdown TItem="LookupItem"
+									   Items="@GetRecipesForPart(item.Item.Name)"
+									   DisplayNameSelector="@(r => r.Name)"
+									   IdSelector="@(r => r.Id)"
+									   SelectedItem="@GetCurrentRecipeLookup(item.Item)"
+									   SelectedItemChanged="@(recipe => OnComponentRecipeChanged(item.Item, recipe))"
+									   Placeholder="Select recipe..."
+									   CssClass="d-inline-block" />
 						</div>
 						<button class="btn btn-sm btn-danger" @onclick="() => RemoveExportedPart(item)">Remove</button>
 					</li>
@@ -251,6 +327,17 @@
 									   SelectedItem="@selectedPartToExport"
 									   SelectedItemChanged="@OnExportPartSelected"
 									   Placeholder="Search for parts to export..."
+									   CssClass="me-2" />
+				</div>
+				<div class="mb-2">
+					<label>Select Recipe:</label>
+					<TypeaheadDropdown TItem="LookupItem"
+									   Items="@availableRecipes"
+									   DisplayNameSelector="@(r => r.Name)"
+									   IdSelector="@(r => r.Id)"
+									   SelectedItem="@selectedRecipeToExport"
+									   SelectedItemChanged="@OnExportRecipeSelected"
+									   Placeholder="Search for recipe..."
 									   CssClass="me-2" />
 				</div>
 				<div class="mb-2">
@@ -299,10 +386,15 @@
 									   CssClass="me-2" />
 							<span class="quantity-label">Quantity:</span>
 							<input type="text" value="@item.Quantity.ToString()" class="form-control quantity-input" />
-							@if (item.Recipe != null)
-							{
-								<span class="text-muted small ms-2">(@item.Recipe.DisplayName)</span>
-							}
+							<span class="ms-2">Recipe:</span>
+							<TypeaheadDropdown TItem="LookupItem"
+									   Items="@GetRecipesForPart(item.Name)"
+									   DisplayNameSelector="@(r => r.Name)"
+									   IdSelector="@(r => r.Id)"
+									   SelectedItem="@GetCurrentRecipeLookup(item)"
+									   SelectedItemChanged="@(recipe => OnComponentRecipeChanged(item, recipe))"
+									   Placeholder="Select recipe..."
+									   CssClass="ms-2" />
 						</div>
 
 						<div class="component-badges">
