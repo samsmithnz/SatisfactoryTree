@@ -124,5 +124,48 @@ namespace SatisfactoryTree.Tests
             Assert.IsTrue(factory.UserDefinedExports.Contains("IronPlate"),
                 "IronPlate should be in UserDefinedExports");
         }
+
+        [TestMethod]
+        public void AddSingleIngredient_ShouldOnlyAddThatIngredient()
+        {
+            // Arrange
+            if (planService == null || planService.Plan == null)
+            {
+                Assert.Fail("PlanService or Plan is null");
+            }
+
+            // Create a factory that produces Reinforced Iron Plates
+            Factory factory = new(1, "Test Factory");
+            factory.ExportedParts.Add(new ExportedItem(new Item { Name = "IronPlateReinforced", Quantity = 1 }));
+            factory.UserDefinedExports.Add("IronPlateReinforced");
+            planService.Plan.Factories.Add(factory);
+
+            // Calculate component parts - this should show Iron Plate and Screws as component parts
+            planService.RefreshPlanCalculations();
+
+            // Verify we have component parts (Iron Plate, Screws, etc.)
+            Assert.IsTrue(factory.ComponentParts.Count > 0, "Should have component parts");
+
+            // Find the Iron Plate component
+            Item? ironPlateComponent = factory.ComponentParts.FirstOrDefault(c => c.Name == "IronPlate");
+            Assert.IsNotNull(ironPlateComponent, "Should have Iron Plate as a component");
+
+            int exportedPartsCountBefore = factory.ExportedParts.Count;
+
+            // Act - Add just the Iron Plate ingredient
+            planService.AddExportedPartToFactory(factory.Id, ironPlateComponent.Name, ironPlateComponent.Quantity, ironPlateComponent.Recipe?.Name);
+
+            // Assert
+            // Should have added only Iron Plate to ExportedParts
+            Assert.AreEqual(exportedPartsCountBefore + 1, factory.ExportedParts.Count,
+                "Should have added exactly one item to ExportedParts");
+            
+            Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == "IronPlate"),
+                "Iron Plate should be in ExportedParts");
+            
+            // The Iron Plate should now be marked as user-defined since we explicitly added it
+            Assert.IsTrue(factory.UserDefinedExports.Contains("IronPlate"),
+                "Iron Plate should be in UserDefinedExports after explicit addition");
+        }
     }
 }

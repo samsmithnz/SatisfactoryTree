@@ -307,6 +307,31 @@
 			!Factory.ExportedParts.Any(e => e.Item.Name == missingIngredient));
 	}
 
+	private bool IsComponentMissingFromExports(Item item)
+	{
+		if (Factory == null || item == null)
+			return false;
+
+		// Check if this component item itself is NOT in ExportedParts
+		// This indicates the ingredient needs to be added as an exported part to be produced
+		return !Factory.ExportedParts.Any(e => e.Item.Name == item.Name);
+	}
+
+	private async Task AddSingleIngredient(Item item)
+	{
+		if (Factory == null || item == null) return;
+		try
+		{
+			// Add just this single ingredient as an exported part
+			PlanService.AddExportedPartToFactory(Factory.Id, item.Name, item.Quantity, item.Recipe?.Name);
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error adding single ingredient: {ex.Message}");
+		}
+	}
+
 	private bool IsRawResource(Item item)
 	{
 		if (item == null || FactoryCatalog?.RawResources == null)
@@ -450,19 +475,15 @@
 				@foreach (Item item in GetNonRawResourceComponents())
 				{
 					<li>
-						@if (HasUnresolvedMissingIngredients(item))
+						@if (IsComponentMissingFromExports(item))
 						{
 							<div class="alert alert-warning d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
 								<div>
 									<i class="fas fa-exclamation-triangle me-2"></i>
-									<strong>Missing Ingredients:</strong> 
-									@foreach (string missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
-									{
-										<span class="badge badge-red ms-1">@GetPartDisplayName(missingIngredient)</span>
-									}
+									<strong>Missing:</strong> This ingredient is not being produced yet.
 								</div>
-								<button class="btn btn-sm btn-primary" @onclick="() => AddMissingIngredientsForItem(item)">
-									<i class="fas fa-plus-circle me-1"></i>Add Missing Ingredients
+								<button class="btn btn-sm btn-primary" @onclick="() => AddSingleIngredient(item)">
+									<i class="fas fa-plus-circle me-1"></i>Add This Ingredient
 								</button>
 							</div>
 						}
