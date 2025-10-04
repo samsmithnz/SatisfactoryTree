@@ -15,12 +15,6 @@ namespace SatisfactoryTree.Logic
             {
                 results.AddRange(CalculateProduction(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts));
             }
-            
-            // Filter out the exported parts themselves from component parts
-            // Component parts should only include the ingredients/dependencies, not the final products
-            var exportedPartNames = factory.ExportedParts.Select(e => e.Item.Name).ToHashSet();
-            results = results.Where(r => !exportedPartNames.Contains(r.Name)).ToList();
-            
             return results;
         }
 
@@ -31,12 +25,6 @@ namespace SatisfactoryTree.Logic
             {
                 results.AddRange(ValidateProductionSetup(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts));
             }
-            
-            // Filter out the exported parts themselves from component parts
-            // Component parts should only include the ingredients/dependencies, not the final products
-            var exportedPartNames = factory.ExportedParts.Select(e => e.Item.Name).ToHashSet();
-            results = results.Where(r => !exportedPartNames.Contains(r.Name)).ToList();
-            
             return results;
         }
 
