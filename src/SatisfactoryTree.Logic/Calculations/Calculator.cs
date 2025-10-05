@@ -23,7 +23,7 @@ namespace SatisfactoryTree.Logic
             List<Item> results = new();
             foreach (ExportedItem item in factory.ExportedParts)
             {
-                results.AddRange(ValidateProductionSetup(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts));
+                results.AddRange(ValidateProductionSetup(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts, item.Item.Recipe));
             }
             return results;
         }
@@ -111,13 +111,13 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        public List<Item> ValidateProductionSetup(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, ImportedItem> importedParts)
+        public List<Item> ValidateProductionSetup(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, ImportedItem> importedParts, Recipe? specificRecipe = null)
         {
             List<Item> results = new();
             int counter = 1;
 
-            // Find recipe for the target part
-            Recipe? recipe = FindRecipe(factoryCatalog, partName);
+            // Use the specific recipe if provided, otherwise find the default recipe
+            Recipe? recipe = specificRecipe ?? FindRecipe(factoryCatalog, partName);
             if (recipe == null)
             {
                 return results;
@@ -142,8 +142,8 @@ namespace SatisfactoryTree.Logic
                 }
             }
 
-            // Get immediate ingredients for embedded display (validation mode - no recursion)
-            List<Item> embeddedIngredients = GetImmediateIngredientsForDisplay(factoryCatalog, partName, quantity, counter);
+            // Get immediate ingredients for embedded display using the specific recipe
+            List<Item> embeddedIngredients = GetImmediateIngredientsForDisplay(factoryCatalog, partName, quantity, counter, recipe);
 
             // Add the goal item with embedded ingredients (like original method)
             Item goalItem = new()
@@ -161,7 +161,7 @@ namespace SatisfactoryTree.Logic
             results.Add(goalItem);
 
             // Validate immediate ingredients and track missing ones for badges
-            List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports);
+            List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports, recipe);
             
             // Track missing ingredients on the goal item for badge display
             foreach (var ingredient in missingIngredients)
@@ -178,11 +178,13 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        private List<Item> ValidateImmediateIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<string, double> availableImports)
+        private List<Item> ValidateImmediateIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<string, double> availableImports, Recipe? specificRecipe = null)
         {
             List<Item> results = new();
             counter++;
-            Recipe? newRecipe = FindRecipe(factoryCatalog, partName);
+            
+            // Use the specific recipe if provided, otherwise find the default recipe
+            Recipe? newRecipe = specificRecipe ?? FindRecipe(factoryCatalog, partName);
 
             // If we have a recipe, validate the immediate ingredients
             if (newRecipe != null && newRecipe.Products != null)
@@ -255,10 +257,12 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        private List<Item> GetImmediateIngredientsForDisplay(FactoryCatalog factoryCatalog, string partName, double quantity, int counter)
+        private List<Item> GetImmediateIngredientsForDisplay(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Recipe? specificRecipe = null)
         {
             List<Item> results = new();
-            Recipe? recipe = FindRecipe(factoryCatalog, partName);
+            
+            // Use the specific recipe if provided, otherwise find the default recipe
+            Recipe? recipe = specificRecipe ?? FindRecipe(factoryCatalog, partName);
 
             if (recipe != null && recipe.Products != null && recipe.Ingredients != null)
             {
