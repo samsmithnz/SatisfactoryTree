@@ -178,7 +178,9 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.IsNotNull(plasticFactory);
             Assert.IsNotNull(plasticFactory.ComponentParts);
             List<Item> results2 = plasticFactory.ComponentParts;
-            Assert.AreEqual(2, results2.Count);
+            // Only the exported item itself should be in component parts, not its ingredients
+            Assert.AreEqual(1, results2.Count);
+            Assert.AreEqual("Plastic", results2[0].Name);
             //Assert.AreEqual("IronScrew", results2[0].Name);
             //Assert.AreEqual(12, results2[0].Quantity);
             //Assert.AreEqual(3, results2[0].Counter);

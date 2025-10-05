@@ -193,11 +193,14 @@
 
 	private void OnComponentRecipeChangedFromDropdown(Item item, string? recipeId)
 	{
-		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null)
+		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null && Factory != null)
 		{
 			Recipe? recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
 			if (recipe != null)
 			{
+				// Store the recipe override so it persists across recalculations
+				Factory.ComponentPartRecipeOverrides[item.Name] = recipe.Name;
+				
 				item.Recipe = recipe;
 				// Re-validate ingredients when recipe changes
 				PlanService.RefreshPlanCalculations();
@@ -213,6 +216,14 @@
 		{
 			// Remove the component part from the factory's component parts list
 			Factory.ComponentParts.Remove(componentItem);
+			
+			// If this component was auto-added (in ExportedParts but not in UserDefinedExports),
+			// remove it from ExportedParts as well so it shows as missing again
+			if (Factory.ExportedParts.Any(e => e.Item.Name == componentItem.Name) && 
+			    !Factory.UserDefinedExports.Contains(componentItem.Name))
+			{
+				PlanService.RemoveExportedPartFromFactory(Factory.Id, componentItem.Name);
+			}
 			
 			// Note: We intentionally do NOT call RefreshPlanCalculations() here
 			// because it would recalculate and add the component back.
@@ -276,20 +287,6 @@
 		}
 	}
 
-	private async Task AddMissingIngredientsForItem(Item item)
-	{
-		if (Factory == null || item == null) return;
-		try
-		{
-			PlanService.AddMissingIngredientsForItem(Factory.Id, item);
-			await InvokeAsync(StateHasChanged);
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine($"Error adding missing ingredients for item: {ex.Message}");
-		}
-	}
-
 	private List<string> GetMissingIngredients()
 	{
 		if (Factory == null) return new List<string>();
@@ -305,6 +302,51 @@
 		// If all missing ingredients are in ExportedParts, they're being produced, so the warning can be hidden
 		return item.MissingIngredients.Any(missingIngredient =>
 			!Factory.ExportedParts.Any(e => e.Item.Name == missingIngredient));
+	}
+
+	private bool IsComponentMissingFromExports(Item item)
+	{
+		if (Factory == null || item == null)
+			return false;
+
+		// Check if this component item itself is NOT in ExportedParts
+		// This indicates the ingredient needs to be added as an exported part to be produced
+		return !Factory.ExportedParts.Any(e => e.Item.Name == item.Name);
+	}
+
+	private async Task AddSingleIngredient(Item item)
+	{
+		if (Factory == null || item == null) return;
+		try
+		{
+			// Add just this single ingredient as a component to be produced
+			// This adds it to ExportedParts but NOT to UserDefinedExports, so it won't show in the "Exported parts" UI section
+			PlanService.AddMissingIngredientsForItem(Factory.Id, item);
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error adding single ingredient: {ex.Message}");
+		}
+	}
+
+	private async Task AddSingleIngredientByName(string ingredientName, double quantity, string? recipeName)
+	{
+		if (Factory == null || string.IsNullOrEmpty(ingredientName)) return;
+		try
+		{
+			// Add the ingredient with the actual quantity needed (not the recipe default)
+			PlanService.AddExportedPartToFactory(Factory.Id, ingredientName, quantity, recipeName);
+			
+			// Remove from UserDefinedExports since this is auto-added
+			Factory.UserDefinedExports.Remove(ingredientName);
+			
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error adding single ingredient by name: {ex.Message}");
+		}
 	}
 
 	private bool IsRawResource(Item item)
@@ -350,6 +392,14 @@
 		// Return component parts that are NOT raw resources
 		return Factory.ComponentParts.Where(item => !IsRawResource(item)).ToList();
 	}
+
+	private double GetTotalPowerConsumption()
+	{
+		if (Factory?.ComponentParts == null)
+			return 0;
+
+		return Factory.ComponentParts.Sum(item => item.BuildingPowerUsage);
+	}
 }
 
 @if (Factory != null)
@@ -367,7 +417,7 @@
 						<div class="exported-part-info">
 							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" />
 							<strong>@GetPartDisplayName(item.Item.Name)</strong> - 
-							<input type="number" value="@item.Item.Quantity" @onchange="@(e => OnExportedPartQuantityChanged(item.Item, e.Value?.ToString()))" class="form-control d-inline-block" style="width: 100px;" min="0" step="0.1" /> per/min (@item.PartQuantityExported per/min exported)
+							<input type="number" value="@item.Item.Quantity" @onchange="@(e => OnExportedPartQuantityChanged(item.Item, e.Value?.ToString()))" class="form-control d-inline-block" style="width: 100px;" min="0" step="0.1" /> per/min
 							<br />
 							<span class="text-muted small">Recipe: </span>
 							@{
@@ -450,19 +500,27 @@
 				@foreach (Item item in GetNonRawResourceComponents())
 				{
 					<li>
-						@if (HasUnresolvedMissingIngredients(item))
+						@if (IsComponentMissingFromExports(item))
 						{
 							<div class="alert alert-warning d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
 								<div>
 									<i class="fas fa-exclamation-triangle me-2"></i>
-									<strong>Missing Ingredients:</strong> 
-									@foreach (string missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
-									{
-										<span class="badge badge-red ms-1">@GetPartDisplayName(missingIngredient)</span>
-									}
+									<strong>Missing:</strong> This ingredient is not being produced yet.
 								</div>
-								<button class="btn btn-sm btn-primary" @onclick="() => AddMissingIngredientsForItem(item)">
-									<i class="fas fa-plus-circle me-1"></i>Add Missing Ingredients
+								<button class="btn btn-sm btn-primary" @onclick="() => AddSingleIngredient(item)">
+									<i class="fas fa-plus-circle me-1"></i>Add This Ingredient
+								</button>
+							</div>
+						}
+						@if (item.IsRedundant)
+						{
+							<div class="alert alert-secondary d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
+								<div>
+									<i class="fas fa-info-circle me-2"></i>
+									<strong>Unused:</strong> This ingredient is no longer needed by the current recipe.
+								</div>
+								<button class="btn btn-sm btn-danger" @onclick="() => RemoveComponentPart(item)">
+									<i class="fas fa-trash me-1"></i>Remove
 								</button>
 							</div>
 						}
@@ -505,20 +563,28 @@
 							{
 								@foreach (Item ingredient in item.Ingredients)
 								{
-									<span class="badge badge-blue">
-										<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
-										@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
-									</span>
-								}
-							}
-							@if (item.HasMissingIngredients)
-							{
-								@foreach (string missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
-								{
-									<span class="badge badge-red" title="Missing ingredient - not available as import">
-										<i class="fas fa-exclamation-triangle me-1"></i>
-										@GetPartDisplayName(missingIngredient) (Missing)
-									</span>
+									bool isMissing = item.HasMissingIngredients && item.MissingIngredients.Contains(ingredient.Name) && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name);
+									
+									@if (isMissing)
+									{
+										<span class="badge badge-red d-inline-flex align-items-center gap-2" title="Missing ingredient - not available as import">
+											<span>
+												<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
+												<i class="fas fa-exclamation-triangle me-1"></i>
+												@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min (Missing)
+											</span>
+											<button class="btn btn-sm btn-primary py-0 px-1" style="font-size: 0.75rem;" @onclick="() => AddSingleIngredientByName(ingredient.Name, ingredient.Quantity, ingredient.Recipe?.Name)">
+												<i class="fas fa-plus-circle"></i>
+											</button>
+										</span>
+									}
+									else
+									{
+										<span class="badge badge-blue">
+											<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
+											@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
+										</span>
+									}
 								}
 							}
 							<span class="badge badge-yellow">
@@ -564,20 +630,29 @@
 			}
 		</ul>
 
-		<p><b>Raw resources:</b></p>
-		@if (GetRawResourceItems().Any())
+		<p><b>Required resources:</b></p>
+		@if (GetRawResourceItems().Any() || GetTotalPowerConsumption() > 0)
 		{
-			@foreach (Item item in GetRawResourceItems())
+			@if (GetRawResourceItems().Any())
 			{
-				<span class="badge badge-blue">
-					<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" />
-					<span>@GetPartDisplayName(item.Name) @Math.Round(item.Quantity, 1) per/min</span>
+				@foreach (Item item in GetRawResourceItems())
+				{
+					<span class="badge badge-blue">
+						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" />
+						<span>@GetPartDisplayName(item.Name) @Math.Round(item.Quantity, 1) per/min</span>
+					</span>
+				}
+			}
+			@if (GetTotalPowerConsumption() > 0)
+			{
+				<span class="badge badge-grey">
+					<i class="fas fa-bolt power-icon" title="Total Power Usage"></i> @Math.Round(GetTotalPowerConsumption(), 1) MW total
 				</span>
 			}
 		}
 		else
 		{
-			<span class="text-muted">No raw resources needed.</span>
+			<span class="text-muted">No resources needed.</span>
 		}
 	</div>
 }
