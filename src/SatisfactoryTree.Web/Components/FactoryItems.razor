@@ -332,18 +332,12 @@
 		if (Factory == null || string.IsNullOrEmpty(ingredientName)) return;
 		try
 		{
-			// Create a temporary item with the missing ingredient to use with AddMissingIngredientsForItem
-			Item tempItem = new()
-			{
-				Name = ingredientName,
-				Quantity = quantity,
-				Recipe = recipeName != null && FactoryCatalog?.Recipes != null 
-					? FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeName) 
-					: null
-			};
-			tempItem.MissingIngredients.Add(ingredientName);
+			// Add the ingredient with the actual quantity needed (not the recipe default)
+			PlanService.AddExportedPartToFactory(Factory.Id, ingredientName, quantity, recipeName);
 			
-			PlanService.AddMissingIngredientsForItem(Factory.Id, tempItem);
+			// Remove from UserDefinedExports since this is auto-added
+			Factory.UserDefinedExports.Remove(ingredientName);
+			
 			await InvokeAsync(StateHasChanged);
 		}
 		catch (Exception ex)
