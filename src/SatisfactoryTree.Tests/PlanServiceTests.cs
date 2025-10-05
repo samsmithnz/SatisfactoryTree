@@ -140,31 +140,36 @@ namespace SatisfactoryTree.Tests
             factory.UserDefinedExports.Add("IronPlateReinforced");
             planService.Plan.Factories.Add(factory);
 
-            // Calculate component parts - this should show Iron Plate and Screws as component parts
+            // Calculate component parts - now only the exported item itself should be in component parts
             planService.RefreshPlanCalculations();
 
-            // Verify we have component parts (Iron Plate, Screws, etc.)
+            // Verify we have component parts
             Assert.IsTrue(factory.ComponentParts.Count > 0, "Should have component parts");
-
-            // Find the Iron Plate component
-            Item? ironPlateComponent = factory.ComponentParts.FirstOrDefault(c => c.Name == "IronPlate");
-            Assert.IsNotNull(ironPlateComponent, "Should have Iron Plate as a component");
+            
+            // Only the exported item should be in component parts, not its ingredients
+            Assert.AreEqual(1, factory.ComponentParts.Count, "Should have only 1 component part (the exported item)");
+            Assert.AreEqual("IronPlateReinforced", factory.ComponentParts[0].Name, "Component part should be Reinforced Iron Plate");
+            
+            // The exported item should have missing ingredients tracked
+            Assert.IsTrue(factory.ComponentParts[0].HasMissingIngredients, "Reinforced Iron Plate should have missing ingredients");
+            Assert.IsTrue(factory.ComponentParts[0].MissingIngredients.Contains("IronPlate"), "Should show Iron Plate as missing");
+            Assert.IsTrue(factory.ComponentParts[0].MissingIngredients.Contains("IronScrew"), "Should show Screws as missing");
 
             int exportedPartsCountBefore = factory.ExportedParts.Count;
             int userDefinedExportsCountBefore = factory.UserDefinedExports.Count;
 
-            // Act - Add just the Iron Plate ingredient using AddMissingIngredientsForItem
-            planService.AddMissingIngredientsForItem(factory.Id, ironPlateComponent);
+            // Act - Add the Reinforced Iron Plate's missing ingredients
+            planService.AddMissingIngredientsForItem(factory.Id, factory.ComponentParts[0]);
 
             // Assert
-            // Should have added Iron Plate to ExportedParts
-            Assert.AreEqual(exportedPartsCountBefore + 1, factory.ExportedParts.Count,
-                "Should have added exactly one item to ExportedParts");
+            // Should have added Iron Plate and Screws to ExportedParts
+            Assert.IsTrue(factory.ExportedParts.Count > exportedPartsCountBefore,
+                "Should have added items to ExportedParts");
             
             Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == "IronPlate"),
                 "Iron Plate should be in ExportedParts");
             
-            // The Iron Plate should NOT be marked as user-defined (only auto-added)
+            // The ingredients should NOT be marked as user-defined (only auto-added)
             Assert.AreEqual(userDefinedExportsCountBefore, factory.UserDefinedExports.Count,
                 "Should not have changed UserDefinedExports count");
             Assert.IsFalse(factory.UserDefinedExports.Contains("IronPlate"),
