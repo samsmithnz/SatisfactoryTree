@@ -179,6 +179,30 @@ code {
     display: block !important;
 }
 
+.add-exported-part-inputs {
+    display: flex !important;
+    gap: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    align-items: flex-end !important;
+}
+
+.add-exported-part-field {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.add-exported-part-field label {
+    font-weight: 600 !important;
+    margin-bottom: 0.25rem !important;
+    display: block !important;
+    font-size: 14px !important;
+}
+
+.add-exported-part-field .form-control,
+.add-exported-part-field select {
+    width: 100% !important;
+}
+
 /* ===============================================
    COMPONENT STYLES WITH MAXIMUM SPECIFICITY
    =============================================== */
