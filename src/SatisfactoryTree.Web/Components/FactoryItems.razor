@@ -308,8 +308,9 @@
 		if (Factory == null || item == null) return;
 		try
 		{
-			// Add just this single ingredient as an exported part
-			PlanService.AddExportedPartToFactory(Factory.Id, item.Name, item.Quantity, item.Recipe?.Name);
+			// Add just this single ingredient as a component to be produced
+			// This adds it to ExportedParts but NOT to UserDefinedExports, so it won't show in the "Exported parts" UI section
+			PlanService.AddMissingIngredientsForItem(Factory.Id, item);
 			await InvokeAsync(StateHasChanged);
 		}
 		catch (Exception ex)

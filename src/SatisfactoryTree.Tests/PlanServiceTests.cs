@@ -126,7 +126,7 @@ namespace SatisfactoryTree.Tests
         }
 
         [TestMethod]
-        public void AddSingleIngredient_ShouldOnlyAddThatIngredient()
+        public void AddSingleIngredient_ShouldNotAddToUserDefinedExports()
         {
             // Arrange
             if (planService == null || planService.Plan == null)
@@ -151,21 +151,24 @@ namespace SatisfactoryTree.Tests
             Assert.IsNotNull(ironPlateComponent, "Should have Iron Plate as a component");
 
             int exportedPartsCountBefore = factory.ExportedParts.Count;
+            int userDefinedExportsCountBefore = factory.UserDefinedExports.Count;
 
-            // Act - Add just the Iron Plate ingredient
-            planService.AddExportedPartToFactory(factory.Id, ironPlateComponent.Name, ironPlateComponent.Quantity, ironPlateComponent.Recipe?.Name);
+            // Act - Add just the Iron Plate ingredient using AddMissingIngredientsForItem
+            planService.AddMissingIngredientsForItem(factory.Id, ironPlateComponent);
 
             // Assert
-            // Should have added only Iron Plate to ExportedParts
+            // Should have added Iron Plate to ExportedParts
             Assert.AreEqual(exportedPartsCountBefore + 1, factory.ExportedParts.Count,
                 "Should have added exactly one item to ExportedParts");
             
             Assert.IsTrue(factory.ExportedParts.Any(e => e.Item.Name == "IronPlate"),
                 "Iron Plate should be in ExportedParts");
             
-            // The Iron Plate should now be marked as user-defined since we explicitly added it
-            Assert.IsTrue(factory.UserDefinedExports.Contains("IronPlate"),
-                "Iron Plate should be in UserDefinedExports after explicit addition");
+            // The Iron Plate should NOT be marked as user-defined (only auto-added)
+            Assert.AreEqual(userDefinedExportsCountBefore, factory.UserDefinedExports.Count,
+                "Should not have changed UserDefinedExports count");
+            Assert.IsFalse(factory.UserDefinedExports.Contains("IronPlate"),
+                "Iron Plate should NOT be in UserDefinedExports since it was auto-added");
         }
     }
 }
