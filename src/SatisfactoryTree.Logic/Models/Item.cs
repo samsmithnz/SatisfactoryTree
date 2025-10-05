@@ -13,5 +13,6 @@
         public List<string> MissingIngredients { get; set; } = new();
         public bool HasMissingIngredients => MissingIngredients.Any();
         public Recipe? Recipe { get; set; }
+        public bool IsRedundant { get; set; } = false;
     }
 }

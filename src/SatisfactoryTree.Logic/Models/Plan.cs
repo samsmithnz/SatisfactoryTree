@@ -15,6 +15,20 @@ namespace SatisfactoryTree.Logic.Models
             // Complete initial calculations - use validation mode or full calculation based on flag
             foreach (Factory factory in Factories)
             {
+                // Collect auto-added ingredients (not user-defined) before recalculation
+                Dictionary<string, Item> autoAddedIngredients = new();
+                if (factory.ExportedParts != null)
+                {
+                    foreach (ExportedItem exportedItem in factory.ExportedParts)
+                    {
+                        if (!factory.UserDefinedExports.Contains(exportedItem.Item.Name))
+                        {
+                            autoAddedIngredients[exportedItem.Item.Name] = exportedItem.Item;
+                        }
+                    }
+                }
+
+                // Recalculate component parts
                 if (UseValidationMode)
                 {
                     factory.ComponentParts = calculator.ValidateFactorySetup(factoryCatalog, factory);
@@ -22,6 +36,45 @@ namespace SatisfactoryTree.Logic.Models
                 else
                 {
                     factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);
+                }
+
+                // Collect all ingredients that are still needed
+                HashSet<string> neededIngredients = new();
+                if (factory.ComponentParts != null)
+                {
+                    foreach (Item componentItem in factory.ComponentParts)
+                    {
+                        if (componentItem.HasMissingIngredients)
+                        {
+                            foreach (string missingIngredient in componentItem.MissingIngredients)
+                            {
+                                neededIngredients.Add(missingIngredient);
+                            }
+                        }
+                    }
+                }
+
+                // Mark auto-added ingredients that are no longer needed as redundant
+                // and add them to ComponentParts so they show in the UI
+                foreach (var kvp in autoAddedIngredients)
+                {
+                    string ingredientName = kvp.Key;
+                    Item ingredientItem = kvp.Value;
+                    
+                    if (!neededIngredients.Contains(ingredientName))
+                    {
+                        // This was auto-added but is no longer needed - mark as redundant
+                        ingredientItem.IsRedundant = true;
+                        // Add it to ComponentParts so it shows in the UI with redundant banner
+                        if (factory.ComponentParts != null && !factory.ComponentParts.Any(c => c.Name == ingredientName))
+                        {
+                            factory.ComponentParts.Add(ingredientItem);
+                        }
+                    }
+                    else
+                    {
+                        ingredientItem.IsRedundant = false;
+                    }
                 }
             }
 

@@ -509,6 +509,18 @@
 								</button>
 							</div>
 						}
+						@if (item.IsRedundant)
+						{
+							<div class="alert alert-secondary d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
+								<div>
+									<i class="fas fa-info-circle me-2"></i>
+									<strong>Unused:</strong> This ingredient is no longer needed by the current recipe.
+								</div>
+								<button class="btn btn-sm btn-danger" @onclick="() => RemoveComponentPart(item)">
+									<i class="fas fa-trash me-1"></i>Remove
+								</button>
+							</div>
+						}
 						<div class="component-part-row">
 							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" />
 							<TypeaheadDropdown TItem="LookupItem"
