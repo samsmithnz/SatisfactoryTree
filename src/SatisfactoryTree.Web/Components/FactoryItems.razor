@@ -193,11 +193,14 @@
 
 	private void OnComponentRecipeChangedFromDropdown(Item item, string? recipeId)
 	{
-		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null)
+		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null && Factory != null)
 		{
 			Recipe? recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
 			if (recipe != null)
 			{
+				// Store the recipe override so it persists across recalculations
+				Factory.ComponentPartRecipeOverrides[item.Name] = recipe.Name;
+				
 				item.Recipe = recipe;
 				// Re-validate ingredients when recipe changes
 				PlanService.RefreshPlanCalculations();

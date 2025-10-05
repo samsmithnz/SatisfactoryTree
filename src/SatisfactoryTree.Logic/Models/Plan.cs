@@ -37,6 +37,27 @@ namespace SatisfactoryTree.Logic.Models
                 {
                     factory.ComponentParts = calculator.CalculateFactoryProduction(factoryCatalog, factory);
                 }
+                
+                // Reapply recipe overrides to component parts after recalculation
+                // This ensures that user-selected recipes persist across recalculations
+                if (factory.ComponentPartRecipeOverrides != null && factory.ComponentPartRecipeOverrides.Any())
+                {
+                    foreach (Item componentItem in factory.ComponentParts)
+                    {
+                        if (factory.ComponentPartRecipeOverrides.ContainsKey(componentItem.Name))
+                        {
+                            string overrideRecipeName = factory.ComponentPartRecipeOverrides[componentItem.Name];
+                            Recipe? overrideRecipe = factoryCatalog.Recipes.FirstOrDefault(r => r.Name == overrideRecipeName);
+                            if (overrideRecipe != null)
+                            {
+                                componentItem.Recipe = overrideRecipe;
+                                
+                                // Recalculate the embedded ingredients for this component based on the overridden recipe
+                                componentItem.Ingredients = calculator.GetImmediateIngredientsForDisplayPublic(factoryCatalog, componentItem.Name, componentItem.Quantity, componentItem.Counter, overrideRecipe, factory.ComponentPartRecipeOverrides);
+                            }
+                        }
+                    }
+                }
 
                 // Collect all ingredients that are still needed
                 HashSet<string> neededIngredients = new();

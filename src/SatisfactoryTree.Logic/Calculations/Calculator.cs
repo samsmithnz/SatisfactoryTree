@@ -23,7 +23,7 @@ namespace SatisfactoryTree.Logic
             List<Item> results = new();
             foreach (ExportedItem item in factory.ExportedParts)
             {
-                results.AddRange(ValidateProductionSetup(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts, item.Item.Recipe));
+                results.AddRange(ValidateProductionSetup(factoryCatalog, item.Item.Name, item.Item.Quantity, factory.ImportedParts, item.Item.Recipe, factory.ComponentPartRecipeOverrides));
             }
             return results;
         }
@@ -111,7 +111,7 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        public List<Item> ValidateProductionSetup(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, ImportedItem> importedParts, Recipe? specificRecipe = null)
+        public List<Item> ValidateProductionSetup(FactoryCatalog factoryCatalog, string partName, double quantity, Dictionary<int, ImportedItem> importedParts, Recipe? specificRecipe = null, Dictionary<string, string>? componentPartRecipeOverrides = null)
         {
             List<Item> results = new();
             int counter = 1;
@@ -143,7 +143,7 @@ namespace SatisfactoryTree.Logic
             }
 
             // Get immediate ingredients for embedded display using the specific recipe
-            List<Item> embeddedIngredients = GetImmediateIngredientsForDisplay(factoryCatalog, partName, quantity, counter, recipe);
+            List<Item> embeddedIngredients = GetImmediateIngredientsForDisplay(factoryCatalog, partName, quantity, counter, recipe, componentPartRecipeOverrides);
 
             // Add the goal item with embedded ingredients (like original method)
             Item goalItem = new()
@@ -161,7 +161,7 @@ namespace SatisfactoryTree.Logic
             results.Add(goalItem);
 
             // Validate immediate ingredients and track missing ones for badges
-            List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports, recipe);
+            List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports, recipe, componentPartRecipeOverrides);
             
             // Track missing ingredients on the goal item for badge display
             foreach (var ingredient in missingIngredients)
@@ -178,7 +178,7 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        private List<Item> ValidateImmediateIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<string, double> availableImports, Recipe? specificRecipe = null)
+        private List<Item> ValidateImmediateIngredients(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Dictionary<string, double> availableImports, Recipe? specificRecipe = null, Dictionary<string, string>? componentPartRecipeOverrides = null)
         {
             List<Item> results = new();
             counter++;
@@ -223,7 +223,20 @@ namespace SatisfactoryTree.Logic
                         }
 
                         // Create ingredient item with validation info
-                        Recipe? ingredientRecipe = FindRecipe(factoryCatalog, ingredient.part);
+                        // Check if there's a recipe override for this ingredient
+                        Recipe? ingredientRecipe = null;
+                        if (componentPartRecipeOverrides != null && componentPartRecipeOverrides.ContainsKey(ingredient.part))
+                        {
+                            string overrideRecipeName = componentPartRecipeOverrides[ingredient.part];
+                            ingredientRecipe = factoryCatalog.Recipes.FirstOrDefault(r => r.Name == overrideRecipeName);
+                        }
+                        
+                        // If no override found, use default recipe
+                        if (ingredientRecipe == null)
+                        {
+                            ingredientRecipe = FindRecipe(factoryCatalog, ingredient.part);
+                        }
+                        
                         string buildingName = ingredientRecipe?.Building.Name ?? string.Empty;
                         double buildingRatio = 0;
                         
@@ -257,7 +270,12 @@ namespace SatisfactoryTree.Logic
             return results;
         }
 
-        private List<Item> GetImmediateIngredientsForDisplay(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Recipe? specificRecipe = null)
+        public List<Item> GetImmediateIngredientsForDisplayPublic(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Recipe? specificRecipe = null, Dictionary<string, string>? componentPartRecipeOverrides = null)
+        {
+            return GetImmediateIngredientsForDisplay(factoryCatalog, partName, quantity, counter, specificRecipe, componentPartRecipeOverrides);
+        }
+
+        private List<Item> GetImmediateIngredientsForDisplay(FactoryCatalog factoryCatalog, string partName, double quantity, int counter, Recipe? specificRecipe = null, Dictionary<string, string>? componentPartRecipeOverrides = null)
         {
             List<Item> results = new();
             
@@ -281,6 +299,20 @@ namespace SatisfactoryTree.Logic
                 {
                     double needed = ingredient.perMin * ratio;
                     
+                    // Check if there's a recipe override for this ingredient
+                    Recipe? ingredientRecipe = null;
+                    if (componentPartRecipeOverrides != null && componentPartRecipeOverrides.ContainsKey(ingredient.part))
+                    {
+                        string overrideRecipeName = componentPartRecipeOverrides[ingredient.part];
+                        ingredientRecipe = factoryCatalog.Recipes.FirstOrDefault(r => r.Name == overrideRecipeName);
+                    }
+                    
+                    // If no override found, use default recipe
+                    if (ingredientRecipe == null)
+                    {
+                        ingredientRecipe = FindRecipe(factoryCatalog, ingredient.part);
+                    }
+                    
                     Item ingredientItem = new()
                     {
                         Name = ingredient.part,
@@ -289,7 +321,8 @@ namespace SatisfactoryTree.Logic
                         Building = string.Empty, // Not needed for embedded display
                         BuildingQuantity = 0,
                         BuildingPowerUsage = 0,
-                        Counter = counter + 1
+                        Counter = counter + 1,
+                        Recipe = ingredientRecipe // Store the recipe so it shows in UI
                     };
 
                     results.Add(ingredientItem);
