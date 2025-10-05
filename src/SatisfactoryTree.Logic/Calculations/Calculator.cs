@@ -172,9 +172,8 @@ namespace SatisfactoryTree.Logic
                 }
             }
             
-            // Add ALL ingredient items (not just those with unmet needs) as component parts
-            // These represent the ingredients that need to be produced locally
-            results.AddRange(missingIngredients);
+            // Don't add ingredients as component parts - they should only appear if they're explicitly added as exported parts
+            // The ingredients are tracked in goalItem.MissingIngredients for badge display
 
             return results;
         }
