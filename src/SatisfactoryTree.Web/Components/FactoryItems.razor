@@ -389,6 +389,14 @@
 		// Return component parts that are NOT raw resources
 		return Factory.ComponentParts.Where(item => !IsRawResource(item)).ToList();
 	}
+
+	private double GetTotalPowerConsumption()
+	{
+		if (Factory?.ComponentParts == null)
+			return 0;
+
+		return Factory.ComponentParts.Sum(item => item.BuildingPowerUsage);
+	}
 }
 
 @if (Factory != null)
@@ -607,20 +615,29 @@
 			}
 		</ul>
 
-		<p><b>Raw resources:</b></p>
-		@if (GetRawResourceItems().Any())
+		<p><b>Required resources:</b></p>
+		@if (GetRawResourceItems().Any() || GetTotalPowerConsumption() > 0)
 		{
-			@foreach (Item item in GetRawResourceItems())
+			@if (GetRawResourceItems().Any())
 			{
-				<span class="badge badge-blue">
-					<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" />
-					<span>@GetPartDisplayName(item.Name) @Math.Round(item.Quantity, 1) per/min</span>
+				@foreach (Item item in GetRawResourceItems())
+				{
+					<span class="badge badge-blue">
+						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" />
+						<span>@GetPartDisplayName(item.Name) @Math.Round(item.Quantity, 1) per/min</span>
+					</span>
+				}
+			}
+			@if (GetTotalPowerConsumption() > 0)
+			{
+				<span class="badge badge-grey">
+					<i class="fas fa-bolt power-icon" title="Total Power Usage"></i> @Math.Round(GetTotalPowerConsumption(), 1) MW total
 				</span>
 			}
 		}
 		else
 		{
-			<span class="text-muted">No raw resources needed.</span>
+			<span class="text-muted">No resources needed.</span>
 		}
 	</div>
 }
