@@ -214,6 +214,14 @@
 			// Remove the component part from the factory's component parts list
 			Factory.ComponentParts.Remove(componentItem);
 			
+			// If this component was auto-added (in ExportedParts but not in UserDefinedExports),
+			// remove it from ExportedParts as well so it shows as missing again
+			if (Factory.ExportedParts.Any(e => e.Item.Name == componentItem.Name) && 
+			    !Factory.UserDefinedExports.Contains(componentItem.Name))
+			{
+				PlanService.RemoveExportedPartFromFactory(Factory.Id, componentItem.Name);
+			}
+			
 			// Note: We intentionally do NOT call RefreshPlanCalculations() here
 			// because it would recalculate and add the component back.
 			// The removal persists until the next calculation is triggered
