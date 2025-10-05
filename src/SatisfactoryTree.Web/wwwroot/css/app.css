@@ -188,7 +188,7 @@ code {
 
 .add-exported-part-field {
     flex: 1 !important;
-    min-width: 0 !important; /* Allow flex items to shrink below content size for proper text truncation */
+    min-width: 0 !important; /* Allow flex items to shrink below their intrinsic content size */
 }
 
 .add-exported-part-field label {
