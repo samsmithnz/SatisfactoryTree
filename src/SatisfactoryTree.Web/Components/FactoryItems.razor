@@ -381,7 +381,18 @@
 			rawResources.AddRange(autoAddedRawResources);
 		}
 
-		return rawResources;
+		// Aggregate raw resources by name, summing quantities
+		// This prevents duplicates when the same raw resource appears in multiple places
+		var aggregatedResources = rawResources
+			.GroupBy(r => r.Name)
+			.Select(g => new Item 
+			{ 
+				Name = g.Key, 
+				Quantity = g.Sum(r => r.Quantity)
+			})
+			.ToList();
+
+		return aggregatedResources;
 	}
 
 	private List<Item> GetNonRawResourceComponents()
