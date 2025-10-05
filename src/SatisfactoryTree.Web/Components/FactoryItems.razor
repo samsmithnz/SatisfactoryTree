@@ -319,6 +319,31 @@
 		}
 	}
 
+	private async Task AddSingleIngredientByName(string ingredientName, double quantity, string? recipeName)
+	{
+		if (Factory == null || string.IsNullOrEmpty(ingredientName)) return;
+		try
+		{
+			// Create a temporary item with the missing ingredient to use with AddMissingIngredientsForItem
+			Item tempItem = new()
+			{
+				Name = ingredientName,
+				Quantity = quantity,
+				Recipe = recipeName != null && FactoryCatalog?.Recipes != null 
+					? FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeName) 
+					: null
+			};
+			tempItem.MissingIngredients.Add(ingredientName);
+			
+			PlanService.AddMissingIngredientsForItem(Factory.Id, tempItem);
+			await InvokeAsync(StateHasChanged);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error adding single ingredient by name: {ex.Message}");
+		}
+	}
+
 	private bool IsRawResource(Item item)
 	{
 		if (item == null || FactoryCatalog?.RawResources == null)
@@ -513,20 +538,28 @@
 							{
 								@foreach (Item ingredient in item.Ingredients)
 								{
-									<span class="badge badge-blue">
-										<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
-										@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
-									</span>
-								}
-							}
-							@if (item.HasMissingIngredients)
-							{
-								@foreach (string missingIngredient in item.MissingIngredients.Where(mi => !Factory.ExportedParts.Any(e => e.Item.Name == mi)))
-								{
-									<span class="badge badge-red" title="Missing ingredient - not available as import">
-										<i class="fas fa-exclamation-triangle me-1"></i>
-										@GetPartDisplayName(missingIngredient) (Missing)
-									</span>
+									bool isMissing = item.HasMissingIngredients && item.MissingIngredients.Contains(ingredient.Name) && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name);
+									
+									@if (isMissing)
+									{
+										<span class="badge badge-red d-inline-flex align-items-center gap-2" title="Missing ingredient - not available as import">
+											<span>
+												<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
+												<i class="fas fa-exclamation-triangle me-1"></i>
+												@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min (Missing)
+											</span>
+											<button class="btn btn-sm btn-primary py-0 px-1" style="font-size: 0.75rem;" @onclick="() => AddSingleIngredientByName(ingredient.Name, ingredient.Quantity, ingredient.Recipe?.Name)">
+												<i class="fas fa-plus-circle"></i>
+											</button>
+										</span>
+									}
+									else
+									{
+										<span class="badge badge-blue">
+											<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
+											@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
+										</span>
+									}
 								}
 							}
 							<span class="badge badge-yellow">
