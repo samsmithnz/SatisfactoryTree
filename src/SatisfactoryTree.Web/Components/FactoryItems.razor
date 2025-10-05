@@ -383,6 +383,8 @@
 
 		// Aggregate raw resources by name, summing quantities
 		// This prevents duplicates when the same raw resource appears in multiple places
+		// Note: Only Name and Quantity are relevant for raw resources display,
+		// other properties (Ingredients, Building, Recipe, etc.) are not used in this context
 		var aggregatedResources = rawResources
 			.GroupBy(r => r.Name)
 			.Select(g => new Item 
