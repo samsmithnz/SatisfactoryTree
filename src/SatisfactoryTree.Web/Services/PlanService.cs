@@ -291,9 +291,9 @@ namespace SatisfactoryTree.Web.Services
                     {
                         if (ingredientNames.Contains(ingredient.Name))
                         {
-                            if (calculatedIngredientQuantities.ContainsKey(ingredient.Name))
+                            if (calculatedIngredientQuantities.TryGetValue(ingredient.Name, out double existingQuantity))
                             {
-                                calculatedIngredientQuantities[ingredient.Name] += ingredient.Quantity;
+                                calculatedIngredientQuantities[ingredient.Name] = existingQuantity + ingredient.Quantity;
                             }
                             else
                             {
