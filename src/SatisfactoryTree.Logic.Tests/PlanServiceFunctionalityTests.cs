@@ -180,7 +180,7 @@ namespace SatisfactoryTree.Logic.Tests
             planService.AddExportedPartToFactory(factory.Id, "IronPlateReinforced", 1);
             
             // Debug: Check what recipe was selected
-            var reinforcedPlateExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == "IronPlateReinforced");
+            ExportedItem? reinforcedPlateExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == "IronPlateReinforced");
             Assert.IsNotNull(reinforcedPlateExport, "Reinforced Iron Plate should be in exported parts");
             
             if (reinforcedPlateExport.Item.Recipe != null)
@@ -189,7 +189,7 @@ namespace SatisfactoryTree.Logic.Tests
                 System.Console.WriteLine($"Recipe ID: {reinforcedPlateExport.Item.Recipe.Name}");
                 System.Console.WriteLine($"IsAlternate: {reinforcedPlateExport.Item.Recipe.IsAlternate}");
                 System.Console.WriteLine($"Ingredients:");
-                foreach (var ing in reinforcedPlateExport.Item.Recipe.Ingredients)
+                foreach (Ingredient ing in reinforcedPlateExport.Item.Recipe.Ingredients)
                 {
                     System.Console.WriteLine($"  {ing.part}: {ing.amount} ({ing.perMin}/min)");
                 }
@@ -214,7 +214,7 @@ namespace SatisfactoryTree.Logic.Tests
             while (iteration < maxIterations && factory.ComponentParts.Any(cp => cp.HasMissingIngredients))
             {
                 iteration++;
-                var componentWithMissing = factory.ComponentParts.FirstOrDefault(cp => cp.HasMissingIngredients);
+                Item? componentWithMissing = factory.ComponentParts.FirstOrDefault(cp => cp.HasMissingIngredients);
                 if (componentWithMissing == null) break;
                 
                 System.Console.WriteLine($"Iteration {iteration}: Adding missing ingredients for {componentWithMissing.Name}");
@@ -224,14 +224,14 @@ namespace SatisfactoryTree.Logic.Tests
                 
                 // Show what was added
                 System.Console.WriteLine($"  Exported parts now:");
-                foreach (var ep in factory.ExportedParts)
+                foreach (ExportedItem ep in factory.ExportedParts)
                 {
                     System.Console.WriteLine($"    {ep.Item.Name}: {ep.Item.Quantity}");
                 }
             }
             
             // Assert - Check if OreIron was added and verify the quantity
-            var oreIronExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == "OreIron");
+            ExportedItem? oreIronExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == "OreIron");
             
             if (oreIronExport != null)
             {
@@ -248,7 +248,7 @@ namespace SatisfactoryTree.Logic.Tests
             else
             {
                 // If OreIron wasn't added, check what's still missing
-                var stillMissing = factory.ComponentParts
+                List<string> stillMissing = factory.ComponentParts
                     .Where(cp => cp.HasMissingIngredients)
                     .SelectMany(cp => cp.MissingIngredients)
                     .Distinct()

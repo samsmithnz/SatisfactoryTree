@@ -1,5 +1,31 @@
 # Copilot Instructions for SatisfactoryTree
 
+## Coding Standards
+
+### Variable Declarations
+
+**Always use explicit type declarations instead of `var`.**
+
+✅ **Good** - Explicit type:
+```csharp
+ExportedItem? item = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == "IronPlate");
+List<string> ingredients = new List<string>();
+Dictionary<string, double> quantities = new Dictionary<string, double>();
+```
+
+❌ **Bad** - Using var:
+```csharp
+var item = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == "IronPlate");
+var ingredients = new List<string>();
+var quantities = new Dictionary<string, double>();
+```
+
+### Rationale
+
+- Explicit types improve code readability and make the intent clearer
+- Helps prevent type confusion, especially with nullable types
+- Makes code reviews easier by showing exactly what type is being used
+
 ## Dependency Injection and Interface Usage
 
 ### When to Use Interfaces
