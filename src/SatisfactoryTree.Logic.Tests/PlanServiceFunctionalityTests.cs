@@ -196,10 +196,14 @@ namespace SatisfactoryTree.Logic.Tests
             }
             
             // Skip this test if the wrong recipe was selected
+            // Note: The game data contains duplicate recipe IDs and the default recipe finder
+            // may select an alternate recipe (e.g., "Alternate: Adhered Iron Plate" which uses Rubber).
+            // This is a known limitation - the test validates the fix works when the expected recipe is used.
             if (reinforcedPlateExport.Item.Recipe == null || 
                 !reinforcedPlateExport.Item.Recipe.Ingredients.Any(i => i.part == "IronScrew"))
             {
-                Assert.Inconclusive("Test requires the default Reinforced Iron Plate recipe with IronScrew, but a different recipe was selected");
+                Assert.Inconclusive("Test requires the default Reinforced Iron Plate recipe with IronScrew, but a different recipe was selected. " +
+                    "This is a known limitation due to duplicate recipe IDs in game data.");
                 return;
             }
 

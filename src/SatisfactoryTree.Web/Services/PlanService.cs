@@ -281,7 +281,7 @@ namespace SatisfactoryTree.Web.Services
             }
 
             // Calculate the actual needed quantities for each ingredient by examining component parts
-            Dictionary<string, double> ingredientQuantities = new();
+            Dictionary<string, double> calculatedIngredientQuantities = new();
             
             foreach (Item componentPart in factory.ComponentParts)
             {
@@ -291,13 +291,13 @@ namespace SatisfactoryTree.Web.Services
                     {
                         if (ingredientNames.Contains(ingredient.Name))
                         {
-                            if (ingredientQuantities.ContainsKey(ingredient.Name))
+                            if (calculatedIngredientQuantities.ContainsKey(ingredient.Name))
                             {
-                                ingredientQuantities[ingredient.Name] += ingredient.Quantity;
+                                calculatedIngredientQuantities[ingredient.Name] += ingredient.Quantity;
                             }
                             else
                             {
-                                ingredientQuantities[ingredient.Name] = ingredient.Quantity;
+                                calculatedIngredientQuantities[ingredient.Name] = ingredient.Quantity;
                             }
                         }
                     }
@@ -312,8 +312,8 @@ namespace SatisfactoryTree.Web.Services
                 if (recipe != null && recipe.Products != null && recipe.Products.Any())
                 {
                     // Use the calculated quantity if available, otherwise fall back to default production rate
-                    double quantity = ingredientQuantities.ContainsKey(ingredientName) 
-                        ? ingredientQuantities[ingredientName] 
+                    double quantity = calculatedIngredientQuantities.ContainsKey(ingredientName) 
+                        ? calculatedIngredientQuantities[ingredientName] 
                         : recipe.Products[0].perMin;
                     
                     // Check if this ingredient is already being exported
