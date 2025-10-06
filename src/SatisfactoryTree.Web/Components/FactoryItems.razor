@@ -335,10 +335,9 @@
 		if (Factory == null || string.IsNullOrEmpty(ingredientName)) return;
 		try
 		{
-			// Add the ingredient with the actual quantity needed (not the recipe default)
-			PlanService.AddExportedPartToFactory(Factory.Id, ingredientName, quantity, recipeName);
+			// Use aggregation logic inside plan service (ignoring provided quantity; service will compute total across all component parts)
+			PlanService.AddSingleMissingIngredientToFactory(Factory.Id, ingredientName);
 			
-			// Remove from UserDefinedExports since this is auto-added
 			Factory.UserDefinedExports.Remove(ingredientName);
 			
 			await InvokeAsync(StateHasChanged);
@@ -670,4 +669,4 @@
 			<span class="text-muted">No resources needed.</span>
 		}
 	</div>
-}
+}}
