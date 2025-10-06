@@ -287,5 +287,87 @@ namespace SatisfactoryTree.Tests
 
             return factoryCatalog.RawResources.ContainsKey(item.Name);
         }
+
+        [TestMethod]
+        public void AddMissingIngredientsForReinforcedIronPlate_ShouldProduceTwelveIronOre()
+        {
+            // Arrange
+            if (planService == null || planService.Plan == null || factoryCatalog == null)
+            {
+                Assert.Fail("PlanService, Plan, or FactoryCatalog is null");
+            }
+
+            Factory factory = new(1, "Test Factory");
+            factory.ExportedParts.Add(new ExportedItem(new Item { Name = "IronPlateReinforced", Quantity = 1 }));
+            factory.UserDefinedExports.Add("IronPlateReinforced");
+            planService.Plan.Factories.Add(factory);
+
+            // Calculate component parts
+            planService.RefreshPlanCalculations();
+
+            // Act - Add missing ingredients step by step
+            var missingIngredients = planService.GetMissingIngredients(factory.Id);
+            System.Console.WriteLine("Initial missing ingredients: " + string.Join(", ", missingIngredients));
+            
+            // Add IronPlate and IronScrew
+            while (missingIngredients.Contains("IronPlate") || missingIngredients.Contains("IronScrew"))
+            {
+                var componentWithMissing = factory.ComponentParts.FirstOrDefault(cp => cp.HasMissingIngredients);
+                if (componentWithMissing != null)
+                {
+                    System.Console.WriteLine($"Adding missing ingredients for: {componentWithMissing.Name}");
+                    planService.AddMissingIngredientsForItem(factory.Id, componentWithMissing);
+                }
+                missingIngredients = planService.GetMissingIngredients(factory.Id);
+                System.Console.WriteLine("Missing ingredients after add: " + string.Join(", ", missingIngredients));
+            }
+            
+            // Now add ingredients for IronPlate and IronScrew, which should add IronIngot and IronRod
+            while (missingIngredients.Contains("IronIngot") || missingIngredients.Contains("IronRod"))
+            {
+                var componentWithMissing = factory.ComponentParts.FirstOrDefault(cp => cp.HasMissingIngredients);
+                if (componentWithMissing != null)
+                {
+                    System.Console.WriteLine($"Adding missing ingredients for: {componentWithMissing.Name}");
+                    planService.AddMissingIngredientsForItem(factory.Id, componentWithMissing);
+                }
+                missingIngredients = planService.GetMissingIngredients(factory.Id);
+                System.Console.WriteLine("Missing ingredients after add: " + string.Join(", ", missingIngredients));
+            }
+            
+            // Assert - Check exported parts
+            System.Console.WriteLine("\nAll exported parts:");
+            foreach (var exported in factory.ExportedParts)
+            {
+                System.Console.WriteLine($"  {exported.Item.Name}: {exported.Item.Quantity}");
+            }
+            
+            // The issue is: when we add missing ingredients for iron ingots, 
+            // it should need 12 iron ore total (9 from IronPlate + 3 from IronRod),
+            // but the problem is we're adding them separately and they might be doubling
+            
+            // For 1 Reinforced Iron Plate:
+            //   - Needs 6 Iron Plates -> needs 9 Iron Ingots -> needs 9 Iron Ore
+            //   - Needs 12 Screws -> 3 Iron Rods -> needs 3 Iron Ingots -> needs 3 Iron Ore
+            //   - Total: 12 iron ore
+            
+            var oreIronExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == "OreIron");
+            if (oreIronExport != null)
+            {
+                System.Console.WriteLine($"\nOreIron quantity: {oreIronExport.Item.Quantity}");
+                Assert.AreEqual(12.0, oreIronExport.Item.Quantity, 0.01, 
+                    $"OreIron quantity should be 12 (9 for plates + 3 for rods), but was {oreIronExport.Item.Quantity}");
+            }
+            else
+            {
+                // Check if OreIron needs to be added
+                missingIngredients = planService.GetMissingIngredients(factory.Id);
+                System.Console.WriteLine($"\nOreIron not in exported parts. Missing ingredients: {string.Join(", ", missingIngredients)}");
+                if (missingIngredients.Contains("OreIron"))
+                {
+                    Assert.Fail("OreIron is still in missing ingredients - test setup incomplete");
+                }
+            }
+        }
     }
 }
