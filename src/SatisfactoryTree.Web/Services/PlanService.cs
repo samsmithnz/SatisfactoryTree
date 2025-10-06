@@ -280,27 +280,53 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add ingredients as exported parts with default recipe quantities (sums quantities if already exists)
+            // Calculate the actual needed quantities for each ingredient by examining component parts
+            Dictionary<string, double> calculatedIngredientQuantities = new();
+            
+            foreach (Item componentPart in factory.ComponentParts)
+            {
+                if (componentPart.Ingredients != null)
+                {
+                    foreach (Item ingredient in componentPart.Ingredients)
+                    {
+                        if (ingredientNames.Contains(ingredient.Name))
+                        {
+                            if (calculatedIngredientQuantities.TryGetValue(ingredient.Name, out double existingQuantity))
+                            {
+                                calculatedIngredientQuantities[ingredient.Name] = existingQuantity + ingredient.Quantity;
+                            }
+                            else
+                            {
+                                calculatedIngredientQuantities[ingredient.Name] = ingredient.Quantity;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Add ingredients as exported parts with calculated quantities (sums quantities if already exists)
             foreach (string ingredientName in ingredientNames)
             {
                 // Find the default recipe for this ingredient
                 Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
                 if (recipe != null && recipe.Products != null && recipe.Products.Any())
                 {
-                    // Use the recipe's default production rate
-                    double defaultQuantity = recipe.Products[0].perMin;
+                    // Use the calculated quantity if available, otherwise fall back to default production rate
+                    double quantity = calculatedIngredientQuantities.ContainsKey(ingredientName) 
+                        ? calculatedIngredientQuantities[ingredientName] 
+                        : recipe.Products[0].perMin;
                     
                     // Check if this ingredient is already being exported
                     ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
                     if (existingExport == null)
                     {
                         // Add as new exported part (but don't track as user-defined) with recipe
-                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = defaultQuantity, Recipe = recipe }));
+                        factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = quantity, Recipe = recipe }));
                     }
                     else
                     {
                         // Sum the quantities together instead of skipping
-                        existingExport.Item.Quantity += defaultQuantity;
+                        existingExport.Item.Quantity += quantity;
                     }
                 }
             }
