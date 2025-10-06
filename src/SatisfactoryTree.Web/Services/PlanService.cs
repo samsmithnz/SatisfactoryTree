@@ -1,4 +1,5 @@
 using SatisfactoryTree.Logic.Models;
+using SatisfactoryTree.Logic; // For Calculator
 
 namespace SatisfactoryTree.Web.Services
 {
@@ -12,7 +13,7 @@ namespace SatisfactoryTree.Web.Services
 
         public Plan? Plan
         {
-            get => _plan;
+            get { return _plan; }
             set
             {
                 _plan = value;
@@ -22,30 +23,18 @@ namespace SatisfactoryTree.Web.Services
 
         public FactoryCatalog? FactoryCatalog
         {
-            get
-            {
-                return _factoryCatalog;
-            }
-            set
-            {
-                _factoryCatalog = value;
-            }
+            get { return _factoryCatalog; }
+            set { _factoryCatalog = value; }
         }
 
         public bool HasPlan
         {
-            get
-            {
-                return _plan != null && _plan.Factories.Any();
-            }
+            get { return _plan != null && _plan.Factories.Any(); }
         }
 
         public int? LastAddedFactoryId
         {
-            get
-            {
-                return _lastAddedFactoryId;
-            }
+            get { return _lastAddedFactoryId; }
         }
 
         public void ClearLastAddedFactory()
@@ -60,7 +49,6 @@ namespace SatisfactoryTree.Web.Services
                 _plan = new Plan();
             }
 
-            // Find the next available ID
             int nextId;
             if (_plan.Factories.Any())
             {
@@ -71,14 +59,12 @@ namespace SatisfactoryTree.Web.Services
                 nextId = 1;
             }
 
-            // Create a new factory with the default name pattern
             string factoryName = $"Factory {nextId}";
-            Factory newFactory = new(nextId, factoryName);
+            Factory newFactory = new Factory(nextId, factoryName);
 
             _plan.Factories.Add(newFactory);
-            _lastAddedFactoryId = newFactory.Id; // mark for scrolling
+            _lastAddedFactoryId = newFactory.Id;
 
-            // Notify listeners so the new factory renders
             PlanChanged?.Invoke();
         }
 
@@ -95,7 +81,6 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Find the specific recipe if provided, otherwise find default recipe
             Recipe? recipe = null;
             if (!string.IsNullOrEmpty(recipeName))
             {
@@ -106,24 +91,23 @@ namespace SatisfactoryTree.Web.Services
                 recipe = FindRecipe(_factoryCatalog, itemName);
             }
 
-            // Check if this exported part already exists
             ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == itemName);
             if (existingExport != null)
             {
-                // Update existing quantity and recipe
-                existingExport.Item.Quantity = quantity;
-                existingExport.Item.Recipe = recipe;
+                // User action: accumulate additional quantity requested
+                existingExport.Item.Quantity += quantity;
+                if (recipe != null)
+                {
+                    existingExport.Item.Recipe = recipe;
+                }
             }
             else
             {
-                // Add new exported part with recipe
-                factory.ExportedParts.Add(new(new Item { Name = itemName, Quantity = quantity, Recipe = recipe }));
+                factory.ExportedParts.Add(new ExportedItem(new Item { Name = itemName, Quantity = quantity, Recipe = recipe }));
             }
             
-            // Track this as a user-defined export
             factory.UserDefinedExports.Add(itemName);
 
-            // Recalculate the entire plan
             RefreshPlanCalculations();
         }
 
@@ -144,11 +128,7 @@ namespace SatisfactoryTree.Web.Services
             if (exportToRemove != null)
             {
                 factory.ExportedParts.Remove(exportToRemove);
-                
-                // Remove from user-defined exports tracking
                 factory.UserDefinedExports.Remove(itemName);
-
-                // Recalculate the entire plan
                 RefreshPlanCalculations();
             }
         }
@@ -166,11 +146,9 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add or update imported part
-            ImportedItem importedItem = new(sourceFactoryId, sourceFactoryName, new Item { Name = itemName, Quantity = quantity });
+            ImportedItem importedItem = new ImportedItem(sourceFactoryId, sourceFactoryName, new Item { Name = itemName, Quantity = quantity });
             factory.ImportedParts[sourceFactoryId] = importedItem;
 
-            // Recalculate the entire plan
             RefreshPlanCalculations();
         }
 
@@ -183,15 +161,11 @@ namespace SatisfactoryTree.Web.Services
 
             try
             {
-                // Recalculate the plan
                 _plan.UpdatePlanCalculations(_factoryCatalog);
-
-                // Notify UI that plan has changed
                 PlanChanged?.Invoke();
             }
             catch (Exception ex)
             {
-                // Log error or handle it appropriately
                 Console.WriteLine($"Error updating plan calculations: {ex.Message}");
             }
         }
@@ -209,13 +183,8 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Get all missing ingredients for this factory
-            var missingIngredients = GetMissingIngredients(factoryId);
-
-            // Add missing ingredients to factory
+            List<string> missingIngredients = GetMissingIngredients(factoryId);
             AddIngredientsToFactory(factory, missingIngredients);
-
-            // Recalculate the entire plan
             RefreshPlanCalculations();
         }
 
@@ -232,9 +201,7 @@ namespace SatisfactoryTree.Web.Services
                 return new List<string>();
             }
 
-            List<string> missingIngredients = new();
-            
-            // Collect all missing ingredients from component parts
+            List<string> missingIngredients = new List<string>();
             foreach (Item item in factory.ComponentParts)
             {
                 if (item.HasMissingIngredients)
@@ -242,8 +209,6 @@ namespace SatisfactoryTree.Web.Services
                     missingIngredients.AddRange(item.MissingIngredients);
                 }
             }
-
-            // Remove duplicates and return
             return missingIngredients.Distinct().ToList();
         }
 
@@ -260,17 +225,127 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Get missing ingredients for this specific component item
             if (!componentItem.HasMissingIngredients)
             {
                 return;
             }
 
-            // Add missing ingredients to factory
             AddIngredientsToFactory(factory, componentItem.MissingIngredients);
-
-            // Recalculate the entire plan
             RefreshPlanCalculations();
+        }
+
+        public void AddSingleMissingIngredientToFactory(int factoryId, string ingredientName)
+        {
+            if (_plan == null || _factoryCatalog == null)
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(ingredientName))
+            {
+                return;
+            }
+
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            if (factory == null)
+            {
+                return;
+            }
+
+            // Compute total needed across all component parts (immediate ingredients lists)
+            double totalNeeded = 0;
+            foreach (Item componentPart in factory.ComponentParts)
+            {
+                if (componentPart.Ingredients != null)
+                {
+                    foreach (Item ingredient in componentPart.Ingredients)
+                    {
+                        if (ingredient.Name == ingredientName)
+                        {
+                            totalNeeded += ingredient.Quantity;
+                        }
+                    }
+                }
+            }
+
+            // Fallback: if no ingredients list present, attempt default recipe rate
+            if (Math.Abs(totalNeeded) < 0.0001)
+            {
+                Recipe? recipeFallback = FindRecipe(_factoryCatalog, ingredientName);
+                if (recipeFallback != null && recipeFallback.Products != null && recipeFallback.Products.Any())
+                {
+                    totalNeeded = recipeFallback.Products[0].perMin;
+                }
+            }
+
+            if (totalNeeded <= 0)
+            {
+                return;
+            }
+
+            // Add or update exported part (auto-added — NOT user-defined) ensuring quantity is sufficient for all usages
+            ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
+            if (existingExport == null)
+            {
+                Recipe? ingredientRecipe = FindRecipe(_factoryCatalog, ingredientName);
+                factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = totalNeeded, Recipe = ingredientRecipe }));
+            }
+            else
+            {
+                // Ensure quantity covers total need (do not accumulate beyond requirement)
+                if (existingExport.Item.Quantity < totalNeeded)
+                {
+                    existingExport.Item.Quantity = totalNeeded;
+                }
+            }
+
+            // Refresh to update UI / dependent calculations
+            RefreshPlanCalculations();
+        }
+
+        public List<Item> GetRawResourceTotals(int factoryId)
+        {
+            List<Item> rawResources = new List<Item>();
+            if (_plan == null || _factoryCatalog == null)
+            {
+                return rawResources;
+            }
+            Factory? factory = _plan.Factories.FirstOrDefault(f => f.Id == factoryId);
+            if (factory == null)
+            {
+                return rawResources;
+            }
+
+            // Use full production calculation to get entire dependency graph
+            Calculator calculator = new Calculator();
+            List<Item> fullBreakdown = calculator.CalculateFactoryProduction(_factoryCatalog, factory);
+
+            if (_factoryCatalog.RawResources == null || _factoryCatalog.RawResources.Count == 0)
+            {
+                return rawResources;
+            }
+
+            Dictionary<string, Item> aggregate = new Dictionary<string, Item>();
+            foreach (Item item in fullBreakdown)
+            {
+                if (_factoryCatalog.RawResources.ContainsKey(item.Name))
+                {
+                    if (aggregate.ContainsKey(item.Name))
+                    {
+                        aggregate[item.Name].Quantity += item.Quantity;
+                    }
+                    else
+                    {
+                        aggregate[item.Name] = new Item
+                        {
+                            Name = item.Name,
+                            Quantity = item.Quantity
+                        };
+                    }
+                }
+            }
+
+            rawResources = aggregate.Values.OrderBy(r => r.Name).ToList();
+            return rawResources;
         }
 
         private void AddIngredientsToFactory(Factory factory, IEnumerable<string> ingredientNames)
@@ -280,9 +355,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Calculate the actual needed quantities for each ingredient by examining component parts
-            Dictionary<string, double> calculatedIngredientQuantities = new();
-            
+            Dictionary<string, double> calculatedIngredientQuantities = new Dictionary<string, double>();
             foreach (Item componentPart in factory.ComponentParts)
             {
                 if (componentPart.Ingredients != null)
@@ -304,29 +377,26 @@ namespace SatisfactoryTree.Web.Services
                 }
             }
 
-            // Add ingredients as exported parts with calculated quantities (sums quantities if already exists)
-            foreach (string ingredientName in ingredientNames)
+            IEnumerable<string> distinctIngredientNames = ingredientNames.Distinct();
+            foreach (string ingredientName in distinctIngredientNames)
             {
-                // Find the default recipe for this ingredient
                 Recipe? recipe = FindRecipe(_factoryCatalog, ingredientName);
                 if (recipe != null && recipe.Products != null && recipe.Products.Any())
                 {
-                    // Use the calculated quantity if available, otherwise fall back to default production rate
-                    double quantity = calculatedIngredientQuantities.ContainsKey(ingredientName) 
-                        ? calculatedIngredientQuantities[ingredientName] 
-                        : recipe.Products[0].perMin;
-                    
-                    // Check if this ingredient is already being exported
+                    double quantity = calculatedIngredientQuantities.ContainsKey(ingredientName) ? calculatedIngredientQuantities[ingredientName] : recipe.Products[0].perMin;
+
                     ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
                     if (existingExport == null)
                     {
-                        // Add as new exported part (but don't track as user-defined) with recipe
                         factory.ExportedParts.Add(new ExportedItem(new Item { Name = ingredientName, Quantity = quantity, Recipe = recipe }));
                     }
                     else
                     {
-                        // Sum the quantities together instead of skipping
-                        existingExport.Item.Quantity += quantity;
+                        // Set to required quantity (do not stack duplicates)
+                        if (existingExport.Item.Quantity < quantity)
+                        {
+                            existingExport.Item.Quantity = quantity;
+                        }
                     }
                 }
             }
@@ -334,20 +404,23 @@ namespace SatisfactoryTree.Web.Services
 
         private Recipe? FindRecipe(FactoryCatalog factoryCatalog, string partName)
         {
-            foreach (Recipe recipe in factoryCatalog.Recipes)
+            // Collect all matching recipes first
+            List<Recipe> candidates = factoryCatalog.Recipes
+                .Where(r => r.Products != null && r.Products.Any(p => p.part == partName))
+                .ToList();
+            if (candidates.Count == 0)
             {
-                if (recipe.Products != null)
-                {
-                    foreach (Product product in recipe.Products)
-                    {
-                        if (product.part == partName)
-                        {
-                            return recipe;
-                        }
-                    }
-                }
+                return null;
             }
-            return null;
+            // Prefer non-alternate, non-converter recipes
+            Recipe? preferred = candidates
+                .FirstOrDefault(r => r.IsAlternate == false && r.Building.Name != "converter");
+            if (preferred != null)
+            {
+                return preferred;
+            }
+            // Otherwise fall back to first candidate (data order)
+            return candidates.First();
         }
 
         public void NotifyPlanChanged()
