@@ -162,11 +162,58 @@ namespace SatisfactoryTree.Web.Services
             try
             {
                 _plan.UpdatePlanCalculations(_factoryCatalog);
+                // After validation calculation, adjust auto-added exported parts to summed required quantity
+                foreach (Factory factory in _plan.Factories)
+                {
+                    RecalculateAutoAddedExportQuantities(factory);
+                }
                 PlanChanged?.Invoke();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error updating plan calculations: {ex.Message}");
+            }
+        }
+
+        private void RecalculateAutoAddedExportQuantities(Factory factory)
+        {
+            if (factory.ComponentParts == null || factory.ComponentParts.Count == 0)
+            {
+                return;
+            }
+            // Aggregate required quantities of each ingredient across all component parts immediate ingredient lists
+            Dictionary<string, double> aggregatedNeeds = new Dictionary<string, double>();
+            foreach (Item component in factory.ComponentParts)
+            {
+                if (component.Ingredients != null)
+                {
+                    foreach (Item ingredient in component.Ingredients)
+                    {
+                        if (aggregatedNeeds.ContainsKey(ingredient.Name))
+                        {
+                            aggregatedNeeds[ingredient.Name] += ingredient.Quantity;
+                        }
+                        else
+                        {
+                            aggregatedNeeds.Add(ingredient.Name, ingredient.Quantity);
+                        }
+                    }
+                }
+            }
+            // Update only auto-added exports (not user-defined) to at least the aggregated need
+            foreach (ExportedItem exported in factory.ExportedParts)
+            {
+                if (!factory.UserDefinedExports.Contains(exported.Item.Name))
+                {
+                    if (aggregatedNeeds.ContainsKey(exported.Item.Name))
+                    {
+                        double needed = aggregatedNeeds[exported.Item.Name];
+                        if (exported.Item.Quantity < needed)
+                        {
+                            exported.Item.Quantity = needed;
+                        }
+                    }
+                }
             }
         }
 
