@@ -1,4 +1,5 @@
 ﻿using SatisfactoryTree.Logic.Models;
+using System.ComponentModel.Design;
 
 namespace SatisfactoryTree.Logic
 {
@@ -6,6 +7,47 @@ namespace SatisfactoryTree.Logic
     {
         //Using a target item, calculate the total number of items needed to produce the target item
         public Calculator() { }
+
+        public Factory2 ValidateFactory(Factory2 factory)
+        {
+            //First add up all currently produced parts
+            Dictionary<string, double> currentIngredients = new();
+            foreach (Item item in factory.Ingredients)
+            {
+                if (currentIngredients.ContainsKey(item.Name))
+                {
+                    currentIngredients[item.Name] += item.Quantity;
+                }
+                else
+                {
+                    currentIngredients.Add(item.Name, item.Quantity);
+                }
+            }
+
+            //Then loop through the dictonary and zero out ingredients that are being produced
+            foreach (Item item in factory.Ingredients)
+            {
+                foreach (Item ingredient in item.Ingredients)
+                {
+                    //if we find the ingredient, remove that quantity from the total
+                    if (currentIngredients.ContainsKey(ingredient.Name))
+                    {
+                        currentIngredients[ingredient.Name] -= item.Quantity;
+                    }
+                    else
+                    {
+                        //If we don't find the ingredient, add it.
+                        if (!item.MissingIngredients.Contains(ingredient.Name))
+                        {
+                            {
+                                item.MissingIngredients.Add(ingredient.Name);
+                            }
+                        }
+                    }
+                }
+            }
+            return factory;
+        }
 
         public List<Item> CalculateFactoryProduction(FactoryCatalog factoryCatalog, Factory factory)
         {
