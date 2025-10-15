@@ -45,12 +45,19 @@ namespace SatisfactoryTree.Logic.Tests
                 factory = calculator.ValidateFactory(factory);
 
                 // Assert
-                Assert.AreEqual("IronPlate", factory.Ingredients[0].Name);
-                Assert.AreEqual(30, factory.Ingredients[0].Quantity);
-                Assert.AreEqual(true, factory.Ingredients[0].HasMissingIngredients);
-                Assert.AreEqual(1, factory.Ingredients[0].MissingIngredients.Count);
-                Assert.AreEqual("IronIngot", factory.Ingredients[0].MissingIngredients.FirstOrDefault().Key);
-                Assert.AreEqual(45, factory.Ingredients[0].MissingIngredients.FirstOrDefault().Value);
+                Assert.IsTrue(factory.Ingredients != null); 
+                Assert.IsTrue(factory.Ingredients.Count > 0);
+                Item ingredient = factory.Ingredients[0];
+                Assert.AreEqual("IronPlate", ingredient.Name);
+                Assert.AreEqual(30, ingredient.Quantity);
+                Assert.AreEqual(true, ingredient.HasMissingIngredients);
+                Assert.AreEqual(1, ingredient.MissingIngredients.Count);
+                Assert.AreEqual("IronIngot", ingredient.MissingIngredients.FirstOrDefault().Key);
+                Assert.AreEqual(45, ingredient.MissingIngredients.FirstOrDefault().Value);
+                Assert.AreEqual("constructormk1", ingredient.Building);
+                Assert.AreEqual(1.5, ingredient.BuildingQuantity);
+                Assert.AreEqual(5.6, ingredient.BuildingPowerUsage);
+
             }
         }
 
@@ -71,13 +78,18 @@ namespace SatisfactoryTree.Logic.Tests
                 factory = calculator.ValidateFactory(factory);
 
                 // Assert
-                Assert.AreEqual("Plastic", factory.Ingredients[0].Name);
-                Assert.AreEqual(30, factory.Ingredients[0].Quantity);
-                Assert.AreEqual(true, factory.Ingredients[0].HasMissingIngredients);
-                Assert.AreEqual(1, factory.Ingredients[0].MissingIngredients.Count);
-                Assert.AreEqual("LiquidOil", factory.Ingredients[0].MissingIngredients.FirstOrDefault().Key);
-                Assert.AreEqual(45, factory.Ingredients[0].MissingIngredients.FirstOrDefault().Value);
-
+                Assert.IsTrue(factory.Ingredients != null);
+                Assert.IsTrue(factory.Ingredients.Count > 0);
+                Item ingredient = factory.Ingredients[0];
+                Assert.AreEqual("Plastic", ingredient.Name);
+                Assert.AreEqual(30, ingredient.Quantity);
+                Assert.AreEqual(true, ingredient.HasMissingIngredients);
+                Assert.AreEqual(1, ingredient.MissingIngredients.Count);
+                Assert.AreEqual("LiquidOil", ingredient.MissingIngredients.FirstOrDefault().Key);
+                Assert.AreEqual(45, ingredient.MissingIngredients.FirstOrDefault().Value);
+                Assert.AreEqual("oilrefinery", ingredient.Building);
+                Assert.AreEqual(1.5, ingredient.BuildingQuantity);
+                Assert.AreEqual(42, ingredient.BuildingPowerUsage);
             }
         }
     }

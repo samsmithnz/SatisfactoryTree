@@ -25,12 +25,13 @@ namespace SatisfactoryTree.Logic
             }
 
             //Then loop through the dictonary and zero out ingredients that are being produced
-            foreach (Item item in factory.Ingredients)
+            for (int itemIndex = 0; itemIndex < factory.Ingredients.Count; itemIndex++)
             {
+                Item item = factory.Ingredients[itemIndex];
                 double ingredientRatio = item.Quantity / item.Recipe.Products[0].perMin;
-                for (int i = 0; i < item.Ingredients.Count; i++)
+                for (int ingIndex = 0; ingIndex < item.Ingredients.Count; ingIndex++)
                 {
-                    Item ingredient = item.Ingredients[i];
+                    Item ingredient = item.Ingredients[ingIndex];
                     double ingredientAmount = item.Recipe.Ingredients.Find(ing => ing.part == ingredient.Name).perMin * ingredientRatio;
                     //item.Ingredients.Add(new()
                     //{
@@ -56,6 +57,12 @@ namespace SatisfactoryTree.Logic
                         }
                     }
                 }
+
+                //Add building details
+                item.Building = item.Recipe.Building.Name;
+                item.BuildingQuantity += ingredientRatio;
+                item.BuildingPowerUsage += GetBuildingPower(factory.FactoryCatalog, item.Recipe.Building.Name, ingredientRatio);
+
             }
             return factory;
         }
