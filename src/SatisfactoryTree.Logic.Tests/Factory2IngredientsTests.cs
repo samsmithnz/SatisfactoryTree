@@ -33,33 +33,52 @@ namespace SatisfactoryTree.Logic.Tests
         [TestMethod]
         public void Factory2IronPlatesTest()
         {
-            // Arrange
-            Factory2 factory = new(1, "Iron Plates Factory", factoryCatalog);
-            Recipe? recipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").FirstOrDefault();
-            factory.AddIngredient("IronPlate", 30, recipe);
-            Calculator calculator = new();
+            if (factoryCatalog != null)
+            {
+                // Arrange
+                Factory2 factory = new(1, "Iron Plates Factory", factoryCatalog);
+                Recipe? recipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate");
+                factory.AddIngredient("IronPlate", 30, recipe);
+                Calculator calculator = new();
 
-            // Act
-            factory = calculator.ValidateFactory(factory);
+                // Act
+                factory = calculator.ValidateFactory(factory);
 
-            // Assert
-            Assert.AreEqual("IronPlate", factory.Ingredients[0].Name);
-            Assert.AreEqual(30, factory.Ingredients[0].Quantity);
-            Assert.AreEqual(true, factory.Ingredients[0].HasMissingIngredients);
-            Assert.AreEqual("IronIngot", factory.Ingredients[0].MissingIngredients.FirstOrDefault().Key);
-            Assert.AreEqual(45, factory.Ingredients[0].MissingIngredients.FirstOrDefault().Value);
+                // Assert
+                Assert.AreEqual("IronPlate", factory.Ingredients[0].Name);
+                Assert.AreEqual(30, factory.Ingredients[0].Quantity);
+                Assert.AreEqual(true, factory.Ingredients[0].HasMissingIngredients);
+                Assert.AreEqual(1, factory.Ingredients[0].MissingIngredients.Count);
+                Assert.AreEqual("IronIngot", factory.Ingredients[0].MissingIngredients.FirstOrDefault().Key);
+                Assert.AreEqual(45, factory.Ingredients[0].MissingIngredients.FirstOrDefault().Value);
+            }
         }
 
 
 
-        //[TestMethod]
-        //public async Task Factory2PlasticTest()
-        //{
-        //    // Arrange
+        [TestMethod]
+        public void Factory2PlasticTest()
+        {
+            if (factoryCatalog != null)
+            {
+                // Arrange
+                Factory2 factory = new(1, "Plastic Factory", factoryCatalog);
+                Recipe? recipe = Lookups.GetRecipes(factoryCatalog, "Plastic").Find(r => r.Name == "Plastic");
+                factory.AddIngredient("Plastic", 30, recipe);
+                Calculator calculator = new();
 
-        //    // Act
+                // Act
+                factory = calculator.ValidateFactory(factory);
 
-        //    // Assert
-        //}
+                // Assert
+                Assert.AreEqual("Plastic", factory.Ingredients[0].Name);
+                Assert.AreEqual(30, factory.Ingredients[0].Quantity);
+                Assert.AreEqual(true, factory.Ingredients[0].HasMissingIngredients);
+                Assert.AreEqual(1, factory.Ingredients[0].MissingIngredients.Count);
+                Assert.AreEqual("LiquidOil", factory.Ingredients[0].MissingIngredients.FirstOrDefault().Key);
+                Assert.AreEqual(45, factory.Ingredients[0].MissingIngredients.FirstOrDefault().Value);
+
+            }
+        }
     }
 }
