@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Logic
         //Using a target item, calculate the total number of items needed to produce the target item
         public Calculator() { }
 
-        public Factory2 ValidateFactory(Factory2 factory)
+        public Factory2 ValidateFactoryIngredient(Factory2 factory)
         {
             //First add up all currently produced parts
             Dictionary<string, double> currentIngredients = new();

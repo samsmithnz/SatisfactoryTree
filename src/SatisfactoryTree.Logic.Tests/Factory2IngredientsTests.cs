@@ -42,7 +42,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Calculator calculator = new();
 
                 // Act
-                factory = calculator.ValidateFactory(factory);
+                factory = calculator.ValidateFactoryIngredient(factory);
 
                 // Assert
                 Assert.IsTrue(factory.Ingredients != null); 
@@ -75,7 +75,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Calculator calculator = new();
 
                 // Act
-                factory = calculator.ValidateFactory(factory);
+                factory = calculator.ValidateFactoryIngredient(factory);
 
                 // Assert
                 Assert.IsTrue(factory.Ingredients != null);
