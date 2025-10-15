@@ -1,5 +1,5 @@
-﻿using SatisfactoryTree.Logic.Models;
-using System.ComponentModel.Design;
+﻿using SatisfactoryTree.Logic.Calculations;
+using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Logic
 {
@@ -27,21 +27,32 @@ namespace SatisfactoryTree.Logic
             //Then loop through the dictonary and zero out ingredients that are being produced
             foreach (Item item in factory.Ingredients)
             {
-                foreach (Item ingredient in item.Ingredients)
+                double ingredientRatio = item.Quantity / item.Recipe.Products[0].perMin;
+                for (int i = 0; i < item.Ingredients.Count; i++)
                 {
+                    Item ingredient = item.Ingredients[i];
+                    double ingredientAmount = item.Recipe.Ingredients.Find(ing => ing.part == ingredient.Name).perMin * ingredientRatio;
+                    //item.Ingredients.Add(new()
+                    //{
+                    //    Name = ingredient.Name,
+                    //    Quantity = ingredientAmount
+                    //});
+
                     //if we find the ingredient, remove that quantity from the total
                     if (currentIngredients.ContainsKey(ingredient.Name))
                     {
-                        currentIngredients[ingredient.Name] -= item.Quantity;
+                        currentIngredients[ingredient.Name] -= ingredientAmount;
                     }
                     else
                     {
                         //If we don't find the ingredient, add it.
-                        if (!item.MissingIngredients.Contains(ingredient.Name))
+                        if (!item.MissingIngredients.ContainsKey(ingredient.Name))
                         {
-                            {
-                                item.MissingIngredients.Add(ingredient.Name);
-                            }
+                            item.MissingIngredients.Add(ingredient.Name, ingredientAmount);
+                        }
+                        else
+                        {
+                            item.MissingIngredients[ingredient.Name] += ingredientAmount;
                         }
                     }
                 }
@@ -294,7 +305,7 @@ namespace SatisfactoryTree.Logic
             {
                 if (ingredient.Quantity > 0.001)
                 {
-                    goalItem.MissingIngredients.Add(ingredient.Name);
+                    goalItem.MissingIngredients.Add(ingredient.Name, ingredient.Quantity);
                 }
             }
             return results;
@@ -368,7 +379,7 @@ namespace SatisfactoryTree.Logic
                         };
                         if (remainingNeed > 0.001)
                         {
-                            ingredientItem.MissingIngredients.Add(ingredient.part);
+                            ingredientItem.MissingIngredients.Add(ingredient.part, remainingNeed);
                         }
                         results.Add(ingredientItem);
                     }

@@ -250,7 +250,7 @@ namespace SatisfactoryTree.Logic.Tests
                 // If OreIron wasn't added, check what's still missing
                 List<string> stillMissing = factory.ComponentParts
                     .Where(cp => cp.HasMissingIngredients)
-                    .SelectMany(cp => cp.MissingIngredients)
+                    .SelectMany(cp => cp.MissingIngredients.Keys.ToList())
                     .Distinct()
                     .ToList();
                 

@@ -300,7 +300,7 @@
 
 		// Check if any missing ingredients are NOT in ExportedParts
 		// If all missing ingredients are in ExportedParts, they're being produced, so the warning can be hidden
-		return item.MissingIngredients.Any(missingIngredient =>
+		return item.MissingIngredients.Keys.ToList().Any(missingIngredient =>
 			!Factory.ExportedParts.Any(e => e.Item.Name == missingIngredient));
 	}
 
@@ -577,7 +577,7 @@
 							{
 								@foreach (Item ingredient in item.Ingredients)
 								{
-									bool isMissing = item.HasMissingIngredients && item.MissingIngredients.Contains(ingredient.Name) && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name);
+									bool isMissing = item.HasMissingIngredients && item.MissingIngredients.ContainsKey(ingredient.Name) && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name);
 									
 									@if (isMissing)
 									{

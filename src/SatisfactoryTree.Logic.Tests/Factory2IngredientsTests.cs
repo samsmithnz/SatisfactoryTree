@@ -1,4 +1,5 @@
-﻿using SatisfactoryTree.Logic.Extraction;
+﻿using SatisfactoryTree.Logic.Calculations;
+using SatisfactoryTree.Logic.Extraction;
 using SatisfactoryTree.Logic.Models;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,8 @@ namespace SatisfactoryTree.Logic.Tests
         {
             // Arrange
             Factory2 factory = new(1, "Iron Plates Factory", factoryCatalog);
-            factory.AddIngredient("IronPlate",30);
+            Recipe? recipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").FirstOrDefault();
+            factory.AddIngredient("IronPlate", 30, recipe);
             Calculator calculator = new();
 
             // Act
@@ -44,6 +46,8 @@ namespace SatisfactoryTree.Logic.Tests
             Assert.AreEqual("IronPlate", factory.Ingredients[0].Name);
             Assert.AreEqual(30, factory.Ingredients[0].Quantity);
             Assert.AreEqual(true, factory.Ingredients[0].HasMissingIngredients);
+            Assert.AreEqual("IronIngot", factory.Ingredients[0].MissingIngredients.FirstOrDefault().Key);
+            Assert.AreEqual(45, factory.Ingredients[0].MissingIngredients.FirstOrDefault().Value);
         }
 
 

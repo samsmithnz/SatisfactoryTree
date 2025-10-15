@@ -28,7 +28,7 @@ namespace SatisfactoryTree.Logic.Calculations
                 }
             }
             //order the recipes by name
-            return recipes.OrderBy(p => p.IsAlternate).ThenByDescending(p=>p.DisplayName).ToList();
+            return recipes.OrderBy(p => p.IsAlternate).ThenByDescending(p => p.DisplayName).ToList();
         }
     }
 }

@@ -1,5 +1,5 @@
-using SatisfactoryTree.Logic.Models;
 using SatisfactoryTree.Logic; // For Calculator
+using SatisfactoryTree.Logic.Models;
 
 namespace SatisfactoryTree.Web.Services
 {
@@ -253,7 +253,8 @@ namespace SatisfactoryTree.Web.Services
             {
                 if (item.HasMissingIngredients)
                 {
-                    missingIngredients.AddRange(item.MissingIngredients);
+                    foreach (KeyValuePair<string,double> missing in item.MissingIngredients)
+                    missingIngredients.AddRange(missing.Key);
                 }
             }
             return missingIngredients.Distinct().ToList();
@@ -277,7 +278,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            AddIngredientsToFactory(factory, componentItem.MissingIngredients);
+            AddIngredientsToFactory(factory, componentItem.MissingIngredients.Keys.ToList());
             RefreshPlanCalculations();
         }
 

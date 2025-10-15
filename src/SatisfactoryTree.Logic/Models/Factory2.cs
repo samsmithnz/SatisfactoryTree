@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Logic.Models
         public string Name { get; set; }
         public List<Item> Ingredients { get; set; }
         public Dictionary<int, ImportedItem> ImportedParts { get; set; }
-        private FactoryCatalog _factoryCatalog;
+        public FactoryCatalog FactoryCatalog;
 
         public Factory2(int id, string name, FactoryCatalog factoryCatalog)
         {
@@ -16,31 +16,43 @@ namespace SatisfactoryTree.Logic.Models
             Name = name;
             Ingredients = new();
             ImportedParts = new();
-            _factoryCatalog = factoryCatalog;
+            FactoryCatalog = factoryCatalog;
         }
 
-        public void AddIngredient(string name, double quantity)
+        public void AddIngredient(string name, double quantity, Recipe? recipe)
         {
             Item item = new()
             {
                 Name = name,
-                Quantity = quantity
+                Quantity = quantity,
+                Recipe = recipe
             };
 
-            List<Recipe> recipes = Lookups.GetRecipes(_factoryCatalog, name);
-            if (recipes.Count > 0 && recipes[0].Products.Count > 0)
+            //If no recipe was provided, get the default recipe for the part
+            if (recipe == null)
             {
-                double ingredientRatio = recipes[0].Products[0].amount / quantity;
-                foreach (Ingredient ingredient in recipes[0].Ingredients)
+                List<Recipe> recipes = Lookups.GetRecipes(FactoryCatalog, name);
+                recipe = recipes.FirstOrDefault();
+            }
+            if (recipe?.Products.Count > 0)
+            {
+                double ingredientRatio = recipe.Products[0].amount / quantity;
+                foreach (Ingredient ingredient in recipe.Ingredients)
                 {
                     double ingredientAmount = ingredient.perMin * ingredientRatio;
                     item.Ingredients.Add(new()
                     {
                         Name = ingredient.part,
-                        Quantity = ingredientAmount
+                        Quantity = ingredientAmount,
+                        Recipe = recipe
                     });
                 }
             }
+            else
+            {
+                throw new Exception("Recipe is null: " + name + ", " + quantity);
+            }
+            Ingredients.Add(item);
         }
     }
 }
