@@ -24,7 +24,7 @@ namespace SatisfactoryTree.Logic
                 }
             }
 
-            //Then loop through the dictonary and zero out ingredients that are being produced
+            //Then loop through the dictionary and zero out ingredients that are being produced
             for (int itemIndex = 0; itemIndex < factory.Ingredients.Count; itemIndex++)
             {
                 Item item = factory.Ingredients[itemIndex];
