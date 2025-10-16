@@ -254,7 +254,7 @@ namespace SatisfactoryTree.Web.Services
                 if (item.HasMissingIngredients)
                 {
                     foreach (KeyValuePair<string,double> missing in item.MissingIngredients)
-                    missingIngredients.AddRange(missing.Key);
+                    missingIngredients.Add(missing.Key);
                 }
             }
             return missingIngredients.Distinct().ToList();
@@ -330,7 +330,7 @@ namespace SatisfactoryTree.Web.Services
                 return;
             }
 
-            // Add or update exported part (auto-added — NOT user-defined) ensuring quantity is sufficient for all usages
+            // Add or update exported part (auto-added Â— NOT user-defined) ensuring quantity is sufficient for all usages
             ExportedItem? existingExport = factory.ExportedParts.FirstOrDefault(e => e.Item.Name == ingredientName);
             if (existingExport == null)
             {
