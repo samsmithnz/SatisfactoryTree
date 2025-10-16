@@ -253,7 +253,7 @@ namespace SatisfactoryTree.Web.Services
             {
                 if (item.HasMissingIngredients)
                 {
-                    foreach (KeyValuePair<string,double> missing in item.MissingIngredients)
+                    foreach (KeyValuePair<string, double> missing in item.MissingIngredients)
                     missingIngredients.Add(missing.Key);
                 }
             }
