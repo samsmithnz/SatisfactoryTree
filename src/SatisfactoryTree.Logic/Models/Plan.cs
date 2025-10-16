@@ -67,7 +67,7 @@ namespace SatisfactoryTree.Logic.Models
                     {
                         if (componentItem.HasMissingIngredients)
                         {
-                            foreach (KeyValuePair<string,double> missingIngredient in componentItem.MissingIngredients)
+                            foreach (KeyValuePair<string, double> missingIngredient in componentItem.MissingIngredients)
                             {
                                 neededIngredients.Add(missingIngredient.Key);
                             }
