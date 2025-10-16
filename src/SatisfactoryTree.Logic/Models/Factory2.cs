@@ -5,7 +5,7 @@ namespace SatisfactoryTree.Logic.Models
     public class Factory2
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public List<Item> Ingredients { get; set; }
         public Dictionary<int, ImportedItem> ImportedParts { get; set; }
         public FactoryCatalog FactoryCatalog;
