@@ -33,11 +33,6 @@ namespace SatisfactoryTree.Logic
                 {
                     Item ingredient = item.Ingredients[ingIndex];
                     double ingredientAmount = item.Recipe.Ingredients.Find(ing => ing.part == ingredient.Name).perMin * ingredientRatio;
-                    //item.Ingredients.Add(new()
-                    //{
-                    //    Name = ingredient.Name,
-                    //    Quantity = ingredientAmount
-                    //});
 
                     //if we find the ingredient, remove that quantity from the total
                     if (currentIngredients.ContainsKey(ingredient.Name))
