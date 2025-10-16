@@ -30,5 +30,23 @@ namespace SatisfactoryTree.Logic.Calculations
             //order the recipes by name
             return recipes.OrderBy(p => p.IsAlternate).ThenByDescending(p => p.DisplayName).ToList();
         }
+
+        public static double GetBuildingPower(FactoryCatalog factoryCatalog, string building, double quantity)
+        {
+            double buildingPower = 0;
+            foreach (KeyValuePair<string, double> item in factoryCatalog.Buildings)
+            {
+                if (building == item.Key)
+                {
+                    buildingPower = item.Value;
+                    break;
+                }
+            }
+            int wholeBuildingCount = (int)Math.Floor(quantity);
+            double fractionalBuildingCount = quantity - wholeBuildingCount;
+            double result = (buildingPower * wholeBuildingCount) + (buildingPower * Math.Pow(fractionalBuildingCount, 1.321928));
+            result = (double)Math.Round((decimal)result, 3);
+            return result;
+        }
     }
 }

@@ -5,6 +5,8 @@
         public string Name { get; set; }
         public double Quantity { get; set; }
         public List<Item> Ingredients { get; set; } = new();
+        public string ByProductName { get; set; }
+        public string ByProductQuantity { get; set; }
         public string ItemImagePath
         {
             get

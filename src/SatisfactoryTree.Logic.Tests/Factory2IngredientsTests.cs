@@ -62,8 +62,6 @@ namespace SatisfactoryTree.Logic.Tests
             }
         }
 
-
-
         [TestMethod]
         public void Factory2PlasticTest()
         {
@@ -92,6 +90,39 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("Refinery", ingredient.BuildingDisplayName);
                 Assert.AreEqual(1.5, ingredient.BuildingQuantity);
                 Assert.AreEqual(42, ingredient.BuildingPowerUsage);
+            }
+        }
+
+        [TestMethod]
+        public void Factory2HeavyModularFrameTest()
+        {
+            if (factoryCatalog != null)
+            {
+                // Arrange
+                Factory2 factory = new(1, "Heavy Modular Frame Factory", factoryCatalog);
+                Recipe? recipe = Lookups.GetRecipes(factoryCatalog, "ModularFrameHeavy").Find(r => r.Name == "ModularFrameHeavy");
+                factory.AddIngredient("ModularFrameHeavy", 1, recipe);
+                Calculator calculator = new();
+
+                // Act
+                factory = calculator.ValidateFactoryIngredient(factory);
+
+                // Assert
+                Assert.IsTrue(factory.Ingredients != null);
+                Assert.IsTrue(factory.Ingredients.Count > 0);
+                Item ingredient = factory.Ingredients[0];
+                Assert.AreEqual("ModularFrameHeavy", ingredient.Name);
+                Assert.AreEqual(1, ingredient.Quantity);
+                Assert.AreEqual(true, ingredient.HasMissingIngredients);
+                Assert.AreEqual(4, ingredient.MissingIngredients.Count);
+                Assert.AreEqual(5, ingredient.MissingIngredients["ModularFrame"]);
+                Assert.AreEqual(20, ingredient.MissingIngredients["SteelPipe"]);
+                Assert.AreEqual(5, ingredient.MissingIngredients["SteelPlateReinforced"]);
+                Assert.AreEqual(120, ingredient.MissingIngredients["IronScrew"]);
+                Assert.AreEqual("manufacturermk1", ingredient.Building);
+                Assert.AreEqual("Manufacturer", ingredient.BuildingDisplayName);
+                Assert.AreEqual(0.5, ingredient.BuildingQuantity);
+                Assert.AreEqual(22, ingredient.BuildingPowerUsage);
             }
         }
     }

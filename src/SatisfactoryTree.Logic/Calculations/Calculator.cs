@@ -52,97 +52,11 @@ namespace SatisfactoryTree.Logic
                         }
                     }
                 }
-
-                //Add building details
-                item.Building = item.Recipe.Building.Name;
-                item.BuildingDisplayName = GetBuildingName(item.Recipe.Building.Name);
-                item.BuildingImagePath = GetBuildingImagePath(item.Recipe.Building.Name);
-                item.BuildingQuantity += ingredientRatio;
-                item.BuildingPowerUsage += GetBuildingPower(factory.FactoryCatalog, item.Recipe.Building.Name, ingredientRatio);
-
             }
             return factory;
         }
 
-        public string GetBuildingImagePath(string buildingName)
-        {
-            // Handle building name mappings to match image files
-            string imageName = buildingName switch
-            {
-                "smeltermk1" => "SmelterMk1_256.png",
-                "foundrymk1" => "Foundry_256.png",
-                "constructormk1" => "ConstructorMk1_256.png",
-                "assemblermk1" => "AssemblerMk1_256.png",
-                "manufacturermk1" => "Manufacturer_256.png",
-                "refinery" or "oilrefinery" => "OilRefinery_256.png",
-                "packager" => "Packager_256.png",
-                "blender" => "Blender_256.png",
-                "hadronCollider" => "ParticleAccelerator_256.png",
-                "generatorcoal" => "CoalGenerator_256.png",
-                "generatorfuel" => "FuelGenerator_256.png",
-                "generatornuclear" => "NuclearPowerplant_256.png",
-                "generatorbiomass" => "BiomassBurner_256.png",
-                "generatorgeothermal" => "GeothermalPowerGenerator_256.png",
-                "minermk1" => "MinerMk1_256.png",
-                "minermk2" => "MinerMk2_256.png",
-                "minermk3" => "MinerMk3_256.png",
-                "oilpump" => "OilExtractor_256.png",
-                "waterpump" => "WaterExtractor_256.png",
-                "frackingextractor" => "ResourceWellExtractor_256.png",
-                "frackingsmasher" => "ResourceWellPressurizer_256.png",
-                "resourcesink" => "ResourceSink_256.png",
-                _ => $"{buildingName}_256.png" // Default: use building name as-is
-            };
-
-            return $"images/buildings/{imageName}";
-        }
-
-        public string GetBuildingName(string buildingName)
-        {
-            string name = buildingName switch
-            {
-                "smeltermk1" => "Smelter",
-                "foundrymk1" => "Foundry",
-                "constructormk1" => "Constructor",
-                "assemblermk1" => "Assembler",
-                "manufacturermk1" => "Manufacturer",
-                "refinery" or "oilrefinery" => "Refinery",
-                "packager" => "Packager",
-                "blender" => "Blender",
-                "hadronCollider" => "Particle Accelerator",
-                "generatorcoal" => "Coal Generator",
-                "generatorfuel" => "Fuel Generator",
-                "generatornuclear" => "Nuclear Power Plant",
-                "generatorbiomass" => "Biomass Burner",
-                "generatorgeothermal" => "Geothermal Power Generator",
-                "minermk1" => "Miner Mk1",
-                "minermk2" => "Miner Mk2",
-                "minermk3" => "Miner Mk3",
-                "oilpump" => "Oil Extractor",
-                "waterpump" => "Water Extractor",
-                "frackingextractor" => "Resource Well Extractor",
-                "frackingsmasher" => "Resource Well Pressurizer",
-                "resourcesink" => "Resource Sink",
-                _ => $"{buildingName}" // Default: use building name as-is
-            };
-            return name;
-        }
-
-        public bool HasBuildingImage(string buildingName)
-        {
-            // Check if we have a specific image mapping for this building
-            return buildingName switch
-            {
-                "smeltermk1" or "foundrymk1" or "constructormk1" or "assemblermk1" or "manufacturermk1" or
-                "oilrefinery" or "refinery" or "packager" or "blender" or "hadronCollider" or
-                "generatorcoal" or "generatorfuel" or "generatornuclear" or
-                "generatorbiomass" or "generatorgeothermal" or
-                "minermk1" or "minermk2" or "minermk3" or
-                "oilpump" or "waterpump" or "frackingextractor" or
-                "frackingsmasher" or "resourcesink" => true,
-                _ => false
-            };
-        }
+      
 
         public List<Item> CalculateFactoryProduction(FactoryCatalog factoryCatalog, Factory factory)
         {
@@ -193,7 +107,7 @@ namespace SatisfactoryTree.Logic
             root.Quantity += quantity;
             double rootRatio = quantity / rootRecipe.Products[0].perMin;
             root.BuildingQuantity += rootRatio;
-            root.BuildingPowerUsage += GetBuildingPower(factoryCatalog, root.Building, rootRatio);
+            root.BuildingPowerUsage += Lookups.GetBuildingPower(factoryCatalog, root.Building, rootRatio);
             BuildDependencies(factoryCatalog, partName, quantity, items, adjacency);
             Dictionary<string, int> distanceToRaw = new Dictionary<string, int>();
             foreach (KeyValuePair<string, Item> kvp in items)
@@ -273,7 +187,7 @@ namespace SatisfactoryTree.Logic
                     {
                         double buildingRatio = needed / prod.perMin;
                         childItem.BuildingQuantity += buildingRatio;
-                        childItem.BuildingPowerUsage += GetBuildingPower(factoryCatalog, childItem.Building, buildingRatio);
+                        childItem.BuildingPowerUsage += Lookups.GetBuildingPower(factoryCatalog, childItem.Building, buildingRatio);
                     }
                 }
                 if (!adjacency.ContainsKey(partName))
@@ -379,7 +293,7 @@ namespace SatisfactoryTree.Logic
                 Ingredients = embeddedIngredients,
                 Building = recipe.Building.Name,
                 BuildingQuantity = buildingRatio,
-                BuildingPowerUsage = GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
+                BuildingPowerUsage = Lookups.GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
                 Counter = counter,
                 Recipe = recipe
             };
@@ -457,7 +371,7 @@ namespace SatisfactoryTree.Logic
                             Ingredients = new List<Item>(),
                             Building = buildingName,
                             BuildingQuantity = buildingRatio,
-                            BuildingPowerUsage = GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
+                            BuildingPowerUsage = Lookups.GetBuildingPower(factoryCatalog, buildingName, buildingRatio),
                             Counter = counter,
                             Recipe = ingredientRecipe
                         };
@@ -520,24 +434,6 @@ namespace SatisfactoryTree.Logic
                 }
             }
             return results;
-        }
-
-        private double GetBuildingPower(FactoryCatalog factoryCatalog, string building, double quantity)
-        {
-            double buildingPower = 0;
-            foreach (KeyValuePair<string, double> item in factoryCatalog.Buildings)
-            {
-                if (building == item.Key)
-                {
-                    buildingPower = item.Value;
-                    break;
-                }
-            }
-            int wholeBuildingCount = (int)Math.Floor(quantity);
-            double fractionalBuildingCount = quantity - wholeBuildingCount;
-            double result = (buildingPower * wholeBuildingCount) + (buildingPower * Math.Pow(fractionalBuildingCount, 1.321928));
-            result = (double)Math.Round((decimal)result, 3);
-            return result;
         }
 
         private Recipe? FindRecipe(FactoryCatalog finalData, string partName)
