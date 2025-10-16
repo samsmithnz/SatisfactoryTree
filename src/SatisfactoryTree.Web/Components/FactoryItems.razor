@@ -1,8 +1,6 @@
 ﻿@using SatisfactoryTree.Logic.Models
 @using SatisfactoryTree.Web.Services
-@using SatisfactoryTree.Logic.Abstractions
 @using SatisfactoryTree.Logic.Services
-@inject SatisfactoryTree.Logic.Abstractions.IFactoryItemDisplayService DisplayService
 @inject PlanService PlanService
 @inject PartLookupService PartLookupService
 @implements IDisposable
@@ -427,7 +425,7 @@
 				{
 					<li class="exported-part-item">
 						<div class="exported-part-info">
-							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" />
+							@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" /> *@
 							<strong>@GetPartDisplayName(item.Item.Name)</strong> - 
 							<input type="number" value="@item.Item.Quantity" @onchange="@(e => OnExportedPartQuantityChanged(item.Item, e.Value?.ToString()))" class="form-control d-inline-block" style="width: 100px;" min="0" step="0.1" /> per/min
 							<br />
@@ -539,7 +537,7 @@
 							</div>
 						}
 						<div class="component-part-row">
-							<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" />
+							@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" /> *@
 							<TypeaheadDropdown TItem="LookupItem"
 									   Items="@FactoryCatalog.PartsLookup"
 									   DisplayNameSelector="@(p => p.Name)"
@@ -583,7 +581,7 @@
 									{
 										<span class="badge badge-red d-inline-flex align-items-center gap-2" title="Missing ingredient - not available as import">
 											<span>
-												<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
+												@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" /> *@
 												<i class="fas fa-exclamation-triangle me-1"></i>
 												@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min (Missing)
 											</span>
@@ -595,14 +593,14 @@
 									else
 									{
 										<span class="badge badge-blue">
-											<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" />
+											@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" /> *@
 											@GetPartDisplayName(ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
 										</span>
 									}
 								}
 							}
 							<span class="badge badge-yellow">
-								@if (!string.IsNullOrEmpty(item.Building) && DisplayService.HasBuildingImage(item.Building))
+								@* @if (!string.IsNullOrEmpty(item.Building) && DisplayService.HasBuildingImage(item.Building))
 								{
 									<img src="@DisplayService.GetBuildingImagePath(item.Building)" alt="@DisplayService.GetBuildingName(item.Building)" class="building-image" />
 								}
@@ -611,7 +609,7 @@
 									<i class="fas fa-building building-icon" title="@item.Building"></i>
 								}
 								@DisplayService.GetBuildingName(item.Building) x @Math.Round(item.BuildingQuantity, 2)
-							</span>
+ *@							</span>
 							<span class="badge badge-grey">
 								<i class="fas fa-bolt power-icon" title="Power Usage"></i> @Math.Round(item.BuildingPowerUsage, 1) MW
 							</span>
@@ -633,7 +631,7 @@
 				@foreach (KeyValuePair<int, ImportedItem> item in Factory.ImportedParts)
 				{
 					<li>
-						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Value.Item.Name))" alt="@GetPartDisplayName(item.Value.Item.Name)" class="part-image" />
+						@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Value.Item.Name))" alt="@GetPartDisplayName(item.Value.Item.Name)" class="part-image" /> *@
 						<strong>@GetPartDisplayName(item.Value.Item.Name)</strong> - Quantity: @Math.Round(item.Value.Item.Quantity, 1) - from factory: @item.Value.FactoryName (@Math.Round(item.Value.PartQuantityImported, 1) per/min imported)
 					</li>
 				}
@@ -652,7 +650,7 @@
 				@foreach (Item item in GetRawResourceItems())
 				{
 					<span class="badge badge-blue">
-						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" />
+						@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" /> *@
 						<span>@GetPartDisplayName(item.Name) @Math.Round(item.Quantity, 1) per/min</span>
 					</span>
 				}

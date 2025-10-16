@@ -55,6 +55,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("IronIngot", ingredient.MissingIngredients.FirstOrDefault().Key);
                 Assert.AreEqual(45, ingredient.MissingIngredients.FirstOrDefault().Value);
                 Assert.AreEqual("constructormk1", ingredient.Building);
+                Assert.AreEqual("Constructor", ingredient.BuildingDisplayName);
                 Assert.AreEqual(1.5, ingredient.BuildingQuantity);
                 Assert.AreEqual(5.6, ingredient.BuildingPowerUsage);
 
@@ -88,6 +89,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("LiquidOil", ingredient.MissingIngredients.FirstOrDefault().Key);
                 Assert.AreEqual(45, ingredient.MissingIngredients.FirstOrDefault().Value);
                 Assert.AreEqual("oilrefinery", ingredient.Building);
+                Assert.AreEqual("Refinery", ingredient.BuildingDisplayName);
                 Assert.AreEqual(1.5, ingredient.BuildingQuantity);
                 Assert.AreEqual(42, ingredient.BuildingPowerUsage);
             }
