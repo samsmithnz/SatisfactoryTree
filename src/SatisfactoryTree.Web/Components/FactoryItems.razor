@@ -8,7 +8,7 @@
 
 @code {
 	[Parameter]
-	public Factory? Factory { get; set; }
+	public Factory2? Factory { get; set; }
 	[Parameter]
 	public FactoryCatalog FactoryCatalog { get; set; } = new();
 
@@ -67,9 +67,9 @@
 	{
 		if (FactoryCatalog == null || string.IsNullOrEmpty(partName))
 		{
-			return new List<LookupItem>();
+			return new();
 		}
-		
+
 		List<Recipe> recipes = SatisfactoryTree.Logic.Calculations.Lookups.GetRecipes(FactoryCatalog, partName);
 		return recipes.Select(r => new LookupItem(r.Name, r.DisplayName)).ToList();
 	}
@@ -116,13 +116,13 @@
 	private void OnExportPartSelected(LookupItem selectedPart)
 	{
 		selectedPartToExport = selectedPart;
-		
+
 		// Load recipes for the selected part
 		if (selectedPart != null && FactoryCatalog != null)
 		{
 			List<Recipe> recipes = SatisfactoryTree.Logic.Calculations.Lookups.GetRecipes(FactoryCatalog, selectedPart.Id);
 			availableRecipes = recipes.Select(r => new LookupItem(r.Name, r.DisplayName)).ToList();
-			
+
 			// Auto-select the first non-alternative recipe
 			Recipe? defaultRecipe = recipes.FirstOrDefault(r => !r.IsAlternate);
 			if (defaultRecipe != null)
@@ -191,43 +191,46 @@
 
 	private void OnComponentRecipeChangedFromDropdown(Item item, string? recipeId)
 	{
-		if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null && Factory != null)
-		{
-			Recipe? recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
-			if (recipe != null)
-			{
-				// Store the recipe override so it persists across recalculations
-				Factory.ComponentPartRecipeOverrides[item.Name] = recipe.Name;
-				
-				item.Recipe = recipe;
-				// Re-validate ingredients when recipe changes
-				PlanService.RefreshPlanCalculations();
-			}
-		}
+		// if (item != null && !string.IsNullOrEmpty(recipeId) && FactoryCatalog != null && Factory != null)
+		// {
+		// 	Recipe? recipe = FactoryCatalog.Recipes.FirstOrDefault(r => r.Name == recipeId);
+		// 	if (recipe != null)
+		// 	{
+		// 		// Store the recipe override so it persists across recalculations
+		// 		Factory.ComponentPartRecipeOverrides[item.Name] = recipe.Name;
+
+		// 		item.Recipe = recipe;
+		// 		// Re-validate ingredients when recipe changes
+		// 		PlanService.RefreshPlanCalculations();
+		// 	}
+		// }
 	}
 
 	private async Task RemoveComponentPart(Item componentItem)
 	{
-		if (Factory == null || componentItem == null) return;
-		
+		if (Factory == null || componentItem == null)
+		{
+			return;
+		}
+
 		try
 		{
 			// Remove the component part from the factory's component parts list
-			Factory.ComponentParts.Remove(componentItem);
-			
-			// If this component was auto-added (in ExportedParts but not in UserDefinedExports),
-			// remove it from ExportedParts as well so it shows as missing again
-			if (Factory.ExportedParts.Any(e => e.Item.Name == componentItem.Name) && 
-			    !Factory.UserDefinedExports.Contains(componentItem.Name))
-			{
-				PlanService.RemoveExportedPartFromFactory(Factory.Id, componentItem.Name);
-			}
-			
+			Factory.Ingredients.Remove(componentItem);
+
+			// // If this component was auto-added (in ExportedParts but not in UserDefinedExports),
+			// // remove it from ExportedParts as well so it shows as missing again
+			// if (Factory.ExportedParts.Any(e => e.Item.Name == componentItem.Name) &&
+			// 	!Factory.UserDefinedExports.Contains(componentItem.Name))
+			// {
+			// 	PlanService.RemoveExportedPartFromFactory(Factory.Id, componentItem.Name);
+			// }
+
 			// Note: We intentionally do NOT call RefreshPlanCalculations() here
 			// because it would recalculate and add the component back.
 			// The removal persists until the next calculation is triggered
 			// by another action (recipe change, quantity change, etc.)
-			
+
 			await InvokeAsync(StateHasChanged);
 		}
 		catch (Exception ex)
@@ -257,12 +260,15 @@
 		}
 	}
 
-	private async Task RemoveExportedPart(ExportedItem exportedItem)
+	private async Task RemoveExportedPart(Item item)
 	{
-		if (Factory == null) return;
+		if (Factory == null)
+		{
+			return;
+		}
 		try
 		{
-			PlanService.RemoveExportedPartFromFactory(Factory.Id, exportedItem.Item.Name);
+			PlanService.RemoveExportedPartFromFactory(Factory.Id, item.Name);
 			await InvokeAsync(StateHasChanged);
 		}
 		catch (Exception ex)
@@ -273,7 +279,10 @@
 
 	private async Task AddAllMissingIngredients()
 	{
-		if (Factory == null) return;
+		if (Factory == null)
+		{
+			return;
+		}
 		try
 		{
 			PlanService.AddAllMissingIngredients(Factory.Id);
@@ -285,36 +294,46 @@
 		}
 	}
 
-	private List<string> GetMissingIngredients()
+	private List<ItemIngredient> GetMissingIngredients()
 	{
-		if (Factory == null) return new List<string>();
+		if (Factory == null)
+		{
+			return new List<ItemIngredient>();
+		}
 		return PlanService.GetMissingIngredients(Factory.Id);
 	}
 
-	private bool HasUnresolvedMissingIngredients(Item item)
-	{
-		if (Factory == null || item == null || !item.HasMissingIngredients)
-			return false;
+	// private bool HasUnresolvedMissingIngredients(Item item)
+	// {
+	// 	if (Factory == null || item == null || !item.HasMissingIngredients)
+	// 	{
+	// 		return false;
+	// 	}
 
-		// Check if any missing ingredients are NOT in ExportedParts
-		// If all missing ingredients are in ExportedParts, they're being produced, so the warning can be hidden
-		return item.MissingIngredients.Keys.ToList().Any(missingIngredient =>
-			!Factory.ExportedParts.Any(e => e.Item.Name == missingIngredient));
-	}
+	// 	// Check if any missing ingredients are NOT in ExportedParts
+	// 	// If all missing ingredients are in ExportedParts, they're being produced, so the warning can be hidden
+	// 	return item.MissingIngredients.ToList().Any(missingIngredient =>
+	// 		!Factory.ExportedParts.Any(e => e.Item.Name == missingIngredient.Name));
+	// }
 
-	private bool IsComponentMissingFromExports(Item item)
-	{
-		if (Factory == null || item == null)
-			return false;
+	// private bool IsComponentMissingFromExports(Item item)
+	// {
+	// 	if (Factory == null || item == null)
+	// 	{
+	// 		return false;
+	// 	}
 
-		// Check if this component item itself is NOT in ExportedParts
-		// This indicates the ingredient needs to be added as an exported part to be produced
-		return !Factory.ExportedParts.Any(e => e.Item.Name == item.Name);
-	}
+	// 	// Check if this component item itself is NOT in ExportedParts
+	// 	// This indicates the ingredient needs to be added as an exported part to be produced
+	// 	return !Factory.ExportedParts.Any(e => e.Item.Name == item.Name);
+	// }
 
 	private async Task AddSingleIngredient(Item item)
 	{
-		if (Factory == null || item == null) return;
+		if (Factory == null || item == null)
+		{
+			return;
+		}
 		try
 		{
 			// Add just this single ingredient as a component to be produced
@@ -330,14 +349,17 @@
 
 	private async Task AddSingleIngredientByName(string ingredientName, double quantity, string? recipeName)
 	{
-		if (Factory == null || string.IsNullOrEmpty(ingredientName)) return;
+		if (Factory == null || string.IsNullOrEmpty(ingredientName))
+		{
+			return;
+		}
 		try
 		{
 			// Use aggregation logic inside plan service (ignoring provided quantity; service will compute total across all component parts)
 			PlanService.AddSingleMissingIngredientToFactory(Factory.Id, ingredientName);
-			
-			Factory.UserDefinedExports.Remove(ingredientName);
-			
+
+			//Factory.UserDefinedExports.Remove(ingredientName);
+
 			await InvokeAsync(StateHasChanged);
 		}
 		catch (Exception ex)
@@ -349,67 +371,75 @@
 	private bool IsRawResource(Item item)
 	{
 		if (item == null || FactoryCatalog?.RawResources == null)
+		{
 			return false;
+		}
 
 		// Check if the item's name exists in the RawResources dictionary
 		return FactoryCatalog.RawResources.ContainsKey(item.Name);
 	}
 
-	private List<Item> GetRawResourceItems()
-	{
-		List<Item> rawResources = new List<Item>();
-		
-		if (Factory == null)
-			return rawResources;
+	// private List<Item> GetRawResourceItems()
+	// {
+	// 	List<Item> rawResources = new();
 
-		// Add raw resources from ComponentParts
-		if (Factory.ComponentParts != null)
-		{
-			rawResources.AddRange(Factory.ComponentParts.Where(item => IsRawResource(item)));
-		}
+	// 	if (Factory == null)
+	// 	{
+	// 		return rawResources;
+	// 	}
 
-		// Also add raw resources from ExportedParts that are NOT user-defined
-		// (these are auto-added missing ingredients that happen to be raw resources)
-		if (Factory.ExportedParts != null)
-		{
-			IEnumerable<Item> autoAddedRawResources = Factory.ExportedParts
-				.Where(e => !Factory.UserDefinedExports.Contains(e.Item.Name) && IsRawResource(e.Item))
-				.Select(e => e.Item);
-			rawResources.AddRange(autoAddedRawResources);
-		}
+	// 	// Add raw resources from ComponentParts
+	// 	if (Factory.ComponentParts != null)
+	// 	{
+	// 		rawResources.AddRange(Factory.ComponentParts.Where(item => IsRawResource(item)));
+	// 	}
 
-		// Aggregate raw resources by name, summing quantities
-		// This prevents duplicates when the same raw resource appears in multiple places
-		// Note: Only Name and Quantity are relevant for raw resources display,
-		// other properties (Ingredients, Building, Recipe, etc.) are not used in this context
-		var aggregatedResources = rawResources
-			.GroupBy(r => r.Name)
-			.Select(g => new Item 
-			{ 
-				Name = g.Key, 
-				Quantity = g.Sum(r => r.Quantity)
-			})
-			.ToList();
+	// 	// Also add raw resources from ExportedParts that are NOT user-defined
+	// 	// (these are auto-added missing ingredients that happen to be raw resources)
+	// 	if (Factory.ExportedParts != null)
+	// 	{
+	// 		IEnumerable<Item> autoAddedRawResources = Factory.ExportedParts
+	// 			.Where(e => !Factory.UserDefinedExports.Contains(e.Item.Name) && IsRawResource(e.Item))
+	// 			.Select(e => e.Item);
+	// 		rawResources.AddRange(autoAddedRawResources);
+	// 	}
 
-		return aggregatedResources;
-	}
+	// 	// Aggregate raw resources by name, summing quantities
+	// 	// This prevents duplicates when the same raw resource appears in multiple places
+	// 	// Note: Only Name and Quantity are relevant for raw resources display,
+	// 	// other properties (Ingredients, Building, Recipe, etc.) are not used in this context
+	// 	var aggregatedResources = rawResources
+	// 		.GroupBy(r => r.Name)
+	// 		.Select(g => new Item
+	// 		{
+	// 			Name = g.Key,
+	// 			Quantity = g.Sum(r => r.Quantity)
+	// 		})
+	// 		.ToList();
 
-	private List<Item> GetNonRawResourceComponents()
-	{
-		if (Factory?.ComponentParts == null)
-			return new List<Item>();
+	// 	return aggregatedResources;
+	// }
 
-		// Return component parts that are NOT raw resources
-		return Factory.ComponentParts.Where(item => !IsRawResource(item)).ToList();
-	}
+	// private List<Item> GetNonRawResourceComponents()
+	// {
+	// 	if (Factory?.ComponentParts == null)
+	// 	{
+	// 		return new();
+	// 	}
 
-	private double GetTotalPowerConsumption()
-	{
-		if (Factory?.ComponentParts == null)
-			return 0;
+	// 	// Return component parts that are NOT raw resources
+	// 	return Factory.ComponentParts.Where(item => !IsRawResource(item)).ToList();
+	// }
 
-		return Factory.ComponentParts.Sum(item => item.BuildingPowerUsage);
-	}
+	// private double GetTotalPowerConsumption()
+	// {
+	// 	if (Factory?.ComponentParts == null)
+	// 	{
+	// 		return 0;
+	// 	}
+
+	// 	return Factory.ComponentParts.Sum(item => item.BuildingPowerUsage);
+	// }
 }
 
 @if (Factory != null)
@@ -418,26 +448,26 @@
 		<h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
 
 		<p><b>Exported parts:</b></p>
-		@if (Factory.ExportedParts != null && Factory.ExportedParts.Any(e => Factory.UserDefinedExports.Contains(e.Item.Name)))
+		@if (Factory.Ingredients != null)
 		{
 			<ul>
-				@foreach (ExportedItem item in Factory.ExportedParts.Where(e => Factory.UserDefinedExports.Contains(e.Item.Name)))
+				@foreach (Item item in Factory.Ingredients)
 				{
 					<li class="exported-part-item">
 						<div class="exported-part-info">
 							@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Item.Name))" alt="@GetPartDisplayName(item.Item.Name)" class="part-image" /> *@
-							<strong>@GetPartDisplayName(item.Item.Name)</strong> - 
-							<input type="number" value="@item.Item.Quantity" @onchange="@(e => OnExportedPartQuantityChanged(item.Item, e.Value?.ToString()))" class="form-control d-inline-block" style="width: 100px;" min="0" step="0.1" /> per/min
+							<strong>@GetPartDisplayName(item.Name)</strong> -
+							<input type="number" value="@item.Quantity" @onchange="@(e => OnExportedPartQuantityChanged(item, e.Value?.ToString()))" class="form-control d-inline-block" style="width: 100px;" min="0" step="0.1" /> per/min
 							<br />
 							<span class="text-muted small">Recipe: </span>
 							@{
-								List<LookupItem> exportedRecipes = GetRecipesForPart(item.Item.Name);
+								List<LookupItem> exportedRecipes = GetRecipesForPart(item.Name);
 								if (exportedRecipes.Any())
 								{
-									<select class="form-control d-inline-block" style="width: auto;" @onchange="@(e => OnExportedPartRecipeChanged(item.Item, e.Value?.ToString()))">
+									<select class="form-control d-inline-block" style="width: auto;" @onchange="@(e => OnExportedPartRecipeChanged(item, e.Value?.ToString()))">
 										@foreach (LookupItem recipe in exportedRecipes)
 										{
-											<option value="@recipe.Id" selected="@(item.Item.Recipe?.Name == recipe.Id)">@recipe.Name</option>
+											<option value="@recipe.Id" selected="@(item.Recipe?.Name == recipe.Id)">@recipe.Name</option>
 										}
 									</select>
 								}
@@ -457,7 +487,7 @@
 			<p class="text-muted">No exported parts defined.</p>
 		}
 
-		@if (!isAddingExportedPart)
+		@* @if (!isAddingExportedPart)
 		{
 			<button class="btn btn-primary me-2" @onclick="StartAddingExportedPart">Add Exported Part</button>
 		}
@@ -503,16 +533,16 @@
 					<button class="btn btn-secondary" @onclick="CancelAddingExportedPart">Cancel</button>
 				</div>
 			</div>
-		}
+		} *@
 
-		<p><b>Component parts:</b></p>
+		<p><b>Parts:</b></p>
 		<ul>
-			@if (GetNonRawResourceComponents().Any())
+			@if (Factory != null && Factory.Ingredients != null && Factory.Ingredients.Any())
 			{
-				@foreach (Item item in GetNonRawResourceComponents())
+				@foreach (Item item in Factory.Ingredients)
 				{
 					<li>
-						@if (IsComponentMissingFromExports(item))
+						@* @if (IsComponentMissingFromExports(item))
 						{
 							<div class="alert alert-warning d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
 								<div>
@@ -535,17 +565,17 @@
 									<i class="fas fa-trash me-1"></i>Remove
 								</button>
 							</div>
-						}
+						} *@
 						<div class="component-part-row">
 							@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" /> *@
 							<TypeaheadDropdown TItem="LookupItem"
-									   Items="@FactoryCatalog.PartsLookup"
-									   DisplayNameSelector="@(p => p.Name)"
-									   IdSelector="@(p => p.Id)"
-									   SelectedItem="@GetCurrentLookup(item)"
-									   SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
-									   Placeholder="Search for parts..."
-									   CssClass="me-2" />
+											   Items="@FactoryCatalog.PartsLookup"
+											   DisplayNameSelector="@(p => p.Name)"
+											   IdSelector="@(p => p.Id)"
+											   SelectedItem="@GetCurrentLookup(item)"
+											   SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
+											   Placeholder="Search for parts..."
+											   CssClass="me-2" />
 							<span class="quantity-label">Quantity:</span>
 							<input type="number" value="@item.Quantity" @onchange="@(e => OnComponentPartQuantityChanged(item, e.Value?.ToString()))" class="form-control quantity-input" min="0" step="0.1" />
 							<span class="ms-2">Recipe:</span>
@@ -575,8 +605,9 @@
 							{
 								@foreach (Item ingredient in item.Ingredients)
 								{
-									bool isMissing = item.HasMissingIngredients && item.MissingIngredients.ContainsKey(ingredient.Name) && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name);
-									
+									bool isMissing = item.HasMissingIngredients && item.MissingIngredients.Find(i => i.Name == ingredient.Name) != null;
+									@* && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name); *@
+
 									@if (isMissing)
 									{
 										<span class="badge badge-red d-inline-flex align-items-center gap-2" title="Missing ingredient - not available as import">
@@ -643,14 +674,14 @@
 		</ul>
 
 		<p><b>Required resources:</b></p>
-		@if (GetRawResourceItems().Any() || GetTotalPowerConsumption() > 0)
+		@* @if (GetRawResourceItems().Any() || GetTotalPowerConsumption() > 0)
 		{
 			@if (GetRawResourceItems().Any())
 			{
 				@foreach (Item item in GetRawResourceItems())
 				{
 					<span class="badge badge-blue">
-						@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" /> *@
+						<img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="ingredient-image" />
 						<span>@GetPartDisplayName(item.Name) @Math.Round(item.Quantity, 1) per/min</span>
 					</span>
 				}
@@ -665,6 +696,7 @@
 		else
 		{
 			<span class="text-muted">No resources needed.</span>
-		}
+		} *@
 	</div>
-}}
+}
+}

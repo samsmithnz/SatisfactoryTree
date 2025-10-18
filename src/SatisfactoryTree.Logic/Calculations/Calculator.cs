@@ -1,5 +1,6 @@
 ﻿using SatisfactoryTree.Logic.Calculations;
 using SatisfactoryTree.Logic.Models;
+using System.Xml.Linq;
 
 namespace SatisfactoryTree.Logic
 {
@@ -42,13 +43,22 @@ namespace SatisfactoryTree.Logic
                     else
                     {
                         //If we don't find the ingredient, add it.
-                        if (!item.MissingIngredients.ContainsKey(ingredient.Name))
+                        ItemIngredient? itemIngredient = item.MissingIngredients.Find(g => g.Name == ingredient.Name);
+                        if (itemIngredient == null)
                         {
-                            item.MissingIngredients.Add(ingredient.Name, ingredientAmount);
+                            itemIngredient = new()
+                            {
+                                Name = ingredient.Name,
+                                DisplayName = "",
+                                Quantity = ingredientAmount,
+                                IngredientImagePart = ""
+
+                            };
+                            item.MissingIngredients.Add(itemIngredient);
                         }
                         else
                         {
-                            item.MissingIngredients[ingredient.Name] += ingredientAmount;
+                            itemIngredient.Quantity += ingredientAmount;
                         }
                     }
                 }
@@ -56,7 +66,7 @@ namespace SatisfactoryTree.Logic
             return factory;
         }
 
-      
+
 
         public List<Item> CalculateFactoryProduction(FactoryCatalog factoryCatalog, Factory factory)
         {
@@ -303,7 +313,14 @@ namespace SatisfactoryTree.Logic
             {
                 if (ingredient.Quantity > 0.001)
                 {
-                    goalItem.MissingIngredients.Add(ingredient.Name, ingredient.Quantity);
+                    ItemIngredient itemIngredient = new()
+                    {
+                        Name = ingredient.Name,
+                        DisplayName = "",
+                        Quantity = ingredient.Quantity,
+                        IngredientImagePart = ""
+                    };
+                    goalItem.MissingIngredients.Add(itemIngredient);
                 }
             }
             return results;
@@ -377,7 +394,14 @@ namespace SatisfactoryTree.Logic
                         };
                         if (remainingNeed > 0.001)
                         {
-                            ingredientItem.MissingIngredients.Add(ingredient.part, remainingNeed);
+                            ItemIngredient itemIngredient = new()
+                            {
+                                Name = ingredient.part,
+                                DisplayName = "",
+                                Quantity = remainingNeed,
+                                IngredientImagePart = ""
+                            };
+                            ingredientItem.MissingIngredients.Add(itemIngredient);
                         }
                         results.Add(ingredientItem);
                     }

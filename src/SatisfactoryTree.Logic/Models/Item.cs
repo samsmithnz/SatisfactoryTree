@@ -22,7 +22,7 @@
         public double BuildingPowerUsage { get; set; }
 
         public int Counter { get; set; }
-        public Dictionary<string, double> MissingIngredients { get; set; } = new();
+        public List<ItemIngredient> MissingIngredients { get; set; } = new();
         public bool HasMissingIngredients => MissingIngredients.Any();
         public Recipe? Recipe { get; set; }
         public bool IsRedundant { get; set; } = false;

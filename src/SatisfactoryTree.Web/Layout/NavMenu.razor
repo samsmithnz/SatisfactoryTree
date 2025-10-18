@@ -25,7 +25,7 @@
             <div class="nav-section-header px-3">
                 <small class="text-muted text-uppercase">Factories</small>
             </div>
-            @foreach (Logic.Models.Factory factory in PlanService.Plan.Factories)
+            @foreach (Logic.Models.Factory2? factory in PlanService.Plan.Factories)
             {
                 <div class="nav-item px-3">
                     <a class="nav-link factory-link" href="#@GetFactoryAnchor(factory)" @onclick="() => ScrollToFactory(factory)" @onclick:preventDefault="false">
@@ -75,7 +75,8 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
-    private string GetFactoryAnchor(SatisfactoryTree.Logic.Models.Factory factory)
+    //TODO: This appears twice, refactor into one.
+    private string GetFactoryAnchor(SatisfactoryTree.Logic.Models.Factory2 factory)
     {
         // Create a URL-friendly anchor from the factory name
         return factory.Name.ToLowerInvariant()
@@ -88,7 +89,7 @@
             .Replace(")", "");
     }
 
-    private async Task ScrollToFactory(SatisfactoryTree.Logic.Models.Factory factory)
+    private async Task ScrollToFactory(SatisfactoryTree.Logic.Models.Factory2 factory)
     {
         // Close the nav menu on mobile after clicking
         collapseNavMenu = true;

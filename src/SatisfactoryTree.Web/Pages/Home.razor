@@ -13,8 +13,8 @@
 
 @code {
 	FactoryCatalog? factoryCatalog;
-	private Factory? screwsFactory;
-	private Factory? reinforcedPlatesFactory;
+	private Factory2? screwsFactory;
+	private Factory2? reinforcedPlatesFactory;
 	private bool isLoading = true;
 	private string? errorMessage;
 	private int? factoryIdToScrollTo; // local cache for scrolling
@@ -36,7 +36,7 @@
 				// screwsFactory = new(1, "Screws factory");
 				// screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
 				// plan.Factories.Add(screwsFactory);
-				reinforcedPlatesFactory = new(1, "Reinforced Iron Plates factory");
+				reinforcedPlatesFactory = new(1, "Reinforced Iron Plates factory", factoryCatalog);
 				// reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
 				// reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
 				plan.Factories.Add(reinforcedPlatesFactory);
@@ -110,7 +110,7 @@
 		}
 	}
 
-	private string GetFactoryAnchor(Factory factory)
+	private string GetFactoryAnchor(Factory2 factory)
 	{
 		// Create a URL-friendly anchor from the factory name (same logic as NavMenu)
 		return factory.Name.ToLowerInvariant()
@@ -137,10 +137,10 @@ else if (!string.IsNullOrEmpty(errorMessage))
 else if (PlanService.Plan?.Factories != null)
 {
 	<h3>The plan</h3>
-	@foreach (Factory factory in PlanService.Plan.Factories)
+	@foreach (Factory2 factory in PlanService.Plan.Factories)
 	{
 		<div id="@GetFactoryAnchor(factory)" class="factory-section">
-			<FactoryItems Factory="factory" FactoryCatalog="PlanService.FactoryCatalog" />
+			<FactoryItems Factory="factory" FactoryCatalog="factory.FactoryCatalog" />
 		</div>
 	}
 }

@@ -45,7 +45,7 @@ namespace SatisfactoryTree.Logic.Tests
                 factory = calculator.ValidateFactoryIngredient(factory);
 
                 // Assert
-                Assert.IsTrue(factory.Ingredients != null); 
+                Assert.IsTrue(factory.Ingredients != null);
                 Assert.IsTrue(factory.Ingredients.Count > 0);
                 Item ingredient = factory.Ingredients[0];
                 Assert.AreEqual("IronPlate", ingredient.Name);
@@ -53,8 +53,10 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("images/parts/IronPlate_256.png", ingredient.ItemImagePath);
                 Assert.AreEqual(true, ingredient.HasMissingIngredients);
                 Assert.AreEqual(1, ingredient.MissingIngredients.Count);
-                Assert.AreEqual("IronIngot", ingredient.MissingIngredients.FirstOrDefault().Key);
-                Assert.AreEqual(45, ingredient.MissingIngredients.FirstOrDefault().Value);
+                Assert.AreEqual("IronIngot", ingredient.MissingIngredients[0].Name);
+                Assert.AreEqual("Iron Ingot", ingredient.MissingIngredients[0].DisplayName); ;
+                Assert.AreEqual(45, ingredient.MissingIngredients[0].Quantity);
+                Assert.AreEqual("images/parts/IronIngot_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
                 Assert.AreEqual("constructormk1", ingredient.Building);
                 Assert.AreEqual("Constructor", ingredient.BuildingDisplayName);
                 Assert.AreEqual(1.5, ingredient.BuildingQuantity);
@@ -87,8 +89,10 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("images/parts/Plastic_256.png", ingredient.ItemImagePath);
                 Assert.AreEqual(true, ingredient.HasMissingIngredients);
                 Assert.AreEqual(1, ingredient.MissingIngredients.Count);
-                Assert.AreEqual("LiquidOil", ingredient.MissingIngredients.FirstOrDefault().Key);
-                Assert.AreEqual(45, ingredient.MissingIngredients.FirstOrDefault().Value);
+                Assert.AreEqual("LiquidOil", ingredient.MissingIngredients[0].Name);
+                Assert.AreEqual("Crude Oil", ingredient.MissingIngredients[0].DisplayName); ;
+                Assert.AreEqual(45, ingredient.MissingIngredients[0].Quantity);
+                Assert.AreEqual("images/parts/LiquidOil_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
                 Assert.AreEqual("oilrefinery", ingredient.Building);
                 Assert.AreEqual("Refinery", ingredient.BuildingDisplayName);
                 Assert.AreEqual(1.5, ingredient.BuildingQuantity);
@@ -121,10 +125,22 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("images/parts/ModularFrameHeavy_256.png", ingredient.ItemImagePath);
                 Assert.AreEqual(true, ingredient.HasMissingIngredients);
                 Assert.AreEqual(4, ingredient.MissingIngredients.Count);
-                Assert.AreEqual(5, ingredient.MissingIngredients["ModularFrame"]);
-                Assert.AreEqual(20, ingredient.MissingIngredients["SteelPipe"]);
-                Assert.AreEqual(5, ingredient.MissingIngredients["SteelPlateReinforced"]);
-                Assert.AreEqual(120, ingredient.MissingIngredients["IronScrew"]);
+                Assert.AreEqual("ModularFrame", ingredient.MissingIngredients[0].Name);
+                Assert.AreEqual("Modular Frame", ingredient.MissingIngredients[0].DisplayName); ;
+                Assert.AreEqual(5, ingredient.MissingIngredients[0].Quantity);
+                Assert.AreEqual("images/parts/LiquidOil_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
+                Assert.AreEqual("SteelPipe", ingredient.MissingIngredients[1].Name);
+                Assert.AreEqual("Steel Pipe", ingredient.MissingIngredients[1].DisplayName); ;
+                Assert.AreEqual(20, ingredient.MissingIngredients[1].Quantity);
+                Assert.AreEqual("images/parts/SteelPipe_256.png", ingredient.MissingIngredients[1].IngredientImagePart);
+                Assert.AreEqual("SteelPlateReinforced", ingredient.MissingIngredients[2].Name);
+                Assert.AreEqual("Reinforced Iron Plate", ingredient.MissingIngredients[2].DisplayName); ;
+                Assert.AreEqual(5, ingredient.MissingIngredients[2].Quantity);
+                Assert.AreEqual("images/parts/LiquidOil_256.png", ingredient.MissingIngredients[2].IngredientImagePart);
+                Assert.AreEqual("IronScrew", ingredient.MissingIngredients[3].Name);
+                Assert.AreEqual("Screws", ingredient.MissingIngredients[3].DisplayName); ;
+                Assert.AreEqual(120, ingredient.MissingIngredients[3].Quantity);
+                Assert.AreEqual("images/parts/IronScrew_256.png", ingredient.MissingIngredients[3].IngredientImagePart);
                 Assert.AreEqual("manufacturermk1", ingredient.Building);
                 Assert.AreEqual("Manufacturer", ingredient.BuildingDisplayName);
                 Assert.AreEqual(0.5, ingredient.BuildingQuantity);
