@@ -326,6 +326,13 @@ span.badge.badge-red[class*="badge-red"],
     border-color: #d73a49 !important;
 }
 
+span.badge.badge-white[class*="badge-white"],
+.badge.badge-white[class*="badge-white"] {
+    background: #f8f9fa !important; /* light fill */
+    color: #495057 !important;
+    border-color: #495057 !important;
+}
+
 span.badge.badge-fluid[class*="badge-fluid"],
 .badge.badge-fluid[class*="badge-fluid"],
 div span.badge.badge-fluid,
