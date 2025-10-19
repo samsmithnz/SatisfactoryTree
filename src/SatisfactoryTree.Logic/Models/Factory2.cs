@@ -58,6 +58,21 @@ namespace SatisfactoryTree.Logic.Models
                     });
                 }
 
+                // If there are byproducts (assuming there can only be 1 byproduct)
+                if (recipe.Products.Count > 1)
+                {
+                    foreach (Product byProduct in recipe.Products)
+                    {
+                        if (byProduct.isByProduct)
+                        {
+                            item.ByProductName = byProduct.part;
+                            item.ByProductDisplayName = Lookups.GetPartDisplayName(FactoryCatalog, byProduct.part);
+                            item.ByProductQuantity = byProduct.perMin * ingredientRatio;
+                            break;
+                        }
+                    }
+                }
+
                 //Add building details
                 item.Building = item.Recipe.Building.Name;
                 item.BuildingDisplayName = GetBuildingName(item.Recipe.Building.Name);

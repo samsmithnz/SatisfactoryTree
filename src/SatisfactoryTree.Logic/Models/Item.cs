@@ -5,14 +5,23 @@
         public string Name { get; set; }
         public double Quantity { get; set; }
         public string DisplayName { get; set; } = string.Empty;
-        public List<Item> Ingredients { get; set; } = new();
-        public string ByProductName { get; set; } = string.Empty;
-        public string ByProductQuantity { get; set; } = string.Empty;
         public string ItemImagePath
         {
             get
             {
                 string imageName = DisplayName.Replace(" ", "");
+                return $"images/parts/{imageName}_256.png";
+            }
+        }
+        public List<Item> Ingredients { get; set; } = new();
+        public string ByProductName { get; set; } = string.Empty;
+        public string ByProductDisplayName { get; set; } = string.Empty;
+        public double ByProductQuantity { get; set; }
+        public string ByProductImagePath
+        {
+            get
+            {
+                string imageName = ByProductDisplayName.Replace(" ", "");
                 return $"images/parts/{imageName}_256.png";
             }
         }

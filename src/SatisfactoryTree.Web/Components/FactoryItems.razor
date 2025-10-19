@@ -468,8 +468,21 @@
 								<button class="btn btn-sm btn-danger" @onclick="() => RemoveExportedPart(item)">Remove</button>
 							</span>
 						</div>
+						@if (string.IsNullOrEmpty(item.ByProductName))
+						{
+							<div class="component-badges">
+								<span>Byproduct:</span>
+								<span class="badge badge-white d-inline-flex align-items-center gap-2" title="Missing ingredient - not available as import">
+									<span>
+										<img src="@item.ByProductImagePath" alt="@item.ByProductDisplayName" class="ingredient-image" />
+										@item.ByProductDisplayName @Math.Round(item.ByProductQuantity) per/min
+									</span>
+								</span>
+							</div>
+						}
 						<div class="component-badges">
 							<span>
+								Requires:
 								@if (item.Ingredients != null)
 								{
 									@foreach (Item ingredient in item.Ingredients)
@@ -524,189 +537,19 @@
 			<p class="text-muted">No exported parts defined.</p>
 		}
 
-		@* @if (!isAddingExportedPart)
-		{
-			<button class="btn btn-primary me-2" @onclick="StartAddingExportedPart">Add Exported Part</button>
-		}
-		else
-		{
-			<div class="add-exported-part-form card p-3 mb-3">
-				<h5>Add New Exported Part</h5>
-				<div class="add-exported-part-inputs">
-					<div class="add-exported-part-field">
-						<label>Select Part:</label>
-						<TypeaheadDropdown TItem="LookupItem"
-										   Items="@FactoryCatalog.PartsLookup"
-										   DisplayNameSelector="@(p => p.Name)"
-										   IdSelector="@(p => p.Id)"
-										   SelectedItem="@selectedPartToExport"
-										   SelectedItemChanged="@OnExportPartSelected"
-										   Placeholder="Search for parts to export..."
-										   CssClass="me-2" />
-					</div>
-					<div class="add-exported-part-field">
-						<label>Select Recipe:</label>
-						@if (availableRecipes.Any())
-						{
-							<select class="form-control" @onchange="@(e => OnExportRecipeSelectedFromDropdown(e.Value?.ToString()))">
-								@foreach (LookupItem recipe in availableRecipes)
-								{
-									<option value="@recipe.Id" selected="@(selectedRecipeToExport?.Id == recipe.Id)">@recipe.Name</option>
-								}
-							</select>
-						}
-						else
-						{
-							<p class="text-muted small">No recipes available for this part</p>
-						}
-					</div>
-					<div class="add-exported-part-field">
-						<label>Quantity per/min:</label>
-						<input type="number" class="form-control" @bind="exportedQuantity" min="0" step="0.1" />
-					</div>
-				</div>
-				<div class="mt-2">
-					<button class="btn btn-success me-2" @onclick="AddExportedPart" disabled="@(selectedPartToExport == null)">Add</button>
-					<button class="btn btn-secondary" @onclick="CancelAddingExportedPart">Cancel</button>
-				</div>
-			</div>
-		} *@
-
-		@if (false)
-		{
-			<p><b>Parts:</b></p>
-			<ul>
-				@if (Factory != null && Factory.Ingredients != null && Factory.Ingredients.Any())
-				{
-					@foreach (Item item in Factory.Ingredients)
-					{
-						<li>
-							@* @if (IsComponentMissingFromExports(item))
-						{
-							<div class="alert alert-warning d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
-								<div>
-									<i class="fas fa-exclamation-triangle me-2"></i>
-									<strong>Missing:</strong> This ingredient is not being produced yet.
-								</div>
-								<button class="btn btn-sm btn-primary" @onclick="() => AddSingleIngredient(item)">
-									<i class="fas fa-plus-circle me-1"></i>Add This Ingredient
-								</button>
-							</div>
-						}
-						@if (item.IsRedundant)
-						{
-							<div class="alert alert-secondary d-flex justify-content-between align-items-center mb-2" style="padding: 0.5rem 0.75rem;">
-								<div>
-									<i class="fas fa-info-circle me-2"></i>
-									<strong>Unused:</strong> This ingredient is no longer needed by the current recipe.
-								</div>
-								<button class="btn btn-sm btn-danger" @onclick="() => RemoveComponentPart(item)">
-									<i class="fas fa-trash me-1"></i>Remove
-								</button>
-							</div>
-						} *@
-							<div class="component-part-row">
-								@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Name))" alt="@GetPartDisplayName(item.Name)" class="part-image" /> *@
-								<TypeaheadDropdown TItem="LookupItem"
-												   Items="@FactoryCatalog.PartsLookup"
-												   DisplayNameSelector="@(p => p.Name)"
-												   IdSelector="@(p => p.Id)"
-												   SelectedItem="@GetCurrentLookup(item)"
-												   SelectedItemChanged="@(lookup => { if (lookup != null) item.Name = lookup.Id; })"
-												   Placeholder="Search for parts..."
-												   CssClass="me-2" />
-								<span class="quantity-label">Quantity:</span>
-								<input type="number" value="@item.Quantity" @onchange="@(e => OnComponentPartQuantityChanged(item, e.Value?.ToString()))" class="form-control quantity-input" min="0" step="0.1" />
-								<span class="ms-2">Recipe:</span>
-								@{
-									List<LookupItem> componentRecipes = GetRecipesForPart(item.Name);
-									if (componentRecipes.Any())
-									{
-										<select class="form-control d-inline-block ms-2" style="width: auto;" @onchange="@(e => OnComponentRecipeChangedFromDropdown(item, e.Value?.ToString()))">
-											@foreach (LookupItem recipe in componentRecipes)
-											{
-												<option value="@recipe.Id" selected="@(item.Recipe?.Name == recipe.Id)">@recipe.Name</option>
-											}
-										</select>
-									}
-									else
-									{
-										<span class="text-muted small ms-2">No recipes available</span>
-									}
-								}
-								<button class="btn btn-sm btn-danger ms-2" @onclick="() => RemoveComponentPart(item)">
-									<i class="fas fa-times"></i>
-								</button>
-							</div>
-
-							<div class="component-badges">
-								@if (item.Ingredients != null)
-								{
-									@foreach (Item ingredient in item.Ingredients)
-									{
-										bool isMissing = item.HasMissingIngredients && item.MissingIngredients.Find(i => i.Name == ingredient.Name) != null;
-										@* && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name); *@
-
-										@if (isMissing)
-										{
-											<span class="badge badge-red d-inline-flex align-items-center gap-2" title="Missing ingredient - not available as import">
-												<span>
-													@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" /> *@
-													<i class="fas fa-exclamation-triangle me-1"></i>
-													@Lookups.GetPartDisplayName(Factory.FactoryCatalog, ingredient.Name), @Math.Round(ingredient.Quantity, 1) per/min (Missing)
-												</span>
-												<button class="btn btn-sm btn-primary py-0 px-1" style="font-size: 0.75rem;" @onclick="() => AddSingleIngredientByName(ingredient.Name, ingredient.Quantity, ingredient.Recipe?.Name)">
-													<i class="fas fa-plus-circle"></i>
-												</button>
-											</span>
-										}
-										else
-										{
-											<span class="badge badge-blue">
-												@* <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(ingredient.Name))" alt="@GetPartDisplayName(ingredient.Name)" class="ingredient-image" /> *@
-												@Lookups.GetPartDisplayName(Factory.FactoryCatalog, ingredient.Name) @Math.Round(ingredient.Quantity, 1) per/min
-											</span>
-										}
-									}
-								}
-								<span class="badge badge-yellow">
-									@* @if (!string.IsNullOrEmpty(item.Building) && DisplayService.HasBuildingImage(item.Building))
-								{
-									<img src="@DisplayService.GetBuildingImagePath(item.Building)" alt="@DisplayService.GetBuildingName(item.Building)" class="building-image" />
-								}
-								else if (!string.IsNullOrEmpty(item.Building))
-								{
-									<i class="fas fa-building building-icon" title="@item.Building"></i>
-								}
-								@DisplayService.GetBuildingName(item.Building) x @Math.Round(item.BuildingQuantity, 2)
- *@							</span>
-								<span class="badge badge-grey">
-									<i class="fas fa-bolt power-icon" title="Power Usage"></i> @Math.Round(item.BuildingPowerUsage, 1) MW
-								</span>
-							</div>
-						</li>
-						<hr>
-					}
-				}
-				else
-				{
-					<li>No component parts calculated yet.</li>
-				}
-			</ul>
-		}
 
 		<p><b>Imported parts:</b></p>
-		<ul>
+		@*	<ul>
 			@if (Factory.ImportedParts != null && Factory.ImportedParts.Any())
 			{
-		@* 				@foreach (KeyValuePair<int, ImportedItem> item in Factory.ImportedParts)
+		 				@foreach (KeyValuePair<int, ImportedItem> item in Factory.ImportedParts)
 				{
 					<li>
 						 <img src="@DisplayService.GetPartImagePath(GetPartDisplayName(item.Value.Item.Name))" alt="@GetPartDisplayName(item.Value.Item.Name)" class="part-image" /> 
 						<strong>@GetPartDisplayName(item.Value.Item.Name)</strong> - Quantity: @Math.Round(item.Value.Item.Quantity, 1) - from factory: @item.Value.FactoryName (@Math.Round(item.Value.PartQuantityImported, 1) per/min imported)
 					</li>
 				}
- *@			}
+ 			}
 				else
 				{
 					<li>No imported parts.</li>
@@ -737,6 +580,5 @@
 		{
 			<span class="text-muted">No resources needed.</span>
 		} *@
-		</div>
-	}
-						
+	</div>
+}

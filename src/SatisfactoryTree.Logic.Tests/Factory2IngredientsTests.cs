@@ -36,19 +36,20 @@ namespace SatisfactoryTree.Logic.Tests
             if (factoryCatalog != null)
             {
                 // Arrange
-                Factory2 factory = new(1, "Iron Plates Factory", factoryCatalog);
-                Recipe? recipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate");
-                factory.AddIngredient("IronPlate", 30, recipe);
+                Factory2 ironPlatesFactory = new(1, "Iron Plates Factory", factoryCatalog);
+                Recipe? ironPlatesRecipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate");
+                ironPlatesFactory.AddIngredient("IronPlate", 30, ironPlatesRecipe);
                 Calculator calculator = new();
 
                 // Act
-                factory = calculator.ValidateFactoryIngredient(factory);
+                ironPlatesFactory = calculator.ValidateFactoryIngredient(ironPlatesFactory);
 
                 // Assert
-                Assert.IsTrue(factory.Ingredients != null);
-                Assert.IsTrue(factory.Ingredients.Count > 0);
-                Item ingredient = factory.Ingredients[0];
+                Assert.IsTrue(ironPlatesFactory.Ingredients != null);
+                Assert.IsTrue(ironPlatesFactory.Ingredients.Count > 0);
+                Item ingredient = ironPlatesFactory.Ingredients[0];
                 Assert.AreEqual("IronPlate", ingredient.Name);
+                Assert.AreEqual("Iron Plate", ingredient.DisplayName);
                 Assert.AreEqual(30, ingredient.Quantity);
                 Assert.AreEqual("images/parts/IronPlate_256.png", ingredient.ItemImagePath);
                 Assert.AreEqual(true, ingredient.HasMissingIngredients);
@@ -85,8 +86,13 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.IsTrue(factory.Ingredients.Count > 0);
                 Item ingredient = factory.Ingredients[0];
                 Assert.AreEqual("Plastic", ingredient.Name);
+                Assert.AreEqual("Plastic", ingredient.DisplayName);
                 Assert.AreEqual(30, ingredient.Quantity);
                 Assert.AreEqual("images/parts/Plastic_256.png", ingredient.ItemImagePath);
+                Assert.AreEqual("HeavyOilResidue", ingredient.ByProductName);
+                Assert.AreEqual("Heavy Oil Residue", ingredient.ByProductDisplayName);
+                Assert.AreEqual(15, ingredient.ByProductQuantity);
+                Assert.AreEqual("images/parts/HeavyOilResidue_256.png", ingredient.ByProductImagePath);
                 Assert.AreEqual(true, ingredient.HasMissingIngredients);
                 Assert.AreEqual(1, ingredient.MissingIngredients.Count);
                 Assert.AreEqual("LiquidOil", ingredient.MissingIngredients[0].Name);
@@ -121,6 +127,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.IsTrue(factory.Ingredients.Count > 0);
                 Item ingredient = factory.Ingredients[0];
                 Assert.AreEqual("ModularFrameHeavy", ingredient.Name);
+                Assert.AreEqual("Heavy Modular Frame", ingredient.DisplayName);
                 Assert.AreEqual(1, ingredient.Quantity);
                 Assert.AreEqual("images/parts/HeavyModularFrame_256.png", ingredient.ItemImagePath);
                 Assert.AreEqual(true, ingredient.HasMissingIngredients);

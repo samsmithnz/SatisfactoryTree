@@ -14,8 +14,6 @@
 
 @code {
 	FactoryCatalog? factoryCatalog;
-	private Factory2? screwsFactory;
-	private Factory2? reinforcedPlatesFactory;
 	private bool isLoading = true;
 	private string? errorMessage;
 	private int? factoryIdToScrollTo; // local cache for scrolling
@@ -34,14 +32,29 @@
 			if (PlanService.Plan == null)
 			{
 				Plan plan = new();
-				// screwsFactory = new(1, "Screws factory");
+				// Factory2? screwsFactory = new(1, "Screws factory");
 				// screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
 				// plan.Factories.Add(screwsFactory);
-				reinforcedPlatesFactory = new(1, "Reinforced Iron Plates factory", factoryCatalog);
+				Factory2? reinforcedPlatesFactory = new(1, "Reinforced Iron Plates factory", factoryCatalog);
 				reinforcedPlatesFactory.AddIngredient("IronPlateReinforced", 5, Lookups.GetRecipes(factoryCatalog, "IronPlateReinforced").Find(r => r.Name == "IronPlateReinforced"));
 				// reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
 				// reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
 				plan.Factories.Add(reinforcedPlatesFactory);
+
+				Factory2 ironPlatesFactory = new(1, "Iron Plates Factory", factoryCatalog);
+				Recipe? ironPlatesRecipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate");
+				ironPlatesFactory.AddIngredient("IronPlate", 30, ironPlatesRecipe);
+				plan.Factories.Add(ironPlatesFactory);
+
+				Factory2 heavyModularFramesfactory = new(1, "Heavy Modular Frame Factory", factoryCatalog);
+				Recipe? heavyModularFramesRecipe = Lookups.GetRecipes(factoryCatalog, "ModularFrameHeavy").Find(r => r.Name == "ModularFrameHeavy");
+				heavyModularFramesfactory.AddIngredient("ModularFrameHeavy", 1, heavyModularFramesRecipe);
+				plan.Factories.Add(heavyModularFramesfactory);
+
+				Factory2 plasticFactory = new(1, "Plastic Factory", factoryCatalog);
+				Recipe? plasticRecipe = Lookups.GetRecipes(factoryCatalog, "Plastic").Find(r => r.Name == "Plastic");
+				plasticFactory.AddIngredient("Plastic", 30, plasticRecipe);
+				plan.Factories.Add(plasticFactory);
 
 				//Calculate the production
 				plan.UpdatePlanCalculations(factoryCatalog);
