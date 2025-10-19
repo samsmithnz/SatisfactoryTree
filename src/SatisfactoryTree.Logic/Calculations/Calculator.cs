@@ -9,59 +9,208 @@ namespace SatisfactoryTree.Logic
         //Using a target item, calculate the total number of items needed to produce the target item
         public Calculator() { }
 
-        public Factory2 ValidateFactoryIngredient(Factory2 factory)
+        public Factory2 ValidateFactoryIngredients(Factory2 factory)
         {
             //First add up all currently produced parts
-            Dictionary<string, double> currentIngredients = new();
+            HashSet<string> items = new();
+            Dictionary<string, double> currentIngredientsProduced = new();
             foreach (Item item in factory.Ingredients)
             {
-                if (currentIngredients.ContainsKey(item.Name))
+                if (currentIngredientsProduced.ContainsKey(item.Name))
                 {
-                    currentIngredients[item.Name] += item.Quantity;
+                    currentIngredientsProduced[item.Name] += item.Quantity;
                 }
                 else
                 {
-                    currentIngredients.Add(item.Name, item.Quantity);
+                    currentIngredientsProduced.Add(item.Name, item.Quantity);
+                    items.Add(item.Name);
                 }
             }
 
-            //Then loop through the dictionary and zero out ingredients that are being produced
-            for (int itemIndex = 0; itemIndex < factory.Ingredients.Count; itemIndex++)
-            {
-                Item item = factory.Ingredients[itemIndex];
-                double ingredientRatio = item.Quantity / item.Recipe.Products[0].perMin;
-                for (int ingIndex = 0; ingIndex < item.Ingredients.Count; ingIndex++)
+            //Then for each of those parts, look at their ingredients
+            Dictionary<string, double> currentIngredientsRequested = new();
+            foreach (Item item in factory.Ingredients)
+            {            
+                if (currentIngredientsRequested.ContainsKey(item.Name))
                 {
-                    Item ingredient = item.Ingredients[ingIndex];
-                    double ingredientAmount = item.Recipe.Ingredients.Find(ing => ing.part == ingredient.Name).perMin * ingredientRatio;
-
-                    //if we find the ingredient, remove that quantity from the total
-                    if (currentIngredients.ContainsKey(ingredient.Name))
+                    currentIngredientsRequested[item.Name] += item.Quantity;
+                }
+                else
+                {
+                    currentIngredientsRequested.Add(item.Name, item.Quantity);
+                    items.Add(item.Name);
+                }
+                foreach (Item item2 in item.Ingredients)
+                {
+                    if (currentIngredientsRequested.ContainsKey(item2.Name))
                     {
-                        currentIngredients[ingredient.Name] -= ingredientAmount;
+                        currentIngredientsRequested[item2.Name] += item2.Quantity;
                     }
                     else
                     {
-                        //If we don't find the ingredient, add it.
-                        ItemIngredient? itemIngredient = item.MissingIngredients.Find(g => g.Name == ingredient.Name);
-                        if (itemIngredient == null)
-                        {
-                            itemIngredient = new()
-                            {
-                                Name = ingredient.Name,
-                                DisplayName = Lookups.GetPartDisplayName(factory.FactoryCatalog, ingredient.Name),
-                                Quantity = ingredientAmount
-
-                            };
-                            item.MissingIngredients.Add(itemIngredient);
-                        }
-                        else
-                        {
-                            itemIngredient.Quantity += ingredientAmount;
-                        }
+                        currentIngredientsRequested.Add(item2.Name, item2.Quantity);
+                        items.Add(item2.Name);
                     }
                 }
             }
+
+            //Then calculate the balance of ingredients
+            Dictionary<string, double> currentIngredientsBalance = new();
+            foreach (string item in items)
+            {
+                double produced = 0;
+                if (currentIngredientsProduced.ContainsKey(item))
+                {
+                    produced = currentIngredientsProduced[item];
+                }
+                double requested = 0;
+                if (currentIngredientsRequested.ContainsKey(item))
+                {
+                    requested = currentIngredientsRequested[item];
+                }
+                currentIngredientsBalance.Add(item, requested - produced);
+            }
+
+            //Then load up missing ingredients
+            foreach (Item item in factory.Ingredients)
+            {
+                foreach (Item item2 in item.Ingredients)
+                {
+                    if (currentIngredientsBalance[item2.Name] != 0)
+                    {
+                        ItemIngredient missingIngredient = new()
+                        {
+                            Name = item2.Name,
+                            DisplayName = Lookups.GetPartDisplayName(factory.FactoryCatalog, item2.Name),
+                            Quantity = currentIngredientsBalance[item2.Name]
+                        };
+                        item.MissingIngredients.Add(missingIngredient);
+                    }
+                }
+            }
+            
+
+            ////Then compare the two dictionaries to see what's missing
+            //foreach (KeyValuePair<string, double> kvp in currentIngredientsRequested)
+            //{
+            //    string ingredientName = kvp.Key;
+            //    double ingredientQuantity = kvp.Value;
+            //    //If we have produced less than we need, add to missing ingredients
+            //    if (currentIngredientsProduced.ContainsKey(ingredientName))
+            //    {
+            //        double producedQuantity = currentIngredientsProduced[ingredientName];
+            //        if (producedQuantity < ingredientQuantity)
+            //        {
+            //            //Find the item in the factory ingredients list
+            //            Item? item = factory.Ingredients.Find(i => i.Name == ingredientName);
+            //            if (item != null)
+            //            {
+            //                //Calculate the missing quantity
+            //                double missingQuantity = ingredientQuantity - producedQuantity;
+            //                //Add to missing ingredients
+            //                ItemIngredient? itemIngredient = item.MissingIngredients.Find(g => g.Name == ingredientName);
+            //                if (itemIngredient == null)
+            //                {
+            //                    itemIngredient = new()
+            //                    {
+            //                        Name = ingredientName,
+            //                        DisplayName = Lookups.GetPartDisplayName(factory.FactoryCatalog, ingredientName),
+            //                        Quantity = missingQuantity
+            //                    };
+            //                    item.MissingIngredients.Add(itemIngredient);
+            //                }
+            //                else
+            //                {
+            //                    itemIngredient.Quantity += missingQuantity;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //If we don't find the ingredient, add it.
+            //        Item? item = factory.Ingredients.Find(i => i.Name == ingredientName);
+            //        if (item != null)
+            //        {
+            //            ItemIngredient? itemIngredient = item.MissingIngredients.Find(g => g.Name == ingredientName);
+            //            if (itemIngredient == null)
+            //            {
+            //                itemIngredient = new()
+            //                {
+            //                    Name = ingredientName,
+            //                    DisplayName = Lookups.GetPartDisplayName(factory.FactoryCatalog, ingredientName),
+            //                    Quantity = ingredientQuantity
+            //                };
+            //                item.MissingIngredients.Add(itemIngredient);
+            //            }
+            //            else
+            //            {
+            //                itemIngredient.Quantity += ingredientQuantity;
+            //            }
+            //        }
+            //    }
+            //}
+
+            ////Then loop through the dictionary and zero out ingredients that are being produced
+            //for (int itemIndex = 0; itemIndex < factory.Ingredients.Count; itemIndex++)
+            //{
+            //    Item item = factory.Ingredients[itemIndex];
+
+            //    //if we find the ingredient, remove that quantity from the total
+            //    if (currentIngredientsProduced.ContainsKey(item.Name))
+            //    {
+            //        currentIngredientsProduced[item.Name] -= item.Quantity;
+            //    }
+            //    else
+            //    {
+            //        //If we don't find the ingredient, add it.
+            //        ItemIngredient? itemIngredient = item.MissingIngredients.Find(g => g.Name == item.Name);
+            //        if (itemIngredient == null)
+            //        {
+            //            itemIngredient = new()
+            //            {
+            //                Name = item.Name,
+            //                DisplayName = Lookups.GetPartDisplayName(factory.FactoryCatalog, item.Name),
+            //                Quantity = item.Quantity
+
+            //            };
+            //            item.MissingIngredients.Add(itemIngredient);
+            //        }
+            //    }
+
+            //    //double ingredientRatio = item.Quantity / item.Recipe.Products[0].perMin;
+            //    //for (int ingIndex = 0; ingIndex < item.Ingredients.Count; ingIndex++)
+            //    //{
+            //    //    Item ingredient = item.Ingredients[ingIndex];
+            //    //    double ingredientAmount = item.Recipe.Ingredients.Find(ing => ing.part == ingredient.Name).perMin * ingredientRatio;
+
+            //    //    //if we find the ingredient, remove that quantity from the total
+            //    //    if (currentIngredients.ContainsKey(ingredient.Name))
+            //    //    {
+            //    //        currentIngredients[ingredient.Name] -= ingredient.Quantity;
+            //    //    }
+            //    //    else
+            //    //    {
+            //    //        //If we don't find the ingredient, add it.
+            //    //        ItemIngredient? itemIngredient = item.MissingIngredients.Find(g => g.Name == ingredient.Name);
+            //    //        if (itemIngredient == null)
+            //    //        {
+            //    //            itemIngredient = new()
+            //    //            {
+            //    //                Name = ingredient.Name,
+            //    //                DisplayName = Lookups.GetPartDisplayName(factory.FactoryCatalog, ingredient.Name),
+            //    //                Quantity = ingredientAmount
+
+            //    //            };
+            //    //            item.MissingIngredients.Add(itemIngredient);
+            //    //        }
+            //    //        else
+            //    //        {
+            //    //            itemIngredient.Quantity += ingredientAmount;
+            //    //        }
+            //    //    }
+            //    //}
+            //}
             return factory;
         }
 
@@ -306,7 +455,7 @@ namespace SatisfactoryTree.Logic
                 BuildingPowerUsage = Lookups.GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
                 Counter = counter,
                 Recipe = recipe
-            };;
+            }; ;
             results.Add(goalItem);
             List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports, recipe, componentPartRecipeOverrides, internalExports);
             foreach (Item ingredient in missingIngredients)

@@ -4,6 +4,7 @@ using SatisfactoryTree.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,7 +43,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Calculator calculator = new();
 
                 // Act
-                ironPlatesFactory = calculator.ValidateFactoryIngredient(ironPlatesFactory);
+                ironPlatesFactory = calculator.ValidateFactoryIngredients(ironPlatesFactory);
 
                 // Assert
                 Assert.IsTrue(ironPlatesFactory.Ingredients != null);
@@ -68,6 +69,40 @@ namespace SatisfactoryTree.Logic.Tests
         }
 
         [TestMethod]
+        public void Factory2IronPlatesAndIngotsTest()
+        {
+            if (factoryCatalog != null)
+            {
+                // Arrange
+                Factory2 ironPlatesFactory = new(1, "Iron Plates Factory", factoryCatalog);
+                Recipe? ironPlatesRecipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate");
+                ironPlatesFactory.AddIngredient("IronPlate", 30, ironPlatesRecipe);
+                ironPlatesFactory.AddIngredient("IronIngot", 45, ironPlatesRecipe);
+                Calculator calculator = new();
+
+                // Act
+                ironPlatesFactory = calculator.ValidateFactoryIngredients(ironPlatesFactory);
+
+                // Assert
+                Assert.IsTrue(ironPlatesFactory.Ingredients != null);
+                Assert.IsTrue(ironPlatesFactory.Ingredients.Count > 0);
+                Item ingredient = ironPlatesFactory.Ingredients[0];
+                Assert.AreEqual("IronPlate", ingredient.Name);
+                Assert.AreEqual("Iron Plate", ingredient.DisplayName);
+                Assert.AreEqual(30, ingredient.Quantity);
+                Assert.AreEqual("images/parts/IronPlate_256.png", ingredient.ItemImagePath);
+                Assert.AreEqual(false, ingredient.HasMissingIngredients);
+                Assert.AreEqual(0, ingredient.MissingIngredients.Count);
+                Assert.AreEqual("constructormk1", ingredient.Building);
+                Assert.AreEqual("Constructor", ingredient.BuildingDisplayName);
+                Assert.AreEqual(1.5, ingredient.BuildingQuantity);
+                Assert.AreEqual(5.6, ingredient.BuildingPowerUsage);
+                Assert.AreEqual("images/buildings/ConstructorMk1_256.png", ingredient.BuildingImagePath);
+
+            }
+        }
+
+        [TestMethod]
         public void Factory2PlasticTest()
         {
             if (factoryCatalog != null)
@@ -79,7 +114,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Calculator calculator = new();
 
                 // Act
-                factory = calculator.ValidateFactoryIngredient(factory);
+                factory = calculator.ValidateFactoryIngredients(factory);
 
                 // Assert
                 Assert.IsTrue(factory.Ingredients != null);
@@ -120,7 +155,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Calculator calculator = new();
 
                 // Act
-                factory = calculator.ValidateFactoryIngredient(factory);
+                factory = calculator.ValidateFactoryIngredients(factory);
 
                 // Assert
                 Assert.IsTrue(factory.Ingredients != null);
@@ -153,6 +188,45 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual(0.5, ingredient.BuildingQuantity);
                 Assert.AreEqual(22, ingredient.BuildingPowerUsage);
                 Assert.AreEqual("images/buildings/Manufacturer_256.png", ingredient.BuildingImagePath);
+            }
+        }
+
+
+        [TestMethod]
+        public void Factory2ReinforcedIronPlatesTest()
+        {
+            if (factoryCatalog != null)
+            {
+                // Arrange
+                Factory2? reinforcedPlatesFactory = new(1, "Reinforced Iron Plates factory", factoryCatalog);
+                reinforcedPlatesFactory.AddIngredient("IronPlateReinforced", 5, Lookups.GetRecipes(factoryCatalog, "IronPlateReinforced").Find(r => r.Name == "IronPlateReinforced"));
+                reinforcedPlatesFactory.AddIngredient("IronPlate", 30, Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate"));
+                reinforcedPlatesFactory.AddIngredient("IronScrew", 30, Lookups.GetRecipes(factoryCatalog, "IronScrew").Find(r => r.Name == "Alternate_Screw"));
+                Calculator calculator = new();
+
+                // Act
+                reinforcedPlatesFactory = calculator.ValidateFactoryIngredients(reinforcedPlatesFactory);
+
+                // Assert
+                Assert.IsTrue(reinforcedPlatesFactory.Ingredients != null);
+                Assert.IsTrue(reinforcedPlatesFactory.Ingredients.Count > 0);
+                Item ingredient = reinforcedPlatesFactory.Ingredients[0];
+                Assert.AreEqual("IronPlateReinforced", ingredient.Name);
+                Assert.AreEqual("Reinforced Iron Plate", ingredient.DisplayName);
+                Assert.AreEqual(5, ingredient.Quantity);
+                Assert.AreEqual("images/parts/ReinforcedIronPlate_256.png", ingredient.ItemImagePath);
+                Assert.AreEqual(true, ingredient.HasMissingIngredients);
+                Assert.AreEqual(1, ingredient.MissingIngredients.Count);
+                Assert.AreEqual("IronScrew", ingredient.MissingIngredients[0].Name);
+                Assert.AreEqual("Screws", ingredient.MissingIngredients[0].DisplayName); ;
+                Assert.AreEqual(30, ingredient.MissingIngredients[0].Quantity);
+                Assert.AreEqual("images/parts/Screws_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
+                Assert.AreEqual("assemblermk1", ingredient.Building);
+                Assert.AreEqual("Assembler", ingredient.BuildingDisplayName);
+                Assert.AreEqual(1.5, ingredient.BuildingQuantity);
+                Assert.AreEqual(5.6, ingredient.BuildingPowerUsage);
+                Assert.AreEqual("images/buildings/AssemblerMk1_256.png", ingredient.BuildingImagePath);
+
             }
         }
     }

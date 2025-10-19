@@ -21,6 +21,10 @@
         {
             get
             {
+                if (string.IsNullOrEmpty(ByProductDisplayName))
+                {
+                    return "";
+                }
                 string imageName = ByProductDisplayName.Replace(" ", "");
                 return $"images/parts/{imageName}_256.png";
             }
@@ -33,8 +37,16 @@
 
         public int Counter { get; set; }
         public List<ItemIngredient> MissingIngredients { get; set; } = new();
-        public bool HasMissingIngredients => MissingIngredients.Any();
+        public bool HasMissingIngredients
+        {
+            get
+            {
+                return MissingIngredients.Any();
+            }
+        }
+
         public Recipe? Recipe { get; set; }
         public bool IsRedundant { get; set; } = false;
+        public int Order { get; set; }
     }
 }

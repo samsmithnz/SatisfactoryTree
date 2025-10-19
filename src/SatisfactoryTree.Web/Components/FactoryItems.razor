@@ -432,7 +432,8 @@
 @if (Factory != null)
 {
 	<div class="factory-container">
-		<h3><input type="text" value="@Factory.Name" class="form-control" /></h3>
+		<hr />
+		<h3 class="factory-title"><i class="fa-solid fa-industry"></i><input type="text" value="@Factory.Name" class="factory-name-input" /></h3>
 
 		<p><b>Factory Parts:</b></p>
 		@if (Factory.Ingredients != null)
@@ -486,8 +487,6 @@
 									@foreach (Item ingredient in item.Ingredients)
 									{
 										bool isMissing = item.HasMissingIngredients && item.MissingIngredients.Find(i => i.Name == ingredient.Name) != null;
-										@* && !Factory.ExportedParts.Any(e => e.Item.Name == ingredient.Name); *@
-
 										@if (isMissing)
 										{
 											<span class="badge badge-red d-inline-flex align-items-center gap-2" title="Missing ingredient - not available as import">
