@@ -6,7 +6,6 @@ namespace SatisfactoryTree.Logic.Calculations
     public class Lookups
     {
 
-        private static Dictionary<string, string>? _partsDisplayLookup; // id -> display name cache
 
         public static List<LookupItem> GetParts(Dictionary<string, Part> parts)
         {
