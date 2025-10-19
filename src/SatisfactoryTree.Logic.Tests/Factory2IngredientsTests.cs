@@ -140,7 +140,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("IronScrew", ingredient.MissingIngredients[3].Name);
                 Assert.AreEqual("Screws", ingredient.MissingIngredients[3].DisplayName); ;
                 Assert.AreEqual(120, ingredient.MissingIngredients[3].Quantity);
-                Assert.AreEqual("images/parts/IronScrew_256.png", ingredient.MissingIngredients[3].IngredientImagePart);
+                Assert.AreEqual("images/parts/Screws_256.png", ingredient.MissingIngredients[3].IngredientImagePart);
                 Assert.AreEqual("manufacturermk1", ingredient.Building);
                 Assert.AreEqual("Manufacturer", ingredient.BuildingDisplayName);
                 Assert.AreEqual(0.5, ingredient.BuildingQuantity);
