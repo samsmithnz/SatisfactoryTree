@@ -8,7 +8,7 @@ namespace SatisfactoryTree.Logic.Models
         public string? Name { get; set; }
         public List<Item> Ingredients { get; set; }
         public Dictionary<int, ImportedItem> ImportedParts { get; set; }
-        public FactoryCatalog FactoryCatalog;
+        public readonly FactoryCatalog FactoryCatalog;
 
         public Factory2(int id, string name, FactoryCatalog factoryCatalog)
         {
