@@ -34,8 +34,15 @@ namespace SatisfactoryTree.Logic.Models
             {
                 List<Recipe> recipes = Lookups.GetRecipes(FactoryCatalog, name);
                 recipe = recipes.FirstOrDefault();
+                if (recipe == null)
+                {
+                    throw new Exception("No recipe found for: " + name + ", " + quantity);
+                }
             }
-            if (recipe?.Products.Count > 0)
+            if (recipe.Products == null || recipe.Products.Count == 0)
+            {
+                throw new Exception("Recipe has no products: " + name + ", " + quantity);
+            }
             {
                 double ingredientRatio = quantity / recipe.Products[0].perMin;
                 foreach (Ingredient ingredient in recipe.Ingredients)
