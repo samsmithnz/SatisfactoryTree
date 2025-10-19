@@ -60,7 +60,7 @@ namespace SatisfactoryTree.Logic.Models
             }
             else
             {
-                throw new Exception("Recipe is null: " + name + ", " + quantity);
+                throw new Exception($"Failed to add ingredient: No recipe found or recipe has no products for '{name}' with quantity {quantity}.");
             }
 
 
