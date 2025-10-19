@@ -128,7 +128,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("ModularFrame", ingredient.MissingIngredients[0].Name);
                 Assert.AreEqual("Modular Frame", ingredient.MissingIngredients[0].DisplayName); ;
                 Assert.AreEqual(5, ingredient.MissingIngredients[0].Quantity);
-                Assert.AreEqual("images/parts/LiquidOil_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
+                Assert.AreEqual("images/parts/ModularFrame_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
                 Assert.AreEqual("SteelPipe", ingredient.MissingIngredients[1].Name);
                 Assert.AreEqual("Steel Pipe", ingredient.MissingIngredients[1].DisplayName); ;
                 Assert.AreEqual(20, ingredient.MissingIngredients[1].Quantity);
