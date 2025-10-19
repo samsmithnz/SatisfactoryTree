@@ -443,12 +443,10 @@
 					<li class="exported-part-item">
 						<div class="component-part-row">
 							<span>
-								<img src="@item.ItemImagePath" alt="@item.Name" class="part-image" />
-								<strong>@item.Name</strong> -
+								<img src="@item.ItemImagePath" alt="@item.DisplayName" class="part-image" />
+								<strong>@item.DisplayName</strong>
 								<input type="number" value="@item.Quantity" @onchange="@(e => OnPartQuantityChanged(item, e.Value?.ToString()))" class="form-control d-inline-block" style="width: 100px;" min="0" step="0.1" /> per/min
-								<span class="badge badge-grey">
-									<i class="fas fa-clipboard-list power-icon" title="Recipe Used"></i>
-								</span>
+								<i class="fas fa-clipboard-list power-icon" title="Recipe Used"></i>
 								@{
 									List<LookupItem> partRecipes = GetRecipesForPart(item.Name);
 									if (partRecipes.Any())
