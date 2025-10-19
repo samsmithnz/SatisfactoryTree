@@ -1,9 +1,12 @@
 ﻿using SatisfactoryTree.Logic.Models;
+using SatisfactoryTree.Logic.Services;
 
 namespace SatisfactoryTree.Logic.Calculations
 {
     public class Lookups
     {
+
+        private static Dictionary<string, string>? _partsDisplayLookup; // id -> display name cache
 
         public static List<LookupItem> GetParts(Dictionary<string, Part> parts)
         {
@@ -48,5 +51,33 @@ namespace SatisfactoryTree.Logic.Calculations
             result = (double)Math.Round((decimal)result, 3);
             return result;
         }
+
+        public static string GetPartDisplayName(FactoryCatalog factoryCatalog, string partName)
+        {
+            if (string.IsNullOrWhiteSpace(partName))
+            {
+                return partName;
+            }
+
+            LookupItem? lookup = factoryCatalog.PartsLookup?.FirstOrDefault(p => p.Id == partName);
+            return lookup?.Name ?? partName;
+        }
+
+        //// Build a quick dictionary for id->display name
+        //public Dictionary<string, string> BuildDisplayLookup(FactoryCatalog catalog)
+        //{
+        //    if (catalog == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(catalog));
+        //    }
+        //    if (catalog.PartsLookup == null)
+        //    {
+        //        return new Dictionary<string, string>();
+        //    }
+
+        //    return catalog.PartsLookup
+        //        .GroupBy(p => p.Id)
+        //        .ToDictionary(g => g.Key, g => g.First().Name);
+        //}
     }
 }

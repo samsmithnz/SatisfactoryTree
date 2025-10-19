@@ -24,8 +24,9 @@ namespace SatisfactoryTree.Logic.Models
             Item item = new()
             {
                 Name = name,
+                DisplayName = Lookups.GetPartDisplayName(FactoryCatalog, name),
                 Quantity = quantity,
-                Recipe = recipe
+                Recipe = recipe,
             };
 
             //If no recipe was provided, get the default recipe for the part
@@ -43,6 +44,7 @@ namespace SatisfactoryTree.Logic.Models
                     item.Ingredients.Add(new()
                     {
                         Name = ingredient.part,
+                        DisplayName = Lookups.GetPartDisplayName(FactoryCatalog, ingredient.part),
                         Quantity = ingredientAmount,
                         Recipe = recipe
                     });

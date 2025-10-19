@@ -299,6 +299,7 @@ namespace SatisfactoryTree.Logic
             Item goalItem = new Item()
             {
                 Name = partName,
+                DisplayName = Lookups.GetPartDisplayName(factoryCatalog, partName),
                 Quantity = quantity,
                 Ingredients = embeddedIngredients,
                 Building = recipe.Building.Name,
@@ -306,7 +307,7 @@ namespace SatisfactoryTree.Logic
                 BuildingPowerUsage = Lookups.GetBuildingPower(factoryCatalog, recipe.Building.Name, buildingRatio),
                 Counter = counter,
                 Recipe = recipe
-            };
+            };;
             results.Add(goalItem);
             List<Item> missingIngredients = ValidateImmediateIngredients(factoryCatalog, partName, quantity, counter, availableImports, recipe, componentPartRecipeOverrides, internalExports);
             foreach (Item ingredient in missingIngredients)
