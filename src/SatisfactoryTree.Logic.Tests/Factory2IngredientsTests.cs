@@ -122,7 +122,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Item ingredient = factory.Ingredients[0];
                 Assert.AreEqual("ModularFrameHeavy", ingredient.Name);
                 Assert.AreEqual(1, ingredient.Quantity);
-                Assert.AreEqual("images/parts/ModularFrameHeavy_256.png", ingredient.ItemImagePath);
+                Assert.AreEqual("images/parts/HeavyModularFrame_256.png", ingredient.ItemImagePath);
                 Assert.AreEqual(true, ingredient.HasMissingIngredients);
                 Assert.AreEqual(4, ingredient.MissingIngredients.Count);
                 Assert.AreEqual("ModularFrame", ingredient.MissingIngredients[0].Name);
@@ -134,9 +134,9 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual(20, ingredient.MissingIngredients[1].Quantity);
                 Assert.AreEqual("images/parts/SteelPipe_256.png", ingredient.MissingIngredients[1].IngredientImagePart);
                 Assert.AreEqual("SteelPlateReinforced", ingredient.MissingIngredients[2].Name);
-                Assert.AreEqual("Reinforced Iron Plate", ingredient.MissingIngredients[2].DisplayName); ;
+                Assert.AreEqual("Encased Industrial Beam", ingredient.MissingIngredients[2].DisplayName); ;
                 Assert.AreEqual(5, ingredient.MissingIngredients[2].Quantity);
-                Assert.AreEqual("images/parts/SteelPlateReinforced_256.png", ingredient.MissingIngredients[2].IngredientImagePart);
+                Assert.AreEqual("images/parts/EncasedIndustrialBeam_256.png", ingredient.MissingIngredients[2].IngredientImagePart);
                 Assert.AreEqual("IronScrew", ingredient.MissingIngredients[3].Name);
                 Assert.AreEqual("Screws", ingredient.MissingIngredients[3].DisplayName); ;
                 Assert.AreEqual(120, ingredient.MissingIngredients[3].Quantity);
