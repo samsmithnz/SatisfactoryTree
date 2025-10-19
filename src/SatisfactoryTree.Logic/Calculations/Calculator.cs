@@ -49,9 +49,8 @@ namespace SatisfactoryTree.Logic
                             itemIngredient = new()
                             {
                                 Name = ingredient.Name,
-                                DisplayName = "",
-                                Quantity = ingredientAmount,
-                                IngredientImagePart = ""
+                                DisplayName = Lookups.GetPartDisplayName(factory.FactoryCatalog, ingredient.Name),
+                                Quantity = ingredientAmount
 
                             };
                             item.MissingIngredients.Add(itemIngredient);
@@ -317,9 +316,8 @@ namespace SatisfactoryTree.Logic
                     ItemIngredient itemIngredient = new()
                     {
                         Name = ingredient.Name,
-                        DisplayName = "",
-                        Quantity = ingredient.Quantity,
-                        IngredientImagePart = ""
+                        DisplayName = Lookups.GetPartDisplayName(factoryCatalog, ingredient.Name),
+                        Quantity = ingredient.Quantity
                     };
                     goalItem.MissingIngredients.Add(itemIngredient);
                 }
@@ -398,9 +396,8 @@ namespace SatisfactoryTree.Logic
                             ItemIngredient itemIngredient = new()
                             {
                                 Name = ingredient.part,
-                                DisplayName = "",
-                                Quantity = remainingNeed,
-                                IngredientImagePart = ""
+                                DisplayName = Lookups.GetPartDisplayName(factoryCatalog, ingredient.part),
+                                Quantity = remainingNeed
                             };
                             ingredientItem.MissingIngredients.Add(itemIngredient);
                         }

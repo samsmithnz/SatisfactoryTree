@@ -92,7 +92,7 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("LiquidOil", ingredient.MissingIngredients[0].Name);
                 Assert.AreEqual("Crude Oil", ingredient.MissingIngredients[0].DisplayName); ;
                 Assert.AreEqual(45, ingredient.MissingIngredients[0].Quantity);
-                Assert.AreEqual("images/parts/LiquidOil_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
+                Assert.AreEqual("images/parts/CrudeOil_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
                 Assert.AreEqual("oilrefinery", ingredient.Building);
                 Assert.AreEqual("Refinery", ingredient.BuildingDisplayName);
                 Assert.AreEqual(1.5, ingredient.BuildingQuantity);

@@ -43,6 +43,7 @@ namespace SatisfactoryTree.Logic.Models
             {
                 throw new Exception("Recipe has no products: " + name + ", " + quantity);
             }
+            else
             {
                 double ingredientRatio = quantity / recipe.Products[0].perMin;
                 foreach (Ingredient ingredient in recipe.Ingredients)
@@ -63,14 +64,7 @@ namespace SatisfactoryTree.Logic.Models
                 item.BuildingImagePath = GetBuildingImagePath(item.Recipe.Building.Name);
                 item.BuildingQuantity += ingredientRatio;
                 item.BuildingPowerUsage += Lookups.GetBuildingPower(FactoryCatalog, item.Recipe.Building.Name, ingredientRatio);
-
             }
-            else
-            {
-                throw new Exception($"Failed to add ingredient: No recipe found or recipe has no products for '{name}' with quantity {quantity}.");
-            }
-
-
 
             Ingredients.Add(item);
         }
