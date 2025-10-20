@@ -30,16 +30,7 @@ namespace SatisfactoryTree.Logic
             //Then for each of those parts, look at their ingredients
             Dictionary<string, double> currentIngredientsRequested = new();
             foreach (Item item in factory.Ingredients)
-            {            
-                if (currentIngredientsRequested.ContainsKey(item.Name))
-                {
-                    currentIngredientsRequested[item.Name] += item.Quantity;
-                }
-                else
-                {
-                    currentIngredientsRequested.Add(item.Name, item.Quantity);
-                    items.Add(item.Name);
-                }
+            {
                 foreach (Item item2 in item.Ingredients)
                 {
                     if (currentIngredientsRequested.ContainsKey(item2.Name))
@@ -76,7 +67,7 @@ namespace SatisfactoryTree.Logic
             {
                 foreach (Item item2 in item.Ingredients)
                 {
-                    if (currentIngredientsBalance[item2.Name] != 0)
+                    if (currentIngredientsBalance[item2.Name] > 0)
                     {
                         ItemIngredient missingIngredient = new()
                         {
