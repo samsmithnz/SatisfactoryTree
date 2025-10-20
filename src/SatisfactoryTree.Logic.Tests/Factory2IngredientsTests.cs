@@ -77,7 +77,8 @@ namespace SatisfactoryTree.Logic.Tests
                 Factory2 ironPlatesFactory = new(1, "Iron Plates Factory", factoryCatalog);
                 Recipe? ironPlatesRecipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate");
                 ironPlatesFactory.AddIngredient("IronPlate", 30, ironPlatesRecipe);
-                ironPlatesFactory.AddIngredient("IronIngot", 45, ironPlatesRecipe);
+                Recipe? ironIngotRecipe = Lookups.GetRecipes(factoryCatalog, "IronIngot").Find(r => r.Name == "IngotIron");
+                ironPlatesFactory.AddIngredient("IronIngot", 45, ironIngotRecipe);
                 Calculator calculator = new();
 
                 // Act
@@ -223,8 +224,8 @@ namespace SatisfactoryTree.Logic.Tests
                 Assert.AreEqual("images/parts/Screws_256.png", ingredient.MissingIngredients[0].IngredientImagePart);
                 Assert.AreEqual("assemblermk1", ingredient.Building);
                 Assert.AreEqual("Assembler", ingredient.BuildingDisplayName);
-                Assert.AreEqual(1.5, ingredient.BuildingQuantity);
-                Assert.AreEqual(5.6, ingredient.BuildingPowerUsage);
+                Assert.AreEqual(1, ingredient.BuildingQuantity);
+                Assert.AreEqual(15, ingredient.BuildingPowerUsage);
                 Assert.AreEqual("images/buildings/AssemblerMk1_256.png", ingredient.BuildingImagePath);
 
             }
