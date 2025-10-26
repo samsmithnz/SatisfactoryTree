@@ -259,6 +259,7 @@ code {
 }
 
 .quantity-input {
+    text-align: right;
     width: 100px !important;
     min-width: 100px !important;
 }
