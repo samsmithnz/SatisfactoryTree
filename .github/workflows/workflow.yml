@@ -31,7 +31,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
     - name: .NET test
       run: dotnet test src/SatisfactoryTree.Logic.Tests/SatisfactoryTree.Logic.Tests.csproj -c Debug -e:CollectCoverage=true -e:CoverletOutput=TestResults/ -e:CoverletOutputFormat=lcov
     - name: Publish coverage report to coveralls.io
@@ -58,7 +58,7 @@ jobs:
         uses: samsmithnz/SamsDotNetSonarCloudAction@v2
         with:
           projects: 'src/SatisfactoryTree/SatisfactoryTree.csproj,src/SatisfactoryTree.Tests/SatisfactoryTree.Tests.csproj,src/SatisfactoryTree.Web/SatisfactoryTree.Web.csproj'
-          dotnet-version: '9.0.x'
+          dotnet-version: '10.0.x'
           sonarcloud-organization: samsmithnz-github
           sonarcloud-project: samsmithnz_SatisfactoryTree
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
