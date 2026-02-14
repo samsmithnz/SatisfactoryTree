@@ -3,10 +3,10 @@
 <PageTitle>Home</PageTitle>
 
 @using SatisfactoryTree.Logic
+@using SatisfactoryTree.Logic.Calculations
 @using SatisfactoryTree.Logic.Extraction
 @using SatisfactoryTree.Logic.Models
 @using SatisfactoryTree.Web.Services
-@using SatisfactoryTree.Logic.Abstractions
 @inject HttpClient Http
 @inject PlanService PlanService
 @inject IJSRuntime JS
@@ -14,8 +14,6 @@
 
 @code {
 	FactoryCatalog? factoryCatalog;
-	private Factory? screwsFactory;
-	private Factory? reinforcedPlatesFactory;
 	private bool isLoading = true;
 	private string? errorMessage;
 	private int? factoryIdToScrollTo; // local cache for scrolling
@@ -29,21 +27,42 @@
 			{
 				throw new Exception("FactoryCatalog could not be loaded or found");
 			}
-			
+
 			// Initialize the plan if it doesn't exist
 			if (PlanService.Plan == null)
 			{
 				Plan plan = new();
-				// screwsFactory = new(1, "Screws factory");
+				Calculator calculator = new();
+				// Factory2? screwsFactory = new(1, "Screws factory");
 				// screwsFactory.ExportedParts.Add(new(new() { Name = "IronScrew", Quantity = 12 }));
 				// plan.Factories.Add(screwsFactory);
-				reinforcedPlatesFactory = new(1, "Reinforced Iron Plates factory");
-				// reinforcedPlatesFactory.ExportedParts.Add(new(new() { Name = "IronPlateReinforced", Quantity = 1 }));
-				// reinforcedPlatesFactory.ImportedParts.Add(1, new(1, "Screws factory", new() { Name = "IronScrew", Quantity = 12 }));
+				Factory2? reinforcedPlatesFactory = new(1, "Reinforced Iron Plates factory", factoryCatalog);
+				reinforcedPlatesFactory.AddIngredient("IronPlateReinforced", 5, Lookups.GetRecipes(factoryCatalog, "IronPlateReinforced").Find(r => r.Name == "IronPlateReinforced"));
+				reinforcedPlatesFactory.AddIngredient("IronPlate", 30, Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate"));
+				reinforcedPlatesFactory.AddIngredient("IronScrew", 30, Lookups.GetRecipes(factoryCatalog, "IronScrew").Find(r => r.Name == "Alternate_Screw"));
+				calculator.ValidateFactoryIngredients(reinforcedPlatesFactory);
 				plan.Factories.Add(reinforcedPlatesFactory);
 
+				Factory2 ironPlatesFactory = new(1, "Iron Plates Factory", factoryCatalog);
+				Recipe? ironPlatesRecipe = Lookups.GetRecipes(factoryCatalog, "IronPlate").Find(r => r.Name == "IronPlate");
+				ironPlatesFactory.AddIngredient("IronPlate", 30, ironPlatesRecipe);
+				calculator.ValidateFactoryIngredients(ironPlatesFactory);
+				plan.Factories.Add(ironPlatesFactory);
+
+				Factory2 heavyModularFramesfactory = new(1, "Heavy Modular Frame Factory", factoryCatalog);
+				Recipe? heavyModularFramesRecipe = Lookups.GetRecipes(factoryCatalog, "ModularFrameHeavy").Find(r => r.Name == "ModularFrameHeavy");
+				heavyModularFramesfactory.AddIngredient("ModularFrameHeavy", 1, heavyModularFramesRecipe);
+				calculator.ValidateFactoryIngredients(heavyModularFramesfactory);
+				plan.Factories.Add(heavyModularFramesfactory);
+
+				Factory2 plasticFactory = new(1, "Plastic Factory", factoryCatalog);
+				Recipe? plasticRecipe = Lookups.GetRecipes(factoryCatalog, "Plastic").Find(r => r.Name == "Plastic");
+				plasticFactory.AddIngredient("Plastic", 30, plasticRecipe);				
+				calculator.ValidateFactoryIngredients(plasticFactory);
+				plan.Factories.Add(plasticFactory);
+
 				//Calculate the production
-				plan.UpdatePlanCalculations(factoryCatalog);
+				//plan.UpdatePlanCalculations(factoryCatalog);
 
 				// Update the PlanService so NavMenu can access the plan
 				PlanService.Plan = plan;
@@ -88,7 +107,7 @@
 	{
 		if (factoryIdToScrollTo.HasValue && PlanService.Plan != null)
 		{
-			var factory = PlanService.Plan.Factories.FirstOrDefault(f => f.Id == factoryIdToScrollTo.Value);
+			Factory2? factory = PlanService.Plan.Factories.FirstOrDefault(f => f.Id == factoryIdToScrollTo.Value);
 			if (factory != null)
 			{
 				string anchor = GetFactoryAnchor(factory);
@@ -111,7 +130,7 @@
 		}
 	}
 
-	private string GetFactoryAnchor(Factory factory)
+	private string GetFactoryAnchor(Factory2 factory)
 	{
 		// Create a URL-friendly anchor from the factory name (same logic as NavMenu)
 		return factory.Name.ToLowerInvariant()
@@ -138,10 +157,10 @@ else if (!string.IsNullOrEmpty(errorMessage))
 else if (PlanService.Plan?.Factories != null)
 {
 	<h3>The plan</h3>
-	@foreach (Factory factory in PlanService.Plan.Factories)
+	@foreach (Factory2 factory in PlanService.Plan.Factories)
 	{
 		<div id="@GetFactoryAnchor(factory)" class="factory-section">
-			<FactoryItems Factory="factory" FactoryCatalog="PlanService.FactoryCatalog" />
+			<FactoryItems Factory="factory" FactoryCatalog="factory.FactoryCatalog" />
 		</div>
 	}
 }
