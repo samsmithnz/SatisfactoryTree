@@ -76,7 +76,7 @@ jobs:
     - name: Install jq for JSON parsing
       run: sudo apt-get update && sudo apt-get install -y jq
     - name: Download the build artifacts
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
     - name: Display GitVersion outputs
       run: |
         echo "Version: ${{ needs.build.outputs.Version }}" 
