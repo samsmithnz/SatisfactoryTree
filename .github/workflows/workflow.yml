@@ -14,7 +14,7 @@ jobs:
       Version: ${{ steps.gitversion.outputs.MajorMinorPatch }}
       CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 0
     - name: Setup GitVersion
@@ -72,7 +72,7 @@ jobs:
     # - sonarCloud
     if: github.ref == 'refs/heads/main'
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: Install jq for JSON parsing
       run: sudo apt-get update && sudo apt-get install -y jq
     - name: Download the build artifacts
